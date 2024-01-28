@@ -299,15 +299,15 @@ class Signed(Signedness):
 class Unsigned(Signedness):
     pass
 
-# RepetitiveType
+# ExplicitType
 
-class RepetitiveType:
+class ExplicitType:
     pass
 
-class RepetitiveRegular(RepetitiveType):
-    size : int
+class ReservedExpansion(ExplicitType):
+    pass
 
-class RepetitiveFx(RepetitiveType):
+class SpecialPurpose(ExplicitType):
     pass
 
 # Content
@@ -332,13 +332,13 @@ class ContentQuantity(Content):
     lsb : float
     unit : str
 
-'''
 # Variation
 
 class Variation:
     pass
 
 class Element(Variation):
+    bit_offset8 : int
     bit_size : int
     content : Type[Content]
 
@@ -349,7 +349,7 @@ class Extended(Variation):
     items : List[Optional[Type[ItemBase]]]
 
 class Repetitive(Variation):
-    t : RepetitiveType
+    rep : Optional[int]
     var : Type[Variation]
 
 class Explicit(Variation):
@@ -365,6 +365,7 @@ class ItemBase:
     pass
 
 class Spare(ItemBase):
+    bit_offset8 : int
     bit_size : int
 
 class Item(ItemBase):
@@ -372,6 +373,7 @@ class Item(ItemBase):
     title : str
     var : Type[Variation]
 
+'''
 class Variation:
     """Baseclass for all variations."""
     variation : str

@@ -86,10 +86,11 @@ mkContent (cont, ix) = case cont of
             fmt ("values = " % stext) (fmtList "{ " " }" f lst)
     ContentString st -> do
         cls "ContentString"
-        indent $ fmt ("t = " % stext) $ case st of
-            A.StringAscii -> "StringAscii"
-            A.StringICAO  -> "StringICAO"
-            A.StringOctal -> "StringOctal"
+        indent $ do
+            fmt ("t = " % stext) $ case st of
+                A.StringAscii -> "StringAscii"
+                A.StringICAO  -> "StringICAO"
+                A.StringOctal -> "StringOctal"
     ContentInteger sig -> do
         cls "ContentInteger"
         indent $ fmt ("sig = " % stext) $ case sig of
@@ -108,8 +109,84 @@ mkContent (cont, ix) = case cont of
     cls c = fmt ("class " % stext % "(" % stext % "):")
         (nameOf "Content" ix) c
 
-{-
+div8 :: Integral a => a -> a
+div8 n = case divMod n 8 of
+    (a, 0) -> a
+    _ -> error "unexpected value"
 
+mkVariation :: AsterixDb EMap -> (Variation, Int) -> BlockM Builder ()
+mkVariation db (var, ix) = case var of
+    Element (OctetOffset o) n cont -> do
+        cls "Element"
+        indent $ do
+            fmt ("bit_offset8 = " % int) o
+            fmt ("bit_size = " % int) n
+            fmt ("content = " % stext)
+                (nameOf "Content" $ indexOf (dbContent db) cont)
+    Group lst -> do
+        cls "Group"
+        indent $ do
+            let f :: Item -> Text
+                f = nameOf "Item" . indexOf (dbItem db)
+            fmt ("items = " % stext)
+                (fmtList "[" "]" f lst)
+    Extended lst -> do
+        cls "Extended"
+        indent $ do
+            let f :: Maybe Item -> Text
+                f Nothing = "None"
+                f (Just item) = nameOf "Item" $ indexOf (dbItem db) item
+            fmt ("items = " % stext)
+                (fmtList "[" "]" f lst)
+    Repetitive rt var2 -> do
+        cls "Repetitive"
+        indent $ do
+            case rt of
+                A.RepetitiveRegular n -> fmt ("rep = " % int) (div8 n)
+                A.RepetitiveFx -> "rep = None"
+            fmt ("var = " % stext)
+                (nameOf "Variation" $ indexOf (dbVariation db) var2)
+    Explicit et -> do
+        cls "Explicit"
+        indent $ do
+            fmt ("t = " % stext) $ case et of
+                Nothing -> "None"
+                Just A.ReservedExpansion  -> "ReservedExpansion"
+                Just A.SpecialPurpose -> "SpecialPurpose"
+    Compound mn lst -> do
+        cls "Compound"
+        indent $ do
+            case mn of
+                Nothing -> "fspec_size = None"
+                Just n -> fmt ("fspec_size = " % int) (div8 n)
+            let f :: Maybe Item -> Text
+                f Nothing = "None"
+                f (Just item) = nameOf "Item" $ indexOf (dbItem db) item
+            fmt ("items = " % stext)
+                (fmtList "[" "]" f lst)
+  where
+    cls c = fmt ("class " % stext % "(" % stext % "):")
+        (nameOf "Variation" ix) c
+
+mkItem :: AsterixDb EMap -> (Item, Int) -> BlockM Builder ()
+mkItem db (item, ix) = case item of
+    Spare (OctetOffset o) n -> do
+        cls "Spare"
+        indent $ do
+            fmt ("bit_offset8 = " % int) o
+            fmt ("bit_size = " % int) n
+    Item name title var -> do
+        cls "Item"
+        indent $ do
+            fmt ("name = \"" % stext % "\"") name
+            fmt ("title = \"" % stext % "\"") title
+            fmt ("var = " % stext)
+                (nameOf "Variation" $ indexOf (dbVariation db) var)
+  where
+    cls c = fmt ("class " % stext % "(" % stext % "):")
+        (nameOf "Item" ix) c
+
+{-
 -- | Name of argument with given (variation) index.
 argOf :: VariationIx -> Text
 argOf vc = nameOf vc <> "_Arg"
@@ -947,13 +1024,13 @@ mkCode ref ver specs' = render "    " "\n" $ do
     ""
     "# Content set"
     sequence_ (fmap mkContent $ enumList $ dbContent db)
-    {-
     ""
     "# Variation set"
-    --sequence_ (fmap (mkVariation db) $ enumList $ dbVariation db)
+    sequence_ (fmap (mkVariation db) $ enumList $ dbVariation db)
     ""
-    "-- | Item set"
+    "# Item set"
     sequence_ (fmap (mkItem db) $ enumList $ dbItem db)
+    {-
     ""
     "-- | Uap set"
     sequence_ (fmap (mkUap db) $ enumList $ dbUap db)
