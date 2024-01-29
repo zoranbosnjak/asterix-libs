@@ -20,6 +20,6 @@ in pkgs.stdenv.mkDerivation rec {
   ];
 
   shellHook = ''
-    export PYTHONPATH=$(pwd):$PYTHONPATH
+    export PYTHONPATH=$(pwd)/src:$PYTHONPATH
   '';
 }

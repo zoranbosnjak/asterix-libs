@@ -2,12 +2,12 @@
 
 import pytest
 
+from asterix.base import Bits
+from asterix.generatedtest import *
 '''
-from asterix.bitstring import Bits
-from asterix.generated_test import *
 
-Spec = CAT_000_1_0
-Ref =  REF_000_1_0
+Spec = Cat_000_1_0
+Ref =  Ref_000_1_0
 
 def test_raw() -> None:
     I = Spec.spec('000')
@@ -347,4 +347,3 @@ def test_category() -> None:
     with pytest.raises(ValueError):   # wrong category
         raw = S0.parse(raw_datablocks[0])
 '''
-

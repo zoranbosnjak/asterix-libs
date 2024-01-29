@@ -326,3 +326,19 @@ indexOf (EMap m) = (Map.!) m
 
 enumList :: EMap k -> [(k, Int)]
 enumList = Map.toList . unEMap
+
+-- | Variations and Items are defined by mutual recursion.
+-- Reorder variations and items, such that any var/item is defined before it's referenced.
+flattenVariationsAndItems :: [Variation] -> [Item] -> [Either Variation Item]
+flattenVariationsAndItems vars items = goVar <> goItem
+  where
+    goVar = case vars of
+        [] -> []
+        (var : vars') -> case var of
+            Element _ _ _ -> Left var : flattenVariationsAndItems vars' items
+            _ -> flattenVariationsAndItems vars' items <> [Left var]
+    goItem = case items of
+        [] -> []
+        (item : items') -> case item of
+            Spare _ _ -> Right item : flattenVariationsAndItems vars items'
+            _ -> flattenVariationsAndItems vars items' <> [Right item]

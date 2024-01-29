@@ -11,6 +11,9 @@ import           Data.Text.Lazy.Builder     (Builder)
 import qualified Data.Text.Lazy.Builder     as BL
 import           Formatting                 as F
 import           Data.Scientific
+import qualified Data.Map as Map
+import qualified Data.Set as Set
+import           Data.Set (Set)
 
 import           Asterix.Indent
 import qualified Asterix.Specs              as A
@@ -20,9 +23,6 @@ import           Struct
 import           Control.Monad.State
 import           Data.List (nub, sort, sortOn, sortBy, intersperse, inits)
 import           Data.Maybe (catMaybes)
-import qualified Data.Map as Map
-import qualified Data.Set as Set
-import           Data.Set (Set)
 import           Data.Bool
 import           Data.String (IsString)
 import           Data.Text.Lazy.Builder (Builder)
@@ -55,7 +55,6 @@ fmt m = runFormat m line
 nameOf :: Integral a => Text -> a -> Text
 nameOf = sformat (stext % "_" % int)
 
-{-
 nameOfAst :: Asterix -> Text
 nameOfAst (Asterix cat (A.Edition a b) spec) = sformat
     (stext % "_" % left 3 '0' % "_" % int % "_" % int)
@@ -64,7 +63,6 @@ nameOfAst (Asterix cat (A.Edition a b) spec) = sformat
     at = case spec of
              AstCat _ -> "Cat"
              AstRef _ -> "Ref"
--}
 
 fmtList :: Text -> Text -> (a -> Text) -> [a] -> Text
 fmtList open close f lst
@@ -114,6 +112,10 @@ div8 n = case divMod n 8 of
     (a, 0) -> a
     _ -> error "unexpected value"
 
+mkVariation :: AsterixDb EMap -> Variation -> BlockM Builder ()
+mkVariation db var = do
+    pure ()
+{-
 mkVariation :: AsterixDb EMap -> (Variation, Int) -> BlockM Builder ()
 mkVariation db (var, ix) = case var of
     Element (OctetOffset o) n cont -> do
@@ -167,7 +169,13 @@ mkVariation db (var, ix) = case var of
   where
     cls c = fmt ("class " % stext % "(" % stext % "):")
         (nameOf "Variation" ix) c
+-}
 
+mkItem :: AsterixDb EMap -> Item -> BlockM Builder ()
+mkItem db item = do
+    pure ()
+
+{-
 mkItem :: AsterixDb EMap -> (Item, Int) -> BlockM Builder ()
 mkItem db (item, ix) = case item of
     Spare (OctetOffset o) n -> do
@@ -185,6 +193,78 @@ mkItem db (item, ix) = case item of
   where
     cls c = fmt ("class " % stext % "(" % stext % "):")
         (nameOf "Item" ix) c
+-}
+
+mkUap :: AsterixDb EMap -> (Uap, Int) -> BlockM Builder ()
+mkUap db (uap, ix) = case uap of
+    Uap var -> do
+        cls "UapSingle"
+        indent $ do
+            fmt ("var = " % stext)
+                (nameOf "Variation" $ indexOf (dbVariation db) var)
+    Uaps lst msel -> do
+        cls "UapMultiple"
+        indent $ do
+            let f :: (A.UapName, Variation) -> Text
+                f (name, var) = sformat ("(\"" % stext % "\", " % stext % ")")
+                    name
+                    (nameOf "Variation" $ indexOf (dbVariation db) var)
+            fmt ("lst = " % stext)
+                (fmtList "[" "]" f lst)
+            case msel of
+                Nothing -> "selector = None"
+                Just (A.UapSelector item tab) -> do
+                    let f1 :: A.Name -> Text
+                        f1 = sformat ("\"" % stext % "\"")
+                        f2 :: (Int, A.UapName) -> Text
+                        f2 (val, name) = sformat
+                            (int % ": \"" % stext % "\"") val name
+                    fmt ("selector = (" % stext % ", " % stext % ")")
+                       (fmtList "[" "]" f1 item)
+                       (fmtList "{" "}" f2 tab)
+  where
+    cls c = fmt ("class " % stext % "(" % stext % "):")
+        (nameOf "Uap" ix) c
+
+mkSpec :: AsterixDb EMap -> (AstSpec, Int) -> BlockM Builder ()
+mkSpec db (uap, ix) = case uap of
+    AstCat uap2 -> do
+        cls "AstCat"
+        indent $ do
+            fmt ("uap = " % stext)
+                (nameOf "Uap" $ indexOf (dbUap db) uap2)
+    AstRef var -> do
+        cls "AstRef"
+        indent $ do
+            fmt ("var = " % stext)
+                (nameOf "Variation" $ indexOf (dbVariation db) var)
+  where
+    cls c = fmt ("class " % stext % "(" % stext % "):")
+        (nameOf "AstSpec" ix) c
+
+mkAsterix :: AsterixDb EMap -> (Asterix, Int) -> BlockM Builder ()
+mkAsterix db (Asterix cat (A.Edition a b) spec, ix) = do
+    cls "Asterix"
+    indent $ do
+        fmt ("cat = " % int) cat
+        fmt ("edition = (" % int % ", " % int % ")") a b
+        fmt ("spec = " % stext)
+            (nameOf "AstSpec" $ indexOf (dbSpec db) spec)
+  where
+    cls c = fmt ("class " % stext % "(" % stext % "):")
+        (nameOf "Asterix" ix) c
+
+mkAlias :: AsterixDb EMap -> Asterix -> BlockM Builder ()
+mkAlias db ast@(Asterix _cat _ed spec) = do
+    fmt (stext % ": TypeAlias = " % stext)
+        (nameOfAst ast)
+        (nameOf "AstSpec" $ indexOf (dbSpec db) spec)
+
+mkManifest :: [Asterix] -> BlockM Builder ()
+mkManifest lst = do
+    let f :: Asterix -> Text
+        f ast = sformat stext (nameOfAst ast)
+    fmt ("manifest = " % stext) (fmtList "[" "]" f lst)
 
 {-
 -- | Name of argument with given (variation) index.
@@ -1024,29 +1104,43 @@ mkCode ref ver specs' = render "    " "\n" $ do
     "# Content set"
     sequence_ (fmap mkContent $ enumList $ dbContent db)
     ""
-    "# Variation set"
+    "# Variation and Item set"
+    {-
+    do
+        let vars = Set.toList $ dbVariation dbSet
+            items = Set.toList $ dbItem dbSet
+        forM_ (flattenVariationsAndItems vars items) $ \case
+            Left var -> mkVariation db var
+            Right item -> mkItem db item
+    -}
+    {-
+    handleVarItem db (dbVariation db) (dbItem db)
     sequence_ (fmap (mkVariation db) $ enumList $ dbVariation db)
     ""
     "# Item set"
     sequence_ (fmap (mkItem db) $ enumList $ dbItem db)
-    {-
+    -}
     ""
-    "-- | Uap set"
+    "# Uap set"
     sequence_ (fmap (mkUap db) $ enumList $ dbUap db)
     ""
-    "-- | Spec set"
+    "# Spec set"
     sequence_ (fmap (mkSpec db) $ enumList $ dbSpec db)
     ""
-    "-- | Asterix set"
+    "# Asterix set"
+    sequence_ (fmap (mkAsterix db) $ enumList $ dbAst db)
+    ""
+    "# Aliases"
     sequence_ (fmap (mkAlias db) specs)
     ""
-    "-- | Manifest - runtime listing of all known specs (CAT or EXP)"
+    "# Manifest"
     mkManifest specs
-    ""
-    -}
   where
     specs :: [Asterix]
     specs = sort $ nub $ fmap deriveAsterix specs'
 
+    dbSet :: AsterixDb Set
+    dbSet = asterixDb specs
+
     db :: AsterixDb EMap
-    db = enumDb $ asterixDb specs
+    db = enumDb $ dbSet

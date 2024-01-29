@@ -332,9 +332,12 @@ class ContentQuantity(Content):
     lsb : float
     unit : str
 
-# Variation
+# Variation, Item
 
 class Variation:
+    pass
+
+class ItemBase:
     pass
 
 class Element(Variation):
@@ -359,11 +362,6 @@ class Compound(Variation):
     fspec_size : Optional[int]
     items : List[Optional[Type[ItemBase]]]
 
-# Item
-
-class ItemBase:
-    pass
-
 class Spare(ItemBase):
     bit_offset8 : int
     bit_size : int
@@ -372,6 +370,36 @@ class Item(ItemBase):
     name : str
     title : str
     var : Type[Variation]
+
+# Uap
+
+class Uap:
+    pass
+
+class UapSingle(Uap):
+    var : Type[Variation]
+
+class UapMultiple(Uap):
+    lst : List[Tuple[str, Type[Variation]]]
+    selector : Optional[Tuple[List[str], dict[int, str]]]
+
+# Spec
+
+class AstSpec:
+    pass
+
+class AstCat(AstSpec):
+    uap : Type[Uap]
+
+class AstRef(AstSpec):
+    var : Type[Variation]
+
+# Asterix
+
+class Asterix:
+    cat : int
+    edition : Tuple[int, int]
+    spec : Type[AstSpec]
 
 '''
 class Variation:
