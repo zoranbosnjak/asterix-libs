@@ -244,11 +244,11 @@ mkAsterix db (Asterix cat (A.Edition a b) spec, ix) = do
     cls c = fmt ("class " % stext % "(" % stext % "):")
         (nameOf "Asterix" ix) c
 
-mkAlias :: AsterixDb EMap -> Asterix -> BlockM Builder ()
-mkAlias db ast@(Asterix _cat _ed spec) = do
+mkAlias :: (Asterix, Int) -> BlockM Builder ()
+mkAlias (ast, ix) = do
     fmt (stext % ": TypeAlias = " % stext)
         (nameOfAst ast)
-        (nameOf "AstSpec" $ indexOf (dbSpec db) spec)
+        (nameOf "Asterix" ix)
 
 mkManifest :: [Asterix] -> BlockM Builder ()
 mkManifest lst = do
@@ -1108,7 +1108,7 @@ mkCode ref ver specs' = render "    " "\n" $ do
     sequence_ (fmap (mkAsterix db) $ enumList $ dbAst db)
     ""
     "# Aliases"
-    sequence_ (fmap (mkAlias db) specs)
+    sequence_ (fmap mkAlias $ enumList $ dbAst db)
     ""
     "# Manifest"
     mkManifest specs

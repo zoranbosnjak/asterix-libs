@@ -480,10 +480,10 @@ class Asterix_3(Asterix):
     spec = AstSpec_2
 
 # Aliases
-Cat_000_1_0: TypeAlias = AstSpec_0
-Ref_000_1_0: TypeAlias = AstSpec_3
-Cat_001_1_0: TypeAlias = AstSpec_1
-Cat_002_1_0: TypeAlias = AstSpec_2
+Cat_000_1_0: TypeAlias = Asterix_0
+Ref_000_1_0: TypeAlias = Asterix_1
+Cat_001_1_0: TypeAlias = Asterix_2
+Cat_002_1_0: TypeAlias = Asterix_3
 
 # Manifest
 manifest = [Cat_000_1_0, Ref_000_1_0, Cat_001_1_0, Cat_002_1_0]
