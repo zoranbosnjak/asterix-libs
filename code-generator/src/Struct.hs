@@ -13,6 +13,7 @@
 module Struct where
 
 import           Control.Monad.State
+import           Control.Monad.RWS
 import           Data.List           (elemIndex)
 import           Data.Map            (Map)
 import qualified Data.Map            as Map
@@ -329,16 +330,33 @@ enumList = Map.toList . unEMap
 
 -- | Variations and Items are defined by mutual recursion.
 -- Reorder variations and items, such that any var/item is defined before it's referenced.
-flattenVariationsAndItems :: [Variation] -> [Item] -> [Either Variation Item]
-flattenVariationsAndItems vars items = goVar <> goItem
+flattenVariationsAndItems :: (Set Variation, Set Item) -> [Either Variation Item]
+flattenVariationsAndItems = snd . evalRWS go ()
   where
-    goVar = case vars of
-        [] -> []
-        (var : vars') -> case var of
-            Element _ _ _ -> Left var : flattenVariationsAndItems vars' items
-            _ -> flattenVariationsAndItems vars' items <> [Left var]
-    goItem = case items of
-        [] -> []
-        (item : items') -> case item of
-            Spare _ _ -> Right item : flattenVariationsAndItems vars items'
-            _ -> flattenVariationsAndItems vars items' <> [Right item]
+    go = do
+        (vars, items) <- get
+        case Set.lookupMin vars of
+            Just var -> goVar var >> go
+            Nothing -> case Set.lookupMin items of
+                Just item -> goItem item >> go
+                Nothing -> pure ()
+    goVar var = do
+        (vars, items) <- get
+        put (Set.delete var vars, items)
+        when (Set.member var vars) $ do
+            case var of
+                Element _ _ _ -> pure ()
+                Group lst -> mapM_ goItem lst
+                Extended lst -> mapM_ (maybe (pure ()) goItem) lst
+                Repetitive _ var2 -> goVar var2
+                Explicit _ -> pure ()
+                Compound _ lst -> mapM_ (maybe (pure ()) goItem) lst
+            tell [Left var]
+    goItem item = do
+        (vars, items) <- get
+        put (vars, Set.delete item items)
+        when (Set.member item items) $ do
+            case item of
+                Spare _ _ -> pure ()
+                Item _ _ var -> goVar var
+            tell [Right item]

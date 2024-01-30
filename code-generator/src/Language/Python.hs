@@ -113,11 +113,7 @@ div8 n = case divMod n 8 of
     _ -> error "unexpected value"
 
 mkVariation :: AsterixDb EMap -> Variation -> BlockM Builder ()
-mkVariation db var = do
-    pure ()
-{-
-mkVariation :: AsterixDb EMap -> (Variation, Int) -> BlockM Builder ()
-mkVariation db (var, ix) = case var of
+mkVariation db var = case var of
     Element (OctetOffset o) n cont -> do
         cls "Element"
         indent $ do
@@ -167,17 +163,12 @@ mkVariation db (var, ix) = case var of
             fmt ("items = " % stext)
                 (fmtList "[" "]" f lst)
   where
+    ix = indexOf (dbVariation db) var
     cls c = fmt ("class " % stext % "(" % stext % "):")
         (nameOf "Variation" ix) c
--}
 
 mkItem :: AsterixDb EMap -> Item -> BlockM Builder ()
-mkItem db item = do
-    pure ()
-
-{-
-mkItem :: AsterixDb EMap -> (Item, Int) -> BlockM Builder ()
-mkItem db (item, ix) = case item of
+mkItem db item = case item of
     Spare (OctetOffset o) n -> do
         cls "Spare"
         indent $ do
@@ -190,10 +181,9 @@ mkItem db (item, ix) = case item of
             fmt ("title = \"" % stext % "\"") title
             fmt ("var = " % stext)
                 (nameOf "Variation" $ indexOf (dbVariation db) var)
-  where
-    cls c = fmt ("class " % stext % "(" % stext % "):")
-        (nameOf "Item" ix) c
--}
+    where
+        ix = indexOf (dbItem db) item
+        cls c = fmt ("class " % stext % "(" % stext % "):") (nameOf "Item" ix) c
 
 mkUap :: AsterixDb EMap -> (Uap, Int) -> BlockM Builder ()
 mkUap db (uap, ix) = case uap of
@@ -1098,28 +1088,15 @@ mkCode ref ver specs' = render "    " "\n" $ do
     "from asterix.base import *"
     ""
     line $ "reference = \"" <> BL.fromText ref <> "\""
-    ""
     line $ "version = \"" <> BL.fromText ver <> "\""
     ""
     "# Content set"
     sequence_ (fmap mkContent $ enumList $ dbContent db)
     ""
     "# Variation and Item set"
-    {-
-    do
-        let vars = Set.toList $ dbVariation dbSet
-            items = Set.toList $ dbItem dbSet
-        forM_ (flattenVariationsAndItems vars items) $ \case
-            Left var -> mkVariation db var
-            Right item -> mkItem db item
-    -}
-    {-
-    handleVarItem db (dbVariation db) (dbItem db)
-    sequence_ (fmap (mkVariation db) $ enumList $ dbVariation db)
-    ""
-    "# Item set"
-    sequence_ (fmap (mkItem db) $ enumList $ dbItem db)
-    -}
+    forM_ (flattenVariationsAndItems (dbVariation dbSet, dbItem dbSet)) $ \case
+        Left var -> mkVariation db var
+        Right item -> mkItem db item
     ""
     "# Uap set"
     sequence_ (fmap (mkUap db) $ enumList $ dbUap db)

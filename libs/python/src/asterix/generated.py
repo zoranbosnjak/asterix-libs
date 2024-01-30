@@ -7,7 +7,6 @@
 from asterix.base import *
 
 reference = "unknown"
-
 version = "19700101.0"
 
 # Content set
@@ -1576,7 +1575,7 @@ class Content_672(ContentQuantity):
     lsb = 0.152587890625
     unit = "m"
 
-# Variation set
+# Variation and Item set
 class Variation_0(Element):
     bit_offset8 = 0
     bit_size = 1
@@ -5069,702 +5068,5310 @@ class Variation_872(Element):
     bit_offset8 = 7
     bit_size = 9
     content = Content_566
+class Item_0(Spare):
+    bit_offset8 = 0
+    bit_size = 1
+class Item_889(Item):
+    name = "FTN"
+    title = "Fusion Track Number"
+    var = Variation_422
 class Variation_873(Group):
     items = [Item_0, Item_889]
+class Item_1313(Item):
+    name = "PR"
+    title = "Mode S Packet Internal Priority"
+    var = Variation_415
+class Item_1337(Item):
+    name = "PT"
+    title = "Packet Type"
+    var = Variation_843
 class Variation_874(Group):
     items = [Item_0, Item_1313, Item_1337]
+class Item_1426(Item):
+    name = "REDRDP"
+    title = "Reduction Steps in Use for An Overload of the RDP"
+    var = Variation_410
+class Item_1427(Item):
+    name = "REDXMT"
+    title = "Reduction Steps in Use for An Overload of the Transmission Subsystem"
+    var = Variation_682
+class Item_29(Spare):
+    bit_offset8 = 7
+    bit_size = 1
 class Variation_875(Group):
     items = [Item_0, Item_1426, Item_1427, Item_29]
+class Item_1435(Item):
+    name = "RES"
+    title = ""
+    var = Variation_358
+class Item_896(Item):
+    name = "GA"
+    title = ""
+    var = Variation_522
 class Variation_876(Group):
     items = [Item_0, Item_1435, Item_896]
+class Item_1437(Item):
+    name = "RES"
+    title = "Resolution with which the GNSS-derived Altitude (GA) is Reported"
+    var = Variation_358
+class Item_897(Item):
+    name = "GA"
+    title = "GNSS-derived Altitude of Target, Expressed as Height Above WGS 84 Ellipsoid"
+    var = Variation_522
 class Variation_877(Group):
     items = [Item_0, Item_1437, Item_897]
+class Item_1858(Item):
+    name = "VNS"
+    title = "Version Not Supported"
+    var = Variation_384
+class Item_1855(Item):
+    name = "VN"
+    title = "Version Number"
+    var = Variation_514
+class Item_1068(Item):
+    name = "LTT"
+    title = "Link Technology Type"
+    var = Variation_774
 class Variation_878(Group):
     items = [Item_0, Item_1858, Item_1855, Item_1068]
+class Item_1856(Item):
+    name = "VN"
+    title = "Version Number"
+    var = Variation_515
 class Variation_879(Group):
     items = [Item_0, Item_1858, Item_1856, Item_1068]
+class Item_1(Spare):
+    bit_offset8 = 0
+    bit_size = 2
+class Item_413(Item):
+    name = "3DH"
+    title = "3D Height, in Binary Notation. Negative Values Are Expressed in Two's Complement"
+    var = Variation_522
 class Variation_880(Group):
     items = [Item_1, Item_413]
+class Item_1293(Item):
+    name = "PIN"
+    title = "PIN Code"
+    var = Variation_520
+class Item_1214(Item):
+    name = "NAV"
+    title = "Validity of NAT"
+    var = Variation_473
+class Item_1208(Item):
+    name = "NAT"
+    title = "National Origin"
+    var = Variation_606
+class Item_1157(Item):
+    name = "MIS"
+    title = "Mission Code"
+    var = Variation_518
 class Variation_881(Group):
     items = [Item_1, Item_1293, Item_1, Item_1214, Item_1208, Item_1, Item_1157]
+class Item_2(Spare):
+    bit_offset8 = 0
+    bit_size = 3
 class Variation_882(Group):
     items = [Item_1, Item_1293, Item_2, Item_1208, Item_1, Item_1157]
+class Item_3(Spare):
+    bit_offset8 = 0
+    bit_size = 4
+class Item_1242(Item):
+    name = "NOV"
+    title = "Validity of NO"
+    var = Variation_644
+class Item_1225(Item):
+    name = "NO"
+    title = "National Origin"
+    var = Variation_775
 class Variation_883(Group):
     items = [Item_1, Item_1293, Item_3, Item_1242, Item_1225]
+class Item_4(Spare):
+    bit_offset8 = 0
+    bit_size = 5
+class Item_1226(Item):
+    name = "NO"
+    title = "National Origin Code"
+    var = Variation_775
 class Variation_884(Group):
     items = [Item_1, Item_1293, Item_4, Item_1226]
+class Item_1826(Item):
+    name = "UPD"
+    title = "Update Period"
+    var = Variation_525
 class Variation_885(Group):
     items = [Item_1, Item_1826]
+class Item_1927(Item):
+    name = "XP"
+    title = "X-pulse from Mode 5 PIN Reply/Report"
+    var = Variation_500
+class Item_1920(Item):
+    name = "X5"
+    title = "X-pulse from Mode 5 Data Reply or Report"
+    var = Variation_585
+class Item_1923(Item):
+    name = "XC"
+    title = "X-pulse from Mode C Reply"
+    var = Variation_667
+class Item_1919(Item):
+    name = "X3"
+    title = "X-pulse from Mode 3/A Reply"
+    var = Variation_758
+class Item_1917(Item):
+    name = "X2"
+    title = "X-pulse from Mode 2 Reply"
+    var = Variation_838
+class Item_1913(Item):
+    name = "X1"
+    title = "X-pulse from Mode 1 Reply"
+    var = Variation_868
 class Variation_886(Group):
     items = [Item_1, Item_1927, Item_1920, Item_1923, Item_1919, Item_1917, Item_1913]
+class Item_1928(Item):
+    name = "XP"
+    title = "X-pulse from Mode 5 PIN Reply/report"
+    var = Variation_500
+class Item_1916(Item):
+    name = "X2"
+    title = "X-pulse from Mode 2 Reply"
+    var = Variation_781
 class Variation_887(Group):
     items = [Item_1, Item_1928, Item_1920, Item_1923, Item_1919, Item_1916, Item_1913]
+class Item_804(Item):
+    name = "DTI"
+    title = "Cockpit Display of Traffic Information"
+    var = Variation_582
+class Item_1129(Item):
+    name = "MDS"
+    title = "Mode-S Extended Squitter"
+    var = Variation_652
+class Item_1818(Item):
+    name = "UAT"
+    title = "UAT"
+    var = Variation_750
+class Item_1852(Item):
+    name = "VDL"
+    title = "VDL Mode 4"
+    var = Variation_823
+class Item_1269(Item):
+    name = "OTR"
+    title = "Other Technology"
+    var = Variation_863
 class Variation_888(Group):
     items = [Item_2, Item_804, Item_1129, Item_1818, Item_1852, Item_1269]
+class Item_865(Item):
+    name = "FOM"
+    title = ""
+    var = Variation_606
 class Variation_889(Group):
     items = [Item_2, Item_865]
+class Item_866(Item):
+    name = "FOM"
+    title = "Figure of Merit"
+    var = Variation_606
 class Variation_890(Group):
     items = [Item_2, Item_866]
+class Item_1352(Item):
+    name = "QA4"
+    title = ""
+    var = Variation_553
+class Item_1347(Item):
+    name = "QA2"
+    title = ""
+    var = Variation_633
+class Item_1344(Item):
+    name = "QA1"
+    title = ""
+    var = Variation_735
+class Item_1361(Item):
+    name = "QB2"
+    title = ""
+    var = Variation_810
+class Item_1357(Item):
+    name = "QB1"
+    title = ""
+    var = Variation_855
 class Variation_891(Group):
     items = [Item_2, Item_1352, Item_1347, Item_1344, Item_1361, Item_1357]
+class Item_1518(Item):
+    name = "SCN"
+    title = "Track / SCN Association"
+    var = Variation_577
+class Item_1409(Item):
+    name = "RC"
+    title = "Roll Call Component"
+    var = Variation_611
+class Item_474(Item):
+    name = "AC"
+    title = "All Call Component"
+    var = Variation_708
+class Item_1610(Item):
+    name = "SSR"
+    title = "SSR Component"
+    var = Variation_784
+class Item_1333(Item):
+    name = "PSR"
+    title = "PSR Component"
+    var = Variation_851
+class Item_1294(Item):
+    name = "PLOTNR"
+    title = ""
+    var = Variation_234
 class Variation_892(Group):
     items = [Item_2, Item_1518, Item_1409, Item_474, Item_1610, Item_1333, Item_1294]
+class Item_1830(Item):
+    name = "VA"
+    title = ""
+    var = Variation_566
+class Item_1175(Item):
+    name = "MODE3A"
+    title = "Mode-3/A Reply in Octal Representation"
+    var = Variation_694
 class Variation_893(Group):
     items = [Item_2, Item_1830, Item_1175]
 class Variation_894(Group):
     items = [Item_2, Item_1920, Item_1923, Item_1919, Item_1917, Item_1913]
+class Item_593(Item):
+    name = "BPS"
+    title = ""
+    var = Variation_698
 class Variation_895(Group):
     items = [Item_3, Item_593]
+class Item_594(Item):
+    name = "BPS"
+    title = "Barometric Pressure Setting"
+    var = Variation_697
 class Variation_896(Group):
     items = [Item_3, Item_594]
+class Item_821(Item):
+    name = "EM1"
+    title = "Extended Mode 1 Reply in Octal Representation"
+    var = Variation_694
 class Variation_897(Group):
     items = [Item_3, Item_821]
+class Item_890(Item):
+    name = "FTN"
+    title = "Fusion Track Number"
+    var = Variation_693
 class Variation_898(Group):
     items = [Item_3, Item_890]
+class Item_940(Item):
+    name = "HDR"
+    title = "Horizontal Reference Direction"
+    var = Variation_664
+class Item_1629(Item):
+    name = "STAT"
+    title = "Selected Heading Status"
+    var = Variation_712
+class Item_1552(Item):
+    name = "SH"
+    title = "Selected Heading"
+    var = Variation_848
 class Variation_899(Group):
     items = [Item_3, Item_940, Item_1629, Item_1552]
+class Item_1165(Item):
+    name = "MOD3A"
+    title = "Mode-3/A Reply in Octal Representation"
+    var = Variation_694
 class Variation_900(Group):
     items = [Item_3, Item_1165]
+class Item_1169(Item):
+    name = "MODE2"
+    title = "Mode-2 Code in Octal Representation"
+    var = Variation_694
 class Variation_901(Group):
     items = [Item_3, Item_1169]
+class Item_1171(Item):
+    name = "MODE3A"
+    title = "(Mode 3/A Code) 4 Digits, Octal Representation"
+    var = Variation_694
 class Variation_902(Group):
     items = [Item_3, Item_1171]
+class Item_1173(Item):
+    name = "MODE3A"
+    title = "Mode-3/A Code (Converted Into Octal Representation) of Aircraft 1 Involved in the Conflict"
+    var = Variation_694
 class Variation_903(Group):
     items = [Item_3, Item_1173]
+class Item_1174(Item):
+    name = "MODE3A"
+    title = "Mode-3/A Code (Converted Into Octal Representation) of Aircraft 2 Involved in the Conflict"
+    var = Variation_694
 class Variation_904(Group):
     items = [Item_3, Item_1174]
 class Variation_905(Group):
     items = [Item_3, Item_1175]
+class Item_1253(Item):
+    name = "OCT1"
+    title = "1st Octal Digit"
+    var = Variation_679
+class Item_1254(Item):
+    name = "OCT2"
+    title = "2nd Octal Digit"
+    var = Variation_870
+class Item_1255(Item):
+    name = "OCT3"
+    title = "3rd Octal Digit"
+    var = Variation_513
+class Item_1256(Item):
+    name = "OCT4"
+    title = "4th Octal Digit"
+    var = Variation_771
 class Variation_906(Group):
     items = [Item_3, Item_1253, Item_1254, Item_1255, Item_1256]
+class Item_1340(Item):
+    name = "PUN"
+    title = "Position Uncertainty"
+    var = Variation_685
 class Variation_907(Group):
     items = [Item_3, Item_1340]
+class Item_1353(Item):
+    name = "QA4"
+    title = ""
+    var = Variation_634
+class Item_1348(Item):
+    name = "QA2"
+    title = ""
+    var = Variation_736
+class Item_1345(Item):
+    name = "QA1"
+    title = ""
+    var = Variation_809
+class Item_1364(Item):
+    name = "QB4"
+    title = ""
+    var = Variation_856
+class Item_1359(Item):
+    name = "QB2"
+    title = ""
+    var = Variation_44
+class Item_1355(Item):
+    name = "QB1"
+    title = ""
+    var = Variation_363
+class Item_1372(Item):
+    name = "QC4"
+    title = ""
+    var = Variation_458
+class Item_1368(Item):
+    name = "QC2"
+    title = ""
+    var = Variation_554
+class Item_1366(Item):
+    name = "QC1"
+    title = ""
+    var = Variation_636
+class Item_1380(Item):
+    name = "QD4"
+    title = ""
+    var = Variation_739
+class Item_1378(Item):
+    name = "QD2"
+    title = ""
+    var = Variation_813
+class Item_1375(Item):
+    name = "QD1"
+    title = ""
+    var = Variation_857
 class Variation_908(Group):
     items = [Item_3, Item_1353, Item_1348, Item_1345, Item_1364, Item_1359, Item_1355, Item_1372, Item_1368, Item_1366, Item_1380, Item_1378, Item_1375]
+class Item_1630(Item):
+    name = "STAT"
+    title = "Status of the Alert"
+    var = Variation_679
 class Variation_909(Group):
     items = [Item_3, Item_1630, Item_29]
+class Item_1758(Item):
+    name = "TRK"
+    title = "Track Number"
+    var = Variation_693
 class Variation_910(Group):
     items = [Item_3, Item_1758]
+class Item_1760(Item):
+    name = "TRN"
+    title = "Track Number"
+    var = Variation_693
 class Variation_911(Group):
     items = [Item_3, Item_1760]
+class Item_1762(Item):
+    name = "TRNUM"
+    title = "Track Number"
+    var = Variation_693
 class Variation_912(Group):
     items = [Item_3, Item_1762]
+class Item_686(Item):
+    name = "COM"
+    title = "Communications Capability of the Transponder"
+    var = Variation_772
 class Variation_913(Group):
     items = [Item_4, Item_686]
+class Item_1217(Item):
+    name = "NBR"
+    title = ""
+    var = Variation_779
 class Variation_914(Group):
     items = [Item_4, Item_1217]
+class Item_1319(Item):
+    name = "PREFIX"
+    title = "Prefix Field"
+    var = Variation_777
 class Variation_915(Group):
     items = [Item_4, Item_1319]
+class Item_1487(Item):
+    name = "RVSM"
+    title = ""
+    var = Variation_770
+class Item_954(Item):
+    name = "HPR"
+    title = ""
+    var = Variation_862
 class Variation_916(Group):
     items = [Item_4, Item_1487, Item_954]
+class Item_5(Spare):
+    bit_offset8 = 0
+    bit_size = 6
+class Item_1669(Item):
+    name = "TAR"
+    title = "Track Angle Rate"
+    var = Variation_847
 class Variation_917(Group):
     items = [Item_5, Item_1669]
+class Item_6(Spare):
+    bit_offset8 = 0
+    bit_size = 7
+class Item_1459(Item):
+    name = "RPP"
+    title = ""
+    var = Variation_872
 class Variation_918(Group):
     items = [Item_6, Item_1459]
+class Item_1689(Item):
+    name = "TCOUNT1"
+    title = ""
+    var = Variation_871
+class Item_1686(Item):
+    name = "TCODE1"
+    title = ""
+    var = Variation_606
+class Item_1690(Item):
+    name = "TCOUNT2"
+    title = ""
+    var = Variation_132
+class Item_1687(Item):
+    name = "TCODE2"
+    title = ""
+    var = Variation_694
+class Item_1691(Item):
+    name = "TCOUNT3"
+    title = ""
+    var = Variation_132
+class Item_1688(Item):
+    name = "TCODE3"
+    title = ""
+    var = Variation_694
 class Variation_919(Group):
     items = [Item_6, Item_1689, Item_1686, Item_1690, Item_1687, Item_1691, Item_1688]
+class Item_465(Item):
+    name = "A"
+    title = "Aerial Identification"
+    var = Variation_20
+class Item_989(Item):
+    name = "IDENT"
+    title = ""
+    var = Variation_414
+class Item_701(Item):
+    name = "COUNTER"
+    title = ""
+    var = Variation_845
 class Variation_920(Group):
     items = [Item_465, Item_989, Item_701]
+class Item_471(Item):
+    name = "AC"
+    title = "ACAS Capabilities"
+    var = Variation_109
+class Item_1161(Item):
+    name = "MN"
+    title = "Multiple Navigation Aids"
+    var = Variation_511
+class Item_768(Item):
+    name = "DC"
+    title = "Differencial Correction"
+    var = Variation_675
+class Item_28(Spare):
+    bit_offset8 = 6
+    bit_size = 6
+class Item_1281(Item):
+    name = "PA"
+    title = "Position Accuracy"
+    var = Variation_691
 class Variation_921(Group):
     items = [Item_471, Item_1161, Item_768, Item_28, Item_1281]
+class Item_473(Item):
+    name = "AC"
+    title = "ACAS Status"
+    var = Variation_110
+class Item_1163(Item):
+    name = "MN"
+    title = "Multiple Navigational Aids Status"
+    var = Variation_512
+class Item_770(Item):
+    name = "DC"
+    title = "Differential Correction Status"
+    var = Variation_676
+class Item_909(Item):
+    name = "GBS"
+    title = "Ground Bit Set"
+    var = Variation_836
+class Item_31(Spare):
+    bit_offset8 = 7
+    bit_size = 6
+class Item_1628(Item):
+    name = "STAT"
+    title = "Flight Status"
+    var = Variation_773
 class Variation_922(Group):
     items = [Item_473, Item_1163, Item_770, Item_909, Item_31, Item_1628]
+class Item_478(Item):
+    name = "ACK"
+    title = "Alert Acknowleged"
+    var = Variation_10
+class Item_1660(Item):
+    name = "SVR"
+    title = "Alert Severity"
+    var = Variation_396
+class Item_19(Spare):
+    bit_offset8 = 3
+    bit_size = 5
+class Item_546(Item):
+    name = "AT"
+    title = "Alert Type"
+    var = Variation_155
+class Item_518(Item):
+    name = "AN"
+    title = "Alert Number"
+    var = Variation_155
 class Variation_923(Group):
     items = [Item_478, Item_1660, Item_19, Item_546, Item_518]
+class Item_479(Item):
+    name = "ACQI"
+    title = ""
+    var = Variation_108
+class Item_1759(Item):
+    name = "TRKUPDCTR"
+    title = ""
+    var = Variation_521
+class Item_1017(Item):
+    name = "LASTTRKUPD"
+    title = ""
+    var = Variation_267
 class Variation_924(Group):
     items = [Item_479, Item_1759, Item_1017]
+class Item_521(Item):
+    name = "ANT"
+    title = "Selected Antenna"
+    var = Variation_11
+class Item_630(Item):
+    name = "CHAB"
+    title = "Channel A/B Selection Status"
+    var = Variation_400
+class Item_1271(Item):
+    name = "OVL"
+    title = "Overload Condition"
+    var = Variation_565
+class Item_1192(Item):
+    name = "MSC"
+    title = "Monitoring System Connected Status"
+    var = Variation_643
+class Item_25(Spare):
+    bit_offset8 = 5
+    bit_size = 3
 class Variation_925(Group):
     items = [Item_521, Item_630, Item_1271, Item_1192, Item_25]
+class Item_631(Item):
+    name = "CHAB"
+    title = "Channel A/B Selection Status"
+    var = Variation_401
+class Item_1276(Item):
+    name = "OVLSUR"
+    title = "Overload Condition"
+    var = Variation_565
+class Item_1194(Item):
+    name = "MSC"
+    title = "Monitoring System Connected Status:"
+    var = Variation_643
+class Item_1516(Item):
+    name = "SCF"
+    title = "Channel A/B Selection Status for Surveillance Co-ordination Function"
+    var = Variation_710
+class Item_784(Item):
+    name = "DLF"
+    title = "Channel A/B Selection Status for Data Link Function"
+    var = Variation_785
+class Item_1275(Item):
+    name = "OVLSCF"
+    title = "Overload in Surveillance Co-ordination Function"
+    var = Variation_861
+class Item_1273(Item):
+    name = "OVLDLF"
+    title = "Overload in Data Link Function"
+    var = Variation_60
+class Item_10(Spare):
+    bit_offset8 = 1
+    bit_size = 7
 class Variation_926(Group):
     items = [Item_521, Item_631, Item_1276, Item_1194, Item_1516, Item_784, Item_1275, Item_1273, Item_10]
+class Item_632(Item):
+    name = "CHAB"
+    title = "Channel A/B Selection Status"
+    var = Variation_402
 class Variation_927(Group):
     items = [Item_521, Item_632, Item_1271, Item_1194, Item_25]
+class Item_523(Item):
+    name = "AP"
+    title = "Autopilot"
+    var = Variation_12
+class Item_1857(Item):
+    name = "VN"
+    title = "Vertical Navigation"
+    var = Variation_392
+class Item_499(Item):
+    name = "AH"
+    title = "Altitude Hold"
+    var = Variation_431
+class Item_515(Item):
+    name = "AM"
+    title = "Approach Mode"
+    var = Variation_530
+class Item_22(Spare):
+    bit_offset8 = 4
+    bit_size = 4
 class Variation_928(Group):
     items = [Item_523, Item_1857, Item_499, Item_515, Item_22]
-class Variation_929(Group):
-    items = [Item_523, Item_1857, Item_499, Item_515, Item_1144, Item_27]
-class Variation_930(Group):
-    items = [Item_561, Item_564]
-class Variation_931(Group):
-    items = [Item_562, Item_565]
-class Variation_932(Group):
-    items = [Item_563, Item_566]
-class Variation_933(Group):
-    items = [Item_568, Item_815, Item_1440, Item_1439]
-class Variation_934(Group):
-    items = [Item_583, Item_584, Item_585, Item_586, Item_587, Item_588, Item_589, Item_590]
-class Variation_935(Group):
-    items = [Item_592, Item_964, Item_968, Item_969, Item_970, Item_971, Item_972, Item_973, Item_974, Item_975, Item_965, Item_966, Item_967]
-class Variation_936(Group):
-    items = [Item_603, Item_10, Item_1436]
-class Variation_937(Group):
-    items = [Item_604, Item_1555, Item_22]
-class Variation_938(Group):
-    items = [Item_609, Item_1094, Item_1652]
-class Variation_939(Group):
-    items = [Item_612, Item_781]
-class Variation_940(Group):
-    items = [Item_623, Item_1303]
-class Variation_941(Group):
-    items = [Item_624, Item_1307]
-class Variation_942(Group):
-    items = [Item_625, Item_1310]
-class Variation_943(Group):
-    items = [Item_641, Item_844, Item_730]
-class Variation_944(Group):
-    items = [Item_644, Item_1315]
-class Variation_945(Group):
-    items = [Item_667, Item_668, Item_672, Item_652]
-class Variation_946(Group):
-    items = [Item_669, Item_670, Item_673, Item_674]
-class Variation_947(Group):
-    items = [Item_676, Item_677, Item_679, Item_680]
-class Variation_948(Group):
-    items = [Item_684, Item_1625, Item_1554, Item_29, Item_1198, Item_535, Item_504, Item_572, Item_574]
-class Variation_949(Group):
-    items = [Item_685, Item_1622, Item_27, Item_1603, Item_535, Item_504, Item_572, Item_575]
-class Variation_950(Group):
-    items = [Item_685, Item_1623, Item_27, Item_1198, Item_535, Item_504, Item_572, Item_574]
-class Variation_951(Group):
-    items = [Item_685, Item_1624, Item_27, Item_1603, Item_535, Item_504, Item_572, Item_575]
-class Variation_952(Group):
-    items = [Item_685, Item_1626, Item_29, Item_1603, Item_535, Item_504, Item_572, Item_573, Item_472, Item_1162, Item_769, Item_19]
-class Variation_953(Group):
-    items = [Item_685, Item_1627, Item_29, Item_1603, Item_535, Item_504, Item_572, Item_573, Item_472, Item_1162, Item_769, Item_19]
-class Variation_954(Group):
-    items = [Item_741, Item_862, Item_15]
-class Variation_955(Group):
-    items = [Item_751, Item_8, Item_606]
-class Variation_956(Group):
-    items = [Item_773, Item_910, Item_1576, Item_1777, Item_1397, Item_1498, Item_1589, Item_29, Item_551, Item_537, Item_25]
-class Variation_957(Group):
-    items = [Item_777, Item_778, Item_713]
-class Variation_958(Group):
-    items = [Item_789, Item_517, Item_880]
-class Variation_959(Group):
-    items = [Item_795, Item_803]
-class Variation_960(Group):
-    items = [Item_824, Item_555, Item_22]
-class Variation_961(Group):
-    items = [Item_825, Item_556, Item_22]
-class Variation_962(Group):
-    items = [Item_829, Item_1832]
-class Variation_963(Group):
-    items = [Item_830, Item_1839, Item_26]
-class Variation_964(Group):
-    items = [Item_831, Item_1835]
-class Variation_965(Group):
-    items = [Item_831, Item_1836]
-class Variation_966(Group):
-    items = [Item_831, Item_1837]
-class Variation_967(Group):
-    items = [Item_831, Item_1838]
-class Variation_968(Group):
-    items = [Item_831, Item_1840]
-class Variation_969(Group):
-    items = [Item_832, Item_1841]
-class Variation_970(Group):
-    items = [Item_833, Item_1842]
-class Variation_971(Group):
-    items = [Item_833, Item_1843]
+class Item_834(Item):
+    name = "EP"
+    title = "Element Populated Bit"
+    var = Variation_630
+class Item_1845(Item):
+    name = "VAL"
+    title = "Value"
+    var = Variation_742
 class Variation_972(Group):
     items = [Item_834, Item_1845]
+class Item_1144(Item):
+    name = "MFM"
+    title = "Status of MCP/FCU Mode Bits"
+    var = Variation_972
+class Item_27(Spare):
+    bit_offset8 = 6
+    bit_size = 2
+class Variation_929(Group):
+    items = [Item_523, Item_1857, Item_499, Item_515, Item_1144, Item_27]
+class Item_561(Item):
+    name = "AX"
+    title = ""
+    var = Variation_195
+class Item_564(Item):
+    name = "AY"
+    title = ""
+    var = Variation_195
+class Variation_930(Group):
+    items = [Item_561, Item_564]
+class Item_562(Item):
+    name = "AX"
+    title = "Ax"
+    var = Variation_195
+class Item_565(Item):
+    name = "AY"
+    title = "Ay"
+    var = Variation_195
+class Variation_931(Group):
+    items = [Item_562, Item_565]
+class Item_563(Item):
+    name = "AX"
+    title = "X Acceleration"
+    var = Variation_196
+class Item_566(Item):
+    name = "AY"
+    title = "Y Acceleration"
+    var = Variation_196
+class Variation_932(Group):
+    items = [Item_563, Item_566]
+class Item_568(Item):
+    name = "AZCON"
+    title = ""
+    var = Variation_293
+class Item_815(Item):
+    name = "ELCON"
+    title = ""
+    var = Variation_259
+class Item_1440(Item):
+    name = "RGCONSTOP"
+    title = ""
+    var = Variation_294
+class Item_1439(Item):
+    name = "RGCONSTART"
+    title = ""
+    var = Variation_294
+class Variation_933(Group):
+    items = [Item_568, Item_815, Item_1440, Item_1439]
+class Item_583(Item):
+    name = "BIT1"
+    title = "TU1/RU1 Contribution"
+    var = Variation_76
+class Item_584(Item):
+    name = "BIT2"
+    title = "TU2/RU2 Contribution"
+    var = Variation_381
+class Item_585(Item):
+    name = "BIT3"
+    title = "TU3/RU3 Contribution"
+    var = Variation_493
+class Item_586(Item):
+    name = "BIT4"
+    title = "TU4/RU4 Contribution"
+    var = Variation_573
+class Item_587(Item):
+    name = "BIT5"
+    title = "TU5/RU5 Contribution"
+    var = Variation_659
+class Item_588(Item):
+    name = "BIT6"
+    title = "TU6/RU6 Contribution"
+    var = Variation_753
+class Item_589(Item):
+    name = "BIT7"
+    title = "TU7/RU7 Contribution"
+    var = Variation_833
+class Item_590(Item):
+    name = "BIT8"
+    title = "TU8/RU8 Contribution"
+    var = Variation_867
+class Variation_934(Group):
+    items = [Item_583, Item_584, Item_585, Item_586, Item_587, Item_588, Item_589, Item_590]
+class Item_592(Item):
+    name = "BKN"
+    title = "Bank Number"
+    var = Variation_127
+class Item_964(Item):
+    name = "I1"
+    title = "Indicator 1"
+    var = Variation_637
+class Item_968(Item):
+    name = "I2"
+    title = "Indicator 2"
+    var = Variation_740
+class Item_969(Item):
+    name = "I3"
+    title = "Indicator 3"
+    var = Variation_815
+class Item_970(Item):
+    name = "I4"
+    title = "Indicator 4"
+    var = Variation_859
+class Item_971(Item):
+    name = "I5"
+    title = "Indicator 5"
+    var = Variation_47
+class Item_972(Item):
+    name = "I6"
+    title = "Indicator 6"
+    var = Variation_364
+class Item_973(Item):
+    name = "I7"
+    title = "Indicator 7"
+    var = Variation_459
+class Item_974(Item):
+    name = "I8"
+    title = "Indicator 8"
+    var = Variation_556
+class Item_975(Item):
+    name = "I9"
+    title = "Indicator 9"
+    var = Variation_637
+class Item_965(Item):
+    name = "I10"
+    title = "Indicator 10"
+    var = Variation_740
+class Item_966(Item):
+    name = "I11"
+    title = "Indicator 11"
+    var = Variation_815
+class Item_967(Item):
+    name = "I12"
+    title = "Indicator 12"
+    var = Variation_859
+class Variation_935(Group):
+    items = [Item_592, Item_964, Item_968, Item_969, Item_970, Item_971, Item_972, Item_973, Item_974, Item_975, Item_965, Item_966, Item_967]
+class Item_603(Item):
+    name = "C"
+    title = "Data Compression Indicator"
+    var = Variation_57
+class Item_1436(Item):
+    name = "RES"
+    title = "Bit Resolution"
+    var = Variation_174
+class Variation_936(Group):
+    items = [Item_603, Item_10, Item_1436]
+class Item_604(Item):
+    name = "CA"
+    title = "Communications Capability of the Transponder"
+    var = Variation_120
+class Item_1555(Item):
+    name = "SI"
+    title = "SI/II-capabilities of the Transponder"
+    var = Variation_580
+class Variation_937(Group):
+    items = [Item_604, Item_1555, Item_22]
+class Item_609(Item):
+    name = "CAT"
+    title = "Category"
+    var = Variation_191
+class Item_1094(Item):
+    name = "MAIN"
+    title = "Main Version Number"
+    var = Variation_191
+class Item_1652(Item):
+    name = "SUB"
+    title = "Sub Version Number"
+    var = Variation_191
+class Variation_938(Group):
+    items = [Item_609, Item_1094, Item_1652]
+class Item_612(Item):
+    name = "CAUSE"
+    title = "Cause"
+    var = Variation_128
+class Item_781(Item):
+    name = "DIAG"
+    title = "Diagnostic"
+    var = Variation_687
+class Variation_939(Group):
+    items = [Item_612, Item_781]
+class Item_623(Item):
+    name = "CEN"
+    title = ""
+    var = Variation_155
+class Item_1303(Item):
+    name = "POS"
+    title = ""
+    var = Variation_155
+class Variation_940(Group):
+    items = [Item_623, Item_1303]
+class Item_624(Item):
+    name = "CEN"
+    title = "Centre"
+    var = Variation_155
+class Item_1307(Item):
+    name = "POS"
+    title = "Position"
+    var = Variation_155
+class Variation_941(Group):
+    items = [Item_624, Item_1307]
+class Item_625(Item):
+    name = "CENTRE"
+    title = "8-bit Group Identification Code"
+    var = Variation_155
+class Item_1310(Item):
+    name = "POSITION"
+    title = "8-bit Control Position Identification Code"
+    var = Variation_155
+class Variation_942(Group):
+    items = [Item_625, Item_1310]
+class Item_641(Item):
+    name = "CID"
+    title = "Component ID"
+    var = Variation_234
+class Item_844(Item):
+    name = "ERRC"
+    title = "Error Code"
+    var = Variation_140
+class Item_730(Item):
+    name = "CS"
+    title = "Component State/Mode"
+    var = Variation_842
+class Variation_943(Group):
+    items = [Item_641, Item_844, Item_730]
+class Item_644(Item):
+    name = "CLS"
+    title = "Classification"
+    var = Variation_227
+class Item_1315(Item):
+    name = "PRB"
+    title = "Probability"
+    var = Variation_420
+class Variation_944(Group):
+    items = [Item_644, Item_1315]
+class Item_667(Item):
+    name = "COHAXHPX"
+    title = ""
+    var = Variation_197
+class Item_668(Item):
+    name = "COHAXHPY"
+    title = ""
+    var = Variation_197
+class Item_672(Item):
+    name = "COHAYHPX"
+    title = ""
+    var = Variation_197
+class Item_652(Item):
+    name = "COAYHPY"
+    title = ""
+    var = Variation_197
+class Variation_945(Group):
+    items = [Item_667, Item_668, Item_672, Item_652]
+class Item_669(Item):
+    name = "COHAXHVX"
+    title = ""
+    var = Variation_197
+class Item_670(Item):
+    name = "COHAXHVY"
+    title = ""
+    var = Variation_197
+class Item_673(Item):
+    name = "COHAYHVX"
+    title = ""
+    var = Variation_197
+class Item_674(Item):
+    name = "COHAYHVY"
+    title = ""
+    var = Variation_197
+class Variation_946(Group):
+    items = [Item_669, Item_670, Item_673, Item_674]
+class Item_676(Item):
+    name = "COHVXHPX"
+    title = ""
+    var = Variation_197
+class Item_677(Item):
+    name = "COHVXHPY"
+    title = ""
+    var = Variation_197
+class Item_679(Item):
+    name = "COHVYHPX"
+    title = ""
+    var = Variation_197
+class Item_680(Item):
+    name = "COHVYHPY"
+    title = ""
+    var = Variation_197
+class Variation_947(Group):
+    items = [Item_676, Item_677, Item_679, Item_680]
+class Item_684(Item):
+    name = "COM"
+    title = "Communications Capability of the Transponder"
+    var = Variation_118
+class Item_1625(Item):
+    name = "STAT"
+    title = "Flight Status"
+    var = Variation_598
+class Item_1554(Item):
+    name = "SI"
+    title = "SI/II Transponder Capability"
+    var = Variation_829
+class Item_1198(Item):
+    name = "MSSC"
+    title = "Mode-S Specific Service Capability"
+    var = Variation_53
+class Item_535(Item):
+    name = "ARC"
+    title = "Altitude Reporting Capability"
+    var = Variation_332
+class Item_504(Item):
+    name = "AIC"
+    title = "Aircraft Identification Capability"
+    var = Variation_474
+class Item_572(Item):
+    name = "B1A"
+    title = "BDS 1,0 Bit 16"
+    var = Variation_527
+class Item_574(Item):
+    name = "B1B"
+    title = "BDS 1,0 Bits 37/40"
+    var = Variation_685
+class Variation_948(Group):
+    items = [Item_684, Item_1625, Item_1554, Item_29, Item_1198, Item_535, Item_504, Item_572, Item_574]
+class Item_685(Item):
+    name = "COM"
+    title = "Communications Capability of the Transponder"
+    var = Variation_119
+class Item_1622(Item):
+    name = "STAT"
+    title = "Flight Status"
+    var = Variation_595
+class Item_1603(Item):
+    name = "SSC"
+    title = "Specific Service Capability"
+    var = Variation_53
+class Item_575(Item):
+    name = "B1B"
+    title = "BDS BDS 1,0 Bits 37/40"
+    var = Variation_685
+class Variation_949(Group):
+    items = [Item_685, Item_1622, Item_27, Item_1603, Item_535, Item_504, Item_572, Item_575]
+class Item_1623(Item):
+    name = "STAT"
+    title = "Flight Status"
+    var = Variation_596
+class Variation_950(Group):
+    items = [Item_685, Item_1623, Item_27, Item_1198, Item_535, Item_504, Item_572, Item_574]
+class Item_1624(Item):
+    name = "STAT"
+    title = "Flight Status"
+    var = Variation_597
+class Variation_951(Group):
+    items = [Item_685, Item_1624, Item_27, Item_1603, Item_535, Item_504, Item_572, Item_575]
+class Item_1626(Item):
+    name = "STAT"
+    title = "Flight Status"
+    var = Variation_603
+class Item_573(Item):
+    name = "B1B"
+    title = "BDS 1,0 Bit 37/40"
+    var = Variation_685
+class Item_472(Item):
+    name = "AC"
+    title = "ACAS Operational"
+    var = Variation_53
+class Item_1162(Item):
+    name = "MN"
+    title = "Multiple Navigational Aids Operating"
+    var = Variation_369
+class Item_769(Item):
+    name = "DC"
+    title = "Differential Correction"
+    var = Variation_501
+class Variation_952(Group):
+    items = [Item_685, Item_1626, Item_29, Item_1603, Item_535, Item_504, Item_572, Item_573, Item_472, Item_1162, Item_769, Item_19]
+class Item_1627(Item):
+    name = "STAT"
+    title = "Flight Status"
+    var = Variation_604
+class Variation_953(Group):
+    items = [Item_685, Item_1627, Item_29, Item_1603, Item_535, Item_504, Item_572, Item_573, Item_472, Item_1162, Item_769, Item_19]
+class Item_741(Item):
+    name = "CST"
+    title = "Track Coasted"
+    var = Variation_50
+class Item_862(Item):
+    name = "FLT"
+    title = "Flight Level Tracking"
+    var = Variation_366
+class Item_15(Spare):
+    bit_offset8 = 2
+    bit_size = 6
+class Variation_954(Group):
+    items = [Item_741, Item_862, Item_15]
+class Item_751(Item):
+    name = "D"
+    title = ""
+    var = Variation_38
+class Item_8(Spare):
+    bit_offset8 = 1
+    bit_size = 5
+class Item_606(Item):
+    name = "CAL"
+    title = "Calculated Doppler Speed, Coded in Two's Complement"
+    var = Variation_846
+class Variation_955(Group):
+    items = [Item_751, Item_8, Item_606]
+class Item_773(Item):
+    name = "DCR"
+    title = "Differential Correction"
+    var = Variation_58
+class Item_910(Item):
+    name = "GBS"
+    title = "Ground Bit Setting"
+    var = Variation_360
+class Item_1576(Item):
+    name = "SIM"
+    title = "Simulated Target"
+    var = Variation_429
+class Item_1777(Item):
+    name = "TST"
+    title = "Test Target"
+    var = Variation_545
+class Item_1397(Item):
+    name = "RAB"
+    title = "Report Type"
+    var = Variation_656
+class Item_1498(Item):
+    name = "SAA"
+    title = "Selected Altitude Available"
+    var = Variation_733
+class Item_1589(Item):
+    name = "SPI"
+    title = "Special Position Identification"
+    var = Variation_782
+class Item_551(Item):
+    name = "ATP"
+    title = "Address Type"
+    var = Variation_125
+class Item_537(Item):
+    name = "ARC"
+    title = "Altitude Reporting Capability"
+    var = Variation_594
+class Variation_956(Group):
+    items = [Item_773, Item_910, Item_1576, Item_1777, Item_1397, Item_1498, Item_1589, Item_29, Item_551, Item_537, Item_25]
+class Item_777(Item):
+    name = "DEVX"
+    title = "Standard Deviation of X Component"
+    var = Variation_214
+class Item_778(Item):
+    name = "DEVY"
+    title = "Standard Deviation of Y Component"
+    var = Variation_214
+class Item_713(Item):
+    name = "COVXY"
+    title = "Covariance in Two’s Complement Form"
+    var = Variation_249
+class Variation_957(Group):
+    items = [Item_777, Item_778, Item_713]
+class Item_789(Item):
+    name = "DOP"
+    title = "Doppler Speed"
+    var = Variation_266
+class Item_517(Item):
+    name = "AMB"
+    title = "Ambiguity Range"
+    var = Variation_266
+class Item_880(Item):
+    name = "FRQ"
+    title = "Transmitter Frequency"
+    var = Variation_263
+class Variation_958(Group):
+    items = [Item_789, Item_517, Item_880]
+class Item_795(Item):
+    name = "DRHO"
+    title = ""
+    var = Variation_194
+class Item_803(Item):
+    name = "DTHETA"
+    title = ""
+    var = Variation_202
+class Variation_959(Group):
+    items = [Item_795, Item_803]
+class Item_824(Item):
+    name = "EMP"
+    title = ""
+    var = Variation_98
+class Item_555(Item):
+    name = "AVL"
+    title = ""
+    var = Variation_505
+class Variation_960(Group):
+    items = [Item_824, Item_555, Item_22]
+class Item_825(Item):
+    name = "EMP"
+    title = "Stand Empty"
+    var = Variation_97
+class Item_556(Item):
+    name = "AVL"
+    title = "Stand Available"
+    var = Variation_504
+class Variation_961(Group):
+    items = [Item_825, Item_556, Item_22]
+class Item_829(Item):
+    name = "EP"
+    title = "ADSB Element Populated Bit"
+    var = Variation_1
+class Item_1832(Item):
+    name = "VAL"
+    title = "On-Site ADS-B Information"
+    var = Variation_375
+class Variation_962(Group):
+    items = [Item_829, Item_1832]
+class Item_830(Item):
+    name = "EP"
+    title = "Element Populated Bit"
+    var = Variation_39
+class Item_1839(Item):
+    name = "VAL"
+    title = "Value"
+    var = Variation_413
+class Item_26(Spare):
+    bit_offset8 = 6
+    bit_size = 1
+class Variation_963(Group):
+    items = [Item_830, Item_1839, Item_26]
+class Item_831(Item):
+    name = "EP"
+    title = "Element Populated Bit"
+    var = Variation_40
+class Item_1835(Item):
+    name = "VAL"
+    title = "Value"
+    var = Variation_398
+class Variation_964(Group):
+    items = [Item_831, Item_1835]
+class Item_1836(Item):
+    name = "VAL"
+    title = "Value"
+    var = Variation_406
+class Variation_965(Group):
+    items = [Item_831, Item_1836]
+class Item_1837(Item):
+    name = "VAL"
+    title = "Value"
+    var = Variation_407
+class Variation_966(Group):
+    items = [Item_831, Item_1837]
+class Item_1838(Item):
+    name = "VAL"
+    title = "Value"
+    var = Variation_409
+class Variation_967(Group):
+    items = [Item_831, Item_1838]
+class Item_1840(Item):
+    name = "VAL"
+    title = "Value"
+    var = Variation_416
+class Variation_968(Group):
+    items = [Item_831, Item_1840]
+class Item_832(Item):
+    name = "EP"
+    title = "Element Populated Bit"
+    var = Variation_454
+class Item_1841(Item):
+    name = "VAL"
+    title = "Value"
+    var = Variation_591
+class Variation_969(Group):
+    items = [Item_832, Item_1841]
+class Item_833(Item):
+    name = "EP"
+    title = "Element Populated Bit"
+    var = Variation_551
+class Item_1842(Item):
+    name = "VAL"
+    title = "Value"
+    var = Variation_639
+class Variation_970(Group):
+    items = [Item_833, Item_1842]
+class Item_1843(Item):
+    name = "VAL"
+    title = "Value"
+    var = Variation_679
+class Variation_971(Group):
+    items = [Item_833, Item_1843]
+class Item_1846(Item):
+    name = "VAL"
+    title = "Value"
+    var = Variation_768
 class Variation_973(Group):
     items = [Item_834, Item_1846]
+class Item_835(Item):
+    name = "EP"
+    title = "Element Populated Bit"
+    var = Variation_732
+class Item_1847(Item):
+    name = "VAL"
+    title = "Value"
+    var = Variation_825
 class Variation_974(Group):
     items = [Item_835, Item_1847]
+class Item_1848(Item):
+    name = "VAL"
+    title = "Value"
+    var = Variation_826
 class Variation_975(Group):
     items = [Item_835, Item_1848]
+class Item_836(Item):
+    name = "EP"
+    title = "Element Population Bit"
+    var = Variation_551
+class Item_1844(Item):
+    name = "VAL"
+    title = "Value"
+    var = Variation_681
 class Variation_976(Group):
     items = [Item_836, Item_1844]
+class Item_837(Item):
+    name = "EP"
+    title = "PAI Element Populated Bit"
+    var = Variation_653
+class Item_1833(Item):
+    name = "VAL"
+    title = "Passive Acquisition Interface Information"
+    var = Variation_748
 class Variation_977(Group):
     items = [Item_837, Item_1833]
+class Item_838(Item):
+    name = "EP"
+    title = "SCN Element Populated Bit"
+    var = Variation_491
+class Item_1834(Item):
+    name = "VAL"
+    title = "Surveillance Cluster Network Information"
+    var = Variation_568
 class Variation_978(Group):
     items = [Item_838, Item_1834]
+class Item_853(Item):
+    name = "FAMILY"
+    title = ""
+    var = Variation_131
+class Item_1209(Item):
+    name = "NATURE"
+    title = ""
+    var = Variation_689
 class Variation_979(Group):
     items = [Item_853, Item_1209]
+class Item_881(Item):
+    name = "FS"
+    title = "Flight Status"
+    var = Variation_9
+class Item_723(Item):
+    name = "CQF"
+    title = "Aircraft CQF"
+    var = Variation_417
 class Variation_980(Group):
     items = [Item_881, Item_723]
+class Item_883(Item):
+    name = "FSI"
+    title = "Full Second Indication"
+    var = Variation_114
+class Item_1729(Item):
+    name = "TOMRP"
+    title = "Fractional Part of the Time of Message Reception for Position in the Ground Station"
+    var = Variation_526
 class Variation_981(Group):
     items = [Item_883, Item_1729]
+class Item_884(Item):
+    name = "FSI"
+    title = "Full Second Indication"
+    var = Variation_115
 class Variation_982(Group):
     items = [Item_884, Item_1729]
+class Item_903(Item):
+    name = "GATOAT"
+    title = ""
+    var = Variation_111
+class Item_875(Item):
+    name = "FR1FR2"
+    title = ""
+    var = Variation_507
+class Item_1486(Item):
+    name = "RVSM"
+    title = ""
+    var = Variation_674
+class Item_953(Item):
+    name = "HPR"
+    title = ""
+    var = Variation_822
 class Variation_983(Group):
     items = [Item_903, Item_875, Item_1486, Item_953, Item_29]
+class Item_876(Item):
+    name = "FR1FR2"
+    title = ""
+    var = Variation_508
+class Item_1583(Item):
+    name = "SP3"
+    title = ""
+    var = Variation_609
+class Item_1582(Item):
+    name = "SP2"
+    title = ""
+    var = Variation_702
+class Item_1581(Item):
+    name = "SP1"
+    title = ""
+    var = Variation_780
 class Variation_984(Group):
     items = [Item_903, Item_876, Item_1583, Item_1582, Item_1581, Item_29]
+class Item_904(Item):
+    name = "GATOAT"
+    title = "Flight Type"
+    var = Variation_111
+class Item_877(Item):
+    name = "FR1FR2"
+    title = "Flight Rules"
+    var = Variation_507
+class Item_1488(Item):
+    name = "RVSM"
+    title = "RVSM"
+    var = Variation_674
+class Item_955(Item):
+    name = "HPR"
+    title = "Flight Priority"
+    var = Variation_822
 class Variation_985(Group):
     items = [Item_904, Item_877, Item_1488, Item_955, Item_29]
+class Item_878(Item):
+    name = "FR1FR2"
+    title = "Flight Rules"
+    var = Variation_508
 class Variation_986(Group):
     items = [Item_904, Item_878, Item_1488, Item_955, Item_29]
+class Item_918(Item):
+    name = "GS"
+    title = "Ground Speed in Two's Complement Form Referenced to WGS84"
+    var = Variation_256
+class Item_1662(Item):
+    name = "TA"
+    title = "Track Angle"
+    var = Variation_293
 class Variation_987(Group):
     items = [Item_918, Item_1662]
+class Item_919(Item):
+    name = "GSP"
+    title = "Calculated Groundspeed"
+    var = Variation_289
+class Item_939(Item):
+    name = "HDG"
+    title = "Calculated Heading"
+    var = Variation_293
 class Variation_988(Group):
     items = [Item_919, Item_939]
+class Item_920(Item):
+    name = "GSP"
+    title = "Ground Speed"
+    var = Variation_289
+class Item_1744(Item):
+    name = "TRA"
+    title = "Track Angle"
+    var = Variation_293
 class Variation_989(Group):
     items = [Item_920, Item_1744]
+class Item_946(Item):
+    name = "HGT"
+    title = "Height of Data Source"
+    var = Variation_237
+class Item_1022(Item):
+    name = "LAT"
+    title = "Latitude"
+    var = Variation_304
+class Item_1049(Item):
+    name = "LON"
+    title = "Longitude"
+    var = Variation_304
 class Variation_990(Group):
     items = [Item_946, Item_1022, Item_1049]
+class Item_983(Item):
+    name = "ICF"
+    title = "Intent Change Flag (see Note)"
+    var = Variation_59
+class Item_1043(Item):
+    name = "LNAV"
+    title = "LNAV Mode"
+    var = Variation_365
+class Item_11(Spare):
+    bit_offset8 = 2
+    bit_size = 1
+class Item_1326(Item):
+    name = "PS"
+    title = "Priority Status"
+    var = Variation_599
+class Item_1602(Item):
+    name = "SS"
+    title = "Surveillance Status"
+    var = Variation_841
 class Variation_991(Group):
     items = [Item_983, Item_1043, Item_11, Item_1326, Item_1602]
+class Item_1136(Item):
+    name = "ME"
+    title = "Military Emergency"
+    var = Variation_479
 class Variation_992(Group):
     items = [Item_983, Item_1043, Item_1136, Item_1326, Item_1602]
+class Item_996(Item):
+    name = "IM"
+    title = ""
+    var = Variation_6
+class Item_541(Item):
+    name = "AS"
+    title = "Air Speed (IAS or Mach)"
+    var = Variation_422
 class Variation_993(Group):
     items = [Item_996, Item_541]
+class Item_997(Item):
+    name = "IM"
+    title = ""
+    var = Variation_7
+class Item_978(Item):
+    name = "IAS"
+    title = ""
+    var = Variation_422
 class Variation_994(Group):
     items = [Item_997, Item_978]
+class Item_999(Item):
+    name = "IR"
+    title = ""
+    var = Variation_46
+class Item_1083(Item):
+    name = "M3A"
+    title = "Age of Mode 3/A Code (I048/070)"
+    var = Variation_421
 class Variation_995(Group):
     items = [Item_999, Item_1083]
+class Item_1018(Item):
+    name = "LAT"
+    title = "APW (Latitude Component)"
+    var = Variation_292
+class Item_1045(Item):
+    name = "LON"
+    title = "APW (Longitude Component)"
+    var = Variation_292
 class Variation_996(Group):
     items = [Item_1018, Item_1045]
+class Item_1019(Item):
+    name = "LAT"
+    title = "APW Latitude Component Accuracy"
+    var = Variation_261
+class Item_1046(Item):
+    name = "LON"
+    title = "APW Longitude Component Accuracy"
+    var = Variation_261
 class Variation_997(Group):
     items = [Item_1019, Item_1046]
+class Item_1020(Item):
+    name = "LAT"
+    title = "In WGS-84 in Two’s Complement"
+    var = Variation_317
+class Item_1047(Item):
+    name = "LON"
+    title = "In WGS-84 in Two’s Complement"
+    var = Variation_317
+class Item_512(Item):
+    name = "ALT"
+    title = "Altitude of Predicted Conflict"
+    var = Variation_240
 class Variation_998(Group):
     items = [Item_1020, Item_1047, Item_512]
 class Variation_999(Group):
     items = [Item_1022, Item_1049]
+class Item_1023(Item):
+    name = "LAT"
+    title = "Latitude"
+    var = Variation_305
+class Item_1050(Item):
+    name = "LON"
+    title = "Longitude"
+    var = Variation_305
 class Variation_1000(Group):
     items = [Item_1023, Item_1050]
+class Item_1024(Item):
+    name = "LAT"
+    title = "Latitude"
+    var = Variation_317
+class Item_1051(Item):
+    name = "LON"
+    title = "Longitude"
+    var = Variation_317
 class Variation_1001(Group):
     items = [Item_1024, Item_1051]
+class Item_1025(Item):
+    name = "LAT"
+    title = "Latitude"
+    var = Variation_318
+class Item_1052(Item):
+    name = "LON"
+    title = "Longitude"
+    var = Variation_318
 class Variation_1002(Group):
     items = [Item_1025, Item_1052]
+class Item_1026(Item):
+    name = "LAT"
+    title = "Latitude"
+    var = Variation_319
+class Item_1053(Item):
+    name = "LON"
+    title = "Longitude"
+    var = Variation_319
 class Variation_1003(Group):
     items = [Item_1026, Item_1053]
+class Item_1027(Item):
+    name = "LAT"
+    title = "Latitude"
+    var = Variation_320
+class Item_1054(Item):
+    name = "LON"
+    title = "Longitude"
+    var = Variation_320
 class Variation_1004(Group):
     items = [Item_1027, Item_1054]
+class Item_1028(Item):
+    name = "LAT"
+    title = "Latitude in WGS 84"
+    var = Variation_304
+class Item_1055(Item):
+    name = "LON"
+    title = "Longitude in WGS 84"
+    var = Variation_304
 class Variation_1005(Group):
     items = [Item_1028, Item_1055]
+class Item_1029(Item):
+    name = "LAT"
+    title = "Latitude in WGS-84"
+    var = Variation_317
+class Item_1056(Item):
+    name = "LON"
+    title = "Longitude in WGS-84"
+    var = Variation_317
 class Variation_1006(Group):
     items = [Item_1029, Item_1056]
+class Item_1030(Item):
+    name = "LAT"
+    title = "Latitude in WGS-84 in Two's Complement"
+    var = Variation_319
+class Item_1057(Item):
+    name = "LON"
+    title = "Longitude in WGS-84 in Two's Complement"
+    var = Variation_319
 class Variation_1007(Group):
     items = [Item_1030, Item_1057]
+class Item_1032(Item):
+    name = "LAT"
+    title = "Latitude in WGS.84 in Two's Complement Form"
+    var = Variation_304
+class Item_1059(Item):
+    name = "LON"
+    title = "Longitude in WGS.84 in Two's Complement Form"
+    var = Variation_304
 class Variation_1008(Group):
     items = [Item_1032, Item_1059]
+class Item_1033(Item):
+    name = "LATITUDE"
+    title = ""
+    var = Variation_319
+class Item_1061(Item):
+    name = "LONGITUDE"
+    title = ""
+    var = Variation_319
 class Variation_1009(Group):
     items = [Item_1033, Item_1061]
+class Item_1065(Item):
+    name = "LS"
+    title = "Lockout State"
+    var = Variation_79
+class Item_1044(Item):
+    name = "LOCTIM"
+    title = "Lockout Time"
+    var = Variation_426
 class Variation_1010(Group):
     items = [Item_1065, Item_1044]
+class Item_1086(Item):
+    name = "M5"
+    title = ""
+    var = Variation_54
+class Item_985(Item):
+    name = "ID"
+    title = ""
+    var = Variation_371
+class Item_754(Item):
+    name = "DA"
+    title = ""
+    var = Variation_476
+class Item_1073(Item):
+    name = "M1"
+    title = ""
+    var = Variation_557
+class Item_1075(Item):
+    name = "M2"
+    title = ""
+    var = Variation_641
+class Item_1079(Item):
+    name = "M3"
+    title = ""
+    var = Variation_743
+class Item_1106(Item):
+    name = "MC"
+    title = ""
+    var = Variation_818
+class Item_1911(Item):
+    name = "X"
+    title = "X-pulse from Mode 5 Data Reply or Report"
+    var = Variation_869
 class Variation_1011(Group):
     items = [Item_1086, Item_985, Item_754, Item_1073, Item_1075, Item_1079, Item_1106, Item_1911]
+class Item_986(Item):
+    name = "ID"
+    title = ""
+    var = Variation_372
+class Item_1074(Item):
+    name = "M1"
+    title = ""
+    var = Variation_558
+class Item_1076(Item):
+    name = "M2"
+    title = ""
+    var = Variation_642
+class Item_1080(Item):
+    name = "M3"
+    title = ""
+    var = Variation_744
+class Item_1105(Item):
+    name = "MC"
+    title = ""
+    var = Variation_808
+class Item_1300(Item):
+    name = "PO"
+    title = ""
+    var = Variation_865
 class Variation_1012(Group):
     items = [Item_1086, Item_986, Item_754, Item_1074, Item_1076, Item_1080, Item_1105, Item_1300]
+class Item_755(Item):
+    name = "DA"
+    title = ""
+    var = Variation_477
+class Item_1107(Item):
+    name = "MC"
+    title = ""
+    var = Variation_819
 class Variation_1013(Group):
     items = [Item_1086, Item_986, Item_755, Item_1074, Item_1076, Item_1080, Item_1107, Item_29]
+class Item_1102(Item):
+    name = "MBDATA"
+    title = ""
+    var = Variation_327
+class Item_578(Item):
+    name = "BDS1"
+    title = ""
+    var = Variation_127
+class Item_580(Item):
+    name = "BDS2"
+    title = ""
+    var = Variation_685
 class Variation_1014(Group):
     items = [Item_1102, Item_578, Item_580]
+class Item_1103(Item):
+    name = "MBDATA"
+    title = "56-bit Message Conveying Mode S Comm B Message Data"
+    var = Variation_327
+class Item_579(Item):
+    name = "BDS1"
+    title = "Comm B Data Buffer Store 1 Address"
+    var = Variation_127
+class Item_581(Item):
+    name = "BDS2"
+    title = "Comm B Data Buffer Store 2 Address"
+    var = Variation_685
 class Variation_1015(Group):
     items = [Item_1103, Item_579, Item_581]
+class Item_1104(Item):
+    name = "MBDATA"
+    title = "Mode S Comm B Message Data"
+    var = Variation_327
 class Variation_1016(Group):
     items = [Item_1104, Item_579, Item_581]
+class Item_1199(Item):
+    name = "MT"
+    title = "Message Type"
+    var = Variation_149
+class Item_1438(Item):
+    name = "RG"
+    title = "Report Generation"
+    var = Variation_864
 class Variation_1017(Group):
     items = [Item_1199, Item_1438]
+class Item_1204(Item):
+    name = "MV"
+    title = "Manage Vertical Mode"
+    var = Variation_64
+class Item_498(Item):
+    name = "AH"
+    title = "Altitude Hold"
+    var = Variation_373
+class Item_513(Item):
+    name = "AM"
+    title = "Approach Mode"
+    var = Variation_483
+class Item_511(Item):
+    name = "ALT"
+    title = "Altitude in Two's Complement Form"
+    var = Variation_608
 class Variation_1018(Group):
     items = [Item_1204, Item_498, Item_513, Item_511]
+class Item_500(Item):
+    name = "AH"
+    title = "Altitude Hold Mode"
+    var = Variation_373
+class Item_509(Item):
+    name = "ALT"
+    title = "Altitude"
+    var = Variation_608
 class Variation_1019(Group):
     items = [Item_1204, Item_500, Item_513, Item_509]
+class Item_1205(Item):
+    name = "MV"
+    title = "Manage Vertical Mode"
+    var = Variation_65
+class Item_501(Item):
+    name = "AH"
+    title = "Altitude Hold Mode"
+    var = Variation_374
+class Item_514(Item):
+    name = "AM"
+    title = "Approach Mode"
+    var = Variation_484
 class Variation_1020(Group):
     items = [Item_1205, Item_501, Item_514, Item_509]
+class Item_1220(Item):
+    name = "NBVB"
+    title = "Number of 'valid' Octets"
+    var = Variation_235
+class Item_1215(Item):
+    name = "NBCELLS"
+    title = "Number of 'valid' Cells"
+    var = Variation_298
 class Variation_1021(Group):
     items = [Item_1220, Item_1215]
+class Item_1229(Item):
+    name = "NOGO"
+    title = ""
+    var = Variation_105
+class Item_1270(Item):
+    name = "OVL"
+    title = ""
+    var = Variation_443
+class Item_1778(Item):
+    name = "TSV"
+    title = ""
+    var = Variation_536
+class Item_1336(Item):
+    name = "PSS"
+    title = "Processing System Status"
+    var = Variation_672
+class Item_1649(Item):
+    name = "STTN"
+    title = "Track Re-numbering Indication"
+    var = Variation_780
 class Variation_1022(Group):
     items = [Item_1229, Item_1270, Item_1778, Item_1336, Item_1649, Item_29]
+class Item_1232(Item):
+    name = "NOGO"
+    title = "Operational Release Status of the System"
+    var = Variation_73
+class Item_1415(Item):
+    name = "RDPC"
+    title = "Radar Data Processor Chain Selection Status"
+    var = Variation_379
+class Item_1416(Item):
+    name = "RDPR"
+    title = "Event to Signal a Reset/restart of the Selected Radar Data Processor Chain, I.e. Expect a New Assignment of Track Numbers"
+    var = Variation_447
+class Item_1274(Item):
+    name = "OVLRDP"
+    title = "Radar Data Processor Overload Indicator"
+    var = Variation_550
+class Item_1277(Item):
+    name = "OVLXMT"
+    title = "Transmission Subsystem Overload Status"
+    var = Variation_629
+class Item_1193(Item):
+    name = "MSC"
+    title = "Monitoring System Connected Status"
+    var = Variation_745
+class Item_1781(Item):
+    name = "TSV"
+    title = "Time Source Validity"
+    var = Variation_837
 class Variation_1023(Group):
     items = [Item_1232, Item_1415, Item_1416, Item_1274, Item_1277, Item_1193, Item_1781, Item_29]
+class Item_1233(Item):
+    name = "NOGO"
+    title = "Operational Release Status of the System"
+    var = Variation_103
+class Item_1272(Item):
+    name = "OVL"
+    title = "Overload Indicator"
+    var = Variation_480
+class Item_1779(Item):
+    name = "TSV"
+    title = "Time Source Validity"
+    var = Variation_584
+class Item_782(Item):
+    name = "DIV"
+    title = ""
+    var = Variation_650
+class Item_1786(Item):
+    name = "TTF"
+    title = ""
+    var = Variation_754
 class Variation_1024(Group):
     items = [Item_1233, Item_1272, Item_1779, Item_782, Item_1786, Item_27]
+class Item_1234(Item):
+    name = "NOGO"
+    title = "Operational Release Status of the System"
+    var = Variation_104
+class Item_1787(Item):
+    name = "TTF"
+    title = "Test Target"
+    var = Variation_661
 class Variation_1025(Group):
     items = [Item_1234, Item_1272, Item_1779, Item_1787, Item_25]
+class Item_1246(Item):
+    name = "NU1"
+    title = "First Number"
+    var = Variation_190
+class Item_1247(Item):
+    name = "NU2"
+    title = "Second Number"
+    var = Variation_190
+class Item_1067(Item):
+    name = "LTR"
+    title = "Letter"
+    var = Variation_190
 class Variation_1026(Group):
     items = [Item_1246, Item_1247, Item_1067]
+class Item_1264(Item):
+    name = "ORG"
+    title = ""
+    var = Variation_49
+class Item_962(Item):
+    name = "I"
+    title = "Intensity Level"
+    var = Variation_408
+class Item_20(Spare):
+    bit_offset8 = 4
+    bit_size = 2
+class Item_887(Item):
+    name = "FSTLST"
+    title = ""
+    var = Variation_840
+class Item_733(Item):
+    name = "CSN"
+    title = "Contour Serial Number"
+    var = Variation_155
 class Variation_1027(Group):
     items = [Item_1264, Item_962, Item_20, Item_887, Item_733]
+class Item_1291(Item):
+    name = "PID"
+    title = "Pair Identification"
+    var = Variation_234
+class Item_1713(Item):
+    name = "TID"
+    title = "Transmitter Identification"
+    var = Variation_234
+class Item_1448(Item):
+    name = "RID"
+    title = "Receiver Identification"
+    var = Variation_234
 class Variation_1028(Group):
     items = [Item_1291, Item_1713, Item_1448]
+class Item_1292(Item):
+    name = "PID"
+    title = "Pair Identifier"
+    var = Variation_235
+class Item_1260(Item):
+    name = "ON"
+    title = "Observation Number"
+    var = Variation_298
 class Variation_1029(Group):
     items = [Item_1292, Item_1260]
+class Item_1302(Item):
+    name = "POL"
+    title = "Polarization in Use by PSR"
+    var = Variation_48
+class Item_1424(Item):
+    name = "REDRAD"
+    title = "Reduction Steps in Use as Result of An Overload Within the PSR Subsystem"
+    var = Variation_410
+class Item_1633(Item):
+    name = "STC"
+    title = "Sensitivity Time Control Map in Use"
+    var = Variation_673
 class Variation_1030(Group):
     items = [Item_1302, Item_1424, Item_1633, Item_27]
+class Item_1316(Item):
+    name = "PREDRHO"
+    title = "Predicted Range"
+    var = Variation_285
+class Item_1317(Item):
+    name = "PREDTHETA"
+    title = "Predicted Azimuth"
+    var = Variation_293
+class Item_849(Item):
+    name = "EVOLRHOSTART"
+    title = "Predicted Closest Range"
+    var = Variation_285
+class Item_848(Item):
+    name = "EVOLRHOEND"
+    title = "Predicted Largest Range"
+    var = Variation_285
+class Item_851(Item):
+    name = "EVOLTHETASTART"
+    title = "Predicted Smallest Azimuth"
+    var = Variation_293
+class Item_850(Item):
+    name = "EVOLTHETAEND"
+    title = "Predicted Largest Azimuth"
+    var = Variation_293
+class Item_1237(Item):
+    name = "NOISERHOSTART"
+    title = "Predicted Closest Range"
+    var = Variation_285
+class Item_1236(Item):
+    name = "NOISERHOEND"
+    title = "Predicted Largest Range"
+    var = Variation_285
+class Item_1239(Item):
+    name = "NOISETHETASTART"
+    title = "Predicted Smallest Azimuth"
+    var = Variation_293
+class Item_1238(Item):
+    name = "NOISETHETAEND"
+    title = "Predicted Largest Azimuth"
+    var = Variation_293
+class Item_1318(Item):
+    name = "PREDTIME"
+    title = "Predicted Detection Time"
+    var = Variation_287
 class Variation_1031(Group):
     items = [Item_1316, Item_1317, Item_849, Item_848, Item_851, Item_850, Item_1237, Item_1236, Item_1239, Item_1238, Item_1318]
+class Item_1320(Item):
+    name = "PREVIOUSII"
+    title = "Former II Code"
+    var = Variation_127
+class Item_747(Item):
+    name = "CURRENTII"
+    title = "Current II Code"
+    var = Variation_685
 class Variation_1032(Group):
     items = [Item_1320, Item_747]
+class Item_1321(Item):
+    name = "PRG"
+    title = "PSR Range Gain"
+    var = Variation_247
+class Item_1314(Item):
+    name = "PRB"
+    title = "PSR Range Bias"
+    var = Variation_255
 class Variation_1033(Group):
     items = [Item_1321, Item_1314]
+class Item_1323(Item):
+    name = "PRIORITY"
+    title = "GICB Priority"
+    var = Variation_138
+class Item_1285(Item):
+    name = "PC"
+    title = "Periodicity Constraint"
+    var = Variation_84
+class Item_553(Item):
+    name = "AU"
+    title = "Asynchronous Update"
+    var = Variation_359
+class Item_1223(Item):
+    name = "NE"
+    title = "Non Extraction"
+    var = Variation_494
+class Item_1412(Item):
+    name = "RD"
+    title = "Reply Destination"
+    var = Variation_592
 class Variation_1034(Group):
     items = [Item_1323, Item_25, Item_1285, Item_553, Item_1223, Item_1412, Item_25]
+class Item_1324(Item):
+    name = "PRIORITY"
+    title = "Priority"
+    var = Variation_132
+class Item_1311(Item):
+    name = "POWER"
+    title = "Power"
+    var = Variation_690
+class Item_808(Item):
+    name = "DURATION"
+    title = "Duration"
+    var = Variation_206
+class Item_708(Item):
+    name = "COVERAGE"
+    title = "Coverage"
+    var = Variation_313
 class Variation_1035(Group):
     items = [Item_1324, Item_1311, Item_808, Item_708]
+class Item_1384(Item):
+    name = "QNH"
+    title = ""
+    var = Variation_56
+class Item_744(Item):
+    name = "CTB"
+    title = "Calculated Track Barometric Altitude"
+    var = Variation_423
 class Variation_1036(Group):
     items = [Item_1384, Item_744]
+class Item_1385(Item):
+    name = "QNH"
+    title = "QNH Correction Applied"
+    var = Variation_55
+class Item_745(Item):
+    name = "CTBA"
+    title = "Calculated Track Barometric Altitude"
+    var = Variation_423
 class Variation_1037(Group):
     items = [Item_1385, Item_745]
+class Item_1386(Item):
+    name = "QNH"
+    title = "QNH Correction Applied"
+    var = Variation_56
 class Variation_1038(Group):
     items = [Item_1386, Item_745]
+class Item_1391(Item):
+    name = "RA"
+    title = "TCAS Resolution Advisory Active"
+    var = Variation_74
+class Item_1678(Item):
+    name = "TC"
+    title = "Target Trajectory Change Report Capability"
+    var = Variation_399
+class Item_1763(Item):
+    name = "TS"
+    title = "Target State Report Capability"
+    var = Variation_562
+class Item_540(Item):
+    name = "ARV"
+    title = "Air-Referenced Velocity Report Capability"
+    var = Variation_646
+class Item_619(Item):
+    name = "CDTIA"
+    title = "Cockpit Display of Traffic Information Airborne"
+    var = Variation_709
+class Item_1241(Item):
+    name = "NOTTCAS"
+    title = "TCAS System Status"
+    var = Variation_831
+class Item_1496(Item):
+    name = "SA"
+    title = "Single Antenna"
+    var = Variation_850
 class Variation_1039(Group):
     items = [Item_1391, Item_1678, Item_1763, Item_540, Item_619, Item_1241, Item_1496]
+class Item_1419(Item):
+    name = "RE"
+    title = "Range Error"
+    var = Variation_198
+class Item_495(Item):
+    name = "AE"
+    title = "Azimuth Error"
+    var = Variation_203
 class Variation_1040(Group):
     items = [Item_1419, Item_495]
+class Item_1420(Item):
+    name = "RE"
+    title = "Range Exceeded Indicator"
+    var = Variation_91
+class Item_600(Item):
+    name = "BVR"
+    title = "Barometric Vertical Rate"
+    var = Variation_424
 class Variation_1041(Group):
     items = [Item_1420, Item_600]
+class Item_917(Item):
+    name = "GS"
+    title = "Ground Speed Referenced to WGS-84"
+    var = Variation_427
+class Item_1663(Item):
+    name = "TA"
+    title = "Track Angle Clockwise Reference to True North"
+    var = Variation_293
 class Variation_1042(Group):
     items = [Item_1420, Item_917, Item_1663]
+class Item_928(Item):
+    name = "GVR"
+    title = "Geometric Vertical Rate"
+    var = Variation_424
 class Variation_1043(Group):
     items = [Item_1420, Item_928]
+class Item_1673(Item):
+    name = "TAS"
+    title = "True Air Speed"
+    var = Variation_425
 class Variation_1044(Group):
     items = [Item_1420, Item_1673]
+class Item_1423(Item):
+    name = "REDRAD"
+    title = "Reduction Steps in Use as Result of An Overload Within the Mode S Subsystem"
+    var = Variation_124
+class Item_645(Item):
+    name = "CLU"
+    title = "Cluster State"
+    var = Variation_531
 class Variation_1045(Group):
     items = [Item_1423, Item_645, Item_22]
+class Item_1425(Item):
+    name = "REDRAD"
+    title = "Reduction Steps in Use as Result of An Overload Within the SSR Subsystem"
+    var = Variation_124
 class Variation_1046(Group):
     items = [Item_1425, Item_19]
+class Item_1441(Item):
+    name = "RHO"
+    title = ""
+    var = Variation_285
+class Item_1699(Item):
+    name = "THETA"
+    title = ""
+    var = Variation_293
 class Variation_1047(Group):
     items = [Item_1441, Item_1699]
+class Item_1442(Item):
+    name = "RHO"
+    title = ""
+    var = Variation_288
 class Variation_1048(Group):
     items = [Item_1442, Item_1699]
+class Item_1443(Item):
+    name = "RHO"
+    title = "Measured Distance"
+    var = Variation_288
+class Item_1700(Item):
+    name = "THETA"
+    title = "Measured Azimuth"
+    var = Variation_293
 class Variation_1049(Group):
     items = [Item_1443, Item_1700]
+class Item_1444(Item):
+    name = "RHO"
+    title = "RHO"
+    var = Variation_265
+class Item_1698(Item):
+    name = "TH"
+    title = "Theta"
+    var = Variation_293
 class Variation_1050(Group):
     items = [Item_1444, Item_1698]
+class Item_1446(Item):
+    name = "RHOST"
+    title = "Rho Start"
+    var = Variation_288
+class Item_1445(Item):
+    name = "RHOEND"
+    title = "Rho End"
+    var = Variation_288
+class Item_1702(Item):
+    name = "THETAST"
+    title = "Theta Start"
+    var = Variation_293
+class Item_1701(Item):
+    name = "THETAEND"
+    title = "Theta End"
+    var = Variation_293
 class Variation_1051(Group):
     items = [Item_1446, Item_1445, Item_1702, Item_1701]
+class Item_1447(Item):
+    name = "RID"
+    title = "Receiver Component ID"
+    var = Variation_234
+class Item_507(Item):
+    name = "ALT"
+    title = "Altitude"
+    var = Variation_249
 class Variation_1052(Group):
     items = [Item_1447, Item_1026, Item_1053, Item_507]
+class Item_1451(Item):
+    name = "RNG"
+    title = "Range Error"
+    var = Variation_198
+class Item_570(Item):
+    name = "AZM"
+    title = "Azimuth Error"
+    var = Variation_203
 class Variation_1053(Group):
     items = [Item_1451, Item_570]
+class Item_1465(Item):
+    name = "RS"
+    title = "Rho Start"
+    var = Variation_285
+class Item_1422(Item):
+    name = "RE"
+    title = "Rho End"
+    var = Variation_285
+class Item_1765(Item):
+    name = "TS"
+    title = "Theta Start"
+    var = Variation_293
+class Item_1696(Item):
+    name = "TE"
+    title = "Theta End"
+    var = Variation_293
 class Variation_1054(Group):
     items = [Item_1465, Item_1422, Item_1765, Item_1696]
+class Item_1470(Item):
+    name = "RSHPX"
+    title = ""
+    var = Variation_271
+class Item_1471(Item):
+    name = "RSHPY"
+    title = ""
+    var = Variation_271
+class Item_696(Item):
+    name = "CORSHPXY"
+    title = ""
+    var = Variation_197
 class Variation_1055(Group):
     items = [Item_1470, Item_1471, Item_696]
+class Item_1473(Item):
+    name = "RSI"
+    title = "8-bit Identification Number of RS"
+    var = Variation_155
+class Item_1466(Item):
+    name = "RS1090"
+    title = "Receiver 1090 MHz"
+    var = Variation_376
+class Item_1793(Item):
+    name = "TX1030"
+    title = "Transmitter 1030 MHz"
+    var = Variation_486
+class Item_1794(Item):
+    name = "TX1090"
+    title = "Transmitter 1090 MHz"
+    var = Variation_570
+class Item_1477(Item):
+    name = "RSS"
+    title = "RS Status"
+    var = Variation_632
+class Item_1474(Item):
+    name = "RSO"
+    title = "RS Operational"
+    var = Variation_751
 class Variation_1056(Group):
     items = [Item_1473, Item_0, Item_1466, Item_1793, Item_1794, Item_1477, Item_1474, Item_27]
+class Item_1484(Item):
+    name = "RTYP"
+    title = "Report Type"
+    var = Variation_142
 class Variation_1057(Group):
     items = [Item_1484, Item_1438]
+class Item_1492(Item):
+    name = "S"
+    title = ""
+    var = Variation_259
+class Item_810(Item):
+    name = "E"
+    title = ""
+    var = Variation_259
 class Variation_1058(Group):
     items = [Item_1492, Item_810]
+class Item_1493(Item):
+    name = "S"
+    title = ""
+    var = Variation_293
+class Item_811(Item):
+    name = "E"
+    title = ""
+    var = Variation_293
 class Variation_1059(Group):
     items = [Item_1493, Item_811]
+class Item_1501(Item):
+    name = "SAC"
+    title = "SAC of Radar Concerned"
+    var = Variation_155
+class Item_1556(Item):
+    name = "SIC"
+    title = "SIC of Radar Concerned"
+    var = Variation_155
+class Item_714(Item):
+    name = "CP"
+    title = "Circular Polarisation"
+    var = Variation_527
+class Item_1882(Item):
+    name = "WO"
+    title = "Weather Channel Overload"
+    var = Variation_609
+class Item_1389(Item):
+    name = "R"
+    title = "Reduction Step in Use By Radar  Concerned"
+    var = Variation_771
 class Variation_1060(Group):
     items = [Item_1501, Item_1556, Item_2, Item_714, Item_1882, Item_1389]
+class Item_1502(Item):
+    name = "SAC"
+    title = "System Area Code"
+    var = Variation_155
+class Item_1557(Item):
+    name = "SIC"
+    title = "System Identification Code"
+    var = Variation_155
 class Variation_1061(Group):
     items = [Item_1502, Item_1557]
+class Item_1801(Item):
+    name = "TYP"
+    title = ""
+    var = Variation_686
 class Variation_1062(Group):
     items = [Item_1502, Item_1557, Item_3, Item_1801]
+class Item_1066(Item):
+    name = "LTN"
+    title = "Local Track Number"
+    var = Variation_234
 class Variation_1063(Group):
     items = [Item_1502, Item_1557, Item_3, Item_1801, Item_1066]
+class Item_1558(Item):
+    name = "SIC"
+    title = "System Identity Code"
+    var = Variation_155
 class Variation_1064(Group):
     items = [Item_1502, Item_1558]
+class Item_1503(Item):
+    name = "SAC"
+    title = "System Area Code Fixed to Zero"
+    var = Variation_155
 class Variation_1065(Group):
     items = [Item_1503, Item_1557]
+class Item_1504(Item):
+    name = "SACADJS"
+    title = "SAC of the Adjacent Sensor"
+    var = Variation_155
+class Item_1559(Item):
+    name = "SICADJS"
+    title = "SIC of the Adjacent Sensor"
+    var = Variation_155
+class Item_1714(Item):
+    name = "TIMEOFDAYSCN"
+    title = "Absolute Timestamp in UTC Provided by the SCN"
+    var = Variation_287
+class Item_758(Item):
+    name = "DATAUSE"
+    title = "Use of Adjacent Sensor Data"
+    var = Variation_143
+class Item_797(Item):
+    name = "DRNA"
+    title = "DRN Availability"
+    var = Variation_852
+class Item_796(Item):
+    name = "DRN"
+    title = ""
+    var = Variation_234
 class Variation_1066(Group):
     items = [Item_1504, Item_1559, Item_1714, Item_758, Item_797, Item_796]
+class Item_1510(Item):
+    name = "SAS"
+    title = ""
+    var = Variation_62
+class Item_1594(Item):
+    name = "SRC"
+    title = ""
+    var = Variation_405
 class Variation_1067(Group):
     items = [Item_1510, Item_1594, Item_511]
+class Item_1511(Item):
+    name = "SAS"
+    title = "Source Availability"
+    var = Variation_61
+class Item_1495(Item):
+    name = "S"
+    title = "Source"
+    var = Variation_404
 class Variation_1068(Group):
     items = [Item_1511, Item_1495, Item_509]
+class Item_1597(Item):
+    name = "SRC"
+    title = "Source"
+    var = Variation_404
 class Variation_1069(Group):
     items = [Item_1511, Item_1597, Item_509]
+class Item_1522(Item):
+    name = "SDAZR"
+    title = ""
+    var = Variation_290
+class Item_653(Item):
+    name = "COAZRAZ"
+    title = ""
+    var = Variation_197
 class Variation_1070(Group):
     items = [Item_1522, Item_653]
+class Item_1524(Item):
+    name = "SDDA"
+    title = ""
+    var = Variation_284
+class Item_654(Item):
+    name = "CODADV"
+    title = ""
+    var = Variation_197
 class Variation_1071(Group):
     items = [Item_1524, Item_654]
+class Item_1528(Item):
+    name = "SDELR"
+    title = ""
+    var = Variation_291
+class Item_661(Item):
+    name = "COELREL"
+    title = ""
+    var = Variation_197
 class Variation_1072(Group):
     items = [Item_1528, Item_661]
+class Item_1533(Item):
+    name = "SDHPX"
+    title = ""
+    var = Variation_281
+class Item_1534(Item):
+    name = "SDHPY"
+    title = ""
+    var = Variation_281
+class Item_698(Item):
+    name = "COSDHPXY"
+    title = ""
+    var = Variation_197
 class Variation_1073(Group):
     items = [Item_1533, Item_1534, Item_698]
+class Item_1538(Item):
+    name = "SDRA"
+    title = ""
+    var = Variation_286
+class Item_693(Item):
+    name = "CORAR"
+    title = ""
+    var = Variation_197
+class Item_694(Item):
+    name = "CORARR"
+    title = ""
+    var = Variation_197
 class Variation_1074(Group):
     items = [Item_1538, Item_693, Item_694]
+class Item_1540(Item):
+    name = "SDRR"
+    title = ""
+    var = Variation_309
+class Item_695(Item):
+    name = "CORRR"
+    title = ""
+    var = Variation_197
 class Variation_1075(Group):
     items = [Item_1540, Item_695]
+class Item_1543(Item):
+    name = "SDVA"
+    title = ""
+    var = Variation_276
+class Item_703(Item):
+    name = "COVAGH"
+    title = ""
+    var = Variation_197
+class Item_707(Item):
+    name = "COVAVV"
+    title = ""
+    var = Variation_197
 class Variation_1076(Group):
     items = [Item_1543, Item_703, Item_707]
+class Item_1544(Item):
+    name = "SDVV"
+    title = ""
+    var = Variation_275
+class Item_709(Item):
+    name = "COVVGH"
+    title = ""
+    var = Variation_197
 class Variation_1077(Group):
     items = [Item_1544, Item_709]
+class Item_1561(Item):
+    name = "SID"
+    title = "Service Identification"
+    var = Variation_127
+class Item_1651(Item):
+    name = "STYP"
+    title = "Type of Service"
+    var = Variation_688
 class Variation_1078(Group):
     items = [Item_1561, Item_1651]
+class Item_1566(Item):
+    name = "SIGX"
+    title = "Sigma (X)) Standard Deviation on the Horizontal Axis of the Local Grid System"
+    var = Variation_218
+class Item_1567(Item):
+    name = "SIGY"
+    title = "Sigma (Y)) Standard Deviation on the Vertical Axis of the Local Grid System"
+    var = Variation_218
+class Item_1565(Item):
+    name = "SIGV"
+    title = "Sigma (V)) Standard Deviation on the Groundspeed Within the Local Grid System"
+    var = Variation_221
+class Item_1564(Item):
+    name = "SIGH"
+    title = "Sigma (H)) Standard Deviation on the Heading Within the Local Grid System"
+    var = Variation_225
 class Variation_1079(Group):
     items = [Item_1566, Item_1567, Item_1565, Item_1564]
+class Item_1599(Item):
+    name = "SRG"
+    title = "Mode S Range Gain"
+    var = Variation_247
+class Item_1593(Item):
+    name = "SRB"
+    title = "Mode S Range Bias"
+    var = Variation_255
 class Variation_1080(Group):
     items = [Item_1599, Item_1593]
+class Item_1620(Item):
+    name = "STARTAZ"
+    title = "Start Azimuth of the Cells Group"
+    var = Variation_293
+class Item_827(Item):
+    name = "ENDAZ"
+    title = "End Azimuth of the Cells Group"
+    var = Variation_293
+class Item_1621(Item):
+    name = "STARTRG"
+    title = "Starting Range of the Cells Group, Expressed in Number of Cells"
+    var = Variation_315
+class Item_621(Item):
+    name = "CELLDUR"
+    title = "Video Cell Duration in Femto-seconds"
+    var = Variation_321
 class Variation_1081(Group):
     items = [Item_1620, Item_827, Item_1621, Item_621]
+class Item_622(Item):
+    name = "CELLDUR"
+    title = "Video Cell Duration in Nano-seconds"
+    var = Variation_322
 class Variation_1082(Group):
     items = [Item_1620, Item_827, Item_1621, Item_622]
+class Item_1637(Item):
+    name = "STI"
+    title = ""
+    var = Variation_92
+class Item_636(Item):
+    name = "CHR"
+    title = "Characters 1-8 (Coded on 6 Bits Each) Defining Target Identification"
+    var = Variation_326
 class Variation_1083(Group):
     items = [Item_1637, Item_15, Item_636]
+class Item_1638(Item):
+    name = "STI"
+    title = ""
+    var = Variation_93
 class Variation_1084(Group):
     items = [Item_1638, Item_15, Item_636]
+class Item_1707(Item):
+    name = "TID"
+    title = "Target Identification"
+    var = Variation_326
 class Variation_1085(Group):
     items = [Item_1638, Item_15, Item_1707]
+class Item_1639(Item):
+    name = "STI"
+    title = ""
+    var = Variation_94
+class Item_637(Item):
+    name = "CHR"
+    title = "Characters 1-8 (coded on 6 Bits Each) Defining Target Identification"
+    var = Variation_326
 class Variation_1086(Group):
     items = [Item_1639, Item_15, Item_637]
+class Item_1644(Item):
+    name = "STR"
+    title = "Start Range"
+    var = Variation_155
+class Item_828(Item):
+    name = "ENDR"
+    title = "End Range"
+    var = Variation_155
+class Item_567(Item):
+    name = "AZ"
+    title = "Azimuth"
+    var = Variation_293
 class Variation_1087(Group):
     items = [Item_1644, Item_828, Item_567]
+class Item_1681(Item):
+    name = "TCA"
+    title = ""
+    var = Variation_75
+class Item_1221(Item):
+    name = "NC"
+    title = ""
+    var = Variation_380
+class Item_1692(Item):
+    name = "TCPN"
+    title = ""
+    var = Variation_518
+class Item_510(Item):
+    name = "ALT"
+    title = "Altitude in Two's Complement Form"
+    var = Variation_239
+class Item_1021(Item):
+    name = "LAT"
+    title = "In WGS.84 in Two's Complement"
+    var = Variation_304
+class Item_1048(Item):
+    name = "LON"
+    title = "In WGS.84 in Two's Complement"
+    var = Variation_304
+class Item_1338(Item):
+    name = "PT"
+    title = "Point Type"
+    var = Variation_130
+class Item_1694(Item):
+    name = "TD"
+    title = ""
+    var = Variation_671
+class Item_1743(Item):
+    name = "TRA"
+    title = ""
+    var = Variation_832
+class Item_1722(Item):
+    name = "TOA"
+    title = ""
+    var = Variation_866
+class Item_1733(Item):
+    name = "TOV"
+    title = "Time Over Point"
+    var = Variation_306
+class Item_1790(Item):
+    name = "TTR"
+    title = "TCP Turn Radius"
+    var = Variation_273
 class Variation_1088(Group):
     items = [Item_1681, Item_1221, Item_1692, Item_510, Item_1021, Item_1048, Item_1338, Item_1694, Item_1743, Item_1722, Item_1733, Item_1790]
+class Item_1682(Item):
+    name = "TCA"
+    title = "TCP Number Availability"
+    var = Variation_75
+class Item_1222(Item):
+    name = "NC"
+    title = "TCP Compliance"
+    var = Variation_380
+class Item_1693(Item):
+    name = "TCPN"
+    title = "Trajectory Change Point Number"
+    var = Variation_518
+class Item_1031(Item):
+    name = "LAT"
+    title = "Latitude in WGS.84 in Two's Complement"
+    var = Variation_304
+class Item_1058(Item):
+    name = "LON"
+    title = "Longitude in WGS.84 in Two's Complement"
+    var = Variation_304
+class Item_1695(Item):
+    name = "TD"
+    title = "Turn Direction"
+    var = Variation_671
+class Item_1745(Item):
+    name = "TRA"
+    title = "Turn Radius Availability"
+    var = Variation_832
+class Item_1723(Item):
+    name = "TOA"
+    title = "TOV Available"
+    var = Variation_866
 class Variation_1089(Group):
     items = [Item_1682, Item_1222, Item_1693, Item_510, Item_1031, Item_1058, Item_1338, Item_1695, Item_1745, Item_1723, Item_1733, Item_1790]
+class Item_1703(Item):
+    name = "TI"
+    title = "Turn Indicator"
+    var = Variation_101
+class Item_1454(Item):
+    name = "ROT"
+    title = "Rate of Turn in Two's Complement Form"
+    var = Variation_150
 class Variation_1090(Group):
     items = [Item_1703, Item_15, Item_1454, Item_29]
+class Item_1706(Item):
+    name = "TID"
+    title = "Identification of Conflict Categories Definition Table"
+    var = Variation_127
+class Item_716(Item):
+    name = "CP"
+    title = "Conflict Properties Class"
+    var = Variation_679
+class Item_731(Item):
+    name = "CS"
+    title = "Conflict Severity"
+    var = Variation_860
 class Variation_1091(Group):
     items = [Item_1706, Item_716, Item_731]
+class Item_1712(Item):
+    name = "TID"
+    title = "Transmitter ID"
+    var = Variation_234
+class Item_1789(Item):
+    name = "TTO"
+    title = "Transmission Time Offset"
+    var = Variation_316
+class Item_549(Item):
+    name = "ATO"
+    title = "Accuracy of Transmission Time Offset"
+    var = Variation_701
+class Item_1286(Item):
+    name = "PCI"
+    title = "Parallel Transmitter Index"
+    var = Variation_235
 class Variation_1092(Group):
     items = [Item_1712, Item_1026, Item_1053, Item_507, Item_1789, Item_3, Item_549, Item_1286]
+class Item_1734(Item):
+    name = "TP1A"
+    title = ""
+    var = Variation_71
+class Item_1735(Item):
+    name = "TP1B"
+    title = ""
+    var = Variation_357
+class Item_1736(Item):
+    name = "TP2A"
+    title = ""
+    var = Variation_492
+class Item_1737(Item):
+    name = "TP2B"
+    title = ""
+    var = Variation_552
+class Item_1738(Item):
+    name = "TP3A"
+    title = ""
+    var = Variation_658
+class Item_1739(Item):
+    name = "TP3B"
+    title = ""
+    var = Variation_734
+class Item_1740(Item):
+    name = "TP4A"
+    title = ""
+    var = Variation_830
+class Item_1741(Item):
+    name = "TP4B"
+    title = ""
+    var = Variation_853
 class Variation_1093(Group):
     items = [Item_1734, Item_1735, Item_1736, Item_1737, Item_1738, Item_1739, Item_1740, Item_1741]
+class Item_1746(Item):
+    name = "TRANS"
+    title = "Transversal Acceleration"
+    var = Variation_96
+class Item_1060(Item):
+    name = "LONG"
+    title = "Longitudinal Acceleration"
+    var = Variation_506
+class Item_1854(Item):
+    name = "VERT"
+    title = "Transversal Acceleration"
+    var = Variation_670
+class Item_486(Item):
+    name = "ADF"
+    title = "Altitude Discrepancy Flag"
+    var = Variation_821
 class Variation_1094(Group):
     items = [Item_1746, Item_1060, Item_1854, Item_486, Item_29]
+class Item_1747(Item):
+    name = "TRB"
+    title = ""
+    var = Variation_29
+class Item_1195(Item):
+    name = "MSG"
+    title = ""
+    var = Variation_418
 class Variation_1095(Group):
     items = [Item_1747, Item_1195]
+class Item_1196(Item):
+    name = "MSG"
+    title = ""
+    var = Variation_419
 class Variation_1096(Group):
     items = [Item_1747, Item_1196]
+class Item_1748(Item):
+    name = "TRB"
+    title = "In Trouble"
+    var = Variation_29
+class Item_1197(Item):
+    name = "MSG"
+    title = "Message"
+    var = Variation_418
 class Variation_1097(Group):
     items = [Item_1748, Item_1197]
+class Item_1796(Item):
+    name = "TYP"
+    title = ""
+    var = Variation_106
+class Item_13(Spare):
+    bit_offset8 = 2
+    bit_size = 3
+class Item_1216(Item):
+    name = "NBR"
+    title = ""
+    var = Variation_778
 class Variation_1098(Group):
     items = [Item_1796, Item_13, Item_1216]
+class Item_1219(Item):
+    name = "NBR"
+    title = "Number from 0 to 99 999 999"
+    var = Variation_778
 class Variation_1099(Group):
     items = [Item_1796, Item_13, Item_1219]
+class Item_1799(Item):
+    name = "TYP"
+    title = ""
+    var = Variation_136
+class Item_760(Item):
+    name = "DAY"
+    title = ""
+    var = Variation_767
+class Item_30(Spare):
+    bit_offset8 = 7
+    bit_size = 4
+class Item_949(Item):
+    name = "HOR"
+    title = ""
+    var = Variation_607
+class Item_1154(Item):
+    name = "MIN"
+    title = ""
+    var = Variation_519
+class Item_557(Item):
+    name = "AVS"
+    title = ""
+    var = Variation_70
+class Item_7(Spare):
+    bit_offset8 = 1
+    bit_size = 1
+class Item_1546(Item):
+    name = "SEC"
+    title = ""
+    var = Variation_519
 class Variation_1100(Group):
     items = [Item_1799, Item_760, Item_30, Item_949, Item_1, Item_1154, Item_557, Item_7, Item_1546]
+class Item_1800(Item):
+    name = "TYP"
+    title = ""
+    var = Variation_137
+class Item_950(Item):
+    name = "HOR"
+    title = "Hours"
+    var = Variation_607
+class Item_1155(Item):
+    name = "MIN"
+    title = "Minutes"
+    var = Variation_519
+class Item_559(Item):
+    name = "AVS"
+    title = "Seconds Available Flag"
+    var = Variation_70
+class Item_1547(Item):
+    name = "SEC"
+    title = "Seconds"
+    var = Variation_519
 class Variation_1101(Group):
     items = [Item_1800, Item_760, Item_30, Item_950, Item_1, Item_1155, Item_559, Item_7, Item_1547]
+class Item_1803(Item):
+    name = "TYP"
+    title = "IFPS Flight ID Type"
+    var = Variation_107
+class Item_1218(Item):
+    name = "NBR"
+    title = "IFPS Flight ID Number"
+    var = Variation_777
 class Variation_1102(Group):
     items = [Item_1803, Item_13, Item_1218]
+class Item_1804(Item):
+    name = "TYP"
+    title = "Message Type (= 28 for 1090 ES, Version 2)"
+    var = Variation_133
+class Item_1650(Item):
+    name = "STYP"
+    title = "Message Sub-type (= 2 for 1090 ES, Version 2)"
+    var = Variation_771
+class Item_534(Item):
+    name = "ARA"
+    title = "Active Resolution Advisories"
+    var = Variation_231
+class Item_1399(Item):
+    name = "RAC"
+    title = "RAC (RA Complement) Record"
+    var = Variation_844
+class Item_1407(Item):
+    name = "RAT"
+    title = "RA Terminated"
+    var = Variation_428
+class Item_1200(Item):
+    name = "MTE"
+    title = "Multiple Threat Encounter"
+    var = Variation_527
+class Item_1788(Item):
+    name = "TTI"
+    title = "Threat Type Indicator"
+    var = Variation_668
+class Item_1708(Item):
+    name = "TID"
+    title = "Threat Identity Data"
+    var = Variation_849
 class Variation_1103(Group):
     items = [Item_1804, Item_1650, Item_534, Item_1399, Item_1407, Item_1200, Item_1788, Item_1708]
+class Item_1805(Item):
+    name = "TYP"
+    title = "Report Type"
+    var = Variation_121
+class Item_1574(Item):
+    name = "SIM"
+    title = ""
+    var = Variation_528
+class Item_1394(Item):
+    name = "RAB"
+    title = ""
+    var = Variation_657
+class Item_1775(Item):
+    name = "TST"
+    title = ""
+    var = Variation_752
 class Variation_1104(Group):
     items = [Item_1805, Item_1574, Item_1394, Item_1775, Item_27]
+class Item_1806(Item):
+    name = "TYP"
+    title = "Time Type"
+    var = Variation_137
+class Item_761(Item):
+    name = "DAY"
+    title = "Day"
+    var = Variation_766
+class Item_951(Item):
+    name = "HOR"
+    title = "Hours, from 0 to 23"
+    var = Variation_607
+class Item_1156(Item):
+    name = "MIN"
+    title = "Minutes, from 0 to 59"
+    var = Variation_519
+class Item_558(Item):
+    name = "AVS"
+    title = "Seconds Available"
+    var = Variation_70
+class Item_1548(Item):
+    name = "SEC"
+    title = "Seconds, from 0 to 59"
+    var = Variation_519
 class Variation_1105(Group):
     items = [Item_1806, Item_761, Item_30, Item_951, Item_1, Item_1156, Item_558, Item_7, Item_1548]
+class Item_1807(Item):
+    name = "TYP"
+    title = "Type of Message Counter"
+    var = Variation_134
+class Item_699(Item):
+    name = "COUNT"
+    title = "COUNTER"
+    var = Variation_776
 class Variation_1106(Group):
     items = [Item_1807, Item_699]
+class Item_1808(Item):
+    name = "TYP"
+    title = "Type of Message Counter"
+    var = Variation_135
 class Variation_1107(Group):
     items = [Item_1808, Item_699]
+class Item_1809(Item):
+    name = "TYPE"
+    title = ""
+    var = Variation_129
+class Item_1266(Item):
+    name = "ORIGIN"
+    title = ""
+    var = Variation_669
+class Item_1632(Item):
+    name = "STATE"
+    title = ""
+    var = Variation_839
 class Variation_1108(Group):
     items = [Item_1809, Item_1266, Item_1632]
+class Item_1810(Item):
+    name = "TYPE"
+    title = "Reply Type"
+    var = Variation_165
+class Item_1434(Item):
+    name = "REPLYNBR"
+    title = ""
+    var = Variation_234
 class Variation_1109(Group):
     items = [Item_1810, Item_1434]
+class Item_1811(Item):
+    name = "TYPE"
+    title = "Type of Report Counter"
+    var = Variation_163
+class Item_1429(Item):
+    name = "REF"
+    title = "Reference from which the Messages Are Countered"
+    var = Variation_43
+class Item_749(Item):
+    name = "CV"
+    title = "32-bit Counter Value"
+    var = Variation_313
 class Variation_1110(Group):
     items = [Item_1811, Item_1429, Item_10, Item_749]
+class Item_1812(Item):
+    name = "TYPE"
+    title = "Type of Report Counter"
+    var = Variation_164
+class Item_1428(Item):
+    name = "REF"
+    title = "Reference from which the Messages Are Counted"
+    var = Variation_42
+class Item_700(Item):
+    name = "COUNT"
+    title = "Counter Value"
+    var = Variation_315
 class Variation_1111(Group):
     items = [Item_1812, Item_1428, Item_10, Item_700]
+class Item_1821(Item):
+    name = "UCI6"
+    title = ""
+    var = Variation_229
+class Item_1034(Item):
+    name = "LCI6"
+    title = ""
+    var = Variation_696
 class Variation_1112(Group):
     items = [Item_1821, Item_1034]
+class Item_1822(Item):
+    name = "UCI9"
+    title = ""
+    var = Variation_229
+class Item_1035(Item):
+    name = "LCI9"
+    title = ""
+    var = Variation_696
 class Variation_1113(Group):
     items = [Item_1822, Item_1035]
+class Item_1825(Item):
+    name = "UM"
+    title = "Uplink Mask"
+    var = Variation_89
+class Item_786(Item):
+    name = "DM"
+    title = "Downlink Mask"
+    var = Variation_336
+class Item_1820(Item):
+    name = "UC"
+    title = "Uplink Command"
+    var = Variation_502
+class Item_771(Item):
+    name = "DC"
+    title = "Downlink Command"
+    var = Variation_586
 class Variation_1114(Group):
     items = [Item_1825, Item_786, Item_1820, Item_771, Item_22]
+class Item_1827(Item):
+    name = "V"
+    title = ""
+    var = Variation_13
+class Item_892(Item):
+    name = "G"
+    title = ""
+    var = Variation_338
+class Item_1004(Item):
+    name = "L"
+    title = ""
+    var = Variation_461
+class Item_16(Spare):
+    bit_offset8 = 3
+    bit_size = 1
+class Item_817(Item):
+    name = "EM1"
+    title = "Extended Mode 1 Code in Octal Representation"
+    var = Variation_694
 class Variation_1115(Group):
     items = [Item_1827, Item_892, Item_1004, Item_16, Item_817]
+class Item_1828(Item):
+    name = "V"
+    title = ""
+    var = Variation_14
+class Item_1005(Item):
+    name = "L"
+    title = ""
+    var = Variation_462
 class Variation_1116(Group):
     items = [Item_1828, Item_7, Item_1005, Item_16, Item_817]
+class Item_1009(Item):
+    name = "L"
+    title = ""
+    var = Variation_466
+class Item_1168(Item):
+    name = "MODE2"
+    title = "Mode 2 Code in Octal Representation"
+    var = Variation_694
 class Variation_1117(Group):
     items = [Item_1828, Item_7, Item_1009, Item_16, Item_1168]
+class Item_12(Spare):
+    bit_offset8 = 2
+    bit_size = 2
+class Item_1176(Item):
+    name = "MODEC"
+    title = "Mode-C Reply in Gray Notation"
+    var = Variation_693
+class Item_1369(Item):
+    name = "QC2"
+    title = ""
+    var = Variation_812
+class Item_1349(Item):
+    name = "QA2"
+    title = ""
+    var = Variation_854
+class Item_1371(Item):
+    name = "QC4"
+    title = ""
+    var = Variation_45
+class Item_1351(Item):
+    name = "QA4"
+    title = ""
+    var = Variation_362
+class Item_1356(Item):
+    name = "QB1"
+    title = ""
+    var = Variation_457
+class Item_1374(Item):
+    name = "QD1"
+    title = ""
+    var = Variation_555
+class Item_1360(Item):
+    name = "QB2"
+    title = ""
+    var = Variation_635
+class Item_1377(Item):
+    name = "QD2"
+    title = ""
+    var = Variation_738
+class Item_1363(Item):
+    name = "QB4"
+    title = ""
+    var = Variation_811
+class Item_1381(Item):
+    name = "QD4"
+    title = ""
+    var = Variation_858
 class Variation_1118(Group):
     items = [Item_1828, Item_892, Item_12, Item_1176, Item_3, Item_1366, Item_1344, Item_1369, Item_1349, Item_1371, Item_1351, Item_1356, Item_1374, Item_1360, Item_1377, Item_1363, Item_1381]
+class Item_856(Item):
+    name = "FL"
+    title = ""
+    var = Variation_524
 class Variation_1119(Group):
     items = [Item_1828, Item_892, Item_856]
+class Item_857(Item):
+    name = "FL"
+    title = "Flight Level"
+    var = Variation_523
 class Variation_1120(Group):
     items = [Item_1828, Item_892, Item_857]
+class Item_947(Item):
+    name = "HGT"
+    title = "Mode-C HEIGHT"
+    var = Variation_523
 class Variation_1121(Group):
     items = [Item_1828, Item_892, Item_947]
+class Item_1007(Item):
+    name = "L"
+    title = ""
+    var = Variation_464
+class Item_1166(Item):
+    name = "MODE1"
+    title = "Mode-1 Code"
+    var = Variation_606
 class Variation_1122(Group):
     items = [Item_1828, Item_892, Item_1007, Item_1166]
 class Variation_1123(Group):
     items = [Item_1828, Item_892, Item_1009, Item_16, Item_1169]
+class Item_1011(Item):
+    name = "L"
+    title = ""
+    var = Variation_468
 class Variation_1124(Group):
     items = [Item_1828, Item_892, Item_1011, Item_16, Item_1175]
+class Item_1012(Item):
+    name = "L"
+    title = ""
+    var = Variation_469
+class Item_1164(Item):
+    name = "MOD3A"
+    title = ""
+    var = Variation_694
 class Variation_1125(Group):
     items = [Item_1828, Item_892, Item_1012, Item_16, Item_1164]
 class Variation_1126(Group):
     items = [Item_1828, Item_892, Item_1012, Item_16, Item_1175]
+class Item_1014(Item):
+    name = "L"
+    title = ""
+    var = Variation_471
 class Variation_1127(Group):
     items = [Item_1828, Item_892, Item_1014, Item_16, Item_1175]
+class Item_1015(Item):
+    name = "L"
+    title = ""
+    var = Variation_472
+class Item_1172(Item):
+    name = "MODE3A"
+    title = "Mode 3/A Reply in Octal Representation"
+    var = Variation_694
 class Variation_1128(Group):
     items = [Item_1828, Item_892, Item_1015, Item_16, Item_1172]
+class Item_893(Item):
+    name = "G"
+    title = ""
+    var = Variation_339
+class Item_508(Item):
+    name = "ALT"
+    title = "Altitude"
+    var = Variation_524
 class Variation_1129(Group):
     items = [Item_1828, Item_893, Item_508]
+class Item_1829(Item):
+    name = "V"
+    title = "Validated"
+    var = Variation_14
+class Item_894(Item):
+    name = "G"
+    title = "Garbled"
+    var = Variation_338
+class Item_1367(Item):
+    name = "QC1"
+    title = "Quality Pulse C1"
+    var = Variation_636
+class Item_1346(Item):
+    name = "QA1"
+    title = "Quality Pulse A1"
+    var = Variation_735
+class Item_1370(Item):
+    name = "QC2"
+    title = "Quality Pulse C2"
+    var = Variation_812
+class Item_1350(Item):
+    name = "QA2"
+    title = "Quality Pulse A2"
+    var = Variation_854
+class Item_1373(Item):
+    name = "QC4"
+    title = "Quality Pulse C4"
+    var = Variation_45
+class Item_1354(Item):
+    name = "QA4"
+    title = "Quality Pulse A4"
+    var = Variation_362
+class Item_1358(Item):
+    name = "QB1"
+    title = "Quality Pulse B1"
+    var = Variation_457
+class Item_1376(Item):
+    name = "QD1"
+    title = "Quality Pulse D1"
+    var = Variation_555
+class Item_1362(Item):
+    name = "QB2"
+    title = "Quality Pulse B2"
+    var = Variation_635
+class Item_1379(Item):
+    name = "QD2"
+    title = "Quality Pulse D2"
+    var = Variation_737
+class Item_1365(Item):
+    name = "QB4"
+    title = "Quality Pulse B4"
+    var = Variation_811
+class Item_1382(Item):
+    name = "QD4"
+    title = "Quality Pulse D4"
+    var = Variation_858
 class Variation_1130(Group):
     items = [Item_1829, Item_894, Item_12, Item_1176, Item_3, Item_1367, Item_1346, Item_1370, Item_1350, Item_1373, Item_1354, Item_1358, Item_1376, Item_1362, Item_1379, Item_1365, Item_1382]
+class Item_629(Item):
+    name = "CH"
+    title = "Change in Mode 3/A"
+    var = Variation_478
 class Variation_1131(Group):
     items = [Item_1829, Item_894, Item_629, Item_16, Item_1175]
 class Variation_1132(Group):
     items = [Item_1829, Item_894, Item_857]
+class Item_1006(Item):
+    name = "L"
+    title = ""
+    var = Variation_463
 class Variation_1133(Group):
     items = [Item_1829, Item_894, Item_1006, Item_16, Item_1175]
+class Item_1008(Item):
+    name = "L"
+    title = ""
+    var = Variation_465
+class Item_1167(Item):
+    name = "MODE1"
+    title = "Mode-1 Code in Octal Representation"
+    var = Variation_606
 class Variation_1134(Group):
     items = [Item_1829, Item_894, Item_1008, Item_1167]
+class Item_1010(Item):
+    name = "L"
+    title = ""
+    var = Variation_467
+class Item_1170(Item):
+    name = "MODE2"
+    title = "Mode-2 Reply in Octal Representation"
+    var = Variation_694
 class Variation_1135(Group):
     items = [Item_1829, Item_894, Item_1010, Item_16, Item_1170]
 class Variation_1136(Group):
     items = [Item_1829, Item_894, Item_1012, Item_16, Item_1175]
+class Item_1013(Item):
+    name = "L"
+    title = ""
+    var = Variation_470
 class Variation_1137(Group):
     items = [Item_1829, Item_894, Item_1013, Item_16, Item_1175]
+class Item_1042(Item):
+    name = "LMC"
+    title = "Last Measured Mode C Code"
+    var = Variation_523
 class Variation_1138(Group):
     items = [Item_1829, Item_894, Item_1042]
+class Item_1851(Item):
+    name = "VDL"
+    title = "VDL Mode 4"
+    var = Variation_90
+class Item_1127(Item):
+    name = "MDS"
+    title = "Mode S"
+    var = Variation_367
+class Item_1817(Item):
+    name = "UAT"
+    title = "UAT"
+    var = Variation_499
 class Variation_1139(Group):
     items = [Item_1851, Item_1127, Item_1817, Item_19]
+class Item_1869(Item):
+    name = "VX"
+    title = ""
+    var = Variation_250
+class Item_1873(Item):
+    name = "VY"
+    title = ""
+    var = Variation_250
 class Variation_1140(Group):
     items = [Item_1869, Item_1873]
+class Item_1870(Item):
+    name = "VX"
+    title = "Velocity (X-component)"
+    var = Variation_250
+class Item_1874(Item):
+    name = "VY"
+    title = "Velocity (Y-component)"
+    var = Variation_250
 class Variation_1141(Group):
     items = [Item_1870, Item_1874]
+class Item_1871(Item):
+    name = "VX"
+    title = "Vx"
+    var = Variation_250
+class Item_1875(Item):
+    name = "VY"
+    title = "Vy"
+    var = Variation_250
 class Variation_1142(Group):
     items = [Item_1871, Item_1875]
+class Item_1872(Item):
+    name = "VX"
+    title = "X Velocity"
+    var = Variation_252
+class Item_1876(Item):
+    name = "VY"
+    title = "Y Velocity"
+    var = Variation_252
 class Variation_1143(Group):
     items = [Item_1872, Item_1876]
+class Item_1885(Item):
+    name = "WS"
+    title = "Wind Speed Valid Flag"
+    var = Variation_66
+class Item_1878(Item):
+    name = "WD"
+    title = "Wind Direction Valid Flag"
+    var = Variation_377
+class Item_1719(Item):
+    name = "TMP"
+    title = "Temperature Valid Flag"
+    var = Variation_487
+class Item_1750(Item):
+    name = "TRB"
+    title = "Turbulence Valid Flag"
+    var = Variation_571
+class Item_1886(Item):
+    name = "WSD"
+    title = "Wind Speed"
+    var = Variation_264
+class Item_1879(Item):
+    name = "WDD"
+    title = "Wind Direction"
+    var = Variation_269
+class Item_1720(Item):
+    name = "TMPD"
+    title = "Temperature in Degrees Celsius"
+    var = Variation_251
+class Item_1751(Item):
+    name = "TRBD"
+    title = "Turbulence"
+    var = Variation_191
 class Variation_1144(Group):
     items = [Item_1885, Item_1878, Item_1719, Item_1750, Item_22, Item_1886, Item_1879, Item_1720, Item_1751]
+class Item_1889(Item):
+    name = "X"
+    title = ""
+    var = Variation_197
+class Item_1932(Item):
+    name = "Y"
+    title = ""
+    var = Variation_197
 class Variation_1145(Group):
     items = [Item_1889, Item_1932]
+class Item_1890(Item):
+    name = "X"
+    title = ""
+    var = Variation_228
+class Item_1934(Item):
+    name = "Y"
+    title = ""
+    var = Variation_695
 class Variation_1146(Group):
     items = [Item_1890, Item_1934]
+class Item_1891(Item):
+    name = "X"
+    title = ""
+    var = Variation_230
+class Item_1935(Item):
+    name = "Y"
+    title = ""
+    var = Variation_699
+class Item_671(Item):
+    name = "COHAXY"
+    title = ""
+    var = Variation_197
 class Variation_1147(Group):
     items = [Item_1891, Item_1935, Item_671]
+class Item_1892(Item):
+    name = "X"
+    title = ""
+    var = Variation_275
+class Item_1933(Item):
+    name = "Y"
+    title = ""
+    var = Variation_275
+class Item_678(Item):
+    name = "COHVXY"
+    title = ""
+    var = Variation_197
 class Variation_1148(Group):
     items = [Item_1892, Item_1933, Item_678]
+class Item_697(Item):
+    name = "CORSHVXY"
+    title = ""
+    var = Variation_197
 class Variation_1149(Group):
     items = [Item_1892, Item_1933, Item_697]
+class Item_1893(Item):
+    name = "X"
+    title = ""
+    var = Variation_295
+class Item_1936(Item):
+    name = "Y"
+    title = ""
+    var = Variation_700
 class Variation_1150(Group):
     items = [Item_1893, Item_1936]
+class Item_1894(Item):
+    name = "X"
+    title = "AA (X-Component)"
+    var = Variation_216
+class Item_1937(Item):
+    name = "Y"
+    title = "AA (Y-Component)"
+    var = Variation_216
 class Variation_1151(Group):
     items = [Item_1894, Item_1937]
+class Item_1895(Item):
+    name = "X"
+    title = "APC (X-Component)"
+    var = Variation_271
+class Item_1938(Item):
+    name = "Y"
+    title = "APC (Y-Component)"
+    var = Variation_271
 class Variation_1152(Group):
     items = [Item_1895, Item_1938]
+class Item_1896(Item):
+    name = "X"
+    title = "ATV (X-Component)"
+    var = Variation_215
+class Item_1939(Item):
+    name = "Y"
+    title = "ATV (Y-Component)"
+    var = Variation_215
 class Variation_1153(Group):
     items = [Item_1896, Item_1939]
+class Item_1897(Item):
+    name = "X"
+    title = "DOP (X-Component)"
+    var = Variation_279
+class Item_1940(Item):
+    name = "Y"
+    title = "DOP (Y-Component)"
+    var = Variation_279
+class Item_1930(Item):
+    name = "XY"
+    title = "DOP (Correlation XY)"
+    var = Variation_279
 class Variation_1154(Group):
     items = [Item_1897, Item_1940, Item_1930]
+class Item_1898(Item):
+    name = "X"
+    title = "Estimated Accuracy Of Acceleration of X Component"
+    var = Variation_212
+class Item_1941(Item):
+    name = "Y"
+    title = "Estimated Accuracy Of Acceleration of Y Component"
+    var = Variation_212
 class Variation_1155(Group):
     items = [Item_1898, Item_1941]
+class Item_1899(Item):
+    name = "X"
+    title = "Estimated Accuracy of the Calculated Position of X Component"
+    var = Variation_214
+class Item_1942(Item):
+    name = "Y"
+    title = "Estimated Accuracy of the Calculated Position of Y Component"
+    var = Variation_214
 class Variation_1156(Group):
     items = [Item_1899, Item_1942]
+class Item_1900(Item):
+    name = "X"
+    title = "Estimated Accuracy of the Calculated Velocity of X Component"
+    var = Variation_210
+class Item_1943(Item):
+    name = "Y"
+    title = "Estimated Accuracy of the Calculated Velocity of Y Component"
+    var = Variation_210
 class Variation_1157(Group):
     items = [Item_1900, Item_1943]
+class Item_1901(Item):
+    name = "X"
+    title = "SDP (X-Component)"
+    var = Variation_281
+class Item_1944(Item):
+    name = "Y"
+    title = "SDP (Y-Component)"
+    var = Variation_281
+class Item_1931(Item):
+    name = "XY"
+    title = "SDP (Correlation XY)"
+    var = Variation_279
 class Variation_1158(Group):
     items = [Item_1901, Item_1944, Item_1931]
+class Item_1902(Item):
+    name = "X"
+    title = "Starting X-position of the Conflict"
+    var = Variation_299
+class Item_1945(Item):
+    name = "Y"
+    title = "Starting Y-position of the Conflict"
+    var = Variation_299
+class Item_1962(Item):
+    name = "Z"
+    title = "Starting Z-position of the Conflict"
+    var = Variation_240
 class Variation_1159(Group):
     items = [Item_1902, Item_1945, Item_1962]
+class Item_1903(Item):
+    name = "X"
+    title = "X Coordinate"
+    var = Variation_237
+class Item_1947(Item):
+    name = "Y"
+    title = "Y Coordinate"
+    var = Variation_237
 class Variation_1160(Group):
     items = [Item_1903, Item_1947]
+class Item_1904(Item):
+    name = "X"
+    title = "X Coordinate"
+    var = Variation_299
+class Item_1948(Item):
+    name = "Y"
+    title = "Y Coordinate"
+    var = Variation_299
 class Variation_1161(Group):
     items = [Item_1904, Item_1948]
+class Item_1905(Item):
+    name = "X"
+    title = "X-Component"
+    var = Variation_155
+class Item_1949(Item):
+    name = "Y"
+    title = "Y-Component"
+    var = Variation_155
+class Item_1040(Item):
+    name = "LENGTH"
+    title = "Length"
+    var = Variation_155
 class Variation_1162(Group):
     items = [Item_1905, Item_1949, Item_1040]
+class Item_1906(Item):
+    name = "X"
+    title = "X-Component"
+    var = Variation_237
+class Item_1950(Item):
+    name = "Y"
+    title = "Y-Component"
+    var = Variation_237
 class Variation_1163(Group):
     items = [Item_1906, Item_1950]
+class Item_1907(Item):
+    name = "X"
+    title = "X-Component"
+    var = Variation_253
+class Item_1951(Item):
+    name = "Y"
+    title = "Y-Component"
+    var = Variation_253
 class Variation_1164(Group):
     items = [Item_1907, Item_1951]
+class Item_1908(Item):
+    name = "X"
+    title = "X-Component"
+    var = Variation_255
+class Item_1946(Item):
+    name = "Y"
+    title = "X-Component"
+    var = Variation_255
 class Variation_1165(Group):
     items = [Item_1908, Item_1946]
+class Item_1952(Item):
+    name = "Y"
+    title = "Y-Component"
+    var = Variation_255
 class Variation_1166(Group):
     items = [Item_1908, Item_1952]
+class Item_1909(Item):
+    name = "X"
+    title = "X-coordinate"
+    var = Variation_236
+class Item_1953(Item):
+    name = "Y"
+    title = "Y-coordinate"
+    var = Variation_236
+class Item_1016(Item):
+    name = "L"
+    title = "Vector Length"
+    var = Variation_235
 class Variation_1167(Group):
     items = [Item_1909, Item_1953, Item_1016]
+class Item_1910(Item):
+    name = "X"
+    title = "X-coordinate"
+    var = Variation_299
+class Item_1954(Item):
+    name = "Y"
+    title = "Y-coordinate"
+    var = Variation_299
 class Variation_1168(Group):
     items = [Item_1910, Item_1954]
+class Item_1912(Item):
+    name = "X1"
+    title = ""
+    var = Variation_155
+class Item_1956(Item):
+    name = "Y1"
+    title = ""
+    var = Variation_155
 class Variation_1169(Group):
     items = [Item_1912, Item_1956]
+class Item_1914(Item):
+    name = "X1"
+    title = "X1-Component"
+    var = Variation_155
+class Item_1957(Item):
+    name = "Y1"
+    title = "Y1-Component"
+    var = Variation_155
+class Item_1918(Item):
+    name = "X2"
+    title = "X2-Component"
+    var = Variation_155
+class Item_1959(Item):
+    name = "Y2"
+    title = "Y2-Component"
+    var = Variation_155
 class Variation_1170(Group):
     items = [Item_1914, Item_1957, Item_1918, Item_1959]
+class Item_1921(Item):
+    name = "XA"
+    title = ""
+    var = Variation_35
+class Item_1922(Item):
+    name = "XC"
+    title = ""
+    var = Variation_445
+class Item_17(Spare):
+    bit_offset8 = 3
+    bit_size = 2
+class Item_1915(Item):
+    name = "X2"
+    title = ""
+    var = Variation_726
 class Variation_1171(Group):
     items = [Item_1921, Item_7, Item_1922, Item_17, Item_1915, Item_27]
+class Item_1955(Item):
+    name = "Y1"
+    title = ""
+    var = Variation_132
+class Item_1958(Item):
+    name = "Y2"
+    title = ""
+    var = Variation_690
+class Item_1960(Item):
+    name = "Y3"
+    title = ""
+    var = Variation_132
+class Item_1961(Item):
+    name = "Y4"
+    title = ""
+    var = Variation_690
+class Item_1072(Item):
+    name = "M1"
+    title = ""
+    var = Variation_132
+class Item_1077(Item):
+    name = "M2"
+    title = ""
+    var = Variation_690
+class Item_752(Item):
+    name = "D1"
+    title = ""
+    var = Variation_132
+class Item_753(Item):
+    name = "D2"
+    title = ""
+    var = Variation_690
 class Variation_1172(Group):
     items = [Item_1955, Item_1958, Item_1960, Item_1961, Item_1072, Item_1077, Item_752, Item_753]
+class Item_1301(Item):
+    name = "POA"
+    title = "Position Offset Applied"
+    var = Variation_489
+class Item_620(Item):
+    name = "CDTIS"
+    title = "Cockpit Display of Traffic Information Surface"
+    var = Variation_532
+class Item_576(Item):
+    name = "B2LOW"
+    title = "Class B2 Transmit Power Less Than 70 Watts"
+    var = Variation_610
+class Item_1406(Item):
+    name = "RAS"
+    title = "Receiving ATC Services"
+    var = Variation_707
+class Item_990(Item):
+    name = "IDENT"
+    title = "Setting of IDENT Switch"
+    var = Variation_814
+class Item_1071(Item):
+    name = "LW"
+    title = "Length and Width of the Aircraft"
+    var = Variation_685
 class Variation_1173(Extended):
     items = [Item_1, Item_1301, Item_620, Item_576, Item_1406, Item_990, None, Item_3, Item_1071]
+class Item_1070(Item):
+    name = "LW"
+    title = "Length and Width of the Aircraft"
+    var = Variation_127
+class Item_21(Spare):
+    bit_offset8 = 4
+    bit_size = 3
 class Variation_1174(Extended):
     items = [Item_1, Item_1301, Item_620, Item_576, Item_1406, Item_990, None, Item_1070, Item_21, None]
+class Item_1631(Item):
+    name = "STAT"
+    title = "Status of the Service"
+    var = Variation_684
 class Variation_1175(Extended):
     items = [Item_3, Item_1631, None]
+class Item_864(Item):
+    name = "FOEFRI"
+    title = "Indication Foe/Friend (Mode4)"
+    var = Variation_763
 class Variation_1176(Extended):
     items = [Item_4, Item_864, None]
+class Item_550(Item):
+    name = "ATP"
+    title = "Address Type"
+    var = Variation_117
+class Item_536(Item):
+    name = "ARC"
+    title = "Altitude Reporting Capability"
+    var = Variation_588
+class Item_1408(Item):
+    name = "RC"
+    title = "Range Check"
+    var = Variation_719
+class Item_1398(Item):
+    name = "RAB"
+    title = "Report Type"
+    var = Variation_828
+class Item_1497(Item):
+    name = "SAA"
+    title = "Selected Altitude Available"
+    var = Variation_631
+class Item_642(Item):
+    name = "CL"
+    title = "Confidence Level"
+    var = Variation_765
+class Item_1041(Item):
+    name = "LLC"
+    title = "List Lookup Check"
+    var = Variation_343
+class Item_998(Item):
+    name = "IPC"
+    title = "Independent Position Check"
+    var = Variation_446
+class Item_1230(Item):
+    name = "NOGO"
+    title = "No-go Bit Status"
+    var = Variation_561
+class Item_720(Item):
+    name = "CPR"
+    title = "Compact Position Reporting"
+    var = Variation_612
+class Item_1037(Item):
+    name = "LDPJ"
+    title = "Local Decoding Position Jump"
+    var = Variation_741
+class Item_1411(Item):
+    name = "RCF"
+    title = "Range Check"
+    var = Variation_799
 class Variation_1177(Extended):
     items = [Item_550, Item_536, Item_1408, Item_1398, None, Item_773, Item_910, Item_1576, Item_1777, Item_1497, Item_642, None, Item_0, Item_1041, Item_998, Item_1230, Item_720, Item_1037, Item_1411, None]
+class Item_1677(Item):
+    name = "TBC"
+    title = "Total Bits Corrected"
+    var = Variation_968
+class Item_1101(Item):
+    name = "MBC"
+    title = "Maximum Bits Corrected"
+    var = Variation_968
 class Variation_1178(Extended):
     items = [Item_550, Item_536, Item_1408, Item_1398, None, Item_773, Item_910, Item_1576, Item_1777, Item_1497, Item_642, None, Item_0, Item_1041, Item_998, Item_1230, Item_720, Item_1037, Item_1411, None, Item_1677, None, Item_1101, None]
 class Variation_1179(Extended):
     items = [Item_550, Item_536, Item_1408, Item_1398, None, Item_773, Item_910, Item_1576, Item_1777, Item_1497, Item_642, None, Item_1, Item_998, Item_1230, Item_720, Item_1037, Item_1411, None]
+class Item_591(Item):
+    name = "BIZ"
+    title = ""
+    var = Variation_78
+class Item_577(Item):
+    name = "BAZ"
+    title = ""
+    var = Variation_383
+class Item_1791(Item):
+    name = "TUR"
+    title = ""
+    var = Variation_498
+class Item_743(Item):
+    name = "CSTP"
+    title = "Coasted - Position"
+    var = Variation_651
+class Item_742(Item):
+    name = "CSTH"
+    title = "Coasted – Height"
+    var = Variation_749
+class Item_651(Item):
+    name = "CNF"
+    title = "Confirmed vs. Tentative Track"
+    var = Variation_787
 class Variation_1180(Extended):
     items = [Item_591, Item_577, Item_1791, Item_16, Item_743, Item_742, Item_651, None]
+class Item_647(Item):
+    name = "CNF"
+    title = ""
+    var = Variation_17
+class Item_1754(Item):
+    name = "TRE"
+    title = ""
+    var = Variation_342
+class Item_739(Item):
+    name = "CST"
+    title = ""
+    var = Variation_510
+class Item_1091(Item):
+    name = "MAH"
+    title = ""
+    var = Variation_615
+class Item_1684(Item):
+    name = "TCC"
+    title = ""
+    var = Variation_756
+class Item_1636(Item):
+    name = "STH"
+    title = ""
+    var = Variation_817
+class Item_1728(Item):
+    name = "TOM"
+    title = ""
+    var = Variation_112
+class Item_790(Item):
+    name = "DOU"
+    title = ""
+    var = Variation_516
+class Item_1183(Item):
+    name = "MRS"
+    title = ""
+    var = Variation_761
+class Item_913(Item):
+    name = "GHO"
+    title = ""
+    var = Variation_27
+class Item_9(Spare):
+    bit_offset8 = 1
+    bit_size = 6
 class Variation_1181(Extended):
     items = [Item_647, Item_1754, Item_739, Item_1091, Item_1684, Item_1636, None, Item_1728, Item_790, Item_1183, None, Item_913, Item_9, None]
+class Item_648(Item):
+    name = "CNF"
+    title = ""
+    var = Variation_18
+class Item_737(Item):
+    name = "CST"
+    title = ""
+    var = Variation_482
+class Item_616(Item):
+    name = "CDM"
+    title = ""
+    var = Variation_589
+class Item_1092(Item):
+    name = "MAH"
+    title = ""
+    var = Variation_715
 class Variation_1182(Extended):
     items = [Item_648, Item_1754, Item_737, Item_616, Item_1092, Item_1636, None, Item_913, Item_9, None]
+class Item_738(Item):
+    name = "CST"
+    title = ""
+    var = Variation_485
 class Variation_1183(Extended):
     items = [Item_648, Item_1754, Item_738, Item_616, Item_1092, Item_1636, None, Item_913, Item_9, None]
+class Item_650(Item):
+    name = "CNF"
+    title = "Confirmed Vs. Tentative Track"
+    var = Variation_15
+class Item_1401(Item):
+    name = "RAD"
+    title = "Type of Sensor(s) Maintaining Track"
+    var = Variation_394
+class Item_792(Item):
+    name = "DOU"
+    title = "Signals Level of Confidence in Plot to Track Association Process"
+    var = Variation_567
+class Item_1093(Item):
+    name = "MAH"
+    title = "Manoeuvre Detection in Horizontal Sense"
+    var = Variation_647
+class Item_617(Item):
+    name = "CDM"
+    title = "Climbing / Descending Mode"
+    var = Variation_760
+class Item_1755(Item):
+    name = "TRE"
+    title = "Signal for End_of_Track"
+    var = Variation_86
+class Item_915(Item):
+    name = "GHO"
+    title = "Ghost Vs. True Target"
+    var = Variation_391
+class Item_1658(Item):
+    name = "SUP"
+    title = "Track Maintained with Track Information from Neighbouring Node B on the Cluster, or Network"
+    var = Variation_474
+class Item_1685(Item):
+    name = "TCC"
+    title = "Type of Plot Coordinate Transformation Mechanism:"
+    var = Variation_578
 class Variation_1184(Extended):
     items = [Item_650, Item_1401, Item_792, Item_1093, Item_617, None, Item_1755, Item_915, Item_1658, Item_1685, Item_21, None]
+class Item_691(Item):
+    name = "CON"
+    title = ""
+    var = Variation_16
+class Item_1400(Item):
+    name = "RAD"
+    title = ""
+    var = Variation_378
+class Item_1096(Item):
+    name = "MAN"
+    title = ""
+    var = Variation_435
+class Item_791(Item):
+    name = "DOU"
+    title = ""
+    var = Variation_533
+class Item_1414(Item):
+    name = "RDPC"
+    title = "Radar Data Processing Chain"
+    var = Variation_654
+class Item_23(Spare):
+    bit_offset8 = 5
+    bit_size = 1
+class Item_914(Item):
+    name = "GHO"
+    title = ""
+    var = Variation_793
+class Item_1753(Item):
+    name = "TRE"
+    title = ""
+    var = Variation_30
 class Variation_1185(Extended):
     items = [Item_691, Item_1400, Item_1096, Item_791, Item_1414, Item_23, Item_914, None, Item_1753, Item_9, None]
+class Item_692(Item):
+    name = "CON"
+    title = ""
+    var = Variation_102
+class Item_1329(Item):
+    name = "PSR"
+    title = ""
+    var = Variation_488
+class Item_1606(Item):
+    name = "SSR"
+    title = ""
+    var = Variation_572
+class Item_1124(Item):
+    name = "MDS"
+    title = ""
+    var = Variation_638
+class Item_491(Item):
+    name = "ADS"
+    title = ""
+    var = Variation_703
+class Item_1159(Item):
+    name = "MLT"
+    title = ""
+    var = Variation_816
+class Item_1263(Item):
+    name = "OPS"
+    title = "Operational Release Status of the System"
+    var = Variation_72
+class Item_1257(Item):
+    name = "ODP"
+    title = "Data Processor Overload Indicator"
+    var = Variation_356
+class Item_1279(Item):
+    name = "OXT"
+    title = "Transmission Subsystem Overload Status"
+    var = Variation_453
+class Item_1190(Item):
+    name = "MSC"
+    title = "Monitoring System Connected Status"
+    var = Variation_559
+class Item_1780(Item):
+    name = "TSV"
+    title = "Time Source Validity"
+    var = Variation_666
+class Item_1244(Item):
+    name = "NPW"
+    title = "No Plot Warning"
+    var = Variation_727
 class Variation_1186(Extended):
     items = [Item_692, Item_1329, Item_1606, Item_1124, Item_491, Item_1159, None, Item_1263, Item_1257, Item_1279, Item_1190, Item_1780, Item_1244, Item_26, None]
+class Item_845(Item):
+    name = "ES"
+    title = ""
+    var = Variation_77
+class Item_1814(Item):
+    name = "UAT"
+    title = ""
+    var = Variation_382
+class Item_14(Spare):
+    bit_offset8 = 2
+    bit_size = 5
 class Variation_1187(Extended):
     items = [Item_845, Item_1814, Item_14, None]
+class Item_847(Item):
+    name = "ES"
+    title = "ES IN Capability"
+    var = Variation_77
+class Item_1819(Item):
+    name = "UAT"
+    title = "UAT IN Capability"
+    var = Variation_382
+class Item_1410(Item):
+    name = "RCE"
+    title = "Reduced Capability Equipment"
+    var = Variation_969
+class Item_1464(Item):
+    name = "RRL"
+    title = "Reply Rate Limiting"
+    var = Variation_975
+class Item_1327(Item):
+    name = "PS3"
+    title = "Priority Status for Version 3 ADS-B Systems"
+    var = Variation_967
+class Item_1742(Item):
+    name = "TPW"
+    title = "Transmit Power"
+    var = Variation_973
+class Item_1770(Item):
+    name = "TSI"
+    title = "Transponder Side Indication"
+    var = Variation_965
+class Item_1203(Item):
+    name = "MUO"
+    title = "Manned / Unmanned Operation"
+    var = Variation_970
+class Item_1490(Item):
+    name = "RWC"
+    title = "Remain Well Clear Corrective Alert"
+    var = Variation_974
+class Item_757(Item):
+    name = "DAA"
+    title = "Detectand Avoid Capabilities"
+    var = Variation_964
+class Item_779(Item):
+    name = "DF17CA"
+    title = "Transponder Capability"
+    var = Variation_971
+class Item_1659(Item):
+    name = "SVH"
+    title = "Sense Vertical & Horizontal"
+    var = Variation_966
+class Item_611(Item):
+    name = "CATC"
+    title = "CAS Type & Capability"
+    var = Variation_976
+class Item_1668(Item):
+    name = "TAO"
+    title = "Transponder Antenna Offset"
+    var = Variation_963
 class Variation_1188(Extended):
     items = [Item_847, Item_1819, Item_1410, Item_1464, None, Item_1327, Item_1742, None, Item_1770, Item_1203, Item_1490, None, Item_757, Item_779, None, Item_1659, Item_611, None, Item_1668, None]
+class Item_852(Item):
+    name = "F"
+    title = "Scaling Factor"
+    var = Variation_139
+class Item_1387(Item):
+    name = "R"
+    title = "Current Reduction Stage in Use"
+    var = Variation_771
+class Item_1343(Item):
+    name = "Q"
+    title = "Processing Parameters"
+    var = Variation_232
 class Variation_1189(Extended):
     items = [Item_852, Item_1387, Item_1343, None]
+class Item_855(Item):
+    name = "FDR"
+    title = "Flight Data Retained"
+    var = Variation_41
 class Variation_1190(Extended):
     items = [Item_855, Item_9, None]
+class Item_905(Item):
+    name = "GATOAT"
+    title = "Identification of Conflict Categories Definition Table"
+    var = Variation_111
+class Item_618(Item):
+    name = "CDM"
+    title = "Climbing/Descending Mode"
+    var = Variation_99
+class Item_1322(Item):
+    name = "PRI"
+    title = ""
+    var = Variation_481
+class Item_924(Item):
+    name = "GV"
+    title = ""
+    var = Variation_534
 class Variation_1191(Extended):
     items = [Item_905, Item_878, Item_1486, Item_953, None, Item_618, Item_1322, Item_924, Item_21, None]
+class Item_1039(Item):
+    name = "LENGTH"
+    title = "Length"
+    var = Variation_151
+class Item_1265(Item):
+    name = "ORIENTATION"
+    title = "Orientation"
+    var = Variation_154
+class Item_1881(Item):
+    name = "WIDTH"
+    title = "Width"
+    var = Variation_151
 class Variation_1192(Extended):
     items = [Item_1039, None, Item_1265, None, Item_1881, None]
+class Item_1097(Item):
+    name = "MAS"
+    title = "Conflict Location in Military Airspace"
+    var = Variation_19
+class Item_608(Item):
+    name = "CAS"
+    title = "Conflict Location in Civil Airspace"
+    var = Variation_335
+class Item_859(Item):
+    name = "FLD"
+    title = "Fast Lateral Divergence"
+    var = Variation_430
+class Item_891(Item):
+    name = "FVD"
+    title = "Fast Vertical Divergence"
+    var = Variation_529
+class Item_1813(Item):
+    name = "TYPE"
+    title = "Type of Separation Infringement"
+    var = Variation_640
+class Item_726(Item):
+    name = "CROSS"
+    title = "Crossing Test"
+    var = Variation_706
+class Item_783(Item):
+    name = "DIV"
+    title = "Divergence Test"
+    var = Variation_783
+class Item_1463(Item):
+    name = "RRC"
+    title = "Runway/Runway Crossing in RIMCAS"
+    var = Variation_33
+class Item_1483(Item):
+    name = "RTC"
+    title = "Runway/Taxiway Crossing in RIMCAS"
+    var = Variation_349
+class Item_1185(Item):
+    name = "MRVA"
+    title = ""
+    var = Variation_440
+class Item_1860(Item):
+    name = "VRAMCRM"
+    title = ""
+    var = Variation_541
+class Item_1862(Item):
+    name = "VRAMVRM"
+    title = ""
+    var = Variation_619
+class Item_1865(Item):
+    name = "VRAMVTM"
+    title = ""
+    var = Variation_716
+class Item_933(Item):
+    name = "HAMHD"
+    title = ""
+    var = Variation_795
+class Item_935(Item):
+    name = "HAMRD"
+    title = ""
+    var = Variation_32
+class Item_937(Item):
+    name = "HAMVD"
+    title = ""
+    var = Variation_344
+class Item_763(Item):
+    name = "DBPSMARR"
+    title = ""
+    var = Variation_439
+class Item_765(Item):
+    name = "DBPSMDEP"
+    title = ""
+    var = Variation_540
+class Item_767(Item):
+    name = "DBPSMTL"
+    title = ""
+    var = Variation_618
+class Item_506(Item):
+    name = "AIW"
+    title = ""
+    var = Variation_717
 class Variation_1193(Extended):
     items = [Item_1097, Item_608, Item_859, Item_891, Item_1813, Item_726, Item_783, None, Item_1463, Item_1483, Item_1185, Item_1860, Item_1862, Item_1865, Item_933, None, Item_935, Item_937, Item_763, Item_765, Item_767, Item_506, Item_26, None]
+class Item_1153(Item):
+    name = "MIDENT"
+    title = "Master System Unit Identification"
+    var = Variation_155
+class Item_1201(Item):
+    name = "MTRACK"
+    title = "Master System Track Number"
+    var = Variation_232
+class Item_1563(Item):
+    name = "SIDENT"
+    title = "Slave System Unit Identification"
+    var = Variation_155
+class Item_1645(Item):
+    name = "STRACK"
+    title = "Slave System Track Number"
+    var = Variation_232
 class Variation_1194(Extended):
     items = [Item_1153, Item_1201, None, Item_1563, Item_1645, None]
+class Item_1177(Item):
+    name = "MOMU"
+    title = "Mono-Static Target Report or Multi-Static Target Report"
+    var = Variation_100
+class Item_1785(Item):
+    name = "TTAX"
+    title = "Target Taxonomy"
+    var = Variation_503
+class Item_1515(Item):
+    name = "SCD"
+    title = "Scanning Direction"
+    var = Variation_677
 class Variation_1195(Extended):
     items = [Item_1177, Item_1785, Item_1515, Item_26, None]
+class Item_1178(Item):
+    name = "MON"
+    title = ""
+    var = Variation_51
+class Item_906(Item):
+    name = "GBS"
+    title = ""
+    var = Variation_390
+class Item_1181(Item):
+    name = "MRH"
+    title = ""
+    var = Variation_432
+class Item_1595(Item):
+    name = "SRC"
+    title = ""
+    var = Variation_601
+class Item_649(Item):
+    name = "CNF"
+    title = ""
+    var = Variation_788
+class Item_1570(Item):
+    name = "SIM"
+    title = ""
+    var = Variation_3
+class Item_1769(Item):
+    name = "TSE"
+    title = ""
+    var = Variation_355
+class Item_1767(Item):
+    name = "TSB"
+    title = ""
+    var = Variation_452
+class Item_879(Item):
+    name = "FRIFOE"
+    title = ""
+    var = Variation_590
+class Item_1135(Item):
+    name = "ME"
+    title = ""
+    var = Variation_729
+class Item_1152(Item):
+    name = "MI"
+    title = ""
+    var = Variation_807
+class Item_516(Item):
+    name = "AMA"
+    title = ""
+    var = Variation_85
+class Item_1586(Item):
+    name = "SPI"
+    title = ""
+    var = Variation_354
+class Item_736(Item):
+    name = "CST"
+    title = ""
+    var = Variation_449
+class Item_871(Item):
+    name = "FPC"
+    title = ""
+    var = Variation_569
+class Item_496(Item):
+    name = "AFF"
+    title = ""
+    var = Variation_625
+class Item_24(Spare):
+    bit_offset8 = 5
+    bit_size = 2
 class Variation_1196(Extended):
     items = [Item_1178, Item_906, Item_1181, Item_1595, Item_649, None, Item_1570, Item_1769, Item_1767, Item_879, Item_1135, Item_1152, None, Item_516, Item_1586, Item_736, Item_871, Item_496, Item_24, None]
+class Item_1328(Item):
+    name = "PSR"
+    title = ""
+    var = Variation_351
+class Item_1605(Item):
+    name = "SSR"
+    title = ""
+    var = Variation_448
+class Item_1123(Item):
+    name = "MDS"
+    title = ""
+    var = Variation_547
+class Item_489(Item):
+    name = "ADS"
+    title = ""
+    var = Variation_626
+class Item_1653(Item):
+    name = "SUC"
+    title = ""
+    var = Variation_731
+class Item_468(Item):
+    name = "AAC"
+    title = ""
+    var = Variation_805
 class Variation_1197(Extended):
     items = [Item_1178, Item_906, Item_1181, Item_1595, Item_649, None, Item_1570, Item_1769, Item_1767, Item_879, Item_1135, Item_1152, None, Item_516, Item_1586, Item_736, Item_871, Item_496, Item_24, None, Item_0, Item_1328, Item_1605, Item_1123, Item_489, Item_1653, Item_468, None]
+class Item_1179(Item):
+    name = "MON"
+    title = ""
+    var = Variation_52
+class Item_1182(Item):
+    name = "MRH"
+    title = "Most Reliable Height"
+    var = Variation_432
+class Item_1598(Item):
+    name = "SRC"
+    title = "Source of Calculated Track Altitude for I062/130"
+    var = Variation_600
+class Item_1572(Item):
+    name = "SIM"
+    title = ""
+    var = Variation_5
+class Item_1768(Item):
+    name = "TSE"
+    title = ""
+    var = Variation_353
+class Item_1766(Item):
+    name = "TSB"
+    title = ""
+    var = Variation_451
+class Item_1643(Item):
+    name = "STP"
+    title = ""
+    var = Variation_730
+class Item_1003(Item):
+    name = "KOS"
+    title = ""
+    var = Variation_786
+class Item_1113(Item):
+    name = "MD4"
+    title = ""
+    var = Variation_397
+class Item_1133(Item):
+    name = "ME"
+    title = ""
+    var = Variation_548
+class Item_1150(Item):
+    name = "MI"
+    title = ""
+    var = Variation_628
+class Item_1115(Item):
+    name = "MD5"
+    title = ""
+    var = Variation_764
+class Item_735(Item):
+    name = "CST"
+    title = ""
+    var = Variation_36
+class Item_490(Item):
+    name = "ADS"
+    title = ""
+    var = Variation_627
+class Item_467(Item):
+    name = "AAC"
+    title = ""
+    var = Variation_804
+class Item_1542(Item):
+    name = "SDS"
+    title = ""
+    var = Variation_95
+class Item_826(Item):
+    name = "EMS"
+    title = ""
+    var = Variation_517
+class Item_1289(Item):
+    name = "PFT"
+    title = ""
+    var = Variation_746
+class Item_872(Item):
+    name = "FPLT"
+    title = ""
+    var = Variation_806
+class Item_807(Item):
+    name = "DUPT"
+    title = ""
+    var = Variation_37
+class Item_805(Item):
+    name = "DUPF"
+    title = ""
+    var = Variation_352
+class Item_806(Item):
+    name = "DUPM"
+    title = ""
+    var = Variation_450
+class Item_18(Spare):
+    bit_offset8 = 3
+    bit_size = 4
 class Variation_1198(Extended):
     items = [Item_1179, Item_1586, Item_1182, Item_1598, Item_649, None, Item_1572, Item_1768, Item_1766, Item_871, Item_496, Item_1643, Item_1003, None, Item_516, Item_1113, Item_1133, Item_1150, Item_1115, None, Item_735, Item_1328, Item_1605, Item_1123, Item_490, Item_1653, Item_467, None, Item_1542, Item_826, Item_1289, Item_872, None, Item_807, Item_805, Item_806, Item_18, None]
+class Item_1550(Item):
+    name = "SFC"
+    title = ""
+    var = Variation_549
+class Item_988(Item):
+    name = "IDD"
+    title = ""
+    var = Variation_648
+class Item_991(Item):
+    name = "IEC"
+    title = ""
+    var = Variation_728
 class Variation_1199(Extended):
     items = [Item_1179, Item_1586, Item_1182, Item_1598, Item_649, None, Item_1572, Item_1768, Item_1766, Item_871, Item_496, Item_1643, Item_1003, None, Item_516, Item_1113, Item_1133, Item_1150, Item_1115, None, Item_735, Item_1328, Item_1605, Item_1123, Item_490, Item_1653, Item_467, None, Item_1542, Item_826, Item_1289, Item_872, None, Item_807, Item_805, Item_806, Item_1550, Item_988, Item_991, Item_26, None]
+class Item_1158(Item):
+    name = "MLAT"
+    title = ""
+    var = Variation_803
 class Variation_1200(Extended):
     items = [Item_1179, Item_1586, Item_1182, Item_1598, Item_649, None, Item_1572, Item_1768, Item_1766, Item_871, Item_496, Item_1643, Item_1003, None, Item_516, Item_1113, Item_1133, Item_1150, Item_1115, None, Item_735, Item_1328, Item_1605, Item_1123, Item_490, Item_1653, Item_467, None, Item_1542, Item_826, Item_1289, Item_872, None, Item_807, Item_805, Item_806, Item_1550, Item_988, Item_991, Item_1158, None]
+class Item_1184(Item):
+    name = "MRVA"
+    title = ""
+    var = Variation_31
+class Item_1403(Item):
+    name = "RAMLD"
+    title = ""
+    var = Variation_347
+class Item_1402(Item):
+    name = "RAMHD"
+    title = ""
+    var = Variation_444
+class Item_1189(Item):
+    name = "MSAW"
+    title = ""
+    var = Variation_538
+class Item_528(Item):
+    name = "APW"
+    title = ""
+    var = Variation_614
+class Item_643(Item):
+    name = "CLAM"
+    title = ""
+    var = Variation_714
+class Item_1634(Item):
+    name = "STCA"
+    title = ""
+    var = Variation_800
+class Item_527(Item):
+    name = "APM"
+    title = ""
+    var = Variation_23
+class Item_1449(Item):
+    name = "RIMCA"
+    title = ""
+    var = Variation_348
+class Item_477(Item):
+    name = "ACASRA"
+    title = ""
+    var = Variation_434
+class Item_1245(Item):
+    name = "NTCA"
+    title = ""
+    var = Variation_543
+class Item_780(Item):
+    name = "DG"
+    title = ""
+    var = Variation_620
+class Item_1258(Item):
+    name = "OF"
+    title = ""
+    var = Variation_718
+class Item_1259(Item):
+    name = "OL"
+    title = ""
+    var = Variation_797
+class Item_505(Item):
+    name = "AIW"
+    title = ""
+    var = Variation_22
+class Item_1283(Item):
+    name = "PAIW"
+    title = ""
+    var = Variation_346
+class Item_1252(Item):
+    name = "OCAT"
+    title = ""
+    var = Variation_442
+class Item_1508(Item):
+    name = "SAM"
+    title = ""
+    var = Variation_544
+class Item_1849(Item):
+    name = "VCD"
+    title = ""
+    var = Variation_621
+class Item_633(Item):
+    name = "CHAM"
+    title = ""
+    var = Variation_713
+class Item_799(Item):
+    name = "DSAM"
+    title = ""
+    var = Variation_791
+class Item_762(Item):
+    name = "DBPSMARR"
+    title = ""
+    var = Variation_26
+class Item_764(Item):
+    name = "DBPSMDEP"
+    title = ""
+    var = Variation_337
+class Item_766(Item):
+    name = "DBPSMTL"
+    title = ""
+    var = Variation_436
+class Item_1861(Item):
+    name = "VRAMCRM"
+    title = ""
+    var = Variation_546
+class Item_1864(Item):
+    name = "VRAMVTM"
+    title = ""
+    var = Variation_623
+class Item_1863(Item):
+    name = "VRAMVRM"
+    title = ""
+    var = Variation_725
+class Item_932(Item):
+    name = "HAMHD"
+    title = ""
+    var = Variation_794
+class Item_934(Item):
+    name = "HAMRD"
+    title = ""
+    var = Variation_28
+class Item_936(Item):
+    name = "HAMVD"
+    title = ""
+    var = Variation_340
+class Item_961(Item):
+    name = "HVI"
+    title = ""
+    var = Variation_438
+class Item_1069(Item):
+    name = "LTW"
+    title = ""
+    var = Variation_537
+class Item_1859(Item):
+    name = "VPM"
+    title = ""
+    var = Variation_622
+class Item_1784(Item):
+    name = "TTA"
+    title = ""
+    var = Variation_723
+class Item_725(Item):
+    name = "CRA"
+    title = ""
+    var = Variation_789
+class Item_544(Item):
+    name = "ASM"
+    title = ""
+    var = Variation_24
+class Item_981(Item):
+    name = "IAVM"
+    title = ""
+    var = Variation_341
+class Item_888(Item):
+    name = "FTD"
+    title = ""
+    var = Variation_437
+class Item_1002(Item):
+    name = "ITD"
+    title = ""
+    var = Variation_535
+class Item_995(Item):
+    name = "IIA"
+    title = ""
+    var = Variation_616
+class Item_1591(Item):
+    name = "SQW"
+    title = ""
+    var = Variation_720
+class Item_748(Item):
+    name = "CUW"
+    title = ""
+    var = Variation_790
+class Item_610(Item):
+    name = "CATC"
+    title = ""
+    var = Variation_25
+class Item_1227(Item):
+    name = "NOCLR"
+    title = ""
+    var = Variation_345
+class Item_1240(Item):
+    name = "NOMOV"
+    title = ""
+    var = Variation_441
+class Item_1235(Item):
+    name = "NOH"
+    title = ""
+    var = Variation_542
+class Item_1883(Item):
+    name = "WRTY"
+    title = ""
+    var = Variation_624
+class Item_1641(Item):
+    name = "STOCC"
+    title = ""
+    var = Variation_721
+class Item_1261(Item):
+    name = "ONGOING"
+    title = ""
+    var = Variation_796
 class Variation_1201(Extended):
     items = [Item_1184, Item_1403, Item_1402, Item_1189, Item_528, Item_643, Item_1634, None, Item_527, Item_1449, Item_477, Item_1245, Item_780, Item_1258, Item_1259, None, Item_505, Item_1283, Item_1252, Item_1508, Item_1849, Item_633, Item_799, None, Item_762, Item_764, Item_766, Item_1861, Item_1864, Item_1863, Item_932, None, Item_934, Item_936, Item_961, Item_1069, Item_1859, Item_1784, Item_725, None, Item_544, Item_981, Item_888, Item_1002, Item_995, Item_1591, Item_748, None, Item_610, Item_1227, Item_1240, Item_1235, Item_1883, Item_1641, Item_1261, None]
+class Item_1210(Item):
+    name = "NAV"
+    title = ""
+    var = Variation_87
+class Item_1250(Item):
+    name = "NVB"
+    title = ""
+    var = Variation_388
 class Variation_1202(Extended):
     items = [Item_1210, Item_1250, Item_14, None]
+class Item_1213(Item):
+    name = "NAV"
+    title = "TID Available"
+    var = Variation_88
+class Item_1251(Item):
+    name = "NVB"
+    title = "TID Valid"
+    var = Variation_389
 class Variation_1203(Extended):
     items = [Item_1213, Item_1251, Item_14, None]
+class Item_1228(Item):
+    name = "NOGO"
+    title = ""
+    var = Variation_21
+class Item_1262(Item):
+    name = "OPS"
+    title = ""
+    var = Variation_403
+class Item_1615(Item):
+    name = "SSTAT"
+    title = ""
+    var = Variation_605
+class Item_1661(Item):
+    name = "SYSTAT"
+    title = ""
+    var = Variation_411
+class Item_1549(Item):
+    name = "SESTAT"
+    title = ""
+    var = Variation_683
 class Variation_1204(Extended):
     items = [Item_1228, Item_1262, Item_1615, None, Item_0, Item_1661, Item_1549, None]
+class Item_1231(Item):
+    name = "NOGO"
+    title = "Operational Release Status of the Data"
+    var = Variation_21
+class Item_1278(Item):
+    name = "OXT"
+    title = "Ground Interface Data Communications Overload"
+    var = Variation_453
+class Item_1191(Item):
+    name = "MSC"
+    title = "Monitoring System Connected Status"
+    var = Variation_560
+class Item_1590(Item):
+    name = "SPO"
+    title = "Indication of Spoofing Attack"
+    var = Variation_747
+class Item_1450(Item):
+    name = "RN"
+    title = "Renumbering Indication for Track ID"
+    var = Variation_802
+class Item_923(Item):
+    name = "GSSP"
+    title = "Ground Station Status Reporting Period"
+    var = Variation_152
 class Variation_1205(Extended):
     items = [Item_1231, Item_1257, Item_1278, Item_1191, Item_1780, Item_1590, Item_1450, None, Item_923, None]
+class Item_1249(Item):
+    name = "NUCRNACV"
+    title = "Navigation Uncertainty Category for Velocity NUCr or the Navigation Accuracy Category for Velocity NACv"
+    var = Variation_116
+class Item_1248(Item):
+    name = "NUCPNIC"
+    title = "Navigation Uncertainty Category for Position NUCp or Navigation Integrity Category NIC"
+    var = Variation_602
+class Item_1224(Item):
+    name = "NICBARO"
+    title = "Navigation Integrity Category for Barometric Altitude"
+    var = Variation_0
+class Item_1568(Item):
+    name = "SIL"
+    title = "Surveillance (version 1) or Source (version 2) Integrity Level"
+    var = Variation_393
+class Item_1207(Item):
+    name = "NACP"
+    title = "Navigation Accuracy Category for Position"
+    var = Variation_602
+class Item_1569(Item):
+    name = "SILS"
+    title = "SIL-Supplement"
+    var = Variation_460
+class Item_1520(Item):
+    name = "SDA"
+    title = "Horizontal Position System Design Assurance Level (as Defined in Version 2)"
+    var = Variation_587
+class Item_926(Item):
+    name = "GVA"
+    title = "Geometric Altitude Accuracy"
+    var = Variation_759
+class Item_1290(Item):
+    name = "PIC"
+    title = "Position Integrity Category"
+    var = Variation_127
 class Variation_1206(Extended):
     items = [Item_1249, Item_1248, None, Item_1224, Item_1568, Item_1207, None, Item_1, Item_1569, Item_1520, Item_926, None, Item_1290, Item_21, None]
+class Item_963(Item):
+    name = "I"
+    title = "Intensity Level"
+    var = Variation_412
+class Item_1494(Item):
+    name = "S"
+    title = "Shading Orientation with Respect to North"
+    var = Variation_680
 class Variation_1207(Extended):
     items = [Item_1264, Item_963, Item_1494, None]
+class Item_1774(Item):
+    name = "TST"
+    title = ""
+    var = Variation_724
+class Item_840(Item):
+    name = "ER"
+    title = ""
+    var = Variation_792
 class Variation_1208(Extended):
     items = [Item_1264, Item_963, Item_1494, None, Item_4, Item_1774, Item_840, None]
+class Item_1430(Item):
+    name = "REFTR1"
+    title = "Ref Trans 1 Status"
+    var = Variation_113
+class Item_1431(Item):
+    name = "REFTR2"
+    title = "Ref Trans 2 Status"
+    var = Variation_678
+class Item_1432(Item):
+    name = "REFTR3"
+    title = "Ref Trans 3 Status"
+    var = Variation_113
+class Item_1433(Item):
+    name = "REFTR4"
+    title = "Ref Trans 4 Status"
+    var = Variation_678
 class Variation_1209(Extended):
     items = [Item_1430, Item_12, Item_1431, Item_26, None, Item_1432, Item_12, Item_1433, Item_26, None]
+class Item_1455(Item):
+    name = "RP"
+    title = "Report Period for Category 021 Reports"
+    var = Variation_209
+class Item_1513(Item):
+    name = "SC"
+    title = "Service Class"
+    var = Variation_123
+class Item_1613(Item):
+    name = "SSRP"
+    title = "Service Status Reporting Period"
+    var = Variation_152
 class Variation_1210(Extended):
     items = [Item_1455, Item_1513, Item_18, None, Item_1613, None]
+class Item_1577(Item):
+    name = "SN"
+    title = "Step Number"
+    var = Variation_141
 class Variation_1211(Extended):
     items = [Item_1577, Item_26, None]
+class Item_1592(Item):
+    name = "SR"
+    title = ""
+    var = Variation_83
+class Item_531(Item):
+    name = "AR"
+    title = ""
+    var = Variation_386
+class Item_839(Item):
+    name = "ER"
+    title = ""
+    var = Variation_496
+class Item_874(Item):
+    name = "FR"
+    title = ""
+    var = Variation_575
+class Item_1180(Item):
+    name = "MR"
+    title = ""
+    var = Variation_662
+class Item_1312(Item):
+    name = "PR"
+    title = ""
+    var = Variation_755
+class Item_724(Item):
+    name = "CR"
+    title = ""
+    var = Variation_835
+class Item_984(Item):
+    name = "ID"
+    title = ""
+    var = Variation_82
+class Item_1088(Item):
+    name = "MA"
+    title = ""
+    var = Variation_387
+class Item_1579(Item):
+    name = "SP"
+    title = ""
+    var = Variation_497
+class Item_944(Item):
+    name = "HG"
+    title = ""
+    var = Variation_576
+class Item_938(Item):
+    name = "HD"
+    title = ""
+    var = Variation_663
 class Variation_1212(Extended):
     items = [Item_1592, Item_531, Item_839, Item_874, Item_1180, Item_1312, Item_724, None, Item_984, Item_1088, Item_1579, Item_944, Item_938, Item_24, None]
+class Item_1604(Item):
+    name = "SSR"
+    title = ""
+    var = Variation_63
+class Item_1186(Item):
+    name = "MS"
+    title = ""
+    var = Variation_368
+class Item_943(Item):
+    name = "HF"
+    title = ""
+    var = Variation_455
+class Item_1853(Item):
+    name = "VDL4"
+    title = ""
+    var = Variation_583
+class Item_1815(Item):
+    name = "UAT"
+    title = ""
+    var = Variation_665
+class Item_787(Item):
+    name = "DME"
+    title = ""
+    var = Variation_711
+class Item_1268(Item):
+    name = "OT"
+    title = ""
+    var = Variation_824
+class Item_1392(Item):
+    name = "RAB"
+    title = ""
+    var = Variation_69
+class Item_1585(Item):
+    name = "SPI"
+    title = ""
+    var = Variation_333
+class Item_634(Item):
+    name = "CHN"
+    title = ""
+    var = Variation_433
+class Item_907(Item):
+    name = "GBS"
+    title = ""
+    var = Variation_579
+class Item_727(Item):
+    name = "CRT"
+    title = ""
+    var = Variation_645
+class Item_1575(Item):
+    name = "SIM"
+    title = ""
+    var = Variation_705
+class Item_1776(Item):
+    name = "TST"
+    title = ""
+    var = Variation_801
 class Variation_1213(Extended):
     items = [Item_1604, Item_1186, Item_943, Item_1853, Item_1815, Item_787, Item_1268, None, Item_1392, Item_1585, Item_634, Item_907, Item_727, Item_1575, Item_1776, None]
+class Item_1642(Item):
+    name = "STP"
+    title = ""
+    var = Variation_8
+class Item_958(Item):
+    name = "HTS"
+    title = ""
+    var = Variation_361
+class Item_959(Item):
+    name = "HTT"
+    title = ""
+    var = Variation_456
+class Item_957(Item):
+    name = "HRD"
+    title = ""
+    var = Variation_581
+class Item_922(Item):
+    name = "GSS"
+    title = "Ground Speed"
+    var = Variation_692
+class Item_945(Item):
+    name = "HGT"
+    title = "Heading/Ground Track Information"
+    var = Variation_153
 class Variation_1214(Extended):
     items = [Item_1642, Item_958, Item_959, Item_957, Item_922, None, Item_945, None]
+class Item_1654(Item):
+    name = "SUI"
+    title = "System Unit Identification"
+    var = Variation_191
+class Item_1640(Item):
+    name = "STN"
+    title = "System Track Number"
+    var = Variation_233
 class Variation_1215(Extended):
     items = [Item_1654, Item_1640, None]
+class Item_1453(Item):
+    name = "ROT"
+    title = "Rate of Turn"
+    var = Variation_150
 class Variation_1216(Extended):
     items = [Item_1703, Item_14, None, Item_1453, None]
+class Item_1795(Item):
+    name = "TYP"
+    title = ""
+    var = Variation_67
+class Item_1573(Item):
+    name = "SIM"
+    title = ""
+    var = Variation_334
+class Item_1614(Item):
+    name = "SSRPSR"
+    title = "Radar Detection in Last Antenna Scan"
+    var = Variation_509
+class Item_520(Item):
+    name = "ANT"
+    title = ""
+    var = Variation_660
+class Item_1588(Item):
+    name = "SPI"
+    title = ""
+    var = Variation_722
+class Item_1395(Item):
+    name = "RAB"
+    title = ""
+    var = Variation_798
+class Item_1771(Item):
+    name = "TST"
+    title = ""
+    var = Variation_34
+class Item_798(Item):
+    name = "DS1DS2"
+    title = "Radar Detection in Last Antenna Scan"
+    var = Variation_395
+class Item_1132(Item):
+    name = "ME"
+    title = ""
+    var = Variation_539
+class Item_1149(Item):
+    name = "MI"
+    title = ""
+    var = Variation_617
 class Variation_1217(Extended):
     items = [Item_1795, Item_1573, Item_1614, Item_520, Item_1588, Item_1395, None, Item_1771, Item_798, Item_1132, Item_1149, Item_24, None]
+class Item_1797(Item):
+    name = "TYP"
+    title = ""
+    var = Variation_122
+class Item_1413(Item):
+    name = "RDP"
+    title = ""
+    var = Variation_655
+class Item_1587(Item):
+    name = "SPI"
+    title = ""
+    var = Variation_704
+class Item_1396(Item):
+    name = "RAB"
+    title = ""
+    var = Variation_827
+class Item_1772(Item):
+    name = "TST"
+    title = ""
+    var = Variation_68
+class Item_842(Item):
+    name = "ERR"
+    title = ""
+    var = Variation_370
+class Item_1929(Item):
+    name = "XPP"
+    title = ""
+    var = Variation_475
+class Item_1134(Item):
+    name = "ME"
+    title = ""
+    var = Variation_564
+class Item_1151(Item):
+    name = "MI"
+    title = ""
+    var = Variation_649
+class Item_863(Item):
+    name = "FOEFRI"
+    title = ""
+    var = Variation_762
 class Variation_1218(Extended):
     items = [Item_1797, Item_1574, Item_1413, Item_1587, Item_1396, None, Item_1772, Item_842, Item_1929, Item_1134, Item_1151, Item_863, None]
+class Item_494(Item):
+    name = "ADSB"
+    title = "On-Site ADS-B Information"
+    var = Variation_962
+class Item_1517(Item):
+    name = "SCN"
+    title = "Surveillance Cluster Network Information"
+    var = Variation_978
+class Item_1282(Item):
+    name = "PAI"
+    title = "Passive Acquisition Interface Information"
+    var = Variation_977
 class Variation_1219(Extended):
     items = [Item_1797, Item_1574, Item_1413, Item_1587, Item_1396, None, Item_1772, Item_842, Item_1929, Item_1134, Item_1151, Item_863, None, Item_494, Item_1517, Item_1282, Item_26, None]
+class Item_1798(Item):
+    name = "TYP"
+    title = ""
+    var = Variation_126
+class Item_772(Item):
+    name = "DCR"
+    title = ""
+    var = Variation_563
+class Item_635(Item):
+    name = "CHN"
+    title = ""
+    var = Variation_613
+class Item_908(Item):
+    name = "GBS"
+    title = ""
+    var = Variation_757
+class Item_728(Item):
+    name = "CRT"
+    title = ""
+    var = Variation_820
+class Item_1571(Item):
+    name = "SIM"
+    title = ""
+    var = Variation_4
+class Item_1773(Item):
+    name = "TST"
+    title = ""
+    var = Variation_350
+class Item_1393(Item):
+    name = "RAB"
+    title = ""
+    var = Variation_490
+class Item_1062(Item):
+    name = "LOP"
+    title = ""
+    var = Variation_593
+class Item_1732(Item):
+    name = "TOT"
+    title = ""
+    var = Variation_769
+class Item_1584(Item):
+    name = "SPI"
+    title = ""
+    var = Variation_2
 class Variation_1220(Extended):
     items = [Item_1798, Item_772, Item_635, Item_908, Item_728, None, Item_1571, Item_1773, Item_1393, Item_1062, Item_1732, None, Item_1584, Item_9, None]
+class Item_1824(Item):
+    name = "UDS"
+    title = "Uplink Default Status"
+    var = Variation_80
+class Item_775(Item):
+    name = "DDS"
+    title = "Downlink Default Status"
+    var = Variation_385
+class Item_1823(Item):
+    name = "UCS"
+    title = "Uplink Current Status"
+    var = Variation_495
+class Item_774(Item):
+    name = "DCS"
+    title = "Downlink Current Status"
+    var = Variation_574
+class Item_813(Item):
+    name = "EI"
+    title = "Exit Indication"
+    var = Variation_834
+class Item_982(Item):
+    name = "IC"
+    title = "Interrogator Control"
+    var = Variation_81
 class Variation_1221(Extended):
     items = [Item_1824, Item_775, Item_1823, Item_774, Item_20, Item_813, None, Item_982, Item_9, None]
 class Variation_1222(Repetitive):
@@ -5944,1482 +10551,54 @@ class Variation_1280(Explicit):
     t = ReservedExpansion
 class Variation_1281(Explicit):
     t = SpecialPurpose
-class Variation_1282(Compound):
-    fspec_size = None
-    items = [Item_60, Item_137, Item_107, Item_274, Item_214, Item_286, Item_222, Item_352, Item_366, Item_292, Item_298, Item_301, Item_303, Item_304, Item_306, Item_309, Item_317, Item_321, Item_238, Item_119, Item_341, Item_84, Item_361, Item_294, Item_296, Item_262, None, None, None, None, None, None, None, Item_1421, Item_1580]
-class Variation_1283(Compound):
-    fspec_size = None
-    items = [Item_60, Item_137, Item_107, Item_275, Item_214, Item_286, Item_222, Item_352, Item_366, Item_292, Item_298, Item_301, Item_303, Item_304, Item_306, Item_309, Item_317, Item_321, Item_238, Item_119, Item_341, Item_84, Item_361, Item_294, Item_296, Item_262, None, None, None, None, None, None, None, Item_1421, Item_1580]
-class Variation_1284(Compound):
-    fspec_size = None
-    items = [Item_60, Item_137, Item_107, Item_275, Item_214, Item_286, Item_222, Item_352, Item_366, Item_292, Item_298, Item_301, Item_303, Item_304, Item_306, Item_309, Item_317, Item_321, Item_238, Item_119, Item_341, Item_84, Item_361, Item_294, Item_296, Item_262, Item_191, Item_281, None, None, None, None, None, Item_1421, Item_1580]
-class Variation_1285(Compound):
-    fspec_size = None
-    items = [Item_60, Item_138, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_353, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
-class Variation_1286(Compound):
-    fspec_size = None
-    items = [Item_60, Item_138, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_354, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
-class Variation_1287(Compound):
-    fspec_size = None
-    items = [Item_60, Item_139, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_353, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_391, None, None, None, None, None, Item_1421, Item_1580]
-class Variation_1288(Compound):
-    fspec_size = None
-    items = [Item_60, Item_140, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_354, Item_190, Item_366, Item_292, Item_303, Item_342, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_384, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
-class Variation_1289(Compound):
-    fspec_size = None
-    items = [Item_60, Item_140, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_354, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
-class Variation_1290(Compound):
-    fspec_size = None
-    items = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_404, Item_141, Item_215, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_401, None, None, None, None, None, Item_1421, Item_1580]
-class Variation_1291(Compound):
-    fspec_size = None
-    items = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_405, Item_141, Item_217, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_400, None, None, None, None, None, Item_1421, Item_1580]
-class Variation_1292(Compound):
-    fspec_size = None
-    items = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_406, Item_141, Item_216, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_400, None, None, None, None, None, Item_1421, Item_1580]
-class Variation_1293(Compound):
-    fspec_size = None
-    items = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_407, Item_141, Item_216, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_401, None, None, None, None, None, Item_1421, Item_1580]
-class Variation_1294(Compound):
-    fspec_size = None
-    items = [Item_61, Item_34, Item_71, Item_94, Item_130, Item_154, Item_178, Item_109, Item_319, Item_265, Item_186, Item_208, Item_203, Item_206, Item_239, Item_124, Item_330, Item_256, None, Item_1421, Item_1580]
-class Variation_1295(Compound):
-    fspec_size = None
-    items = [Item_61, Item_35, Item_107, Item_85, Item_144, Item_167, Item_182, Item_188, Item_242, Item_254, Item_263, Item_221, Item_1421, Item_1580]
-class Variation_1296(Compound):
-    fspec_size = None
-    items = [Item_61, Item_36, Item_107, Item_85, Item_144, Item_167, Item_182, Item_189, Item_242, Item_254, Item_263, Item_221, Item_1421, Item_1580]
-class Variation_1297(Compound):
-    fspec_size = None
-    items = [Item_61, Item_37, Item_107, Item_85, Item_144, Item_167, Item_182, Item_189, Item_242, Item_254, Item_263, Item_221, Item_1421, Item_1580]
-class Variation_1298(Compound):
-    fspec_size = None
-    items = [Item_61, Item_38, Item_85, Item_107, Item_144, Item_166, Item_180, Item_196, Item_241, Item_220, Item_218, None, Item_1580, None]
-class Variation_1299(Compound):
-    fspec_size = None
-    items = [Item_61, Item_39, Item_96, Item_127, Item_122, Item_131, Item_164, Item_231, Item_246, Item_261, Item_270, Item_129, Item_1580, None]
-class Variation_1300(Compound):
-    fspec_size = None
-    items = [Item_61, Item_40, Item_72, Item_108, Item_81, Item_136, Item_165, None, None, None, None, None, Item_1421, Item_1580]
-class Variation_1301(Compound):
-    fspec_size = None
-    items = [Item_61, Item_41, Item_289, Item_441, Item_442, Item_443, Item_444, Item_447, Item_455, Item_458, None, None, Item_1421, Item_1580]
-class Variation_1302(Compound):
-    fspec_size = None
-    items = [Item_61, Item_44, Item_92, Item_289, Item_146, Item_134, Item_152, Item_335, Item_345, Item_312, Item_322, Item_176, Item_362, Item_371, Item_377, Item_396, Item_224, Item_232, Item_383, Item_440, Item_398, Item_436, Item_386, Item_278, Item_350, None, Item_1580, Item_1421]
-class Variation_1303(Compound):
-    fspec_size = None
-    items = [Item_61, Item_46, Item_97, Item_110, Item_143, Item_148, Item_156, Item_157, Item_169, Item_170, Item_171, Item_289, Item_1421, Item_1580]
-class Variation_1304(Compound):
-    fspec_size = None
-    items = [Item_61, Item_47, Item_95, Item_106, Item_181, Item_199, Item_211, Item_229, Item_249]
-class Variation_1305(Compound):
-    fspec_size = None
-    items = [Item_61, Item_48, Item_72, Item_87, Item_111, Item_293, Item_316, Item_329, Item_168, Item_382, Item_393, Item_416, Item_446, Item_449, Item_450, Item_451, Item_452, Item_454, Item_430, Item_459, Item_460, Item_461, Item_462, Item_463, Item_464, Item_1580]
-class Variation_1306(Compound):
-    fspec_size = None
-    items = [Item_61, Item_49, Item_73, Item_199, Item_243, Item_250, Item_338, Item_260, Item_269, None, None, None, Item_1421, Item_1580]
-class Variation_1307(Compound):
-    fspec_size = None
-    items = [Item_61, Item_50, Item_336, Item_72, Item_86, Item_199, Item_248, Item_253, Item_264, Item_288, Item_1580, Item_448, Item_456]
-class Variation_1308(Compound):
-    fspec_size = None
-    items = [Item_61, Item_67, Item_33, Item_402, Item_359, Item_363, Item_289, Item_155, Item_192, Item_159, Item_344, Item_367, Item_369, Item_355, Item_403, None, None, None, None, None, Item_1580]
-class Variation_1309(Compound):
-    fspec_size = None
-    items = [Item_61, Item_72, Item_42, Item_289, Item_340, Item_394, Item_417, Item_419, Item_421, Item_423, Item_1580]
-class Variation_1310(Compound):
-    fspec_size = None
-    items = [Item_61, Item_72, Item_43, Item_107, Item_135, Item_230, Item_162, Item_177, Item_187, Item_213, Item_247, Item_255, Item_266, Item_273, Item_285, Item_299, Item_310, Item_320, Item_331, Item_333, Item_339, Item_1580]
-class Variation_1311(Compound):
-    fspec_size = None
-    items = [Item_61, Item_72, Item_108, Item_163, Item_179, Item_198, Item_212, Item_219, Item_227, Item_233, Item_235, None, Item_1421, Item_1580]
-class Variation_1312(Compound):
-    fspec_size = None
-    items = [Item_61, Item_72, Item_289, Item_439, None, Item_1580, Item_1421]
-class Variation_1313(Compound):
-    fspec_size = None
-    items = [Item_61, Item_88, Item_289, Item_145, Item_153, Item_313, Item_323, Item_195, Item_346, Item_224, Item_244, Item_362, Item_373, Item_258, Item_252, Item_348, Item_396, Item_397, Item_435, Item_415, Item_374, Item_365, Item_380, Item_113, Item_173, Item_161, Item_1421, Item_1580]
-class Variation_1314(Compound):
-    fspec_size = None
-    items = [Item_61, Item_88, Item_289, Item_145, Item_153, Item_313, Item_324, Item_195, Item_346, Item_224, Item_244, Item_362, Item_373, Item_258, Item_252, Item_348, Item_396, Item_397, Item_435, Item_415, Item_378, Item_365, Item_380, Item_113, Item_173, Item_161, Item_1421, Item_1580]
-class Variation_1315(Compound):
-    fspec_size = None
-    items = [Item_61, Item_89, Item_132, Item_194, Item_226, Item_276, Item_291, Item_160, Item_267, Item_280, Item_210, Item_245, Item_174, Item_112, Item_300, None, None, None, None, Item_1580, None]
-class Variation_1316(Compound):
-    fspec_size = None
-    items = [Item_61, Item_89, Item_315, Item_132, Item_150, Item_334, Item_194, Item_226, Item_291, Item_276, Item_280, Item_267, Item_326, Item_357, Item_160, Item_210, Item_245, Item_174, Item_112, Item_1580, None, Item_300]
-class Variation_1317(Compound):
-    fspec_size = None
-    items = [Item_61, Item_289, Item_90, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_375, Item_313, Item_151, Item_334, Item_325, Item_356, Item_115, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
-class Variation_1318(Compound):
-    fspec_size = None
-    items = [Item_61, Item_289, Item_90, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_379, Item_313, Item_151, Item_334, Item_325, Item_356, Item_114, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
-class Variation_1319(Compound):
-    fspec_size = None
-    items = [Item_61, Item_289, Item_90, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_379, Item_313, Item_151, Item_334, Item_325, Item_356, Item_115, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
-class Variation_1320(Compound):
-    fspec_size = None
-    items = [Item_61, Item_289, Item_91, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_375, Item_313, Item_151, Item_334, Item_325, Item_356, Item_116, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
-class Variation_1321(Compound):
-    fspec_size = None
-    items = [Item_62, Item_45, Item_72, Item_290, Item_147, Item_149, Item_347, Item_349, Item_175, Item_372, Item_408, Item_311, Item_327, Item_387, Item_424, Item_225, Item_237, Item_234, Item_358, Item_383, Item_411, Item_395, Item_399, Item_434, Item_445, Item_453, Item_457, Item_1580, Item_1421]
-class Variation_1322(Compound):
-    fspec_size = None
-    items = [Item_62, Item_45, Item_72, Item_290, Item_147, Item_149, Item_347, Item_349, Item_175, Item_372, Item_409, Item_311, Item_328, Item_388, Item_424, Item_225, Item_236, Item_234, Item_358, Item_383, Item_410, Item_395, Item_399, Item_434, Item_445, Item_453, Item_457, Item_1580, Item_1421]
-class Variation_1323(Compound):
-    fspec_size = None
-    items = [Item_63, Item_74, Item_78, Item_125, Item_93, Item_142, Item_158, Item_183, Item_414, Item_420, Item_422, Item_427, Item_428, Item_431, Item_432, Item_425, Item_426, Item_429, Item_437, None, Item_1421]
-class Variation_1324(Compound):
-    fspec_size = None
-    items = [Item_126, Item_128, Item_32, Item_51, Item_54, Item_75, Item_77, Item_79, Item_80, Item_103, Item_105, Item_101, Item_102, Item_104, Item_52, Item_55, Item_56, Item_57, Item_59, Item_64, Item_65, Item_69, Item_70, Item_82, Item_98, Item_99, Item_100, Item_53, Item_117, Item_118, Item_120, Item_121, Item_123, Item_66, Item_68]
-class Variation_1325(Compound):
-    fspec_size = None
-    items = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_687, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_1099, Item_976, Item_1089, Item_597]
-class Variation_1326(Compound):
-    fspec_size = None
-    items = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_688, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_582, Item_976, Item_1089, Item_595]
-class Variation_1327(Compound):
-    fspec_size = None
-    items = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_688, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_1099, Item_976, Item_1089, Item_595]
-class Variation_1328(Compound):
-    fspec_size = None
-    items = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_688, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_1099, Item_976, Item_1089, Item_597]
-class Variation_1329(Compound):
-    fspec_size = None
-    items = [Item_502, Item_1081, Item_721, Item_718, Item_1782, Item_801, Item_475, Item_1187, Item_869, Item_626]
-class Variation_1330(Compound):
-    fspec_size = None
-    items = [Item_503, Item_1082, Item_722, Item_719, Item_1783, Item_802, Item_476, Item_1188, Item_870, Item_627]
-class Variation_1331(Compound):
-    fspec_size = None
-    items = [Item_519, Item_607, Item_1480, Item_1481, Item_1512, Item_895]
-class Variation_1332(Compound):
-    fspec_size = None
-    items = [Item_522, Item_1752, Item_1084, Item_1383, Item_1704, Item_1095, Item_912, Item_858, Item_1001, Item_882, Item_542, Item_1674, Item_1145, Item_601, Item_929, Item_925, Item_1671, Item_1705, Item_1764, Item_1138, Item_1452, Item_533, Item_1514]
-class Variation_1333(Compound):
-    fspec_size = None
-    items = [Item_522, Item_1752, Item_1084, Item_1383, Item_1704, Item_1095, Item_912, Item_858, Item_1506, Item_882, Item_542, Item_1674, Item_1145, Item_601, Item_929, Item_925, Item_1671, Item_1705, Item_1764, Item_1138, Item_1452, Item_533, Item_1514]
-class Variation_1334(Compound):
-    fspec_size = None
-    items = [Item_524, Item_702, Item_529, Item_497, Item_470, Item_552, Item_466, Item_539]
-class Variation_1335(Compound):
-    fspec_size = None
-    items = [Item_525, Item_530, Item_547, Item_554, Item_538, Item_469]
-class Variation_1336(Compound):
-    fspec_size = None
-    items = [Item_567, Item_1467, Item_1521, Item_571, Item_1523, Item_569]
-class Variation_1337(Compound):
-    fspec_size = None
-    items = [Item_605, Item_1417]
-class Variation_1338(Compound):
-    fspec_size = None
-    items = [Item_646, Item_613, Item_715, Item_615]
-class Variation_1339(Compound):
-    fspec_size = None
-    items = [Item_681, None, None, Item_1334, Item_1611, Item_1130]
-class Variation_1340(Compound):
-    fspec_size = None
-    items = [Item_682, None, None, Item_1335, Item_1612, Item_1131]
-class Variation_1341(Compound):
-    fspec_size = None
-    items = [Item_788, Item_1536, Item_1531]
-class Variation_1342(Compound):
-    fspec_size = None
-    items = [Item_793, Item_794, Item_1460, Item_1461]
-class Variation_1343(Compound):
-    fspec_size = None
-    items = [Item_809, Item_1526, Item_756, Item_1525, Item_658, Item_660, Item_659, Item_655, Item_657, Item_656]
-class Variation_1344(Compound):
-    fspec_size = None
-    items = [Item_814, Item_1468, Item_1527, Item_841, Item_1529, Item_816]
-class Variation_1345(Compound):
-    fspec_size = None
-    items = [Item_873, Item_732, Item_994, Item_860, Item_1724, Item_1887, Item_484, Item_485, Item_1491, Item_628, Item_614, Item_1725, Item_545, Item_1647]
-class Variation_1346(Compound):
-    fspec_size = None
-    items = [Item_873, Item_732, Item_994, Item_861, Item_1724, Item_1887, Item_484, Item_485, Item_1491, Item_628, Item_614, Item_1725, Item_545, Item_1647]
-class Variation_1347(Compound):
-    fspec_size = None
-    items = [Item_911, Item_1469, Item_1530, Item_639, Item_640, Item_663, Item_664, Item_662]
-class Variation_1348(Compound):
-    fspec_size = None
-    items = [Item_931, Item_1532, Item_665, Item_666]
-class Variation_1349(Compound):
-    fspec_size = None
-    items = [Item_960, Item_1472, Item_1535, Item_675]
-class Variation_1350(Compound):
-    fspec_size = None
-    items = [Item_992, Item_1485, Item_1418, Item_1726, Item_545, Item_1646, Item_1562, Item_1619]
-class Variation_1351(Compound):
-    fspec_size = None
-    items = [Item_1038, Item_1880, Item_948, Item_1267]
-class Variation_1352(Compound):
-    fspec_size = None
-    items = [Item_1098, Item_487, None, Item_689, None, None, None, Item_482, Item_812, None, Item_560]
-class Variation_1353(Compound):
-    fspec_size = None
-    items = [Item_1098, Item_487, None, Item_690, None, None, None, Item_482, Item_812, None, Item_560]
-class Variation_1354(Compound):
-    fspec_size = None
-    items = [Item_1143, Item_1109, Item_1112, Item_1121, Item_1114, Item_1116, Item_1147, Item_979, Item_1676, Item_1507, Item_886, Item_1709, Item_683, Item_1500, Item_481, Item_602, Item_930, Item_1405, Item_1672, Item_1667, Item_921, Item_1867, Item_1140, Item_823, Item_1309, Item_901, Item_1342, Item_1100, Item_977, Item_1090, Item_598]
-class Variation_1355(Compound):
-    fspec_size = None
-    items = [Item_1280, Item_956, Item_952]
-class Variation_1356(Compound):
-    fspec_size = None
-    items = [Item_1298, Item_1458, Item_1578, Item_759]
-class Variation_1357(Compound):
-    fspec_size = None
-    items = [Item_1330, Item_1607, Item_1119, Item_1141, Item_1125, Item_493, Item_483, Item_1108, Item_1110, Item_1063, Item_1756, Item_1202]
-class Variation_1358(Compound):
-    fspec_size = None
-    items = [Item_1331, Item_1608, Item_1120, Item_1142, Item_1126, Item_493, Item_483, Item_1108, Item_1111, Item_1063, Item_1756, Item_1202]
-class Variation_1359(Compound):
-    fspec_size = None
-    items = [Item_1339, Item_548, Item_1761, Item_1243, Item_785, Item_1036, Item_1680, Item_1717, Item_543, Item_1697, Item_1000]
-class Variation_1360(Compound):
-    fspec_size = None
-    items = [Item_1388, Item_1475, Item_1537, Item_1462, Item_1476, Item_1541, Item_1390, Item_1539]
-class Variation_1361(Compound):
-    fspec_size = None
-    items = [Item_1519, Item_1596, Item_1489, Item_532]
-class Variation_1362(Compound):
-    fspec_size = None
-    items = [Item_1560, Item_1304, Item_941, Item_1122, Item_1118, Item_1802]
-class Variation_1363(Compound):
-    fspec_size = None
-    items = [Item_1560, Item_1304, Item_942, Item_1122, Item_1118, Item_1802]
-class Variation_1364(Compound):
-    fspec_size = None
-    items = [Item_1600, Item_1601, Item_1509, Item_1325, Item_1284, Item_1457, Item_526]
-class Variation_1365(Compound):
-    fspec_size = None
-    items = [Item_1655, Item_1295, Item_1305, Item_899, Item_818, Item_1730, Item_1926]
-class Variation_1366(Compound):
-    fspec_size = None
-    items = [Item_1656, Item_1299, Item_820, Item_1925, Item_868, Item_1078]
-class Variation_1367(Compound):
-    fspec_size = None
-    items = [Item_1657, Item_1296, Item_1306, Item_898, Item_819, Item_1731, Item_1924]
-class Variation_1368(Compound):
-    fspec_size = None
-    items = [Item_1657, Item_1297, Item_1306, Item_898, Item_819, Item_1731, Item_1924, Item_867]
-class Variation_1369(Compound):
-    fspec_size = None
-    items = [Item_1665, Item_729, Item_993, Item_854, Item_1664, Item_1888, Item_776, Item_800, Item_1418, Item_628, Item_746, Item_1727, Item_545, Item_1646, Item_1635, Item_1618, Item_1288, Item_1287]
-class Variation_1370(Compound):
-    fspec_size = None
-    items = [Item_1679, Item_1683, Item_638, Item_1148, Item_750, Item_1206]
-class Variation_1371(Compound):
-    fspec_size = None
-    items = [Item_1715, Item_1710]
-class Variation_1372(Compound):
-    fspec_size = None
-    items = [Item_1757, Item_1332, Item_1609, Item_1128, Item_492, Item_846, Item_1850, Item_1816, Item_1064, Item_1160]
-class Variation_1373(Compound):
-    fspec_size = None
-    items = [Item_1831, Item_1478, Item_705, Item_706, Item_704]
-class Variation_1374(Compound):
-    fspec_size = None
-    items = [Item_1868, Item_1479, Item_1545, Item_711, Item_712, Item_710]
-class Variation_1375(Compound):
-    fspec_size = None
-    items = [Item_1884, Item_1877, Item_1718, Item_1749]
-class Variation_1376(Compound):
-    fspec_size = 1
-    items = [Item_596, Item_1553, Item_1211, Item_902, Item_1551, Item_1616, Item_1721, Item_1137]
-class Variation_1377(Compound):
-    fspec_size = 1
-    items = [Item_596, Item_1553, Item_1212, Item_902, Item_1551, Item_1617, Item_1721, Item_1137]
-class Variation_1378(Compound):
-    fspec_size = 1
-    items = [Item_740, Item_734, Item_1792, Item_1648]
-class Variation_1379(Compound):
-    fspec_size = 1
-    items = [Item_1117, Item_1087, Item_1085, Item_1456, Item_843, Item_1482, Item_717]
-
-# Item set
-class Item_0(Spare):
-    bit_offset8 = 0
-    bit_size = 1
-class Item_1(Spare):
-    bit_offset8 = 0
-    bit_size = 2
-class Item_2(Spare):
-    bit_offset8 = 0
-    bit_size = 3
-class Item_3(Spare):
-    bit_offset8 = 0
-    bit_size = 4
-class Item_4(Spare):
-    bit_offset8 = 0
-    bit_size = 5
-class Item_5(Spare):
-    bit_offset8 = 0
-    bit_size = 6
-class Item_6(Spare):
-    bit_offset8 = 0
-    bit_size = 7
-class Item_7(Spare):
-    bit_offset8 = 1
-    bit_size = 1
-class Item_8(Spare):
-    bit_offset8 = 1
-    bit_size = 5
-class Item_9(Spare):
-    bit_offset8 = 1
-    bit_size = 6
-class Item_10(Spare):
-    bit_offset8 = 1
-    bit_size = 7
-class Item_11(Spare):
-    bit_offset8 = 2
-    bit_size = 1
-class Item_12(Spare):
-    bit_offset8 = 2
-    bit_size = 2
-class Item_13(Spare):
-    bit_offset8 = 2
-    bit_size = 3
-class Item_14(Spare):
-    bit_offset8 = 2
-    bit_size = 5
-class Item_15(Spare):
-    bit_offset8 = 2
-    bit_size = 6
-class Item_16(Spare):
-    bit_offset8 = 3
-    bit_size = 1
-class Item_17(Spare):
-    bit_offset8 = 3
-    bit_size = 2
-class Item_18(Spare):
-    bit_offset8 = 3
-    bit_size = 4
-class Item_19(Spare):
-    bit_offset8 = 3
-    bit_size = 5
-class Item_20(Spare):
-    bit_offset8 = 4
-    bit_size = 2
-class Item_21(Spare):
-    bit_offset8 = 4
-    bit_size = 3
-class Item_22(Spare):
-    bit_offset8 = 4
-    bit_size = 4
-class Item_23(Spare):
-    bit_offset8 = 5
-    bit_size = 1
-class Item_24(Spare):
-    bit_offset8 = 5
-    bit_size = 2
-class Item_25(Spare):
-    bit_offset8 = 5
-    bit_size = 3
-class Item_26(Spare):
-    bit_offset8 = 6
-    bit_size = 1
-class Item_27(Spare):
-    bit_offset8 = 6
-    bit_size = 2
-class Item_28(Spare):
-    bit_offset8 = 6
-    bit_size = 6
-class Item_29(Spare):
-    bit_offset8 = 7
-    bit_size = 1
-class Item_30(Spare):
-    bit_offset8 = 7
-    bit_size = 4
-class Item_31(Spare):
-    bit_offset8 = 7
-    bit_size = 6
-class Item_32(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_156
-class Item_33(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_159
-class Item_34(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_169
-class Item_35(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_175
-class Item_36(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_176
-class Item_37(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_177
-class Item_38(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_178
-class Item_39(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_179
-class Item_40(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_180
-class Item_41(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_182
-class Item_42(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_183
-class Item_43(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_184
-class Item_44(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_185
-class Item_45(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_186
-class Item_46(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_187
-class Item_47(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_188
-class Item_48(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_1017
-class Item_49(Item):
-    name = "000"
-    title = "Report Type"
-    var = Variation_170
-class Item_50(Item):
-    name = "000"
-    title = "Report Type"
-    var = Variation_1057
-class Item_51(Item):
-    name = "001"
-    title = "Result"
-    var = Variation_939
-class Item_52(Item):
-    name = "002"
-    title = "Time of Day"
-    var = Variation_311
-class Item_53(Item):
-    name = "004"
-    title = "II Code"
-    var = Variation_1032
-class Item_54(Item):
-    name = "005"
-    title = "Mode S Address"
-    var = Variation_296
-class Item_55(Item):
-    name = "006"
-    title = "Mode S Address List"
-    var = Variation_1226
-class Item_56(Item):
-    name = "007"
-    title = "Aircraft Data Link Command"
-    var = Variation_1114
-class Item_57(Item):
-    name = "008"
-    title = "Aircraft Data Link Status"
-    var = Variation_1221
-class Item_58(Item):
-    name = "008"
-    title = "Aircraft Operational Status"
-    var = Variation_1039
-class Item_59(Item):
-    name = "009"
-    title = "Aircraft Data Link Report Request"
-    var = Variation_1212
 class Item_60(Item):
     name = "010"
     title = "Data Source Identification"
     var = Variation_1061
-class Item_61(Item):
-    name = "010"
-    title = "Data Source Identifier"
-    var = Variation_1061
-class Item_62(Item):
-    name = "010"
-    title = "Data Source Identifier"
-    var = Variation_1065
-class Item_63(Item):
-    name = "010"
-    title = "Server Identification Tag"
-    var = Variation_1061
-class Item_64(Item):
-    name = "010"
-    title = "Transponder Communications Capability"
-    var = Variation_913
-class Item_65(Item):
-    name = "011"
-    title = "Capability Report"
-    var = Variation_327
-class Item_66(Item):
-    name = "012"
-    title = "Aircraft Coverage Quality Factor"
-    var = Variation_980
-class Item_67(Item):
-    name = "012"
-    title = "Data Destination Identifier"
-    var = Variation_1061
-class Item_68(Item):
-    name = "013"
-    title = "Aircraft CQF Calculation Method"
-    var = Variation_155
-class Item_69(Item):
-    name = "014"
-    title = "Aircraft Position in Polar Co-ordinates"
-    var = Variation_1048
-class Item_70(Item):
-    name = "015"
-    title = "Aircraft Position in Cartesian Co-ordinates"
-    var = Variation_1166
-class Item_71(Item):
-    name = "015"
-    title = "SDPS Identifier"
-    var = Variation_1252
-class Item_72(Item):
-    name = "015"
-    title = "Service Identification"
-    var = Variation_155
-class Item_73(Item):
-    name = "015"
-    title = "Service Type and Identification"
-    var = Variation_1078
-class Item_74(Item):
-    name = "015"
-    title = "User Number"
-    var = Variation_235
-class Item_75(Item):
-    name = "016"
-    title = "Packet Number"
-    var = Variation_315
-class Item_76(Item):
-    name = "016"
-    title = "Service Management"
-    var = Variation_209
-class Item_77(Item):
-    name = "017"
-    title = "Packet Number List"
-    var = Variation_1228
-class Item_78(Item):
-    name = "018"
-    title = "Data Source Identification Tag"
-    var = Variation_1061
-class Item_79(Item):
-    name = "018"
-    title = "Mode S Packet Properties"
-    var = Variation_874
-class Item_80(Item):
-    name = "019"
-    title = "Mode S Packet"
-    var = Variation_1279
-class Item_81(Item):
-    name = "020"
-    title = "Batch Number"
-    var = Variation_191
-class Item_82(Item):
-    name = "020"
-    title = "Broadcast Number"
-    var = Variation_315
-class Item_83(Item):
-    name = "020"
-    title = "Emitter Category"
-    var = Variation_160
-class Item_84(Item):
-    name = "020"
-    title = "Emitter Category"
-    var = Variation_172
-class Item_85(Item):
-    name = "020"
-    title = "Sector Number"
-    var = Variation_224
-class Item_86(Item):
-    name = "020"
-    title = "Service Designator"
-    var = Variation_326
-class Item_87(Item):
-    name = "020"
-    title = "Target Report Descriptor"
-    var = Variation_1195
-class Item_88(Item):
-    name = "020"
-    title = "Target Report Descriptor"
-    var = Variation_1213
-class Item_89(Item):
-    name = "020"
-    title = "Target Report Descriptor"
-    var = Variation_1217
-class Item_90(Item):
-    name = "020"
-    title = "Target Report Descriptor"
-    var = Variation_1218
-class Item_91(Item):
-    name = "020"
-    title = "Target Report Descriptor"
-    var = Variation_1219
-class Item_92(Item):
-    name = "020"
-    title = "Target Report Descriptor"
-    var = Variation_1220
-class Item_93(Item):
-    name = "020"
-    title = "Time of ASTERIX Report Generation"
-    var = Variation_311
-class Item_94(Item):
-    name = "020"
-    title = "Time of Message"
-    var = Variation_311
-class Item_95(Item):
-    name = "020"
-    title = "Vector Qualifier"
-    var = Variation_1207
-class Item_96(Item):
-    name = "020"
-    title = "Vector Qualifier"
-    var = Variation_1208
-class Item_97(Item):
-    name = "020"
-    title = "Video Record Header"
-    var = Variation_315
-class Item_98(Item):
-    name = "021"
-    title = "Broadcast Properties"
-    var = Variation_1035
-class Item_99(Item):
-    name = "022"
-    title = "Broadcast Prefix"
-    var = Variation_915
-class Item_100(Item):
-    name = "023"
-    title = "Uplink or Downlink Broadcast"
-    var = Variation_327
-class Item_101(Item):
-    name = "025"
-    title = "GICB Number"
-    var = Variation_315
-class Item_102(Item):
-    name = "027"
-    title = "BDS Code"
-    var = Variation_155
-class Item_103(Item):
-    name = "028"
-    title = "GICB Extraction Periodicity"
-    var = Variation_268
-class Item_104(Item):
-    name = "029"
-    title = "GICB Extracted"
-    var = Variation_327
-class Item_105(Item):
-    name = "030"
-    title = "GICB Properties"
-    var = Variation_1034
-class Item_106(Item):
-    name = "030"
-    title = "Sequence of Cartesian Vectors"
-    var = Variation_1270
-class Item_107(Item):
-    name = "030"
-    title = "Time of Day"
-    var = Variation_311
-class Item_108(Item):
-    name = "030"
-    title = "Time of Message"
-    var = Variation_311
-class Item_109(Item):
-    name = "030"
-    title = "Track Number 1"
-    var = Variation_234
-class Item_110(Item):
-    name = "030"
-    title = "Video Summary"
-    var = Variation_1224
-class Item_111(Item):
-    name = "030"
-    title = "Warning/Error Conditions"
-    var = Variation_1273
-class Item_112(Item):
-    name = "030"
-    title = "Warning/Error Conditions"
-    var = Variation_1274
-class Item_113(Item):
-    name = "030"
-    title = "Warning/Error Conditions"
-    var = Variation_1278
-class Item_114(Item):
-    name = "030"
-    title = "Warning/Error Conditions and Target Classification"
-    var = Variation_1275
-class Item_115(Item):
-    name = "030"
-    title = "Warning/Error Conditions and Target Classification"
-    var = Variation_1276
-class Item_116(Item):
-    name = "030"
-    title = "Warning/Error Conditions and Target Classification"
-    var = Variation_1277
-class Item_117(Item):
-    name = "031"
-    title = "Aircraft Identity"
-    var = Variation_324
-class Item_118(Item):
-    name = "032"
-    title = "Aircraft Mode A"
-    var = Variation_1125
-class Item_119(Item):
-    name = "032"
-    title = "Time of Day Accuracy"
-    var = Variation_220
-class Item_120(Item):
-    name = "033"
-    title = "Aircraft Height"
-    var = Variation_1120
-class Item_121(Item):
-    name = "034"
-    title = "Aircraft Speed"
-    var = Variation_289
-class Item_122(Item):
-    name = "034"
-    title = "Sequence of Polar Vectors in SPF Notation"
-    var = Variation_1256
-class Item_123(Item):
-    name = "035"
-    title = "Aircraft Heading"
-    var = Variation_293
-class Item_124(Item):
-    name = "035"
-    title = "Track Number 2"
-    var = Variation_234
-class Item_125(Item):
-    name = "035"
-    title = "Type of Message"
-    var = Variation_979
-class Item_126(Item):
-    name = "036"
-    title = "Data Source Identifier"
-    var = Variation_1061
-class Item_127(Item):
-    name = "036"
-    title = "Sequence of Cartesian Vectors in SPF Notation"
-    var = Variation_1269
-class Item_128(Item):
-    name = "037"
-    title = "Data Destination Identifier"
-    var = Variation_1061
-class Item_129(Item):
-    name = "038"
-    title = "Sequence of Weather Vectors in SPF Notation"
-    var = Variation_1272
-class Item_130(Item):
-    name = "040"
-    title = "Alert Identifier"
-    var = Variation_234
-class Item_131(Item):
-    name = "040"
-    title = "Contour Identifier"
-    var = Variation_1027
-class Item_132(Item):
-    name = "040"
-    title = "Measured Position in Polar Co-ordinates"
-    var = Variation_1047
-class Item_133(Item):
-    name = "040"
-    title = "Measured Position in Polar Co-ordinates"
-    var = Variation_1048
-class Item_134(Item):
-    name = "040"
-    title = "Measured Position in Polar Co-ordinates"
-    var = Variation_1050
-class Item_135(Item):
-    name = "040"
-    title = "Report Number"
-    var = Variation_155
-class Item_136(Item):
-    name = "040"
-    title = "SDPS Configuration and Status"
-    var = Variation_1022
 class Item_137(Item):
     name = "040"
     title = "Target Report Descriptor"
     var = Variation_956
-class Item_138(Item):
-    name = "040"
-    title = "Target Report Descriptor"
-    var = Variation_1177
-class Item_139(Item):
-    name = "040"
-    title = "Target Report Descriptor"
-    var = Variation_1178
-class Item_140(Item):
-    name = "040"
-    title = "Target Report Descriptor"
-    var = Variation_1179
-class Item_141(Item):
-    name = "040"
-    title = "Track Number"
-    var = Variation_234
-class Item_142(Item):
-    name = "040"
-    title = "Track Number"
-    var = Variation_235
-class Item_143(Item):
-    name = "040"
-    title = "Video Header Nano"
-    var = Variation_1082
-class Item_144(Item):
-    name = "041"
-    title = "Antenna Rotation Speed"
-    var = Variation_287
-class Item_145(Item):
-    name = "041"
-    title = "Position In WGS-84 Coordinates"
-    var = Variation_1001
-class Item_146(Item):
-    name = "041"
-    title = "Position in WGS-84 Co-ordinates"
-    var = Variation_1003
-class Item_147(Item):
-    name = "041"
-    title = "Position in WGS-84 Coordinates"
-    var = Variation_1007
-class Item_148(Item):
-    name = "041"
-    title = "Video Header Femto"
-    var = Variation_1081
-class Item_149(Item):
-    name = "042"
-    title = "Calculated Position in Cartesian Co-ordinates"
-    var = Variation_1163
-class Item_150(Item):
-    name = "042"
-    title = "Calculated Position in Cartesian Co-ordinates"
-    var = Variation_1164
-class Item_151(Item):
-    name = "042"
-    title = "Calculated Position in Cartesian Co-ordinates"
-    var = Variation_1165
-class Item_152(Item):
-    name = "042"
-    title = "Position in Cartesian Co-ordinates"
-    var = Variation_1160
-class Item_153(Item):
-    name = "042"
-    title = "Position in Cartesian Coordinates"
-    var = Variation_1168
-class Item_154(Item):
-    name = "045"
-    title = "Alert Status"
-    var = Variation_909
-class Item_155(Item):
-    name = "045"
-    title = "Calculated Position in WGS-84 Coordinates"
-    var = Variation_1000
-class Item_156(Item):
-    name = "048"
-    title = "Video Cells Resolution & Data Compression Indicator"
-    var = Variation_936
-class Item_157(Item):
-    name = "049"
-    title = "Video Octets & Video Cells Counters"
-    var = Variation_1021
-class Item_158(Item):
-    name = "050"
-    title = "Composed Track Number"
-    var = Variation_1215
-class Item_159(Item):
-    name = "050"
-    title = "Flight Level in Binary Representation"
-    var = Variation_1129
-class Item_160(Item):
-    name = "050"
-    title = "Mode-2 Code in Octal Representation"
-    var = Variation_1123
-class Item_161(Item):
-    name = "050"
-    title = "Mode-2 Code in Octal Representation"
-    var = Variation_1135
-class Item_162(Item):
-    name = "050"
-    title = "Position in WGS-84 Coordinates"
-    var = Variation_1006
-class Item_163(Item):
-    name = "050"
-    title = "Sensor Identifier"
-    var = Variation_1061
-class Item_164(Item):
-    name = "050"
-    title = "Sequence of Contour Points in SPF Notation"
-    var = Variation_1271
-class Item_165(Item):
-    name = "050"
-    title = "Service Status Report"
-    var = Variation_181
-class Item_166(Item):
-    name = "050"
-    title = "Station Configuration Status"
-    var = Variation_1273
-class Item_167(Item):
-    name = "050"
-    title = "System Configuration and Status"
-    var = Variation_1340
-class Item_168(Item):
-    name = "050"
-    title = "Update Period"
-    var = Variation_885
-class Item_169(Item):
-    name = "050"
-    title = "Video Block Low Data Volume"
-    var = Variation_1227
-class Item_170(Item):
-    name = "051"
-    title = "Video Block Medium Data Volume"
-    var = Variation_1231
-class Item_171(Item):
-    name = "052"
-    title = "Video Block High Data Volume"
-    var = Variation_1232
-class Item_172(Item):
-    name = "055"
-    title = "Mode-1 Code in Octal Representation"
-    var = Variation_1122
-class Item_173(Item):
-    name = "055"
-    title = "Mode-1 Code in Octal Representation"
-    var = Variation_1134
-class Item_174(Item):
-    name = "060"
-    title = "Mode-2 Code Confidence Indicator"
-    var = Variation_908
-class Item_175(Item):
-    name = "060"
-    title = "Mode-3/A Code in Octal Representation"
-    var = Variation_900
-class Item_176(Item):
-    name = "060"
-    title = "Mode-3/A Code in Octal Representation"
-    var = Variation_1136
-class Item_177(Item):
-    name = "060"
-    title = "Position in Cartesian Coordinates"
-    var = Variation_1168
-class Item_178(Item):
-    name = "060"
-    title = "Safety Net Function and System Status"
-    var = Variation_1201
-class Item_179(Item):
-    name = "060"
-    title = "Sensor Configuration and Status"
-    var = Variation_1186
-class Item_180(Item):
-    name = "060"
-    title = "Station Processing Mode"
-    var = Variation_1273
-class Item_181(Item):
-    name = "060"
-    title = "Synchronisation/Control Signal"
-    var = Variation_1211
-class Item_182(Item):
-    name = "060"
-    title = "System Processing Mode"
-    var = Variation_1339
-class Item_183(Item):
-    name = "060"
-    title = "Track Mode 3/A"
-    var = Variation_902
-class Item_184(Item):
-    name = "060"
-    title = "Track Mode 3/A Code"
-    var = Variation_1131
-class Item_185(Item):
-    name = "065"
-    title = "Mode-1 Code Confidence Indicator"
-    var = Variation_891
-class Item_186(Item):
-    name = "070"
-    title = "Conflict Timing and Separation"
-    var = Variation_1370
-class Item_187(Item):
-    name = "070"
-    title = "Local Bearing"
-    var = Variation_277
-class Item_188(Item):
-    name = "070"
-    title = "Message Count Values"
-    var = Variation_1263
-class Item_189(Item):
-    name = "070"
-    title = "Message Count Values"
-    var = Variation_1264
-class Item_190(Item):
-    name = "070"
-    title = "Mode 3/A Code in Octal Representation"
-    var = Variation_905
-class Item_191(Item):
-    name = "070"
-    title = "Mode 3/A Code in Octal Representation"
-    var = Variation_1124
-class Item_192(Item):
-    name = "070"
-    title = "Mode 3/A Code in Octal Representation"
-    var = Variation_1128
-class Item_193(Item):
-    name = "070"
-    title = "Mode-3/A Code in Octal Representation"
-    var = Variation_1126
-class Item_194(Item):
-    name = "070"
-    title = "Mode-3/A Code in Octal Representation"
-    var = Variation_1127
-class Item_195(Item):
-    name = "070"
-    title = "Mode-3/A Code in Octal Representation"
-    var = Variation_1137
-class Item_196(Item):
-    name = "070"
-    title = "Plot Count Values"
-    var = Variation_1235
-class Item_197(Item):
-    name = "070"
-    title = "Time Of Track Information"
-    var = Variation_311
-class Item_198(Item):
-    name = "070"
-    title = "Time Stamping Bias"
-    var = Variation_238
-class Item_199(Item):
-    name = "070"
+class Item_107(Item):
+    name = "030"
     title = "Time of Day"
     var = Variation_311
-class Item_200(Item):
-    name = "071"
-    title = "Time of Applicability for Position"
-    var = Variation_311
-class Item_201(Item):
-    name = "072"
-    title = "Time of Applicability for Velocity"
-    var = Variation_311
-class Item_202(Item):
-    name = "073"
-    title = "Time of Message Reception for Position"
-    var = Variation_311
-class Item_203(Item):
-    name = "074"
-    title = "Longitudinal Deviation"
-    var = Variation_241
-class Item_204(Item):
-    name = "074"
-    title = "Time of Message Reception of Position-High Precision"
-    var = Variation_981
-class Item_205(Item):
-    name = "075"
-    title = "Time of Message Reception for Velocity"
-    var = Variation_311
-class Item_206(Item):
-    name = "075"
-    title = "Transversal Distance Deviation"
-    var = Variation_299
-class Item_207(Item):
-    name = "076"
-    title = "Time of Message Reception of Velocity-High Precision"
-    var = Variation_982
-class Item_208(Item):
-    name = "076"
-    title = "Vertical Deviation"
-    var = Variation_240
-class Item_209(Item):
-    name = "077"
-    title = "Time of ASTERIX Report Transmission"
-    var = Variation_311
-class Item_210(Item):
-    name = "080"
-    title = "Mode-3/A Code Confidence Indicator"
-    var = Variation_908
-class Item_211(Item):
-    name = "080"
-    title = "Processing Status"
-    var = Variation_1189
-class Item_212(Item):
-    name = "080"
-    title = "SSR / Mode S Range Gain and Bias"
-    var = Variation_1080
-class Item_213(Item):
-    name = "080"
-    title = "System Bearing"
-    var = Variation_277
-class Item_214(Item):
-    name = "080"
-    title = "Target Address"
-    var = Variation_296
-class Item_215(Item):
-    name = "080"
-    title = "Track Status"
-    var = Variation_1198
-class Item_216(Item):
-    name = "080"
-    title = "Track Status"
-    var = Variation_1199
-class Item_217(Item):
-    name = "080"
-    title = "Track Status"
-    var = Variation_1200
-class Item_218(Item):
-    name = "080"
-    title = "Warning/Error Conditions"
-    var = Variation_1273
-class Item_219(Item):
-    name = "081"
-    title = "SSR Mode S Azimuth Bias"
-    var = Variation_262
-class Item_220(Item):
-    name = "090"
-    title = "Collimation Error"
-    var = Variation_1040
-class Item_221(Item):
-    name = "090"
-    title = "Collimation Error"
-    var = Variation_1053
-class Item_222(Item):
-    name = "090"
-    title = "Figure of Merit"
-    var = Variation_921
-class Item_223(Item):
-    name = "090"
-    title = "Flight Level in Binary Representation"
-    var = Variation_1119
-class Item_224(Item):
-    name = "090"
-    title = "Flight Level in Binary Representation"
-    var = Variation_1132
-class Item_225(Item):
-    name = "090"
-    title = "Measured Flight Level"
-    var = Variation_248
-class Item_226(Item):
-    name = "090"
-    title = "Mode-C Code in Binary Representation"
-    var = Variation_1121
-class Item_227(Item):
-    name = "090"
-    title = "PSR Range Gain and Bias"
-    var = Variation_1033
-class Item_228(Item):
-    name = "090"
-    title = "Quality Indicators"
-    var = Variation_1206
-class Item_229(Item):
-    name = "090"
-    title = "Radar Configuration and Status"
-    var = Variation_1251
-class Item_230(Item):
-    name = "090"
-    title = "Radio Channel Name"
-    var = Variation_328
-class Item_231(Item):
-    name = "090"
-    title = "Time of Day"
-    var = Variation_311
-class Item_232(Item):
-    name = "091"
-    title = "Measured Height"
-    var = Variation_257
-class Item_233(Item):
-    name = "091"
-    title = "PSR Azimuth Bias"
-    var = Variation_262
-class Item_234(Item):
-    name = "092"
-    title = "Calculated Track Geometric Altitude"
-    var = Variation_257
-class Item_235(Item):
-    name = "092"
-    title = "PSR Elevation Bias"
-    var = Variation_262
-class Item_236(Item):
-    name = "093"
-    title = "Calculated Track Barometric Altitude"
-    var = Variation_1037
-class Item_237(Item):
-    name = "093"
-    title = "Calculated Track Barometric Altitude"
-    var = Variation_1038
-class Item_238(Item):
-    name = "095"
-    title = "Velocity Accuracy"
-    var = Variation_155
-class Item_239(Item):
-    name = "100"
-    title = "Area Definition"
-    var = Variation_1331
-class Item_240(Item):
-    name = "100"
-    title = "Calculated Track Position (Cartesian)"
-    var = Variation_1161
-class Item_241(Item):
-    name = "100"
-    title = "Dynamic Window Type 1"
-    var = Variation_1054
-class Item_242(Item):
-    name = "100"
-    title = "Generic Polar Window"
-    var = Variation_1051
-class Item_243(Item):
-    name = "100"
-    title = "Ground Station Status"
-    var = Variation_1205
-class Item_244(Item):
-    name = "100"
-    title = "Mode C Code"
-    var = Variation_1130
-class Item_245(Item):
-    name = "100"
-    title = "Mode-C Code and Code Confidence Indicator"
-    var = Variation_1118
-class Item_246(Item):
-    name = "100"
-    title = "Processing Status"
-    var = Variation_1189
-class Item_247(Item):
-    name = "100"
-    title = "Quality of Measurement"
-    var = Variation_155
-class Item_248(Item):
-    name = "100"
-    title = "System and Service Status"
-    var = Variation_1204
-class Item_249(Item):
-    name = "100"
-    title = "Vector Count"
-    var = Variation_235
-class Item_250(Item):
-    name = "101"
-    title = "Service Configuration"
-    var = Variation_1210
-class Item_251(Item):
-    name = "105"
-    title = "Calculated Position In WGS-84 Co-ordinates"
-    var = Variation_1001
-class Item_252(Item):
-    name = "105"
-    title = "Geometric Height (WGS-84)"
-    var = Variation_257
-class Item_253(Item):
-    name = "105"
-    title = "System and Service Error Codes"
-    var = Variation_1223
-class Item_254(Item):
-    name = "110"
-    title = "Data Filter"
-    var = Variation_158
-class Item_255(Item):
-    name = "110"
-    title = "Estimated Uncertainty"
-    var = Variation_207
-class Item_256(Item):
-    name = "110"
-    title = "FDPS Sector Control Identification"
-    var = Variation_1240
-class Item_257(Item):
-    name = "110"
-    title = "Height Measured by a 3D Radar"
-    var = Variation_880
-class Item_258(Item):
-    name = "110"
-    title = "Measured Height (Local Cartesian Coordinates)"
-    var = Variation_257
-class Item_259(Item):
-    name = "110"
-    title = "Mode 5 Data Reports and Extended Mode 1 Code"
-    var = Variation_1365
-class Item_260(Item):
-    name = "110"
-    title = "Service Status"
-    var = Variation_1175
-class Item_261(Item):
-    name = "110"
-    title = "Station Configuration Status"
-    var = Variation_1273
-class Item_262(Item):
-    name = "110"
-    title = "Trajectory Intent"
-    var = Variation_1371
-class Item_263(Item):
-    name = "120"
-    title = "3D-Position Of Data Source"
-    var = Variation_990
-class Item_264(Item):
-    name = "120"
-    title = "Component Status"
-    var = Variation_1241
-class Item_265(Item):
-    name = "120"
-    title = "Conflict Characteristics"
-    var = Variation_1338
-class Item_266(Item):
-    name = "120"
-    title = "Contributing Sensors"
-    var = Variation_1222
-class Item_267(Item):
-    name = "120"
-    title = "Measured Radial Doppler Speed"
-    var = Variation_201
-class Item_268(Item):
-    name = "120"
-    title = "Radial Doppler Speed"
-    var = Variation_1337
-class Item_269(Item):
-    name = "120"
-    title = "Service Statistics"
-    var = Variation_1267
-class Item_270(Item):
-    name = "120"
-    title = "Total Number of Items Constituting One Weather Picture"
-    var = Variation_235
-class Item_271(Item):
-    name = "120"
-    title = "Track Mode 2 Code"
-    var = Variation_901
-class Item_272(Item):
-    name = "130"
-    title = "Calculated Track Geometric Altitude"
-    var = Variation_257
-class Item_273(Item):
-    name = "130"
-    title = "Conflicting Transmitter Position in WGS-84 Coordinates"
-    var = Variation_1006
 class Item_274(Item):
     name = "130"
     title = "Position in WGS-84 Co-ordinates"
     var = Variation_999
-class Item_275(Item):
-    name = "130"
-    title = "Position in WGS-84 Co-ordinates"
-    var = Variation_1001
-class Item_276(Item):
-    name = "130"
-    title = "Radar Plot Characteristics"
-    var = Variation_1273
-class Item_277(Item):
-    name = "130"
-    title = "Radar Plot Characteristics"
-    var = Variation_1364
-class Item_278(Item):
-    name = "131"
-    title = "Amplitude of Primary Plot"
-    var = Variation_155
-class Item_279(Item):
-    name = "131"
-    title = "High-Resolution Position in WGS-84 Co-ordinates"
-    var = Variation_1002
-class Item_280(Item):
-    name = "131"
-    title = "Received Power"
-    var = Variation_193
-class Item_281(Item):
-    name = "131"
-    title = "Signal Amplitude"
-    var = Variation_155
-class Item_282(Item):
-    name = "132"
-    title = "Message Amplitude"
-    var = Variation_193
-class Item_283(Item):
-    name = "135"
-    title = "Calculated Track Barometric Altitude"
-    var = Variation_1036
-class Item_284(Item):
-    name = "136"
-    title = "Measured Flight Level"
-    var = Variation_248
-class Item_285(Item):
-    name = "140"
-    title = "Conflicting Transmitter Position in Cartesian Coordinates"
-    var = Variation_1168
+class Item_214(Item):
+    name = "080"
+    title = "Target Address"
+    var = Variation_296
 class Item_286(Item):
     name = "140"
     title = "Geometric Altitude"
     var = Variation_257
-class Item_287(Item):
-    name = "140"
-    title = "Geometric Height"
-    var = Variation_257
-class Item_288(Item):
-    name = "140"
-    title = "Service Statistics"
-    var = Variation_1268
-class Item_289(Item):
-    name = "140"
-    title = "Time of Day"
-    var = Variation_311
-class Item_290(Item):
-    name = "140"
-    title = "Time of Track Information"
-    var = Variation_311
-class Item_291(Item):
-    name = "141"
-    title = "Truncated Time of Day"
-    var = Variation_287
+class Item_222(Item):
+    name = "090"
+    title = "Figure of Merit"
+    var = Variation_921
+class Item_352(Item):
+    name = "210"
+    title = "Link Technology Indicator"
+    var = Variation_888
+class Item_366(Item):
+    name = "230"
+    title = "Roll Angle"
+    var = Variation_246
 class Item_292(Item):
     name = "145"
     title = "Flight Level"
     var = Variation_248
-class Item_293(Item):
-    name = "145"
-    title = "Time of Applicability"
-    var = Variation_311
-class Item_294(Item):
-    name = "146"
-    title = "Intermediate State Selected Altitude"
-    var = Variation_1069
-class Item_295(Item):
-    name = "146"
-    title = "Selected Altitude"
-    var = Variation_1068
-class Item_296(Item):
-    name = "148"
-    title = "Final State Selected Altitude"
-    var = Variation_1019
-class Item_297(Item):
-    name = "148"
-    title = "Final State Selected Altitude"
-    var = Variation_1020
 class Item_298(Item):
     name = "150"
     title = "Air Speed"
     var = Variation_993
-class Item_299(Item):
-    name = "150"
-    title = "Conflicting Transmitter Estimated Uncertainty"
-    var = Variation_207
-class Item_300(Item):
-    name = "150"
-    title = "Presence of X-Pulse"
-    var = Variation_1171
 class Item_301(Item):
     name = "151"
     title = "True Airspeed"
     var = Variation_264
-class Item_302(Item):
-    name = "151"
-    title = "True Airspeed"
-    var = Variation_1044
 class Item_303(Item):
     name = "152"
     title = "Magnetic Heading"
@@ -7428,14 +10607,181 @@ class Item_304(Item):
     name = "155"
     title = "Barometric Vertical Rate"
     var = Variation_258
-class Item_305(Item):
-    name = "155"
-    title = "Barometric Vertical Rate"
-    var = Variation_1041
 class Item_306(Item):
     name = "157"
     title = "Geometric Vertical Rate"
     var = Variation_258
+class Item_309(Item):
+    name = "160"
+    title = "Ground Vector"
+    var = Variation_987
+class Item_317(Item):
+    name = "165"
+    title = "Rate Of Turn"
+    var = Variation_1216
+class Item_321(Item):
+    name = "170"
+    title = "Target Identification"
+    var = Variation_326
+class Item_238(Item):
+    name = "095"
+    title = "Velocity Accuracy"
+    var = Variation_155
+class Item_119(Item):
+    name = "032"
+    title = "Time of Day Accuracy"
+    var = Variation_220
+class Item_341(Item):
+    name = "200"
+    title = "Target Status"
+    var = Variation_161
+class Item_84(Item):
+    name = "020"
+    title = "Emitter Category"
+    var = Variation_172
+class Item_1884(Item):
+    name = "WS"
+    title = "Wind Speed"
+    var = Variation_264
+class Item_1877(Item):
+    name = "WD"
+    title = "Wind Direction"
+    var = Variation_269
+class Item_1718(Item):
+    name = "TMP"
+    title = "Temperature"
+    var = Variation_251
+class Item_1749(Item):
+    name = "TRB"
+    title = "Turbulence"
+    var = Variation_191
+class Variation_1375(Compound):
+    fspec_size = None
+    items = [Item_1884, Item_1877, Item_1718, Item_1749]
+class Item_361(Item):
+    name = "220"
+    title = "Met Information"
+    var = Variation_1375
+class Item_294(Item):
+    name = "146"
+    title = "Intermediate State Selected Altitude"
+    var = Variation_1069
+class Item_296(Item):
+    name = "148"
+    title = "Final State Selected Altitude"
+    var = Variation_1019
+class Item_1715(Item):
+    name = "TIS"
+    title = "Trajectory Intent Status"
+    var = Variation_1202
+class Item_1710(Item):
+    name = "TID"
+    title = "Trajectory Intent Data"
+    var = Variation_1257
+class Variation_1371(Compound):
+    fspec_size = None
+    items = [Item_1715, Item_1710]
+class Item_262(Item):
+    name = "110"
+    title = "Trajectory Intent"
+    var = Variation_1371
+class Item_1421(Item):
+    name = "RE"
+    title = "Reserved Expansion Field"
+    var = Variation_1280
+class Item_1580(Item):
+    name = "SP"
+    title = "Special Purpose Field"
+    var = Variation_1281
+class Variation_1282(Compound):
+    fspec_size = None
+    items = [Item_60, Item_137, Item_107, Item_274, Item_214, Item_286, Item_222, Item_352, Item_366, Item_292, Item_298, Item_301, Item_303, Item_304, Item_306, Item_309, Item_317, Item_321, Item_238, Item_119, Item_341, Item_84, Item_361, Item_294, Item_296, Item_262, None, None, None, None, None, None, None, Item_1421, Item_1580]
+class Item_275(Item):
+    name = "130"
+    title = "Position in WGS-84 Co-ordinates"
+    var = Variation_1001
+class Variation_1283(Compound):
+    fspec_size = None
+    items = [Item_60, Item_137, Item_107, Item_275, Item_214, Item_286, Item_222, Item_352, Item_366, Item_292, Item_298, Item_301, Item_303, Item_304, Item_306, Item_309, Item_317, Item_321, Item_238, Item_119, Item_341, Item_84, Item_361, Item_294, Item_296, Item_262, None, None, None, None, None, None, None, Item_1421, Item_1580]
+class Item_191(Item):
+    name = "070"
+    title = "Mode 3/A Code in Octal Representation"
+    var = Variation_1124
+class Item_281(Item):
+    name = "131"
+    title = "Signal Amplitude"
+    var = Variation_155
+class Variation_1284(Compound):
+    fspec_size = None
+    items = [Item_60, Item_137, Item_107, Item_275, Item_214, Item_286, Item_222, Item_352, Item_366, Item_292, Item_298, Item_301, Item_303, Item_304, Item_306, Item_309, Item_317, Item_321, Item_238, Item_119, Item_341, Item_84, Item_361, Item_294, Item_296, Item_262, Item_191, Item_281, None, None, None, None, None, Item_1421, Item_1580]
+class Item_138(Item):
+    name = "040"
+    title = "Target Report Descriptor"
+    var = Variation_1177
+class Item_314(Item):
+    name = "161"
+    title = "Track Number"
+    var = Variation_912
+class Item_72(Item):
+    name = "015"
+    title = "Service Identification"
+    var = Variation_155
+class Item_200(Item):
+    name = "071"
+    title = "Time of Applicability for Position"
+    var = Variation_311
+class Item_279(Item):
+    name = "131"
+    title = "High-Resolution Position in WGS-84 Co-ordinates"
+    var = Variation_1002
+class Item_201(Item):
+    name = "072"
+    title = "Time of Applicability for Velocity"
+    var = Variation_311
+class Item_302(Item):
+    name = "151"
+    title = "True Airspeed"
+    var = Variation_1044
+class Item_202(Item):
+    name = "073"
+    title = "Time of Message Reception for Position"
+    var = Variation_311
+class Item_204(Item):
+    name = "074"
+    title = "Time of Message Reception of Position-High Precision"
+    var = Variation_981
+class Item_205(Item):
+    name = "075"
+    title = "Time of Message Reception for Velocity"
+    var = Variation_311
+class Item_207(Item):
+    name = "076"
+    title = "Time of Message Reception of Velocity-High Precision"
+    var = Variation_982
+class Item_287(Item):
+    name = "140"
+    title = "Geometric Height"
+    var = Variation_257
+class Item_228(Item):
+    name = "090"
+    title = "Quality Indicators"
+    var = Variation_1206
+class Item_353(Item):
+    name = "210"
+    title = "MOPS Version"
+    var = Variation_878
+class Item_190(Item):
+    name = "070"
+    title = "Mode 3/A Code in Octal Representation"
+    var = Variation_905
+class Item_343(Item):
+    name = "200"
+    title = "Target Status"
+    var = Variation_992
+class Item_305(Item):
+    name = "155"
+    title = "Barometric Vertical Rate"
+    var = Variation_1041
 class Item_307(Item):
     name = "157"
     title = "Geometric Vertical Rate"
@@ -7444,534 +10790,1258 @@ class Item_308(Item):
     name = "160"
     title = "Airborne Ground Vector"
     var = Variation_1042
-class Item_309(Item):
-    name = "160"
-    title = "Ground Vector"
-    var = Variation_987
-class Item_310(Item):
-    name = "160"
-    title = "Track Number"
-    var = Variation_234
-class Item_311(Item):
-    name = "161"
-    title = "Track Number"
-    var = Variation_873
-class Item_312(Item):
-    name = "161"
-    title = "Track Number"
-    var = Variation_910
-class Item_313(Item):
-    name = "161"
-    title = "Track Number"
-    var = Variation_911
-class Item_314(Item):
-    name = "161"
-    title = "Track Number"
-    var = Variation_912
-class Item_315(Item):
-    name = "161"
-    title = "Track Plot Number"
-    var = Variation_234
-class Item_316(Item):
-    name = "161"
-    title = "Track/Plot Number"
-    var = Variation_235
-class Item_317(Item):
-    name = "165"
-    title = "Rate Of Turn"
-    var = Variation_1216
 class Item_318(Item):
     name = "165"
     title = "Track Angle Rate"
     var = Variation_917
-class Item_319(Item):
-    name = "170"
-    title = "Aircraft Identification and Characteristics 1"
-    var = Variation_1329
-class Item_320(Item):
-    name = "170"
-    title = "Sensor Identification"
-    var = Variation_155
-class Item_321(Item):
-    name = "170"
-    title = "Target Identification"
-    var = Variation_326
-class Item_322(Item):
-    name = "170"
-    title = "Track Status"
-    var = Variation_1181
-class Item_323(Item):
-    name = "170"
-    title = "Track Status"
-    var = Variation_1182
-class Item_324(Item):
-    name = "170"
-    title = "Track Status"
-    var = Variation_1183
-class Item_325(Item):
-    name = "170"
-    title = "Track Status"
-    var = Variation_1184
-class Item_326(Item):
-    name = "170"
-    title = "Track Status"
-    var = Variation_1185
-class Item_327(Item):
-    name = "170"
-    title = "Track Status"
-    var = Variation_1196
-class Item_328(Item):
-    name = "170"
-    title = "Track Status"
-    var = Variation_1197
-class Item_329(Item):
-    name = "170"
-    title = "Track/Plot Status"
-    var = Variation_1180
-class Item_330(Item):
-    name = "171"
-    title = "Aircraft Identification and Characteristics 2"
-    var = Variation_1330
-class Item_331(Item):
-    name = "180"
-    title = "Signal Level"
-    var = Variation_244
-class Item_332(Item):
-    name = "185"
-    title = "Calculated Track Velocity (Cartesian)"
-    var = Variation_1141
-class Item_333(Item):
-    name = "190"
-    title = "Signal Quality"
-    var = Variation_155
-class Item_334(Item):
-    name = "200"
-    title = "Calculated Track Velocity in Polar Co-ordinates"
-    var = Variation_988
-class Item_335(Item):
-    name = "200"
-    title = "Calculated Track Velocity in Polar Co-ordinates"
-    var = Variation_989
-class Item_336(Item):
-    name = "200"
-    title = "Message Identification"
-    var = Variation_298
-class Item_337(Item):
-    name = "200"
-    title = "Mode of Movement"
-    var = Variation_1094
-class Item_338(Item):
-    name = "200"
-    title = "Operational Range"
-    var = Variation_205
-class Item_339(Item):
-    name = "200"
-    title = "Signal Elevation"
-    var = Variation_246
-class Item_340(Item):
-    name = "200"
-    title = "System Configuration Reporting Period"
-    var = Variation_206
-class Item_341(Item):
-    name = "200"
-    title = "Target Status"
-    var = Variation_161
-class Item_342(Item):
-    name = "200"
-    title = "Target Status"
-    var = Variation_991
-class Item_343(Item):
-    name = "200"
-    title = "Target Status"
-    var = Variation_992
-class Item_344(Item):
-    name = "200"
-    title = "Track Velocity in Polar Co-ordinates"
-    var = Variation_988
-class Item_345(Item):
-    name = "202"
-    title = "Calculated Track Velocity in Cartesian Co-ordinates"
-    var = Variation_1143
-class Item_346(Item):
-    name = "202"
-    title = "Calculated Track Velocity in Cartesian Coordinates"
-    var = Variation_1140
-class Item_347(Item):
-    name = "202"
-    title = "Calculated Track Velocity in Cartesian Coordinates"
-    var = Variation_1142
-class Item_348(Item):
-    name = "210"
-    title = "Calculated Acceleration"
-    var = Variation_930
-class Item_349(Item):
-    name = "210"
-    title = "Calculated Acceleration"
-    var = Variation_931
-class Item_350(Item):
-    name = "210"
-    title = "Calculated Acceleration"
-    var = Variation_932
-class Item_351(Item):
-    name = "210"
-    title = "Calculated Acceleration (Cartesian)"
-    var = Variation_930
-class Item_352(Item):
-    name = "210"
-    title = "Link Technology Indicator"
-    var = Variation_888
-class Item_353(Item):
-    name = "210"
-    title = "MOPS Version"
-    var = Variation_878
-class Item_354(Item):
-    name = "210"
-    title = "MOPS Version"
-    var = Variation_879
-class Item_355(Item):
-    name = "210"
-    title = "Mode S Address List"
-    var = Variation_1226
-class Item_356(Item):
-    name = "210"
-    title = "Track Quality"
-    var = Variation_1079
-class Item_357(Item):
-    name = "210"
-    title = "Track Quality"
-    var = Variation_1273
-class Item_358(Item):
-    name = "215"
-    title = "Calculated Rate Of Climb/Descent"
-    var = Variation_258
-class Item_359(Item):
-    name = "220"
-    title = "Aircraft Address"
-    var = Variation_296
-class Item_360(Item):
-    name = "220"
-    title = "Calculated Rate of Climb/Descent"
-    var = Variation_258
-class Item_361(Item):
-    name = "220"
-    title = "Met Information"
-    var = Variation_1375
-class Item_362(Item):
-    name = "220"
-    title = "Target Address"
-    var = Variation_296
-class Item_363(Item):
-    name = "221"
-    title = "Duplicate Address Reference Number (DRN)"
-    var = Variation_234
-class Item_364(Item):
-    name = "230"
-    title = "Communications/ACAS Capability and Flight Status"
-    var = Variation_948
-class Item_365(Item):
-    name = "230"
-    title = "Communications/ACAS Capability and Flight Status"
-    var = Variation_950
-class Item_366(Item):
-    name = "230"
-    title = "Roll Angle"
-    var = Variation_246
-class Item_367(Item):
-    name = "230"
-    title = "Transponder Capability"
-    var = Variation_937
-class Item_368(Item):
-    name = "240"
-    title = "Aircraft Identification"
-    var = Variation_326
-class Item_369(Item):
-    name = "240"
-    title = "Track Status"
-    var = Variation_954
-class Item_370(Item):
-    name = "245"
-    title = "Target Identification"
-    var = Variation_1083
-class Item_371(Item):
-    name = "245"
-    title = "Target Identification"
-    var = Variation_1084
-class Item_372(Item):
-    name = "245"
-    title = "Target Identification"
-    var = Variation_1085
-class Item_373(Item):
-    name = "245"
-    title = "Target Identification"
-    var = Variation_1086
-class Item_374(Item):
-    name = "250"
-    title = "BDS Register Data"
-    var = Variation_1246
-class Item_375(Item):
-    name = "250"
-    title = "BDS Register Data"
-    var = Variation_1247
-class Item_376(Item):
-    name = "250"
-    title = "Mode S MB Data"
-    var = Variation_1230
-class Item_377(Item):
-    name = "250"
-    title = "Mode S MB Data"
-    var = Variation_1245
-class Item_378(Item):
-    name = "250"
-    title = "Mode S MB Data"
-    var = Variation_1246
-class Item_379(Item):
-    name = "250"
-    title = "Mode S MB Data"
-    var = Variation_1247
-class Item_380(Item):
-    name = "260"
-    title = "ACAS Resolution Advisory Report"
-    var = Variation_327
-class Item_381(Item):
-    name = "260"
-    title = "ACAS Resolution Advisory Report"
-    var = Variation_1103
-class Item_382(Item):
-    name = "270"
-    title = "Target Size & Orientation"
-    var = Variation_1351
-class Item_383(Item):
-    name = "270"
-    title = "Target Size and Orientation"
-    var = Variation_1192
-class Item_384(Item):
-    name = "271"
-    title = "Surface Capabilities and Characteristics"
-    var = Variation_1173
+class Item_209(Item):
+    name = "077"
+    title = "Time of ASTERIX Report Transmission"
+    var = Variation_311
+class Item_83(Item):
+    name = "020"
+    title = "Emitter Category"
+    var = Variation_160
+class Item_295(Item):
+    name = "146"
+    title = "Selected Altitude"
+    var = Variation_1068
+class Item_297(Item):
+    name = "148"
+    title = "Final State Selected Altitude"
+    var = Variation_1020
+class Item_76(Item):
+    name = "016"
+    title = "Service Management"
+    var = Variation_209
+class Item_58(Item):
+    name = "008"
+    title = "Aircraft Operational Status"
+    var = Variation_1039
 class Item_385(Item):
     name = "271"
     title = "Surface Capabilities and Characteristics"
     var = Variation_1174
-class Item_386(Item):
-    name = "280"
-    title = "Presence"
-    var = Variation_1244
-class Item_387(Item):
-    name = "290"
-    title = "System Track Update Ages"
-    var = Variation_1357
-class Item_388(Item):
-    name = "290"
-    title = "System Track Update Ages"
-    var = Variation_1358
-class Item_389(Item):
-    name = "290"
-    title = "System Track Update Ages"
-    var = Variation_1372
-class Item_390(Item):
-    name = "295"
-    title = "Data Ages"
-    var = Variation_1332
-class Item_391(Item):
-    name = "295"
-    title = "Data Ages"
-    var = Variation_1333
-class Item_392(Item):
-    name = "295"
-    title = "Track Data Ages"
-    var = Variation_1354
-class Item_393(Item):
-    name = "300"
-    title = "Object Classification"
-    var = Variation_1242
-class Item_394(Item):
-    name = "300"
-    title = "Pair Identification"
-    var = Variation_1248
-class Item_395(Item):
-    name = "300"
-    title = "Vehicle Fleet Identification"
-    var = Variation_157
-class Item_396(Item):
-    name = "300"
-    title = "Vehicle Fleet Identification"
-    var = Variation_167
-class Item_397(Item):
-    name = "310"
-    title = "Pre-programmed Message"
-    var = Variation_1095
-class Item_398(Item):
-    name = "310"
-    title = "Pre-programmed Message"
-    var = Variation_1096
-class Item_399(Item):
-    name = "310"
-    title = "Pre-programmed Message"
-    var = Variation_1097
-class Item_400(Item):
-    name = "340"
-    title = "Measured Information"
-    var = Variation_1362
-class Item_401(Item):
-    name = "340"
-    title = "Measured Information"
-    var = Variation_1363
-class Item_402(Item):
-    name = "350"
-    title = "Cluster Station/Node List"
-    var = Variation_1252
-class Item_403(Item):
-    name = "360"
-    title = "Cluster Controller Command State"
-    var = Variation_155
-class Item_404(Item):
-    name = "380"
-    title = "Aircraft Derived Data"
-    var = Variation_1325
-class Item_405(Item):
-    name = "380"
-    title = "Aircraft Derived Data"
-    var = Variation_1326
-class Item_406(Item):
-    name = "380"
-    title = "Aircraft Derived Data"
-    var = Variation_1327
-class Item_407(Item):
-    name = "380"
-    title = "Aircraft Derived Data"
-    var = Variation_1328
-class Item_408(Item):
-    name = "380"
-    title = "Mode-S / ADS-B Related Data"
-    var = Variation_1352
-class Item_409(Item):
-    name = "380"
-    title = "Mode-S / ADS-B Related Data"
-    var = Variation_1353
-class Item_410(Item):
-    name = "390"
-    title = "Flight Plan Related Data"
-    var = Variation_1345
-class Item_411(Item):
-    name = "390"
-    title = "Flight Plan Related Data"
-    var = Variation_1346
-class Item_412(Item):
-    name = "390"
-    title = "Flight Plan Related Data"
-    var = Variation_1369
-class Item_413(Item):
-    name = "3DH"
-    title = "3D Height, in Binary Notation. Negative Values Are Expressed in Two's Complement"
-    var = Variation_522
-class Item_414(Item):
-    name = "400"
-    title = "Callsign"
-    var = Variation_328
-class Item_415(Item):
-    name = "400"
-    title = "Contributing Devices"
-    var = Variation_1237
-class Item_416(Item):
-    name = "400"
-    title = "Measurement Identifier"
-    var = Variation_1029
-class Item_417(Item):
-    name = "400"
-    title = "Position of the System Reference Point"
-    var = Variation_1003
+class Item_282(Item):
+    name = "132"
+    title = "Message Amplitude"
+    var = Variation_193
+class Item_376(Item):
+    name = "250"
+    title = "Mode S MB Data"
+    var = Variation_1230
+class Item_381(Item):
+    name = "260"
+    title = "ACAS Resolution Advisory Report"
+    var = Variation_1103
 class Item_418(Item):
     name = "400"
     title = "Receiver ID"
     var = Variation_155
-class Item_419(Item):
-    name = "405"
-    title = "Height of System Reference Point"
-    var = Variation_249
-class Item_420(Item):
-    name = "410"
-    title = "Plan Number"
-    var = Variation_235
-class Item_421(Item):
-    name = "410"
-    title = "Transmitter Properties"
-    var = Variation_1259
-class Item_422(Item):
-    name = "420"
+class Item_522(Item):
+    name = "AOS"
+    title = "Aircraft Operational Status Age"
+    var = Variation_211
+class Item_1752(Item):
+    name = "TRD"
+    title = "Target Report Descriptor Age"
+    var = Variation_211
+class Item_1084(Item):
+    name = "M3A"
+    title = "Mode 3/A Age"
+    var = Variation_211
+class Item_1383(Item):
+    name = "QI"
+    title = "Quality Indicators Age"
+    var = Variation_211
+class Item_1704(Item):
+    name = "TI1"
+    title = "Trajectory Intent Age"
+    var = Variation_211
+class Item_1095(Item):
+    name = "MAM"
+    title = "Message Amplitude Age"
+    var = Variation_211
+class Item_912(Item):
+    name = "GH"
+    title = "Geometric Height Age"
+    var = Variation_211
+class Item_858(Item):
+    name = "FL"
+    title = "Flight Level Age"
+    var = Variation_211
+class Item_1001(Item):
+    name = "ISA"
+    title = "Intermediate State Selected Altitude Age"
+    var = Variation_211
+class Item_882(Item):
+    name = "FSA"
+    title = "Final State Selected Altitude Age"
+    var = Variation_211
+class Item_542(Item):
+    name = "AS"
+    title = "Air Speed Age"
+    var = Variation_211
+class Item_1674(Item):
+    name = "TAS"
+    title = "True Air Speed Age"
+    var = Variation_211
+class Item_1145(Item):
+    name = "MH"
+    title = "Magnetic Heading Age"
+    var = Variation_211
+class Item_601(Item):
+    name = "BVR"
+    title = "Barometric Vertical Rate Age"
+    var = Variation_211
+class Item_929(Item):
+    name = "GVR"
+    title = "Geometric Vertical Rate Age"
+    var = Variation_211
+class Item_925(Item):
+    name = "GV"
+    title = "Ground Vector Age"
+    var = Variation_211
+class Item_1671(Item):
+    name = "TAR"
+    title = "Track Angle Rate Age"
+    var = Variation_211
+class Item_1705(Item):
+    name = "TI2"
+    title = "Target Identification Age"
+    var = Variation_211
+class Item_1764(Item):
+    name = "TS"
+    title = "Target Status Age"
+    var = Variation_211
+class Item_1138(Item):
+    name = "MET"
+    title = "Met Information Age"
+    var = Variation_211
+class Item_1452(Item):
+    name = "ROA"
+    title = "Roll Angle Age"
+    var = Variation_211
+class Item_533(Item):
+    name = "ARA"
+    title = "ACAS Resolution Advisory Age"
+    var = Variation_211
+class Item_1514(Item):
+    name = "SCC"
+    title = "Surface Capabilities and Characteristics Age"
+    var = Variation_211
+class Variation_1332(Compound):
+    fspec_size = None
+    items = [Item_522, Item_1752, Item_1084, Item_1383, Item_1704, Item_1095, Item_912, Item_858, Item_1001, Item_882, Item_542, Item_1674, Item_1145, Item_601, Item_929, Item_925, Item_1671, Item_1705, Item_1764, Item_1138, Item_1452, Item_533, Item_1514]
+class Item_390(Item):
+    name = "295"
+    title = "Data Ages"
+    var = Variation_1332
+class Variation_1285(Compound):
+    fspec_size = None
+    items = [Item_60, Item_138, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_353, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
+class Item_354(Item):
+    name = "210"
+    title = "MOPS Version"
+    var = Variation_879
+class Variation_1286(Compound):
+    fspec_size = None
+    items = [Item_60, Item_138, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_354, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
+class Item_139(Item):
+    name = "040"
+    title = "Target Report Descriptor"
+    var = Variation_1178
+class Item_1506(Item):
+    name = "SAL"
+    title = "Selected Altitude Age"
+    var = Variation_211
+class Variation_1333(Compound):
+    fspec_size = None
+    items = [Item_522, Item_1752, Item_1084, Item_1383, Item_1704, Item_1095, Item_912, Item_858, Item_1506, Item_882, Item_542, Item_1674, Item_1145, Item_601, Item_929, Item_925, Item_1671, Item_1705, Item_1764, Item_1138, Item_1452, Item_533, Item_1514]
+class Item_391(Item):
+    name = "295"
+    title = "Data Ages"
+    var = Variation_1333
+class Variation_1287(Compound):
+    fspec_size = None
+    items = [Item_60, Item_139, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_353, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_391, None, None, None, None, None, Item_1421, Item_1580]
+class Item_140(Item):
+    name = "040"
+    title = "Target Report Descriptor"
+    var = Variation_1179
+class Item_342(Item):
+    name = "200"
+    title = "Target Status"
+    var = Variation_991
+class Item_384(Item):
+    name = "271"
+    title = "Surface Capabilities and Characteristics"
+    var = Variation_1173
+class Variation_1288(Compound):
+    fspec_size = None
+    items = [Item_60, Item_140, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_354, Item_190, Item_366, Item_292, Item_303, Item_342, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_384, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
+class Variation_1289(Compound):
+    fspec_size = None
+    items = [Item_60, Item_140, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_354, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
+class Item_61(Item):
+    name = "010"
+    title = "Data Source Identifier"
+    var = Variation_1061
+class Item_197(Item):
+    name = "070"
+    title = "Time Of Track Information"
+    var = Variation_311
+class Item_251(Item):
+    name = "105"
+    title = "Calculated Position In WGS-84 Co-ordinates"
+    var = Variation_1001
+class Item_240(Item):
+    name = "100"
+    title = "Calculated Track Position (Cartesian)"
+    var = Variation_1161
+class Item_332(Item):
+    name = "185"
+    title = "Calculated Track Velocity (Cartesian)"
+    var = Variation_1141
+class Item_351(Item):
+    name = "210"
+    title = "Calculated Acceleration (Cartesian)"
+    var = Variation_930
+class Item_184(Item):
+    name = "060"
+    title = "Track Mode 3/A Code"
+    var = Variation_1131
+class Item_370(Item):
+    name = "245"
+    title = "Target Identification"
+    var = Variation_1083
+class Item_488(Item):
+    name = "ADR"
+    title = "Target Address"
+    var = Variation_296
+class Item_987(Item):
+    name = "ID"
+    title = "Target Identification"
+    var = Variation_326
+class Item_1146(Item):
+    name = "MHG"
+    title = "Magnetic Heading"
+    var = Variation_293
+class Item_980(Item):
+    name = "IAS"
+    title = "Indicated Airspeed/Mach No"
+    var = Variation_994
+class Item_1675(Item):
+    name = "TAS"
+    title = "True Airspeed"
+    var = Variation_264
+class Item_1505(Item):
+    name = "SAL"
+    title = "Selected Altitude"
+    var = Variation_1067
+class Item_885(Item):
+    name = "FSS"
+    title = "Final State Selected Altitude"
+    var = Variation_1018
+class Item_1716(Item):
+    name = "TIS"
+    title = "Trajectory Intent Status"
+    var = Variation_1203
+class Item_1711(Item):
+    name = "TID"
+    title = "Trajectory Intent Data"
+    var = Variation_1258
+class Item_687(Item):
+    name = "COM"
+    title = "Communications/ACAS Capability and Flight Status"
+    var = Variation_949
+class Item_1499(Item):
+    name = "SAB"
+    title = "Status Reported by ADS-B"
+    var = Variation_922
+class Item_480(Item):
+    name = "ACS"
+    title = "ACAS Resolution Advisory Report"
+    var = Variation_327
+class Item_599(Item):
+    name = "BVR"
+    title = "Barometric Vertical Rate"
+    var = Variation_258
+class Item_927(Item):
+    name = "GVR"
+    title = "Geometric Vertical Rate"
+    var = Variation_258
+class Item_1404(Item):
+    name = "RAN"
+    title = "Roll Angle"
+    var = Variation_246
+class Item_1670(Item):
+    name = "TAR"
+    title = "Track Angle Rate"
+    var = Variation_1090
+class Item_1666(Item):
+    name = "TAN"
+    title = "Track Angle"
+    var = Variation_293
+class Item_916(Item):
+    name = "GS"
+    title = "Ground Speed"
+    var = Variation_256
+class Item_1866(Item):
+    name = "VUN"
+    title = "Velocity Uncertainty"
+    var = Variation_155
+class Item_1139(Item):
+    name = "MET"
+    title = "Meteorological Data"
+    var = Variation_1144
+class Item_822(Item):
+    name = "EMC"
+    title = "Emitter Category"
+    var = Variation_173
+class Item_1308(Item):
+    name = "POS"
+    title = "Position"
+    var = Variation_1008
+class Item_900(Item):
+    name = "GAL"
+    title = "Geometric Altitude"
+    var = Variation_257
+class Item_1341(Item):
+    name = "PUN"
+    title = "Position Uncertainty"
+    var = Variation_907
+class Item_1099(Item):
+    name = "MB"
+    title = "MODE S MB DATA"
+    var = Variation_1230
+class Item_976(Item):
+    name = "IAR"
+    title = "Indicated Airspeed"
+    var = Variation_264
+class Item_1089(Item):
+    name = "MAC"
+    title = "Mach Number"
+    var = Variation_278
+class Item_597(Item):
+    name = "BPS"
+    title = "Barometric Pressure Setting (derived from Mode S BDS 4,0)"
+    var = Variation_895
+class Variation_1325(Compound):
+    fspec_size = None
+    items = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_687, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_1099, Item_976, Item_1089, Item_597]
+class Item_404(Item):
+    name = "380"
+    title = "Aircraft Derived Data"
+    var = Variation_1325
+class Item_141(Item):
+    name = "040"
+    title = "Track Number"
+    var = Variation_234
+class Item_215(Item):
+    name = "080"
+    title = "Track Status"
+    var = Variation_1198
+class Item_1757(Item):
+    name = "TRK"
+    title = "Track Age"
+    var = Variation_217
+class Item_1332(Item):
+    name = "PSR"
+    title = "PSR Age"
+    var = Variation_217
+class Item_1609(Item):
+    name = "SSR"
+    title = "SSR Age"
+    var = Variation_217
+class Item_1128(Item):
+    name = "MDS"
+    title = "Mode S Age"
+    var = Variation_217
+class Item_492(Item):
+    name = "ADS"
+    title = "ADS-C Age"
+    var = Variation_282
+class Item_846(Item):
+    name = "ES"
+    title = "ADS-B Extended Squitter Age"
+    var = Variation_217
+class Item_1850(Item):
+    name = "VDL"
+    title = "ADS-B VDL Mode 4 Age"
+    var = Variation_217
+class Item_1816(Item):
+    name = "UAT"
+    title = "ADS-B UAT Age"
+    var = Variation_217
+class Item_1064(Item):
+    name = "LOP"
+    title = "Loop Age"
+    var = Variation_217
+class Item_1160(Item):
+    name = "MLT"
+    title = "Multilateration Age"
+    var = Variation_217
+class Variation_1372(Compound):
+    fspec_size = None
+    items = [Item_1757, Item_1332, Item_1609, Item_1128, Item_492, Item_846, Item_1850, Item_1816, Item_1064, Item_1160]
+class Item_389(Item):
+    name = "290"
+    title = "System Track Update Ages"
+    var = Variation_1372
+class Item_337(Item):
+    name = "200"
+    title = "Mode of Movement"
+    var = Variation_1094
+class Item_1143(Item):
+    name = "MFL"
+    title = "Measured Flight Level Age"
+    var = Variation_217
+class Item_1109(Item):
+    name = "MD1"
+    title = "Mode 1 Age"
+    var = Variation_217
+class Item_1112(Item):
+    name = "MD2"
+    title = "Mode 2 Age"
+    var = Variation_217
+class Item_1121(Item):
+    name = "MDA"
+    title = "Mode 3/A Age"
+    var = Variation_217
+class Item_1114(Item):
+    name = "MD4"
+    title = "Mode 4 Age"
+    var = Variation_217
+class Item_1116(Item):
+    name = "MD5"
+    title = "Mode 5 Age"
+    var = Variation_217
+class Item_1147(Item):
+    name = "MHG"
+    title = "Magnetic Heading Age"
+    var = Variation_217
+class Item_979(Item):
+    name = "IAS"
+    title = "Indicated Airspeed / Mach Nb Age"
+    var = Variation_217
+class Item_1676(Item):
+    name = "TAS"
+    title = "True Airspeed Age"
+    var = Variation_217
+class Item_1507(Item):
+    name = "SAL"
+    title = "Selected Altitude Age"
+    var = Variation_217
+class Item_886(Item):
+    name = "FSS"
+    title = "Final State Selected Altitude Age"
+    var = Variation_217
+class Item_1709(Item):
+    name = "TID"
+    title = "Trajectory Intent Age"
+    var = Variation_217
+class Item_683(Item):
+    name = "COM"
+    title = "Communication/ACAS Capability and Flight Status Age"
+    var = Variation_217
+class Item_1500(Item):
+    name = "SAB"
+    title = "Status Reported by ADS-B Age"
+    var = Variation_217
+class Item_481(Item):
+    name = "ACS"
+    title = "ACAS Resolution Advisory Report Age"
+    var = Variation_217
+class Item_602(Item):
+    name = "BVR"
+    title = "Barometric Vertical Rate Age"
+    var = Variation_217
+class Item_930(Item):
+    name = "GVR"
+    title = "Geometrical Vertical Rate Age"
+    var = Variation_217
+class Item_1405(Item):
+    name = "RAN"
+    title = "Roll Angle Age"
+    var = Variation_217
+class Item_1672(Item):
+    name = "TAR"
+    title = "Track Angle Rate Age"
+    var = Variation_217
+class Item_1667(Item):
+    name = "TAN"
+    title = "Track Angle Age"
+    var = Variation_217
+class Item_921(Item):
+    name = "GSP"
+    title = "Ground Speed Age"
+    var = Variation_217
+class Item_1867(Item):
+    name = "VUN"
+    title = "Velocity Uncertainty Age"
+    var = Variation_217
+class Item_1140(Item):
+    name = "MET"
+    title = "Meteorological Data Age"
+    var = Variation_217
+class Item_823(Item):
+    name = "EMC"
+    title = "Emitter Category Age"
+    var = Variation_217
+class Item_1309(Item):
+    name = "POS"
+    title = "Position Age"
+    var = Variation_217
+class Item_901(Item):
+    name = "GAL"
+    title = "Geometric Altitude Age"
+    var = Variation_217
+class Item_1342(Item):
+    name = "PUN"
+    title = "Position Uncertainty Age"
+    var = Variation_217
+class Item_1100(Item):
+    name = "MB"
+    title = "Mode S MB Data Age"
+    var = Variation_217
+class Item_977(Item):
+    name = "IAR"
+    title = "Indicated Airspeed Data Age"
+    var = Variation_217
+class Item_1090(Item):
+    name = "MAC"
+    title = "Mach Number Data Age"
+    var = Variation_217
+class Item_598(Item):
+    name = "BPS"
+    title = "Barometric Pressure Setting Data Age"
+    var = Variation_217
+class Variation_1354(Compound):
+    fspec_size = None
+    items = [Item_1143, Item_1109, Item_1112, Item_1121, Item_1114, Item_1116, Item_1147, Item_979, Item_1676, Item_1507, Item_886, Item_1709, Item_683, Item_1500, Item_481, Item_602, Item_930, Item_1405, Item_1672, Item_1667, Item_921, Item_1867, Item_1140, Item_823, Item_1309, Item_901, Item_1342, Item_1100, Item_977, Item_1090, Item_598]
+class Item_392(Item):
+    name = "295"
+    title = "Track Data Ages"
+    var = Variation_1354
+class Item_284(Item):
+    name = "136"
+    title = "Measured Flight Level"
+    var = Variation_248
+class Item_272(Item):
+    name = "130"
+    title = "Calculated Track Geometric Altitude"
+    var = Variation_257
+class Item_283(Item):
+    name = "135"
+    title = "Calculated Track Barometric Altitude"
+    var = Variation_1036
+class Item_360(Item):
+    name = "220"
+    title = "Calculated Rate of Climb/Descent"
+    var = Variation_258
+class Item_1665(Item):
+    name = "TAG"
+    title = "FPPS Identification Tag"
+    var = Variation_1061
+class Item_729(Item):
+    name = "CS"
+    title = "Callsign"
+    var = Variation_328
+class Item_993(Item):
+    name = "IFI"
+    title = "IFPS_FLIGHT_ID"
+    var = Variation_1099
+class Item_854(Item):
+    name = "FCT"
     title = "Flight Category"
-    var = Variation_984
-class Item_423(Item):
-    name = "420"
-    title = "Receiver Properties"
-    var = Variation_1249
-class Item_424(Item):
-    name = "430"
-    title = "Phase of Flight"
-    var = Variation_168
-class Item_425(Item):
-    name = "430"
+    var = Variation_983
+class Item_1664(Item):
+    name = "TAC"
     title = "Type of Aircraft"
     var = Variation_314
-class Item_426(Item):
-    name = "435"
+class Item_1888(Item):
+    name = "WTC"
     title = "Wake Turbulence Category"
-    var = Variation_189
-class Item_427(Item):
-    name = "440"
-    title = "Departure Aerodrome"
+    var = Variation_190
+class Item_776(Item):
+    name = "DEP"
+    title = "Departure Airport"
     var = Variation_314
-class Item_428(Item):
-    name = "450"
-    title = "Destination Aerodrome"
+class Item_800(Item):
+    name = "DST"
+    title = "Destination Airport"
     var = Variation_314
-class Item_429(Item):
-    name = "460"
-    title = "Allocated SSR Codes"
-    var = Variation_1234
-class Item_430(Item):
-    name = "480"
-    title = "Associations"
-    var = Variation_1229
-class Item_431(Item):
-    name = "480"
+class Item_1418(Item):
+    name = "RDS"
+    title = "Runway Designation"
+    var = Variation_1026
+class Item_628(Item):
+    name = "CFL"
     title = "Current Cleared Flight Level"
     var = Variation_280
-class Item_432(Item):
-    name = "490"
+class Item_746(Item):
+    name = "CTL"
     title = "Current Control Position"
-    var = Variation_941
-class Item_433(Item):
-    name = "500"
-    title = "Estimated Accuracies"
-    var = Variation_1334
-class Item_434(Item):
-    name = "500"
-    title = "Estimated Accuracies"
-    var = Variation_1335
-class Item_435(Item):
-    name = "500"
-    title = "Position Accuracy"
-    var = Variation_1341
-class Item_436(Item):
-    name = "500"
-    title = "Standard Deviation of Position"
-    var = Variation_957
-class Item_437(Item):
-    name = "500"
-    title = "Supplementary Flight Data"
-    var = Variation_1350
+    var = Variation_942
+class Item_1727(Item):
+    name = "TOD"
+    title = "Time of Departure / Arrival"
+    var = Variation_1261
+class Item_545(Item):
+    name = "AST"
+    title = "Aircraft Stand"
+    var = Variation_325
+class Item_1646(Item):
+    name = "STS"
+    title = "Stand Status"
+    var = Variation_960
+class Item_1635(Item):
+    name = "STD"
+    title = "Standard Instrument Departure"
+    var = Variation_328
+class Item_1618(Item):
+    name = "STA"
+    title = "Standard Instrument Arrival"
+    var = Variation_328
+class Item_1288(Item):
+    name = "PEM"
+    title = "Pre-Emergency Mode 3/A"
+    var = Variation_893
+class Item_1287(Item):
+    name = "PEC"
+    title = "Pre-Emergency Callsign"
+    var = Variation_328
+class Variation_1369(Compound):
+    fspec_size = None
+    items = [Item_1665, Item_729, Item_993, Item_854, Item_1664, Item_1888, Item_776, Item_800, Item_1418, Item_628, Item_746, Item_1727, Item_545, Item_1646, Item_1635, Item_1618, Item_1288, Item_1287]
+class Item_412(Item):
+    name = "390"
+    title = "Flight Plan Related Data"
+    var = Variation_1369
+class Item_383(Item):
+    name = "270"
+    title = "Target Size and Orientation"
+    var = Variation_1192
+class Item_396(Item):
+    name = "300"
+    title = "Vehicle Fleet Identification"
+    var = Variation_167
+class Item_1655(Item):
+    name = "SUM"
+    title = "Mode 5 Summary"
+    var = Variation_1011
+class Item_1295(Item):
+    name = "PMN"
+    title = "Mode 5 PIN/ National Origin/Mission Code"
+    var = Variation_882
+class Item_1305(Item):
+    name = "POS"
+    title = "Mode 5 Reported Position"
+    var = Variation_999
+class Item_899(Item):
+    name = "GA"
+    title = "Mode 5 GNSS-derived Altitude"
+    var = Variation_877
+class Item_818(Item):
+    name = "EM1"
+    title = "Extended Mode 1 Code in Octal Representation"
+    var = Variation_897
+class Item_1730(Item):
+    name = "TOS"
+    title = "Time Offset for POS and GA"
+    var = Variation_199
+class Item_1926(Item):
+    name = "XP"
+    title = "X Pulse Presence"
+    var = Variation_894
+class Variation_1365(Compound):
+    fspec_size = None
+    items = [Item_1655, Item_1295, Item_1305, Item_899, Item_818, Item_1730, Item_1926]
+class Item_259(Item):
+    name = "110"
+    title = "Mode 5 Data Reports and Extended Mode 1 Code"
+    var = Variation_1365
+class Item_271(Item):
+    name = "120"
+    title = "Track Mode 2 Code"
+    var = Variation_901
 class Item_438(Item):
     name = "510"
     title = "Composed Track Number"
     var = Variation_1194
-class Item_439(Item):
-    name = "550"
-    title = "Category Version Number Report"
-    var = Variation_1239
-class Item_440(Item):
-    name = "550"
-    title = "System Status"
-    var = Variation_1024
+class Item_524(Item):
+    name = "APC"
+    title = "Estimated Accuracy Of Track Position (Cartesian)"
+    var = Variation_1152
+class Item_702(Item):
+    name = "COV"
+    title = "XY Covariance Component"
+    var = Variation_242
+class Item_529(Item):
+    name = "APW"
+    title = "Estimated Accuracy Of Track Position (WGS-84)"
+    var = Variation_996
+class Item_497(Item):
+    name = "AGA"
+    title = "Estimated Accuracy Of Calculated Track Geometric Altitude"
+    var = Variation_222
+class Item_470(Item):
+    name = "ABA"
+    title = "Estimated Accuracy Of Calculated Track Barometric Altitude"
+    var = Variation_213
+class Item_552(Item):
+    name = "ATV"
+    title = "Estimated Accuracy Of Track Velocity (Cartesian)"
+    var = Variation_1153
+class Item_466(Item):
+    name = "AA"
+    title = "Estimated Accuracy Of Acceleration (Cartesian)"
+    var = Variation_1151
+class Item_539(Item):
+    name = "ARC"
+    title = "Estimated Accuracy Of Rate Of Climb/Descent"
+    var = Variation_223
+class Variation_1334(Compound):
+    fspec_size = None
+    items = [Item_524, Item_702, Item_529, Item_497, Item_470, Item_552, Item_466, Item_539]
+class Item_433(Item):
+    name = "500"
+    title = "Estimated Accuracies"
+    var = Variation_1334
+class Item_1560(Item):
+    name = "SID"
+    title = "Sensor Identification"
+    var = Variation_1061
+class Item_1304(Item):
+    name = "POS"
+    title = "Measured Position"
+    var = Variation_1049
+class Item_942(Item):
+    name = "HEIGHT"
+    title = "Measured 3-D Height"
+    var = Variation_270
+class Item_1122(Item):
+    name = "MDC"
+    title = ""
+    var = Variation_1138
+class Item_1118(Item):
+    name = "MDA"
+    title = ""
+    var = Variation_1133
+class Item_1802(Item):
+    name = "TYP"
+    title = ""
+    var = Variation_1104
+class Variation_1363(Compound):
+    fspec_size = None
+    items = [Item_1560, Item_1304, Item_942, Item_1122, Item_1118, Item_1802]
+class Item_401(Item):
+    name = "340"
+    title = "Measured Information"
+    var = Variation_1363
+class Variation_1290(Compound):
+    fspec_size = None
+    items = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_404, Item_141, Item_215, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_401, None, None, None, None, None, Item_1421, Item_1580]
+class Item_688(Item):
+    name = "COM"
+    title = "Communications/ACAS Capability and Flight Status"
+    var = Variation_951
+class Item_582(Item):
+    name = "BDSDATA"
+    title = "BDS Register DATA"
+    var = Variation_1230
+class Item_595(Item):
+    name = "BPS"
+    title = "Barometric Pressure Setting"
+    var = Variation_895
+class Variation_1326(Compound):
+    fspec_size = None
+    items = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_688, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_582, Item_976, Item_1089, Item_595]
+class Item_405(Item):
+    name = "380"
+    title = "Aircraft Derived Data"
+    var = Variation_1326
+class Item_217(Item):
+    name = "080"
+    title = "Track Status"
+    var = Variation_1200
+class Item_941(Item):
+    name = "HEIGHT"
+    title = "Measured 3-D Height"
+    var = Variation_240
+class Variation_1362(Compound):
+    fspec_size = None
+    items = [Item_1560, Item_1304, Item_941, Item_1122, Item_1118, Item_1802]
+class Item_400(Item):
+    name = "340"
+    title = "Measured Information"
+    var = Variation_1362
+class Variation_1291(Compound):
+    fspec_size = None
+    items = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_405, Item_141, Item_217, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_400, None, None, None, None, None, Item_1421, Item_1580]
+class Variation_1327(Compound):
+    fspec_size = None
+    items = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_688, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_1099, Item_976, Item_1089, Item_595]
+class Item_406(Item):
+    name = "380"
+    title = "Aircraft Derived Data"
+    var = Variation_1327
+class Item_216(Item):
+    name = "080"
+    title = "Track Status"
+    var = Variation_1199
+class Variation_1292(Compound):
+    fspec_size = None
+    items = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_406, Item_141, Item_216, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_400, None, None, None, None, None, Item_1421, Item_1580]
+class Variation_1328(Compound):
+    fspec_size = None
+    items = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_688, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_1099, Item_976, Item_1089, Item_597]
+class Item_407(Item):
+    name = "380"
+    title = "Aircraft Derived Data"
+    var = Variation_1328
+class Variation_1293(Compound):
+    fspec_size = None
+    items = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_407, Item_141, Item_216, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_401, None, None, None, None, None, Item_1421, Item_1580]
+class Item_34(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_169
+class Item_71(Item):
+    name = "015"
+    title = "SDPS Identifier"
+    var = Variation_1252
+class Item_94(Item):
+    name = "020"
+    title = "Time of Message"
+    var = Variation_311
+class Item_130(Item):
+    name = "040"
+    title = "Alert Identifier"
+    var = Variation_234
+class Item_154(Item):
+    name = "045"
+    title = "Alert Status"
+    var = Variation_909
+class Item_178(Item):
+    name = "060"
+    title = "Safety Net Function and System Status"
+    var = Variation_1201
+class Item_109(Item):
+    name = "030"
+    title = "Track Number 1"
+    var = Variation_234
+class Item_502(Item):
+    name = "AI1"
+    title = "Aircraft Identifier (in 7 Characters) of Aircraft 1 Involved in the Conflict"
+    var = Variation_328
+class Item_1081(Item):
+    name = "M31"
+    title = "Mode 3/A Code Aircraft 1"
+    var = Variation_903
+class Item_721(Item):
+    name = "CPW"
+    title = "Predicted Conflict Position Target 1 in WGS-84 Coordinates"
+    var = Variation_998
+class Item_718(Item):
+    name = "CPC"
+    title = "Predicted Conflict Position for the Aircraft 1 Involved in the Conflict"
+    var = Variation_1159
+class Item_1782(Item):
+    name = "TT1"
+    title = "Time to Runway Threshold for First Approaching Aircraft in a RIMCA"
+    var = Variation_311
+class Item_801(Item):
+    name = "DT1"
+    title = "Distance to Runway Threshold for Aircraft 1 Involved in a RIMCA"
+    var = Variation_271
+class Item_475(Item):
+    name = "AC1"
+    title = "Characteristics of Aircraft 1 Involved in the Conflict"
+    var = Variation_1191
+class Item_1187(Item):
+    name = "MS1"
+    title = "Aircraft Identification Downloaded from Aircraft 1 Involved in the Conflict If Equipped with a Mode-S Transponder"
+    var = Variation_325
+class Item_869(Item):
+    name = "FP1"
+    title = "Number of the Flight Plan Correlated to Aircraft 1 Involved in the Conflict"
+    var = Variation_914
+class Item_626(Item):
+    name = "CF1"
+    title = "Cleared Flight Level for Aircraft 1 Involved in the Conflict"
+    var = Variation_280
+class Variation_1329(Compound):
+    fspec_size = None
+    items = [Item_502, Item_1081, Item_721, Item_718, Item_1782, Item_801, Item_475, Item_1187, Item_869, Item_626]
+class Item_319(Item):
+    name = "170"
+    title = "Aircraft Identification and Characteristics 1"
+    var = Variation_1329
+class Item_646(Item):
+    name = "CN"
+    title = "Conflict Nature"
+    var = Variation_1193
+class Item_613(Item):
+    name = "CC"
+    title = "Conflict Classification"
+    var = Variation_1091
+class Item_715(Item):
+    name = "CP"
+    title = "Conflict Probability"
+    var = Variation_208
+class Item_615(Item):
+    name = "CD"
+    title = "Conflict Duration"
+    var = Variation_311
+class Variation_1338(Compound):
+    fspec_size = None
+    items = [Item_646, Item_613, Item_715, Item_615]
+class Item_265(Item):
+    name = "120"
+    title = "Conflict Characteristics"
+    var = Variation_1338
+class Item_1679(Item):
+    name = "TC"
+    title = "Time to Conflict"
+    var = Variation_311
+class Item_1683(Item):
+    name = "TCA"
+    title = "Time to Closest Approach"
+    var = Variation_311
+class Item_638(Item):
+    name = "CHS"
+    title = "Current Horizontal Separation"
+    var = Variation_307
+class Item_1148(Item):
+    name = "MHS"
+    title = "Estimated Minimum Horizontal Separation"
+    var = Variation_271
+class Item_750(Item):
+    name = "CVS"
+    title = "Current Vertical Separation"
+    var = Variation_270
+class Item_1206(Item):
+    name = "MVS"
+    title = "Estimated Minimum Vertical Separation"
+    var = Variation_270
+class Variation_1370(Compound):
+    fspec_size = None
+    items = [Item_1679, Item_1683, Item_638, Item_1148, Item_750, Item_1206]
+class Item_186(Item):
+    name = "070"
+    title = "Conflict Timing and Separation"
+    var = Variation_1370
+class Item_208(Item):
+    name = "076"
+    title = "Vertical Deviation"
+    var = Variation_240
+class Item_203(Item):
+    name = "074"
+    title = "Longitudinal Deviation"
+    var = Variation_241
+class Item_206(Item):
+    name = "075"
+    title = "Transversal Distance Deviation"
+    var = Variation_299
+class Item_519(Item):
+    name = "AN"
+    title = "Area Name"
+    var = Variation_326
+class Item_607(Item):
+    name = "CAN"
+    title = "Crossing Area Name"
+    var = Variation_328
+class Item_1480(Item):
+    name = "RT1"
+    title = "Runway/Taxiway Designator 1"
+    var = Variation_328
+class Item_1481(Item):
+    name = "RT2"
+    title = "Runway/Taxiway Designator 2"
+    var = Variation_328
+class Item_1512(Item):
+    name = "SB"
+    title = "Stop Bar Designator"
+    var = Variation_328
+class Item_895(Item):
+    name = "G"
+    title = "Gate Designator"
+    var = Variation_328
+class Variation_1331(Compound):
+    fspec_size = None
+    items = [Item_519, Item_607, Item_1480, Item_1481, Item_1512, Item_895]
+class Item_239(Item):
+    name = "100"
+    title = "Area Definition"
+    var = Variation_1331
+class Item_124(Item):
+    name = "035"
+    title = "Track Number 2"
+    var = Variation_234
+class Item_503(Item):
+    name = "AI2"
+    title = "Aircraft Identifier (in 7 Characters) of Aircraft 2 Involved in the Conflict"
+    var = Variation_328
+class Item_1082(Item):
+    name = "M32"
+    title = "Mode 3/A Code Aircraft 2"
+    var = Variation_904
+class Item_722(Item):
+    name = "CPW"
+    title = "Predicted Conflict Position Target 2 in WGS-84 Coordinates"
+    var = Variation_998
+class Item_719(Item):
+    name = "CPL"
+    title = "Predicted Conflict Position for the Aircraft 2 Involved in the Conflict"
+    var = Variation_1159
+class Item_1783(Item):
+    name = "TT2"
+    title = "Time to Runway Threshold for Second Approaching Aircraft in a RIMCA"
+    var = Variation_311
+class Item_802(Item):
+    name = "DT2"
+    title = "Distance to Runway Threshold for Aircraft 2 Involved in a RIMCA"
+    var = Variation_271
+class Item_476(Item):
+    name = "AC2"
+    title = "Characteristics of Aircraft 2 Involved in the Conflict"
+    var = Variation_1191
+class Item_1188(Item):
+    name = "MS2"
+    title = "Aircraft Identification Downloaded From Aircraft 2 Involved in the Conflict If Eequipped With a Mode-S Transponder"
+    var = Variation_325
+class Item_870(Item):
+    name = "FP2"
+    title = "Number of the Flight Plan Correlated to Aircraft 2 Involved in the Conflict"
+    var = Variation_914
+class Item_627(Item):
+    name = "CF2"
+    title = "Cleared Flight Level for Aircraft 2 Involved in the Conflict"
+    var = Variation_280
+class Variation_1330(Compound):
+    fspec_size = None
+    items = [Item_503, Item_1082, Item_722, Item_719, Item_1783, Item_802, Item_476, Item_1188, Item_870, Item_627]
+class Item_330(Item):
+    name = "171"
+    title = "Aircraft Identification and Characteristics 2"
+    var = Variation_1330
+class Item_256(Item):
+    name = "110"
+    title = "FDPS Sector Control Identification"
+    var = Variation_1240
+class Variation_1294(Compound):
+    fspec_size = None
+    items = [Item_61, Item_34, Item_71, Item_94, Item_130, Item_154, Item_178, Item_109, Item_319, Item_265, Item_186, Item_208, Item_203, Item_206, Item_239, Item_124, Item_330, Item_256, None, Item_1421, Item_1580]
+class Item_35(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_175
+class Item_85(Item):
+    name = "020"
+    title = "Sector Number"
+    var = Variation_224
+class Item_144(Item):
+    name = "041"
+    title = "Antenna Rotation Speed"
+    var = Variation_287
+class Item_682(Item):
+    name = "COM"
+    title = "Common Part"
+    var = Variation_1023
+class Item_1335(Item):
+    name = "PSR"
+    title = "Specific Status Information for a PSR Sensor"
+    var = Variation_925
+class Item_1612(Item):
+    name = "SSR"
+    title = "Specific Status Information for a SSR Sensor"
+    var = Variation_927
+class Item_1131(Item):
+    name = "MDS"
+    title = "Specific Status Information for a Mode S Sensor"
+    var = Variation_926
+class Variation_1340(Compound):
+    fspec_size = None
+    items = [Item_682, None, None, Item_1335, Item_1612, Item_1131]
+class Item_167(Item):
+    name = "050"
+    title = "System Configuration and Status"
+    var = Variation_1340
+class Item_681(Item):
+    name = "COM"
+    title = "Common Part"
+    var = Variation_875
+class Item_1334(Item):
+    name = "PSR"
+    title = "Specific Processing Mode Information for a PSR Sensor"
+    var = Variation_1030
+class Item_1611(Item):
+    name = "SSR"
+    title = "Specific Processing Mode Information for a SSR Sensor"
+    var = Variation_1046
+class Item_1130(Item):
+    name = "MDS"
+    title = "Specific Processing Mode Information for a Mode S Sensor"
+    var = Variation_1045
+class Variation_1339(Compound):
+    fspec_size = None
+    items = [Item_681, None, None, Item_1334, Item_1611, Item_1130]
+class Item_182(Item):
+    name = "060"
+    title = "System Processing Mode"
+    var = Variation_1339
+class Item_188(Item):
+    name = "070"
+    title = "Message Count Values"
+    var = Variation_1263
+class Item_242(Item):
+    name = "100"
+    title = "Generic Polar Window"
+    var = Variation_1051
+class Item_254(Item):
+    name = "110"
+    title = "Data Filter"
+    var = Variation_158
+class Item_263(Item):
+    name = "120"
+    title = "3D-Position Of Data Source"
+    var = Variation_990
+class Item_221(Item):
+    name = "090"
+    title = "Collimation Error"
+    var = Variation_1053
+class Variation_1295(Compound):
+    fspec_size = None
+    items = [Item_61, Item_35, Item_107, Item_85, Item_144, Item_167, Item_182, Item_188, Item_242, Item_254, Item_263, Item_221, Item_1421, Item_1580]
+class Item_36(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_176
+class Item_189(Item):
+    name = "070"
+    title = "Message Count Values"
+    var = Variation_1264
+class Variation_1296(Compound):
+    fspec_size = None
+    items = [Item_61, Item_36, Item_107, Item_85, Item_144, Item_167, Item_182, Item_189, Item_242, Item_254, Item_263, Item_221, Item_1421, Item_1580]
+class Item_37(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_177
+class Variation_1297(Compound):
+    fspec_size = None
+    items = [Item_61, Item_37, Item_107, Item_85, Item_144, Item_167, Item_182, Item_189, Item_242, Item_254, Item_263, Item_221, Item_1421, Item_1580]
+class Item_38(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_178
+class Item_166(Item):
+    name = "050"
+    title = "Station Configuration Status"
+    var = Variation_1273
+class Item_180(Item):
+    name = "060"
+    title = "Station Processing Mode"
+    var = Variation_1273
+class Item_196(Item):
+    name = "070"
+    title = "Plot Count Values"
+    var = Variation_1235
+class Item_241(Item):
+    name = "100"
+    title = "Dynamic Window Type 1"
+    var = Variation_1054
+class Item_220(Item):
+    name = "090"
+    title = "Collimation Error"
+    var = Variation_1040
+class Item_218(Item):
+    name = "080"
+    title = "Warning/Error Conditions"
+    var = Variation_1273
+class Variation_1298(Compound):
+    fspec_size = None
+    items = [Item_61, Item_38, Item_85, Item_107, Item_144, Item_166, Item_180, Item_196, Item_241, Item_220, Item_218, None, Item_1580, None]
+class Item_39(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_179
+class Item_96(Item):
+    name = "020"
+    title = "Vector Qualifier"
+    var = Variation_1208
+class Item_127(Item):
+    name = "036"
+    title = "Sequence of Cartesian Vectors in SPF Notation"
+    var = Variation_1269
+class Item_122(Item):
+    name = "034"
+    title = "Sequence of Polar Vectors in SPF Notation"
+    var = Variation_1256
+class Item_131(Item):
+    name = "040"
+    title = "Contour Identifier"
+    var = Variation_1027
+class Item_164(Item):
+    name = "050"
+    title = "Sequence of Contour Points in SPF Notation"
+    var = Variation_1271
+class Item_231(Item):
+    name = "090"
+    title = "Time of Day"
+    var = Variation_311
+class Item_246(Item):
+    name = "100"
+    title = "Processing Status"
+    var = Variation_1189
+class Item_261(Item):
+    name = "110"
+    title = "Station Configuration Status"
+    var = Variation_1273
+class Item_270(Item):
+    name = "120"
+    title = "Total Number of Items Constituting One Weather Picture"
+    var = Variation_235
+class Item_129(Item):
+    name = "038"
+    title = "Sequence of Weather Vectors in SPF Notation"
+    var = Variation_1272
+class Variation_1299(Compound):
+    fspec_size = None
+    items = [Item_61, Item_39, Item_96, Item_127, Item_122, Item_131, Item_164, Item_231, Item_246, Item_261, Item_270, Item_129, Item_1580, None]
+class Item_40(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_180
+class Item_108(Item):
+    name = "030"
+    title = "Time of Message"
+    var = Variation_311
+class Item_81(Item):
+    name = "020"
+    title = "Batch Number"
+    var = Variation_191
+class Item_136(Item):
+    name = "040"
+    title = "SDPS Configuration and Status"
+    var = Variation_1022
+class Item_165(Item):
+    name = "050"
+    title = "Service Status Report"
+    var = Variation_181
+class Variation_1300(Compound):
+    fspec_size = None
+    items = [Item_61, Item_40, Item_72, Item_108, Item_81, Item_136, Item_165, None, None, None, None, None, Item_1421, Item_1580]
+class Item_41(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_182
+class Item_289(Item):
+    name = "140"
+    title = "Time of Day"
+    var = Variation_311
 class Item_441(Item):
     name = "550"
     title = "System Status"
@@ -7988,782 +12058,276 @@ class Item_444(Item):
     name = "553"
     title = "Reference Transponder Detailed Status"
     var = Variation_1209
-class Item_445(Item):
-    name = "600"
-    title = "Alert Messages"
-    var = Variation_923
-class Item_446(Item):
-    name = "600"
-    title = "Horizontal Position Information"
-    var = Variation_1355
 class Item_447(Item):
     name = "600"
     title = "Position of the MLT System Reference Point"
     var = Variation_1002
-class Item_448(Item):
-    name = "600"
-    title = "Position of the System Reference Point"
-    var = Variation_1004
-class Item_449(Item):
-    name = "601"
-    title = "Geometric Height Information"
-    var = Variation_1347
-class Item_450(Item):
-    name = "602"
-    title = "Horizontal Velocity Information"
-    var = Variation_1349
-class Item_451(Item):
-    name = "603"
-    title = "Horizontal Acceleration Information"
-    var = Variation_1348
-class Item_452(Item):
-    name = "604"
-    title = "Vertical Velocity Information"
-    var = Variation_1374
-class Item_453(Item):
-    name = "605"
-    title = "Tracks in Alert"
-    var = Variation_1233
-class Item_454(Item):
-    name = "605"
-    title = "Vertical Velocity Information"
-    var = Variation_1373
 class Item_455(Item):
     name = "610"
     title = "Height of the MLT System Reference Point"
     var = Variation_249
-class Item_456(Item):
-    name = "610"
-    title = "Height of the System Reference Point"
-    var = Variation_249
-class Item_457(Item):
-    name = "610"
-    title = "Holdbar Status"
-    var = Variation_1238
 class Item_458(Item):
     name = "620"
     title = "WGS-84 Undulation"
     var = Variation_194
-class Item_459(Item):
-    name = "625"
-    title = "Range Information"
-    var = Variation_1360
-class Item_460(Item):
-    name = "626"
-    title = "Doppler Information"
-    var = Variation_1343
-class Item_461(Item):
-    name = "627"
-    title = "Azimuth Information"
-    var = Variation_1336
-class Item_462(Item):
-    name = "628"
-    title = "Elevation Information"
-    var = Variation_1344
-class Item_463(Item):
-    name = "630"
-    title = "Path Quality"
-    var = Variation_1342
-class Item_464(Item):
-    name = "631"
-    title = "Contour (Azimuth, Elevation Angle, Range Extent)"
-    var = Variation_1236
-class Item_465(Item):
-    name = "A"
-    title = "Aerial Identification"
-    var = Variation_20
-class Item_466(Item):
-    name = "AA"
-    title = "Estimated Accuracy Of Acceleration (Cartesian)"
-    var = Variation_1151
-class Item_467(Item):
-    name = "AAC"
-    title = ""
-    var = Variation_804
-class Item_468(Item):
-    name = "AAC"
-    title = ""
-    var = Variation_805
-class Item_469(Item):
-    name = "AAC"
-    title = "Estimated Accuracy Of Acceleration (Cartesian)"
-    var = Variation_1155
-class Item_470(Item):
-    name = "ABA"
-    title = "Estimated Accuracy Of Calculated Track Barometric Altitude"
-    var = Variation_213
-class Item_471(Item):
-    name = "AC"
-    title = "ACAS Capabilities"
-    var = Variation_109
-class Item_472(Item):
-    name = "AC"
-    title = "ACAS Operational"
-    var = Variation_53
-class Item_473(Item):
-    name = "AC"
-    title = "ACAS Status"
-    var = Variation_110
-class Item_474(Item):
-    name = "AC"
-    title = "All Call Component"
-    var = Variation_708
-class Item_475(Item):
-    name = "AC1"
-    title = "Characteristics of Aircraft 1 Involved in the Conflict"
-    var = Variation_1191
-class Item_476(Item):
-    name = "AC2"
-    title = "Characteristics of Aircraft 2 Involved in the Conflict"
-    var = Variation_1191
-class Item_477(Item):
-    name = "ACASRA"
-    title = ""
-    var = Variation_434
-class Item_478(Item):
-    name = "ACK"
-    title = "Alert Acknowleged"
-    var = Variation_10
-class Item_479(Item):
-    name = "ACQI"
-    title = ""
-    var = Variation_108
-class Item_480(Item):
-    name = "ACS"
-    title = "ACAS Resolution Advisory Report"
-    var = Variation_327
-class Item_481(Item):
-    name = "ACS"
-    title = "ACAS Resolution Advisory Report Age"
-    var = Variation_217
-class Item_482(Item):
-    name = "ACT"
-    title = "Aircraft Derived Aircraft Type"
-    var = Variation_314
-class Item_483(Item):
-    name = "ADB"
-    title = "Age of the Last ADS-B Report Used to Update the Track"
-    var = Variation_217
-class Item_484(Item):
-    name = "ADEP"
-    title = "Departure Airport"
-    var = Variation_314
-class Item_485(Item):
-    name = "ADES"
-    title = "Destination Airport"
-    var = Variation_314
-class Item_486(Item):
-    name = "ADF"
-    title = "Altitude Discrepancy Flag"
-    var = Variation_821
-class Item_487(Item):
-    name = "ADR"
-    title = "24 Bits Aircraft Address"
-    var = Variation_296
-class Item_488(Item):
-    name = "ADR"
+class Variation_1301(Compound):
+    fspec_size = None
+    items = [Item_61, Item_41, Item_289, Item_441, Item_442, Item_443, Item_444, Item_447, Item_455, Item_458, None, None, Item_1421, Item_1580]
+class Item_44(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_185
+class Item_92(Item):
+    name = "020"
+    title = "Target Report Descriptor"
+    var = Variation_1220
+class Item_146(Item):
+    name = "041"
+    title = "Position in WGS-84 Co-ordinates"
+    var = Variation_1003
+class Item_134(Item):
+    name = "040"
+    title = "Measured Position in Polar Co-ordinates"
+    var = Variation_1050
+class Item_152(Item):
+    name = "042"
+    title = "Position in Cartesian Co-ordinates"
+    var = Variation_1160
+class Item_335(Item):
+    name = "200"
+    title = "Calculated Track Velocity in Polar Co-ordinates"
+    var = Variation_989
+class Item_345(Item):
+    name = "202"
+    title = "Calculated Track Velocity in Cartesian Co-ordinates"
+    var = Variation_1143
+class Item_312(Item):
+    name = "161"
+    title = "Track Number"
+    var = Variation_910
+class Item_322(Item):
+    name = "170"
+    title = "Track Status"
+    var = Variation_1181
+class Item_176(Item):
+    name = "060"
+    title = "Mode-3/A Code in Octal Representation"
+    var = Variation_1136
+class Item_362(Item):
+    name = "220"
     title = "Target Address"
     var = Variation_296
-class Item_489(Item):
-    name = "ADS"
-    title = ""
-    var = Variation_626
-class Item_490(Item):
-    name = "ADS"
-    title = ""
-    var = Variation_627
-class Item_491(Item):
-    name = "ADS"
-    title = ""
-    var = Variation_703
-class Item_492(Item):
-    name = "ADS"
-    title = "ADS-C Age"
-    var = Variation_282
-class Item_493(Item):
-    name = "ADS"
-    title = "Age of the Last ADS Report Used to Update the Track"
-    var = Variation_282
-class Item_494(Item):
-    name = "ADSB"
-    title = "On-Site ADS-B Information"
-    var = Variation_962
-class Item_495(Item):
-    name = "AE"
-    title = "Azimuth Error"
-    var = Variation_203
-class Item_496(Item):
-    name = "AFF"
-    title = ""
-    var = Variation_625
-class Item_497(Item):
-    name = "AGA"
-    title = "Estimated Accuracy Of Calculated Track Geometric Altitude"
-    var = Variation_222
-class Item_498(Item):
-    name = "AH"
-    title = "Altitude Hold"
-    var = Variation_373
-class Item_499(Item):
-    name = "AH"
-    title = "Altitude Hold"
-    var = Variation_431
-class Item_500(Item):
-    name = "AH"
-    title = "Altitude Hold Mode"
-    var = Variation_373
-class Item_501(Item):
-    name = "AH"
-    title = "Altitude Hold Mode"
-    var = Variation_374
-class Item_502(Item):
-    name = "AI1"
-    title = "Aircraft Identifier (in 7 Characters) of Aircraft 1 Involved in the Conflict"
-    var = Variation_328
-class Item_503(Item):
-    name = "AI2"
-    title = "Aircraft Identifier (in 7 Characters) of Aircraft 2 Involved in the Conflict"
-    var = Variation_328
-class Item_504(Item):
-    name = "AIC"
-    title = "Aircraft Identification Capability"
-    var = Variation_474
-class Item_505(Item):
-    name = "AIW"
-    title = ""
-    var = Variation_22
-class Item_506(Item):
-    name = "AIW"
-    title = ""
-    var = Variation_717
-class Item_507(Item):
-    name = "ALT"
-    title = "Altitude"
-    var = Variation_249
-class Item_508(Item):
-    name = "ALT"
-    title = "Altitude"
-    var = Variation_524
-class Item_509(Item):
-    name = "ALT"
-    title = "Altitude"
-    var = Variation_608
-class Item_510(Item):
-    name = "ALT"
-    title = "Altitude in Two's Complement Form"
-    var = Variation_239
-class Item_511(Item):
-    name = "ALT"
-    title = "Altitude in Two's Complement Form"
-    var = Variation_608
-class Item_512(Item):
-    name = "ALT"
-    title = "Altitude of Predicted Conflict"
-    var = Variation_240
-class Item_513(Item):
-    name = "AM"
-    title = "Approach Mode"
-    var = Variation_483
-class Item_514(Item):
-    name = "AM"
-    title = "Approach Mode"
-    var = Variation_484
-class Item_515(Item):
-    name = "AM"
-    title = "Approach Mode"
-    var = Variation_530
-class Item_516(Item):
-    name = "AMA"
-    title = ""
-    var = Variation_85
-class Item_517(Item):
-    name = "AMB"
-    title = "Ambiguity Range"
-    var = Variation_266
-class Item_518(Item):
-    name = "AN"
-    title = "Alert Number"
+class Item_371(Item):
+    name = "245"
+    title = "Target Identification"
+    var = Variation_1084
+class Item_377(Item):
+    name = "250"
+    title = "Mode S MB Data"
+    var = Variation_1245
+class Item_224(Item):
+    name = "090"
+    title = "Flight Level in Binary Representation"
+    var = Variation_1132
+class Item_232(Item):
+    name = "091"
+    title = "Measured Height"
+    var = Variation_257
+class Item_440(Item):
+    name = "550"
+    title = "System Status"
+    var = Variation_1024
+class Item_398(Item):
+    name = "310"
+    title = "Pre-programmed Message"
+    var = Variation_1096
+class Item_436(Item):
+    name = "500"
+    title = "Standard Deviation of Position"
+    var = Variation_957
+class Item_386(Item):
+    name = "280"
+    title = "Presence"
+    var = Variation_1244
+class Item_278(Item):
+    name = "131"
+    title = "Amplitude of Primary Plot"
     var = Variation_155
-class Item_519(Item):
-    name = "AN"
-    title = "Area Name"
-    var = Variation_326
-class Item_520(Item):
-    name = "ANT"
-    title = ""
-    var = Variation_660
-class Item_521(Item):
-    name = "ANT"
-    title = "Selected Antenna"
-    var = Variation_11
-class Item_522(Item):
-    name = "AOS"
-    title = "Aircraft Operational Status Age"
-    var = Variation_211
-class Item_523(Item):
-    name = "AP"
-    title = "Autopilot"
-    var = Variation_12
-class Item_524(Item):
-    name = "APC"
-    title = "Estimated Accuracy Of Track Position (Cartesian)"
-    var = Variation_1152
-class Item_525(Item):
-    name = "APC"
-    title = "Estimated Accuracy Of Track Position (Cartesian)"
-    var = Variation_1156
-class Item_526(Item):
-    name = "APD"
-    title = "Difference in Azimuth Between PSR and SSR Plot"
-    var = Variation_203
-class Item_527(Item):
-    name = "APM"
-    title = ""
-    var = Variation_23
-class Item_528(Item):
-    name = "APW"
-    title = ""
-    var = Variation_614
-class Item_529(Item):
-    name = "APW"
-    title = "Estimated Accuracy Of Track Position (WGS-84)"
-    var = Variation_996
-class Item_530(Item):
-    name = "APW"
-    title = "Estimated Accuracy Of Track Position (WGS84)"
-    var = Variation_997
-class Item_531(Item):
-    name = "AR"
-    title = ""
-    var = Variation_386
-class Item_532(Item):
-    name = "AR"
-    title = "Ambiguous Range"
-    var = Variation_288
-class Item_533(Item):
-    name = "ARA"
-    title = "ACAS Resolution Advisory Age"
-    var = Variation_211
-class Item_534(Item):
-    name = "ARA"
-    title = "Active Resolution Advisories"
-    var = Variation_231
-class Item_535(Item):
-    name = "ARC"
-    title = "Altitude Reporting Capability"
-    var = Variation_332
-class Item_536(Item):
-    name = "ARC"
-    title = "Altitude Reporting Capability"
-    var = Variation_588
-class Item_537(Item):
-    name = "ARC"
-    title = "Altitude Reporting Capability"
-    var = Variation_594
-class Item_538(Item):
-    name = "ARC"
-    title = "Estimated Accuracy Of Rate Of Climb / Descent"
-    var = Variation_243
-class Item_539(Item):
-    name = "ARC"
-    title = "Estimated Accuracy Of Rate Of Climb/Descent"
-    var = Variation_223
-class Item_540(Item):
-    name = "ARV"
-    title = "Air-Referenced Velocity Report Capability"
-    var = Variation_646
-class Item_541(Item):
-    name = "AS"
-    title = "Air Speed (IAS or Mach)"
-    var = Variation_422
-class Item_542(Item):
-    name = "AS"
-    title = "Air Speed Age"
-    var = Variation_211
-class Item_543(Item):
-    name = "ASI"
-    title = "Adjacent Sensor Information"
-    var = Variation_1255
-class Item_544(Item):
-    name = "ASM"
-    title = ""
-    var = Variation_24
-class Item_545(Item):
-    name = "AST"
-    title = "Aircraft Stand"
-    var = Variation_325
-class Item_546(Item):
-    name = "AT"
-    title = "Alert Type"
-    var = Variation_155
-class Item_547(Item):
-    name = "ATH"
-    title = "Estimated Accuracy Of Track Height"
-    var = Variation_242
-class Item_548(Item):
-    name = "ATL"
-    title = "ADS-B/Track Link"
-    var = Variation_1225
-class Item_549(Item):
-    name = "ATO"
-    title = "Accuracy of Transmission Time Offset"
-    var = Variation_701
-class Item_550(Item):
-    name = "ATP"
-    title = "Address Type"
-    var = Variation_117
-class Item_551(Item):
-    name = "ATP"
-    title = "Address Type"
-    var = Variation_125
-class Item_552(Item):
-    name = "ATV"
-    title = "Estimated Accuracy Of Track Velocity (Cartesian)"
-    var = Variation_1153
-class Item_553(Item):
-    name = "AU"
-    title = "Asynchronous Update"
-    var = Variation_359
-class Item_554(Item):
-    name = "AVC"
-    title = "Estimated Accuracy Of Track Velocity (Cartesian)"
-    var = Variation_1157
-class Item_555(Item):
-    name = "AVL"
-    title = ""
-    var = Variation_505
-class Item_556(Item):
-    name = "AVL"
-    title = "Stand Available"
-    var = Variation_504
-class Item_557(Item):
-    name = "AVS"
-    title = ""
-    var = Variation_70
-class Item_558(Item):
-    name = "AVS"
-    title = "Seconds Available"
-    var = Variation_70
-class Item_559(Item):
-    name = "AVS"
-    title = "Seconds Available Flag"
-    var = Variation_70
-class Item_560(Item):
-    name = "AVTECH"
-    title = "Available Technologies"
-    var = Variation_1139
-class Item_561(Item):
-    name = "AX"
-    title = ""
-    var = Variation_195
-class Item_562(Item):
-    name = "AX"
-    title = "Ax"
-    var = Variation_195
-class Item_563(Item):
-    name = "AX"
-    title = "X Acceleration"
-    var = Variation_196
-class Item_564(Item):
-    name = "AY"
-    title = ""
-    var = Variation_195
-class Item_565(Item):
-    name = "AY"
-    title = "Ay"
-    var = Variation_195
-class Item_566(Item):
-    name = "AY"
-    title = "Y Acceleration"
-    var = Variation_196
-class Item_567(Item):
-    name = "AZ"
-    title = "Azimuth"
-    var = Variation_293
-class Item_568(Item):
-    name = "AZCON"
-    title = ""
-    var = Variation_293
-class Item_569(Item):
-    name = "AZEX"
-    title = "Azimuth Extent"
-    var = Variation_1059
-class Item_570(Item):
-    name = "AZM"
-    title = "Azimuth Error"
-    var = Variation_203
-class Item_571(Item):
-    name = "AZR"
-    title = "Azimuth Rate"
-    var = Variation_259
-class Item_572(Item):
-    name = "B1A"
-    title = "BDS 1,0 Bit 16"
-    var = Variation_527
-class Item_573(Item):
-    name = "B1B"
-    title = "BDS 1,0 Bit 37/40"
-    var = Variation_685
-class Item_574(Item):
-    name = "B1B"
-    title = "BDS 1,0 Bits 37/40"
-    var = Variation_685
-class Item_575(Item):
-    name = "B1B"
-    title = "BDS BDS 1,0 Bits 37/40"
-    var = Variation_685
-class Item_576(Item):
-    name = "B2LOW"
-    title = "Class B2 Transmit Power Less Than 70 Watts"
-    var = Variation_610
-class Item_577(Item):
-    name = "BAZ"
-    title = ""
-    var = Variation_383
-class Item_578(Item):
-    name = "BDS1"
-    title = ""
-    var = Variation_127
-class Item_579(Item):
-    name = "BDS1"
-    title = "Comm B Data Buffer Store 1 Address"
-    var = Variation_127
-class Item_580(Item):
-    name = "BDS2"
-    title = ""
-    var = Variation_685
-class Item_581(Item):
-    name = "BDS2"
-    title = "Comm B Data Buffer Store 2 Address"
-    var = Variation_685
-class Item_582(Item):
-    name = "BDSDATA"
-    title = "BDS Register DATA"
-    var = Variation_1230
-class Item_583(Item):
-    name = "BIT1"
-    title = "TU1/RU1 Contribution"
-    var = Variation_76
-class Item_584(Item):
-    name = "BIT2"
-    title = "TU2/RU2 Contribution"
-    var = Variation_381
-class Item_585(Item):
-    name = "BIT3"
-    title = "TU3/RU3 Contribution"
-    var = Variation_493
-class Item_586(Item):
-    name = "BIT4"
-    title = "TU4/RU4 Contribution"
-    var = Variation_573
-class Item_587(Item):
-    name = "BIT5"
-    title = "TU5/RU5 Contribution"
-    var = Variation_659
-class Item_588(Item):
-    name = "BIT6"
-    title = "TU6/RU6 Contribution"
-    var = Variation_753
-class Item_589(Item):
-    name = "BIT7"
-    title = "TU7/RU7 Contribution"
-    var = Variation_833
-class Item_590(Item):
-    name = "BIT8"
-    title = "TU8/RU8 Contribution"
-    var = Variation_867
-class Item_591(Item):
-    name = "BIZ"
-    title = ""
-    var = Variation_78
-class Item_592(Item):
-    name = "BKN"
-    title = "Bank Number"
-    var = Variation_127
-class Item_593(Item):
-    name = "BPS"
-    title = ""
-    var = Variation_698
-class Item_594(Item):
-    name = "BPS"
-    title = "Barometric Pressure Setting"
-    var = Variation_697
-class Item_595(Item):
-    name = "BPS"
-    title = "Barometric Pressure Setting"
-    var = Variation_895
-class Item_596(Item):
-    name = "BPS"
-    title = "Barometric Pressure Setting"
-    var = Variation_896
-class Item_597(Item):
-    name = "BPS"
-    title = "Barometric Pressure Setting (derived from Mode S BDS 4,0)"
-    var = Variation_895
-class Item_598(Item):
-    name = "BPS"
-    title = "Barometric Pressure Setting Data Age"
-    var = Variation_217
-class Item_599(Item):
-    name = "BVR"
-    title = "Barometric Vertical Rate"
-    var = Variation_258
-class Item_600(Item):
-    name = "BVR"
-    title = "Barometric Vertical Rate"
-    var = Variation_424
-class Item_601(Item):
-    name = "BVR"
-    title = "Barometric Vertical Rate Age"
-    var = Variation_211
-class Item_602(Item):
-    name = "BVR"
-    title = "Barometric Vertical Rate Age"
-    var = Variation_217
-class Item_603(Item):
-    name = "C"
-    title = "Data Compression Indicator"
-    var = Variation_57
-class Item_604(Item):
-    name = "CA"
-    title = "Communications Capability of the Transponder"
-    var = Variation_120
-class Item_605(Item):
-    name = "CAL"
-    title = "Calculated Doppler Speed"
-    var = Variation_955
-class Item_606(Item):
-    name = "CAL"
-    title = "Calculated Doppler Speed, Coded in Two's Complement"
-    var = Variation_846
-class Item_607(Item):
-    name = "CAN"
-    title = "Crossing Area Name"
-    var = Variation_328
-class Item_608(Item):
-    name = "CAS"
-    title = "Conflict Location in Civil Airspace"
-    var = Variation_335
-class Item_609(Item):
-    name = "CAT"
-    title = "Category"
-    var = Variation_191
-class Item_610(Item):
-    name = "CATC"
-    title = ""
-    var = Variation_25
-class Item_611(Item):
-    name = "CATC"
-    title = "CAS Type & Capability"
-    var = Variation_976
-class Item_612(Item):
-    name = "CAUSE"
-    title = "Cause"
-    var = Variation_128
-class Item_613(Item):
-    name = "CC"
-    title = "Conflict Classification"
-    var = Variation_1091
-class Item_614(Item):
-    name = "CCP"
-    title = "Current Control Position"
-    var = Variation_942
-class Item_615(Item):
-    name = "CD"
-    title = "Conflict Duration"
+class Item_350(Item):
+    name = "210"
+    title = "Calculated Acceleration"
+    var = Variation_932
+class Variation_1302(Compound):
+    fspec_size = None
+    items = [Item_61, Item_44, Item_92, Item_289, Item_146, Item_134, Item_152, Item_335, Item_345, Item_312, Item_322, Item_176, Item_362, Item_371, Item_377, Item_396, Item_224, Item_232, Item_383, Item_440, Item_398, Item_436, Item_386, Item_278, Item_350, None, Item_1580, Item_1421]
+class Item_46(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_187
+class Item_97(Item):
+    name = "020"
+    title = "Video Record Header"
+    var = Variation_315
+class Item_110(Item):
+    name = "030"
+    title = "Video Summary"
+    var = Variation_1224
+class Item_143(Item):
+    name = "040"
+    title = "Video Header Nano"
+    var = Variation_1082
+class Item_148(Item):
+    name = "041"
+    title = "Video Header Femto"
+    var = Variation_1081
+class Item_156(Item):
+    name = "048"
+    title = "Video Cells Resolution & Data Compression Indicator"
+    var = Variation_936
+class Item_157(Item):
+    name = "049"
+    title = "Video Octets & Video Cells Counters"
+    var = Variation_1021
+class Item_169(Item):
+    name = "050"
+    title = "Video Block Low Data Volume"
+    var = Variation_1227
+class Item_170(Item):
+    name = "051"
+    title = "Video Block Medium Data Volume"
+    var = Variation_1231
+class Item_171(Item):
+    name = "052"
+    title = "Video Block High Data Volume"
+    var = Variation_1232
+class Variation_1303(Compound):
+    fspec_size = None
+    items = [Item_61, Item_46, Item_97, Item_110, Item_143, Item_148, Item_156, Item_157, Item_169, Item_170, Item_171, Item_289, Item_1421, Item_1580]
+class Item_47(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_188
+class Item_95(Item):
+    name = "020"
+    title = "Vector Qualifier"
+    var = Variation_1207
+class Item_106(Item):
+    name = "030"
+    title = "Sequence of Cartesian Vectors"
+    var = Variation_1270
+class Item_181(Item):
+    name = "060"
+    title = "Synchronisation/Control Signal"
+    var = Variation_1211
+class Item_199(Item):
+    name = "070"
+    title = "Time of Day"
     var = Variation_311
-class Item_616(Item):
-    name = "CDM"
-    title = ""
-    var = Variation_589
-class Item_617(Item):
-    name = "CDM"
-    title = "Climbing / Descending Mode"
-    var = Variation_760
-class Item_618(Item):
-    name = "CDM"
-    title = "Climbing/Descending Mode"
-    var = Variation_99
-class Item_619(Item):
-    name = "CDTIA"
-    title = "Cockpit Display of Traffic Information Airborne"
-    var = Variation_709
-class Item_620(Item):
-    name = "CDTIS"
-    title = "Cockpit Display of Traffic Information Surface"
-    var = Variation_532
-class Item_621(Item):
-    name = "CELLDUR"
-    title = "Video Cell Duration in Femto-seconds"
-    var = Variation_321
-class Item_622(Item):
-    name = "CELLDUR"
-    title = "Video Cell Duration in Nano-seconds"
-    var = Variation_322
-class Item_623(Item):
-    name = "CEN"
-    title = ""
-    var = Variation_155
-class Item_624(Item):
-    name = "CEN"
-    title = "Centre"
-    var = Variation_155
-class Item_625(Item):
-    name = "CENTRE"
-    title = "8-bit Group Identification Code"
-    var = Variation_155
-class Item_626(Item):
-    name = "CF1"
-    title = "Cleared Flight Level for Aircraft 1 Involved in the Conflict"
-    var = Variation_280
-class Item_627(Item):
-    name = "CF2"
-    title = "Cleared Flight Level for Aircraft 2 Involved in the Conflict"
-    var = Variation_280
-class Item_628(Item):
-    name = "CFL"
-    title = "Current Cleared Flight Level"
-    var = Variation_280
-class Item_629(Item):
-    name = "CH"
-    title = "Change in Mode 3/A"
-    var = Variation_478
-class Item_630(Item):
-    name = "CHAB"
-    title = "Channel A/B Selection Status"
-    var = Variation_400
-class Item_631(Item):
-    name = "CHAB"
-    title = "Channel A/B Selection Status"
-    var = Variation_401
-class Item_632(Item):
-    name = "CHAB"
-    title = "Channel A/B Selection Status"
-    var = Variation_402
-class Item_633(Item):
-    name = "CHAM"
-    title = ""
-    var = Variation_713
-class Item_634(Item):
-    name = "CHN"
-    title = ""
-    var = Variation_433
-class Item_635(Item):
-    name = "CHN"
-    title = ""
-    var = Variation_613
-class Item_636(Item):
-    name = "CHR"
-    title = "Characters 1-8 (Coded on 6 Bits Each) Defining Target Identification"
-    var = Variation_326
-class Item_637(Item):
-    name = "CHR"
-    title = "Characters 1-8 (coded on 6 Bits Each) Defining Target Identification"
-    var = Variation_326
-class Item_638(Item):
-    name = "CHS"
-    title = "Current Horizontal Separation"
-    var = Variation_307
+class Item_211(Item):
+    name = "080"
+    title = "Processing Status"
+    var = Variation_1189
+class Item_229(Item):
+    name = "090"
+    title = "Radar Configuration and Status"
+    var = Variation_1251
+class Item_249(Item):
+    name = "100"
+    title = "Vector Count"
+    var = Variation_235
+class Variation_1304(Compound):
+    fspec_size = None
+    items = [Item_61, Item_47, Item_95, Item_106, Item_181, Item_199, Item_211, Item_229, Item_249]
+class Item_48(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_1017
+class Item_87(Item):
+    name = "020"
+    title = "Target Report Descriptor"
+    var = Variation_1195
+class Item_111(Item):
+    name = "030"
+    title = "Warning/Error Conditions"
+    var = Variation_1273
+class Item_293(Item):
+    name = "145"
+    title = "Time of Applicability"
+    var = Variation_311
+class Item_316(Item):
+    name = "161"
+    title = "Track/Plot Number"
+    var = Variation_235
+class Item_329(Item):
+    name = "170"
+    title = "Track/Plot Status"
+    var = Variation_1180
+class Item_168(Item):
+    name = "050"
+    title = "Update Period"
+    var = Variation_885
+class Item_1038(Item):
+    name = "LEN"
+    title = "Target Length"
+    var = Variation_274
+class Item_1880(Item):
+    name = "WDT"
+    title = "Target Width"
+    var = Variation_274
+class Item_948(Item):
+    name = "HGT"
+    title = "Target Height"
+    var = Variation_274
+class Item_1267(Item):
+    name = "ORT"
+    title = "Target Orientation"
+    var = Variation_293
+class Variation_1351(Compound):
+    fspec_size = None
+    items = [Item_1038, Item_1880, Item_948, Item_1267]
+class Item_382(Item):
+    name = "270"
+    title = "Target Size & Orientation"
+    var = Variation_1351
+class Item_393(Item):
+    name = "300"
+    title = "Object Classification"
+    var = Variation_1242
+class Item_416(Item):
+    name = "400"
+    title = "Measurement Identifier"
+    var = Variation_1029
+class Item_1280(Item):
+    name = "P84"
+    title = "Horizontal Position in WGS-84 Coordinates"
+    var = Variation_1009
+class Item_956(Item):
+    name = "HPR"
+    title = "Horizontal Position Resolution"
+    var = Variation_1055
+class Item_952(Item):
+    name = "HPP"
+    title = "Horizontal Position Precision"
+    var = Variation_1073
+class Variation_1355(Compound):
+    fspec_size = None
+    items = [Item_1280, Item_956, Item_952]
+class Item_446(Item):
+    name = "600"
+    title = "Horizontal Position Information"
+    var = Variation_1355
+class Item_911(Item):
+    name = "GH"
+    title = "Geometric Height (WGS-84)"
+    var = Variation_302
+class Item_1469(Item):
+    name = "RSGH"
+    title = "Geometric Height Resolution"
+    var = Variation_310
+class Item_1530(Item):
+    name = "SDGH"
+    title = "Geometric Height Precision"
+    var = Variation_310
 class Item_639(Item):
     name = "CI6"
     title = "Confidence Interval for Geometric Height (67%)"
@@ -8772,94 +12336,6 @@ class Item_640(Item):
     name = "CI9"
     title = "Confidence Interval for Geometric Height (95%)"
     var = Variation_1113
-class Item_641(Item):
-    name = "CID"
-    title = "Component ID"
-    var = Variation_234
-class Item_642(Item):
-    name = "CL"
-    title = "Confidence Level"
-    var = Variation_765
-class Item_643(Item):
-    name = "CLAM"
-    title = ""
-    var = Variation_714
-class Item_644(Item):
-    name = "CLS"
-    title = "Classification"
-    var = Variation_227
-class Item_645(Item):
-    name = "CLU"
-    title = "Cluster State"
-    var = Variation_531
-class Item_646(Item):
-    name = "CN"
-    title = "Conflict Nature"
-    var = Variation_1193
-class Item_647(Item):
-    name = "CNF"
-    title = ""
-    var = Variation_17
-class Item_648(Item):
-    name = "CNF"
-    title = ""
-    var = Variation_18
-class Item_649(Item):
-    name = "CNF"
-    title = ""
-    var = Variation_788
-class Item_650(Item):
-    name = "CNF"
-    title = "Confirmed Vs. Tentative Track"
-    var = Variation_15
-class Item_651(Item):
-    name = "CNF"
-    title = "Confirmed vs. Tentative Track"
-    var = Variation_787
-class Item_652(Item):
-    name = "COAYHPY"
-    title = ""
-    var = Variation_197
-class Item_653(Item):
-    name = "COAZRAZ"
-    title = ""
-    var = Variation_197
-class Item_654(Item):
-    name = "CODADV"
-    title = ""
-    var = Variation_197
-class Item_655(Item):
-    name = "CODAR"
-    title = "Correlation of Doppler Acceleration and Range"
-    var = Variation_197
-class Item_656(Item):
-    name = "CODARA"
-    title = "Correlation of Doppler Acceleration and Range Acceleration"
-    var = Variation_197
-class Item_657(Item):
-    name = "CODARR"
-    title = "Correlation of Doppler Acceleration and Range Rate"
-    var = Variation_197
-class Item_658(Item):
-    name = "CODVR"
-    title = "Correlation of Doppler Velocity and Range"
-    var = Variation_197
-class Item_659(Item):
-    name = "CODVRA"
-    title = "Correlation of Doppler Velocity and Range Acceleration"
-    var = Variation_197
-class Item_660(Item):
-    name = "CODVRR"
-    title = "Correlation of Doppler Velocity and Range Rate"
-    var = Variation_197
-class Item_661(Item):
-    name = "COELREL"
-    title = ""
-    var = Variation_197
-class Item_662(Item):
-    name = "COGHHA"
-    title = "Correlation of Geometric Height and Horizontal Acceleration"
-    var = Variation_1145
 class Item_663(Item):
     name = "COGHHP"
     title = "Correlation of Geometric Height and Horizontal Position"
@@ -8868,6 +12344,48 @@ class Item_664(Item):
     name = "COGHHV"
     title = "Correlation of Geometric Height and Horizontal Velocity"
     var = Variation_1145
+class Item_662(Item):
+    name = "COGHHA"
+    title = "Correlation of Geometric Height and Horizontal Acceleration"
+    var = Variation_1145
+class Variation_1347(Compound):
+    fspec_size = None
+    items = [Item_911, Item_1469, Item_1530, Item_639, Item_640, Item_663, Item_664, Item_662]
+class Item_449(Item):
+    name = "601"
+    title = "Geometric Height Information"
+    var = Variation_1347
+class Item_960(Item):
+    name = "HV"
+    title = "Horizontal Velocity Vector"
+    var = Variation_1150
+class Item_1472(Item):
+    name = "RSHV"
+    title = "Horizontal Velocity Resolution"
+    var = Variation_1149
+class Item_1535(Item):
+    name = "SDHV"
+    title = "Horizontal Velocity Precision"
+    var = Variation_1148
+class Item_675(Item):
+    name = "COHVHP"
+    title = "Correlation of Horizontal Velocity and Horizontal Position"
+    var = Variation_947
+class Variation_1349(Compound):
+    fspec_size = None
+    items = [Item_960, Item_1472, Item_1535, Item_675]
+class Item_450(Item):
+    name = "602"
+    title = "Horizontal Velocity Information"
+    var = Variation_1349
+class Item_931(Item):
+    name = "HA"
+    title = "Horizontal Acceleration Vector"
+    var = Variation_1146
+class Item_1532(Item):
+    name = "SDHA"
+    title = "Horizontal Acceleration Precision"
+    var = Variation_1147
 class Item_665(Item):
     name = "COHAHP"
     title = "Correlation of Horizontal Acceleration and Horizontal Position"
@@ -8876,182 +12394,25 @@ class Item_666(Item):
     name = "COHAHV"
     title = "Correlation of Horizontal Acceleration and Horizontal Velocity"
     var = Variation_946
-class Item_667(Item):
-    name = "COHAXHPX"
-    title = ""
-    var = Variation_197
-class Item_668(Item):
-    name = "COHAXHPY"
-    title = ""
-    var = Variation_197
-class Item_669(Item):
-    name = "COHAXHVX"
-    title = ""
-    var = Variation_197
-class Item_670(Item):
-    name = "COHAXHVY"
-    title = ""
-    var = Variation_197
-class Item_671(Item):
-    name = "COHAXY"
-    title = ""
-    var = Variation_197
-class Item_672(Item):
-    name = "COHAYHPX"
-    title = ""
-    var = Variation_197
-class Item_673(Item):
-    name = "COHAYHVX"
-    title = ""
-    var = Variation_197
-class Item_674(Item):
-    name = "COHAYHVY"
-    title = ""
-    var = Variation_197
-class Item_675(Item):
-    name = "COHVHP"
-    title = "Correlation of Horizontal Velocity and Horizontal Position"
-    var = Variation_947
-class Item_676(Item):
-    name = "COHVXHPX"
-    title = ""
-    var = Variation_197
-class Item_677(Item):
-    name = "COHVXHPY"
-    title = ""
-    var = Variation_197
-class Item_678(Item):
-    name = "COHVXY"
-    title = ""
-    var = Variation_197
-class Item_679(Item):
-    name = "COHVYHPX"
-    title = ""
-    var = Variation_197
-class Item_680(Item):
-    name = "COHVYHPY"
-    title = ""
-    var = Variation_197
-class Item_681(Item):
-    name = "COM"
-    title = "Common Part"
-    var = Variation_875
-class Item_682(Item):
-    name = "COM"
-    title = "Common Part"
-    var = Variation_1023
-class Item_683(Item):
-    name = "COM"
-    title = "Communication/ACAS Capability and Flight Status Age"
-    var = Variation_217
-class Item_684(Item):
-    name = "COM"
-    title = "Communications Capability of the Transponder"
-    var = Variation_118
-class Item_685(Item):
-    name = "COM"
-    title = "Communications Capability of the Transponder"
-    var = Variation_119
-class Item_686(Item):
-    name = "COM"
-    title = "Communications Capability of the Transponder"
-    var = Variation_772
-class Item_687(Item):
-    name = "COM"
-    title = "Communications/ACAS Capability and Flight Status"
-    var = Variation_949
-class Item_688(Item):
-    name = "COM"
-    title = "Communications/ACAS Capability and Flight Status"
-    var = Variation_951
-class Item_689(Item):
-    name = "COMACAS"
-    title = "Communications/ACAS Capability and Flight Status"
-    var = Variation_952
-class Item_690(Item):
-    name = "COMACAS"
-    title = "Communications/ACAS Capability and Flight Status"
-    var = Variation_953
-class Item_691(Item):
-    name = "CON"
-    title = ""
-    var = Variation_16
-class Item_692(Item):
-    name = "CON"
-    title = ""
-    var = Variation_102
-class Item_693(Item):
-    name = "CORAR"
-    title = ""
-    var = Variation_197
-class Item_694(Item):
-    name = "CORARR"
-    title = ""
-    var = Variation_197
-class Item_695(Item):
-    name = "CORRR"
-    title = ""
-    var = Variation_197
-class Item_696(Item):
-    name = "CORSHPXY"
-    title = ""
-    var = Variation_197
-class Item_697(Item):
-    name = "CORSHVXY"
-    title = ""
-    var = Variation_197
-class Item_698(Item):
-    name = "COSDHPXY"
-    title = ""
-    var = Variation_197
-class Item_699(Item):
-    name = "COUNT"
-    title = "COUNTER"
-    var = Variation_776
-class Item_700(Item):
-    name = "COUNT"
-    title = "Counter Value"
-    var = Variation_315
-class Item_701(Item):
-    name = "COUNTER"
-    title = ""
-    var = Variation_845
-class Item_702(Item):
-    name = "COV"
-    title = "XY Covariance Component"
-    var = Variation_242
-class Item_703(Item):
-    name = "COVAGH"
-    title = ""
-    var = Variation_197
-class Item_704(Item):
-    name = "COVAHA"
-    title = "Correlation of Vertical Acceleration and Horizontal Acceleration"
-    var = Variation_1145
-class Item_705(Item):
-    name = "COVAHP"
-    title = "Correlation of Vertical Acceleration and Horizontal Position"
-    var = Variation_1145
-class Item_706(Item):
-    name = "COVAHV"
-    title = "Correlation of Vertical Acceleration and Horizontal Velocity"
-    var = Variation_1145
-class Item_707(Item):
-    name = "COVAVV"
-    title = ""
-    var = Variation_197
-class Item_708(Item):
-    name = "COVERAGE"
-    title = "Coverage"
-    var = Variation_313
-class Item_709(Item):
-    name = "COVVGH"
-    title = ""
-    var = Variation_197
-class Item_710(Item):
-    name = "COVVHA"
-    title = "Correlation of Vertical Velocity and Horizontal Acceleration"
-    var = Variation_1145
+class Variation_1348(Compound):
+    fspec_size = None
+    items = [Item_931, Item_1532, Item_665, Item_666]
+class Item_451(Item):
+    name = "603"
+    title = "Horizontal Acceleration Information"
+    var = Variation_1348
+class Item_1868(Item):
+    name = "VV"
+    title = "Vertical Velocity"
+    var = Variation_303
+class Item_1479(Item):
+    name = "RSVV"
+    title = "Vertical Velocity Resolution"
+    var = Variation_275
+class Item_1545(Item):
+    name = "SDVV"
+    title = "Vertical Velocity Precision"
+    var = Variation_1077
 class Item_711(Item):
     name = "COVVHP"
     title = "Correlation of Vertical Velocity and Horizontal Position"
@@ -9060,326 +12421,192 @@ class Item_712(Item):
     name = "COVVHV"
     title = "Correlation of Vertical Velocity and Horizontal Velocity"
     var = Variation_1145
-class Item_713(Item):
-    name = "COVXY"
-    title = "Covariance in Two’s Complement Form"
-    var = Variation_249
-class Item_714(Item):
-    name = "CP"
-    title = "Circular Polarisation"
-    var = Variation_527
-class Item_715(Item):
-    name = "CP"
-    title = "Conflict Probability"
-    var = Variation_208
-class Item_716(Item):
-    name = "CP"
-    title = "Conflict Properties Class"
-    var = Variation_679
-class Item_717(Item):
-    name = "CPC"
-    title = "Common and Plot Characteristics"
-    var = Variation_1356
-class Item_718(Item):
-    name = "CPC"
-    title = "Predicted Conflict Position for the Aircraft 1 Involved in the Conflict"
-    var = Variation_1159
-class Item_719(Item):
-    name = "CPL"
-    title = "Predicted Conflict Position for the Aircraft 2 Involved in the Conflict"
-    var = Variation_1159
-class Item_720(Item):
-    name = "CPR"
-    title = "Compact Position Reporting"
-    var = Variation_612
-class Item_721(Item):
-    name = "CPW"
-    title = "Predicted Conflict Position Target 1 in WGS-84 Coordinates"
-    var = Variation_998
-class Item_722(Item):
-    name = "CPW"
-    title = "Predicted Conflict Position Target 2 in WGS-84 Coordinates"
-    var = Variation_998
-class Item_723(Item):
-    name = "CQF"
-    title = "Aircraft CQF"
-    var = Variation_417
-class Item_724(Item):
-    name = "CR"
-    title = ""
-    var = Variation_835
-class Item_725(Item):
-    name = "CRA"
-    title = ""
-    var = Variation_789
-class Item_726(Item):
-    name = "CROSS"
-    title = "Crossing Test"
-    var = Variation_706
-class Item_727(Item):
-    name = "CRT"
-    title = ""
-    var = Variation_645
-class Item_728(Item):
-    name = "CRT"
-    title = ""
-    var = Variation_820
-class Item_729(Item):
-    name = "CS"
-    title = "Callsign"
-    var = Variation_328
-class Item_730(Item):
-    name = "CS"
-    title = "Component State/Mode"
-    var = Variation_842
-class Item_731(Item):
-    name = "CS"
-    title = "Conflict Severity"
-    var = Variation_860
-class Item_732(Item):
-    name = "CSN"
-    title = "Callsign"
-    var = Variation_328
-class Item_733(Item):
-    name = "CSN"
-    title = "Contour Serial Number"
-    var = Variation_155
-class Item_734(Item):
-    name = "CSN"
-    title = "Contributing Sensors No Local Tracknumbers"
-    var = Variation_1253
-class Item_735(Item):
-    name = "CST"
-    title = ""
-    var = Variation_36
-class Item_736(Item):
-    name = "CST"
-    title = ""
-    var = Variation_449
-class Item_737(Item):
-    name = "CST"
-    title = ""
-    var = Variation_482
-class Item_738(Item):
-    name = "CST"
-    title = ""
-    var = Variation_485
-class Item_739(Item):
-    name = "CST"
-    title = ""
-    var = Variation_510
-class Item_740(Item):
-    name = "CST"
-    title = "Contributing Sensors With Local Tracknumbers"
-    var = Variation_1254
-class Item_741(Item):
-    name = "CST"
-    title = "Track Coasted"
-    var = Variation_50
-class Item_742(Item):
-    name = "CSTH"
-    title = "Coasted – Height"
-    var = Variation_749
-class Item_743(Item):
-    name = "CSTP"
-    title = "Coasted - Position"
-    var = Variation_651
-class Item_744(Item):
-    name = "CTB"
-    title = "Calculated Track Barometric Altitude"
-    var = Variation_423
-class Item_745(Item):
-    name = "CTBA"
-    title = "Calculated Track Barometric Altitude"
-    var = Variation_423
-class Item_746(Item):
-    name = "CTL"
-    title = "Current Control Position"
-    var = Variation_942
-class Item_747(Item):
-    name = "CURRENTII"
-    title = "Current II Code"
-    var = Variation_685
-class Item_748(Item):
-    name = "CUW"
-    title = ""
-    var = Variation_790
-class Item_749(Item):
-    name = "CV"
-    title = "32-bit Counter Value"
-    var = Variation_313
-class Item_750(Item):
-    name = "CVS"
-    title = "Current Vertical Separation"
-    var = Variation_270
-class Item_751(Item):
-    name = "D"
-    title = ""
-    var = Variation_38
-class Item_752(Item):
-    name = "D1"
-    title = ""
-    var = Variation_132
-class Item_753(Item):
-    name = "D2"
-    title = ""
-    var = Variation_690
-class Item_754(Item):
-    name = "DA"
-    title = ""
-    var = Variation_476
-class Item_755(Item):
-    name = "DA"
-    title = ""
-    var = Variation_477
+class Item_710(Item):
+    name = "COVVHA"
+    title = "Correlation of Vertical Velocity and Horizontal Acceleration"
+    var = Variation_1145
+class Variation_1374(Compound):
+    fspec_size = None
+    items = [Item_1868, Item_1479, Item_1545, Item_711, Item_712, Item_710]
+class Item_452(Item):
+    name = "604"
+    title = "Vertical Velocity Information"
+    var = Variation_1374
+class Item_1831(Item):
+    name = "VA"
+    title = "Vertical Acceleration"
+    var = Variation_245
+class Item_1478(Item):
+    name = "RSVA"
+    title = "Vertical Acceleration Precision"
+    var = Variation_1076
+class Item_705(Item):
+    name = "COVAHP"
+    title = "Correlation of Vertical Acceleration and Horizontal Position"
+    var = Variation_1145
+class Item_706(Item):
+    name = "COVAHV"
+    title = "Correlation of Vertical Acceleration and Horizontal Velocity"
+    var = Variation_1145
+class Item_704(Item):
+    name = "COVAHA"
+    title = "Correlation of Vertical Acceleration and Horizontal Acceleration"
+    var = Variation_1145
+class Variation_1373(Compound):
+    fspec_size = None
+    items = [Item_1831, Item_1478, Item_705, Item_706, Item_704]
+class Item_454(Item):
+    name = "605"
+    title = "Vertical Velocity Information"
+    var = Variation_1373
+class Item_430(Item):
+    name = "480"
+    title = "Associations"
+    var = Variation_1229
+class Item_1388(Item):
+    name = "R"
+    title = "Range"
+    var = Variation_300
+class Item_1475(Item):
+    name = "RSR"
+    title = "Range Resolution"
+    var = Variation_308
+class Item_1537(Item):
+    name = "SDR"
+    title = "Range Precision"
+    var = Variation_308
+class Item_1462(Item):
+    name = "RR"
+    title = "Range Rate"
+    var = Variation_301
+class Item_1476(Item):
+    name = "RSRR"
+    title = "Range Rate Resolution"
+    var = Variation_309
+class Item_1541(Item):
+    name = "SDRR"
+    title = "Range Rate Precision"
+    var = Variation_1075
+class Item_1390(Item):
+    name = "RA"
+    title = "Range Acceleration"
+    var = Variation_254
+class Item_1539(Item):
+    name = "SDRA"
+    title = "Range Acceleration Precision"
+    var = Variation_1074
+class Variation_1360(Compound):
+    fspec_size = None
+    items = [Item_1388, Item_1475, Item_1537, Item_1462, Item_1476, Item_1541, Item_1390, Item_1539]
+class Item_459(Item):
+    name = "625"
+    title = "Range Information"
+    var = Variation_1360
+class Item_809(Item):
+    name = "DV"
+    title = "Doppler Velocity"
+    var = Variation_303
+class Item_1526(Item):
+    name = "SDDV"
+    title = "Precision of Doppler Velocity"
+    var = Variation_283
 class Item_756(Item):
     name = "DA"
     title = "Doppler Acceleration"
     var = Variation_254
-class Item_757(Item):
-    name = "DAA"
-    title = "Detectand Avoid Capabilities"
-    var = Variation_964
-class Item_758(Item):
-    name = "DATAUSE"
-    title = "Use of Adjacent Sensor Data"
-    var = Variation_143
-class Item_759(Item):
-    name = "DATE"
-    title = "Common and Plot Characteristics Date"
-    var = Variation_1172
-class Item_760(Item):
-    name = "DAY"
-    title = ""
-    var = Variation_767
-class Item_761(Item):
-    name = "DAY"
-    title = "Day"
-    var = Variation_766
-class Item_762(Item):
-    name = "DBPSMARR"
-    title = ""
-    var = Variation_26
-class Item_763(Item):
-    name = "DBPSMARR"
-    title = ""
-    var = Variation_439
-class Item_764(Item):
-    name = "DBPSMDEP"
-    title = ""
-    var = Variation_337
-class Item_765(Item):
-    name = "DBPSMDEP"
-    title = ""
-    var = Variation_540
-class Item_766(Item):
-    name = "DBPSMTL"
-    title = ""
-    var = Variation_436
-class Item_767(Item):
-    name = "DBPSMTL"
-    title = ""
-    var = Variation_618
-class Item_768(Item):
-    name = "DC"
-    title = "Differencial Correction"
-    var = Variation_675
-class Item_769(Item):
-    name = "DC"
-    title = "Differential Correction"
-    var = Variation_501
-class Item_770(Item):
-    name = "DC"
-    title = "Differential Correction Status"
-    var = Variation_676
-class Item_771(Item):
-    name = "DC"
-    title = "Downlink Command"
-    var = Variation_586
-class Item_772(Item):
-    name = "DCR"
-    title = ""
-    var = Variation_563
-class Item_773(Item):
-    name = "DCR"
-    title = "Differential Correction"
-    var = Variation_58
-class Item_774(Item):
-    name = "DCS"
-    title = "Downlink Current Status"
-    var = Variation_574
-class Item_775(Item):
-    name = "DDS"
-    title = "Downlink Default Status"
-    var = Variation_385
-class Item_776(Item):
-    name = "DEP"
-    title = "Departure Airport"
-    var = Variation_314
-class Item_777(Item):
-    name = "DEVX"
-    title = "Standard Deviation of X Component"
-    var = Variation_214
-class Item_778(Item):
-    name = "DEVY"
-    title = "Standard Deviation of Y Component"
-    var = Variation_214
-class Item_779(Item):
-    name = "DF17CA"
-    title = "Transponder Capability"
-    var = Variation_971
-class Item_780(Item):
-    name = "DG"
-    title = ""
-    var = Variation_620
-class Item_781(Item):
-    name = "DIAG"
-    title = "Diagnostic"
-    var = Variation_687
-class Item_782(Item):
-    name = "DIV"
-    title = ""
-    var = Variation_650
-class Item_783(Item):
-    name = "DIV"
-    title = "Divergence Test"
-    var = Variation_783
-class Item_784(Item):
-    name = "DLF"
-    title = "Channel A/B Selection Status for Data Link Function"
-    var = Variation_785
-class Item_785(Item):
-    name = "DLK"
-    title = "Data Link Characteristics"
-    var = Variation_1265
-class Item_786(Item):
-    name = "DM"
-    title = "Downlink Mask"
-    var = Variation_336
-class Item_787(Item):
-    name = "DME"
-    title = ""
-    var = Variation_711
-class Item_788(Item):
-    name = "DOP"
-    title = "DOP of Position"
-    var = Variation_1154
-class Item_789(Item):
-    name = "DOP"
-    title = "Doppler Speed"
-    var = Variation_266
-class Item_790(Item):
-    name = "DOU"
-    title = ""
-    var = Variation_516
-class Item_791(Item):
-    name = "DOU"
-    title = ""
-    var = Variation_533
-class Item_792(Item):
-    name = "DOU"
-    title = "Signals Level of Confidence in Plot to Track Association Process"
-    var = Variation_567
+class Item_1525(Item):
+    name = "SDDA"
+    title = "Precision of Doppler Acceleration"
+    var = Variation_1071
+class Item_658(Item):
+    name = "CODVR"
+    title = "Correlation of Doppler Velocity and Range"
+    var = Variation_197
+class Item_660(Item):
+    name = "CODVRR"
+    title = "Correlation of Doppler Velocity and Range Rate"
+    var = Variation_197
+class Item_659(Item):
+    name = "CODVRA"
+    title = "Correlation of Doppler Velocity and Range Acceleration"
+    var = Variation_197
+class Item_655(Item):
+    name = "CODAR"
+    title = "Correlation of Doppler Acceleration and Range"
+    var = Variation_197
+class Item_657(Item):
+    name = "CODARR"
+    title = "Correlation of Doppler Acceleration and Range Rate"
+    var = Variation_197
+class Item_656(Item):
+    name = "CODARA"
+    title = "Correlation of Doppler Acceleration and Range Acceleration"
+    var = Variation_197
+class Variation_1343(Compound):
+    fspec_size = None
+    items = [Item_809, Item_1526, Item_756, Item_1525, Item_658, Item_660, Item_659, Item_655, Item_657, Item_656]
+class Item_460(Item):
+    name = "626"
+    title = "Doppler Information"
+    var = Variation_1343
+class Item_1467(Item):
+    name = "RSAZ"
+    title = "Azimuth Resolution"
+    var = Variation_290
+class Item_1521(Item):
+    name = "SDASZ"
+    title = "Standard Deviation of Azimuth"
+    var = Variation_290
+class Item_571(Item):
+    name = "AZR"
+    title = "Azimuth Rate"
+    var = Variation_259
+class Item_1523(Item):
+    name = "SDAZR"
+    title = "Standard Deviation of Azimuth Rate"
+    var = Variation_1070
+class Item_569(Item):
+    name = "AZEX"
+    title = "Azimuth Extent"
+    var = Variation_1059
+class Variation_1336(Compound):
+    fspec_size = None
+    items = [Item_567, Item_1467, Item_1521, Item_571, Item_1523, Item_569]
+class Item_461(Item):
+    name = "627"
+    title = "Azimuth Information"
+    var = Variation_1336
+class Item_814(Item):
+    name = "EL"
+    title = "Elevation"
+    var = Variation_259
+class Item_1468(Item):
+    name = "RSEL"
+    title = "Elevation Resolution"
+    var = Variation_290
+class Item_1527(Item):
+    name = "SDEL"
+    title = "Standard Deviation of Elevation"
+    var = Variation_290
+class Item_841(Item):
+    name = "ER"
+    title = "Elevation Rate"
+    var = Variation_260
+class Item_1529(Item):
+    name = "SDER"
+    title = "Standard Deviation of Elevation Rate"
+    var = Variation_1072
+class Item_816(Item):
+    name = "ELEX"
+    title = "Elevation Extent"
+    var = Variation_1058
+class Variation_1344(Compound):
+    fspec_size = None
+    items = [Item_814, Item_1468, Item_1527, Item_841, Item_1529, Item_816]
+class Item_462(Item):
+    name = "628"
+    title = "Elevation Information"
+    var = Variation_1344
 class Item_793(Item):
     name = "DPP"
     title = "Direct Path - Power"
@@ -9388,2666 +12615,6 @@ class Item_794(Item):
     name = "DPS"
     title = "Direct Path - Signal to Noise Ratio (SNR)"
     var = Variation_192
-class Item_795(Item):
-    name = "DRHO"
-    title = ""
-    var = Variation_194
-class Item_796(Item):
-    name = "DRN"
-    title = ""
-    var = Variation_234
-class Item_797(Item):
-    name = "DRNA"
-    title = "DRN Availability"
-    var = Variation_852
-class Item_798(Item):
-    name = "DS1DS2"
-    title = "Radar Detection in Last Antenna Scan"
-    var = Variation_395
-class Item_799(Item):
-    name = "DSAM"
-    title = ""
-    var = Variation_791
-class Item_800(Item):
-    name = "DST"
-    title = "Destination Airport"
-    var = Variation_314
-class Item_801(Item):
-    name = "DT1"
-    title = "Distance to Runway Threshold for Aircraft 1 Involved in a RIMCA"
-    var = Variation_271
-class Item_802(Item):
-    name = "DT2"
-    title = "Distance to Runway Threshold for Aircraft 2 Involved in a RIMCA"
-    var = Variation_271
-class Item_803(Item):
-    name = "DTHETA"
-    title = ""
-    var = Variation_202
-class Item_804(Item):
-    name = "DTI"
-    title = "Cockpit Display of Traffic Information"
-    var = Variation_582
-class Item_805(Item):
-    name = "DUPF"
-    title = ""
-    var = Variation_352
-class Item_806(Item):
-    name = "DUPM"
-    title = ""
-    var = Variation_450
-class Item_807(Item):
-    name = "DUPT"
-    title = ""
-    var = Variation_37
-class Item_808(Item):
-    name = "DURATION"
-    title = "Duration"
-    var = Variation_206
-class Item_809(Item):
-    name = "DV"
-    title = "Doppler Velocity"
-    var = Variation_303
-class Item_810(Item):
-    name = "E"
-    title = ""
-    var = Variation_259
-class Item_811(Item):
-    name = "E"
-    title = ""
-    var = Variation_293
-class Item_812(Item):
-    name = "ECAT"
-    title = "Emitter Category"
-    var = Variation_171
-class Item_813(Item):
-    name = "EI"
-    title = "Exit Indication"
-    var = Variation_834
-class Item_814(Item):
-    name = "EL"
-    title = "Elevation"
-    var = Variation_259
-class Item_815(Item):
-    name = "ELCON"
-    title = ""
-    var = Variation_259
-class Item_816(Item):
-    name = "ELEX"
-    title = "Elevation Extent"
-    var = Variation_1058
-class Item_817(Item):
-    name = "EM1"
-    title = "Extended Mode 1 Code in Octal Representation"
-    var = Variation_694
-class Item_818(Item):
-    name = "EM1"
-    title = "Extended Mode 1 Code in Octal Representation"
-    var = Variation_897
-class Item_819(Item):
-    name = "EM1"
-    title = "Extended Mode 1 Code in Octal Representation"
-    var = Variation_1115
-class Item_820(Item):
-    name = "EM1"
-    title = "Extended Mode 1 Code in Octal Representation"
-    var = Variation_1116
-class Item_821(Item):
-    name = "EM1"
-    title = "Extended Mode 1 Reply in Octal Representation"
-    var = Variation_694
-class Item_822(Item):
-    name = "EMC"
-    title = "Emitter Category"
-    var = Variation_173
-class Item_823(Item):
-    name = "EMC"
-    title = "Emitter Category Age"
-    var = Variation_217
-class Item_824(Item):
-    name = "EMP"
-    title = ""
-    var = Variation_98
-class Item_825(Item):
-    name = "EMP"
-    title = "Stand Empty"
-    var = Variation_97
-class Item_826(Item):
-    name = "EMS"
-    title = ""
-    var = Variation_517
-class Item_827(Item):
-    name = "ENDAZ"
-    title = "End Azimuth of the Cells Group"
-    var = Variation_293
-class Item_828(Item):
-    name = "ENDR"
-    title = "End Range"
-    var = Variation_155
-class Item_829(Item):
-    name = "EP"
-    title = "ADSB Element Populated Bit"
-    var = Variation_1
-class Item_830(Item):
-    name = "EP"
-    title = "Element Populated Bit"
-    var = Variation_39
-class Item_831(Item):
-    name = "EP"
-    title = "Element Populated Bit"
-    var = Variation_40
-class Item_832(Item):
-    name = "EP"
-    title = "Element Populated Bit"
-    var = Variation_454
-class Item_833(Item):
-    name = "EP"
-    title = "Element Populated Bit"
-    var = Variation_551
-class Item_834(Item):
-    name = "EP"
-    title = "Element Populated Bit"
-    var = Variation_630
-class Item_835(Item):
-    name = "EP"
-    title = "Element Populated Bit"
-    var = Variation_732
-class Item_836(Item):
-    name = "EP"
-    title = "Element Population Bit"
-    var = Variation_551
-class Item_837(Item):
-    name = "EP"
-    title = "PAI Element Populated Bit"
-    var = Variation_653
-class Item_838(Item):
-    name = "EP"
-    title = "SCN Element Populated Bit"
-    var = Variation_491
-class Item_839(Item):
-    name = "ER"
-    title = ""
-    var = Variation_496
-class Item_840(Item):
-    name = "ER"
-    title = ""
-    var = Variation_792
-class Item_841(Item):
-    name = "ER"
-    title = "Elevation Rate"
-    var = Variation_260
-class Item_842(Item):
-    name = "ERR"
-    title = ""
-    var = Variation_370
-class Item_843(Item):
-    name = "ERR"
-    title = "Extended Range Report"
-    var = Variation_312
-class Item_844(Item):
-    name = "ERRC"
-    title = "Error Code"
-    var = Variation_140
-class Item_845(Item):
-    name = "ES"
-    title = ""
-    var = Variation_77
-class Item_846(Item):
-    name = "ES"
-    title = "ADS-B Extended Squitter Age"
-    var = Variation_217
-class Item_847(Item):
-    name = "ES"
-    title = "ES IN Capability"
-    var = Variation_77
-class Item_848(Item):
-    name = "EVOLRHOEND"
-    title = "Predicted Largest Range"
-    var = Variation_285
-class Item_849(Item):
-    name = "EVOLRHOSTART"
-    title = "Predicted Closest Range"
-    var = Variation_285
-class Item_850(Item):
-    name = "EVOLTHETAEND"
-    title = "Predicted Largest Azimuth"
-    var = Variation_293
-class Item_851(Item):
-    name = "EVOLTHETASTART"
-    title = "Predicted Smallest Azimuth"
-    var = Variation_293
-class Item_852(Item):
-    name = "F"
-    title = "Scaling Factor"
-    var = Variation_139
-class Item_853(Item):
-    name = "FAMILY"
-    title = ""
-    var = Variation_131
-class Item_854(Item):
-    name = "FCT"
-    title = "Flight Category"
-    var = Variation_983
-class Item_855(Item):
-    name = "FDR"
-    title = "Flight Data Retained"
-    var = Variation_41
-class Item_856(Item):
-    name = "FL"
-    title = ""
-    var = Variation_524
-class Item_857(Item):
-    name = "FL"
-    title = "Flight Level"
-    var = Variation_523
-class Item_858(Item):
-    name = "FL"
-    title = "Flight Level Age"
-    var = Variation_211
-class Item_859(Item):
-    name = "FLD"
-    title = "Fast Lateral Divergence"
-    var = Variation_430
-class Item_860(Item):
-    name = "FLIGHTCAT"
-    title = "Flight Category"
-    var = Variation_985
-class Item_861(Item):
-    name = "FLIGHTCAT"
-    title = "Flight Category"
-    var = Variation_986
-class Item_862(Item):
-    name = "FLT"
-    title = "Flight Level Tracking"
-    var = Variation_366
-class Item_863(Item):
-    name = "FOEFRI"
-    title = ""
-    var = Variation_762
-class Item_864(Item):
-    name = "FOEFRI"
-    title = "Indication Foe/Friend (Mode4)"
-    var = Variation_763
-class Item_865(Item):
-    name = "FOM"
-    title = ""
-    var = Variation_606
-class Item_866(Item):
-    name = "FOM"
-    title = "Figure of Merit"
-    var = Variation_606
-class Item_867(Item):
-    name = "FOM"
-    title = "Figure of Merit"
-    var = Variation_889
-class Item_868(Item):
-    name = "FOM"
-    title = "Figure of Merit"
-    var = Variation_890
-class Item_869(Item):
-    name = "FP1"
-    title = "Number of the Flight Plan Correlated to Aircraft 1 Involved in the Conflict"
-    var = Variation_914
-class Item_870(Item):
-    name = "FP2"
-    title = "Number of the Flight Plan Correlated to Aircraft 2 Involved in the Conflict"
-    var = Variation_914
-class Item_871(Item):
-    name = "FPC"
-    title = ""
-    var = Variation_569
-class Item_872(Item):
-    name = "FPLT"
-    title = ""
-    var = Variation_806
-class Item_873(Item):
-    name = "FPPSID"
-    title = "FPPS Identification Tag"
-    var = Variation_1064
-class Item_874(Item):
-    name = "FR"
-    title = ""
-    var = Variation_575
-class Item_875(Item):
-    name = "FR1FR2"
-    title = ""
-    var = Variation_507
-class Item_876(Item):
-    name = "FR1FR2"
-    title = ""
-    var = Variation_508
-class Item_877(Item):
-    name = "FR1FR2"
-    title = "Flight Rules"
-    var = Variation_507
-class Item_878(Item):
-    name = "FR1FR2"
-    title = "Flight Rules"
-    var = Variation_508
-class Item_879(Item):
-    name = "FRIFOE"
-    title = ""
-    var = Variation_590
-class Item_880(Item):
-    name = "FRQ"
-    title = "Transmitter Frequency"
-    var = Variation_263
-class Item_881(Item):
-    name = "FS"
-    title = "Flight Status"
-    var = Variation_9
-class Item_882(Item):
-    name = "FSA"
-    title = "Final State Selected Altitude Age"
-    var = Variation_211
-class Item_883(Item):
-    name = "FSI"
-    title = "Full Second Indication"
-    var = Variation_114
-class Item_884(Item):
-    name = "FSI"
-    title = "Full Second Indication"
-    var = Variation_115
-class Item_885(Item):
-    name = "FSS"
-    title = "Final State Selected Altitude"
-    var = Variation_1018
-class Item_886(Item):
-    name = "FSS"
-    title = "Final State Selected Altitude Age"
-    var = Variation_217
-class Item_887(Item):
-    name = "FSTLST"
-    title = ""
-    var = Variation_840
-class Item_888(Item):
-    name = "FTD"
-    title = ""
-    var = Variation_437
-class Item_889(Item):
-    name = "FTN"
-    title = "Fusion Track Number"
-    var = Variation_422
-class Item_890(Item):
-    name = "FTN"
-    title = "Fusion Track Number"
-    var = Variation_693
-class Item_891(Item):
-    name = "FVD"
-    title = "Fast Vertical Divergence"
-    var = Variation_529
-class Item_892(Item):
-    name = "G"
-    title = ""
-    var = Variation_338
-class Item_893(Item):
-    name = "G"
-    title = ""
-    var = Variation_339
-class Item_894(Item):
-    name = "G"
-    title = "Garbled"
-    var = Variation_338
-class Item_895(Item):
-    name = "G"
-    title = "Gate Designator"
-    var = Variation_328
-class Item_896(Item):
-    name = "GA"
-    title = ""
-    var = Variation_522
-class Item_897(Item):
-    name = "GA"
-    title = "GNSS-derived Altitude of Target, Expressed as Height Above WGS 84 Ellipsoid"
-    var = Variation_522
-class Item_898(Item):
-    name = "GA"
-    title = "Mode 5 GNSS-derived Altitude"
-    var = Variation_876
-class Item_899(Item):
-    name = "GA"
-    title = "Mode 5 GNSS-derived Altitude"
-    var = Variation_877
-class Item_900(Item):
-    name = "GAL"
-    title = "Geometric Altitude"
-    var = Variation_257
-class Item_901(Item):
-    name = "GAL"
-    title = "Geometric Altitude Age"
-    var = Variation_217
-class Item_902(Item):
-    name = "GAO"
-    title = "GPS Antenna Offset"
-    var = Variation_155
-class Item_903(Item):
-    name = "GATOAT"
-    title = ""
-    var = Variation_111
-class Item_904(Item):
-    name = "GATOAT"
-    title = "Flight Type"
-    var = Variation_111
-class Item_905(Item):
-    name = "GATOAT"
-    title = "Identification of Conflict Categories Definition Table"
-    var = Variation_111
-class Item_906(Item):
-    name = "GBS"
-    title = ""
-    var = Variation_390
-class Item_907(Item):
-    name = "GBS"
-    title = ""
-    var = Variation_579
-class Item_908(Item):
-    name = "GBS"
-    title = ""
-    var = Variation_757
-class Item_909(Item):
-    name = "GBS"
-    title = "Ground Bit Set"
-    var = Variation_836
-class Item_910(Item):
-    name = "GBS"
-    title = "Ground Bit Setting"
-    var = Variation_360
-class Item_911(Item):
-    name = "GH"
-    title = "Geometric Height (WGS-84)"
-    var = Variation_302
-class Item_912(Item):
-    name = "GH"
-    title = "Geometric Height Age"
-    var = Variation_211
-class Item_913(Item):
-    name = "GHO"
-    title = ""
-    var = Variation_27
-class Item_914(Item):
-    name = "GHO"
-    title = ""
-    var = Variation_793
-class Item_915(Item):
-    name = "GHO"
-    title = "Ghost Vs. True Target"
-    var = Variation_391
-class Item_916(Item):
-    name = "GS"
-    title = "Ground Speed"
-    var = Variation_256
-class Item_917(Item):
-    name = "GS"
-    title = "Ground Speed Referenced to WGS-84"
-    var = Variation_427
-class Item_918(Item):
-    name = "GS"
-    title = "Ground Speed in Two's Complement Form Referenced to WGS84"
-    var = Variation_256
-class Item_919(Item):
-    name = "GSP"
-    title = "Calculated Groundspeed"
-    var = Variation_289
-class Item_920(Item):
-    name = "GSP"
-    title = "Ground Speed"
-    var = Variation_289
-class Item_921(Item):
-    name = "GSP"
-    title = "Ground Speed Age"
-    var = Variation_217
-class Item_922(Item):
-    name = "GSS"
-    title = "Ground Speed"
-    var = Variation_692
-class Item_923(Item):
-    name = "GSSP"
-    title = "Ground Station Status Reporting Period"
-    var = Variation_152
-class Item_924(Item):
-    name = "GV"
-    title = ""
-    var = Variation_534
-class Item_925(Item):
-    name = "GV"
-    title = "Ground Vector Age"
-    var = Variation_211
-class Item_926(Item):
-    name = "GVA"
-    title = "Geometric Altitude Accuracy"
-    var = Variation_759
-class Item_927(Item):
-    name = "GVR"
-    title = "Geometric Vertical Rate"
-    var = Variation_258
-class Item_928(Item):
-    name = "GVR"
-    title = "Geometric Vertical Rate"
-    var = Variation_424
-class Item_929(Item):
-    name = "GVR"
-    title = "Geometric Vertical Rate Age"
-    var = Variation_211
-class Item_930(Item):
-    name = "GVR"
-    title = "Geometrical Vertical Rate Age"
-    var = Variation_217
-class Item_931(Item):
-    name = "HA"
-    title = "Horizontal Acceleration Vector"
-    var = Variation_1146
-class Item_932(Item):
-    name = "HAMHD"
-    title = ""
-    var = Variation_794
-class Item_933(Item):
-    name = "HAMHD"
-    title = ""
-    var = Variation_795
-class Item_934(Item):
-    name = "HAMRD"
-    title = ""
-    var = Variation_28
-class Item_935(Item):
-    name = "HAMRD"
-    title = ""
-    var = Variation_32
-class Item_936(Item):
-    name = "HAMVD"
-    title = ""
-    var = Variation_340
-class Item_937(Item):
-    name = "HAMVD"
-    title = ""
-    var = Variation_344
-class Item_938(Item):
-    name = "HD"
-    title = ""
-    var = Variation_663
-class Item_939(Item):
-    name = "HDG"
-    title = "Calculated Heading"
-    var = Variation_293
-class Item_940(Item):
-    name = "HDR"
-    title = "Horizontal Reference Direction"
-    var = Variation_664
-class Item_941(Item):
-    name = "HEIGHT"
-    title = "Measured 3-D Height"
-    var = Variation_240
-class Item_942(Item):
-    name = "HEIGHT"
-    title = "Measured 3-D Height"
-    var = Variation_270
-class Item_943(Item):
-    name = "HF"
-    title = ""
-    var = Variation_455
-class Item_944(Item):
-    name = "HG"
-    title = ""
-    var = Variation_576
-class Item_945(Item):
-    name = "HGT"
-    title = "Heading/Ground Track Information"
-    var = Variation_153
-class Item_946(Item):
-    name = "HGT"
-    title = "Height of Data Source"
-    var = Variation_237
-class Item_947(Item):
-    name = "HGT"
-    title = "Mode-C HEIGHT"
-    var = Variation_523
-class Item_948(Item):
-    name = "HGT"
-    title = "Target Height"
-    var = Variation_274
-class Item_949(Item):
-    name = "HOR"
-    title = ""
-    var = Variation_607
-class Item_950(Item):
-    name = "HOR"
-    title = "Hours"
-    var = Variation_607
-class Item_951(Item):
-    name = "HOR"
-    title = "Hours, from 0 to 23"
-    var = Variation_607
-class Item_952(Item):
-    name = "HPP"
-    title = "Horizontal Position Precision"
-    var = Variation_1073
-class Item_953(Item):
-    name = "HPR"
-    title = ""
-    var = Variation_822
-class Item_954(Item):
-    name = "HPR"
-    title = ""
-    var = Variation_862
-class Item_955(Item):
-    name = "HPR"
-    title = "Flight Priority"
-    var = Variation_822
-class Item_956(Item):
-    name = "HPR"
-    title = "Horizontal Position Resolution"
-    var = Variation_1055
-class Item_957(Item):
-    name = "HRD"
-    title = ""
-    var = Variation_581
-class Item_958(Item):
-    name = "HTS"
-    title = ""
-    var = Variation_361
-class Item_959(Item):
-    name = "HTT"
-    title = ""
-    var = Variation_456
-class Item_960(Item):
-    name = "HV"
-    title = "Horizontal Velocity Vector"
-    var = Variation_1150
-class Item_961(Item):
-    name = "HVI"
-    title = ""
-    var = Variation_438
-class Item_962(Item):
-    name = "I"
-    title = "Intensity Level"
-    var = Variation_408
-class Item_963(Item):
-    name = "I"
-    title = "Intensity Level"
-    var = Variation_412
-class Item_964(Item):
-    name = "I1"
-    title = "Indicator 1"
-    var = Variation_637
-class Item_965(Item):
-    name = "I10"
-    title = "Indicator 10"
-    var = Variation_740
-class Item_966(Item):
-    name = "I11"
-    title = "Indicator 11"
-    var = Variation_815
-class Item_967(Item):
-    name = "I12"
-    title = "Indicator 12"
-    var = Variation_859
-class Item_968(Item):
-    name = "I2"
-    title = "Indicator 2"
-    var = Variation_740
-class Item_969(Item):
-    name = "I3"
-    title = "Indicator 3"
-    var = Variation_815
-class Item_970(Item):
-    name = "I4"
-    title = "Indicator 4"
-    var = Variation_859
-class Item_971(Item):
-    name = "I5"
-    title = "Indicator 5"
-    var = Variation_47
-class Item_972(Item):
-    name = "I6"
-    title = "Indicator 6"
-    var = Variation_364
-class Item_973(Item):
-    name = "I7"
-    title = "Indicator 7"
-    var = Variation_459
-class Item_974(Item):
-    name = "I8"
-    title = "Indicator 8"
-    var = Variation_556
-class Item_975(Item):
-    name = "I9"
-    title = "Indicator 9"
-    var = Variation_637
-class Item_976(Item):
-    name = "IAR"
-    title = "Indicated Airspeed"
-    var = Variation_264
-class Item_977(Item):
-    name = "IAR"
-    title = "Indicated Airspeed Data Age"
-    var = Variation_217
-class Item_978(Item):
-    name = "IAS"
-    title = ""
-    var = Variation_422
-class Item_979(Item):
-    name = "IAS"
-    title = "Indicated Airspeed / Mach Nb Age"
-    var = Variation_217
-class Item_980(Item):
-    name = "IAS"
-    title = "Indicated Airspeed/Mach No"
-    var = Variation_994
-class Item_981(Item):
-    name = "IAVM"
-    title = ""
-    var = Variation_341
-class Item_982(Item):
-    name = "IC"
-    title = "Interrogator Control"
-    var = Variation_81
-class Item_983(Item):
-    name = "ICF"
-    title = "Intent Change Flag (see Note)"
-    var = Variation_59
-class Item_984(Item):
-    name = "ID"
-    title = ""
-    var = Variation_82
-class Item_985(Item):
-    name = "ID"
-    title = ""
-    var = Variation_371
-class Item_986(Item):
-    name = "ID"
-    title = ""
-    var = Variation_372
-class Item_987(Item):
-    name = "ID"
-    title = "Target Identification"
-    var = Variation_326
-class Item_988(Item):
-    name = "IDD"
-    title = ""
-    var = Variation_648
-class Item_989(Item):
-    name = "IDENT"
-    title = ""
-    var = Variation_414
-class Item_990(Item):
-    name = "IDENT"
-    title = "Setting of IDENT Switch"
-    var = Variation_814
-class Item_991(Item):
-    name = "IEC"
-    title = ""
-    var = Variation_728
-class Item_992(Item):
-    name = "IFI"
-    title = "IFPS FLIGHT ID"
-    var = Variation_1098
-class Item_993(Item):
-    name = "IFI"
-    title = "IFPS_FLIGHT_ID"
-    var = Variation_1099
-class Item_994(Item):
-    name = "IFPSFLIGHTID"
-    title = "IFPS_FLIGHT_ID"
-    var = Variation_1102
-class Item_995(Item):
-    name = "IIA"
-    title = ""
-    var = Variation_616
-class Item_996(Item):
-    name = "IM"
-    title = ""
-    var = Variation_6
-class Item_997(Item):
-    name = "IM"
-    title = ""
-    var = Variation_7
-class Item_998(Item):
-    name = "IPC"
-    title = "Independent Position Check"
-    var = Variation_446
-class Item_999(Item):
-    name = "IR"
-    title = ""
-    var = Variation_46
-class Item_1000(Item):
-    name = "IR"
-    title = "Identity Requested"
-    var = Variation_995
-class Item_1001(Item):
-    name = "ISA"
-    title = "Intermediate State Selected Altitude Age"
-    var = Variation_211
-class Item_1002(Item):
-    name = "ITD"
-    title = ""
-    var = Variation_535
-class Item_1003(Item):
-    name = "KOS"
-    title = ""
-    var = Variation_786
-class Item_1004(Item):
-    name = "L"
-    title = ""
-    var = Variation_461
-class Item_1005(Item):
-    name = "L"
-    title = ""
-    var = Variation_462
-class Item_1006(Item):
-    name = "L"
-    title = ""
-    var = Variation_463
-class Item_1007(Item):
-    name = "L"
-    title = ""
-    var = Variation_464
-class Item_1008(Item):
-    name = "L"
-    title = ""
-    var = Variation_465
-class Item_1009(Item):
-    name = "L"
-    title = ""
-    var = Variation_466
-class Item_1010(Item):
-    name = "L"
-    title = ""
-    var = Variation_467
-class Item_1011(Item):
-    name = "L"
-    title = ""
-    var = Variation_468
-class Item_1012(Item):
-    name = "L"
-    title = ""
-    var = Variation_469
-class Item_1013(Item):
-    name = "L"
-    title = ""
-    var = Variation_470
-class Item_1014(Item):
-    name = "L"
-    title = ""
-    var = Variation_471
-class Item_1015(Item):
-    name = "L"
-    title = ""
-    var = Variation_472
-class Item_1016(Item):
-    name = "L"
-    title = "Vector Length"
-    var = Variation_235
-class Item_1017(Item):
-    name = "LASTTRKUPD"
-    title = ""
-    var = Variation_267
-class Item_1018(Item):
-    name = "LAT"
-    title = "APW (Latitude Component)"
-    var = Variation_292
-class Item_1019(Item):
-    name = "LAT"
-    title = "APW Latitude Component Accuracy"
-    var = Variation_261
-class Item_1020(Item):
-    name = "LAT"
-    title = "In WGS-84 in Two’s Complement"
-    var = Variation_317
-class Item_1021(Item):
-    name = "LAT"
-    title = "In WGS.84 in Two's Complement"
-    var = Variation_304
-class Item_1022(Item):
-    name = "LAT"
-    title = "Latitude"
-    var = Variation_304
-class Item_1023(Item):
-    name = "LAT"
-    title = "Latitude"
-    var = Variation_305
-class Item_1024(Item):
-    name = "LAT"
-    title = "Latitude"
-    var = Variation_317
-class Item_1025(Item):
-    name = "LAT"
-    title = "Latitude"
-    var = Variation_318
-class Item_1026(Item):
-    name = "LAT"
-    title = "Latitude"
-    var = Variation_319
-class Item_1027(Item):
-    name = "LAT"
-    title = "Latitude"
-    var = Variation_320
-class Item_1028(Item):
-    name = "LAT"
-    title = "Latitude in WGS 84"
-    var = Variation_304
-class Item_1029(Item):
-    name = "LAT"
-    title = "Latitude in WGS-84"
-    var = Variation_317
-class Item_1030(Item):
-    name = "LAT"
-    title = "Latitude in WGS-84 in Two's Complement"
-    var = Variation_319
-class Item_1031(Item):
-    name = "LAT"
-    title = "Latitude in WGS.84 in Two's Complement"
-    var = Variation_304
-class Item_1032(Item):
-    name = "LAT"
-    title = "Latitude in WGS.84 in Two's Complement Form"
-    var = Variation_304
-class Item_1033(Item):
-    name = "LATITUDE"
-    title = ""
-    var = Variation_319
-class Item_1034(Item):
-    name = "LCI6"
-    title = ""
-    var = Variation_696
-class Item_1035(Item):
-    name = "LCI9"
-    title = ""
-    var = Variation_696
-class Item_1036(Item):
-    name = "LCK"
-    title = "Lockout Characteristics"
-    var = Variation_1010
-class Item_1037(Item):
-    name = "LDPJ"
-    title = "Local Decoding Position Jump"
-    var = Variation_741
-class Item_1038(Item):
-    name = "LEN"
-    title = "Target Length"
-    var = Variation_274
-class Item_1039(Item):
-    name = "LENGTH"
-    title = "Length"
-    var = Variation_151
-class Item_1040(Item):
-    name = "LENGTH"
-    title = "Length"
-    var = Variation_155
-class Item_1041(Item):
-    name = "LLC"
-    title = "List Lookup Check"
-    var = Variation_343
-class Item_1042(Item):
-    name = "LMC"
-    title = "Last Measured Mode C Code"
-    var = Variation_523
-class Item_1043(Item):
-    name = "LNAV"
-    title = "LNAV Mode"
-    var = Variation_365
-class Item_1044(Item):
-    name = "LOCTIM"
-    title = "Lockout Time"
-    var = Variation_426
-class Item_1045(Item):
-    name = "LON"
-    title = "APW (Longitude Component)"
-    var = Variation_292
-class Item_1046(Item):
-    name = "LON"
-    title = "APW Longitude Component Accuracy"
-    var = Variation_261
-class Item_1047(Item):
-    name = "LON"
-    title = "In WGS-84 in Two’s Complement"
-    var = Variation_317
-class Item_1048(Item):
-    name = "LON"
-    title = "In WGS.84 in Two's Complement"
-    var = Variation_304
-class Item_1049(Item):
-    name = "LON"
-    title = "Longitude"
-    var = Variation_304
-class Item_1050(Item):
-    name = "LON"
-    title = "Longitude"
-    var = Variation_305
-class Item_1051(Item):
-    name = "LON"
-    title = "Longitude"
-    var = Variation_317
-class Item_1052(Item):
-    name = "LON"
-    title = "Longitude"
-    var = Variation_318
-class Item_1053(Item):
-    name = "LON"
-    title = "Longitude"
-    var = Variation_319
-class Item_1054(Item):
-    name = "LON"
-    title = "Longitude"
-    var = Variation_320
-class Item_1055(Item):
-    name = "LON"
-    title = "Longitude in WGS 84"
-    var = Variation_304
-class Item_1056(Item):
-    name = "LON"
-    title = "Longitude in WGS-84"
-    var = Variation_317
-class Item_1057(Item):
-    name = "LON"
-    title = "Longitude in WGS-84 in Two's Complement"
-    var = Variation_319
-class Item_1058(Item):
-    name = "LON"
-    title = "Longitude in WGS.84 in Two's Complement"
-    var = Variation_304
-class Item_1059(Item):
-    name = "LON"
-    title = "Longitude in WGS.84 in Two's Complement Form"
-    var = Variation_304
-class Item_1060(Item):
-    name = "LONG"
-    title = "Longitudinal Acceleration"
-    var = Variation_506
-class Item_1061(Item):
-    name = "LONGITUDE"
-    title = ""
-    var = Variation_319
-class Item_1062(Item):
-    name = "LOP"
-    title = ""
-    var = Variation_593
-class Item_1063(Item):
-    name = "LOP"
-    title = "Age of the Last Magentic Loop Detection"
-    var = Variation_217
-class Item_1064(Item):
-    name = "LOP"
-    title = "Loop Age"
-    var = Variation_217
-class Item_1065(Item):
-    name = "LS"
-    title = "Lockout State"
-    var = Variation_79
-class Item_1066(Item):
-    name = "LTN"
-    title = "Local Track Number"
-    var = Variation_234
-class Item_1067(Item):
-    name = "LTR"
-    title = "Letter"
-    var = Variation_190
-class Item_1068(Item):
-    name = "LTT"
-    title = "Link Technology Type"
-    var = Variation_774
-class Item_1069(Item):
-    name = "LTW"
-    title = ""
-    var = Variation_537
-class Item_1070(Item):
-    name = "LW"
-    title = "Length and Width of the Aircraft"
-    var = Variation_127
-class Item_1071(Item):
-    name = "LW"
-    title = "Length and Width of the Aircraft"
-    var = Variation_685
-class Item_1072(Item):
-    name = "M1"
-    title = ""
-    var = Variation_132
-class Item_1073(Item):
-    name = "M1"
-    title = ""
-    var = Variation_557
-class Item_1074(Item):
-    name = "M1"
-    title = ""
-    var = Variation_558
-class Item_1075(Item):
-    name = "M2"
-    title = ""
-    var = Variation_641
-class Item_1076(Item):
-    name = "M2"
-    title = ""
-    var = Variation_642
-class Item_1077(Item):
-    name = "M2"
-    title = ""
-    var = Variation_690
-class Item_1078(Item):
-    name = "M2"
-    title = "Mode 2 Code in Octal Representation"
-    var = Variation_1117
-class Item_1079(Item):
-    name = "M3"
-    title = ""
-    var = Variation_743
-class Item_1080(Item):
-    name = "M3"
-    title = ""
-    var = Variation_744
-class Item_1081(Item):
-    name = "M31"
-    title = "Mode 3/A Code Aircraft 1"
-    var = Variation_903
-class Item_1082(Item):
-    name = "M32"
-    title = "Mode 3/A Code Aircraft 2"
-    var = Variation_904
-class Item_1083(Item):
-    name = "M3A"
-    title = "Age of Mode 3/A Code (I048/070)"
-    var = Variation_421
-class Item_1084(Item):
-    name = "M3A"
-    title = "Mode 3/A Age"
-    var = Variation_211
-class Item_1085(Item):
-    name = "M4E"
-    title = "Extended Mode 4 Report"
-    var = Variation_1176
-class Item_1086(Item):
-    name = "M5"
-    title = ""
-    var = Variation_54
-class Item_1087(Item):
-    name = "M5N"
-    title = "Mode 5 Reports, New Format"
-    var = Variation_1368
-class Item_1088(Item):
-    name = "MA"
-    title = ""
-    var = Variation_387
-class Item_1089(Item):
-    name = "MAC"
-    title = "Mach Number"
-    var = Variation_278
-class Item_1090(Item):
-    name = "MAC"
-    title = "Mach Number Data Age"
-    var = Variation_217
-class Item_1091(Item):
-    name = "MAH"
-    title = ""
-    var = Variation_615
-class Item_1092(Item):
-    name = "MAH"
-    title = ""
-    var = Variation_715
-class Item_1093(Item):
-    name = "MAH"
-    title = "Manoeuvre Detection in Horizontal Sense"
-    var = Variation_647
-class Item_1094(Item):
-    name = "MAIN"
-    title = "Main Version Number"
-    var = Variation_191
-class Item_1095(Item):
-    name = "MAM"
-    title = "Message Amplitude Age"
-    var = Variation_211
-class Item_1096(Item):
-    name = "MAN"
-    title = ""
-    var = Variation_435
-class Item_1097(Item):
-    name = "MAS"
-    title = "Conflict Location in Military Airspace"
-    var = Variation_19
-class Item_1098(Item):
-    name = "MB"
-    title = "BDS"
-    var = Variation_1230
-class Item_1099(Item):
-    name = "MB"
-    title = "MODE S MB DATA"
-    var = Variation_1230
-class Item_1100(Item):
-    name = "MB"
-    title = "Mode S MB Data Age"
-    var = Variation_217
-class Item_1101(Item):
-    name = "MBC"
-    title = "Maximum Bits Corrected"
-    var = Variation_968
-class Item_1102(Item):
-    name = "MBDATA"
-    title = ""
-    var = Variation_327
-class Item_1103(Item):
-    name = "MBDATA"
-    title = "56-bit Message Conveying Mode S Comm B Message Data"
-    var = Variation_327
-class Item_1104(Item):
-    name = "MBDATA"
-    title = "Mode S Comm B Message Data"
-    var = Variation_327
-class Item_1105(Item):
-    name = "MC"
-    title = ""
-    var = Variation_808
-class Item_1106(Item):
-    name = "MC"
-    title = ""
-    var = Variation_818
-class Item_1107(Item):
-    name = "MC"
-    title = ""
-    var = Variation_819
-class Item_1108(Item):
-    name = "MD1"
-    title = "Age of the Last Valid Mode 1 Used to Update the Track"
-    var = Variation_217
-class Item_1109(Item):
-    name = "MD1"
-    title = "Mode 1 Age"
-    var = Variation_217
-class Item_1110(Item):
-    name = "MD2"
-    title = "Age of the Last Mode 2 Used to Update the Track"
-    var = Variation_217
-class Item_1111(Item):
-    name = "MD2"
-    title = "Age of the Last Valid Mode 2 Used to Update the Track"
-    var = Variation_217
-class Item_1112(Item):
-    name = "MD2"
-    title = "Mode 2 Age"
-    var = Variation_217
-class Item_1113(Item):
-    name = "MD4"
-    title = ""
-    var = Variation_397
-class Item_1114(Item):
-    name = "MD4"
-    title = "Mode 4 Age"
-    var = Variation_217
-class Item_1115(Item):
-    name = "MD5"
-    title = ""
-    var = Variation_764
-class Item_1116(Item):
-    name = "MD5"
-    title = "Mode 5 Age"
-    var = Variation_217
-class Item_1117(Item):
-    name = "MD5"
-    title = "Mode 5 Reports"
-    var = Variation_1367
-class Item_1118(Item):
-    name = "MDA"
-    title = ""
-    var = Variation_1133
-class Item_1119(Item):
-    name = "MDA"
-    title = "Age of the Last Mode A Detection Used to Update the Track"
-    var = Variation_217
-class Item_1120(Item):
-    name = "MDA"
-    title = "Age of the Last Valid Mode A Report Used to Update the Track"
-    var = Variation_217
-class Item_1121(Item):
-    name = "MDA"
-    title = "Mode 3/A Age"
-    var = Variation_217
-class Item_1122(Item):
-    name = "MDC"
-    title = ""
-    var = Variation_1138
-class Item_1123(Item):
-    name = "MDS"
-    title = ""
-    var = Variation_547
-class Item_1124(Item):
-    name = "MDS"
-    title = ""
-    var = Variation_638
-class Item_1125(Item):
-    name = "MDS"
-    title = "Age of the Last Mode S Detection Used to Update the Track"
-    var = Variation_217
-class Item_1126(Item):
-    name = "MDS"
-    title = "Age of the Last Mode S Report Used to Update the Track"
-    var = Variation_217
-class Item_1127(Item):
-    name = "MDS"
-    title = "Mode S"
-    var = Variation_367
-class Item_1128(Item):
-    name = "MDS"
-    title = "Mode S Age"
-    var = Variation_217
-class Item_1129(Item):
-    name = "MDS"
-    title = "Mode-S Extended Squitter"
-    var = Variation_652
-class Item_1130(Item):
-    name = "MDS"
-    title = "Specific Processing Mode Information for a Mode S Sensor"
-    var = Variation_1045
-class Item_1131(Item):
-    name = "MDS"
-    title = "Specific Status Information for a Mode S Sensor"
-    var = Variation_926
-class Item_1132(Item):
-    name = "ME"
-    title = ""
-    var = Variation_539
-class Item_1133(Item):
-    name = "ME"
-    title = ""
-    var = Variation_548
-class Item_1134(Item):
-    name = "ME"
-    title = ""
-    var = Variation_564
-class Item_1135(Item):
-    name = "ME"
-    title = ""
-    var = Variation_729
-class Item_1136(Item):
-    name = "ME"
-    title = "Military Emergency"
-    var = Variation_479
-class Item_1137(Item):
-    name = "MES"
-    title = "Military Extended Squitter"
-    var = Variation_1366
-class Item_1138(Item):
-    name = "MET"
-    title = "Met Information Age"
-    var = Variation_211
-class Item_1139(Item):
-    name = "MET"
-    title = "Meteorological Data"
-    var = Variation_1144
-class Item_1140(Item):
-    name = "MET"
-    title = "Meteorological Data Age"
-    var = Variation_217
-class Item_1141(Item):
-    name = "MFL"
-    title = "Age of the Last Mode C Detection Used to Update the Track"
-    var = Variation_217
-class Item_1142(Item):
-    name = "MFL"
-    title = "Age of the Last Valid and Credible Mode C Used to Update the Track"
-    var = Variation_217
-class Item_1143(Item):
-    name = "MFL"
-    title = "Measured Flight Level Age"
-    var = Variation_217
-class Item_1144(Item):
-    name = "MFM"
-    title = "Status of MCP/FCU Mode Bits"
-    var = Variation_972
-class Item_1145(Item):
-    name = "MH"
-    title = "Magnetic Heading Age"
-    var = Variation_211
-class Item_1146(Item):
-    name = "MHG"
-    title = "Magnetic Heading"
-    var = Variation_293
-class Item_1147(Item):
-    name = "MHG"
-    title = "Magnetic Heading Age"
-    var = Variation_217
-class Item_1148(Item):
-    name = "MHS"
-    title = "Estimated Minimum Horizontal Separation"
-    var = Variation_271
-class Item_1149(Item):
-    name = "MI"
-    title = ""
-    var = Variation_617
-class Item_1150(Item):
-    name = "MI"
-    title = ""
-    var = Variation_628
-class Item_1151(Item):
-    name = "MI"
-    title = ""
-    var = Variation_649
-class Item_1152(Item):
-    name = "MI"
-    title = ""
-    var = Variation_807
-class Item_1153(Item):
-    name = "MIDENT"
-    title = "Master System Unit Identification"
-    var = Variation_155
-class Item_1154(Item):
-    name = "MIN"
-    title = ""
-    var = Variation_519
-class Item_1155(Item):
-    name = "MIN"
-    title = "Minutes"
-    var = Variation_519
-class Item_1156(Item):
-    name = "MIN"
-    title = "Minutes, from 0 to 59"
-    var = Variation_519
-class Item_1157(Item):
-    name = "MIS"
-    title = "Mission Code"
-    var = Variation_518
-class Item_1158(Item):
-    name = "MLAT"
-    title = ""
-    var = Variation_803
-class Item_1159(Item):
-    name = "MLT"
-    title = ""
-    var = Variation_816
-class Item_1160(Item):
-    name = "MLT"
-    title = "Multilateration Age"
-    var = Variation_217
-class Item_1161(Item):
-    name = "MN"
-    title = "Multiple Navigation Aids"
-    var = Variation_511
-class Item_1162(Item):
-    name = "MN"
-    title = "Multiple Navigational Aids Operating"
-    var = Variation_369
-class Item_1163(Item):
-    name = "MN"
-    title = "Multiple Navigational Aids Status"
-    var = Variation_512
-class Item_1164(Item):
-    name = "MOD3A"
-    title = ""
-    var = Variation_694
-class Item_1165(Item):
-    name = "MOD3A"
-    title = "Mode-3/A Reply in Octal Representation"
-    var = Variation_694
-class Item_1166(Item):
-    name = "MODE1"
-    title = "Mode-1 Code"
-    var = Variation_606
-class Item_1167(Item):
-    name = "MODE1"
-    title = "Mode-1 Code in Octal Representation"
-    var = Variation_606
-class Item_1168(Item):
-    name = "MODE2"
-    title = "Mode 2 Code in Octal Representation"
-    var = Variation_694
-class Item_1169(Item):
-    name = "MODE2"
-    title = "Mode-2 Code in Octal Representation"
-    var = Variation_694
-class Item_1170(Item):
-    name = "MODE2"
-    title = "Mode-2 Reply in Octal Representation"
-    var = Variation_694
-class Item_1171(Item):
-    name = "MODE3A"
-    title = "(Mode 3/A Code) 4 Digits, Octal Representation"
-    var = Variation_694
-class Item_1172(Item):
-    name = "MODE3A"
-    title = "Mode 3/A Reply in Octal Representation"
-    var = Variation_694
-class Item_1173(Item):
-    name = "MODE3A"
-    title = "Mode-3/A Code (Converted Into Octal Representation) of Aircraft 1 Involved in the Conflict"
-    var = Variation_694
-class Item_1174(Item):
-    name = "MODE3A"
-    title = "Mode-3/A Code (Converted Into Octal Representation) of Aircraft 2 Involved in the Conflict"
-    var = Variation_694
-class Item_1175(Item):
-    name = "MODE3A"
-    title = "Mode-3/A Reply in Octal Representation"
-    var = Variation_694
-class Item_1176(Item):
-    name = "MODEC"
-    title = "Mode-C Reply in Gray Notation"
-    var = Variation_693
-class Item_1177(Item):
-    name = "MOMU"
-    title = "Mono-Static Target Report or Multi-Static Target Report"
-    var = Variation_100
-class Item_1178(Item):
-    name = "MON"
-    title = ""
-    var = Variation_51
-class Item_1179(Item):
-    name = "MON"
-    title = ""
-    var = Variation_52
-class Item_1180(Item):
-    name = "MR"
-    title = ""
-    var = Variation_662
-class Item_1181(Item):
-    name = "MRH"
-    title = ""
-    var = Variation_432
-class Item_1182(Item):
-    name = "MRH"
-    title = "Most Reliable Height"
-    var = Variation_432
-class Item_1183(Item):
-    name = "MRS"
-    title = ""
-    var = Variation_761
-class Item_1184(Item):
-    name = "MRVA"
-    title = ""
-    var = Variation_31
-class Item_1185(Item):
-    name = "MRVA"
-    title = ""
-    var = Variation_440
-class Item_1186(Item):
-    name = "MS"
-    title = ""
-    var = Variation_368
-class Item_1187(Item):
-    name = "MS1"
-    title = "Aircraft Identification Downloaded from Aircraft 1 Involved in the Conflict If Equipped with a Mode-S Transponder"
-    var = Variation_325
-class Item_1188(Item):
-    name = "MS2"
-    title = "Aircraft Identification Downloaded From Aircraft 2 Involved in the Conflict If Eequipped With a Mode-S Transponder"
-    var = Variation_325
-class Item_1189(Item):
-    name = "MSAW"
-    title = ""
-    var = Variation_538
-class Item_1190(Item):
-    name = "MSC"
-    title = "Monitoring System Connected Status"
-    var = Variation_559
-class Item_1191(Item):
-    name = "MSC"
-    title = "Monitoring System Connected Status"
-    var = Variation_560
-class Item_1192(Item):
-    name = "MSC"
-    title = "Monitoring System Connected Status"
-    var = Variation_643
-class Item_1193(Item):
-    name = "MSC"
-    title = "Monitoring System Connected Status"
-    var = Variation_745
-class Item_1194(Item):
-    name = "MSC"
-    title = "Monitoring System Connected Status:"
-    var = Variation_643
-class Item_1195(Item):
-    name = "MSG"
-    title = ""
-    var = Variation_418
-class Item_1196(Item):
-    name = "MSG"
-    title = ""
-    var = Variation_419
-class Item_1197(Item):
-    name = "MSG"
-    title = "Message"
-    var = Variation_418
-class Item_1198(Item):
-    name = "MSSC"
-    title = "Mode-S Specific Service Capability"
-    var = Variation_53
-class Item_1199(Item):
-    name = "MT"
-    title = "Message Type"
-    var = Variation_149
-class Item_1200(Item):
-    name = "MTE"
-    title = "Multiple Threat Encounter"
-    var = Variation_527
-class Item_1201(Item):
-    name = "MTRACK"
-    title = "Master System Track Number"
-    var = Variation_232
-class Item_1202(Item):
-    name = "MUL"
-    title = "Age of the Last Multilateration Detection"
-    var = Variation_217
-class Item_1203(Item):
-    name = "MUO"
-    title = "Manned / Unmanned Operation"
-    var = Variation_970
-class Item_1204(Item):
-    name = "MV"
-    title = "Manage Vertical Mode"
-    var = Variation_64
-class Item_1205(Item):
-    name = "MV"
-    title = "Manage Vertical Mode"
-    var = Variation_65
-class Item_1206(Item):
-    name = "MVS"
-    title = "Estimated Minimum Vertical Separation"
-    var = Variation_270
-class Item_1207(Item):
-    name = "NACP"
-    title = "Navigation Accuracy Category for Position"
-    var = Variation_602
-class Item_1208(Item):
-    name = "NAT"
-    title = "National Origin"
-    var = Variation_606
-class Item_1209(Item):
-    name = "NATURE"
-    title = ""
-    var = Variation_689
-class Item_1210(Item):
-    name = "NAV"
-    title = ""
-    var = Variation_87
-class Item_1211(Item):
-    name = "NAV"
-    title = "Navigation Mode"
-    var = Variation_928
-class Item_1212(Item):
-    name = "NAV"
-    title = "Navigation Mode"
-    var = Variation_929
-class Item_1213(Item):
-    name = "NAV"
-    title = "TID Available"
-    var = Variation_88
-class Item_1214(Item):
-    name = "NAV"
-    title = "Validity of NAT"
-    var = Variation_473
-class Item_1215(Item):
-    name = "NBCELLS"
-    title = "Number of 'valid' Cells"
-    var = Variation_298
-class Item_1216(Item):
-    name = "NBR"
-    title = ""
-    var = Variation_778
-class Item_1217(Item):
-    name = "NBR"
-    title = ""
-    var = Variation_779
-class Item_1218(Item):
-    name = "NBR"
-    title = "IFPS Flight ID Number"
-    var = Variation_777
-class Item_1219(Item):
-    name = "NBR"
-    title = "Number from 0 to 99 999 999"
-    var = Variation_778
-class Item_1220(Item):
-    name = "NBVB"
-    title = "Number of 'valid' Octets"
-    var = Variation_235
-class Item_1221(Item):
-    name = "NC"
-    title = ""
-    var = Variation_380
-class Item_1222(Item):
-    name = "NC"
-    title = "TCP Compliance"
-    var = Variation_380
-class Item_1223(Item):
-    name = "NE"
-    title = "Non Extraction"
-    var = Variation_494
-class Item_1224(Item):
-    name = "NICBARO"
-    title = "Navigation Integrity Category for Barometric Altitude"
-    var = Variation_0
-class Item_1225(Item):
-    name = "NO"
-    title = "National Origin"
-    var = Variation_775
-class Item_1226(Item):
-    name = "NO"
-    title = "National Origin Code"
-    var = Variation_775
-class Item_1227(Item):
-    name = "NOCLR"
-    title = ""
-    var = Variation_345
-class Item_1228(Item):
-    name = "NOGO"
-    title = ""
-    var = Variation_21
-class Item_1229(Item):
-    name = "NOGO"
-    title = ""
-    var = Variation_105
-class Item_1230(Item):
-    name = "NOGO"
-    title = "No-go Bit Status"
-    var = Variation_561
-class Item_1231(Item):
-    name = "NOGO"
-    title = "Operational Release Status of the Data"
-    var = Variation_21
-class Item_1232(Item):
-    name = "NOGO"
-    title = "Operational Release Status of the System"
-    var = Variation_73
-class Item_1233(Item):
-    name = "NOGO"
-    title = "Operational Release Status of the System"
-    var = Variation_103
-class Item_1234(Item):
-    name = "NOGO"
-    title = "Operational Release Status of the System"
-    var = Variation_104
-class Item_1235(Item):
-    name = "NOH"
-    title = ""
-    var = Variation_542
-class Item_1236(Item):
-    name = "NOISERHOEND"
-    title = "Predicted Largest Range"
-    var = Variation_285
-class Item_1237(Item):
-    name = "NOISERHOSTART"
-    title = "Predicted Closest Range"
-    var = Variation_285
-class Item_1238(Item):
-    name = "NOISETHETAEND"
-    title = "Predicted Largest Azimuth"
-    var = Variation_293
-class Item_1239(Item):
-    name = "NOISETHETASTART"
-    title = "Predicted Smallest Azimuth"
-    var = Variation_293
-class Item_1240(Item):
-    name = "NOMOV"
-    title = ""
-    var = Variation_441
-class Item_1241(Item):
-    name = "NOTTCAS"
-    title = "TCAS System Status"
-    var = Variation_831
-class Item_1242(Item):
-    name = "NOV"
-    title = "Validity of NO"
-    var = Variation_644
-class Item_1243(Item):
-    name = "NPP"
-    title = "Next Predicted Position"
-    var = Variation_1031
-class Item_1244(Item):
-    name = "NPW"
-    title = "No Plot Warning"
-    var = Variation_727
-class Item_1245(Item):
-    name = "NTCA"
-    title = ""
-    var = Variation_543
-class Item_1246(Item):
-    name = "NU1"
-    title = "First Number"
-    var = Variation_190
-class Item_1247(Item):
-    name = "NU2"
-    title = "Second Number"
-    var = Variation_190
-class Item_1248(Item):
-    name = "NUCPNIC"
-    title = "Navigation Uncertainty Category for Position NUCp or Navigation Integrity Category NIC"
-    var = Variation_602
-class Item_1249(Item):
-    name = "NUCRNACV"
-    title = "Navigation Uncertainty Category for Velocity NUCr or the Navigation Accuracy Category for Velocity NACv"
-    var = Variation_116
-class Item_1250(Item):
-    name = "NVB"
-    title = ""
-    var = Variation_388
-class Item_1251(Item):
-    name = "NVB"
-    title = "TID Valid"
-    var = Variation_389
-class Item_1252(Item):
-    name = "OCAT"
-    title = ""
-    var = Variation_442
-class Item_1253(Item):
-    name = "OCT1"
-    title = "1st Octal Digit"
-    var = Variation_679
-class Item_1254(Item):
-    name = "OCT2"
-    title = "2nd Octal Digit"
-    var = Variation_870
-class Item_1255(Item):
-    name = "OCT3"
-    title = "3rd Octal Digit"
-    var = Variation_513
-class Item_1256(Item):
-    name = "OCT4"
-    title = "4th Octal Digit"
-    var = Variation_771
-class Item_1257(Item):
-    name = "ODP"
-    title = "Data Processor Overload Indicator"
-    var = Variation_356
-class Item_1258(Item):
-    name = "OF"
-    title = ""
-    var = Variation_718
-class Item_1259(Item):
-    name = "OL"
-    title = ""
-    var = Variation_797
-class Item_1260(Item):
-    name = "ON"
-    title = "Observation Number"
-    var = Variation_298
-class Item_1261(Item):
-    name = "ONGOING"
-    title = ""
-    var = Variation_796
-class Item_1262(Item):
-    name = "OPS"
-    title = ""
-    var = Variation_403
-class Item_1263(Item):
-    name = "OPS"
-    title = "Operational Release Status of the System"
-    var = Variation_72
-class Item_1264(Item):
-    name = "ORG"
-    title = ""
-    var = Variation_49
-class Item_1265(Item):
-    name = "ORIENTATION"
-    title = "Orientation"
-    var = Variation_154
-class Item_1266(Item):
-    name = "ORIGIN"
-    title = ""
-    var = Variation_669
-class Item_1267(Item):
-    name = "ORT"
-    title = "Target Orientation"
-    var = Variation_293
-class Item_1268(Item):
-    name = "OT"
-    title = ""
-    var = Variation_824
-class Item_1269(Item):
-    name = "OTR"
-    title = "Other Technology"
-    var = Variation_863
-class Item_1270(Item):
-    name = "OVL"
-    title = ""
-    var = Variation_443
-class Item_1271(Item):
-    name = "OVL"
-    title = "Overload Condition"
-    var = Variation_565
-class Item_1272(Item):
-    name = "OVL"
-    title = "Overload Indicator"
-    var = Variation_480
-class Item_1273(Item):
-    name = "OVLDLF"
-    title = "Overload in Data Link Function"
-    var = Variation_60
-class Item_1274(Item):
-    name = "OVLRDP"
-    title = "Radar Data Processor Overload Indicator"
-    var = Variation_550
-class Item_1275(Item):
-    name = "OVLSCF"
-    title = "Overload in Surveillance Co-ordination Function"
-    var = Variation_861
-class Item_1276(Item):
-    name = "OVLSUR"
-    title = "Overload Condition"
-    var = Variation_565
-class Item_1277(Item):
-    name = "OVLXMT"
-    title = "Transmission Subsystem Overload Status"
-    var = Variation_629
-class Item_1278(Item):
-    name = "OXT"
-    title = "Ground Interface Data Communications Overload"
-    var = Variation_453
-class Item_1279(Item):
-    name = "OXT"
-    title = "Transmission Subsystem Overload Status"
-    var = Variation_453
-class Item_1280(Item):
-    name = "P84"
-    title = "Horizontal Position in WGS-84 Coordinates"
-    var = Variation_1009
-class Item_1281(Item):
-    name = "PA"
-    title = "Position Accuracy"
-    var = Variation_691
-class Item_1282(Item):
-    name = "PAI"
-    title = "Passive Acquisition Interface Information"
-    var = Variation_977
-class Item_1283(Item):
-    name = "PAIW"
-    title = ""
-    var = Variation_346
-class Item_1284(Item):
-    name = "PAM"
-    title = "Amplitude of Primary Plot"
-    var = Variation_193
-class Item_1285(Item):
-    name = "PC"
-    title = "Periodicity Constraint"
-    var = Variation_84
-class Item_1286(Item):
-    name = "PCI"
-    title = "Parallel Transmitter Index"
-    var = Variation_235
-class Item_1287(Item):
-    name = "PEC"
-    title = "Pre-Emergency Callsign"
-    var = Variation_328
-class Item_1288(Item):
-    name = "PEM"
-    title = "Pre-Emergency Mode 3/A"
-    var = Variation_893
-class Item_1289(Item):
-    name = "PFT"
-    title = ""
-    var = Variation_746
-class Item_1290(Item):
-    name = "PIC"
-    title = "Position Integrity Category"
-    var = Variation_127
-class Item_1291(Item):
-    name = "PID"
-    title = "Pair Identification"
-    var = Variation_234
-class Item_1292(Item):
-    name = "PID"
-    title = "Pair Identifier"
-    var = Variation_235
-class Item_1293(Item):
-    name = "PIN"
-    title = "PIN Code"
-    var = Variation_520
-class Item_1294(Item):
-    name = "PLOTNR"
-    title = ""
-    var = Variation_234
-class Item_1295(Item):
-    name = "PMN"
-    title = "Mode 5 PIN/ National Origin/Mission Code"
-    var = Variation_882
-class Item_1296(Item):
-    name = "PMN"
-    title = "PIN/ National Origin/Mission Code"
-    var = Variation_881
-class Item_1297(Item):
-    name = "PMN"
-    title = "PIN/ National Origin/Mission Code"
-    var = Variation_883
-class Item_1298(Item):
-    name = "PNB"
-    title = "Plot Number"
-    var = Variation_234
-class Item_1299(Item):
-    name = "PNO"
-    title = "Mode 5 PIN / National Origin"
-    var = Variation_884
-class Item_1300(Item):
-    name = "PO"
-    title = ""
-    var = Variation_865
-class Item_1301(Item):
-    name = "POA"
-    title = "Position Offset Applied"
-    var = Variation_489
-class Item_1302(Item):
-    name = "POL"
-    title = "Polarization in Use by PSR"
-    var = Variation_48
-class Item_1303(Item):
-    name = "POS"
-    title = ""
-    var = Variation_155
-class Item_1304(Item):
-    name = "POS"
-    title = "Measured Position"
-    var = Variation_1049
-class Item_1305(Item):
-    name = "POS"
-    title = "Mode 5 Reported Position"
-    var = Variation_999
-class Item_1306(Item):
-    name = "POS"
-    title = "Mode 5 Reported Position"
-    var = Variation_1005
-class Item_1307(Item):
-    name = "POS"
-    title = "Position"
-    var = Variation_155
-class Item_1308(Item):
-    name = "POS"
-    title = "Position"
-    var = Variation_1008
-class Item_1309(Item):
-    name = "POS"
-    title = "Position Age"
-    var = Variation_217
-class Item_1310(Item):
-    name = "POSITION"
-    title = "8-bit Control Position Identification Code"
-    var = Variation_155
-class Item_1311(Item):
-    name = "POWER"
-    title = "Power"
-    var = Variation_690
-class Item_1312(Item):
-    name = "PR"
-    title = ""
-    var = Variation_755
-class Item_1313(Item):
-    name = "PR"
-    title = "Mode S Packet Internal Priority"
-    var = Variation_415
-class Item_1314(Item):
-    name = "PRB"
-    title = "PSR Range Bias"
-    var = Variation_255
-class Item_1315(Item):
-    name = "PRB"
-    title = "Probability"
-    var = Variation_420
-class Item_1316(Item):
-    name = "PREDRHO"
-    title = "Predicted Range"
-    var = Variation_285
-class Item_1317(Item):
-    name = "PREDTHETA"
-    title = "Predicted Azimuth"
-    var = Variation_293
-class Item_1318(Item):
-    name = "PREDTIME"
-    title = "Predicted Detection Time"
-    var = Variation_287
-class Item_1319(Item):
-    name = "PREFIX"
-    title = "Prefix Field"
-    var = Variation_777
-class Item_1320(Item):
-    name = "PREVIOUSII"
-    title = "Former II Code"
-    var = Variation_127
-class Item_1321(Item):
-    name = "PRG"
-    title = "PSR Range Gain"
-    var = Variation_247
-class Item_1322(Item):
-    name = "PRI"
-    title = ""
-    var = Variation_481
-class Item_1323(Item):
-    name = "PRIORITY"
-    title = "GICB Priority"
-    var = Variation_138
-class Item_1324(Item):
-    name = "PRIORITY"
-    title = "Priority"
-    var = Variation_132
-class Item_1325(Item):
-    name = "PRL"
-    title = "Primary Plot Runlength"
-    var = Variation_226
-class Item_1326(Item):
-    name = "PS"
-    title = "Priority Status"
-    var = Variation_599
-class Item_1327(Item):
-    name = "PS3"
-    title = "Priority Status for Version 3 ADS-B Systems"
-    var = Variation_967
-class Item_1328(Item):
-    name = "PSR"
-    title = ""
-    var = Variation_351
-class Item_1329(Item):
-    name = "PSR"
-    title = ""
-    var = Variation_488
-class Item_1330(Item):
-    name = "PSR"
-    title = "Age of The Last Primary Detection Used to Update the Track"
-    var = Variation_217
-class Item_1331(Item):
-    name = "PSR"
-    title = "Age of the Last Primary Report Used to Update the Track"
-    var = Variation_217
-class Item_1332(Item):
-    name = "PSR"
-    title = "PSR Age"
-    var = Variation_217
-class Item_1333(Item):
-    name = "PSR"
-    title = "PSR Component"
-    var = Variation_851
-class Item_1334(Item):
-    name = "PSR"
-    title = "Specific Processing Mode Information for a PSR Sensor"
-    var = Variation_1030
-class Item_1335(Item):
-    name = "PSR"
-    title = "Specific Status Information for a PSR Sensor"
-    var = Variation_925
-class Item_1336(Item):
-    name = "PSS"
-    title = "Processing System Status"
-    var = Variation_672
-class Item_1337(Item):
-    name = "PT"
-    title = "Packet Type"
-    var = Variation_843
-class Item_1338(Item):
-    name = "PT"
-    title = "Point Type"
-    var = Variation_130
-class Item_1339(Item):
-    name = "PTL"
-    title = "Plot/Track Link"
-    var = Variation_892
-class Item_1340(Item):
-    name = "PUN"
-    title = "Position Uncertainty"
-    var = Variation_685
-class Item_1341(Item):
-    name = "PUN"
-    title = "Position Uncertainty"
-    var = Variation_907
-class Item_1342(Item):
-    name = "PUN"
-    title = "Position Uncertainty Age"
-    var = Variation_217
-class Item_1343(Item):
-    name = "Q"
-    title = "Processing Parameters"
-    var = Variation_232
-class Item_1344(Item):
-    name = "QA1"
-    title = ""
-    var = Variation_735
-class Item_1345(Item):
-    name = "QA1"
-    title = ""
-    var = Variation_809
-class Item_1346(Item):
-    name = "QA1"
-    title = "Quality Pulse A1"
-    var = Variation_735
-class Item_1347(Item):
-    name = "QA2"
-    title = ""
-    var = Variation_633
-class Item_1348(Item):
-    name = "QA2"
-    title = ""
-    var = Variation_736
-class Item_1349(Item):
-    name = "QA2"
-    title = ""
-    var = Variation_854
-class Item_1350(Item):
-    name = "QA2"
-    title = "Quality Pulse A2"
-    var = Variation_854
-class Item_1351(Item):
-    name = "QA4"
-    title = ""
-    var = Variation_362
-class Item_1352(Item):
-    name = "QA4"
-    title = ""
-    var = Variation_553
-class Item_1353(Item):
-    name = "QA4"
-    title = ""
-    var = Variation_634
-class Item_1354(Item):
-    name = "QA4"
-    title = "Quality Pulse A4"
-    var = Variation_362
-class Item_1355(Item):
-    name = "QB1"
-    title = ""
-    var = Variation_363
-class Item_1356(Item):
-    name = "QB1"
-    title = ""
-    var = Variation_457
-class Item_1357(Item):
-    name = "QB1"
-    title = ""
-    var = Variation_855
-class Item_1358(Item):
-    name = "QB1"
-    title = "Quality Pulse B1"
-    var = Variation_457
-class Item_1359(Item):
-    name = "QB2"
-    title = ""
-    var = Variation_44
-class Item_1360(Item):
-    name = "QB2"
-    title = ""
-    var = Variation_635
-class Item_1361(Item):
-    name = "QB2"
-    title = ""
-    var = Variation_810
-class Item_1362(Item):
-    name = "QB2"
-    title = "Quality Pulse B2"
-    var = Variation_635
-class Item_1363(Item):
-    name = "QB4"
-    title = ""
-    var = Variation_811
-class Item_1364(Item):
-    name = "QB4"
-    title = ""
-    var = Variation_856
-class Item_1365(Item):
-    name = "QB4"
-    title = "Quality Pulse B4"
-    var = Variation_811
-class Item_1366(Item):
-    name = "QC1"
-    title = ""
-    var = Variation_636
-class Item_1367(Item):
-    name = "QC1"
-    title = "Quality Pulse C1"
-    var = Variation_636
-class Item_1368(Item):
-    name = "QC2"
-    title = ""
-    var = Variation_554
-class Item_1369(Item):
-    name = "QC2"
-    title = ""
-    var = Variation_812
-class Item_1370(Item):
-    name = "QC2"
-    title = "Quality Pulse C2"
-    var = Variation_812
-class Item_1371(Item):
-    name = "QC4"
-    title = ""
-    var = Variation_45
-class Item_1372(Item):
-    name = "QC4"
-    title = ""
-    var = Variation_458
-class Item_1373(Item):
-    name = "QC4"
-    title = "Quality Pulse C4"
-    var = Variation_45
-class Item_1374(Item):
-    name = "QD1"
-    title = ""
-    var = Variation_555
-class Item_1375(Item):
-    name = "QD1"
-    title = ""
-    var = Variation_857
-class Item_1376(Item):
-    name = "QD1"
-    title = "Quality Pulse D1"
-    var = Variation_555
-class Item_1377(Item):
-    name = "QD2"
-    title = ""
-    var = Variation_738
-class Item_1378(Item):
-    name = "QD2"
-    title = ""
-    var = Variation_813
-class Item_1379(Item):
-    name = "QD2"
-    title = "Quality Pulse D2"
-    var = Variation_737
-class Item_1380(Item):
-    name = "QD4"
-    title = ""
-    var = Variation_739
-class Item_1381(Item):
-    name = "QD4"
-    title = ""
-    var = Variation_858
-class Item_1382(Item):
-    name = "QD4"
-    title = "Quality Pulse D4"
-    var = Variation_858
-class Item_1383(Item):
-    name = "QI"
-    title = "Quality Indicators Age"
-    var = Variation_211
-class Item_1384(Item):
-    name = "QNH"
-    title = ""
-    var = Variation_56
-class Item_1385(Item):
-    name = "QNH"
-    title = "QNH Correction Applied"
-    var = Variation_55
-class Item_1386(Item):
-    name = "QNH"
-    title = "QNH Correction Applied"
-    var = Variation_56
-class Item_1387(Item):
-    name = "R"
-    title = "Current Reduction Stage in Use"
-    var = Variation_771
-class Item_1388(Item):
-    name = "R"
-    title = "Range"
-    var = Variation_300
-class Item_1389(Item):
-    name = "R"
-    title = "Reduction Step in Use By Radar  Concerned"
-    var = Variation_771
-class Item_1390(Item):
-    name = "RA"
-    title = "Range Acceleration"
-    var = Variation_254
-class Item_1391(Item):
-    name = "RA"
-    title = "TCAS Resolution Advisory Active"
-    var = Variation_74
-class Item_1392(Item):
-    name = "RAB"
-    title = ""
-    var = Variation_69
-class Item_1393(Item):
-    name = "RAB"
-    title = ""
-    var = Variation_490
-class Item_1394(Item):
-    name = "RAB"
-    title = ""
-    var = Variation_657
-class Item_1395(Item):
-    name = "RAB"
-    title = ""
-    var = Variation_798
-class Item_1396(Item):
-    name = "RAB"
-    title = ""
-    var = Variation_827
-class Item_1397(Item):
-    name = "RAB"
-    title = "Report Type"
-    var = Variation_656
-class Item_1398(Item):
-    name = "RAB"
-    title = "Report Type"
-    var = Variation_828
-class Item_1399(Item):
-    name = "RAC"
-    title = "RAC (RA Complement) Record"
-    var = Variation_844
-class Item_1400(Item):
-    name = "RAD"
-    title = ""
-    var = Variation_378
-class Item_1401(Item):
-    name = "RAD"
-    title = "Type of Sensor(s) Maintaining Track"
-    var = Variation_394
-class Item_1402(Item):
-    name = "RAMHD"
-    title = ""
-    var = Variation_444
-class Item_1403(Item):
-    name = "RAMLD"
-    title = ""
-    var = Variation_347
-class Item_1404(Item):
-    name = "RAN"
-    title = "Roll Angle"
-    var = Variation_246
-class Item_1405(Item):
-    name = "RAN"
-    title = "Roll Angle Age"
-    var = Variation_217
-class Item_1406(Item):
-    name = "RAS"
-    title = "Receiving ATC Services"
-    var = Variation_707
-class Item_1407(Item):
-    name = "RAT"
-    title = "RA Terminated"
-    var = Variation_428
-class Item_1408(Item):
-    name = "RC"
-    title = "Range Check"
-    var = Variation_719
-class Item_1409(Item):
-    name = "RC"
-    title = "Roll Call Component"
-    var = Variation_611
-class Item_1410(Item):
-    name = "RCE"
-    title = "Reduced Capability Equipment"
-    var = Variation_969
-class Item_1411(Item):
-    name = "RCF"
-    title = "Range Check"
-    var = Variation_799
-class Item_1412(Item):
-    name = "RD"
-    title = "Reply Destination"
-    var = Variation_592
-class Item_1413(Item):
-    name = "RDP"
-    title = ""
-    var = Variation_655
-class Item_1414(Item):
-    name = "RDPC"
-    title = "Radar Data Processing Chain"
-    var = Variation_654
-class Item_1415(Item):
-    name = "RDPC"
-    title = "Radar Data Processor Chain Selection Status"
-    var = Variation_379
-class Item_1416(Item):
-    name = "RDPR"
-    title = "Event to Signal a Reset/restart of the Selected Radar Data Processor Chain, I.e. Expect a New Assignment of Track Numbers"
-    var = Variation_447
-class Item_1417(Item):
-    name = "RDS"
-    title = "Raw Doppler Speed"
-    var = Variation_1243
-class Item_1418(Item):
-    name = "RDS"
-    title = "Runway Designation"
-    var = Variation_1026
-class Item_1419(Item):
-    name = "RE"
-    title = "Range Error"
-    var = Variation_198
-class Item_1420(Item):
-    name = "RE"
-    title = "Range Exceeded Indicator"
-    var = Variation_91
-class Item_1421(Item):
-    name = "RE"
-    title = "Reserved Expansion Field"
-    var = Variation_1280
-class Item_1422(Item):
-    name = "RE"
-    title = "Rho End"
-    var = Variation_285
-class Item_1423(Item):
-    name = "REDRAD"
-    title = "Reduction Steps in Use as Result of An Overload Within the Mode S Subsystem"
-    var = Variation_124
-class Item_1424(Item):
-    name = "REDRAD"
-    title = "Reduction Steps in Use as Result of An Overload Within the PSR Subsystem"
-    var = Variation_410
-class Item_1425(Item):
-    name = "REDRAD"
-    title = "Reduction Steps in Use as Result of An Overload Within the SSR Subsystem"
-    var = Variation_124
-class Item_1426(Item):
-    name = "REDRDP"
-    title = "Reduction Steps in Use for An Overload of the RDP"
-    var = Variation_410
-class Item_1427(Item):
-    name = "REDXMT"
-    title = "Reduction Steps in Use for An Overload of the Transmission Subsystem"
-    var = Variation_682
-class Item_1428(Item):
-    name = "REF"
-    title = "Reference from which the Messages Are Counted"
-    var = Variation_42
-class Item_1429(Item):
-    name = "REF"
-    title = "Reference from which the Messages Are Countered"
-    var = Variation_43
-class Item_1430(Item):
-    name = "REFTR1"
-    title = "Ref Trans 1 Status"
-    var = Variation_113
-class Item_1431(Item):
-    name = "REFTR2"
-    title = "Ref Trans 2 Status"
-    var = Variation_678
-class Item_1432(Item):
-    name = "REFTR3"
-    title = "Ref Trans 3 Status"
-    var = Variation_113
-class Item_1433(Item):
-    name = "REFTR4"
-    title = "Ref Trans 4 Status"
-    var = Variation_678
-class Item_1434(Item):
-    name = "REPLYNBR"
-    title = ""
-    var = Variation_234
-class Item_1435(Item):
-    name = "RES"
-    title = ""
-    var = Variation_358
-class Item_1436(Item):
-    name = "RES"
-    title = "Bit Resolution"
-    var = Variation_174
-class Item_1437(Item):
-    name = "RES"
-    title = "Resolution with which the GNSS-derived Altitude (GA) is Reported"
-    var = Variation_358
-class Item_1438(Item):
-    name = "RG"
-    title = "Report Generation"
-    var = Variation_864
-class Item_1439(Item):
-    name = "RGCONSTART"
-    title = ""
-    var = Variation_294
-class Item_1440(Item):
-    name = "RGCONSTOP"
-    title = ""
-    var = Variation_294
-class Item_1441(Item):
-    name = "RHO"
-    title = ""
-    var = Variation_285
-class Item_1442(Item):
-    name = "RHO"
-    title = ""
-    var = Variation_288
-class Item_1443(Item):
-    name = "RHO"
-    title = "Measured Distance"
-    var = Variation_288
-class Item_1444(Item):
-    name = "RHO"
-    title = "RHO"
-    var = Variation_265
-class Item_1445(Item):
-    name = "RHOEND"
-    title = "Rho End"
-    var = Variation_288
-class Item_1446(Item):
-    name = "RHOST"
-    title = "Rho Start"
-    var = Variation_288
-class Item_1447(Item):
-    name = "RID"
-    title = "Receiver Component ID"
-    var = Variation_234
-class Item_1448(Item):
-    name = "RID"
-    title = "Receiver Identification"
-    var = Variation_234
-class Item_1449(Item):
-    name = "RIMCA"
-    title = ""
-    var = Variation_348
-class Item_1450(Item):
-    name = "RN"
-    title = "Renumbering Indication for Track ID"
-    var = Variation_802
-class Item_1451(Item):
-    name = "RNG"
-    title = "Range Error"
-    var = Variation_198
-class Item_1452(Item):
-    name = "ROA"
-    title = "Roll Angle Age"
-    var = Variation_211
-class Item_1453(Item):
-    name = "ROT"
-    title = "Rate of Turn"
-    var = Variation_150
-class Item_1454(Item):
-    name = "ROT"
-    title = "Rate of Turn in Two's Complement Form"
-    var = Variation_150
-class Item_1455(Item):
-    name = "RP"
-    title = "Report Period for Category 021 Reports"
-    var = Variation_209
-class Item_1456(Item):
-    name = "RPC"
-    title = "Radar Plot Characteristics"
-    var = Variation_1361
-class Item_1457(Item):
-    name = "RPD"
-    title = "Difference in Range Between PSR and SSR Plot"
-    var = Variation_200
-class Item_1458(Item):
-    name = "RPL"
-    title = "Replies/Plot Link"
-    var = Variation_1266
-class Item_1459(Item):
-    name = "RPP"
-    title = ""
-    var = Variation_872
 class Item_1460(Item):
     name = "RPP"
     title = "Reflected Path - Power"
@@ -12056,558 +12623,504 @@ class Item_1461(Item):
     name = "RPS"
     title = "Reflected Path - Signal to Noise Ratio (SNR)"
     var = Variation_192
-class Item_1462(Item):
-    name = "RR"
-    title = "Range Rate"
-    var = Variation_301
-class Item_1463(Item):
-    name = "RRC"
-    title = "Runway/Runway Crossing in RIMCAS"
-    var = Variation_33
-class Item_1464(Item):
-    name = "RRL"
-    title = "Reply Rate Limiting"
-    var = Variation_975
-class Item_1465(Item):
-    name = "RS"
-    title = "Rho Start"
-    var = Variation_285
-class Item_1466(Item):
-    name = "RS1090"
-    title = "Receiver 1090 MHz"
-    var = Variation_376
-class Item_1467(Item):
-    name = "RSAZ"
-    title = "Azimuth Resolution"
-    var = Variation_290
-class Item_1468(Item):
-    name = "RSEL"
-    title = "Elevation Resolution"
-    var = Variation_290
-class Item_1469(Item):
-    name = "RSGH"
-    title = "Geometric Height Resolution"
-    var = Variation_310
-class Item_1470(Item):
-    name = "RSHPX"
-    title = ""
-    var = Variation_271
-class Item_1471(Item):
-    name = "RSHPY"
-    title = ""
-    var = Variation_271
-class Item_1472(Item):
-    name = "RSHV"
-    title = "Horizontal Velocity Resolution"
-    var = Variation_1149
-class Item_1473(Item):
-    name = "RSI"
-    title = "8-bit Identification Number of RS"
-    var = Variation_155
-class Item_1474(Item):
-    name = "RSO"
-    title = "RS Operational"
-    var = Variation_751
-class Item_1475(Item):
-    name = "RSR"
-    title = "Range Resolution"
-    var = Variation_308
-class Item_1476(Item):
-    name = "RSRR"
-    title = "Range Rate Resolution"
-    var = Variation_309
-class Item_1477(Item):
-    name = "RSS"
-    title = "RS Status"
-    var = Variation_632
-class Item_1478(Item):
-    name = "RSVA"
-    title = "Vertical Acceleration Precision"
-    var = Variation_1076
-class Item_1479(Item):
-    name = "RSVV"
-    title = "Vertical Velocity Resolution"
-    var = Variation_275
-class Item_1480(Item):
-    name = "RT1"
-    title = "Runway/Taxiway Designator 1"
-    var = Variation_328
-class Item_1481(Item):
-    name = "RT2"
-    title = "Runway/Taxiway Designator 2"
-    var = Variation_328
-class Item_1482(Item):
-    name = "RTC"
-    title = "Radar Track Characteristics"
-    var = Variation_1359
-class Item_1483(Item):
-    name = "RTC"
-    title = "Runway/Taxiway Crossing in RIMCAS"
-    var = Variation_349
-class Item_1484(Item):
-    name = "RTYP"
+class Variation_1342(Compound):
+    fspec_size = None
+    items = [Item_793, Item_794, Item_1460, Item_1461]
+class Item_463(Item):
+    name = "630"
+    title = "Path Quality"
+    var = Variation_1342
+class Item_464(Item):
+    name = "631"
+    title = "Contour (Azimuth, Elevation Angle, Range Extent)"
+    var = Variation_1236
+class Variation_1305(Compound):
+    fspec_size = None
+    items = [Item_61, Item_48, Item_72, Item_87, Item_111, Item_293, Item_316, Item_329, Item_168, Item_382, Item_393, Item_416, Item_446, Item_449, Item_450, Item_451, Item_452, Item_454, Item_430, Item_459, Item_460, Item_461, Item_462, Item_463, Item_464, Item_1580]
+class Item_49(Item):
+    name = "000"
     title = "Report Type"
-    var = Variation_142
-class Item_1485(Item):
-    name = "RVP"
-    title = "RVSM & Flight Priority"
-    var = Variation_916
-class Item_1486(Item):
-    name = "RVSM"
-    title = ""
-    var = Variation_674
-class Item_1487(Item):
-    name = "RVSM"
-    title = ""
-    var = Variation_770
-class Item_1488(Item):
-    name = "RVSM"
-    title = "RVSM"
-    var = Variation_674
-class Item_1489(Item):
-    name = "RW"
-    title = "Range Width"
-    var = Variation_288
-class Item_1490(Item):
-    name = "RWC"
-    title = "Remain Well Clear Corrective Alert"
-    var = Variation_974
-class Item_1491(Item):
-    name = "RWY"
-    title = "Runway Designation"
-    var = Variation_297
-class Item_1492(Item):
-    name = "S"
-    title = ""
-    var = Variation_259
-class Item_1493(Item):
-    name = "S"
-    title = ""
-    var = Variation_293
-class Item_1494(Item):
-    name = "S"
-    title = "Shading Orientation with Respect to North"
-    var = Variation_680
-class Item_1495(Item):
-    name = "S"
-    title = "Source"
-    var = Variation_404
-class Item_1496(Item):
-    name = "SA"
-    title = "Single Antenna"
-    var = Variation_850
-class Item_1497(Item):
-    name = "SAA"
-    title = "Selected Altitude Available"
-    var = Variation_631
-class Item_1498(Item):
-    name = "SAA"
-    title = "Selected Altitude Available"
-    var = Variation_733
-class Item_1499(Item):
-    name = "SAB"
-    title = "Status Reported by ADS-B"
-    var = Variation_922
-class Item_1500(Item):
-    name = "SAB"
-    title = "Status Reported by ADS-B Age"
-    var = Variation_217
-class Item_1501(Item):
-    name = "SAC"
-    title = "SAC of Radar Concerned"
+    var = Variation_170
+class Item_73(Item):
+    name = "015"
+    title = "Service Type and Identification"
+    var = Variation_1078
+class Item_243(Item):
+    name = "100"
+    title = "Ground Station Status"
+    var = Variation_1205
+class Item_250(Item):
+    name = "101"
+    title = "Service Configuration"
+    var = Variation_1210
+class Item_338(Item):
+    name = "200"
+    title = "Operational Range"
+    var = Variation_205
+class Item_260(Item):
+    name = "110"
+    title = "Service Status"
+    var = Variation_1175
+class Item_269(Item):
+    name = "120"
+    title = "Service Statistics"
+    var = Variation_1267
+class Variation_1306(Compound):
+    fspec_size = None
+    items = [Item_61, Item_49, Item_73, Item_199, Item_243, Item_250, Item_338, Item_260, Item_269, None, None, None, Item_1421, Item_1580]
+class Item_50(Item):
+    name = "000"
+    title = "Report Type"
+    var = Variation_1057
+class Item_336(Item):
+    name = "200"
+    title = "Message Identification"
+    var = Variation_298
+class Item_86(Item):
+    name = "020"
+    title = "Service Designator"
+    var = Variation_326
+class Item_248(Item):
+    name = "100"
+    title = "System and Service Status"
+    var = Variation_1204
+class Item_253(Item):
+    name = "105"
+    title = "System and Service Error Codes"
+    var = Variation_1223
+class Item_264(Item):
+    name = "120"
+    title = "Component Status"
+    var = Variation_1241
+class Item_288(Item):
+    name = "140"
+    title = "Service Statistics"
+    var = Variation_1268
+class Item_448(Item):
+    name = "600"
+    title = "Position of the System Reference Point"
+    var = Variation_1004
+class Item_456(Item):
+    name = "610"
+    title = "Height of the System Reference Point"
+    var = Variation_249
+class Variation_1307(Compound):
+    fspec_size = None
+    items = [Item_61, Item_50, Item_336, Item_72, Item_86, Item_199, Item_248, Item_253, Item_264, Item_288, Item_1580, Item_448, Item_456]
+class Item_67(Item):
+    name = "012"
+    title = "Data Destination Identifier"
+    var = Variation_1061
+class Item_33(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_159
+class Item_402(Item):
+    name = "350"
+    title = "Cluster Station/Node List"
+    var = Variation_1252
+class Item_359(Item):
+    name = "220"
+    title = "Aircraft Address"
+    var = Variation_296
+class Item_363(Item):
+    name = "221"
+    title = "Duplicate Address Reference Number (DRN)"
+    var = Variation_234
+class Item_155(Item):
+    name = "045"
+    title = "Calculated Position in WGS-84 Coordinates"
+    var = Variation_1000
+class Item_192(Item):
+    name = "070"
+    title = "Mode 3/A Code in Octal Representation"
+    var = Variation_1128
+class Item_159(Item):
+    name = "050"
+    title = "Flight Level in Binary Representation"
+    var = Variation_1129
+class Item_344(Item):
+    name = "200"
+    title = "Track Velocity in Polar Co-ordinates"
+    var = Variation_988
+class Item_367(Item):
+    name = "230"
+    title = "Transponder Capability"
+    var = Variation_937
+class Item_369(Item):
+    name = "240"
+    title = "Track Status"
+    var = Variation_954
+class Item_355(Item):
+    name = "210"
+    title = "Mode S Address List"
+    var = Variation_1226
+class Item_403(Item):
+    name = "360"
+    title = "Cluster Controller Command State"
     var = Variation_155
-class Item_1502(Item):
-    name = "SAC"
-    title = "System Area Code"
+class Variation_1308(Compound):
+    fspec_size = None
+    items = [Item_61, Item_67, Item_33, Item_402, Item_359, Item_363, Item_289, Item_155, Item_192, Item_159, Item_344, Item_367, Item_369, Item_355, Item_403, None, None, None, None, None, Item_1580]
+class Item_42(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_183
+class Item_340(Item):
+    name = "200"
+    title = "System Configuration Reporting Period"
+    var = Variation_206
+class Item_394(Item):
+    name = "300"
+    title = "Pair Identification"
+    var = Variation_1248
+class Item_417(Item):
+    name = "400"
+    title = "Position of the System Reference Point"
+    var = Variation_1003
+class Item_419(Item):
+    name = "405"
+    title = "Height of System Reference Point"
+    var = Variation_249
+class Item_421(Item):
+    name = "410"
+    title = "Transmitter Properties"
+    var = Variation_1259
+class Item_423(Item):
+    name = "420"
+    title = "Receiver Properties"
+    var = Variation_1249
+class Variation_1309(Compound):
+    fspec_size = None
+    items = [Item_61, Item_72, Item_42, Item_289, Item_340, Item_394, Item_417, Item_419, Item_421, Item_423, Item_1580]
+class Item_43(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_184
+class Item_135(Item):
+    name = "040"
+    title = "Report Number"
     var = Variation_155
-class Item_1503(Item):
-    name = "SAC"
-    title = "System Area Code Fixed to Zero"
-    var = Variation_155
-class Item_1504(Item):
-    name = "SACADJS"
-    title = "SAC of the Adjacent Sensor"
-    var = Variation_155
-class Item_1505(Item):
-    name = "SAL"
-    title = "Selected Altitude"
-    var = Variation_1067
-class Item_1506(Item):
-    name = "SAL"
-    title = "Selected Altitude Age"
-    var = Variation_211
-class Item_1507(Item):
-    name = "SAL"
-    title = "Selected Altitude Age"
-    var = Variation_217
-class Item_1508(Item):
-    name = "SAM"
-    title = ""
-    var = Variation_544
-class Item_1509(Item):
-    name = "SAM"
-    title = "Amplitude of (M)SSR Reply"
-    var = Variation_193
-class Item_1510(Item):
-    name = "SAS"
-    title = ""
-    var = Variation_62
-class Item_1511(Item):
-    name = "SAS"
-    title = "Source Availability"
-    var = Variation_61
-class Item_1512(Item):
-    name = "SB"
-    title = "Stop Bar Designator"
+class Item_230(Item):
+    name = "090"
+    title = "Radio Channel Name"
     var = Variation_328
-class Item_1513(Item):
-    name = "SC"
-    title = "Service Class"
-    var = Variation_123
-class Item_1514(Item):
-    name = "SCC"
-    title = "Surface Capabilities and Characteristics Age"
-    var = Variation_211
-class Item_1515(Item):
-    name = "SCD"
-    title = "Scanning Direction"
-    var = Variation_677
-class Item_1516(Item):
-    name = "SCF"
-    title = "Channel A/B Selection Status for Surveillance Co-ordination Function"
-    var = Variation_710
-class Item_1517(Item):
-    name = "SCN"
-    title = "Surveillance Cluster Network Information"
-    var = Variation_978
-class Item_1518(Item):
-    name = "SCN"
-    title = "Track / SCN Association"
-    var = Variation_577
-class Item_1519(Item):
-    name = "SCO"
-    title = "Score"
-    var = Variation_191
-class Item_1520(Item):
-    name = "SDA"
-    title = "Horizontal Position System Design Assurance Level (as Defined in Version 2)"
-    var = Variation_587
-class Item_1521(Item):
-    name = "SDASZ"
-    title = "Standard Deviation of Azimuth"
-    var = Variation_290
-class Item_1522(Item):
-    name = "SDAZR"
-    title = ""
-    var = Variation_290
-class Item_1523(Item):
-    name = "SDAZR"
-    title = "Standard Deviation of Azimuth Rate"
-    var = Variation_1070
-class Item_1524(Item):
-    name = "SDDA"
-    title = ""
-    var = Variation_284
-class Item_1525(Item):
-    name = "SDDA"
-    title = "Precision of Doppler Acceleration"
-    var = Variation_1071
-class Item_1526(Item):
-    name = "SDDV"
-    title = "Precision of Doppler Velocity"
-    var = Variation_283
-class Item_1527(Item):
-    name = "SDEL"
-    title = "Standard Deviation of Elevation"
-    var = Variation_290
-class Item_1528(Item):
-    name = "SDELR"
-    title = ""
-    var = Variation_291
-class Item_1529(Item):
-    name = "SDER"
-    title = "Standard Deviation of Elevation Rate"
-    var = Variation_1072
-class Item_1530(Item):
-    name = "SDGH"
-    title = "Geometric Height Precision"
-    var = Variation_310
-class Item_1531(Item):
-    name = "SDH"
-    title = "Standard Deviation of Geometric Height (WGS 84)"
-    var = Variation_271
-class Item_1532(Item):
-    name = "SDHA"
-    title = "Horizontal Acceleration Precision"
-    var = Variation_1147
-class Item_1533(Item):
-    name = "SDHPX"
-    title = ""
-    var = Variation_281
-class Item_1534(Item):
-    name = "SDHPY"
-    title = ""
-    var = Variation_281
-class Item_1535(Item):
-    name = "SDHV"
-    title = "Horizontal Velocity Precision"
-    var = Variation_1148
+class Item_162(Item):
+    name = "050"
+    title = "Position in WGS-84 Coordinates"
+    var = Variation_1006
+class Item_177(Item):
+    name = "060"
+    title = "Position in Cartesian Coordinates"
+    var = Variation_1168
+class Item_187(Item):
+    name = "070"
+    title = "Local Bearing"
+    var = Variation_277
+class Item_213(Item):
+    name = "080"
+    title = "System Bearing"
+    var = Variation_277
+class Item_247(Item):
+    name = "100"
+    title = "Quality of Measurement"
+    var = Variation_155
+class Item_255(Item):
+    name = "110"
+    title = "Estimated Uncertainty"
+    var = Variation_207
+class Item_266(Item):
+    name = "120"
+    title = "Contributing Sensors"
+    var = Variation_1222
+class Item_273(Item):
+    name = "130"
+    title = "Conflicting Transmitter Position in WGS-84 Coordinates"
+    var = Variation_1006
+class Item_285(Item):
+    name = "140"
+    title = "Conflicting Transmitter Position in Cartesian Coordinates"
+    var = Variation_1168
+class Item_299(Item):
+    name = "150"
+    title = "Conflicting Transmitter Estimated Uncertainty"
+    var = Variation_207
+class Item_310(Item):
+    name = "160"
+    title = "Track Number"
+    var = Variation_234
+class Item_320(Item):
+    name = "170"
+    title = "Sensor Identification"
+    var = Variation_155
+class Item_331(Item):
+    name = "180"
+    title = "Signal Level"
+    var = Variation_244
+class Item_333(Item):
+    name = "190"
+    title = "Signal Quality"
+    var = Variation_155
+class Item_339(Item):
+    name = "200"
+    title = "Signal Elevation"
+    var = Variation_246
+class Variation_1310(Compound):
+    fspec_size = None
+    items = [Item_61, Item_72, Item_43, Item_107, Item_135, Item_230, Item_162, Item_177, Item_187, Item_213, Item_247, Item_255, Item_266, Item_273, Item_285, Item_299, Item_310, Item_320, Item_331, Item_333, Item_339, Item_1580]
+class Item_163(Item):
+    name = "050"
+    title = "Sensor Identifier"
+    var = Variation_1061
+class Item_179(Item):
+    name = "060"
+    title = "Sensor Configuration and Status"
+    var = Variation_1186
+class Item_198(Item):
+    name = "070"
+    title = "Time Stamping Bias"
+    var = Variation_238
+class Item_212(Item):
+    name = "080"
+    title = "SSR / Mode S Range Gain and Bias"
+    var = Variation_1080
+class Item_219(Item):
+    name = "081"
+    title = "SSR Mode S Azimuth Bias"
+    var = Variation_262
+class Item_227(Item):
+    name = "090"
+    title = "PSR Range Gain and Bias"
+    var = Variation_1033
+class Item_233(Item):
+    name = "091"
+    title = "PSR Azimuth Bias"
+    var = Variation_262
+class Item_235(Item):
+    name = "092"
+    title = "PSR Elevation Bias"
+    var = Variation_262
+class Variation_1311(Compound):
+    fspec_size = None
+    items = [Item_61, Item_72, Item_108, Item_163, Item_179, Item_198, Item_212, Item_219, Item_227, Item_233, Item_235, None, Item_1421, Item_1580]
+class Item_439(Item):
+    name = "550"
+    title = "Category Version Number Report"
+    var = Variation_1239
+class Variation_1312(Compound):
+    fspec_size = None
+    items = [Item_61, Item_72, Item_289, Item_439, None, Item_1580, Item_1421]
+class Item_88(Item):
+    name = "020"
+    title = "Target Report Descriptor"
+    var = Variation_1213
+class Item_145(Item):
+    name = "041"
+    title = "Position In WGS-84 Coordinates"
+    var = Variation_1001
+class Item_153(Item):
+    name = "042"
+    title = "Position in Cartesian Coordinates"
+    var = Variation_1168
+class Item_313(Item):
+    name = "161"
+    title = "Track Number"
+    var = Variation_911
+class Item_323(Item):
+    name = "170"
+    title = "Track Status"
+    var = Variation_1182
+class Item_195(Item):
+    name = "070"
+    title = "Mode-3/A Code in Octal Representation"
+    var = Variation_1137
+class Item_346(Item):
+    name = "202"
+    title = "Calculated Track Velocity in Cartesian Coordinates"
+    var = Variation_1140
+class Item_244(Item):
+    name = "100"
+    title = "Mode C Code"
+    var = Variation_1130
+class Item_373(Item):
+    name = "245"
+    title = "Target Identification"
+    var = Variation_1086
+class Item_258(Item):
+    name = "110"
+    title = "Measured Height (Local Cartesian Coordinates)"
+    var = Variation_257
+class Item_252(Item):
+    name = "105"
+    title = "Geometric Height (WGS-84)"
+    var = Variation_257
+class Item_348(Item):
+    name = "210"
+    title = "Calculated Acceleration"
+    var = Variation_930
+class Item_397(Item):
+    name = "310"
+    title = "Pre-programmed Message"
+    var = Variation_1095
+class Item_788(Item):
+    name = "DOP"
+    title = "DOP of Position"
+    var = Variation_1154
 class Item_1536(Item):
     name = "SDP"
     title = "Standard Deviation of Position"
     var = Variation_1158
-class Item_1537(Item):
-    name = "SDR"
-    title = "Range Precision"
-    var = Variation_308
-class Item_1538(Item):
-    name = "SDRA"
-    title = ""
-    var = Variation_286
-class Item_1539(Item):
-    name = "SDRA"
-    title = "Range Acceleration Precision"
-    var = Variation_1074
-class Item_1540(Item):
-    name = "SDRR"
-    title = ""
-    var = Variation_309
-class Item_1541(Item):
-    name = "SDRR"
-    title = "Range Rate Precision"
-    var = Variation_1075
-class Item_1542(Item):
-    name = "SDS"
-    title = ""
-    var = Variation_95
-class Item_1543(Item):
-    name = "SDVA"
-    title = ""
-    var = Variation_276
-class Item_1544(Item):
-    name = "SDVV"
-    title = ""
-    var = Variation_275
-class Item_1545(Item):
-    name = "SDVV"
-    title = "Vertical Velocity Precision"
-    var = Variation_1077
-class Item_1546(Item):
-    name = "SEC"
-    title = ""
-    var = Variation_519
-class Item_1547(Item):
-    name = "SEC"
-    title = "Seconds"
-    var = Variation_519
-class Item_1548(Item):
-    name = "SEC"
-    title = "Seconds, from 0 to 59"
-    var = Variation_519
-class Item_1549(Item):
-    name = "SESTAT"
-    title = ""
-    var = Variation_683
-class Item_1550(Item):
-    name = "SFC"
-    title = ""
-    var = Variation_549
-class Item_1551(Item):
-    name = "SGV"
-    title = "Surface Ground Vector"
-    var = Variation_1214
-class Item_1552(Item):
-    name = "SH"
-    title = "Selected Heading"
-    var = Variation_848
-class Item_1553(Item):
-    name = "SH"
-    title = "Selected Heading"
-    var = Variation_899
-class Item_1554(Item):
-    name = "SI"
-    title = "SI/II Transponder Capability"
-    var = Variation_829
-class Item_1555(Item):
-    name = "SI"
-    title = "SI/II-capabilities of the Transponder"
-    var = Variation_580
-class Item_1556(Item):
-    name = "SIC"
-    title = "SIC of Radar Concerned"
-    var = Variation_155
-class Item_1557(Item):
-    name = "SIC"
-    title = "System Identification Code"
-    var = Variation_155
-class Item_1558(Item):
-    name = "SIC"
-    title = "System Identity Code"
-    var = Variation_155
-class Item_1559(Item):
-    name = "SICADJS"
-    title = "SIC of the Adjacent Sensor"
-    var = Variation_155
-class Item_1560(Item):
-    name = "SID"
-    title = "Sensor Identification"
-    var = Variation_1061
-class Item_1561(Item):
-    name = "SID"
-    title = "Service Identification"
-    var = Variation_127
-class Item_1562(Item):
-    name = "SID"
-    title = "Standard Instrument Departure"
-    var = Variation_328
-class Item_1563(Item):
-    name = "SIDENT"
-    title = "Slave System Unit Identification"
-    var = Variation_155
-class Item_1564(Item):
-    name = "SIGH"
-    title = "Sigma (H)) Standard Deviation on the Heading Within the Local Grid System"
-    var = Variation_225
-class Item_1565(Item):
-    name = "SIGV"
-    title = "Sigma (V)) Standard Deviation on the Groundspeed Within the Local Grid System"
-    var = Variation_221
-class Item_1566(Item):
-    name = "SIGX"
-    title = "Sigma (X)) Standard Deviation on the Horizontal Axis of the Local Grid System"
-    var = Variation_218
-class Item_1567(Item):
-    name = "SIGY"
-    title = "Sigma (Y)) Standard Deviation on the Vertical Axis of the Local Grid System"
-    var = Variation_218
-class Item_1568(Item):
-    name = "SIL"
-    title = "Surveillance (version 1) or Source (version 2) Integrity Level"
-    var = Variation_393
-class Item_1569(Item):
-    name = "SILS"
-    title = "SIL-Supplement"
-    var = Variation_460
-class Item_1570(Item):
-    name = "SIM"
-    title = ""
-    var = Variation_3
-class Item_1571(Item):
-    name = "SIM"
-    title = ""
-    var = Variation_4
-class Item_1572(Item):
-    name = "SIM"
-    title = ""
-    var = Variation_5
-class Item_1573(Item):
-    name = "SIM"
-    title = ""
-    var = Variation_334
-class Item_1574(Item):
-    name = "SIM"
-    title = ""
-    var = Variation_528
-class Item_1575(Item):
-    name = "SIM"
-    title = ""
-    var = Variation_705
-class Item_1576(Item):
-    name = "SIM"
-    title = "Simulated Target"
-    var = Variation_429
-class Item_1577(Item):
-    name = "SN"
-    title = "Step Number"
-    var = Variation_141
-class Item_1578(Item):
-    name = "SNB"
-    title = "Scan Number"
-    var = Variation_191
-class Item_1579(Item):
-    name = "SP"
-    title = ""
-    var = Variation_497
-class Item_1580(Item):
-    name = "SP"
-    title = "Special Purpose Field"
-    var = Variation_1281
-class Item_1581(Item):
-    name = "SP1"
-    title = ""
-    var = Variation_780
-class Item_1582(Item):
-    name = "SP2"
-    title = ""
-    var = Variation_702
-class Item_1583(Item):
-    name = "SP3"
-    title = ""
-    var = Variation_609
-class Item_1584(Item):
-    name = "SPI"
-    title = ""
-    var = Variation_2
-class Item_1585(Item):
-    name = "SPI"
-    title = ""
-    var = Variation_333
-class Item_1586(Item):
-    name = "SPI"
-    title = ""
-    var = Variation_354
-class Item_1587(Item):
-    name = "SPI"
-    title = ""
-    var = Variation_704
-class Item_1588(Item):
-    name = "SPI"
-    title = ""
-    var = Variation_722
-class Item_1589(Item):
-    name = "SPI"
-    title = "Special Position Identification"
-    var = Variation_782
-class Item_1590(Item):
-    name = "SPO"
-    title = "Indication of Spoofing Attack"
-    var = Variation_747
-class Item_1591(Item):
-    name = "SQW"
-    title = ""
-    var = Variation_720
-class Item_1592(Item):
-    name = "SR"
-    title = ""
-    var = Variation_83
-class Item_1593(Item):
-    name = "SRB"
-    title = "Mode S Range Bias"
-    var = Variation_255
-class Item_1594(Item):
-    name = "SRC"
-    title = ""
-    var = Variation_405
-class Item_1595(Item):
-    name = "SRC"
-    title = ""
-    var = Variation_601
-class Item_1596(Item):
-    name = "SRC"
-    title = "Signal/Clutter Ratio"
-    var = Variation_272
-class Item_1597(Item):
-    name = "SRC"
-    title = "Source"
-    var = Variation_404
-class Item_1598(Item):
-    name = "SRC"
-    title = "Source of Calculated Track Altitude for I062/130"
-    var = Variation_600
-class Item_1599(Item):
-    name = "SRG"
-    title = "Mode S Range Gain"
-    var = Variation_247
+class Item_1531(Item):
+    name = "SDH"
+    title = "Standard Deviation of Geometric Height (WGS 84)"
+    var = Variation_271
+class Variation_1341(Compound):
+    fspec_size = None
+    items = [Item_788, Item_1536, Item_1531]
+class Item_435(Item):
+    name = "500"
+    title = "Position Accuracy"
+    var = Variation_1341
+class Item_415(Item):
+    name = "400"
+    title = "Contributing Devices"
+    var = Variation_1237
+class Item_374(Item):
+    name = "250"
+    title = "BDS Register Data"
+    var = Variation_1246
+class Item_365(Item):
+    name = "230"
+    title = "Communications/ACAS Capability and Flight Status"
+    var = Variation_950
+class Item_380(Item):
+    name = "260"
+    title = "ACAS Resolution Advisory Report"
+    var = Variation_327
+class Item_113(Item):
+    name = "030"
+    title = "Warning/Error Conditions"
+    var = Variation_1278
+class Item_173(Item):
+    name = "055"
+    title = "Mode-1 Code in Octal Representation"
+    var = Variation_1134
+class Item_161(Item):
+    name = "050"
+    title = "Mode-2 Code in Octal Representation"
+    var = Variation_1135
+class Variation_1313(Compound):
+    fspec_size = None
+    items = [Item_61, Item_88, Item_289, Item_145, Item_153, Item_313, Item_323, Item_195, Item_346, Item_224, Item_244, Item_362, Item_373, Item_258, Item_252, Item_348, Item_396, Item_397, Item_435, Item_415, Item_374, Item_365, Item_380, Item_113, Item_173, Item_161, Item_1421, Item_1580]
+class Item_324(Item):
+    name = "170"
+    title = "Track Status"
+    var = Variation_1183
+class Item_378(Item):
+    name = "250"
+    title = "Mode S MB Data"
+    var = Variation_1246
+class Variation_1314(Compound):
+    fspec_size = None
+    items = [Item_61, Item_88, Item_289, Item_145, Item_153, Item_313, Item_324, Item_195, Item_346, Item_224, Item_244, Item_362, Item_373, Item_258, Item_252, Item_348, Item_396, Item_397, Item_435, Item_415, Item_378, Item_365, Item_380, Item_113, Item_173, Item_161, Item_1421, Item_1580]
+class Item_89(Item):
+    name = "020"
+    title = "Target Report Descriptor"
+    var = Variation_1217
+class Item_132(Item):
+    name = "040"
+    title = "Measured Position in Polar Co-ordinates"
+    var = Variation_1047
+class Item_194(Item):
+    name = "070"
+    title = "Mode-3/A Code in Octal Representation"
+    var = Variation_1127
+class Item_226(Item):
+    name = "090"
+    title = "Mode-C Code in Binary Representation"
+    var = Variation_1121
+class Item_276(Item):
+    name = "130"
+    title = "Radar Plot Characteristics"
+    var = Variation_1273
+class Item_291(Item):
+    name = "141"
+    title = "Truncated Time of Day"
+    var = Variation_287
+class Item_160(Item):
+    name = "050"
+    title = "Mode-2 Code in Octal Representation"
+    var = Variation_1123
+class Item_267(Item):
+    name = "120"
+    title = "Measured Radial Doppler Speed"
+    var = Variation_201
+class Item_280(Item):
+    name = "131"
+    title = "Received Power"
+    var = Variation_193
+class Item_210(Item):
+    name = "080"
+    title = "Mode-3/A Code Confidence Indicator"
+    var = Variation_908
+class Item_245(Item):
+    name = "100"
+    title = "Mode-C Code and Code Confidence Indicator"
+    var = Variation_1118
+class Item_174(Item):
+    name = "060"
+    title = "Mode-2 Code Confidence Indicator"
+    var = Variation_908
+class Item_112(Item):
+    name = "030"
+    title = "Warning/Error Conditions"
+    var = Variation_1274
+class Item_300(Item):
+    name = "150"
+    title = "Presence of X-Pulse"
+    var = Variation_1171
+class Variation_1315(Compound):
+    fspec_size = None
+    items = [Item_61, Item_89, Item_132, Item_194, Item_226, Item_276, Item_291, Item_160, Item_267, Item_280, Item_210, Item_245, Item_174, Item_112, Item_300, None, None, None, None, Item_1580, None]
+class Item_315(Item):
+    name = "161"
+    title = "Track Plot Number"
+    var = Variation_234
+class Item_150(Item):
+    name = "042"
+    title = "Calculated Position in Cartesian Co-ordinates"
+    var = Variation_1164
+class Item_334(Item):
+    name = "200"
+    title = "Calculated Track Velocity in Polar Co-ordinates"
+    var = Variation_988
+class Item_326(Item):
+    name = "170"
+    title = "Track Status"
+    var = Variation_1185
+class Item_357(Item):
+    name = "210"
+    title = "Track Quality"
+    var = Variation_1273
+class Variation_1316(Compound):
+    fspec_size = None
+    items = [Item_61, Item_89, Item_315, Item_132, Item_150, Item_334, Item_194, Item_226, Item_291, Item_276, Item_280, Item_267, Item_326, Item_357, Item_160, Item_210, Item_245, Item_174, Item_112, Item_1580, None, Item_300]
+class Item_90(Item):
+    name = "020"
+    title = "Target Report Descriptor"
+    var = Variation_1218
+class Item_133(Item):
+    name = "040"
+    title = "Measured Position in Polar Co-ordinates"
+    var = Variation_1048
+class Item_193(Item):
+    name = "070"
+    title = "Mode-3/A Code in Octal Representation"
+    var = Variation_1126
+class Item_223(Item):
+    name = "090"
+    title = "Flight Level in Binary Representation"
+    var = Variation_1119
 class Item_1600(Item):
     name = "SRL"
     title = "SSR Plot Runlength"
@@ -12616,1450 +13129,934 @@ class Item_1601(Item):
     name = "SRR"
     title = "Number of Received Replies for (M)SSR"
     var = Variation_191
-class Item_1602(Item):
-    name = "SS"
-    title = "Surveillance Status"
-    var = Variation_841
-class Item_1603(Item):
-    name = "SSC"
-    title = "Specific Service Capability"
-    var = Variation_53
-class Item_1604(Item):
-    name = "SSR"
-    title = ""
-    var = Variation_63
-class Item_1605(Item):
-    name = "SSR"
-    title = ""
-    var = Variation_448
-class Item_1606(Item):
-    name = "SSR"
-    title = ""
-    var = Variation_572
+class Item_1509(Item):
+    name = "SAM"
+    title = "Amplitude of (M)SSR Reply"
+    var = Variation_193
+class Item_1325(Item):
+    name = "PRL"
+    title = "Primary Plot Runlength"
+    var = Variation_226
+class Item_1284(Item):
+    name = "PAM"
+    title = "Amplitude of Primary Plot"
+    var = Variation_193
+class Item_1457(Item):
+    name = "RPD"
+    title = "Difference in Range Between PSR and SSR Plot"
+    var = Variation_200
+class Item_526(Item):
+    name = "APD"
+    title = "Difference in Azimuth Between PSR and SSR Plot"
+    var = Variation_203
+class Variation_1364(Compound):
+    fspec_size = None
+    items = [Item_1600, Item_1601, Item_1509, Item_1325, Item_1284, Item_1457, Item_526]
+class Item_277(Item):
+    name = "130"
+    title = "Radar Plot Characteristics"
+    var = Variation_1364
+class Item_368(Item):
+    name = "240"
+    title = "Aircraft Identification"
+    var = Variation_326
+class Item_375(Item):
+    name = "250"
+    title = "BDS Register Data"
+    var = Variation_1247
+class Item_151(Item):
+    name = "042"
+    title = "Calculated Position in Cartesian Co-ordinates"
+    var = Variation_1165
+class Item_325(Item):
+    name = "170"
+    title = "Track Status"
+    var = Variation_1184
+class Item_356(Item):
+    name = "210"
+    title = "Track Quality"
+    var = Variation_1079
+class Item_115(Item):
+    name = "030"
+    title = "Warning/Error Conditions and Target Classification"
+    var = Variation_1276
+class Item_257(Item):
+    name = "110"
+    title = "Height Measured by a 3D Radar"
+    var = Variation_880
+class Item_605(Item):
+    name = "CAL"
+    title = "Calculated Doppler Speed"
+    var = Variation_955
+class Item_1417(Item):
+    name = "RDS"
+    title = "Raw Doppler Speed"
+    var = Variation_1243
+class Variation_1337(Compound):
+    fspec_size = None
+    items = [Item_605, Item_1417]
+class Item_268(Item):
+    name = "120"
+    title = "Radial Doppler Speed"
+    var = Variation_1337
+class Item_364(Item):
+    name = "230"
+    title = "Communications/ACAS Capability and Flight Status"
+    var = Variation_948
+class Item_172(Item):
+    name = "055"
+    title = "Mode-1 Code in Octal Representation"
+    var = Variation_1122
+class Item_185(Item):
+    name = "065"
+    title = "Mode-1 Code Confidence Indicator"
+    var = Variation_891
+class Variation_1317(Compound):
+    fspec_size = None
+    items = [Item_61, Item_289, Item_90, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_375, Item_313, Item_151, Item_334, Item_325, Item_356, Item_115, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
+class Item_379(Item):
+    name = "250"
+    title = "Mode S MB Data"
+    var = Variation_1247
+class Item_114(Item):
+    name = "030"
+    title = "Warning/Error Conditions and Target Classification"
+    var = Variation_1275
+class Variation_1318(Compound):
+    fspec_size = None
+    items = [Item_61, Item_289, Item_90, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_379, Item_313, Item_151, Item_334, Item_325, Item_356, Item_114, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
+class Variation_1319(Compound):
+    fspec_size = None
+    items = [Item_61, Item_289, Item_90, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_379, Item_313, Item_151, Item_334, Item_325, Item_356, Item_115, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
+class Item_91(Item):
+    name = "020"
+    title = "Target Report Descriptor"
+    var = Variation_1219
+class Item_116(Item):
+    name = "030"
+    title = "Warning/Error Conditions and Target Classification"
+    var = Variation_1277
+class Variation_1320(Compound):
+    fspec_size = None
+    items = [Item_61, Item_289, Item_91, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_375, Item_313, Item_151, Item_334, Item_325, Item_356, Item_116, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
+class Item_62(Item):
+    name = "010"
+    title = "Data Source Identifier"
+    var = Variation_1065
+class Item_45(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_186
+class Item_290(Item):
+    name = "140"
+    title = "Time of Track Information"
+    var = Variation_311
+class Item_147(Item):
+    name = "041"
+    title = "Position in WGS-84 Coordinates"
+    var = Variation_1007
+class Item_149(Item):
+    name = "042"
+    title = "Calculated Position in Cartesian Co-ordinates"
+    var = Variation_1163
+class Item_347(Item):
+    name = "202"
+    title = "Calculated Track Velocity in Cartesian Coordinates"
+    var = Variation_1142
+class Item_349(Item):
+    name = "210"
+    title = "Calculated Acceleration"
+    var = Variation_931
+class Item_175(Item):
+    name = "060"
+    title = "Mode-3/A Code in Octal Representation"
+    var = Variation_900
+class Item_372(Item):
+    name = "245"
+    title = "Target Identification"
+    var = Variation_1085
+class Item_1098(Item):
+    name = "MB"
+    title = "BDS"
+    var = Variation_1230
+class Item_487(Item):
+    name = "ADR"
+    title = "24 Bits Aircraft Address"
+    var = Variation_296
+class Item_689(Item):
+    name = "COMACAS"
+    title = "Communications/ACAS Capability and Flight Status"
+    var = Variation_952
+class Item_482(Item):
+    name = "ACT"
+    title = "Aircraft Derived Aircraft Type"
+    var = Variation_314
+class Item_812(Item):
+    name = "ECAT"
+    title = "Emitter Category"
+    var = Variation_171
+class Item_560(Item):
+    name = "AVTECH"
+    title = "Available Technologies"
+    var = Variation_1139
+class Variation_1352(Compound):
+    fspec_size = None
+    items = [Item_1098, Item_487, None, Item_689, None, None, None, Item_482, Item_812, None, Item_560]
+class Item_408(Item):
+    name = "380"
+    title = "Mode-S / ADS-B Related Data"
+    var = Variation_1352
+class Item_311(Item):
+    name = "161"
+    title = "Track Number"
+    var = Variation_873
+class Item_327(Item):
+    name = "170"
+    title = "Track Status"
+    var = Variation_1196
+class Item_1330(Item):
+    name = "PSR"
+    title = "Age of The Last Primary Detection Used to Update the Track"
+    var = Variation_217
 class Item_1607(Item):
     name = "SSR"
     title = "Age of the Last Secondary Detection Used to Update the Track"
+    var = Variation_217
+class Item_1119(Item):
+    name = "MDA"
+    title = "Age of the Last Mode A Detection Used to Update the Track"
+    var = Variation_217
+class Item_1141(Item):
+    name = "MFL"
+    title = "Age of the Last Mode C Detection Used to Update the Track"
+    var = Variation_217
+class Item_1125(Item):
+    name = "MDS"
+    title = "Age of the Last Mode S Detection Used to Update the Track"
+    var = Variation_217
+class Item_493(Item):
+    name = "ADS"
+    title = "Age of the Last ADS Report Used to Update the Track"
+    var = Variation_282
+class Item_483(Item):
+    name = "ADB"
+    title = "Age of the Last ADS-B Report Used to Update the Track"
+    var = Variation_217
+class Item_1108(Item):
+    name = "MD1"
+    title = "Age of the Last Valid Mode 1 Used to Update the Track"
+    var = Variation_217
+class Item_1110(Item):
+    name = "MD2"
+    title = "Age of the Last Mode 2 Used to Update the Track"
+    var = Variation_217
+class Item_1063(Item):
+    name = "LOP"
+    title = "Age of the Last Magentic Loop Detection"
+    var = Variation_217
+class Item_1756(Item):
+    name = "TRK"
+    title = "Actual Track Age Since First Occurrence"
+    var = Variation_217
+class Item_1202(Item):
+    name = "MUL"
+    title = "Age of the Last Multilateration Detection"
+    var = Variation_217
+class Variation_1357(Compound):
+    fspec_size = None
+    items = [Item_1330, Item_1607, Item_1119, Item_1141, Item_1125, Item_493, Item_483, Item_1108, Item_1110, Item_1063, Item_1756, Item_1202]
+class Item_387(Item):
+    name = "290"
+    title = "System Track Update Ages"
+    var = Variation_1357
+class Item_424(Item):
+    name = "430"
+    title = "Phase of Flight"
+    var = Variation_168
+class Item_225(Item):
+    name = "090"
+    title = "Measured Flight Level"
+    var = Variation_248
+class Item_237(Item):
+    name = "093"
+    title = "Calculated Track Barometric Altitude"
+    var = Variation_1038
+class Item_234(Item):
+    name = "092"
+    title = "Calculated Track Geometric Altitude"
+    var = Variation_257
+class Item_358(Item):
+    name = "215"
+    title = "Calculated Rate Of Climb/Descent"
+    var = Variation_258
+class Item_873(Item):
+    name = "FPPSID"
+    title = "FPPS Identification Tag"
+    var = Variation_1064
+class Item_732(Item):
+    name = "CSN"
+    title = "Callsign"
+    var = Variation_328
+class Item_994(Item):
+    name = "IFPSFLIGHTID"
+    title = "IFPS_FLIGHT_ID"
+    var = Variation_1102
+class Item_861(Item):
+    name = "FLIGHTCAT"
+    title = "Flight Category"
+    var = Variation_986
+class Item_1724(Item):
+    name = "TOA"
+    title = "Type of Aircraft"
+    var = Variation_314
+class Item_1887(Item):
+    name = "WTC"
+    title = "Wake Turbulence Category"
+    var = Variation_189
+class Item_484(Item):
+    name = "ADEP"
+    title = "Departure Airport"
+    var = Variation_314
+class Item_485(Item):
+    name = "ADES"
+    title = "Destination Airport"
+    var = Variation_314
+class Item_1491(Item):
+    name = "RWY"
+    title = "Runway Designation"
+    var = Variation_297
+class Item_614(Item):
+    name = "CCP"
+    title = "Current Control Position"
+    var = Variation_942
+class Item_1725(Item):
+    name = "TOD"
+    title = "Time of Departure"
+    var = Variation_1262
+class Item_1647(Item):
+    name = "STS"
+    title = "Stand Status"
+    var = Variation_961
+class Variation_1346(Compound):
+    fspec_size = None
+    items = [Item_873, Item_732, Item_994, Item_861, Item_1724, Item_1887, Item_484, Item_485, Item_1491, Item_628, Item_614, Item_1725, Item_545, Item_1647]
+class Item_411(Item):
+    name = "390"
+    title = "Flight Plan Related Data"
+    var = Variation_1346
+class Item_395(Item):
+    name = "300"
+    title = "Vehicle Fleet Identification"
+    var = Variation_157
+class Item_399(Item):
+    name = "310"
+    title = "Pre-programmed Message"
+    var = Variation_1097
+class Item_525(Item):
+    name = "APC"
+    title = "Estimated Accuracy Of Track Position (Cartesian)"
+    var = Variation_1156
+class Item_530(Item):
+    name = "APW"
+    title = "Estimated Accuracy Of Track Position (WGS84)"
+    var = Variation_997
+class Item_547(Item):
+    name = "ATH"
+    title = "Estimated Accuracy Of Track Height"
+    var = Variation_242
+class Item_554(Item):
+    name = "AVC"
+    title = "Estimated Accuracy Of Track Velocity (Cartesian)"
+    var = Variation_1157
+class Item_538(Item):
+    name = "ARC"
+    title = "Estimated Accuracy Of Rate Of Climb / Descent"
+    var = Variation_243
+class Item_469(Item):
+    name = "AAC"
+    title = "Estimated Accuracy Of Acceleration (Cartesian)"
+    var = Variation_1155
+class Variation_1335(Compound):
+    fspec_size = None
+    items = [Item_525, Item_530, Item_547, Item_554, Item_538, Item_469]
+class Item_434(Item):
+    name = "500"
+    title = "Estimated Accuracies"
+    var = Variation_1335
+class Item_445(Item):
+    name = "600"
+    title = "Alert Messages"
+    var = Variation_923
+class Item_453(Item):
+    name = "605"
+    title = "Tracks in Alert"
+    var = Variation_1233
+class Item_457(Item):
+    name = "610"
+    title = "Holdbar Status"
+    var = Variation_1238
+class Variation_1321(Compound):
+    fspec_size = None
+    items = [Item_62, Item_45, Item_72, Item_290, Item_147, Item_149, Item_347, Item_349, Item_175, Item_372, Item_408, Item_311, Item_327, Item_387, Item_424, Item_225, Item_237, Item_234, Item_358, Item_383, Item_411, Item_395, Item_399, Item_434, Item_445, Item_453, Item_457, Item_1580, Item_1421]
+class Item_690(Item):
+    name = "COMACAS"
+    title = "Communications/ACAS Capability and Flight Status"
+    var = Variation_953
+class Variation_1353(Compound):
+    fspec_size = None
+    items = [Item_1098, Item_487, None, Item_690, None, None, None, Item_482, Item_812, None, Item_560]
+class Item_409(Item):
+    name = "380"
+    title = "Mode-S / ADS-B Related Data"
+    var = Variation_1353
+class Item_328(Item):
+    name = "170"
+    title = "Track Status"
+    var = Variation_1197
+class Item_1331(Item):
+    name = "PSR"
+    title = "Age of the Last Primary Report Used to Update the Track"
     var = Variation_217
 class Item_1608(Item):
     name = "SSR"
     title = "Age of the Last Secondary Report Used to Update the Track"
     var = Variation_217
-class Item_1609(Item):
-    name = "SSR"
-    title = "SSR Age"
+class Item_1120(Item):
+    name = "MDA"
+    title = "Age of the Last Valid Mode A Report Used to Update the Track"
     var = Variation_217
-class Item_1610(Item):
-    name = "SSR"
-    title = "SSR Component"
-    var = Variation_784
-class Item_1611(Item):
-    name = "SSR"
-    title = "Specific Processing Mode Information for a SSR Sensor"
-    var = Variation_1046
-class Item_1612(Item):
-    name = "SSR"
-    title = "Specific Status Information for a SSR Sensor"
-    var = Variation_927
-class Item_1613(Item):
-    name = "SSRP"
-    title = "Service Status Reporting Period"
-    var = Variation_152
-class Item_1614(Item):
-    name = "SSRPSR"
-    title = "Radar Detection in Last Antenna Scan"
-    var = Variation_509
-class Item_1615(Item):
-    name = "SSTAT"
-    title = ""
-    var = Variation_605
-class Item_1616(Item):
-    name = "STA"
-    title = "Aircraft Status"
-    var = Variation_1187
-class Item_1617(Item):
-    name = "STA"
-    title = "Aircraft Status"
-    var = Variation_1188
-class Item_1618(Item):
-    name = "STA"
-    title = "Standard Instrument Arrival"
+class Item_1142(Item):
+    name = "MFL"
+    title = "Age of the Last Valid and Credible Mode C Used to Update the Track"
+    var = Variation_217
+class Item_1126(Item):
+    name = "MDS"
+    title = "Age of the Last Mode S Report Used to Update the Track"
+    var = Variation_217
+class Item_1111(Item):
+    name = "MD2"
+    title = "Age of the Last Valid Mode 2 Used to Update the Track"
+    var = Variation_217
+class Variation_1358(Compound):
+    fspec_size = None
+    items = [Item_1331, Item_1608, Item_1120, Item_1142, Item_1126, Item_493, Item_483, Item_1108, Item_1111, Item_1063, Item_1756, Item_1202]
+class Item_388(Item):
+    name = "290"
+    title = "System Track Update Ages"
+    var = Variation_1358
+class Item_236(Item):
+    name = "093"
+    title = "Calculated Track Barometric Altitude"
+    var = Variation_1037
+class Item_860(Item):
+    name = "FLIGHTCAT"
+    title = "Flight Category"
+    var = Variation_985
+class Variation_1345(Compound):
+    fspec_size = None
+    items = [Item_873, Item_732, Item_994, Item_860, Item_1724, Item_1887, Item_484, Item_485, Item_1491, Item_628, Item_614, Item_1725, Item_545, Item_1647]
+class Item_410(Item):
+    name = "390"
+    title = "Flight Plan Related Data"
+    var = Variation_1345
+class Variation_1322(Compound):
+    fspec_size = None
+    items = [Item_62, Item_45, Item_72, Item_290, Item_147, Item_149, Item_347, Item_349, Item_175, Item_372, Item_409, Item_311, Item_328, Item_388, Item_424, Item_225, Item_236, Item_234, Item_358, Item_383, Item_410, Item_395, Item_399, Item_434, Item_445, Item_453, Item_457, Item_1580, Item_1421]
+class Item_63(Item):
+    name = "010"
+    title = "Server Identification Tag"
+    var = Variation_1061
+class Item_74(Item):
+    name = "015"
+    title = "User Number"
+    var = Variation_235
+class Item_78(Item):
+    name = "018"
+    title = "Data Source Identification Tag"
+    var = Variation_1061
+class Item_125(Item):
+    name = "035"
+    title = "Type of Message"
+    var = Variation_979
+class Item_93(Item):
+    name = "020"
+    title = "Time of ASTERIX Report Generation"
+    var = Variation_311
+class Item_142(Item):
+    name = "040"
+    title = "Track Number"
+    var = Variation_235
+class Item_158(Item):
+    name = "050"
+    title = "Composed Track Number"
+    var = Variation_1215
+class Item_183(Item):
+    name = "060"
+    title = "Track Mode 3/A"
+    var = Variation_902
+class Item_414(Item):
+    name = "400"
+    title = "Callsign"
+    var = Variation_328
+class Item_420(Item):
+    name = "410"
+    title = "Plan Number"
+    var = Variation_235
+class Item_422(Item):
+    name = "420"
+    title = "Flight Category"
+    var = Variation_984
+class Item_427(Item):
+    name = "440"
+    title = "Departure Aerodrome"
+    var = Variation_314
+class Item_428(Item):
+    name = "450"
+    title = "Destination Aerodrome"
+    var = Variation_314
+class Item_431(Item):
+    name = "480"
+    title = "Current Cleared Flight Level"
+    var = Variation_280
+class Item_432(Item):
+    name = "490"
+    title = "Current Control Position"
+    var = Variation_941
+class Item_425(Item):
+    name = "430"
+    title = "Type of Aircraft"
+    var = Variation_314
+class Item_426(Item):
+    name = "435"
+    title = "Wake Turbulence Category"
+    var = Variation_189
+class Item_429(Item):
+    name = "460"
+    title = "Allocated SSR Codes"
+    var = Variation_1234
+class Item_992(Item):
+    name = "IFI"
+    title = "IFPS FLIGHT ID"
+    var = Variation_1098
+class Item_1485(Item):
+    name = "RVP"
+    title = "RVSM & Flight Priority"
+    var = Variation_916
+class Item_1726(Item):
+    name = "TOD"
+    title = "Time of Departure / Arrival"
+    var = Variation_1260
+class Item_1562(Item):
+    name = "SID"
+    title = "Standard Instrument Departure"
     var = Variation_328
 class Item_1619(Item):
     name = "STAR"
     title = "Standard Instrument Arrival"
     var = Variation_328
-class Item_1620(Item):
-    name = "STARTAZ"
-    title = "Start Azimuth of the Cells Group"
-    var = Variation_293
-class Item_1621(Item):
-    name = "STARTRG"
-    title = "Starting Range of the Cells Group, Expressed in Number of Cells"
-    var = Variation_315
-class Item_1622(Item):
-    name = "STAT"
-    title = "Flight Status"
-    var = Variation_595
-class Item_1623(Item):
-    name = "STAT"
-    title = "Flight Status"
-    var = Variation_596
-class Item_1624(Item):
-    name = "STAT"
-    title = "Flight Status"
-    var = Variation_597
-class Item_1625(Item):
-    name = "STAT"
-    title = "Flight Status"
-    var = Variation_598
-class Item_1626(Item):
-    name = "STAT"
-    title = "Flight Status"
-    var = Variation_603
-class Item_1627(Item):
-    name = "STAT"
-    title = "Flight Status"
-    var = Variation_604
-class Item_1628(Item):
-    name = "STAT"
-    title = "Flight Status"
-    var = Variation_773
-class Item_1629(Item):
-    name = "STAT"
-    title = "Selected Heading Status"
-    var = Variation_712
-class Item_1630(Item):
-    name = "STAT"
-    title = "Status of the Alert"
-    var = Variation_679
-class Item_1631(Item):
-    name = "STAT"
-    title = "Status of the Service"
-    var = Variation_684
-class Item_1632(Item):
-    name = "STATE"
-    title = ""
-    var = Variation_839
-class Item_1633(Item):
-    name = "STC"
-    title = "Sensitivity Time Control Map in Use"
-    var = Variation_673
-class Item_1634(Item):
-    name = "STCA"
-    title = ""
-    var = Variation_800
-class Item_1635(Item):
-    name = "STD"
-    title = "Standard Instrument Departure"
-    var = Variation_328
-class Item_1636(Item):
-    name = "STH"
-    title = ""
-    var = Variation_817
-class Item_1637(Item):
-    name = "STI"
-    title = ""
-    var = Variation_92
-class Item_1638(Item):
-    name = "STI"
-    title = ""
-    var = Variation_93
-class Item_1639(Item):
-    name = "STI"
-    title = ""
-    var = Variation_94
-class Item_1640(Item):
-    name = "STN"
-    title = "System Track Number"
-    var = Variation_233
-class Item_1641(Item):
-    name = "STOCC"
-    title = ""
-    var = Variation_721
-class Item_1642(Item):
-    name = "STP"
-    title = ""
-    var = Variation_8
-class Item_1643(Item):
-    name = "STP"
-    title = ""
-    var = Variation_730
-class Item_1644(Item):
-    name = "STR"
-    title = "Start Range"
-    var = Variation_155
-class Item_1645(Item):
-    name = "STRACK"
-    title = "Slave System Track Number"
-    var = Variation_232
-class Item_1646(Item):
-    name = "STS"
-    title = "Stand Status"
-    var = Variation_960
-class Item_1647(Item):
-    name = "STS"
-    title = "Stand Status"
-    var = Variation_961
-class Item_1648(Item):
-    name = "STS"
-    title = "Supplementary Track Status"
-    var = Variation_1190
-class Item_1649(Item):
-    name = "STTN"
-    title = "Track Re-numbering Indication"
-    var = Variation_780
-class Item_1650(Item):
-    name = "STYP"
-    title = "Message Sub-type (= 2 for 1090 ES, Version 2)"
-    var = Variation_771
-class Item_1651(Item):
-    name = "STYP"
-    title = "Type of Service"
-    var = Variation_688
-class Item_1652(Item):
-    name = "SUB"
-    title = "Sub Version Number"
-    var = Variation_191
-class Item_1653(Item):
-    name = "SUC"
-    title = ""
-    var = Variation_731
-class Item_1654(Item):
-    name = "SUI"
-    title = "System Unit Identification"
-    var = Variation_191
-class Item_1655(Item):
-    name = "SUM"
-    title = "Mode 5 Summary"
-    var = Variation_1011
-class Item_1656(Item):
-    name = "SUM"
-    title = "Mode 5 Summary"
-    var = Variation_1012
-class Item_1657(Item):
-    name = "SUM"
-    title = "Mode 5 Summary"
-    var = Variation_1013
-class Item_1658(Item):
-    name = "SUP"
-    title = "Track Maintained with Track Information from Neighbouring Node B on the Cluster, or Network"
-    var = Variation_474
-class Item_1659(Item):
-    name = "SVH"
-    title = "Sense Vertical & Horizontal"
-    var = Variation_966
-class Item_1660(Item):
-    name = "SVR"
-    title = "Alert Severity"
-    var = Variation_396
-class Item_1661(Item):
-    name = "SYSTAT"
-    title = ""
-    var = Variation_411
-class Item_1662(Item):
-    name = "TA"
-    title = "Track Angle"
-    var = Variation_293
-class Item_1663(Item):
-    name = "TA"
-    title = "Track Angle Clockwise Reference to True North"
-    var = Variation_293
-class Item_1664(Item):
-    name = "TAC"
-    title = "Type of Aircraft"
-    var = Variation_314
-class Item_1665(Item):
-    name = "TAG"
-    title = "FPPS Identification Tag"
+class Variation_1350(Compound):
+    fspec_size = None
+    items = [Item_992, Item_1485, Item_1418, Item_1726, Item_545, Item_1646, Item_1562, Item_1619]
+class Item_437(Item):
+    name = "500"
+    title = "Supplementary Flight Data"
+    var = Variation_1350
+class Variation_1323(Compound):
+    fspec_size = None
+    items = [Item_63, Item_74, Item_78, Item_125, Item_93, Item_142, Item_158, Item_183, Item_414, Item_420, Item_422, Item_427, Item_428, Item_431, Item_432, Item_425, Item_426, Item_429, Item_437, None, Item_1421]
+class Item_126(Item):
+    name = "036"
+    title = "Data Source Identifier"
     var = Variation_1061
-class Item_1666(Item):
-    name = "TAN"
-    title = "Track Angle"
-    var = Variation_293
-class Item_1667(Item):
-    name = "TAN"
-    title = "Track Angle Age"
-    var = Variation_217
-class Item_1668(Item):
-    name = "TAO"
-    title = "Transponder Antenna Offset"
-    var = Variation_963
-class Item_1669(Item):
-    name = "TAR"
-    title = "Track Angle Rate"
-    var = Variation_847
-class Item_1670(Item):
-    name = "TAR"
-    title = "Track Angle Rate"
-    var = Variation_1090
-class Item_1671(Item):
-    name = "TAR"
-    title = "Track Angle Rate Age"
-    var = Variation_211
-class Item_1672(Item):
-    name = "TAR"
-    title = "Track Angle Rate Age"
-    var = Variation_217
-class Item_1673(Item):
-    name = "TAS"
-    title = "True Air Speed"
-    var = Variation_425
-class Item_1674(Item):
-    name = "TAS"
-    title = "True Air Speed Age"
-    var = Variation_211
-class Item_1675(Item):
-    name = "TAS"
-    title = "True Airspeed"
-    var = Variation_264
-class Item_1676(Item):
-    name = "TAS"
-    title = "True Airspeed Age"
-    var = Variation_217
-class Item_1677(Item):
-    name = "TBC"
-    title = "Total Bits Corrected"
-    var = Variation_968
-class Item_1678(Item):
-    name = "TC"
-    title = "Target Trajectory Change Report Capability"
-    var = Variation_399
-class Item_1679(Item):
-    name = "TC"
-    title = "Time to Conflict"
+class Item_128(Item):
+    name = "037"
+    title = "Data Destination Identifier"
+    var = Variation_1061
+class Item_32(Item):
+    name = "000"
+    title = "Message Type"
+    var = Variation_156
+class Item_51(Item):
+    name = "001"
+    title = "Result"
+    var = Variation_939
+class Item_54(Item):
+    name = "005"
+    title = "Mode S Address"
+    var = Variation_296
+class Item_75(Item):
+    name = "016"
+    title = "Packet Number"
+    var = Variation_315
+class Item_77(Item):
+    name = "017"
+    title = "Packet Number List"
+    var = Variation_1228
+class Item_79(Item):
+    name = "018"
+    title = "Mode S Packet Properties"
+    var = Variation_874
+class Item_80(Item):
+    name = "019"
+    title = "Mode S Packet"
+    var = Variation_1279
+class Item_103(Item):
+    name = "028"
+    title = "GICB Extraction Periodicity"
+    var = Variation_268
+class Item_105(Item):
+    name = "030"
+    title = "GICB Properties"
+    var = Variation_1034
+class Item_101(Item):
+    name = "025"
+    title = "GICB Number"
+    var = Variation_315
+class Item_102(Item):
+    name = "027"
+    title = "BDS Code"
+    var = Variation_155
+class Item_104(Item):
+    name = "029"
+    title = "GICB Extracted"
+    var = Variation_327
+class Item_52(Item):
+    name = "002"
+    title = "Time of Day"
     var = Variation_311
-class Item_1680(Item):
-    name = "TC"
-    title = "Transition Code"
-    var = Variation_919
-class Item_1681(Item):
-    name = "TCA"
-    title = ""
-    var = Variation_75
-class Item_1682(Item):
-    name = "TCA"
-    title = "TCP Number Availability"
-    var = Variation_75
-class Item_1683(Item):
-    name = "TCA"
-    title = "Time to Closest Approach"
-    var = Variation_311
-class Item_1684(Item):
-    name = "TCC"
-    title = ""
-    var = Variation_756
-class Item_1685(Item):
-    name = "TCC"
-    title = "Type of Plot Coordinate Transformation Mechanism:"
-    var = Variation_578
-class Item_1686(Item):
-    name = "TCODE1"
-    title = ""
-    var = Variation_606
-class Item_1687(Item):
-    name = "TCODE2"
-    title = ""
-    var = Variation_694
-class Item_1688(Item):
-    name = "TCODE3"
-    title = ""
-    var = Variation_694
-class Item_1689(Item):
-    name = "TCOUNT1"
-    title = ""
-    var = Variation_871
-class Item_1690(Item):
-    name = "TCOUNT2"
-    title = ""
-    var = Variation_132
-class Item_1691(Item):
-    name = "TCOUNT3"
-    title = ""
-    var = Variation_132
-class Item_1692(Item):
-    name = "TCPN"
-    title = ""
-    var = Variation_518
-class Item_1693(Item):
-    name = "TCPN"
-    title = "Trajectory Change Point Number"
-    var = Variation_518
-class Item_1694(Item):
-    name = "TD"
-    title = ""
-    var = Variation_671
-class Item_1695(Item):
-    name = "TD"
-    title = "Turn Direction"
-    var = Variation_671
-class Item_1696(Item):
-    name = "TE"
-    title = "Theta End"
+class Item_55(Item):
+    name = "006"
+    title = "Mode S Address List"
+    var = Variation_1226
+class Item_56(Item):
+    name = "007"
+    title = "Aircraft Data Link Command"
+    var = Variation_1114
+class Item_57(Item):
+    name = "008"
+    title = "Aircraft Data Link Status"
+    var = Variation_1221
+class Item_59(Item):
+    name = "009"
+    title = "Aircraft Data Link Report Request"
+    var = Variation_1212
+class Item_64(Item):
+    name = "010"
+    title = "Transponder Communications Capability"
+    var = Variation_913
+class Item_65(Item):
+    name = "011"
+    title = "Capability Report"
+    var = Variation_327
+class Item_69(Item):
+    name = "014"
+    title = "Aircraft Position in Polar Co-ordinates"
+    var = Variation_1048
+class Item_70(Item):
+    name = "015"
+    title = "Aircraft Position in Cartesian Co-ordinates"
+    var = Variation_1166
+class Item_82(Item):
+    name = "020"
+    title = "Broadcast Number"
+    var = Variation_315
+class Item_98(Item):
+    name = "021"
+    title = "Broadcast Properties"
+    var = Variation_1035
+class Item_99(Item):
+    name = "022"
+    title = "Broadcast Prefix"
+    var = Variation_915
+class Item_100(Item):
+    name = "023"
+    title = "Uplink or Downlink Broadcast"
+    var = Variation_327
+class Item_53(Item):
+    name = "004"
+    title = "II Code"
+    var = Variation_1032
+class Item_117(Item):
+    name = "031"
+    title = "Aircraft Identity"
+    var = Variation_324
+class Item_118(Item):
+    name = "032"
+    title = "Aircraft Mode A"
+    var = Variation_1125
+class Item_120(Item):
+    name = "033"
+    title = "Aircraft Height"
+    var = Variation_1120
+class Item_121(Item):
+    name = "034"
+    title = "Aircraft Speed"
+    var = Variation_289
+class Item_123(Item):
+    name = "035"
+    title = "Aircraft Heading"
     var = Variation_293
-class Item_1697(Item):
-    name = "TES"
-    title = "Track Extrapolation Source"
-    var = Variation_166
-class Item_1698(Item):
-    name = "TH"
-    title = "Theta"
-    var = Variation_293
-class Item_1699(Item):
-    name = "THETA"
-    title = ""
-    var = Variation_293
-class Item_1700(Item):
-    name = "THETA"
-    title = "Measured Azimuth"
-    var = Variation_293
-class Item_1701(Item):
-    name = "THETAEND"
-    title = "Theta End"
-    var = Variation_293
-class Item_1702(Item):
-    name = "THETAST"
-    title = "Theta Start"
-    var = Variation_293
-class Item_1703(Item):
-    name = "TI"
-    title = "Turn Indicator"
-    var = Variation_101
-class Item_1704(Item):
-    name = "TI1"
-    title = "Trajectory Intent Age"
-    var = Variation_211
-class Item_1705(Item):
-    name = "TI2"
-    title = "Target Identification Age"
-    var = Variation_211
-class Item_1706(Item):
-    name = "TID"
-    title = "Identification of Conflict Categories Definition Table"
-    var = Variation_127
-class Item_1707(Item):
-    name = "TID"
-    title = "Target Identification"
-    var = Variation_326
-class Item_1708(Item):
-    name = "TID"
-    title = "Threat Identity Data"
-    var = Variation_849
-class Item_1709(Item):
-    name = "TID"
-    title = "Trajectory Intent Age"
-    var = Variation_217
-class Item_1710(Item):
-    name = "TID"
-    title = "Trajectory Intent Data"
-    var = Variation_1257
-class Item_1711(Item):
-    name = "TID"
-    title = "Trajectory Intent Data"
-    var = Variation_1258
-class Item_1712(Item):
-    name = "TID"
-    title = "Transmitter ID"
+class Item_66(Item):
+    name = "012"
+    title = "Aircraft Coverage Quality Factor"
+    var = Variation_980
+class Item_68(Item):
+    name = "013"
+    title = "Aircraft CQF Calculation Method"
+    var = Variation_155
+class Variation_1324(Compound):
+    fspec_size = None
+    items = [Item_126, Item_128, Item_32, Item_51, Item_54, Item_75, Item_77, Item_79, Item_80, Item_103, Item_105, Item_101, Item_102, Item_104, Item_52, Item_55, Item_56, Item_57, Item_59, Item_64, Item_65, Item_69, Item_70, Item_82, Item_98, Item_99, Item_100, Item_53, Item_117, Item_118, Item_120, Item_121, Item_123, Item_66, Item_68]
+class Item_1298(Item):
+    name = "PNB"
+    title = "Plot Number"
     var = Variation_234
-class Item_1713(Item):
-    name = "TID"
-    title = "Transmitter Identification"
-    var = Variation_234
-class Item_1714(Item):
-    name = "TIMEOFDAYSCN"
-    title = "Absolute Timestamp in UTC Provided by the SCN"
-    var = Variation_287
-class Item_1715(Item):
-    name = "TIS"
-    title = "Trajectory Intent Status"
-    var = Variation_1202
-class Item_1716(Item):
-    name = "TIS"
-    title = "Trajectory Intent Status"
-    var = Variation_1203
-class Item_1717(Item):
-    name = "TLC"
-    title = "Track Life Cycle"
-    var = Variation_924
-class Item_1718(Item):
-    name = "TMP"
-    title = "Temperature"
-    var = Variation_251
-class Item_1719(Item):
-    name = "TMP"
-    title = "Temperature Valid Flag"
-    var = Variation_487
-class Item_1720(Item):
-    name = "TMPD"
-    title = "Temperature in Degrees Celsius"
-    var = Variation_251
-class Item_1721(Item):
-    name = "TNH"
-    title = "True North Heading"
-    var = Variation_293
-class Item_1722(Item):
-    name = "TOA"
-    title = ""
-    var = Variation_866
-class Item_1723(Item):
-    name = "TOA"
-    title = "TOV Available"
-    var = Variation_866
-class Item_1724(Item):
-    name = "TOA"
-    title = "Type of Aircraft"
-    var = Variation_314
-class Item_1725(Item):
-    name = "TOD"
-    title = "Time of Departure"
-    var = Variation_1262
-class Item_1726(Item):
-    name = "TOD"
-    title = "Time of Departure / Arrival"
-    var = Variation_1260
-class Item_1727(Item):
-    name = "TOD"
-    title = "Time of Departure / Arrival"
-    var = Variation_1261
-class Item_1728(Item):
-    name = "TOM"
-    title = ""
-    var = Variation_112
-class Item_1729(Item):
-    name = "TOMRP"
-    title = "Fractional Part of the Time of Message Reception for Position in the Ground Station"
-    var = Variation_526
-class Item_1730(Item):
-    name = "TOS"
-    title = "Time Offset for POS and GA"
-    var = Variation_199
-class Item_1731(Item):
-    name = "TOS"
-    title = "Time Offset for POS and GA"
-    var = Variation_219
-class Item_1732(Item):
-    name = "TOT"
-    title = ""
-    var = Variation_769
-class Item_1733(Item):
-    name = "TOV"
-    title = "Time Over Point"
-    var = Variation_306
-class Item_1734(Item):
-    name = "TP1A"
-    title = ""
-    var = Variation_71
-class Item_1735(Item):
-    name = "TP1B"
-    title = ""
-    var = Variation_357
-class Item_1736(Item):
-    name = "TP2A"
-    title = ""
-    var = Variation_492
-class Item_1737(Item):
-    name = "TP2B"
-    title = ""
-    var = Variation_552
-class Item_1738(Item):
-    name = "TP3A"
-    title = ""
-    var = Variation_658
-class Item_1739(Item):
-    name = "TP3B"
-    title = ""
-    var = Variation_734
-class Item_1740(Item):
-    name = "TP4A"
-    title = ""
-    var = Variation_830
-class Item_1741(Item):
-    name = "TP4B"
-    title = ""
-    var = Variation_853
-class Item_1742(Item):
-    name = "TPW"
-    title = "Transmit Power"
-    var = Variation_973
-class Item_1743(Item):
-    name = "TRA"
-    title = ""
-    var = Variation_832
-class Item_1744(Item):
-    name = "TRA"
-    title = "Track Angle"
-    var = Variation_293
-class Item_1745(Item):
-    name = "TRA"
-    title = "Turn Radius Availability"
-    var = Variation_832
-class Item_1746(Item):
-    name = "TRANS"
-    title = "Transversal Acceleration"
-    var = Variation_96
-class Item_1747(Item):
-    name = "TRB"
-    title = ""
-    var = Variation_29
-class Item_1748(Item):
-    name = "TRB"
-    title = "In Trouble"
-    var = Variation_29
-class Item_1749(Item):
-    name = "TRB"
-    title = "Turbulence"
+class Item_1458(Item):
+    name = "RPL"
+    title = "Replies/Plot Link"
+    var = Variation_1266
+class Item_1578(Item):
+    name = "SNB"
+    title = "Scan Number"
     var = Variation_191
-class Item_1750(Item):
-    name = "TRB"
-    title = "Turbulence Valid Flag"
-    var = Variation_571
-class Item_1751(Item):
-    name = "TRBD"
-    title = "Turbulence"
-    var = Variation_191
-class Item_1752(Item):
-    name = "TRD"
-    title = "Target Report Descriptor Age"
-    var = Variation_211
-class Item_1753(Item):
-    name = "TRE"
-    title = ""
-    var = Variation_30
-class Item_1754(Item):
-    name = "TRE"
-    title = ""
-    var = Variation_342
-class Item_1755(Item):
-    name = "TRE"
-    title = "Signal for End_of_Track"
-    var = Variation_86
-class Item_1756(Item):
-    name = "TRK"
-    title = "Actual Track Age Since First Occurrence"
-    var = Variation_217
-class Item_1757(Item):
-    name = "TRK"
-    title = "Track Age"
-    var = Variation_217
-class Item_1758(Item):
-    name = "TRK"
-    title = "Track Number"
-    var = Variation_693
-class Item_1759(Item):
-    name = "TRKUPDCTR"
-    title = ""
-    var = Variation_521
-class Item_1760(Item):
-    name = "TRN"
-    title = "Track Number"
-    var = Variation_693
+class Item_759(Item):
+    name = "DATE"
+    title = "Common and Plot Characteristics Date"
+    var = Variation_1172
+class Variation_1356(Compound):
+    fspec_size = None
+    items = [Item_1298, Item_1458, Item_1578, Item_759]
+class Item_1339(Item):
+    name = "PTL"
+    title = "Plot/Track Link"
+    var = Variation_892
+class Item_548(Item):
+    name = "ATL"
+    title = "ADS-B/Track Link"
+    var = Variation_1225
 class Item_1761(Item):
     name = "TRN"
     title = "Turn State"
     var = Variation_204
-class Item_1762(Item):
-    name = "TRNUM"
-    title = "Track Number"
-    var = Variation_693
-class Item_1763(Item):
-    name = "TS"
-    title = "Target State Report Capability"
-    var = Variation_562
-class Item_1764(Item):
-    name = "TS"
-    title = "Target Status Age"
-    var = Variation_211
-class Item_1765(Item):
-    name = "TS"
-    title = "Theta Start"
-    var = Variation_293
-class Item_1766(Item):
-    name = "TSB"
-    title = ""
-    var = Variation_451
-class Item_1767(Item):
-    name = "TSB"
-    title = ""
-    var = Variation_452
-class Item_1768(Item):
-    name = "TSE"
-    title = ""
-    var = Variation_353
-class Item_1769(Item):
-    name = "TSE"
-    title = ""
-    var = Variation_355
-class Item_1770(Item):
-    name = "TSI"
-    title = "Transponder Side Indication"
-    var = Variation_965
-class Item_1771(Item):
-    name = "TST"
-    title = ""
-    var = Variation_34
-class Item_1772(Item):
-    name = "TST"
-    title = ""
-    var = Variation_68
-class Item_1773(Item):
-    name = "TST"
-    title = ""
-    var = Variation_350
-class Item_1774(Item):
-    name = "TST"
-    title = ""
-    var = Variation_724
-class Item_1775(Item):
-    name = "TST"
-    title = ""
-    var = Variation_752
-class Item_1776(Item):
-    name = "TST"
-    title = ""
-    var = Variation_801
-class Item_1777(Item):
-    name = "TST"
-    title = "Test Target"
-    var = Variation_545
-class Item_1778(Item):
-    name = "TSV"
-    title = ""
-    var = Variation_536
-class Item_1779(Item):
-    name = "TSV"
-    title = "Time Source Validity"
-    var = Variation_584
-class Item_1780(Item):
-    name = "TSV"
-    title = "Time Source Validity"
-    var = Variation_666
-class Item_1781(Item):
-    name = "TSV"
-    title = "Time Source Validity"
-    var = Variation_837
-class Item_1782(Item):
-    name = "TT1"
-    title = "Time to Runway Threshold for First Approaching Aircraft in a RIMCA"
-    var = Variation_311
-class Item_1783(Item):
-    name = "TT2"
-    title = "Time to Runway Threshold for Second Approaching Aircraft in a RIMCA"
-    var = Variation_311
-class Item_1784(Item):
-    name = "TTA"
-    title = ""
-    var = Variation_723
-class Item_1785(Item):
-    name = "TTAX"
-    title = "Target Taxonomy"
-    var = Variation_503
-class Item_1786(Item):
-    name = "TTF"
-    title = ""
-    var = Variation_754
-class Item_1787(Item):
-    name = "TTF"
-    title = "Test Target"
-    var = Variation_661
-class Item_1788(Item):
-    name = "TTI"
-    title = "Threat Type Indicator"
-    var = Variation_668
-class Item_1789(Item):
-    name = "TTO"
-    title = "Transmission Time Offset"
-    var = Variation_316
-class Item_1790(Item):
-    name = "TTR"
-    title = "TCP Turn Radius"
-    var = Variation_273
-class Item_1791(Item):
-    name = "TUR"
-    title = ""
-    var = Variation_498
-class Item_1792(Item):
-    name = "TVS"
-    title = "Calculated Track Velocity Relative to System Reference Point"
-    var = Variation_1140
-class Item_1793(Item):
-    name = "TX1030"
-    title = "Transmitter 1030 MHz"
-    var = Variation_486
-class Item_1794(Item):
-    name = "TX1090"
-    title = "Transmitter 1090 MHz"
-    var = Variation_570
-class Item_1795(Item):
-    name = "TYP"
-    title = ""
-    var = Variation_67
-class Item_1796(Item):
-    name = "TYP"
-    title = ""
-    var = Variation_106
-class Item_1797(Item):
-    name = "TYP"
-    title = ""
-    var = Variation_122
-class Item_1798(Item):
-    name = "TYP"
-    title = ""
-    var = Variation_126
-class Item_1799(Item):
-    name = "TYP"
-    title = ""
-    var = Variation_136
-class Item_1800(Item):
-    name = "TYP"
-    title = ""
-    var = Variation_137
-class Item_1801(Item):
-    name = "TYP"
-    title = ""
-    var = Variation_686
-class Item_1802(Item):
-    name = "TYP"
-    title = ""
-    var = Variation_1104
-class Item_1803(Item):
-    name = "TYP"
-    title = "IFPS Flight ID Type"
-    var = Variation_107
-class Item_1804(Item):
-    name = "TYP"
-    title = "Message Type (= 28 for 1090 ES, Version 2)"
-    var = Variation_133
-class Item_1805(Item):
-    name = "TYP"
-    title = "Report Type"
-    var = Variation_121
-class Item_1806(Item):
-    name = "TYP"
-    title = "Time Type"
-    var = Variation_137
-class Item_1807(Item):
-    name = "TYP"
-    title = "Type of Message Counter"
-    var = Variation_134
-class Item_1808(Item):
-    name = "TYP"
-    title = "Type of Message Counter"
-    var = Variation_135
-class Item_1809(Item):
-    name = "TYPE"
-    title = ""
-    var = Variation_129
-class Item_1810(Item):
-    name = "TYPE"
-    title = "Reply Type"
-    var = Variation_165
-class Item_1811(Item):
-    name = "TYPE"
-    title = "Type of Report Counter"
-    var = Variation_163
-class Item_1812(Item):
-    name = "TYPE"
-    title = "Type of Report Counter"
-    var = Variation_164
-class Item_1813(Item):
-    name = "TYPE"
-    title = "Type of Separation Infringement"
-    var = Variation_640
-class Item_1814(Item):
-    name = "UAT"
-    title = ""
-    var = Variation_382
-class Item_1815(Item):
-    name = "UAT"
-    title = ""
-    var = Variation_665
-class Item_1816(Item):
-    name = "UAT"
-    title = "ADS-B UAT Age"
-    var = Variation_217
-class Item_1817(Item):
-    name = "UAT"
-    title = "UAT"
-    var = Variation_499
-class Item_1818(Item):
-    name = "UAT"
-    title = "UAT"
-    var = Variation_750
-class Item_1819(Item):
-    name = "UAT"
-    title = "UAT IN Capability"
-    var = Variation_382
-class Item_1820(Item):
-    name = "UC"
-    title = "Uplink Command"
-    var = Variation_502
-class Item_1821(Item):
-    name = "UCI6"
-    title = ""
-    var = Variation_229
-class Item_1822(Item):
-    name = "UCI9"
-    title = ""
-    var = Variation_229
-class Item_1823(Item):
-    name = "UCS"
-    title = "Uplink Current Status"
-    var = Variation_495
-class Item_1824(Item):
-    name = "UDS"
-    title = "Uplink Default Status"
-    var = Variation_80
-class Item_1825(Item):
-    name = "UM"
-    title = "Uplink Mask"
-    var = Variation_89
-class Item_1826(Item):
-    name = "UPD"
-    title = "Update Period"
-    var = Variation_525
-class Item_1827(Item):
-    name = "V"
-    title = ""
-    var = Variation_13
-class Item_1828(Item):
-    name = "V"
-    title = ""
-    var = Variation_14
-class Item_1829(Item):
-    name = "V"
-    title = "Validated"
-    var = Variation_14
-class Item_1830(Item):
-    name = "VA"
-    title = ""
-    var = Variation_566
-class Item_1831(Item):
-    name = "VA"
-    title = "Vertical Acceleration"
-    var = Variation_245
-class Item_1832(Item):
-    name = "VAL"
-    title = "On-Site ADS-B Information"
-    var = Variation_375
-class Item_1833(Item):
-    name = "VAL"
-    title = "Passive Acquisition Interface Information"
-    var = Variation_748
-class Item_1834(Item):
-    name = "VAL"
-    title = "Surveillance Cluster Network Information"
-    var = Variation_568
-class Item_1835(Item):
-    name = "VAL"
-    title = "Value"
-    var = Variation_398
-class Item_1836(Item):
-    name = "VAL"
-    title = "Value"
-    var = Variation_406
-class Item_1837(Item):
-    name = "VAL"
-    title = "Value"
-    var = Variation_407
-class Item_1838(Item):
-    name = "VAL"
-    title = "Value"
-    var = Variation_409
-class Item_1839(Item):
-    name = "VAL"
-    title = "Value"
-    var = Variation_413
-class Item_1840(Item):
-    name = "VAL"
-    title = "Value"
-    var = Variation_416
-class Item_1841(Item):
-    name = "VAL"
-    title = "Value"
-    var = Variation_591
-class Item_1842(Item):
-    name = "VAL"
-    title = "Value"
-    var = Variation_639
-class Item_1843(Item):
-    name = "VAL"
-    title = "Value"
-    var = Variation_679
-class Item_1844(Item):
-    name = "VAL"
-    title = "Value"
-    var = Variation_681
-class Item_1845(Item):
-    name = "VAL"
-    title = "Value"
-    var = Variation_742
-class Item_1846(Item):
-    name = "VAL"
-    title = "Value"
-    var = Variation_768
-class Item_1847(Item):
-    name = "VAL"
-    title = "Value"
-    var = Variation_825
-class Item_1848(Item):
-    name = "VAL"
-    title = "Value"
-    var = Variation_826
-class Item_1849(Item):
-    name = "VCD"
-    title = ""
-    var = Variation_621
-class Item_1850(Item):
-    name = "VDL"
-    title = "ADS-B VDL Mode 4 Age"
-    var = Variation_217
-class Item_1851(Item):
-    name = "VDL"
-    title = "VDL Mode 4"
-    var = Variation_90
-class Item_1852(Item):
-    name = "VDL"
-    title = "VDL Mode 4"
-    var = Variation_823
-class Item_1853(Item):
-    name = "VDL4"
-    title = ""
-    var = Variation_583
-class Item_1854(Item):
-    name = "VERT"
-    title = "Transversal Acceleration"
-    var = Variation_670
-class Item_1855(Item):
-    name = "VN"
-    title = "Version Number"
-    var = Variation_514
-class Item_1856(Item):
-    name = "VN"
-    title = "Version Number"
-    var = Variation_515
-class Item_1857(Item):
-    name = "VN"
-    title = "Vertical Navigation"
-    var = Variation_392
-class Item_1858(Item):
-    name = "VNS"
-    title = "Version Not Supported"
-    var = Variation_384
-class Item_1859(Item):
-    name = "VPM"
-    title = ""
-    var = Variation_622
-class Item_1860(Item):
-    name = "VRAMCRM"
-    title = ""
-    var = Variation_541
-class Item_1861(Item):
-    name = "VRAMCRM"
-    title = ""
-    var = Variation_546
-class Item_1862(Item):
-    name = "VRAMVRM"
-    title = ""
-    var = Variation_619
-class Item_1863(Item):
-    name = "VRAMVRM"
-    title = ""
-    var = Variation_725
-class Item_1864(Item):
-    name = "VRAMVTM"
-    title = ""
-    var = Variation_623
-class Item_1865(Item):
-    name = "VRAMVTM"
-    title = ""
-    var = Variation_716
-class Item_1866(Item):
-    name = "VUN"
-    title = "Velocity Uncertainty"
-    var = Variation_155
-class Item_1867(Item):
-    name = "VUN"
-    title = "Velocity Uncertainty Age"
-    var = Variation_217
-class Item_1868(Item):
-    name = "VV"
-    title = "Vertical Velocity"
-    var = Variation_303
-class Item_1869(Item):
-    name = "VX"
-    title = ""
-    var = Variation_250
-class Item_1870(Item):
-    name = "VX"
-    title = "Velocity (X-component)"
-    var = Variation_250
-class Item_1871(Item):
-    name = "VX"
-    title = "Vx"
-    var = Variation_250
-class Item_1872(Item):
-    name = "VX"
-    title = "X Velocity"
-    var = Variation_252
-class Item_1873(Item):
-    name = "VY"
-    title = ""
-    var = Variation_250
-class Item_1874(Item):
-    name = "VY"
-    title = "Velocity (Y-component)"
-    var = Variation_250
-class Item_1875(Item):
-    name = "VY"
-    title = "Vy"
-    var = Variation_250
-class Item_1876(Item):
-    name = "VY"
-    title = "Y Velocity"
-    var = Variation_252
-class Item_1877(Item):
-    name = "WD"
-    title = "Wind Direction"
-    var = Variation_269
-class Item_1878(Item):
-    name = "WD"
-    title = "Wind Direction Valid Flag"
-    var = Variation_377
-class Item_1879(Item):
-    name = "WDD"
-    title = "Wind Direction"
-    var = Variation_269
-class Item_1880(Item):
-    name = "WDT"
-    title = "Target Width"
-    var = Variation_274
-class Item_1881(Item):
-    name = "WIDTH"
-    title = "Width"
-    var = Variation_151
-class Item_1882(Item):
-    name = "WO"
-    title = "Weather Channel Overload"
-    var = Variation_609
-class Item_1883(Item):
-    name = "WRTY"
-    title = ""
-    var = Variation_624
-class Item_1884(Item):
-    name = "WS"
-    title = "Wind Speed"
-    var = Variation_264
-class Item_1885(Item):
-    name = "WS"
-    title = "Wind Speed Valid Flag"
-    var = Variation_66
-class Item_1886(Item):
-    name = "WSD"
-    title = "Wind Speed"
-    var = Variation_264
-class Item_1887(Item):
-    name = "WTC"
-    title = "Wake Turbulence Category"
-    var = Variation_189
-class Item_1888(Item):
-    name = "WTC"
-    title = "Wake Turbulence Category"
-    var = Variation_190
-class Item_1889(Item):
-    name = "X"
-    title = ""
-    var = Variation_197
-class Item_1890(Item):
-    name = "X"
-    title = ""
-    var = Variation_228
-class Item_1891(Item):
-    name = "X"
-    title = ""
-    var = Variation_230
-class Item_1892(Item):
-    name = "X"
-    title = ""
-    var = Variation_275
-class Item_1893(Item):
-    name = "X"
-    title = ""
-    var = Variation_295
-class Item_1894(Item):
-    name = "X"
-    title = "AA (X-Component)"
-    var = Variation_216
-class Item_1895(Item):
-    name = "X"
-    title = "APC (X-Component)"
-    var = Variation_271
-class Item_1896(Item):
-    name = "X"
-    title = "ATV (X-Component)"
-    var = Variation_215
-class Item_1897(Item):
-    name = "X"
-    title = "DOP (X-Component)"
-    var = Variation_279
-class Item_1898(Item):
-    name = "X"
-    title = "Estimated Accuracy Of Acceleration of X Component"
-    var = Variation_212
-class Item_1899(Item):
-    name = "X"
-    title = "Estimated Accuracy of the Calculated Position of X Component"
-    var = Variation_214
-class Item_1900(Item):
-    name = "X"
-    title = "Estimated Accuracy of the Calculated Velocity of X Component"
-    var = Variation_210
-class Item_1901(Item):
-    name = "X"
-    title = "SDP (X-Component)"
-    var = Variation_281
-class Item_1902(Item):
-    name = "X"
-    title = "Starting X-position of the Conflict"
-    var = Variation_299
-class Item_1903(Item):
-    name = "X"
-    title = "X Coordinate"
-    var = Variation_237
-class Item_1904(Item):
-    name = "X"
-    title = "X Coordinate"
-    var = Variation_299
-class Item_1905(Item):
-    name = "X"
-    title = "X-Component"
-    var = Variation_155
-class Item_1906(Item):
-    name = "X"
-    title = "X-Component"
-    var = Variation_237
-class Item_1907(Item):
-    name = "X"
-    title = "X-Component"
-    var = Variation_253
-class Item_1908(Item):
-    name = "X"
-    title = "X-Component"
-    var = Variation_255
-class Item_1909(Item):
-    name = "X"
-    title = "X-coordinate"
-    var = Variation_236
-class Item_1910(Item):
-    name = "X"
-    title = "X-coordinate"
-    var = Variation_299
-class Item_1911(Item):
-    name = "X"
-    title = "X-pulse from Mode 5 Data Reply or Report"
-    var = Variation_869
-class Item_1912(Item):
-    name = "X1"
-    title = ""
-    var = Variation_155
-class Item_1913(Item):
-    name = "X1"
-    title = "X-pulse from Mode 1 Reply"
-    var = Variation_868
-class Item_1914(Item):
-    name = "X1"
-    title = "X1-Component"
-    var = Variation_155
-class Item_1915(Item):
-    name = "X2"
-    title = ""
-    var = Variation_726
-class Item_1916(Item):
-    name = "X2"
-    title = "X-pulse from Mode 2 Reply"
-    var = Variation_781
-class Item_1917(Item):
-    name = "X2"
-    title = "X-pulse from Mode 2 Reply"
-    var = Variation_838
-class Item_1918(Item):
-    name = "X2"
-    title = "X2-Component"
-    var = Variation_155
-class Item_1919(Item):
-    name = "X3"
-    title = "X-pulse from Mode 3/A Reply"
-    var = Variation_758
-class Item_1920(Item):
-    name = "X5"
-    title = "X-pulse from Mode 5 Data Reply or Report"
-    var = Variation_585
-class Item_1921(Item):
-    name = "XA"
-    title = ""
-    var = Variation_35
-class Item_1922(Item):
-    name = "XC"
-    title = ""
-    var = Variation_445
-class Item_1923(Item):
-    name = "XC"
-    title = "X-pulse from Mode C Reply"
-    var = Variation_667
-class Item_1924(Item):
-    name = "XP"
-    title = "X Pulse Presence"
-    var = Variation_886
+class Item_1243(Item):
+    name = "NPP"
+    title = "Next Predicted Position"
+    var = Variation_1031
+class Item_785(Item):
+    name = "DLK"
+    title = "Data Link Characteristics"
+    var = Variation_1265
+class Item_1036(Item):
+    name = "LCK"
+    title = "Lockout Characteristics"
+    var = Variation_1010
+class Item_1680(Item):
+    name = "TC"
+    title = "Transition Code"
+    var = Variation_919
+class Item_1717(Item):
+    name = "TLC"
+    title = "Track Life Cycle"
+    var = Variation_924
+class Item_543(Item):
+    name = "ASI"
+    title = "Adjacent Sensor Information"
+    var = Variation_1255
+class Item_1697(Item):
+    name = "TES"
+    title = "Track Extrapolation Source"
+    var = Variation_166
+class Item_1000(Item):
+    name = "IR"
+    title = "Identity Requested"
+    var = Variation_995
+class Variation_1359(Compound):
+    fspec_size = None
+    items = [Item_1339, Item_548, Item_1761, Item_1243, Item_785, Item_1036, Item_1680, Item_1717, Item_543, Item_1697, Item_1000]
+class Item_1519(Item):
+    name = "SCO"
+    title = "Score"
+    var = Variation_191
+class Item_1596(Item):
+    name = "SRC"
+    title = "Signal/Clutter Ratio"
+    var = Variation_272
+class Item_1489(Item):
+    name = "RW"
+    title = "Range Width"
+    var = Variation_288
+class Item_532(Item):
+    name = "AR"
+    title = "Ambiguous Range"
+    var = Variation_288
+class Variation_1361(Compound):
+    fspec_size = None
+    items = [Item_1519, Item_1596, Item_1489, Item_532]
+class Item_1656(Item):
+    name = "SUM"
+    title = "Mode 5 Summary"
+    var = Variation_1012
+class Item_1299(Item):
+    name = "PNO"
+    title = "Mode 5 PIN / National Origin"
+    var = Variation_884
+class Item_820(Item):
+    name = "EM1"
+    title = "Extended Mode 1 Code in Octal Representation"
+    var = Variation_1116
 class Item_1925(Item):
     name = "XP"
     title = "X Pulse Presence"
     var = Variation_887
-class Item_1926(Item):
+class Item_868(Item):
+    name = "FOM"
+    title = "Figure of Merit"
+    var = Variation_890
+class Item_1078(Item):
+    name = "M2"
+    title = "Mode 2 Code in Octal Representation"
+    var = Variation_1117
+class Variation_1366(Compound):
+    fspec_size = None
+    items = [Item_1656, Item_1299, Item_820, Item_1925, Item_868, Item_1078]
+class Item_1657(Item):
+    name = "SUM"
+    title = "Mode 5 Summary"
+    var = Variation_1013
+class Item_1296(Item):
+    name = "PMN"
+    title = "PIN/ National Origin/Mission Code"
+    var = Variation_881
+class Item_1306(Item):
+    name = "POS"
+    title = "Mode 5 Reported Position"
+    var = Variation_1005
+class Item_898(Item):
+    name = "GA"
+    title = "Mode 5 GNSS-derived Altitude"
+    var = Variation_876
+class Item_819(Item):
+    name = "EM1"
+    title = "Extended Mode 1 Code in Octal Representation"
+    var = Variation_1115
+class Item_1731(Item):
+    name = "TOS"
+    title = "Time Offset for POS and GA"
+    var = Variation_219
+class Item_1924(Item):
     name = "XP"
     title = "X Pulse Presence"
-    var = Variation_894
-class Item_1927(Item):
-    name = "XP"
-    title = "X-pulse from Mode 5 PIN Reply/Report"
-    var = Variation_500
-class Item_1928(Item):
-    name = "XP"
-    title = "X-pulse from Mode 5 PIN Reply/report"
-    var = Variation_500
-class Item_1929(Item):
-    name = "XPP"
-    title = ""
-    var = Variation_475
-class Item_1930(Item):
-    name = "XY"
-    title = "DOP (Correlation XY)"
-    var = Variation_279
-class Item_1931(Item):
-    name = "XY"
-    title = "SDP (Correlation XY)"
-    var = Variation_279
-class Item_1932(Item):
-    name = "Y"
-    title = ""
-    var = Variation_197
-class Item_1933(Item):
-    name = "Y"
-    title = ""
-    var = Variation_275
-class Item_1934(Item):
-    name = "Y"
-    title = ""
-    var = Variation_695
-class Item_1935(Item):
-    name = "Y"
-    title = ""
-    var = Variation_699
-class Item_1936(Item):
-    name = "Y"
-    title = ""
-    var = Variation_700
-class Item_1937(Item):
-    name = "Y"
-    title = "AA (Y-Component)"
-    var = Variation_216
-class Item_1938(Item):
-    name = "Y"
-    title = "APC (Y-Component)"
-    var = Variation_271
-class Item_1939(Item):
-    name = "Y"
-    title = "ATV (Y-Component)"
-    var = Variation_215
-class Item_1940(Item):
-    name = "Y"
-    title = "DOP (Y-Component)"
-    var = Variation_279
-class Item_1941(Item):
-    name = "Y"
-    title = "Estimated Accuracy Of Acceleration of Y Component"
-    var = Variation_212
-class Item_1942(Item):
-    name = "Y"
-    title = "Estimated Accuracy of the Calculated Position of Y Component"
-    var = Variation_214
-class Item_1943(Item):
-    name = "Y"
-    title = "Estimated Accuracy of the Calculated Velocity of Y Component"
-    var = Variation_210
-class Item_1944(Item):
-    name = "Y"
-    title = "SDP (Y-Component)"
-    var = Variation_281
-class Item_1945(Item):
-    name = "Y"
-    title = "Starting Y-position of the Conflict"
-    var = Variation_299
-class Item_1946(Item):
-    name = "Y"
-    title = "X-Component"
-    var = Variation_255
-class Item_1947(Item):
-    name = "Y"
-    title = "Y Coordinate"
-    var = Variation_237
-class Item_1948(Item):
-    name = "Y"
-    title = "Y Coordinate"
-    var = Variation_299
-class Item_1949(Item):
-    name = "Y"
-    title = "Y-Component"
+    var = Variation_886
+class Variation_1367(Compound):
+    fspec_size = None
+    items = [Item_1657, Item_1296, Item_1306, Item_898, Item_819, Item_1731, Item_1924]
+class Item_1297(Item):
+    name = "PMN"
+    title = "PIN/ National Origin/Mission Code"
+    var = Variation_883
+class Item_867(Item):
+    name = "FOM"
+    title = "Figure of Merit"
+    var = Variation_889
+class Variation_1368(Compound):
+    fspec_size = None
+    items = [Item_1657, Item_1297, Item_1306, Item_898, Item_819, Item_1731, Item_1924, Item_867]
+class Item_596(Item):
+    name = "BPS"
+    title = "Barometric Pressure Setting"
+    var = Variation_896
+class Item_1553(Item):
+    name = "SH"
+    title = "Selected Heading"
+    var = Variation_899
+class Item_1211(Item):
+    name = "NAV"
+    title = "Navigation Mode"
+    var = Variation_928
+class Item_902(Item):
+    name = "GAO"
+    title = "GPS Antenna Offset"
     var = Variation_155
-class Item_1950(Item):
-    name = "Y"
-    title = "Y-Component"
-    var = Variation_237
-class Item_1951(Item):
-    name = "Y"
-    title = "Y-Component"
-    var = Variation_253
-class Item_1952(Item):
-    name = "Y"
-    title = "Y-Component"
-    var = Variation_255
-class Item_1953(Item):
-    name = "Y"
-    title = "Y-coordinate"
-    var = Variation_236
-class Item_1954(Item):
-    name = "Y"
-    title = "Y-coordinate"
-    var = Variation_299
-class Item_1955(Item):
-    name = "Y1"
-    title = ""
-    var = Variation_132
-class Item_1956(Item):
-    name = "Y1"
-    title = ""
-    var = Variation_155
-class Item_1957(Item):
-    name = "Y1"
-    title = "Y1-Component"
-    var = Variation_155
-class Item_1958(Item):
-    name = "Y2"
-    title = ""
-    var = Variation_690
-class Item_1959(Item):
-    name = "Y2"
-    title = "Y2-Component"
-    var = Variation_155
-class Item_1960(Item):
-    name = "Y3"
-    title = ""
-    var = Variation_132
-class Item_1961(Item):
-    name = "Y4"
-    title = ""
-    var = Variation_690
-class Item_1962(Item):
-    name = "Z"
-    title = "Starting Z-position of the Conflict"
-    var = Variation_240
+class Item_1551(Item):
+    name = "SGV"
+    title = "Surface Ground Vector"
+    var = Variation_1214
+class Item_1616(Item):
+    name = "STA"
+    title = "Aircraft Status"
+    var = Variation_1187
+class Item_1721(Item):
+    name = "TNH"
+    title = "True North Heading"
+    var = Variation_293
+class Item_1137(Item):
+    name = "MES"
+    title = "Military Extended Squitter"
+    var = Variation_1366
+class Variation_1376(Compound):
+    fspec_size = 1
+    items = [Item_596, Item_1553, Item_1211, Item_902, Item_1551, Item_1616, Item_1721, Item_1137]
+class Item_1212(Item):
+    name = "NAV"
+    title = "Navigation Mode"
+    var = Variation_929
+class Item_1617(Item):
+    name = "STA"
+    title = "Aircraft Status"
+    var = Variation_1188
+class Variation_1377(Compound):
+    fspec_size = 1
+    items = [Item_596, Item_1553, Item_1212, Item_902, Item_1551, Item_1617, Item_1721, Item_1137]
+class Item_740(Item):
+    name = "CST"
+    title = "Contributing Sensors With Local Tracknumbers"
+    var = Variation_1254
+class Item_734(Item):
+    name = "CSN"
+    title = "Contributing Sensors No Local Tracknumbers"
+    var = Variation_1253
+class Item_1792(Item):
+    name = "TVS"
+    title = "Calculated Track Velocity Relative to System Reference Point"
+    var = Variation_1140
+class Item_1648(Item):
+    name = "STS"
+    title = "Supplementary Track Status"
+    var = Variation_1190
+class Variation_1378(Compound):
+    fspec_size = 1
+    items = [Item_740, Item_734, Item_1792, Item_1648]
+class Item_1117(Item):
+    name = "MD5"
+    title = "Mode 5 Reports"
+    var = Variation_1367
+class Item_1087(Item):
+    name = "M5N"
+    title = "Mode 5 Reports, New Format"
+    var = Variation_1368
+class Item_1085(Item):
+    name = "M4E"
+    title = "Extended Mode 4 Report"
+    var = Variation_1176
+class Item_1456(Item):
+    name = "RPC"
+    title = "Radar Plot Characteristics"
+    var = Variation_1361
+class Item_843(Item):
+    name = "ERR"
+    title = "Extended Range Report"
+    var = Variation_312
+class Item_1482(Item):
+    name = "RTC"
+    title = "Radar Track Characteristics"
+    var = Variation_1359
+class Item_717(Item):
+    name = "CPC"
+    title = "Common and Plot Characteristics"
+    var = Variation_1356
+class Variation_1379(Compound):
+    fspec_size = 1
+    items = [Item_1117, Item_1087, Item_1085, Item_1456, Item_843, Item_1482, Item_717]
 
 # Uap set
 class Uap_0(UapSingle):
@@ -14538,4 +14535,3 @@ Cat_247_1_3: TypeAlias = AstSpec_30
 
 # Manifest
 manifest = [Cat_001_1_2, Cat_001_1_3, Cat_001_1_4, Cat_002_1_0, Cat_002_1_1, Cat_004_1_12, Cat_008_1_2, Cat_008_1_3, Cat_009_2_1, Cat_010_1_1, Cat_011_1_2, Cat_011_1_3, Cat_015_1_0, Cat_015_1_1, Cat_016_1_0, Cat_017_1_3, Cat_018_1_7, Cat_019_1_3, Cat_020_1_9, Cat_020_1_10, Cat_021_0_23, Cat_021_0_24, Cat_021_0_25, Cat_021_0_26, Ref_021_1_4, Ref_021_1_5, Cat_021_2_1, Cat_021_2_2, Cat_021_2_3, Cat_021_2_4, Cat_021_2_5, Cat_021_2_6, Cat_023_1_2, Cat_023_1_3, Cat_025_1_5, Cat_032_1_1, Cat_034_1_27, Cat_034_1_28, Cat_034_1_29, Ref_048_1_11, Cat_048_1_27, Cat_048_1_28, Cat_048_1_29, Cat_048_1_30, Cat_048_1_31, Ref_062_1_2, Cat_062_1_17, Cat_062_1_18, Cat_062_1_19, Cat_062_1_20, Cat_063_1_6, Cat_065_1_4, Cat_065_1_5, Cat_065_1_6, Cat_205_1_0, Cat_240_1_3, Cat_247_1_2, Cat_247_1_3]
-
