@@ -8,12 +8,11 @@ nix-shell
 # prettify python source code
 autopep8 --in-place --aggressive --aggressive <filename> <filename>...
 
-# run static code check once
+# run static code check and tests once
 mypy
-
-# monitor changes in .py files, check with 'mypy' on any change
-find . | grep "\.py" | entr sh -c 'clear && mypy && date'
-
-# run tests
 pytest
+
+# monitor changes in .py files, check automatically on any change
+find . | grep "\.py" | entr sh -c 'clear && date && mypy && pytest'
 ```
+
