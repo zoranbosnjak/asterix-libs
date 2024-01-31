@@ -10657,7 +10657,22 @@ class Item_1749(Item):
     var = Variation_191
 class Variation_1375(Compound):
     fspec_size = None
-    items = [Item_1884, Item_1877, Item_1718, Item_1749]
+    items_list = [Item_1884, Item_1877, Item_1718, Item_1749]
+    items_dict = {"WS": ("Wind Speed", Variation_264, 0x80), "WD": ("Wind Direction", Variation_269, 0x40), "TMP": ("Temperature", Variation_251, 0x20), "TRB": ("Turbulence", Variation_191, 0x10)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["WS"]) -> Variation_264: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["WD"]) -> Variation_269: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TMP"]) -> Variation_251: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TRB"]) -> Variation_191: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_361(Item):
     name = "220"
     title = "Met Information"
@@ -10680,7 +10695,16 @@ class Item_1710(Item):
     var = Variation_1257
 class Variation_1371(Compound):
     fspec_size = None
-    items = [Item_1715, Item_1710]
+    items_list = [Item_1715, Item_1710]
+    items_dict = {"TIS": ("Trajectory Intent Status", Variation_1202, 0x80), "TID": ("Trajectory Intent Data", Variation_1257, 0x40)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TIS"]) -> Variation_1202: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TID"]) -> Variation_1257: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_262(Item):
     name = "110"
     title = "Trajectory Intent"
@@ -10695,14 +10719,188 @@ class Item_1580(Item):
     var = Variation_1281
 class Variation_1282(Compound):
     fspec_size = None
-    items = [Item_60, Item_137, Item_107, Item_274, Item_214, Item_286, Item_222, Item_352, Item_366, Item_292, Item_298, Item_301, Item_303, Item_304, Item_306, Item_309, Item_317, Item_321, Item_238, Item_119, Item_341, Item_84, Item_361, Item_294, Item_296, Item_262, None, None, None, None, None, None, None, Item_1421, Item_1580]
+    items_list = [Item_60, Item_137, Item_107, Item_274, Item_214, Item_286, Item_222, Item_352, Item_366, Item_292, Item_298, Item_301, Item_303, Item_304, Item_306, Item_309, Item_317, Item_321, Item_238, Item_119, Item_341, Item_84, Item_361, Item_294, Item_296, Item_262, None, None, None, None, None, None, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x8000000000), "040": ("Target Report Descriptor", Variation_956, 0x4000000000), "030": ("Time of Day", Variation_311, 0x2000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_999, 0x1000000000), "080": ("Target Address", Variation_296, 0x0800000000), "140": ("Geometric Altitude", Variation_257, 0x0400000000), "090": ("Figure of Merit", Variation_921, 0x0200000000), "210": ("Link Technology Indicator", Variation_888, 0x0180000000), "230": ("Roll Angle", Variation_246, 0x0140000000), "145": ("Flight Level", Variation_248, 0x0120000000), "150": ("Air Speed", Variation_993, 0x0110000000), "151": ("True Airspeed", Variation_264, 0x0108000000), "152": ("Magnetic Heading", Variation_293, 0x0104000000), "155": ("Barometric Vertical Rate", Variation_258, 0x0102000000), "157": ("Geometric Vertical Rate", Variation_258, 0x0101800000), "160": ("Ground Vector", Variation_987, 0x0101400000), "165": ("Rate Of Turn", Variation_1216, 0x0101200000), "170": ("Target Identification", Variation_326, 0x0101100000), "095": ("Velocity Accuracy", Variation_155, 0x0101080000), "032": ("Time of Day Accuracy", Variation_220, 0x0101040000), "200": ("Target Status", Variation_161, 0x0101020000), "020": ("Emitter Category", Variation_172, 0x0101018000), "220": ("Met Information", Variation_1375, 0x0101014000), "146": ("Intermediate State Selected Altitude", Variation_1069, 0x0101012000), "148": ("Final State Selected Altitude", Variation_1019, 0x0101011000), "110": ("Trajectory Intent", Variation_1371, 0x0101010800), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010104), "SP": ("Special Purpose Field", Variation_1281, 0x0101010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_956: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_999: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_921: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_888: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["230"]) -> Variation_246: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["145"]) -> Variation_248: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["150"]) -> Variation_993: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["151"]) -> Variation_264: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["152"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["155"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["157"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["160"]) -> Variation_987: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["165"]) -> Variation_1216: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["095"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["032"]) -> Variation_220: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_161: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_172: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_1375: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["146"]) -> Variation_1069: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["148"]) -> Variation_1019: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_1371: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_275(Item):
     name = "130"
     title = "Position in WGS-84 Co-ordinates"
     var = Variation_1001
 class Variation_1283(Compound):
     fspec_size = None
-    items = [Item_60, Item_137, Item_107, Item_275, Item_214, Item_286, Item_222, Item_352, Item_366, Item_292, Item_298, Item_301, Item_303, Item_304, Item_306, Item_309, Item_317, Item_321, Item_238, Item_119, Item_341, Item_84, Item_361, Item_294, Item_296, Item_262, None, None, None, None, None, None, None, Item_1421, Item_1580]
+    items_list = [Item_60, Item_137, Item_107, Item_275, Item_214, Item_286, Item_222, Item_352, Item_366, Item_292, Item_298, Item_301, Item_303, Item_304, Item_306, Item_309, Item_317, Item_321, Item_238, Item_119, Item_341, Item_84, Item_361, Item_294, Item_296, Item_262, None, None, None, None, None, None, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x8000000000), "040": ("Target Report Descriptor", Variation_956, 0x4000000000), "030": ("Time of Day", Variation_311, 0x2000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_1001, 0x1000000000), "080": ("Target Address", Variation_296, 0x0800000000), "140": ("Geometric Altitude", Variation_257, 0x0400000000), "090": ("Figure of Merit", Variation_921, 0x0200000000), "210": ("Link Technology Indicator", Variation_888, 0x0180000000), "230": ("Roll Angle", Variation_246, 0x0140000000), "145": ("Flight Level", Variation_248, 0x0120000000), "150": ("Air Speed", Variation_993, 0x0110000000), "151": ("True Airspeed", Variation_264, 0x0108000000), "152": ("Magnetic Heading", Variation_293, 0x0104000000), "155": ("Barometric Vertical Rate", Variation_258, 0x0102000000), "157": ("Geometric Vertical Rate", Variation_258, 0x0101800000), "160": ("Ground Vector", Variation_987, 0x0101400000), "165": ("Rate Of Turn", Variation_1216, 0x0101200000), "170": ("Target Identification", Variation_326, 0x0101100000), "095": ("Velocity Accuracy", Variation_155, 0x0101080000), "032": ("Time of Day Accuracy", Variation_220, 0x0101040000), "200": ("Target Status", Variation_161, 0x0101020000), "020": ("Emitter Category", Variation_172, 0x0101018000), "220": ("Met Information", Variation_1375, 0x0101014000), "146": ("Intermediate State Selected Altitude", Variation_1069, 0x0101012000), "148": ("Final State Selected Altitude", Variation_1019, 0x0101011000), "110": ("Trajectory Intent", Variation_1371, 0x0101010800), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010104), "SP": ("Special Purpose Field", Variation_1281, 0x0101010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_956: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_1001: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_921: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_888: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["230"]) -> Variation_246: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["145"]) -> Variation_248: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["150"]) -> Variation_993: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["151"]) -> Variation_264: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["152"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["155"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["157"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["160"]) -> Variation_987: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["165"]) -> Variation_1216: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["095"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["032"]) -> Variation_220: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_161: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_172: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_1375: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["146"]) -> Variation_1069: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["148"]) -> Variation_1019: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_1371: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_191(Item):
     name = "070"
     title = "Mode 3/A Code in Octal Representation"
@@ -10713,7 +10911,100 @@ class Item_281(Item):
     var = Variation_155
 class Variation_1284(Compound):
     fspec_size = None
-    items = [Item_60, Item_137, Item_107, Item_275, Item_214, Item_286, Item_222, Item_352, Item_366, Item_292, Item_298, Item_301, Item_303, Item_304, Item_306, Item_309, Item_317, Item_321, Item_238, Item_119, Item_341, Item_84, Item_361, Item_294, Item_296, Item_262, Item_191, Item_281, None, None, None, None, None, Item_1421, Item_1580]
+    items_list = [Item_60, Item_137, Item_107, Item_275, Item_214, Item_286, Item_222, Item_352, Item_366, Item_292, Item_298, Item_301, Item_303, Item_304, Item_306, Item_309, Item_317, Item_321, Item_238, Item_119, Item_341, Item_84, Item_361, Item_294, Item_296, Item_262, Item_191, Item_281, None, None, None, None, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x8000000000), "040": ("Target Report Descriptor", Variation_956, 0x4000000000), "030": ("Time of Day", Variation_311, 0x2000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_1001, 0x1000000000), "080": ("Target Address", Variation_296, 0x0800000000), "140": ("Geometric Altitude", Variation_257, 0x0400000000), "090": ("Figure of Merit", Variation_921, 0x0200000000), "210": ("Link Technology Indicator", Variation_888, 0x0180000000), "230": ("Roll Angle", Variation_246, 0x0140000000), "145": ("Flight Level", Variation_248, 0x0120000000), "150": ("Air Speed", Variation_993, 0x0110000000), "151": ("True Airspeed", Variation_264, 0x0108000000), "152": ("Magnetic Heading", Variation_293, 0x0104000000), "155": ("Barometric Vertical Rate", Variation_258, 0x0102000000), "157": ("Geometric Vertical Rate", Variation_258, 0x0101800000), "160": ("Ground Vector", Variation_987, 0x0101400000), "165": ("Rate Of Turn", Variation_1216, 0x0101200000), "170": ("Target Identification", Variation_326, 0x0101100000), "095": ("Velocity Accuracy", Variation_155, 0x0101080000), "032": ("Time of Day Accuracy", Variation_220, 0x0101040000), "200": ("Target Status", Variation_161, 0x0101020000), "020": ("Emitter Category", Variation_172, 0x0101018000), "220": ("Met Information", Variation_1375, 0x0101014000), "146": ("Intermediate State Selected Altitude", Variation_1069, 0x0101012000), "148": ("Final State Selected Altitude", Variation_1019, 0x0101011000), "110": ("Trajectory Intent", Variation_1371, 0x0101010800), "070": ("Mode 3/A Code in Octal Representation", Variation_1124, 0x0101010400), "131": ("Signal Amplitude", Variation_155, 0x0101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010104), "SP": ("Special Purpose Field", Variation_1281, 0x0101010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_956: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_1001: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_921: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_888: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["230"]) -> Variation_246: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["145"]) -> Variation_248: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["150"]) -> Variation_993: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["151"]) -> Variation_264: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["152"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["155"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["157"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["160"]) -> Variation_987: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["165"]) -> Variation_1216: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["095"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["032"]) -> Variation_220: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_161: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_172: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_1375: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["146"]) -> Variation_1069: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["148"]) -> Variation_1019: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_1371: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_1124: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["131"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_138(Item):
     name = "040"
     title = "Target Report Descriptor"
@@ -10932,21 +11223,363 @@ class Item_1514(Item):
     var = Variation_211
 class Variation_1332(Compound):
     fspec_size = None
-    items = [Item_522, Item_1752, Item_1084, Item_1383, Item_1704, Item_1095, Item_912, Item_858, Item_1001, Item_882, Item_542, Item_1674, Item_1145, Item_601, Item_929, Item_925, Item_1671, Item_1705, Item_1764, Item_1138, Item_1452, Item_533, Item_1514]
+    items_list = [Item_522, Item_1752, Item_1084, Item_1383, Item_1704, Item_1095, Item_912, Item_858, Item_1001, Item_882, Item_542, Item_1674, Item_1145, Item_601, Item_929, Item_925, Item_1671, Item_1705, Item_1764, Item_1138, Item_1452, Item_533, Item_1514]
+    items_dict = {"AOS": ("Aircraft Operational Status Age", Variation_211, 0x80000000), "TRD": ("Target Report Descriptor Age", Variation_211, 0x40000000), "M3A": ("Mode 3/A Age", Variation_211, 0x20000000), "QI": ("Quality Indicators Age", Variation_211, 0x10000000), "TI1": ("Trajectory Intent Age", Variation_211, 0x08000000), "MAM": ("Message Amplitude Age", Variation_211, 0x04000000), "GH": ("Geometric Height Age", Variation_211, 0x02000000), "FL": ("Flight Level Age", Variation_211, 0x01800000), "ISA": ("Intermediate State Selected Altitude Age", Variation_211, 0x01400000), "FSA": ("Final State Selected Altitude Age", Variation_211, 0x01200000), "AS": ("Air Speed Age", Variation_211, 0x01100000), "TAS": ("True Air Speed Age", Variation_211, 0x01080000), "MH": ("Magnetic Heading Age", Variation_211, 0x01040000), "BVR": ("Barometric Vertical Rate Age", Variation_211, 0x01020000), "GVR": ("Geometric Vertical Rate Age", Variation_211, 0x01018000), "GV": ("Ground Vector Age", Variation_211, 0x01014000), "TAR": ("Track Angle Rate Age", Variation_211, 0x01012000), "TI2": ("Target Identification Age", Variation_211, 0x01011000), "TS": ("Target Status Age", Variation_211, 0x01010800), "MET": ("Met Information Age", Variation_211, 0x01010400), "ROA": ("Roll Angle Age", Variation_211, 0x01010200), "ARA": ("ACAS Resolution Advisory Age", Variation_211, 0x01010180), "SCC": ("Surface Capabilities and Characteristics Age", Variation_211, 0x01010140)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AOS"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TRD"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["M3A"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["QI"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TI1"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MAM"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GH"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FL"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ISA"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FSA"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AS"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAS"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MH"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["BVR"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GVR"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GV"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAR"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TI2"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TS"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MET"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ROA"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ARA"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SCC"]) -> Variation_211: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_390(Item):
     name = "295"
     title = "Data Ages"
     var = Variation_1332
 class Variation_1285(Compound):
     fspec_size = None
-    items = [Item_60, Item_138, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_353, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
+    items_list = [Item_60, Item_138, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_353, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x80000000000000), "040": ("Target Report Descriptor", Variation_1177, 0x40000000000000), "161": ("Track Number", Variation_912, 0x20000000000000), "015": ("Service Identification", Variation_155, 0x10000000000000), "071": ("Time of Applicability for Position", Variation_311, 0x08000000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_999, 0x04000000000000), "131": ("High-Resolution Position in WGS-84 Co-ordinates", Variation_1002, 0x02000000000000), "072": ("Time of Applicability for Velocity", Variation_311, 0x01800000000000), "150": ("Air Speed", Variation_993, 0x01400000000000), "151": ("True Airspeed", Variation_1044, 0x01200000000000), "080": ("Target Address", Variation_296, 0x01100000000000), "073": ("Time of Message Reception for Position", Variation_311, 0x01080000000000), "074": ("Time of Message Reception of Position-High Precision", Variation_981, 0x01040000000000), "075": ("Time of Message Reception for Velocity", Variation_311, 0x01020000000000), "076": ("Time of Message Reception of Velocity-High Precision", Variation_982, 0x01018000000000), "140": ("Geometric Height", Variation_257, 0x01014000000000), "090": ("Quality Indicators", Variation_1206, 0x01012000000000), "210": ("MOPS Version", Variation_878, 0x01011000000000), "070": ("Mode 3/A Code in Octal Representation", Variation_905, 0x01010800000000), "230": ("Roll Angle", Variation_246, 0x01010400000000), "145": ("Flight Level", Variation_248, 0x01010200000000), "152": ("Magnetic Heading", Variation_293, 0x01010180000000), "200": ("Target Status", Variation_992, 0x01010140000000), "155": ("Barometric Vertical Rate", Variation_1041, 0x01010120000000), "157": ("Geometric Vertical Rate", Variation_1043, 0x01010110000000), "160": ("Airborne Ground Vector", Variation_1042, 0x01010108000000), "165": ("Track Angle Rate", Variation_917, 0x01010104000000), "077": ("Time of ASTERIX Report Transmission", Variation_311, 0x01010102000000), "170": ("Target Identification", Variation_326, 0x01010101800000), "020": ("Emitter Category", Variation_160, 0x01010101400000), "220": ("Met Information", Variation_1375, 0x01010101200000), "146": ("Selected Altitude", Variation_1068, 0x01010101100000), "148": ("Final State Selected Altitude", Variation_1020, 0x01010101080000), "110": ("Trajectory Intent", Variation_1371, 0x01010101040000), "016": ("Service Management", Variation_209, 0x01010101020000), "008": ("Aircraft Operational Status", Variation_1039, 0x01010101018000), "271": ("Surface Capabilities and Characteristics", Variation_1174, 0x01010101014000), "132": ("Message Amplitude", Variation_193, 0x01010101012000), "250": ("Mode S MB Data", Variation_1230, 0x01010101011000), "260": ("ACAS Resolution Advisory Report", Variation_1103, 0x01010101010800), "400": ("Receiver ID", Variation_155, 0x01010101010400), "295": ("Data Ages", Variation_1332, 0x01010101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010101010104), "SP": ("Special Purpose Field", Variation_1281, 0x01010101010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_1177: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_912: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["071"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_999: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["131"]) -> Variation_1002: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["072"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["150"]) -> Variation_993: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["151"]) -> Variation_1044: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["073"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["074"]) -> Variation_981: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["075"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["076"]) -> Variation_982: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1206: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_878: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_905: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["230"]) -> Variation_246: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["145"]) -> Variation_248: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["152"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_992: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["155"]) -> Variation_1041: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["157"]) -> Variation_1043: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["160"]) -> Variation_1042: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["165"]) -> Variation_917: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["077"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_160: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_1375: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["146"]) -> Variation_1068: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["148"]) -> Variation_1020: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_1371: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["016"]) -> Variation_209: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["008"]) -> Variation_1039: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["271"]) -> Variation_1174: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["132"]) -> Variation_193: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["250"]) -> Variation_1230: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["260"]) -> Variation_1103: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["400"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["295"]) -> Variation_1332: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_354(Item):
     name = "210"
     title = "MOPS Version"
     var = Variation_879
 class Variation_1286(Compound):
     fspec_size = None
-    items = [Item_60, Item_138, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_354, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
+    items_list = [Item_60, Item_138, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_354, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x80000000000000), "040": ("Target Report Descriptor", Variation_1177, 0x40000000000000), "161": ("Track Number", Variation_912, 0x20000000000000), "015": ("Service Identification", Variation_155, 0x10000000000000), "071": ("Time of Applicability for Position", Variation_311, 0x08000000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_999, 0x04000000000000), "131": ("High-Resolution Position in WGS-84 Co-ordinates", Variation_1002, 0x02000000000000), "072": ("Time of Applicability for Velocity", Variation_311, 0x01800000000000), "150": ("Air Speed", Variation_993, 0x01400000000000), "151": ("True Airspeed", Variation_1044, 0x01200000000000), "080": ("Target Address", Variation_296, 0x01100000000000), "073": ("Time of Message Reception for Position", Variation_311, 0x01080000000000), "074": ("Time of Message Reception of Position-High Precision", Variation_981, 0x01040000000000), "075": ("Time of Message Reception for Velocity", Variation_311, 0x01020000000000), "076": ("Time of Message Reception of Velocity-High Precision", Variation_982, 0x01018000000000), "140": ("Geometric Height", Variation_257, 0x01014000000000), "090": ("Quality Indicators", Variation_1206, 0x01012000000000), "210": ("MOPS Version", Variation_879, 0x01011000000000), "070": ("Mode 3/A Code in Octal Representation", Variation_905, 0x01010800000000), "230": ("Roll Angle", Variation_246, 0x01010400000000), "145": ("Flight Level", Variation_248, 0x01010200000000), "152": ("Magnetic Heading", Variation_293, 0x01010180000000), "200": ("Target Status", Variation_992, 0x01010140000000), "155": ("Barometric Vertical Rate", Variation_1041, 0x01010120000000), "157": ("Geometric Vertical Rate", Variation_1043, 0x01010110000000), "160": ("Airborne Ground Vector", Variation_1042, 0x01010108000000), "165": ("Track Angle Rate", Variation_917, 0x01010104000000), "077": ("Time of ASTERIX Report Transmission", Variation_311, 0x01010102000000), "170": ("Target Identification", Variation_326, 0x01010101800000), "020": ("Emitter Category", Variation_160, 0x01010101400000), "220": ("Met Information", Variation_1375, 0x01010101200000), "146": ("Selected Altitude", Variation_1068, 0x01010101100000), "148": ("Final State Selected Altitude", Variation_1020, 0x01010101080000), "110": ("Trajectory Intent", Variation_1371, 0x01010101040000), "016": ("Service Management", Variation_209, 0x01010101020000), "008": ("Aircraft Operational Status", Variation_1039, 0x01010101018000), "271": ("Surface Capabilities and Characteristics", Variation_1174, 0x01010101014000), "132": ("Message Amplitude", Variation_193, 0x01010101012000), "250": ("Mode S MB Data", Variation_1230, 0x01010101011000), "260": ("ACAS Resolution Advisory Report", Variation_1103, 0x01010101010800), "400": ("Receiver ID", Variation_155, 0x01010101010400), "295": ("Data Ages", Variation_1332, 0x01010101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010101010104), "SP": ("Special Purpose Field", Variation_1281, 0x01010101010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_1177: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_912: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["071"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_999: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["131"]) -> Variation_1002: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["072"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["150"]) -> Variation_993: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["151"]) -> Variation_1044: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["073"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["074"]) -> Variation_981: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["075"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["076"]) -> Variation_982: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1206: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_879: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_905: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["230"]) -> Variation_246: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["145"]) -> Variation_248: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["152"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_992: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["155"]) -> Variation_1041: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["157"]) -> Variation_1043: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["160"]) -> Variation_1042: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["165"]) -> Variation_917: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["077"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_160: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_1375: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["146"]) -> Variation_1068: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["148"]) -> Variation_1020: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_1371: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["016"]) -> Variation_209: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["008"]) -> Variation_1039: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["271"]) -> Variation_1174: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["132"]) -> Variation_193: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["250"]) -> Variation_1230: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["260"]) -> Variation_1103: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["400"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["295"]) -> Variation_1332: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_139(Item):
     name = "040"
     title = "Target Report Descriptor"
@@ -10957,14 +11590,221 @@ class Item_1506(Item):
     var = Variation_211
 class Variation_1333(Compound):
     fspec_size = None
-    items = [Item_522, Item_1752, Item_1084, Item_1383, Item_1704, Item_1095, Item_912, Item_858, Item_1506, Item_882, Item_542, Item_1674, Item_1145, Item_601, Item_929, Item_925, Item_1671, Item_1705, Item_1764, Item_1138, Item_1452, Item_533, Item_1514]
+    items_list = [Item_522, Item_1752, Item_1084, Item_1383, Item_1704, Item_1095, Item_912, Item_858, Item_1506, Item_882, Item_542, Item_1674, Item_1145, Item_601, Item_929, Item_925, Item_1671, Item_1705, Item_1764, Item_1138, Item_1452, Item_533, Item_1514]
+    items_dict = {"AOS": ("Aircraft Operational Status Age", Variation_211, 0x80000000), "TRD": ("Target Report Descriptor Age", Variation_211, 0x40000000), "M3A": ("Mode 3/A Age", Variation_211, 0x20000000), "QI": ("Quality Indicators Age", Variation_211, 0x10000000), "TI1": ("Trajectory Intent Age", Variation_211, 0x08000000), "MAM": ("Message Amplitude Age", Variation_211, 0x04000000), "GH": ("Geometric Height Age", Variation_211, 0x02000000), "FL": ("Flight Level Age", Variation_211, 0x01800000), "SAL": ("Selected Altitude Age", Variation_211, 0x01400000), "FSA": ("Final State Selected Altitude Age", Variation_211, 0x01200000), "AS": ("Air Speed Age", Variation_211, 0x01100000), "TAS": ("True Air Speed Age", Variation_211, 0x01080000), "MH": ("Magnetic Heading Age", Variation_211, 0x01040000), "BVR": ("Barometric Vertical Rate Age", Variation_211, 0x01020000), "GVR": ("Geometric Vertical Rate Age", Variation_211, 0x01018000), "GV": ("Ground Vector Age", Variation_211, 0x01014000), "TAR": ("Track Angle Rate Age", Variation_211, 0x01012000), "TI2": ("Target Identification Age", Variation_211, 0x01011000), "TS": ("Target Status Age", Variation_211, 0x01010800), "MET": ("Met Information Age", Variation_211, 0x01010400), "ROA": ("Roll Angle Age", Variation_211, 0x01010200), "ARA": ("ACAS Resolution Advisory Age", Variation_211, 0x01010180), "SCC": ("Surface Capabilities and Characteristics Age", Variation_211, 0x01010140)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AOS"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TRD"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["M3A"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["QI"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TI1"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MAM"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GH"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FL"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SAL"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FSA"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AS"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAS"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MH"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["BVR"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GVR"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GV"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAR"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TI2"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TS"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MET"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ROA"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ARA"]) -> Variation_211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SCC"]) -> Variation_211: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_391(Item):
     name = "295"
     title = "Data Ages"
     var = Variation_1333
 class Variation_1287(Compound):
     fspec_size = None
-    items = [Item_60, Item_139, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_353, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_391, None, None, None, None, None, Item_1421, Item_1580]
+    items_list = [Item_60, Item_139, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_353, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_391, None, None, None, None, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x80000000000000), "040": ("Target Report Descriptor", Variation_1178, 0x40000000000000), "161": ("Track Number", Variation_912, 0x20000000000000), "015": ("Service Identification", Variation_155, 0x10000000000000), "071": ("Time of Applicability for Position", Variation_311, 0x08000000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_999, 0x04000000000000), "131": ("High-Resolution Position in WGS-84 Co-ordinates", Variation_1002, 0x02000000000000), "072": ("Time of Applicability for Velocity", Variation_311, 0x01800000000000), "150": ("Air Speed", Variation_993, 0x01400000000000), "151": ("True Airspeed", Variation_1044, 0x01200000000000), "080": ("Target Address", Variation_296, 0x01100000000000), "073": ("Time of Message Reception for Position", Variation_311, 0x01080000000000), "074": ("Time of Message Reception of Position-High Precision", Variation_981, 0x01040000000000), "075": ("Time of Message Reception for Velocity", Variation_311, 0x01020000000000), "076": ("Time of Message Reception of Velocity-High Precision", Variation_982, 0x01018000000000), "140": ("Geometric Height", Variation_257, 0x01014000000000), "090": ("Quality Indicators", Variation_1206, 0x01012000000000), "210": ("MOPS Version", Variation_878, 0x01011000000000), "070": ("Mode 3/A Code in Octal Representation", Variation_905, 0x01010800000000), "230": ("Roll Angle", Variation_246, 0x01010400000000), "145": ("Flight Level", Variation_248, 0x01010200000000), "152": ("Magnetic Heading", Variation_293, 0x01010180000000), "200": ("Target Status", Variation_992, 0x01010140000000), "155": ("Barometric Vertical Rate", Variation_1041, 0x01010120000000), "157": ("Geometric Vertical Rate", Variation_1043, 0x01010110000000), "160": ("Airborne Ground Vector", Variation_1042, 0x01010108000000), "165": ("Track Angle Rate", Variation_917, 0x01010104000000), "077": ("Time of ASTERIX Report Transmission", Variation_311, 0x01010102000000), "170": ("Target Identification", Variation_326, 0x01010101800000), "020": ("Emitter Category", Variation_160, 0x01010101400000), "220": ("Met Information", Variation_1375, 0x01010101200000), "146": ("Selected Altitude", Variation_1068, 0x01010101100000), "148": ("Final State Selected Altitude", Variation_1020, 0x01010101080000), "110": ("Trajectory Intent", Variation_1371, 0x01010101040000), "016": ("Service Management", Variation_209, 0x01010101020000), "008": ("Aircraft Operational Status", Variation_1039, 0x01010101018000), "271": ("Surface Capabilities and Characteristics", Variation_1174, 0x01010101014000), "132": ("Message Amplitude", Variation_193, 0x01010101012000), "250": ("Mode S MB Data", Variation_1230, 0x01010101011000), "260": ("ACAS Resolution Advisory Report", Variation_1103, 0x01010101010800), "400": ("Receiver ID", Variation_155, 0x01010101010400), "295": ("Data Ages", Variation_1333, 0x01010101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010101010104), "SP": ("Special Purpose Field", Variation_1281, 0x01010101010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_1178: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_912: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["071"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_999: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["131"]) -> Variation_1002: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["072"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["150"]) -> Variation_993: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["151"]) -> Variation_1044: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["073"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["074"]) -> Variation_981: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["075"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["076"]) -> Variation_982: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1206: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_878: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_905: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["230"]) -> Variation_246: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["145"]) -> Variation_248: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["152"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_992: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["155"]) -> Variation_1041: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["157"]) -> Variation_1043: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["160"]) -> Variation_1042: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["165"]) -> Variation_917: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["077"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_160: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_1375: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["146"]) -> Variation_1068: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["148"]) -> Variation_1020: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_1371: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["016"]) -> Variation_209: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["008"]) -> Variation_1039: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["271"]) -> Variation_1174: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["132"]) -> Variation_193: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["250"]) -> Variation_1230: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["260"]) -> Variation_1103: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["400"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["295"]) -> Variation_1333: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_140(Item):
     name = "040"
     title = "Target Report Descriptor"
@@ -10979,10 +11819,280 @@ class Item_384(Item):
     var = Variation_1173
 class Variation_1288(Compound):
     fspec_size = None
-    items = [Item_60, Item_140, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_354, Item_190, Item_366, Item_292, Item_303, Item_342, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_384, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
+    items_list = [Item_60, Item_140, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_354, Item_190, Item_366, Item_292, Item_303, Item_342, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_384, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x80000000000000), "040": ("Target Report Descriptor", Variation_1179, 0x40000000000000), "161": ("Track Number", Variation_912, 0x20000000000000), "015": ("Service Identification", Variation_155, 0x10000000000000), "071": ("Time of Applicability for Position", Variation_311, 0x08000000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_999, 0x04000000000000), "131": ("High-Resolution Position in WGS-84 Co-ordinates", Variation_1002, 0x02000000000000), "072": ("Time of Applicability for Velocity", Variation_311, 0x01800000000000), "150": ("Air Speed", Variation_993, 0x01400000000000), "151": ("True Airspeed", Variation_1044, 0x01200000000000), "080": ("Target Address", Variation_296, 0x01100000000000), "073": ("Time of Message Reception for Position", Variation_311, 0x01080000000000), "074": ("Time of Message Reception of Position-High Precision", Variation_981, 0x01040000000000), "075": ("Time of Message Reception for Velocity", Variation_311, 0x01020000000000), "076": ("Time of Message Reception of Velocity-High Precision", Variation_982, 0x01018000000000), "140": ("Geometric Height", Variation_257, 0x01014000000000), "090": ("Quality Indicators", Variation_1206, 0x01012000000000), "210": ("MOPS Version", Variation_879, 0x01011000000000), "070": ("Mode 3/A Code in Octal Representation", Variation_905, 0x01010800000000), "230": ("Roll Angle", Variation_246, 0x01010400000000), "145": ("Flight Level", Variation_248, 0x01010200000000), "152": ("Magnetic Heading", Variation_293, 0x01010180000000), "200": ("Target Status", Variation_991, 0x01010140000000), "155": ("Barometric Vertical Rate", Variation_1041, 0x01010120000000), "157": ("Geometric Vertical Rate", Variation_1043, 0x01010110000000), "160": ("Airborne Ground Vector", Variation_1042, 0x01010108000000), "165": ("Track Angle Rate", Variation_917, 0x01010104000000), "077": ("Time of ASTERIX Report Transmission", Variation_311, 0x01010102000000), "170": ("Target Identification", Variation_326, 0x01010101800000), "020": ("Emitter Category", Variation_160, 0x01010101400000), "220": ("Met Information", Variation_1375, 0x01010101200000), "146": ("Selected Altitude", Variation_1068, 0x01010101100000), "148": ("Final State Selected Altitude", Variation_1020, 0x01010101080000), "110": ("Trajectory Intent", Variation_1371, 0x01010101040000), "016": ("Service Management", Variation_209, 0x01010101020000), "008": ("Aircraft Operational Status", Variation_1039, 0x01010101018000), "271": ("Surface Capabilities and Characteristics", Variation_1173, 0x01010101014000), "132": ("Message Amplitude", Variation_193, 0x01010101012000), "250": ("Mode S MB Data", Variation_1230, 0x01010101011000), "260": ("ACAS Resolution Advisory Report", Variation_1103, 0x01010101010800), "400": ("Receiver ID", Variation_155, 0x01010101010400), "295": ("Data Ages", Variation_1332, 0x01010101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010101010104), "SP": ("Special Purpose Field", Variation_1281, 0x01010101010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_1179: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_912: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["071"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_999: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["131"]) -> Variation_1002: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["072"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["150"]) -> Variation_993: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["151"]) -> Variation_1044: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["073"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["074"]) -> Variation_981: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["075"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["076"]) -> Variation_982: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1206: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_879: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_905: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["230"]) -> Variation_246: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["145"]) -> Variation_248: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["152"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_991: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["155"]) -> Variation_1041: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["157"]) -> Variation_1043: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["160"]) -> Variation_1042: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["165"]) -> Variation_917: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["077"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_160: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_1375: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["146"]) -> Variation_1068: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["148"]) -> Variation_1020: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_1371: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["016"]) -> Variation_209: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["008"]) -> Variation_1039: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["271"]) -> Variation_1173: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["132"]) -> Variation_193: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["250"]) -> Variation_1230: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["260"]) -> Variation_1103: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["400"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["295"]) -> Variation_1332: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Variation_1289(Compound):
     fspec_size = None
-    items = [Item_60, Item_140, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_354, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
+    items_list = [Item_60, Item_140, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_354, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x80000000000000), "040": ("Target Report Descriptor", Variation_1179, 0x40000000000000), "161": ("Track Number", Variation_912, 0x20000000000000), "015": ("Service Identification", Variation_155, 0x10000000000000), "071": ("Time of Applicability for Position", Variation_311, 0x08000000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_999, 0x04000000000000), "131": ("High-Resolution Position in WGS-84 Co-ordinates", Variation_1002, 0x02000000000000), "072": ("Time of Applicability for Velocity", Variation_311, 0x01800000000000), "150": ("Air Speed", Variation_993, 0x01400000000000), "151": ("True Airspeed", Variation_1044, 0x01200000000000), "080": ("Target Address", Variation_296, 0x01100000000000), "073": ("Time of Message Reception for Position", Variation_311, 0x01080000000000), "074": ("Time of Message Reception of Position-High Precision", Variation_981, 0x01040000000000), "075": ("Time of Message Reception for Velocity", Variation_311, 0x01020000000000), "076": ("Time of Message Reception of Velocity-High Precision", Variation_982, 0x01018000000000), "140": ("Geometric Height", Variation_257, 0x01014000000000), "090": ("Quality Indicators", Variation_1206, 0x01012000000000), "210": ("MOPS Version", Variation_879, 0x01011000000000), "070": ("Mode 3/A Code in Octal Representation", Variation_905, 0x01010800000000), "230": ("Roll Angle", Variation_246, 0x01010400000000), "145": ("Flight Level", Variation_248, 0x01010200000000), "152": ("Magnetic Heading", Variation_293, 0x01010180000000), "200": ("Target Status", Variation_992, 0x01010140000000), "155": ("Barometric Vertical Rate", Variation_1041, 0x01010120000000), "157": ("Geometric Vertical Rate", Variation_1043, 0x01010110000000), "160": ("Airborne Ground Vector", Variation_1042, 0x01010108000000), "165": ("Track Angle Rate", Variation_917, 0x01010104000000), "077": ("Time of ASTERIX Report Transmission", Variation_311, 0x01010102000000), "170": ("Target Identification", Variation_326, 0x01010101800000), "020": ("Emitter Category", Variation_160, 0x01010101400000), "220": ("Met Information", Variation_1375, 0x01010101200000), "146": ("Selected Altitude", Variation_1068, 0x01010101100000), "148": ("Final State Selected Altitude", Variation_1020, 0x01010101080000), "110": ("Trajectory Intent", Variation_1371, 0x01010101040000), "016": ("Service Management", Variation_209, 0x01010101020000), "008": ("Aircraft Operational Status", Variation_1039, 0x01010101018000), "271": ("Surface Capabilities and Characteristics", Variation_1174, 0x01010101014000), "132": ("Message Amplitude", Variation_193, 0x01010101012000), "250": ("Mode S MB Data", Variation_1230, 0x01010101011000), "260": ("ACAS Resolution Advisory Report", Variation_1103, 0x01010101010800), "400": ("Receiver ID", Variation_155, 0x01010101010400), "295": ("Data Ages", Variation_1332, 0x01010101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010101010104), "SP": ("Special Purpose Field", Variation_1281, 0x01010101010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_1179: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_912: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["071"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_999: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["131"]) -> Variation_1002: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["072"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["150"]) -> Variation_993: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["151"]) -> Variation_1044: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["073"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["074"]) -> Variation_981: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["075"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["076"]) -> Variation_982: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1206: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_879: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_905: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["230"]) -> Variation_246: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["145"]) -> Variation_248: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["152"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_992: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["155"]) -> Variation_1041: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["157"]) -> Variation_1043: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["160"]) -> Variation_1042: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["165"]) -> Variation_917: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["077"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_160: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_1375: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["146"]) -> Variation_1068: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["148"]) -> Variation_1020: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_1371: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["016"]) -> Variation_209: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["008"]) -> Variation_1039: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["271"]) -> Variation_1174: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["132"]) -> Variation_193: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["250"]) -> Variation_1230: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["260"]) -> Variation_1103: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["400"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["295"]) -> Variation_1332: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_61(Item):
     name = "010"
     title = "Data Source Identifier"
@@ -11129,7 +12239,94 @@ class Item_597(Item):
     var = Variation_895
 class Variation_1325(Compound):
     fspec_size = None
-    items = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_687, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_1099, Item_976, Item_1089, Item_597]
+    items_list = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_687, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_1099, Item_976, Item_1089, Item_597]
+    items_dict = {"ADR": ("Target Address", Variation_296, 0x80000000), "ID": ("Target Identification", Variation_326, 0x40000000), "MHG": ("Magnetic Heading", Variation_293, 0x20000000), "IAS": ("Indicated Airspeed/Mach No", Variation_994, 0x10000000), "TAS": ("True Airspeed", Variation_264, 0x08000000), "SAL": ("Selected Altitude", Variation_1067, 0x04000000), "FSS": ("Final State Selected Altitude", Variation_1018, 0x02000000), "TIS": ("Trajectory Intent Status", Variation_1203, 0x01800000), "TID": ("Trajectory Intent Data", Variation_1258, 0x01400000), "COM": ("Communications/ACAS Capability and Flight Status", Variation_949, 0x01200000), "SAB": ("Status Reported by ADS-B", Variation_922, 0x01100000), "ACS": ("ACAS Resolution Advisory Report", Variation_327, 0x01080000), "BVR": ("Barometric Vertical Rate", Variation_258, 0x01040000), "GVR": ("Geometric Vertical Rate", Variation_258, 0x01020000), "RAN": ("Roll Angle", Variation_246, 0x01018000), "TAR": ("Track Angle Rate", Variation_1090, 0x01014000), "TAN": ("Track Angle", Variation_293, 0x01012000), "GS": ("Ground Speed", Variation_256, 0x01011000), "VUN": ("Velocity Uncertainty", Variation_155, 0x01010800), "MET": ("Meteorological Data", Variation_1144, 0x01010400), "EMC": ("Emitter Category", Variation_173, 0x01010200), "POS": ("Position", Variation_1008, 0x01010180), "GAL": ("Geometric Altitude", Variation_257, 0x01010140), "PUN": ("Position Uncertainty", Variation_907, 0x01010120), "MB": ("MODE S MB DATA", Variation_1230, 0x01010110), "IAR": ("Indicated Airspeed", Variation_264, 0x01010108), "MAC": ("Mach Number", Variation_278, 0x01010104), "BPS": ("Barometric Pressure Setting (derived from Mode S BDS 4,0)", Variation_895, 0x01010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ADR"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ID"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MHG"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["IAS"]) -> Variation_994: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAS"]) -> Variation_264: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SAL"]) -> Variation_1067: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FSS"]) -> Variation_1018: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TIS"]) -> Variation_1203: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TID"]) -> Variation_1258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COM"]) -> Variation_949: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SAB"]) -> Variation_922: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ACS"]) -> Variation_327: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["BVR"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GVR"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RAN"]) -> Variation_246: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAR"]) -> Variation_1090: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAN"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GS"]) -> Variation_256: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["VUN"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MET"]) -> Variation_1144: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["EMC"]) -> Variation_173: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["POS"]) -> Variation_1008: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GAL"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PUN"]) -> Variation_907: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MB"]) -> Variation_1230: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["IAR"]) -> Variation_264: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MAC"]) -> Variation_278: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["BPS"]) -> Variation_895: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_404(Item):
     name = "380"
     title = "Aircraft Derived Data"
@@ -11184,7 +12381,40 @@ class Item_1160(Item):
     var = Variation_217
 class Variation_1372(Compound):
     fspec_size = None
-    items = [Item_1757, Item_1332, Item_1609, Item_1128, Item_492, Item_846, Item_1850, Item_1816, Item_1064, Item_1160]
+    items_list = [Item_1757, Item_1332, Item_1609, Item_1128, Item_492, Item_846, Item_1850, Item_1816, Item_1064, Item_1160]
+    items_dict = {"TRK": ("Track Age", Variation_217, 0x8000), "PSR": ("PSR Age", Variation_217, 0x4000), "SSR": ("SSR Age", Variation_217, 0x2000), "MDS": ("Mode S Age", Variation_217, 0x1000), "ADS": ("ADS-C Age", Variation_282, 0x0800), "ES": ("ADS-B Extended Squitter Age", Variation_217, 0x0400), "VDL": ("ADS-B VDL Mode 4 Age", Variation_217, 0x0200), "UAT": ("ADS-B UAT Age", Variation_217, 0x0180), "LOP": ("Loop Age", Variation_217, 0x0140), "MLT": ("Multilateration Age", Variation_217, 0x0120)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TRK"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PSR"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SSR"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MDS"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ADS"]) -> Variation_282: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ES"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["VDL"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["UAT"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["LOP"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MLT"]) -> Variation_217: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_389(Item):
     name = "290"
     title = "System Track Update Ages"
@@ -11319,7 +12549,103 @@ class Item_598(Item):
     var = Variation_217
 class Variation_1354(Compound):
     fspec_size = None
-    items = [Item_1143, Item_1109, Item_1112, Item_1121, Item_1114, Item_1116, Item_1147, Item_979, Item_1676, Item_1507, Item_886, Item_1709, Item_683, Item_1500, Item_481, Item_602, Item_930, Item_1405, Item_1672, Item_1667, Item_921, Item_1867, Item_1140, Item_823, Item_1309, Item_901, Item_1342, Item_1100, Item_977, Item_1090, Item_598]
+    items_list = [Item_1143, Item_1109, Item_1112, Item_1121, Item_1114, Item_1116, Item_1147, Item_979, Item_1676, Item_1507, Item_886, Item_1709, Item_683, Item_1500, Item_481, Item_602, Item_930, Item_1405, Item_1672, Item_1667, Item_921, Item_1867, Item_1140, Item_823, Item_1309, Item_901, Item_1342, Item_1100, Item_977, Item_1090, Item_598]
+    items_dict = {"MFL": ("Measured Flight Level Age", Variation_217, 0x8000000000), "MD1": ("Mode 1 Age", Variation_217, 0x4000000000), "MD2": ("Mode 2 Age", Variation_217, 0x2000000000), "MDA": ("Mode 3/A Age", Variation_217, 0x1000000000), "MD4": ("Mode 4 Age", Variation_217, 0x0800000000), "MD5": ("Mode 5 Age", Variation_217, 0x0400000000), "MHG": ("Magnetic Heading Age", Variation_217, 0x0200000000), "IAS": ("Indicated Airspeed / Mach Nb Age", Variation_217, 0x0180000000), "TAS": ("True Airspeed Age", Variation_217, 0x0140000000), "SAL": ("Selected Altitude Age", Variation_217, 0x0120000000), "FSS": ("Final State Selected Altitude Age", Variation_217, 0x0110000000), "TID": ("Trajectory Intent Age", Variation_217, 0x0108000000), "COM": ("Communication/ACAS Capability and Flight Status Age", Variation_217, 0x0104000000), "SAB": ("Status Reported by ADS-B Age", Variation_217, 0x0102000000), "ACS": ("ACAS Resolution Advisory Report Age", Variation_217, 0x0101800000), "BVR": ("Barometric Vertical Rate Age", Variation_217, 0x0101400000), "GVR": ("Geometrical Vertical Rate Age", Variation_217, 0x0101200000), "RAN": ("Roll Angle Age", Variation_217, 0x0101100000), "TAR": ("Track Angle Rate Age", Variation_217, 0x0101080000), "TAN": ("Track Angle Age", Variation_217, 0x0101040000), "GSP": ("Ground Speed Age", Variation_217, 0x0101020000), "VUN": ("Velocity Uncertainty Age", Variation_217, 0x0101018000), "MET": ("Meteorological Data Age", Variation_217, 0x0101014000), "EMC": ("Emitter Category Age", Variation_217, 0x0101012000), "POS": ("Position Age", Variation_217, 0x0101011000), "GAL": ("Geometric Altitude Age", Variation_217, 0x0101010800), "PUN": ("Position Uncertainty Age", Variation_217, 0x0101010400), "MB": ("Mode S MB Data Age", Variation_217, 0x0101010200), "IAR": ("Indicated Airspeed Data Age", Variation_217, 0x0101010180), "MAC": ("Mach Number Data Age", Variation_217, 0x0101010140), "BPS": ("Barometric Pressure Setting Data Age", Variation_217, 0x0101010120)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MFL"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MD1"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MD2"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MDA"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MD4"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MD5"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MHG"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["IAS"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAS"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SAL"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FSS"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TID"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COM"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SAB"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ACS"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["BVR"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GVR"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RAN"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAR"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAN"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GSP"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["VUN"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MET"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["EMC"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["POS"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GAL"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PUN"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MB"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["IAR"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MAC"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["BPS"]) -> Variation_217: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_392(Item):
     name = "295"
     title = "Track Data Ages"
@@ -11414,7 +12740,64 @@ class Item_1287(Item):
     var = Variation_328
 class Variation_1369(Compound):
     fspec_size = None
-    items = [Item_1665, Item_729, Item_993, Item_854, Item_1664, Item_1888, Item_776, Item_800, Item_1418, Item_628, Item_746, Item_1727, Item_545, Item_1646, Item_1635, Item_1618, Item_1288, Item_1287]
+    items_list = [Item_1665, Item_729, Item_993, Item_854, Item_1664, Item_1888, Item_776, Item_800, Item_1418, Item_628, Item_746, Item_1727, Item_545, Item_1646, Item_1635, Item_1618, Item_1288, Item_1287]
+    items_dict = {"TAG": ("FPPS Identification Tag", Variation_1061, 0x800000), "CS": ("Callsign", Variation_328, 0x400000), "IFI": ("IFPS_FLIGHT_ID", Variation_1099, 0x200000), "FCT": ("Flight Category", Variation_983, 0x100000), "TAC": ("Type of Aircraft", Variation_314, 0x080000), "WTC": ("Wake Turbulence Category", Variation_190, 0x040000), "DEP": ("Departure Airport", Variation_314, 0x020000), "DST": ("Destination Airport", Variation_314, 0x018000), "RDS": ("Runway Designation", Variation_1026, 0x014000), "CFL": ("Current Cleared Flight Level", Variation_280, 0x012000), "CTL": ("Current Control Position", Variation_942, 0x011000), "TOD": ("Time of Departure / Arrival", Variation_1261, 0x010800), "AST": ("Aircraft Stand", Variation_325, 0x010400), "STS": ("Stand Status", Variation_960, 0x010200), "STD": ("Standard Instrument Departure", Variation_328, 0x010180), "STA": ("Standard Instrument Arrival", Variation_328, 0x010140), "PEM": ("Pre-Emergency Mode 3/A", Variation_893, 0x010120), "PEC": ("Pre-Emergency Callsign", Variation_328, 0x010110)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAG"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CS"]) -> Variation_328: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["IFI"]) -> Variation_1099: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FCT"]) -> Variation_983: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAC"]) -> Variation_314: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["WTC"]) -> Variation_190: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["DEP"]) -> Variation_314: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["DST"]) -> Variation_314: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RDS"]) -> Variation_1026: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CFL"]) -> Variation_280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CTL"]) -> Variation_942: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TOD"]) -> Variation_1261: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AST"]) -> Variation_325: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["STS"]) -> Variation_960: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["STD"]) -> Variation_328: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["STA"]) -> Variation_328: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PEM"]) -> Variation_893: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PEC"]) -> Variation_328: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_412(Item):
     name = "390"
     title = "Flight Plan Related Data"
@@ -11457,7 +12840,31 @@ class Item_1926(Item):
     var = Variation_894
 class Variation_1365(Compound):
     fspec_size = None
-    items = [Item_1655, Item_1295, Item_1305, Item_899, Item_818, Item_1730, Item_1926]
+    items_list = [Item_1655, Item_1295, Item_1305, Item_899, Item_818, Item_1730, Item_1926]
+    items_dict = {"SUM": ("Mode 5 Summary", Variation_1011, 0x80), "PMN": ("Mode 5 PIN/ National Origin/Mission Code", Variation_882, 0x40), "POS": ("Mode 5 Reported Position", Variation_999, 0x20), "GA": ("Mode 5 GNSS-derived Altitude", Variation_877, 0x10), "EM1": ("Extended Mode 1 Code in Octal Representation", Variation_897, 0x08), "TOS": ("Time Offset for POS and GA", Variation_199, 0x04), "XP": ("X Pulse Presence", Variation_894, 0x02)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SUM"]) -> Variation_1011: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PMN"]) -> Variation_882: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["POS"]) -> Variation_999: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GA"]) -> Variation_877: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["EM1"]) -> Variation_897: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TOS"]) -> Variation_199: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["XP"]) -> Variation_894: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_259(Item):
     name = "110"
     title = "Mode 5 Data Reports and Extended Mode 1 Code"
@@ -11504,7 +12911,34 @@ class Item_539(Item):
     var = Variation_223
 class Variation_1334(Compound):
     fspec_size = None
-    items = [Item_524, Item_702, Item_529, Item_497, Item_470, Item_552, Item_466, Item_539]
+    items_list = [Item_524, Item_702, Item_529, Item_497, Item_470, Item_552, Item_466, Item_539]
+    items_dict = {"APC": ("Estimated Accuracy Of Track Position (Cartesian)", Variation_1152, 0x8000), "COV": ("XY Covariance Component", Variation_242, 0x4000), "APW": ("Estimated Accuracy Of Track Position (WGS-84)", Variation_996, 0x2000), "AGA": ("Estimated Accuracy Of Calculated Track Geometric Altitude", Variation_222, 0x1000), "ABA": ("Estimated Accuracy Of Calculated Track Barometric Altitude", Variation_213, 0x0800), "ATV": ("Estimated Accuracy Of Track Velocity (Cartesian)", Variation_1153, 0x0400), "AA": ("Estimated Accuracy Of Acceleration (Cartesian)", Variation_1151, 0x0200), "ARC": ("Estimated Accuracy Of Rate Of Climb/Descent", Variation_223, 0x0180)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["APC"]) -> Variation_1152: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COV"]) -> Variation_242: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["APW"]) -> Variation_996: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AGA"]) -> Variation_222: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ABA"]) -> Variation_213: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ATV"]) -> Variation_1153: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AA"]) -> Variation_1151: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ARC"]) -> Variation_223: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_433(Item):
     name = "500"
     title = "Estimated Accuracies"
@@ -11535,14 +12969,125 @@ class Item_1802(Item):
     var = Variation_1104
 class Variation_1363(Compound):
     fspec_size = None
-    items = [Item_1560, Item_1304, Item_942, Item_1122, Item_1118, Item_1802]
+    items_list = [Item_1560, Item_1304, Item_942, Item_1122, Item_1118, Item_1802]
+    items_dict = {"SID": ("Sensor Identification", Variation_1061, 0x80), "POS": ("Measured Position", Variation_1049, 0x40), "HEIGHT": ("Measured 3-D Height", Variation_270, 0x20), "MDC": ("", Variation_1138, 0x10), "MDA": ("", Variation_1133, 0x08), "TYP": ("", Variation_1104, 0x04)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SID"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["POS"]) -> Variation_1049: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["HEIGHT"]) -> Variation_270: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MDC"]) -> Variation_1138: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MDA"]) -> Variation_1133: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TYP"]) -> Variation_1104: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_401(Item):
     name = "340"
     title = "Measured Information"
     var = Variation_1363
 class Variation_1290(Compound):
     fspec_size = None
-    items = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_404, Item_141, Item_215, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_401, None, None, None, None, None, Item_1421, Item_1580]
+    items_list = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_404, Item_141, Item_215, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_401, None, None, None, None, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000000000), "015": ("Service Identification", Variation_155, 0x2000000000), "070": ("Time Of Track Information", Variation_311, 0x1000000000), "105": ("Calculated Position In WGS-84 Co-ordinates", Variation_1001, 0x0800000000), "100": ("Calculated Track Position (Cartesian)", Variation_1161, 0x0400000000), "185": ("Calculated Track Velocity (Cartesian)", Variation_1141, 0x0200000000), "210": ("Calculated Acceleration (Cartesian)", Variation_930, 0x0180000000), "060": ("Track Mode 3/A Code", Variation_1131, 0x0140000000), "245": ("Target Identification", Variation_1083, 0x0120000000), "380": ("Aircraft Derived Data", Variation_1325, 0x0110000000), "040": ("Track Number", Variation_234, 0x0108000000), "080": ("Track Status", Variation_1198, 0x0104000000), "290": ("System Track Update Ages", Variation_1372, 0x0102000000), "200": ("Mode of Movement", Variation_1094, 0x0101800000), "295": ("Track Data Ages", Variation_1354, 0x0101400000), "136": ("Measured Flight Level", Variation_248, 0x0101200000), "130": ("Calculated Track Geometric Altitude", Variation_257, 0x0101100000), "135": ("Calculated Track Barometric Altitude", Variation_1036, 0x0101080000), "220": ("Calculated Rate of Climb/Descent", Variation_258, 0x0101040000), "390": ("Flight Plan Related Data", Variation_1369, 0x0101020000), "270": ("Target Size and Orientation", Variation_1192, 0x0101018000), "300": ("Vehicle Fleet Identification", Variation_167, 0x0101014000), "110": ("Mode 5 Data Reports and Extended Mode 1 Code", Variation_1365, 0x0101012000), "120": ("Track Mode 2 Code", Variation_901, 0x0101011000), "510": ("Composed Track Number", Variation_1194, 0x0101010800), "500": ("Estimated Accuracies", Variation_1334, 0x0101010400), "340": ("Measured Information", Variation_1363, 0x0101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010104), "SP": ("Special Purpose Field", Variation_1281, 0x0101010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["105"]) -> Variation_1001: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1161: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["185"]) -> Variation_1141: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_930: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_1131: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["245"]) -> Variation_1083: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["380"]) -> Variation_1325: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_234: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_1198: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["290"]) -> Variation_1372: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_1094: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["295"]) -> Variation_1354: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["136"]) -> Variation_248: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["135"]) -> Variation_1036: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["390"]) -> Variation_1369: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["270"]) -> Variation_1192: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["300"]) -> Variation_167: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_1365: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_901: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["510"]) -> Variation_1194: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["500"]) -> Variation_1334: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["340"]) -> Variation_1363: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_688(Item):
     name = "COM"
     title = "Communications/ACAS Capability and Flight Status"
@@ -11557,7 +13102,94 @@ class Item_595(Item):
     var = Variation_895
 class Variation_1326(Compound):
     fspec_size = None
-    items = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_688, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_582, Item_976, Item_1089, Item_595]
+    items_list = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_688, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_582, Item_976, Item_1089, Item_595]
+    items_dict = {"ADR": ("Target Address", Variation_296, 0x80000000), "ID": ("Target Identification", Variation_326, 0x40000000), "MHG": ("Magnetic Heading", Variation_293, 0x20000000), "IAS": ("Indicated Airspeed/Mach No", Variation_994, 0x10000000), "TAS": ("True Airspeed", Variation_264, 0x08000000), "SAL": ("Selected Altitude", Variation_1067, 0x04000000), "FSS": ("Final State Selected Altitude", Variation_1018, 0x02000000), "TIS": ("Trajectory Intent Status", Variation_1203, 0x01800000), "TID": ("Trajectory Intent Data", Variation_1258, 0x01400000), "COM": ("Communications/ACAS Capability and Flight Status", Variation_951, 0x01200000), "SAB": ("Status Reported by ADS-B", Variation_922, 0x01100000), "ACS": ("ACAS Resolution Advisory Report", Variation_327, 0x01080000), "BVR": ("Barometric Vertical Rate", Variation_258, 0x01040000), "GVR": ("Geometric Vertical Rate", Variation_258, 0x01020000), "RAN": ("Roll Angle", Variation_246, 0x01018000), "TAR": ("Track Angle Rate", Variation_1090, 0x01014000), "TAN": ("Track Angle", Variation_293, 0x01012000), "GS": ("Ground Speed", Variation_256, 0x01011000), "VUN": ("Velocity Uncertainty", Variation_155, 0x01010800), "MET": ("Meteorological Data", Variation_1144, 0x01010400), "EMC": ("Emitter Category", Variation_173, 0x01010200), "POS": ("Position", Variation_1008, 0x01010180), "GAL": ("Geometric Altitude", Variation_257, 0x01010140), "PUN": ("Position Uncertainty", Variation_907, 0x01010120), "BDSDATA": ("BDS Register DATA", Variation_1230, 0x01010110), "IAR": ("Indicated Airspeed", Variation_264, 0x01010108), "MAC": ("Mach Number", Variation_278, 0x01010104), "BPS": ("Barometric Pressure Setting", Variation_895, 0x01010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ADR"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ID"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MHG"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["IAS"]) -> Variation_994: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAS"]) -> Variation_264: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SAL"]) -> Variation_1067: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FSS"]) -> Variation_1018: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TIS"]) -> Variation_1203: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TID"]) -> Variation_1258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COM"]) -> Variation_951: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SAB"]) -> Variation_922: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ACS"]) -> Variation_327: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["BVR"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GVR"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RAN"]) -> Variation_246: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAR"]) -> Variation_1090: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAN"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GS"]) -> Variation_256: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["VUN"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MET"]) -> Variation_1144: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["EMC"]) -> Variation_173: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["POS"]) -> Variation_1008: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GAL"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PUN"]) -> Variation_907: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["BDSDATA"]) -> Variation_1230: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["IAR"]) -> Variation_264: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MAC"]) -> Variation_278: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["BPS"]) -> Variation_895: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_405(Item):
     name = "380"
     title = "Aircraft Derived Data"
@@ -11572,17 +13204,215 @@ class Item_941(Item):
     var = Variation_240
 class Variation_1362(Compound):
     fspec_size = None
-    items = [Item_1560, Item_1304, Item_941, Item_1122, Item_1118, Item_1802]
+    items_list = [Item_1560, Item_1304, Item_941, Item_1122, Item_1118, Item_1802]
+    items_dict = {"SID": ("Sensor Identification", Variation_1061, 0x80), "POS": ("Measured Position", Variation_1049, 0x40), "HEIGHT": ("Measured 3-D Height", Variation_240, 0x20), "MDC": ("", Variation_1138, 0x10), "MDA": ("", Variation_1133, 0x08), "TYP": ("", Variation_1104, 0x04)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SID"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["POS"]) -> Variation_1049: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["HEIGHT"]) -> Variation_240: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MDC"]) -> Variation_1138: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MDA"]) -> Variation_1133: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TYP"]) -> Variation_1104: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_400(Item):
     name = "340"
     title = "Measured Information"
     var = Variation_1362
 class Variation_1291(Compound):
     fspec_size = None
-    items = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_405, Item_141, Item_217, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_400, None, None, None, None, None, Item_1421, Item_1580]
+    items_list = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_405, Item_141, Item_217, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_400, None, None, None, None, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000000000), "015": ("Service Identification", Variation_155, 0x2000000000), "070": ("Time Of Track Information", Variation_311, 0x1000000000), "105": ("Calculated Position In WGS-84 Co-ordinates", Variation_1001, 0x0800000000), "100": ("Calculated Track Position (Cartesian)", Variation_1161, 0x0400000000), "185": ("Calculated Track Velocity (Cartesian)", Variation_1141, 0x0200000000), "210": ("Calculated Acceleration (Cartesian)", Variation_930, 0x0180000000), "060": ("Track Mode 3/A Code", Variation_1131, 0x0140000000), "245": ("Target Identification", Variation_1083, 0x0120000000), "380": ("Aircraft Derived Data", Variation_1326, 0x0110000000), "040": ("Track Number", Variation_234, 0x0108000000), "080": ("Track Status", Variation_1200, 0x0104000000), "290": ("System Track Update Ages", Variation_1372, 0x0102000000), "200": ("Mode of Movement", Variation_1094, 0x0101800000), "295": ("Track Data Ages", Variation_1354, 0x0101400000), "136": ("Measured Flight Level", Variation_248, 0x0101200000), "130": ("Calculated Track Geometric Altitude", Variation_257, 0x0101100000), "135": ("Calculated Track Barometric Altitude", Variation_1036, 0x0101080000), "220": ("Calculated Rate of Climb/Descent", Variation_258, 0x0101040000), "390": ("Flight Plan Related Data", Variation_1369, 0x0101020000), "270": ("Target Size and Orientation", Variation_1192, 0x0101018000), "300": ("Vehicle Fleet Identification", Variation_167, 0x0101014000), "110": ("Mode 5 Data Reports and Extended Mode 1 Code", Variation_1365, 0x0101012000), "120": ("Track Mode 2 Code", Variation_901, 0x0101011000), "510": ("Composed Track Number", Variation_1194, 0x0101010800), "500": ("Estimated Accuracies", Variation_1334, 0x0101010400), "340": ("Measured Information", Variation_1362, 0x0101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010104), "SP": ("Special Purpose Field", Variation_1281, 0x0101010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["105"]) -> Variation_1001: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1161: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["185"]) -> Variation_1141: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_930: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_1131: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["245"]) -> Variation_1083: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["380"]) -> Variation_1326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_234: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_1200: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["290"]) -> Variation_1372: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_1094: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["295"]) -> Variation_1354: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["136"]) -> Variation_248: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["135"]) -> Variation_1036: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["390"]) -> Variation_1369: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["270"]) -> Variation_1192: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["300"]) -> Variation_167: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_1365: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_901: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["510"]) -> Variation_1194: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["500"]) -> Variation_1334: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["340"]) -> Variation_1362: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Variation_1327(Compound):
     fspec_size = None
-    items = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_688, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_1099, Item_976, Item_1089, Item_595]
+    items_list = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_688, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_1099, Item_976, Item_1089, Item_595]
+    items_dict = {"ADR": ("Target Address", Variation_296, 0x80000000), "ID": ("Target Identification", Variation_326, 0x40000000), "MHG": ("Magnetic Heading", Variation_293, 0x20000000), "IAS": ("Indicated Airspeed/Mach No", Variation_994, 0x10000000), "TAS": ("True Airspeed", Variation_264, 0x08000000), "SAL": ("Selected Altitude", Variation_1067, 0x04000000), "FSS": ("Final State Selected Altitude", Variation_1018, 0x02000000), "TIS": ("Trajectory Intent Status", Variation_1203, 0x01800000), "TID": ("Trajectory Intent Data", Variation_1258, 0x01400000), "COM": ("Communications/ACAS Capability and Flight Status", Variation_951, 0x01200000), "SAB": ("Status Reported by ADS-B", Variation_922, 0x01100000), "ACS": ("ACAS Resolution Advisory Report", Variation_327, 0x01080000), "BVR": ("Barometric Vertical Rate", Variation_258, 0x01040000), "GVR": ("Geometric Vertical Rate", Variation_258, 0x01020000), "RAN": ("Roll Angle", Variation_246, 0x01018000), "TAR": ("Track Angle Rate", Variation_1090, 0x01014000), "TAN": ("Track Angle", Variation_293, 0x01012000), "GS": ("Ground Speed", Variation_256, 0x01011000), "VUN": ("Velocity Uncertainty", Variation_155, 0x01010800), "MET": ("Meteorological Data", Variation_1144, 0x01010400), "EMC": ("Emitter Category", Variation_173, 0x01010200), "POS": ("Position", Variation_1008, 0x01010180), "GAL": ("Geometric Altitude", Variation_257, 0x01010140), "PUN": ("Position Uncertainty", Variation_907, 0x01010120), "MB": ("MODE S MB DATA", Variation_1230, 0x01010110), "IAR": ("Indicated Airspeed", Variation_264, 0x01010108), "MAC": ("Mach Number", Variation_278, 0x01010104), "BPS": ("Barometric Pressure Setting", Variation_895, 0x01010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ADR"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ID"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MHG"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["IAS"]) -> Variation_994: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAS"]) -> Variation_264: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SAL"]) -> Variation_1067: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FSS"]) -> Variation_1018: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TIS"]) -> Variation_1203: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TID"]) -> Variation_1258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COM"]) -> Variation_951: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SAB"]) -> Variation_922: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ACS"]) -> Variation_327: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["BVR"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GVR"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RAN"]) -> Variation_246: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAR"]) -> Variation_1090: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAN"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GS"]) -> Variation_256: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["VUN"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MET"]) -> Variation_1144: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["EMC"]) -> Variation_173: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["POS"]) -> Variation_1008: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GAL"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PUN"]) -> Variation_907: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MB"]) -> Variation_1230: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["IAR"]) -> Variation_264: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MAC"]) -> Variation_278: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["BPS"]) -> Variation_895: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_406(Item):
     name = "380"
     title = "Aircraft Derived Data"
@@ -11593,17 +13423,284 @@ class Item_216(Item):
     var = Variation_1199
 class Variation_1292(Compound):
     fspec_size = None
-    items = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_406, Item_141, Item_216, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_400, None, None, None, None, None, Item_1421, Item_1580]
+    items_list = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_406, Item_141, Item_216, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_400, None, None, None, None, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000000000), "015": ("Service Identification", Variation_155, 0x2000000000), "070": ("Time Of Track Information", Variation_311, 0x1000000000), "105": ("Calculated Position In WGS-84 Co-ordinates", Variation_1001, 0x0800000000), "100": ("Calculated Track Position (Cartesian)", Variation_1161, 0x0400000000), "185": ("Calculated Track Velocity (Cartesian)", Variation_1141, 0x0200000000), "210": ("Calculated Acceleration (Cartesian)", Variation_930, 0x0180000000), "060": ("Track Mode 3/A Code", Variation_1131, 0x0140000000), "245": ("Target Identification", Variation_1083, 0x0120000000), "380": ("Aircraft Derived Data", Variation_1327, 0x0110000000), "040": ("Track Number", Variation_234, 0x0108000000), "080": ("Track Status", Variation_1199, 0x0104000000), "290": ("System Track Update Ages", Variation_1372, 0x0102000000), "200": ("Mode of Movement", Variation_1094, 0x0101800000), "295": ("Track Data Ages", Variation_1354, 0x0101400000), "136": ("Measured Flight Level", Variation_248, 0x0101200000), "130": ("Calculated Track Geometric Altitude", Variation_257, 0x0101100000), "135": ("Calculated Track Barometric Altitude", Variation_1036, 0x0101080000), "220": ("Calculated Rate of Climb/Descent", Variation_258, 0x0101040000), "390": ("Flight Plan Related Data", Variation_1369, 0x0101020000), "270": ("Target Size and Orientation", Variation_1192, 0x0101018000), "300": ("Vehicle Fleet Identification", Variation_167, 0x0101014000), "110": ("Mode 5 Data Reports and Extended Mode 1 Code", Variation_1365, 0x0101012000), "120": ("Track Mode 2 Code", Variation_901, 0x0101011000), "510": ("Composed Track Number", Variation_1194, 0x0101010800), "500": ("Estimated Accuracies", Variation_1334, 0x0101010400), "340": ("Measured Information", Variation_1362, 0x0101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010104), "SP": ("Special Purpose Field", Variation_1281, 0x0101010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["105"]) -> Variation_1001: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1161: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["185"]) -> Variation_1141: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_930: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_1131: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["245"]) -> Variation_1083: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["380"]) -> Variation_1327: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_234: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_1199: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["290"]) -> Variation_1372: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_1094: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["295"]) -> Variation_1354: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["136"]) -> Variation_248: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["135"]) -> Variation_1036: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["390"]) -> Variation_1369: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["270"]) -> Variation_1192: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["300"]) -> Variation_167: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_1365: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_901: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["510"]) -> Variation_1194: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["500"]) -> Variation_1334: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["340"]) -> Variation_1362: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Variation_1328(Compound):
     fspec_size = None
-    items = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_688, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_1099, Item_976, Item_1089, Item_597]
+    items_list = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_688, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_1099, Item_976, Item_1089, Item_597]
+    items_dict = {"ADR": ("Target Address", Variation_296, 0x80000000), "ID": ("Target Identification", Variation_326, 0x40000000), "MHG": ("Magnetic Heading", Variation_293, 0x20000000), "IAS": ("Indicated Airspeed/Mach No", Variation_994, 0x10000000), "TAS": ("True Airspeed", Variation_264, 0x08000000), "SAL": ("Selected Altitude", Variation_1067, 0x04000000), "FSS": ("Final State Selected Altitude", Variation_1018, 0x02000000), "TIS": ("Trajectory Intent Status", Variation_1203, 0x01800000), "TID": ("Trajectory Intent Data", Variation_1258, 0x01400000), "COM": ("Communications/ACAS Capability and Flight Status", Variation_951, 0x01200000), "SAB": ("Status Reported by ADS-B", Variation_922, 0x01100000), "ACS": ("ACAS Resolution Advisory Report", Variation_327, 0x01080000), "BVR": ("Barometric Vertical Rate", Variation_258, 0x01040000), "GVR": ("Geometric Vertical Rate", Variation_258, 0x01020000), "RAN": ("Roll Angle", Variation_246, 0x01018000), "TAR": ("Track Angle Rate", Variation_1090, 0x01014000), "TAN": ("Track Angle", Variation_293, 0x01012000), "GS": ("Ground Speed", Variation_256, 0x01011000), "VUN": ("Velocity Uncertainty", Variation_155, 0x01010800), "MET": ("Meteorological Data", Variation_1144, 0x01010400), "EMC": ("Emitter Category", Variation_173, 0x01010200), "POS": ("Position", Variation_1008, 0x01010180), "GAL": ("Geometric Altitude", Variation_257, 0x01010140), "PUN": ("Position Uncertainty", Variation_907, 0x01010120), "MB": ("MODE S MB DATA", Variation_1230, 0x01010110), "IAR": ("Indicated Airspeed", Variation_264, 0x01010108), "MAC": ("Mach Number", Variation_278, 0x01010104), "BPS": ("Barometric Pressure Setting (derived from Mode S BDS 4,0)", Variation_895, 0x01010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ADR"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ID"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MHG"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["IAS"]) -> Variation_994: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAS"]) -> Variation_264: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SAL"]) -> Variation_1067: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FSS"]) -> Variation_1018: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TIS"]) -> Variation_1203: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TID"]) -> Variation_1258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COM"]) -> Variation_951: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SAB"]) -> Variation_922: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ACS"]) -> Variation_327: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["BVR"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GVR"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RAN"]) -> Variation_246: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAR"]) -> Variation_1090: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TAN"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GS"]) -> Variation_256: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["VUN"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MET"]) -> Variation_1144: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["EMC"]) -> Variation_173: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["POS"]) -> Variation_1008: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GAL"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PUN"]) -> Variation_907: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MB"]) -> Variation_1230: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["IAR"]) -> Variation_264: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MAC"]) -> Variation_278: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["BPS"]) -> Variation_895: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_407(Item):
     name = "380"
     title = "Aircraft Derived Data"
     var = Variation_1328
 class Variation_1293(Compound):
     fspec_size = None
-    items = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_407, Item_141, Item_216, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_401, None, None, None, None, None, Item_1421, Item_1580]
+    items_list = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_407, Item_141, Item_216, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_401, None, None, None, None, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000000000), "015": ("Service Identification", Variation_155, 0x2000000000), "070": ("Time Of Track Information", Variation_311, 0x1000000000), "105": ("Calculated Position In WGS-84 Co-ordinates", Variation_1001, 0x0800000000), "100": ("Calculated Track Position (Cartesian)", Variation_1161, 0x0400000000), "185": ("Calculated Track Velocity (Cartesian)", Variation_1141, 0x0200000000), "210": ("Calculated Acceleration (Cartesian)", Variation_930, 0x0180000000), "060": ("Track Mode 3/A Code", Variation_1131, 0x0140000000), "245": ("Target Identification", Variation_1083, 0x0120000000), "380": ("Aircraft Derived Data", Variation_1328, 0x0110000000), "040": ("Track Number", Variation_234, 0x0108000000), "080": ("Track Status", Variation_1199, 0x0104000000), "290": ("System Track Update Ages", Variation_1372, 0x0102000000), "200": ("Mode of Movement", Variation_1094, 0x0101800000), "295": ("Track Data Ages", Variation_1354, 0x0101400000), "136": ("Measured Flight Level", Variation_248, 0x0101200000), "130": ("Calculated Track Geometric Altitude", Variation_257, 0x0101100000), "135": ("Calculated Track Barometric Altitude", Variation_1036, 0x0101080000), "220": ("Calculated Rate of Climb/Descent", Variation_258, 0x0101040000), "390": ("Flight Plan Related Data", Variation_1369, 0x0101020000), "270": ("Target Size and Orientation", Variation_1192, 0x0101018000), "300": ("Vehicle Fleet Identification", Variation_167, 0x0101014000), "110": ("Mode 5 Data Reports and Extended Mode 1 Code", Variation_1365, 0x0101012000), "120": ("Track Mode 2 Code", Variation_901, 0x0101011000), "510": ("Composed Track Number", Variation_1194, 0x0101010800), "500": ("Estimated Accuracies", Variation_1334, 0x0101010400), "340": ("Measured Information", Variation_1363, 0x0101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010104), "SP": ("Special Purpose Field", Variation_1281, 0x0101010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["105"]) -> Variation_1001: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1161: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["185"]) -> Variation_1141: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_930: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_1131: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["245"]) -> Variation_1083: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["380"]) -> Variation_1328: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_234: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_1199: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["290"]) -> Variation_1372: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_1094: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["295"]) -> Variation_1354: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["136"]) -> Variation_248: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["135"]) -> Variation_1036: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["390"]) -> Variation_1369: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["270"]) -> Variation_1192: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["300"]) -> Variation_167: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_1365: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_901: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["510"]) -> Variation_1194: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["500"]) -> Variation_1334: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["340"]) -> Variation_1363: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_34(Item):
     name = "000"
     title = "Message Type"
@@ -11674,7 +13771,40 @@ class Item_626(Item):
     var = Variation_280
 class Variation_1329(Compound):
     fspec_size = None
-    items = [Item_502, Item_1081, Item_721, Item_718, Item_1782, Item_801, Item_475, Item_1187, Item_869, Item_626]
+    items_list = [Item_502, Item_1081, Item_721, Item_718, Item_1782, Item_801, Item_475, Item_1187, Item_869, Item_626]
+    items_dict = {"AI1": ("Aircraft Identifier (in 7 Characters) of Aircraft 1 Involved in the Conflict", Variation_328, 0x8000), "M31": ("Mode 3/A Code Aircraft 1", Variation_903, 0x4000), "CPW": ("Predicted Conflict Position Target 1 in WGS-84 Coordinates", Variation_998, 0x2000), "CPC": ("Predicted Conflict Position for the Aircraft 1 Involved in the Conflict", Variation_1159, 0x1000), "TT1": ("Time to Runway Threshold for First Approaching Aircraft in a RIMCA", Variation_311, 0x0800), "DT1": ("Distance to Runway Threshold for Aircraft 1 Involved in a RIMCA", Variation_271, 0x0400), "AC1": ("Characteristics of Aircraft 1 Involved in the Conflict", Variation_1191, 0x0200), "MS1": ("Aircraft Identification Downloaded from Aircraft 1 Involved in the Conflict If Equipped with a Mode-S Transponder", Variation_325, 0x0180), "FP1": ("Number of the Flight Plan Correlated to Aircraft 1 Involved in the Conflict", Variation_914, 0x0140), "CF1": ("Cleared Flight Level for Aircraft 1 Involved in the Conflict", Variation_280, 0x0120)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AI1"]) -> Variation_328: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["M31"]) -> Variation_903: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CPW"]) -> Variation_998: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CPC"]) -> Variation_1159: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TT1"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["DT1"]) -> Variation_271: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AC1"]) -> Variation_1191: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MS1"]) -> Variation_325: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FP1"]) -> Variation_914: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CF1"]) -> Variation_280: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_319(Item):
     name = "170"
     title = "Aircraft Identification and Characteristics 1"
@@ -11697,7 +13827,22 @@ class Item_615(Item):
     var = Variation_311
 class Variation_1338(Compound):
     fspec_size = None
-    items = [Item_646, Item_613, Item_715, Item_615]
+    items_list = [Item_646, Item_613, Item_715, Item_615]
+    items_dict = {"CN": ("Conflict Nature", Variation_1193, 0x80), "CC": ("Conflict Classification", Variation_1091, 0x40), "CP": ("Conflict Probability", Variation_208, 0x20), "CD": ("Conflict Duration", Variation_311, 0x10)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CN"]) -> Variation_1193: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CC"]) -> Variation_1091: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CP"]) -> Variation_208: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CD"]) -> Variation_311: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_265(Item):
     name = "120"
     title = "Conflict Characteristics"
@@ -11728,7 +13873,28 @@ class Item_1206(Item):
     var = Variation_270
 class Variation_1370(Compound):
     fspec_size = None
-    items = [Item_1679, Item_1683, Item_638, Item_1148, Item_750, Item_1206]
+    items_list = [Item_1679, Item_1683, Item_638, Item_1148, Item_750, Item_1206]
+    items_dict = {"TC": ("Time to Conflict", Variation_311, 0x80), "TCA": ("Time to Closest Approach", Variation_311, 0x40), "CHS": ("Current Horizontal Separation", Variation_307, 0x20), "MHS": ("Estimated Minimum Horizontal Separation", Variation_271, 0x10), "CVS": ("Current Vertical Separation", Variation_270, 0x08), "MVS": ("Estimated Minimum Vertical Separation", Variation_270, 0x04)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TC"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TCA"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CHS"]) -> Variation_307: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MHS"]) -> Variation_271: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CVS"]) -> Variation_270: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MVS"]) -> Variation_270: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_186(Item):
     name = "070"
     title = "Conflict Timing and Separation"
@@ -11771,7 +13937,28 @@ class Item_895(Item):
     var = Variation_328
 class Variation_1331(Compound):
     fspec_size = None
-    items = [Item_519, Item_607, Item_1480, Item_1481, Item_1512, Item_895]
+    items_list = [Item_519, Item_607, Item_1480, Item_1481, Item_1512, Item_895]
+    items_dict = {"AN": ("Area Name", Variation_326, 0x80), "CAN": ("Crossing Area Name", Variation_328, 0x40), "RT1": ("Runway/Taxiway Designator 1", Variation_328, 0x20), "RT2": ("Runway/Taxiway Designator 2", Variation_328, 0x10), "SB": ("Stop Bar Designator", Variation_328, 0x08), "G": ("Gate Designator", Variation_328, 0x04)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AN"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CAN"]) -> Variation_328: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RT1"]) -> Variation_328: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RT2"]) -> Variation_328: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SB"]) -> Variation_328: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["G"]) -> Variation_328: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_239(Item):
     name = "100"
     title = "Area Definition"
@@ -11822,7 +14009,40 @@ class Item_627(Item):
     var = Variation_280
 class Variation_1330(Compound):
     fspec_size = None
-    items = [Item_503, Item_1082, Item_722, Item_719, Item_1783, Item_802, Item_476, Item_1188, Item_870, Item_627]
+    items_list = [Item_503, Item_1082, Item_722, Item_719, Item_1783, Item_802, Item_476, Item_1188, Item_870, Item_627]
+    items_dict = {"AI2": ("Aircraft Identifier (in 7 Characters) of Aircraft 2 Involved in the Conflict", Variation_328, 0x8000), "M32": ("Mode 3/A Code Aircraft 2", Variation_904, 0x4000), "CPW": ("Predicted Conflict Position Target 2 in WGS-84 Coordinates", Variation_998, 0x2000), "CPL": ("Predicted Conflict Position for the Aircraft 2 Involved in the Conflict", Variation_1159, 0x1000), "TT2": ("Time to Runway Threshold for Second Approaching Aircraft in a RIMCA", Variation_311, 0x0800), "DT2": ("Distance to Runway Threshold for Aircraft 2 Involved in a RIMCA", Variation_271, 0x0400), "AC2": ("Characteristics of Aircraft 2 Involved in the Conflict", Variation_1191, 0x0200), "MS2": ("Aircraft Identification Downloaded From Aircraft 2 Involved in the Conflict If Eequipped With a Mode-S Transponder", Variation_325, 0x0180), "FP2": ("Number of the Flight Plan Correlated to Aircraft 2 Involved in the Conflict", Variation_914, 0x0140), "CF2": ("Cleared Flight Level for Aircraft 2 Involved in the Conflict", Variation_280, 0x0120)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AI2"]) -> Variation_328: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["M32"]) -> Variation_904: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CPW"]) -> Variation_998: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CPL"]) -> Variation_1159: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TT2"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["DT2"]) -> Variation_271: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AC2"]) -> Variation_1191: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MS2"]) -> Variation_325: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FP2"]) -> Variation_914: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CF2"]) -> Variation_280: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_330(Item):
     name = "171"
     title = "Aircraft Identification and Characteristics 2"
@@ -11833,7 +14053,70 @@ class Item_256(Item):
     var = Variation_1240
 class Variation_1294(Compound):
     fspec_size = None
-    items = [Item_61, Item_34, Item_71, Item_94, Item_130, Item_154, Item_178, Item_109, Item_319, Item_265, Item_186, Item_208, Item_203, Item_206, Item_239, Item_124, Item_330, Item_256, None, Item_1421, Item_1580]
+    items_list = [Item_61, Item_34, Item_71, Item_94, Item_130, Item_154, Item_178, Item_109, Item_319, Item_265, Item_186, Item_208, Item_203, Item_206, Item_239, Item_124, Item_330, Item_256, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x800000), "000": ("Message Type", Variation_169, 0x400000), "015": ("SDPS Identifier", Variation_1252, 0x200000), "020": ("Time of Message", Variation_311, 0x100000), "040": ("Alert Identifier", Variation_234, 0x080000), "045": ("Alert Status", Variation_909, 0x040000), "060": ("Safety Net Function and System Status", Variation_1201, 0x020000), "030": ("Track Number 1", Variation_234, 0x018000), "170": ("Aircraft Identification and Characteristics 1", Variation_1329, 0x014000), "120": ("Conflict Characteristics", Variation_1338, 0x012000), "070": ("Conflict Timing and Separation", Variation_1370, 0x011000), "076": ("Vertical Deviation", Variation_240, 0x010800), "074": ("Longitudinal Deviation", Variation_241, 0x010400), "075": ("Transversal Distance Deviation", Variation_299, 0x010200), "100": ("Area Definition", Variation_1331, 0x010180), "035": ("Track Number 2", Variation_234, 0x010140), "171": ("Aircraft Identification and Characteristics 2", Variation_1330, 0x010120), "110": ("FDPS Sector Control Identification", Variation_1240, 0x010110), "RE": ("Reserved Expansion Field", Variation_1280, 0x010104), "SP": ("Special Purpose Field", Variation_1281, 0x010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_169: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_1252: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_234: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["045"]) -> Variation_909: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_1201: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_234: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_1329: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_1338: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_1370: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["076"]) -> Variation_240: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["074"]) -> Variation_241: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["075"]) -> Variation_299: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1331: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["035"]) -> Variation_234: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["171"]) -> Variation_1330: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_1240: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_35(Item):
     name = "000"
     title = "Message Type"
@@ -11864,7 +14147,22 @@ class Item_1131(Item):
     var = Variation_926
 class Variation_1340(Compound):
     fspec_size = None
-    items = [Item_682, None, None, Item_1335, Item_1612, Item_1131]
+    items_list = [Item_682, None, None, Item_1335, Item_1612, Item_1131]
+    items_dict = {"COM": ("Common Part", Variation_1023, 0x80), "PSR": ("Specific Status Information for a PSR Sensor", Variation_925, 0x10), "SSR": ("Specific Status Information for a SSR Sensor", Variation_927, 0x08), "MDS": ("Specific Status Information for a Mode S Sensor", Variation_926, 0x04)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COM"]) -> Variation_1023: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PSR"]) -> Variation_925: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SSR"]) -> Variation_927: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MDS"]) -> Variation_926: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_167(Item):
     name = "050"
     title = "System Configuration and Status"
@@ -11887,7 +14185,22 @@ class Item_1130(Item):
     var = Variation_1045
 class Variation_1339(Compound):
     fspec_size = None
-    items = [Item_681, None, None, Item_1334, Item_1611, Item_1130]
+    items_list = [Item_681, None, None, Item_1334, Item_1611, Item_1130]
+    items_dict = {"COM": ("Common Part", Variation_875, 0x80), "PSR": ("Specific Processing Mode Information for a PSR Sensor", Variation_1030, 0x10), "SSR": ("Specific Processing Mode Information for a SSR Sensor", Variation_1046, 0x08), "MDS": ("Specific Processing Mode Information for a Mode S Sensor", Variation_1045, 0x04)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COM"]) -> Variation_875: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PSR"]) -> Variation_1030: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SSR"]) -> Variation_1046: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MDS"]) -> Variation_1045: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_182(Item):
     name = "060"
     title = "System Processing Mode"
@@ -11914,7 +14227,52 @@ class Item_221(Item):
     var = Variation_1053
 class Variation_1295(Compound):
     fspec_size = None
-    items = [Item_61, Item_35, Item_107, Item_85, Item_144, Item_167, Item_182, Item_188, Item_242, Item_254, Item_263, Item_221, Item_1421, Item_1580]
+    items_list = [Item_61, Item_35, Item_107, Item_85, Item_144, Item_167, Item_182, Item_188, Item_242, Item_254, Item_263, Item_221, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_175, 0x4000), "030": ("Time of Day", Variation_311, 0x2000), "020": ("Sector Number", Variation_224, 0x1000), "041": ("Antenna Rotation Speed", Variation_287, 0x0800), "050": ("System Configuration and Status", Variation_1340, 0x0400), "060": ("System Processing Mode", Variation_1339, 0x0200), "070": ("Message Count Values", Variation_1263, 0x0180), "100": ("Generic Polar Window", Variation_1051, 0x0140), "110": ("Data Filter", Variation_158, 0x0120), "120": ("3D-Position Of Data Source", Variation_990, 0x0110), "090": ("Collimation Error", Variation_1053, 0x0108), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_175: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_224: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["041"]) -> Variation_287: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1340: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_1339: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_1263: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1051: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_158: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_990: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1053: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_36(Item):
     name = "000"
     title = "Message Type"
@@ -11925,14 +14283,104 @@ class Item_189(Item):
     var = Variation_1264
 class Variation_1296(Compound):
     fspec_size = None
-    items = [Item_61, Item_36, Item_107, Item_85, Item_144, Item_167, Item_182, Item_189, Item_242, Item_254, Item_263, Item_221, Item_1421, Item_1580]
+    items_list = [Item_61, Item_36, Item_107, Item_85, Item_144, Item_167, Item_182, Item_189, Item_242, Item_254, Item_263, Item_221, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_176, 0x4000), "030": ("Time of Day", Variation_311, 0x2000), "020": ("Sector Number", Variation_224, 0x1000), "041": ("Antenna Rotation Speed", Variation_287, 0x0800), "050": ("System Configuration and Status", Variation_1340, 0x0400), "060": ("System Processing Mode", Variation_1339, 0x0200), "070": ("Message Count Values", Variation_1264, 0x0180), "100": ("Generic Polar Window", Variation_1051, 0x0140), "110": ("Data Filter", Variation_158, 0x0120), "120": ("3D-Position Of Data Source", Variation_990, 0x0110), "090": ("Collimation Error", Variation_1053, 0x0108), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_176: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_224: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["041"]) -> Variation_287: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1340: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_1339: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_1264: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1051: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_158: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_990: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1053: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_37(Item):
     name = "000"
     title = "Message Type"
     var = Variation_177
 class Variation_1297(Compound):
     fspec_size = None
-    items = [Item_61, Item_37, Item_107, Item_85, Item_144, Item_167, Item_182, Item_189, Item_242, Item_254, Item_263, Item_221, Item_1421, Item_1580]
+    items_list = [Item_61, Item_37, Item_107, Item_85, Item_144, Item_167, Item_182, Item_189, Item_242, Item_254, Item_263, Item_221, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_177, 0x4000), "030": ("Time of Day", Variation_311, 0x2000), "020": ("Sector Number", Variation_224, 0x1000), "041": ("Antenna Rotation Speed", Variation_287, 0x0800), "050": ("System Configuration and Status", Variation_1340, 0x0400), "060": ("System Processing Mode", Variation_1339, 0x0200), "070": ("Message Count Values", Variation_1264, 0x0180), "100": ("Generic Polar Window", Variation_1051, 0x0140), "110": ("Data Filter", Variation_158, 0x0120), "120": ("3D-Position Of Data Source", Variation_990, 0x0110), "090": ("Collimation Error", Variation_1053, 0x0108), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_177: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_224: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["041"]) -> Variation_287: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1340: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_1339: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_1264: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1051: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_158: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_990: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1053: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_38(Item):
     name = "000"
     title = "Message Type"
@@ -11963,7 +14411,46 @@ class Item_218(Item):
     var = Variation_1273
 class Variation_1298(Compound):
     fspec_size = None
-    items = [Item_61, Item_38, Item_85, Item_107, Item_144, Item_166, Item_180, Item_196, Item_241, Item_220, Item_218, None, Item_1580, None]
+    items_list = [Item_61, Item_38, Item_85, Item_107, Item_144, Item_166, Item_180, Item_196, Item_241, Item_220, Item_218, None, Item_1580, None]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_178, 0x4000), "020": ("Sector Number", Variation_224, 0x2000), "030": ("Time of Day", Variation_311, 0x1000), "041": ("Antenna Rotation Speed", Variation_287, 0x0800), "050": ("Station Configuration Status", Variation_1273, 0x0400), "060": ("Station Processing Mode", Variation_1273, 0x0200), "070": ("Plot Count Values", Variation_1235, 0x0180), "100": ("Dynamic Window Type 1", Variation_1054, 0x0140), "090": ("Collimation Error", Variation_1040, 0x0120), "080": ("Warning/Error Conditions", Variation_1273, 0x0110), "SP": ("Special Purpose Field", Variation_1281, 0x0104)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_178: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_224: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["041"]) -> Variation_287: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1273: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_1273: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_1235: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1054: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1040: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_1273: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_39(Item):
     name = "000"
     title = "Message Type"
@@ -12010,7 +14497,49 @@ class Item_129(Item):
     var = Variation_1272
 class Variation_1299(Compound):
     fspec_size = None
-    items = [Item_61, Item_39, Item_96, Item_127, Item_122, Item_131, Item_164, Item_231, Item_246, Item_261, Item_270, Item_129, Item_1580, None]
+    items_list = [Item_61, Item_39, Item_96, Item_127, Item_122, Item_131, Item_164, Item_231, Item_246, Item_261, Item_270, Item_129, Item_1580, None]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_179, 0x4000), "020": ("Vector Qualifier", Variation_1208, 0x2000), "036": ("Sequence of Cartesian Vectors in SPF Notation", Variation_1269, 0x1000), "034": ("Sequence of Polar Vectors in SPF Notation", Variation_1256, 0x0800), "040": ("Contour Identifier", Variation_1027, 0x0400), "050": ("Sequence of Contour Points in SPF Notation", Variation_1271, 0x0200), "090": ("Time of Day", Variation_311, 0x0180), "100": ("Processing Status", Variation_1189, 0x0140), "110": ("Station Configuration Status", Variation_1273, 0x0120), "120": ("Total Number of Items Constituting One Weather Picture", Variation_235, 0x0110), "038": ("Sequence of Weather Vectors in SPF Notation", Variation_1272, 0x0108), "SP": ("Special Purpose Field", Variation_1281, 0x0104)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_179: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_1208: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["036"]) -> Variation_1269: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["034"]) -> Variation_1256: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_1027: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1271: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1189: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_1273: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_235: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["038"]) -> Variation_1272: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_40(Item):
     name = "000"
     title = "Message Type"
@@ -12033,7 +14562,37 @@ class Item_165(Item):
     var = Variation_181
 class Variation_1300(Compound):
     fspec_size = None
-    items = [Item_61, Item_40, Item_72, Item_108, Item_81, Item_136, Item_165, None, None, None, None, None, Item_1421, Item_1580]
+    items_list = [Item_61, Item_40, Item_72, Item_108, Item_81, Item_136, Item_165, None, None, None, None, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_180, 0x4000), "015": ("Service Identification", Variation_155, 0x2000), "030": ("Time of Message", Variation_311, 0x1000), "020": ("Batch Number", Variation_191, 0x0800), "040": ("SDPS Configuration and Status", Variation_1022, 0x0400), "050": ("Service Status Report", Variation_181, 0x0200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_180: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_191: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_1022: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_181: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_41(Item):
     name = "000"
     title = "Message Type"
@@ -12072,7 +14631,46 @@ class Item_458(Item):
     var = Variation_194
 class Variation_1301(Compound):
     fspec_size = None
-    items = [Item_61, Item_41, Item_289, Item_441, Item_442, Item_443, Item_444, Item_447, Item_455, Item_458, None, None, Item_1421, Item_1580]
+    items_list = [Item_61, Item_41, Item_289, Item_441, Item_442, Item_443, Item_444, Item_447, Item_455, Item_458, None, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_182, 0x4000), "140": ("Time of Day", Variation_311, 0x2000), "550": ("System Status", Variation_1025, 0x1000), "551": ("Tracking Processor Detailed Status", Variation_1093, 0x0800), "552": ("Remote Sensor Detailed Status", Variation_1250, 0x0400), "553": ("Reference Transponder Detailed Status", Variation_1209, 0x0200), "600": ("Position of the MLT System Reference Point", Variation_1002, 0x0180), "610": ("Height of the MLT System Reference Point", Variation_249, 0x0140), "620": ("WGS-84 Undulation", Variation_194, 0x0120), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_182: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["550"]) -> Variation_1025: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["551"]) -> Variation_1093: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["552"]) -> Variation_1250: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["553"]) -> Variation_1209: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["600"]) -> Variation_1002: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["610"]) -> Variation_249: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["620"]) -> Variation_194: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_44(Item):
     name = "000"
     title = "Message Type"
@@ -12159,7 +14757,91 @@ class Item_350(Item):
     var = Variation_932
 class Variation_1302(Compound):
     fspec_size = None
-    items = [Item_61, Item_44, Item_92, Item_289, Item_146, Item_134, Item_152, Item_335, Item_345, Item_312, Item_322, Item_176, Item_362, Item_371, Item_377, Item_396, Item_224, Item_232, Item_383, Item_440, Item_398, Item_436, Item_386, Item_278, Item_350, None, Item_1580, Item_1421]
+    items_list = [Item_61, Item_44, Item_92, Item_289, Item_146, Item_134, Item_152, Item_335, Item_345, Item_312, Item_322, Item_176, Item_362, Item_371, Item_377, Item_396, Item_224, Item_232, Item_383, Item_440, Item_398, Item_436, Item_386, Item_278, Item_350, None, Item_1580, Item_1421]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "000": ("Message Type", Variation_185, 0x40000000), "020": ("Target Report Descriptor", Variation_1220, 0x20000000), "140": ("Time of Day", Variation_311, 0x10000000), "041": ("Position in WGS-84 Co-ordinates", Variation_1003, 0x08000000), "040": ("Measured Position in Polar Co-ordinates", Variation_1050, 0x04000000), "042": ("Position in Cartesian Co-ordinates", Variation_1160, 0x02000000), "200": ("Calculated Track Velocity in Polar Co-ordinates", Variation_989, 0x01800000), "202": ("Calculated Track Velocity in Cartesian Co-ordinates", Variation_1143, 0x01400000), "161": ("Track Number", Variation_910, 0x01200000), "170": ("Track Status", Variation_1181, 0x01100000), "060": ("Mode-3/A Code in Octal Representation", Variation_1136, 0x01080000), "220": ("Target Address", Variation_296, 0x01040000), "245": ("Target Identification", Variation_1084, 0x01020000), "250": ("Mode S MB Data", Variation_1245, 0x01018000), "300": ("Vehicle Fleet Identification", Variation_167, 0x01014000), "090": ("Flight Level in Binary Representation", Variation_1132, 0x01012000), "091": ("Measured Height", Variation_257, 0x01011000), "270": ("Target Size and Orientation", Variation_1192, 0x01010800), "550": ("System Status", Variation_1024, 0x01010400), "310": ("Pre-programmed Message", Variation_1096, 0x01010200), "500": ("Standard Deviation of Position", Variation_957, 0x01010180), "280": ("Presence", Variation_1244, 0x01010140), "131": ("Amplitude of Primary Plot", Variation_155, 0x01010120), "210": ("Calculated Acceleration", Variation_932, 0x01010110), "SP": ("Special Purpose Field", Variation_1281, 0x01010104), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_185: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_1220: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["041"]) -> Variation_1003: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_1050: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["042"]) -> Variation_1160: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_989: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["202"]) -> Variation_1143: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_910: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_1181: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_1136: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["245"]) -> Variation_1084: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["250"]) -> Variation_1245: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["300"]) -> Variation_167: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1132: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["091"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["270"]) -> Variation_1192: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["550"]) -> Variation_1024: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["310"]) -> Variation_1096: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["500"]) -> Variation_957: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["280"]) -> Variation_1244: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["131"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_932: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_46(Item):
     name = "000"
     title = "Message Type"
@@ -12202,7 +14884,52 @@ class Item_171(Item):
     var = Variation_1232
 class Variation_1303(Compound):
     fspec_size = None
-    items = [Item_61, Item_46, Item_97, Item_110, Item_143, Item_148, Item_156, Item_157, Item_169, Item_170, Item_171, Item_289, Item_1421, Item_1580]
+    items_list = [Item_61, Item_46, Item_97, Item_110, Item_143, Item_148, Item_156, Item_157, Item_169, Item_170, Item_171, Item_289, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_187, 0x4000), "020": ("Video Record Header", Variation_315, 0x2000), "030": ("Video Summary", Variation_1224, 0x1000), "040": ("Video Header Nano", Variation_1082, 0x0800), "041": ("Video Header Femto", Variation_1081, 0x0400), "048": ("Video Cells Resolution & Data Compression Indicator", Variation_936, 0x0200), "049": ("Video Octets & Video Cells Counters", Variation_1021, 0x0180), "050": ("Video Block Low Data Volume", Variation_1227, 0x0140), "051": ("Video Block Medium Data Volume", Variation_1231, 0x0120), "052": ("Video Block High Data Volume", Variation_1232, 0x0110), "140": ("Time of Day", Variation_311, 0x0108), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_187: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_315: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_1224: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_1082: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["041"]) -> Variation_1081: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["048"]) -> Variation_936: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["049"]) -> Variation_1021: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1227: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["051"]) -> Variation_1231: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["052"]) -> Variation_1232: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_47(Item):
     name = "000"
     title = "Message Type"
@@ -12237,7 +14964,37 @@ class Item_249(Item):
     var = Variation_235
 class Variation_1304(Compound):
     fspec_size = None
-    items = [Item_61, Item_47, Item_95, Item_106, Item_181, Item_199, Item_211, Item_229, Item_249]
+    items_list = [Item_61, Item_47, Item_95, Item_106, Item_181, Item_199, Item_211, Item_229, Item_249]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_188, 0x4000), "020": ("Vector Qualifier", Variation_1207, 0x2000), "030": ("Sequence of Cartesian Vectors", Variation_1270, 0x1000), "060": ("Synchronisation/Control Signal", Variation_1211, 0x0800), "070": ("Time of Day", Variation_311, 0x0400), "080": ("Processing Status", Variation_1189, 0x0200), "090": ("Radar Configuration and Status", Variation_1251, 0x0180), "100": ("Vector Count", Variation_235, 0x0140)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_188: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_1207: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_1270: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_1211: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_1189: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1251: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_235: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_48(Item):
     name = "000"
     title = "Message Type"
@@ -12284,7 +15041,22 @@ class Item_1267(Item):
     var = Variation_293
 class Variation_1351(Compound):
     fspec_size = None
-    items = [Item_1038, Item_1880, Item_948, Item_1267]
+    items_list = [Item_1038, Item_1880, Item_948, Item_1267]
+    items_dict = {"LEN": ("Target Length", Variation_274, 0x80), "WDT": ("Target Width", Variation_274, 0x40), "HGT": ("Target Height", Variation_274, 0x20), "ORT": ("Target Orientation", Variation_293, 0x10)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["LEN"]) -> Variation_274: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["WDT"]) -> Variation_274: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["HGT"]) -> Variation_274: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ORT"]) -> Variation_293: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_382(Item):
     name = "270"
     title = "Target Size & Orientation"
@@ -12311,7 +15083,19 @@ class Item_952(Item):
     var = Variation_1073
 class Variation_1355(Compound):
     fspec_size = None
-    items = [Item_1280, Item_956, Item_952]
+    items_list = [Item_1280, Item_956, Item_952]
+    items_dict = {"P84": ("Horizontal Position in WGS-84 Coordinates", Variation_1009, 0x80), "HPR": ("Horizontal Position Resolution", Variation_1055, 0x40), "HPP": ("Horizontal Position Precision", Variation_1073, 0x20)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["P84"]) -> Variation_1009: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["HPR"]) -> Variation_1055: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["HPP"]) -> Variation_1073: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_446(Item):
     name = "600"
     title = "Horizontal Position Information"
@@ -12350,7 +15134,34 @@ class Item_662(Item):
     var = Variation_1145
 class Variation_1347(Compound):
     fspec_size = None
-    items = [Item_911, Item_1469, Item_1530, Item_639, Item_640, Item_663, Item_664, Item_662]
+    items_list = [Item_911, Item_1469, Item_1530, Item_639, Item_640, Item_663, Item_664, Item_662]
+    items_dict = {"GH": ("Geometric Height (WGS-84)", Variation_302, 0x8000), "RSGH": ("Geometric Height Resolution", Variation_310, 0x4000), "SDGH": ("Geometric Height Precision", Variation_310, 0x2000), "CI6": ("Confidence Interval for Geometric Height (67%)", Variation_1112, 0x1000), "CI9": ("Confidence Interval for Geometric Height (95%)", Variation_1113, 0x0800), "COGHHP": ("Correlation of Geometric Height and Horizontal Position", Variation_1145, 0x0400), "COGHHV": ("Correlation of Geometric Height and Horizontal Velocity", Variation_1145, 0x0200), "COGHHA": ("Correlation of Geometric Height and Horizontal Acceleration", Variation_1145, 0x0180)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GH"]) -> Variation_302: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RSGH"]) -> Variation_310: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SDGH"]) -> Variation_310: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CI6"]) -> Variation_1112: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CI9"]) -> Variation_1113: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COGHHP"]) -> Variation_1145: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COGHHV"]) -> Variation_1145: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COGHHA"]) -> Variation_1145: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_449(Item):
     name = "601"
     title = "Geometric Height Information"
@@ -12373,7 +15184,22 @@ class Item_675(Item):
     var = Variation_947
 class Variation_1349(Compound):
     fspec_size = None
-    items = [Item_960, Item_1472, Item_1535, Item_675]
+    items_list = [Item_960, Item_1472, Item_1535, Item_675]
+    items_dict = {"HV": ("Horizontal Velocity Vector", Variation_1150, 0x80), "RSHV": ("Horizontal Velocity Resolution", Variation_1149, 0x40), "SDHV": ("Horizontal Velocity Precision", Variation_1148, 0x20), "COHVHP": ("Correlation of Horizontal Velocity and Horizontal Position", Variation_947, 0x10)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["HV"]) -> Variation_1150: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RSHV"]) -> Variation_1149: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SDHV"]) -> Variation_1148: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COHVHP"]) -> Variation_947: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_450(Item):
     name = "602"
     title = "Horizontal Velocity Information"
@@ -12396,7 +15222,22 @@ class Item_666(Item):
     var = Variation_946
 class Variation_1348(Compound):
     fspec_size = None
-    items = [Item_931, Item_1532, Item_665, Item_666]
+    items_list = [Item_931, Item_1532, Item_665, Item_666]
+    items_dict = {"HA": ("Horizontal Acceleration Vector", Variation_1146, 0x80), "SDHA": ("Horizontal Acceleration Precision", Variation_1147, 0x40), "COHAHP": ("Correlation of Horizontal Acceleration and Horizontal Position", Variation_945, 0x20), "COHAHV": ("Correlation of Horizontal Acceleration and Horizontal Velocity", Variation_946, 0x10)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["HA"]) -> Variation_1146: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SDHA"]) -> Variation_1147: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COHAHP"]) -> Variation_945: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COHAHV"]) -> Variation_946: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_451(Item):
     name = "603"
     title = "Horizontal Acceleration Information"
@@ -12427,7 +15268,28 @@ class Item_710(Item):
     var = Variation_1145
 class Variation_1374(Compound):
     fspec_size = None
-    items = [Item_1868, Item_1479, Item_1545, Item_711, Item_712, Item_710]
+    items_list = [Item_1868, Item_1479, Item_1545, Item_711, Item_712, Item_710]
+    items_dict = {"VV": ("Vertical Velocity", Variation_303, 0x80), "RSVV": ("Vertical Velocity Resolution", Variation_275, 0x40), "SDVV": ("Vertical Velocity Precision", Variation_1077, 0x20), "COVVHP": ("Correlation of Vertical Velocity and Horizontal Position", Variation_1145, 0x10), "COVVHV": ("Correlation of Vertical Velocity and Horizontal Velocity", Variation_1145, 0x08), "COVVHA": ("Correlation of Vertical Velocity and Horizontal Acceleration", Variation_1145, 0x04)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["VV"]) -> Variation_303: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RSVV"]) -> Variation_275: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SDVV"]) -> Variation_1077: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COVVHP"]) -> Variation_1145: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COVVHV"]) -> Variation_1145: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COVVHA"]) -> Variation_1145: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_452(Item):
     name = "604"
     title = "Vertical Velocity Information"
@@ -12454,7 +15316,25 @@ class Item_704(Item):
     var = Variation_1145
 class Variation_1373(Compound):
     fspec_size = None
-    items = [Item_1831, Item_1478, Item_705, Item_706, Item_704]
+    items_list = [Item_1831, Item_1478, Item_705, Item_706, Item_704]
+    items_dict = {"VA": ("Vertical Acceleration", Variation_245, 0x80), "RSVA": ("Vertical Acceleration Precision", Variation_1076, 0x40), "COVAHP": ("Correlation of Vertical Acceleration and Horizontal Position", Variation_1145, 0x20), "COVAHV": ("Correlation of Vertical Acceleration and Horizontal Velocity", Variation_1145, 0x10), "COVAHA": ("Correlation of Vertical Acceleration and Horizontal Acceleration", Variation_1145, 0x08)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["VA"]) -> Variation_245: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RSVA"]) -> Variation_1076: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COVAHP"]) -> Variation_1145: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COVAHV"]) -> Variation_1145: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COVAHA"]) -> Variation_1145: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_454(Item):
     name = "605"
     title = "Vertical Velocity Information"
@@ -12497,7 +15377,34 @@ class Item_1539(Item):
     var = Variation_1074
 class Variation_1360(Compound):
     fspec_size = None
-    items = [Item_1388, Item_1475, Item_1537, Item_1462, Item_1476, Item_1541, Item_1390, Item_1539]
+    items_list = [Item_1388, Item_1475, Item_1537, Item_1462, Item_1476, Item_1541, Item_1390, Item_1539]
+    items_dict = {"R": ("Range", Variation_300, 0x8000), "RSR": ("Range Resolution", Variation_308, 0x4000), "SDR": ("Range Precision", Variation_308, 0x2000), "RR": ("Range Rate", Variation_301, 0x1000), "RSRR": ("Range Rate Resolution", Variation_309, 0x0800), "SDRR": ("Range Rate Precision", Variation_1075, 0x0400), "RA": ("Range Acceleration", Variation_254, 0x0200), "SDRA": ("Range Acceleration Precision", Variation_1074, 0x0180)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["R"]) -> Variation_300: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RSR"]) -> Variation_308: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SDR"]) -> Variation_308: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RR"]) -> Variation_301: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RSRR"]) -> Variation_309: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SDRR"]) -> Variation_1075: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RA"]) -> Variation_254: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SDRA"]) -> Variation_1074: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_459(Item):
     name = "625"
     title = "Range Information"
@@ -12544,7 +15451,40 @@ class Item_656(Item):
     var = Variation_197
 class Variation_1343(Compound):
     fspec_size = None
-    items = [Item_809, Item_1526, Item_756, Item_1525, Item_658, Item_660, Item_659, Item_655, Item_657, Item_656]
+    items_list = [Item_809, Item_1526, Item_756, Item_1525, Item_658, Item_660, Item_659, Item_655, Item_657, Item_656]
+    items_dict = {"DV": ("Doppler Velocity", Variation_303, 0x8000), "SDDV": ("Precision of Doppler Velocity", Variation_283, 0x4000), "DA": ("Doppler Acceleration", Variation_254, 0x2000), "SDDA": ("Precision of Doppler Acceleration", Variation_1071, 0x1000), "CODVR": ("Correlation of Doppler Velocity and Range", Variation_197, 0x0800), "CODVRR": ("Correlation of Doppler Velocity and Range Rate", Variation_197, 0x0400), "CODVRA": ("Correlation of Doppler Velocity and Range Acceleration", Variation_197, 0x0200), "CODAR": ("Correlation of Doppler Acceleration and Range", Variation_197, 0x0180), "CODARR": ("Correlation of Doppler Acceleration and Range Rate", Variation_197, 0x0140), "CODARA": ("Correlation of Doppler Acceleration and Range Acceleration", Variation_197, 0x0120)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["DV"]) -> Variation_303: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SDDV"]) -> Variation_283: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["DA"]) -> Variation_254: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SDDA"]) -> Variation_1071: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CODVR"]) -> Variation_197: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CODVRR"]) -> Variation_197: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CODVRA"]) -> Variation_197: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CODAR"]) -> Variation_197: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CODARR"]) -> Variation_197: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CODARA"]) -> Variation_197: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_460(Item):
     name = "626"
     title = "Doppler Information"
@@ -12571,7 +15511,28 @@ class Item_569(Item):
     var = Variation_1059
 class Variation_1336(Compound):
     fspec_size = None
-    items = [Item_567, Item_1467, Item_1521, Item_571, Item_1523, Item_569]
+    items_list = [Item_567, Item_1467, Item_1521, Item_571, Item_1523, Item_569]
+    items_dict = {"AZ": ("Azimuth", Variation_293, 0x80), "RSAZ": ("Azimuth Resolution", Variation_290, 0x40), "SDASZ": ("Standard Deviation of Azimuth", Variation_290, 0x20), "AZR": ("Azimuth Rate", Variation_259, 0x10), "SDAZR": ("Standard Deviation of Azimuth Rate", Variation_1070, 0x08), "AZEX": ("Azimuth Extent", Variation_1059, 0x04)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AZ"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RSAZ"]) -> Variation_290: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SDASZ"]) -> Variation_290: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AZR"]) -> Variation_259: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SDAZR"]) -> Variation_1070: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AZEX"]) -> Variation_1059: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_461(Item):
     name = "627"
     title = "Azimuth Information"
@@ -12602,7 +15563,28 @@ class Item_816(Item):
     var = Variation_1058
 class Variation_1344(Compound):
     fspec_size = None
-    items = [Item_814, Item_1468, Item_1527, Item_841, Item_1529, Item_816]
+    items_list = [Item_814, Item_1468, Item_1527, Item_841, Item_1529, Item_816]
+    items_dict = {"EL": ("Elevation", Variation_259, 0x80), "RSEL": ("Elevation Resolution", Variation_290, 0x40), "SDEL": ("Standard Deviation of Elevation", Variation_290, 0x20), "ER": ("Elevation Rate", Variation_260, 0x10), "SDER": ("Standard Deviation of Elevation Rate", Variation_1072, 0x08), "ELEX": ("Elevation Extent", Variation_1058, 0x04)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["EL"]) -> Variation_259: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RSEL"]) -> Variation_290: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SDEL"]) -> Variation_290: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ER"]) -> Variation_260: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SDER"]) -> Variation_1072: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ELEX"]) -> Variation_1058: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_462(Item):
     name = "628"
     title = "Elevation Information"
@@ -12625,7 +15607,22 @@ class Item_1461(Item):
     var = Variation_192
 class Variation_1342(Compound):
     fspec_size = None
-    items = [Item_793, Item_794, Item_1460, Item_1461]
+    items_list = [Item_793, Item_794, Item_1460, Item_1461]
+    items_dict = {"DPP": ("Direct Path - Power", Variation_192, 0x80), "DPS": ("Direct Path - Signal to Noise Ratio (SNR)", Variation_192, 0x40), "RPP": ("Reflected Path - Power", Variation_918, 0x20), "RPS": ("Reflected Path - Signal to Noise Ratio (SNR)", Variation_192, 0x10)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["DPP"]) -> Variation_192: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["DPS"]) -> Variation_192: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RPP"]) -> Variation_918: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RPS"]) -> Variation_192: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_463(Item):
     name = "630"
     title = "Path Quality"
@@ -12636,7 +15633,88 @@ class Item_464(Item):
     var = Variation_1236
 class Variation_1305(Compound):
     fspec_size = None
-    items = [Item_61, Item_48, Item_72, Item_87, Item_111, Item_293, Item_316, Item_329, Item_168, Item_382, Item_393, Item_416, Item_446, Item_449, Item_450, Item_451, Item_452, Item_454, Item_430, Item_459, Item_460, Item_461, Item_462, Item_463, Item_464, Item_1580]
+    items_list = [Item_61, Item_48, Item_72, Item_87, Item_111, Item_293, Item_316, Item_329, Item_168, Item_382, Item_393, Item_416, Item_446, Item_449, Item_450, Item_451, Item_452, Item_454, Item_430, Item_459, Item_460, Item_461, Item_462, Item_463, Item_464, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "000": ("Message Type", Variation_1017, 0x40000000), "015": ("Service Identification", Variation_155, 0x20000000), "020": ("Target Report Descriptor", Variation_1195, 0x10000000), "030": ("Warning/Error Conditions", Variation_1273, 0x08000000), "145": ("Time of Applicability", Variation_311, 0x04000000), "161": ("Track/Plot Number", Variation_235, 0x02000000), "170": ("Track/Plot Status", Variation_1180, 0x01800000), "050": ("Update Period", Variation_885, 0x01400000), "270": ("Target Size & Orientation", Variation_1351, 0x01200000), "300": ("Object Classification", Variation_1242, 0x01100000), "400": ("Measurement Identifier", Variation_1029, 0x01080000), "600": ("Horizontal Position Information", Variation_1355, 0x01040000), "601": ("Geometric Height Information", Variation_1347, 0x01020000), "602": ("Horizontal Velocity Information", Variation_1349, 0x01018000), "603": ("Horizontal Acceleration Information", Variation_1348, 0x01014000), "604": ("Vertical Velocity Information", Variation_1374, 0x01012000), "605": ("Vertical Velocity Information", Variation_1373, 0x01011000), "480": ("Associations", Variation_1229, 0x01010800), "625": ("Range Information", Variation_1360, 0x01010400), "626": ("Doppler Information", Variation_1343, 0x01010200), "627": ("Azimuth Information", Variation_1336, 0x01010180), "628": ("Elevation Information", Variation_1344, 0x01010140), "630": ("Path Quality", Variation_1342, 0x01010120), "631": ("Contour (Azimuth, Elevation Angle, Range Extent)", Variation_1236, 0x01010110), "SP": ("Special Purpose Field", Variation_1281, 0x01010108)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_1017: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_1195: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_1273: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["145"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_235: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_1180: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_885: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["270"]) -> Variation_1351: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["300"]) -> Variation_1242: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["400"]) -> Variation_1029: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["600"]) -> Variation_1355: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["601"]) -> Variation_1347: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["602"]) -> Variation_1349: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["603"]) -> Variation_1348: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["604"]) -> Variation_1374: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["605"]) -> Variation_1373: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["480"]) -> Variation_1229: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["625"]) -> Variation_1360: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["626"]) -> Variation_1343: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["627"]) -> Variation_1336: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["628"]) -> Variation_1344: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["630"]) -> Variation_1342: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["631"]) -> Variation_1236: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_49(Item):
     name = "000"
     title = "Report Type"
@@ -12667,7 +15745,43 @@ class Item_269(Item):
     var = Variation_1267
 class Variation_1306(Compound):
     fspec_size = None
-    items = [Item_61, Item_49, Item_73, Item_199, Item_243, Item_250, Item_338, Item_260, Item_269, None, None, None, Item_1421, Item_1580]
+    items_list = [Item_61, Item_49, Item_73, Item_199, Item_243, Item_250, Item_338, Item_260, Item_269, None, None, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Report Type", Variation_170, 0x4000), "015": ("Service Type and Identification", Variation_1078, 0x2000), "070": ("Time of Day", Variation_311, 0x1000), "100": ("Ground Station Status", Variation_1205, 0x0800), "101": ("Service Configuration", Variation_1210, 0x0400), "200": ("Operational Range", Variation_205, 0x0200), "110": ("Service Status", Variation_1175, 0x0180), "120": ("Service Statistics", Variation_1267, 0x0140), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_170: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_1078: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1205: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["101"]) -> Variation_1210: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_205: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_1175: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_1267: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_50(Item):
     name = "000"
     title = "Report Type"
@@ -12706,7 +15820,49 @@ class Item_456(Item):
     var = Variation_249
 class Variation_1307(Compound):
     fspec_size = None
-    items = [Item_61, Item_50, Item_336, Item_72, Item_86, Item_199, Item_248, Item_253, Item_264, Item_288, Item_1580, Item_448, Item_456]
+    items_list = [Item_61, Item_50, Item_336, Item_72, Item_86, Item_199, Item_248, Item_253, Item_264, Item_288, Item_1580, Item_448, Item_456]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Report Type", Variation_1057, 0x4000), "200": ("Message Identification", Variation_298, 0x2000), "015": ("Service Identification", Variation_155, 0x1000), "020": ("Service Designator", Variation_326, 0x0800), "070": ("Time of Day", Variation_311, 0x0400), "100": ("System and Service Status", Variation_1204, 0x0200), "105": ("System and Service Error Codes", Variation_1223, 0x0180), "120": ("Component Status", Variation_1241, 0x0140), "140": ("Service Statistics", Variation_1268, 0x0120), "SP": ("Special Purpose Field", Variation_1281, 0x0110), "600": ("Position of the System Reference Point", Variation_1004, 0x0108), "610": ("Height of the System Reference Point", Variation_249, 0x0104)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_1057: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_298: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1204: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["105"]) -> Variation_1223: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_1241: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_1268: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["600"]) -> Variation_1004: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["610"]) -> Variation_249: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_67(Item):
     name = "012"
     title = "Data Destination Identifier"
@@ -12761,7 +15917,58 @@ class Item_403(Item):
     var = Variation_155
 class Variation_1308(Compound):
     fspec_size = None
-    items = [Item_61, Item_67, Item_33, Item_402, Item_359, Item_363, Item_289, Item_155, Item_192, Item_159, Item_344, Item_367, Item_369, Item_355, Item_403, None, None, None, None, None, Item_1580]
+    items_list = [Item_61, Item_67, Item_33, Item_402, Item_359, Item_363, Item_289, Item_155, Item_192, Item_159, Item_344, Item_367, Item_369, Item_355, Item_403, None, None, None, None, None, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x800000), "012": ("Data Destination Identifier", Variation_1061, 0x400000), "000": ("Message Type", Variation_159, 0x200000), "350": ("Cluster Station/Node List", Variation_1252, 0x100000), "220": ("Aircraft Address", Variation_296, 0x080000), "221": ("Duplicate Address Reference Number (DRN)", Variation_234, 0x040000), "140": ("Time of Day", Variation_311, 0x020000), "045": ("Calculated Position in WGS-84 Coordinates", Variation_1000, 0x018000), "070": ("Mode 3/A Code in Octal Representation", Variation_1128, 0x014000), "050": ("Flight Level in Binary Representation", Variation_1129, 0x012000), "200": ("Track Velocity in Polar Co-ordinates", Variation_988, 0x011000), "230": ("Transponder Capability", Variation_937, 0x010800), "240": ("Track Status", Variation_954, 0x010400), "210": ("Mode S Address List", Variation_1226, 0x010200), "360": ("Cluster Controller Command State", Variation_155, 0x010180), "SP": ("Special Purpose Field", Variation_1281, 0x010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["012"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_159: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["350"]) -> Variation_1252: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["221"]) -> Variation_234: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["045"]) -> Variation_1000: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_1128: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1129: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_988: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["230"]) -> Variation_937: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["240"]) -> Variation_954: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_1226: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["360"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_42(Item):
     name = "000"
     title = "Message Type"
@@ -12792,7 +15999,43 @@ class Item_423(Item):
     var = Variation_1249
 class Variation_1309(Compound):
     fspec_size = None
-    items = [Item_61, Item_72, Item_42, Item_289, Item_340, Item_394, Item_417, Item_419, Item_421, Item_423, Item_1580]
+    items_list = [Item_61, Item_72, Item_42, Item_289, Item_340, Item_394, Item_417, Item_419, Item_421, Item_423, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "015": ("Service Identification", Variation_155, 0x4000), "000": ("Message Type", Variation_183, 0x2000), "140": ("Time of Day", Variation_311, 0x1000), "200": ("System Configuration Reporting Period", Variation_206, 0x0800), "300": ("Pair Identification", Variation_1248, 0x0400), "400": ("Position of the System Reference Point", Variation_1003, 0x0200), "405": ("Height of System Reference Point", Variation_249, 0x0180), "410": ("Transmitter Properties", Variation_1259, 0x0140), "420": ("Receiver Properties", Variation_1249, 0x0120), "SP": ("Special Purpose Field", Variation_1281, 0x0110)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_183: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_206: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["300"]) -> Variation_1248: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["400"]) -> Variation_1003: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["405"]) -> Variation_249: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["410"]) -> Variation_1259: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["420"]) -> Variation_1249: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_43(Item):
     name = "000"
     title = "Message Type"
@@ -12867,7 +16110,76 @@ class Item_339(Item):
     var = Variation_246
 class Variation_1310(Compound):
     fspec_size = None
-    items = [Item_61, Item_72, Item_43, Item_107, Item_135, Item_230, Item_162, Item_177, Item_187, Item_213, Item_247, Item_255, Item_266, Item_273, Item_285, Item_299, Item_310, Item_320, Item_331, Item_333, Item_339, Item_1580]
+    items_list = [Item_61, Item_72, Item_43, Item_107, Item_135, Item_230, Item_162, Item_177, Item_187, Item_213, Item_247, Item_255, Item_266, Item_273, Item_285, Item_299, Item_310, Item_320, Item_331, Item_333, Item_339, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "015": ("Service Identification", Variation_155, 0x40000000), "000": ("Message Type", Variation_184, 0x20000000), "030": ("Time of Day", Variation_311, 0x10000000), "040": ("Report Number", Variation_155, 0x08000000), "090": ("Radio Channel Name", Variation_328, 0x04000000), "050": ("Position in WGS-84 Coordinates", Variation_1006, 0x02000000), "060": ("Position in Cartesian Coordinates", Variation_1168, 0x01800000), "070": ("Local Bearing", Variation_277, 0x01400000), "080": ("System Bearing", Variation_277, 0x01200000), "100": ("Quality of Measurement", Variation_155, 0x01100000), "110": ("Estimated Uncertainty", Variation_207, 0x01080000), "120": ("Contributing Sensors", Variation_1222, 0x01040000), "130": ("Conflicting Transmitter Position in WGS-84 Coordinates", Variation_1006, 0x01020000), "140": ("Conflicting Transmitter Position in Cartesian Coordinates", Variation_1168, 0x01018000), "150": ("Conflicting Transmitter Estimated Uncertainty", Variation_207, 0x01014000), "160": ("Track Number", Variation_234, 0x01012000), "170": ("Sensor Identification", Variation_155, 0x01011000), "180": ("Signal Level", Variation_244, 0x01010800), "190": ("Signal Quality", Variation_155, 0x01010400), "200": ("Signal Elevation", Variation_246, 0x01010200), "SP": ("Special Purpose Field", Variation_1281, 0x01010180)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_184: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_328: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1006: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_1168: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_277: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_277: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_207: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_1222: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_1006: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_1168: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["150"]) -> Variation_207: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["160"]) -> Variation_234: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["180"]) -> Variation_244: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["190"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_246: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_163(Item):
     name = "050"
     title = "Sensor Identifier"
@@ -12902,14 +16214,77 @@ class Item_235(Item):
     var = Variation_262
 class Variation_1311(Compound):
     fspec_size = None
-    items = [Item_61, Item_72, Item_108, Item_163, Item_179, Item_198, Item_212, Item_219, Item_227, Item_233, Item_235, None, Item_1421, Item_1580]
+    items_list = [Item_61, Item_72, Item_108, Item_163, Item_179, Item_198, Item_212, Item_219, Item_227, Item_233, Item_235, None, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "015": ("Service Identification", Variation_155, 0x4000), "030": ("Time of Message", Variation_311, 0x2000), "050": ("Sensor Identifier", Variation_1061, 0x1000), "060": ("Sensor Configuration and Status", Variation_1186, 0x0800), "070": ("Time Stamping Bias", Variation_238, 0x0400), "080": ("SSR / Mode S Range Gain and Bias", Variation_1080, 0x0200), "081": ("SSR Mode S Azimuth Bias", Variation_262, 0x0180), "090": ("PSR Range Gain and Bias", Variation_1033, 0x0140), "091": ("PSR Azimuth Bias", Variation_262, 0x0120), "092": ("PSR Elevation Bias", Variation_262, 0x0110), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_1186: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_238: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_1080: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["081"]) -> Variation_262: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1033: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["091"]) -> Variation_262: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["092"]) -> Variation_262: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_439(Item):
     name = "550"
     title = "Category Version Number Report"
     var = Variation_1239
 class Variation_1312(Compound):
     fspec_size = None
-    items = [Item_61, Item_72, Item_289, Item_439, None, Item_1580, Item_1421]
+    items_list = [Item_61, Item_72, Item_289, Item_439, None, Item_1580, Item_1421]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80), "015": ("Service Identification", Variation_155, 0x40), "140": ("Time of Day", Variation_311, 0x20), "550": ("Category Version Number Report", Variation_1239, 0x10), "SP": ("Special Purpose Field", Variation_1281, 0x04), "RE": ("Reserved Expansion Field", Variation_1280, 0x02)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["550"]) -> Variation_1239: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_88(Item):
     name = "020"
     title = "Target Report Descriptor"
@@ -12976,7 +16351,19 @@ class Item_1531(Item):
     var = Variation_271
 class Variation_1341(Compound):
     fspec_size = None
-    items = [Item_788, Item_1536, Item_1531]
+    items_list = [Item_788, Item_1536, Item_1531]
+    items_dict = {"DOP": ("DOP of Position", Variation_1154, 0x80), "SDP": ("Standard Deviation of Position", Variation_1158, 0x40), "SDH": ("Standard Deviation of Geometric Height (WGS 84)", Variation_271, 0x20)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["DOP"]) -> Variation_1154: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SDP"]) -> Variation_1158: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SDH"]) -> Variation_271: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_435(Item):
     name = "500"
     title = "Position Accuracy"
@@ -13011,7 +16398,94 @@ class Item_161(Item):
     var = Variation_1135
 class Variation_1313(Compound):
     fspec_size = None
-    items = [Item_61, Item_88, Item_289, Item_145, Item_153, Item_313, Item_323, Item_195, Item_346, Item_224, Item_244, Item_362, Item_373, Item_258, Item_252, Item_348, Item_396, Item_397, Item_435, Item_415, Item_374, Item_365, Item_380, Item_113, Item_173, Item_161, Item_1421, Item_1580]
+    items_list = [Item_61, Item_88, Item_289, Item_145, Item_153, Item_313, Item_323, Item_195, Item_346, Item_224, Item_244, Item_362, Item_373, Item_258, Item_252, Item_348, Item_396, Item_397, Item_435, Item_415, Item_374, Item_365, Item_380, Item_113, Item_173, Item_161, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "020": ("Target Report Descriptor", Variation_1213, 0x40000000), "140": ("Time of Day", Variation_311, 0x20000000), "041": ("Position In WGS-84 Coordinates", Variation_1001, 0x10000000), "042": ("Position in Cartesian Coordinates", Variation_1168, 0x08000000), "161": ("Track Number", Variation_911, 0x04000000), "170": ("Track Status", Variation_1182, 0x02000000), "070": ("Mode-3/A Code in Octal Representation", Variation_1137, 0x01800000), "202": ("Calculated Track Velocity in Cartesian Coordinates", Variation_1140, 0x01400000), "090": ("Flight Level in Binary Representation", Variation_1132, 0x01200000), "100": ("Mode C Code", Variation_1130, 0x01100000), "220": ("Target Address", Variation_296, 0x01080000), "245": ("Target Identification", Variation_1086, 0x01040000), "110": ("Measured Height (Local Cartesian Coordinates)", Variation_257, 0x01020000), "105": ("Geometric Height (WGS-84)", Variation_257, 0x01018000), "210": ("Calculated Acceleration", Variation_930, 0x01014000), "300": ("Vehicle Fleet Identification", Variation_167, 0x01012000), "310": ("Pre-programmed Message", Variation_1095, 0x01011000), "500": ("Position Accuracy", Variation_1341, 0x01010800), "400": ("Contributing Devices", Variation_1237, 0x01010400), "250": ("BDS Register Data", Variation_1246, 0x01010200), "230": ("Communications/ACAS Capability and Flight Status", Variation_950, 0x01010180), "260": ("ACAS Resolution Advisory Report", Variation_327, 0x01010140), "030": ("Warning/Error Conditions", Variation_1278, 0x01010120), "055": ("Mode-1 Code in Octal Representation", Variation_1134, 0x01010110), "050": ("Mode-2 Code in Octal Representation", Variation_1135, 0x01010108), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010104), "SP": ("Special Purpose Field", Variation_1281, 0x01010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_1213: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["041"]) -> Variation_1001: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["042"]) -> Variation_1168: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_911: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_1182: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_1137: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["202"]) -> Variation_1140: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1132: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1130: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["245"]) -> Variation_1086: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["105"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_930: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["300"]) -> Variation_167: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["310"]) -> Variation_1095: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["500"]) -> Variation_1341: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["400"]) -> Variation_1237: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["250"]) -> Variation_1246: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["230"]) -> Variation_950: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["260"]) -> Variation_327: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_1278: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["055"]) -> Variation_1134: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1135: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_324(Item):
     name = "170"
     title = "Track Status"
@@ -13022,7 +16496,94 @@ class Item_378(Item):
     var = Variation_1246
 class Variation_1314(Compound):
     fspec_size = None
-    items = [Item_61, Item_88, Item_289, Item_145, Item_153, Item_313, Item_324, Item_195, Item_346, Item_224, Item_244, Item_362, Item_373, Item_258, Item_252, Item_348, Item_396, Item_397, Item_435, Item_415, Item_378, Item_365, Item_380, Item_113, Item_173, Item_161, Item_1421, Item_1580]
+    items_list = [Item_61, Item_88, Item_289, Item_145, Item_153, Item_313, Item_324, Item_195, Item_346, Item_224, Item_244, Item_362, Item_373, Item_258, Item_252, Item_348, Item_396, Item_397, Item_435, Item_415, Item_378, Item_365, Item_380, Item_113, Item_173, Item_161, Item_1421, Item_1580]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "020": ("Target Report Descriptor", Variation_1213, 0x40000000), "140": ("Time of Day", Variation_311, 0x20000000), "041": ("Position In WGS-84 Coordinates", Variation_1001, 0x10000000), "042": ("Position in Cartesian Coordinates", Variation_1168, 0x08000000), "161": ("Track Number", Variation_911, 0x04000000), "170": ("Track Status", Variation_1183, 0x02000000), "070": ("Mode-3/A Code in Octal Representation", Variation_1137, 0x01800000), "202": ("Calculated Track Velocity in Cartesian Coordinates", Variation_1140, 0x01400000), "090": ("Flight Level in Binary Representation", Variation_1132, 0x01200000), "100": ("Mode C Code", Variation_1130, 0x01100000), "220": ("Target Address", Variation_296, 0x01080000), "245": ("Target Identification", Variation_1086, 0x01040000), "110": ("Measured Height (Local Cartesian Coordinates)", Variation_257, 0x01020000), "105": ("Geometric Height (WGS-84)", Variation_257, 0x01018000), "210": ("Calculated Acceleration", Variation_930, 0x01014000), "300": ("Vehicle Fleet Identification", Variation_167, 0x01012000), "310": ("Pre-programmed Message", Variation_1095, 0x01011000), "500": ("Position Accuracy", Variation_1341, 0x01010800), "400": ("Contributing Devices", Variation_1237, 0x01010400), "250": ("Mode S MB Data", Variation_1246, 0x01010200), "230": ("Communications/ACAS Capability and Flight Status", Variation_950, 0x01010180), "260": ("ACAS Resolution Advisory Report", Variation_327, 0x01010140), "030": ("Warning/Error Conditions", Variation_1278, 0x01010120), "055": ("Mode-1 Code in Octal Representation", Variation_1134, 0x01010110), "050": ("Mode-2 Code in Octal Representation", Variation_1135, 0x01010108), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010104), "SP": ("Special Purpose Field", Variation_1281, 0x01010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_1213: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["041"]) -> Variation_1001: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["042"]) -> Variation_1168: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_911: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_1183: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_1137: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["202"]) -> Variation_1140: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1132: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1130: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["245"]) -> Variation_1086: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["105"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_930: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["300"]) -> Variation_167: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["310"]) -> Variation_1095: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["500"]) -> Variation_1341: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["400"]) -> Variation_1237: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["250"]) -> Variation_1246: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["230"]) -> Variation_950: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["260"]) -> Variation_327: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_1278: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["055"]) -> Variation_1134: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1135: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_89(Item):
     name = "020"
     title = "Target Report Descriptor"
@@ -13081,7 +16642,58 @@ class Item_300(Item):
     var = Variation_1171
 class Variation_1315(Compound):
     fspec_size = None
-    items = [Item_61, Item_89, Item_132, Item_194, Item_226, Item_276, Item_291, Item_160, Item_267, Item_280, Item_210, Item_245, Item_174, Item_112, Item_300, None, None, None, None, Item_1580, None]
+    items_list = [Item_61, Item_89, Item_132, Item_194, Item_226, Item_276, Item_291, Item_160, Item_267, Item_280, Item_210, Item_245, Item_174, Item_112, Item_300, None, None, None, None, Item_1580, None]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x800000), "020": ("Target Report Descriptor", Variation_1217, 0x400000), "040": ("Measured Position in Polar Co-ordinates", Variation_1047, 0x200000), "070": ("Mode-3/A Code in Octal Representation", Variation_1127, 0x100000), "090": ("Mode-C Code in Binary Representation", Variation_1121, 0x080000), "130": ("Radar Plot Characteristics", Variation_1273, 0x040000), "141": ("Truncated Time of Day", Variation_287, 0x020000), "050": ("Mode-2 Code in Octal Representation", Variation_1123, 0x018000), "120": ("Measured Radial Doppler Speed", Variation_201, 0x014000), "131": ("Received Power", Variation_193, 0x012000), "080": ("Mode-3/A Code Confidence Indicator", Variation_908, 0x011000), "100": ("Mode-C Code and Code Confidence Indicator", Variation_1118, 0x010800), "060": ("Mode-2 Code Confidence Indicator", Variation_908, 0x010400), "030": ("Warning/Error Conditions", Variation_1274, 0x010200), "150": ("Presence of X-Pulse", Variation_1171, 0x010180), "SP": ("Special Purpose Field", Variation_1281, 0x010104)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_1217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_1047: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_1127: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1121: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_1273: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["141"]) -> Variation_287: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1123: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_201: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["131"]) -> Variation_193: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_908: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1118: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_908: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_1274: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["150"]) -> Variation_1171: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_315(Item):
     name = "161"
     title = "Track Plot Number"
@@ -13104,7 +16716,73 @@ class Item_357(Item):
     var = Variation_1273
 class Variation_1316(Compound):
     fspec_size = None
-    items = [Item_61, Item_89, Item_315, Item_132, Item_150, Item_334, Item_194, Item_226, Item_291, Item_276, Item_280, Item_267, Item_326, Item_357, Item_160, Item_210, Item_245, Item_174, Item_112, Item_1580, None, Item_300]
+    items_list = [Item_61, Item_89, Item_315, Item_132, Item_150, Item_334, Item_194, Item_226, Item_291, Item_276, Item_280, Item_267, Item_326, Item_357, Item_160, Item_210, Item_245, Item_174, Item_112, Item_1580, None, Item_300]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "020": ("Target Report Descriptor", Variation_1217, 0x40000000), "161": ("Track Plot Number", Variation_234, 0x20000000), "040": ("Measured Position in Polar Co-ordinates", Variation_1047, 0x10000000), "042": ("Calculated Position in Cartesian Co-ordinates", Variation_1164, 0x08000000), "200": ("Calculated Track Velocity in Polar Co-ordinates", Variation_988, 0x04000000), "070": ("Mode-3/A Code in Octal Representation", Variation_1127, 0x02000000), "090": ("Mode-C Code in Binary Representation", Variation_1121, 0x01800000), "141": ("Truncated Time of Day", Variation_287, 0x01400000), "130": ("Radar Plot Characteristics", Variation_1273, 0x01200000), "131": ("Received Power", Variation_193, 0x01100000), "120": ("Measured Radial Doppler Speed", Variation_201, 0x01080000), "170": ("Track Status", Variation_1185, 0x01040000), "210": ("Track Quality", Variation_1273, 0x01020000), "050": ("Mode-2 Code in Octal Representation", Variation_1123, 0x01018000), "080": ("Mode-3/A Code Confidence Indicator", Variation_908, 0x01014000), "100": ("Mode-C Code and Code Confidence Indicator", Variation_1118, 0x01012000), "060": ("Mode-2 Code Confidence Indicator", Variation_908, 0x01011000), "030": ("Warning/Error Conditions", Variation_1274, 0x01010800), "SP": ("Special Purpose Field", Variation_1281, 0x01010400), "150": ("Presence of X-Pulse", Variation_1171, 0x01010180)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_1217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_234: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_1047: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["042"]) -> Variation_1164: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_988: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_1127: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1121: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["141"]) -> Variation_287: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_1273: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["131"]) -> Variation_193: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_201: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_1185: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_1273: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1123: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_908: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1118: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_908: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_1274: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["150"]) -> Variation_1171: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_90(Item):
     name = "020"
     title = "Target Report Descriptor"
@@ -13151,7 +16829,31 @@ class Item_526(Item):
     var = Variation_203
 class Variation_1364(Compound):
     fspec_size = None
-    items = [Item_1600, Item_1601, Item_1509, Item_1325, Item_1284, Item_1457, Item_526]
+    items_list = [Item_1600, Item_1601, Item_1509, Item_1325, Item_1284, Item_1457, Item_526]
+    items_dict = {"SRL": ("SSR Plot Runlength", Variation_226, 0x80), "SRR": ("Number of Received Replies for (M)SSR", Variation_191, 0x40), "SAM": ("Amplitude of (M)SSR Reply", Variation_193, 0x20), "PRL": ("Primary Plot Runlength", Variation_226, 0x10), "PAM": ("Amplitude of Primary Plot", Variation_193, 0x08), "RPD": ("Difference in Range Between PSR and SSR Plot", Variation_200, 0x04), "APD": ("Difference in Azimuth Between PSR and SSR Plot", Variation_203, 0x02)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SRL"]) -> Variation_226: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SRR"]) -> Variation_191: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SAM"]) -> Variation_193: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PRL"]) -> Variation_226: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PAM"]) -> Variation_193: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RPD"]) -> Variation_200: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["APD"]) -> Variation_203: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_277(Item):
     name = "130"
     title = "Radar Plot Characteristics"
@@ -13194,7 +16896,16 @@ class Item_1417(Item):
     var = Variation_1243
 class Variation_1337(Compound):
     fspec_size = None
-    items = [Item_605, Item_1417]
+    items_list = [Item_605, Item_1417]
+    items_dict = {"CAL": ("Calculated Doppler Speed", Variation_955, 0x80), "RDS": ("Raw Doppler Speed", Variation_1243, 0x40)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CAL"]) -> Variation_955: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RDS"]) -> Variation_1243: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_268(Item):
     name = "120"
     title = "Radial Doppler Speed"
@@ -13213,7 +16924,94 @@ class Item_185(Item):
     var = Variation_891
 class Variation_1317(Compound):
     fspec_size = None
-    items = [Item_61, Item_289, Item_90, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_375, Item_313, Item_151, Item_334, Item_325, Item_356, Item_115, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
+    items_list = [Item_61, Item_289, Item_90, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_375, Item_313, Item_151, Item_334, Item_325, Item_356, Item_115, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "140": ("Time of Day", Variation_311, 0x40000000), "020": ("Target Report Descriptor", Variation_1218, 0x20000000), "040": ("Measured Position in Polar Co-ordinates", Variation_1048, 0x10000000), "070": ("Mode-3/A Code in Octal Representation", Variation_1126, 0x08000000), "090": ("Flight Level in Binary Representation", Variation_1119, 0x04000000), "130": ("Radar Plot Characteristics", Variation_1364, 0x02000000), "220": ("Aircraft Address", Variation_296, 0x01800000), "240": ("Aircraft Identification", Variation_326, 0x01400000), "250": ("BDS Register Data", Variation_1247, 0x01200000), "161": ("Track Number", Variation_911, 0x01100000), "042": ("Calculated Position in Cartesian Co-ordinates", Variation_1165, 0x01080000), "200": ("Calculated Track Velocity in Polar Co-ordinates", Variation_988, 0x01040000), "170": ("Track Status", Variation_1184, 0x01020000), "210": ("Track Quality", Variation_1079, 0x01018000), "030": ("Warning/Error Conditions and Target Classification", Variation_1276, 0x01014000), "080": ("Mode-3/A Code Confidence Indicator", Variation_908, 0x01012000), "100": ("Mode-C Code and Code Confidence Indicator", Variation_1118, 0x01011000), "110": ("Height Measured by a 3D Radar", Variation_880, 0x01010800), "120": ("Radial Doppler Speed", Variation_1337, 0x01010400), "230": ("Communications/ACAS Capability and Flight Status", Variation_948, 0x01010200), "260": ("ACAS Resolution Advisory Report", Variation_327, 0x01010180), "055": ("Mode-1 Code in Octal Representation", Variation_1122, 0x01010140), "050": ("Mode-2 Code in Octal Representation", Variation_1123, 0x01010120), "065": ("Mode-1 Code Confidence Indicator", Variation_891, 0x01010110), "060": ("Mode-2 Code Confidence Indicator", Variation_908, 0x01010108), "SP": ("Special Purpose Field", Variation_1281, 0x01010104), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_1218: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_1048: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_1126: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1119: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_1364: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["240"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["250"]) -> Variation_1247: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_911: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["042"]) -> Variation_1165: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_988: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_1184: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_1079: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_1276: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_908: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1118: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_880: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_1337: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["230"]) -> Variation_948: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["260"]) -> Variation_327: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["055"]) -> Variation_1122: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1123: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["065"]) -> Variation_891: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_908: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_379(Item):
     name = "250"
     title = "Mode S MB Data"
@@ -13224,10 +17022,184 @@ class Item_114(Item):
     var = Variation_1275
 class Variation_1318(Compound):
     fspec_size = None
-    items = [Item_61, Item_289, Item_90, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_379, Item_313, Item_151, Item_334, Item_325, Item_356, Item_114, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
+    items_list = [Item_61, Item_289, Item_90, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_379, Item_313, Item_151, Item_334, Item_325, Item_356, Item_114, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "140": ("Time of Day", Variation_311, 0x40000000), "020": ("Target Report Descriptor", Variation_1218, 0x20000000), "040": ("Measured Position in Polar Co-ordinates", Variation_1048, 0x10000000), "070": ("Mode-3/A Code in Octal Representation", Variation_1126, 0x08000000), "090": ("Flight Level in Binary Representation", Variation_1119, 0x04000000), "130": ("Radar Plot Characteristics", Variation_1364, 0x02000000), "220": ("Aircraft Address", Variation_296, 0x01800000), "240": ("Aircraft Identification", Variation_326, 0x01400000), "250": ("Mode S MB Data", Variation_1247, 0x01200000), "161": ("Track Number", Variation_911, 0x01100000), "042": ("Calculated Position in Cartesian Co-ordinates", Variation_1165, 0x01080000), "200": ("Calculated Track Velocity in Polar Co-ordinates", Variation_988, 0x01040000), "170": ("Track Status", Variation_1184, 0x01020000), "210": ("Track Quality", Variation_1079, 0x01018000), "030": ("Warning/Error Conditions and Target Classification", Variation_1275, 0x01014000), "080": ("Mode-3/A Code Confidence Indicator", Variation_908, 0x01012000), "100": ("Mode-C Code and Code Confidence Indicator", Variation_1118, 0x01011000), "110": ("Height Measured by a 3D Radar", Variation_880, 0x01010800), "120": ("Radial Doppler Speed", Variation_1337, 0x01010400), "230": ("Communications/ACAS Capability and Flight Status", Variation_948, 0x01010200), "260": ("ACAS Resolution Advisory Report", Variation_327, 0x01010180), "055": ("Mode-1 Code in Octal Representation", Variation_1122, 0x01010140), "050": ("Mode-2 Code in Octal Representation", Variation_1123, 0x01010120), "065": ("Mode-1 Code Confidence Indicator", Variation_891, 0x01010110), "060": ("Mode-2 Code Confidence Indicator", Variation_908, 0x01010108), "SP": ("Special Purpose Field", Variation_1281, 0x01010104), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_1218: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_1048: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_1126: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1119: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_1364: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["240"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["250"]) -> Variation_1247: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_911: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["042"]) -> Variation_1165: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_988: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_1184: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_1079: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_1275: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_908: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1118: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_880: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_1337: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["230"]) -> Variation_948: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["260"]) -> Variation_327: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["055"]) -> Variation_1122: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1123: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["065"]) -> Variation_891: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_908: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Variation_1319(Compound):
     fspec_size = None
-    items = [Item_61, Item_289, Item_90, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_379, Item_313, Item_151, Item_334, Item_325, Item_356, Item_115, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
+    items_list = [Item_61, Item_289, Item_90, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_379, Item_313, Item_151, Item_334, Item_325, Item_356, Item_115, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "140": ("Time of Day", Variation_311, 0x40000000), "020": ("Target Report Descriptor", Variation_1218, 0x20000000), "040": ("Measured Position in Polar Co-ordinates", Variation_1048, 0x10000000), "070": ("Mode-3/A Code in Octal Representation", Variation_1126, 0x08000000), "090": ("Flight Level in Binary Representation", Variation_1119, 0x04000000), "130": ("Radar Plot Characteristics", Variation_1364, 0x02000000), "220": ("Aircraft Address", Variation_296, 0x01800000), "240": ("Aircraft Identification", Variation_326, 0x01400000), "250": ("Mode S MB Data", Variation_1247, 0x01200000), "161": ("Track Number", Variation_911, 0x01100000), "042": ("Calculated Position in Cartesian Co-ordinates", Variation_1165, 0x01080000), "200": ("Calculated Track Velocity in Polar Co-ordinates", Variation_988, 0x01040000), "170": ("Track Status", Variation_1184, 0x01020000), "210": ("Track Quality", Variation_1079, 0x01018000), "030": ("Warning/Error Conditions and Target Classification", Variation_1276, 0x01014000), "080": ("Mode-3/A Code Confidence Indicator", Variation_908, 0x01012000), "100": ("Mode-C Code and Code Confidence Indicator", Variation_1118, 0x01011000), "110": ("Height Measured by a 3D Radar", Variation_880, 0x01010800), "120": ("Radial Doppler Speed", Variation_1337, 0x01010400), "230": ("Communications/ACAS Capability and Flight Status", Variation_948, 0x01010200), "260": ("ACAS Resolution Advisory Report", Variation_327, 0x01010180), "055": ("Mode-1 Code in Octal Representation", Variation_1122, 0x01010140), "050": ("Mode-2 Code in Octal Representation", Variation_1123, 0x01010120), "065": ("Mode-1 Code Confidence Indicator", Variation_891, 0x01010110), "060": ("Mode-2 Code Confidence Indicator", Variation_908, 0x01010108), "SP": ("Special Purpose Field", Variation_1281, 0x01010104), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_1218: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_1048: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_1126: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1119: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_1364: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["240"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["250"]) -> Variation_1247: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_911: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["042"]) -> Variation_1165: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_988: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_1184: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_1079: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_1276: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_908: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1118: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_880: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_1337: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["230"]) -> Variation_948: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["260"]) -> Variation_327: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["055"]) -> Variation_1122: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1123: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["065"]) -> Variation_891: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_908: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_91(Item):
     name = "020"
     title = "Target Report Descriptor"
@@ -13238,7 +17210,94 @@ class Item_116(Item):
     var = Variation_1277
 class Variation_1320(Compound):
     fspec_size = None
-    items = [Item_61, Item_289, Item_91, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_375, Item_313, Item_151, Item_334, Item_325, Item_356, Item_116, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
+    items_list = [Item_61, Item_289, Item_91, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_375, Item_313, Item_151, Item_334, Item_325, Item_356, Item_116, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
+    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "140": ("Time of Day", Variation_311, 0x40000000), "020": ("Target Report Descriptor", Variation_1219, 0x20000000), "040": ("Measured Position in Polar Co-ordinates", Variation_1048, 0x10000000), "070": ("Mode-3/A Code in Octal Representation", Variation_1126, 0x08000000), "090": ("Flight Level in Binary Representation", Variation_1119, 0x04000000), "130": ("Radar Plot Characteristics", Variation_1364, 0x02000000), "220": ("Aircraft Address", Variation_296, 0x01800000), "240": ("Aircraft Identification", Variation_326, 0x01400000), "250": ("BDS Register Data", Variation_1247, 0x01200000), "161": ("Track Number", Variation_911, 0x01100000), "042": ("Calculated Position in Cartesian Co-ordinates", Variation_1165, 0x01080000), "200": ("Calculated Track Velocity in Polar Co-ordinates", Variation_988, 0x01040000), "170": ("Track Status", Variation_1184, 0x01020000), "210": ("Track Quality", Variation_1079, 0x01018000), "030": ("Warning/Error Conditions and Target Classification", Variation_1277, 0x01014000), "080": ("Mode-3/A Code Confidence Indicator", Variation_908, 0x01012000), "100": ("Mode-C Code and Code Confidence Indicator", Variation_1118, 0x01011000), "110": ("Height Measured by a 3D Radar", Variation_880, 0x01010800), "120": ("Radial Doppler Speed", Variation_1337, 0x01010400), "230": ("Communications/ACAS Capability and Flight Status", Variation_948, 0x01010200), "260": ("ACAS Resolution Advisory Report", Variation_327, 0x01010180), "055": ("Mode-1 Code in Octal Representation", Variation_1122, 0x01010140), "050": ("Mode-2 Code in Octal Representation", Variation_1123, 0x01010120), "065": ("Mode-1 Code Confidence Indicator", Variation_891, 0x01010110), "060": ("Mode-2 Code Confidence Indicator", Variation_908, 0x01010108), "SP": ("Special Purpose Field", Variation_1281, 0x01010104), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_1219: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_1048: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["070"]) -> Variation_1126: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_1119: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["130"]) -> Variation_1364: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["220"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["240"]) -> Variation_326: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["250"]) -> Variation_1247: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_911: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["042"]) -> Variation_1165: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> Variation_988: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_1184: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_1079: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_1277: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["080"]) -> Variation_908: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["100"]) -> Variation_1118: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["110"]) -> Variation_880: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["120"]) -> Variation_1337: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["230"]) -> Variation_948: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["260"]) -> Variation_327: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["055"]) -> Variation_1122: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1123: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["065"]) -> Variation_891: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_908: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_62(Item):
     name = "010"
     title = "Data Source Identifier"
@@ -13301,7 +17360,28 @@ class Item_560(Item):
     var = Variation_1139
 class Variation_1352(Compound):
     fspec_size = None
-    items = [Item_1098, Item_487, None, Item_689, None, None, None, Item_482, Item_812, None, Item_560]
+    items_list = [Item_1098, Item_487, None, Item_689, None, None, None, Item_482, Item_812, None, Item_560]
+    items_dict = {"MB": ("BDS", Variation_1230, 0x8000), "ADR": ("24 Bits Aircraft Address", Variation_296, 0x4000), "COMACAS": ("Communications/ACAS Capability and Flight Status", Variation_952, 0x1000), "ACT": ("Aircraft Derived Aircraft Type", Variation_314, 0x0180), "ECAT": ("Emitter Category", Variation_171, 0x0140), "AVTECH": ("Available Technologies", Variation_1139, 0x0110)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MB"]) -> Variation_1230: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ADR"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COMACAS"]) -> Variation_952: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ACT"]) -> Variation_314: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ECAT"]) -> Variation_171: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AVTECH"]) -> Variation_1139: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_408(Item):
     name = "380"
     title = "Mode-S / ADS-B Related Data"
@@ -13364,7 +17444,46 @@ class Item_1202(Item):
     var = Variation_217
 class Variation_1357(Compound):
     fspec_size = None
-    items = [Item_1330, Item_1607, Item_1119, Item_1141, Item_1125, Item_493, Item_483, Item_1108, Item_1110, Item_1063, Item_1756, Item_1202]
+    items_list = [Item_1330, Item_1607, Item_1119, Item_1141, Item_1125, Item_493, Item_483, Item_1108, Item_1110, Item_1063, Item_1756, Item_1202]
+    items_dict = {"PSR": ("Age of The Last Primary Detection Used to Update the Track", Variation_217, 0x8000), "SSR": ("Age of the Last Secondary Detection Used to Update the Track", Variation_217, 0x4000), "MDA": ("Age of the Last Mode A Detection Used to Update the Track", Variation_217, 0x2000), "MFL": ("Age of the Last Mode C Detection Used to Update the Track", Variation_217, 0x1000), "MDS": ("Age of the Last Mode S Detection Used to Update the Track", Variation_217, 0x0800), "ADS": ("Age of the Last ADS Report Used to Update the Track", Variation_282, 0x0400), "ADB": ("Age of the Last ADS-B Report Used to Update the Track", Variation_217, 0x0200), "MD1": ("Age of the Last Valid Mode 1 Used to Update the Track", Variation_217, 0x0180), "MD2": ("Age of the Last Mode 2 Used to Update the Track", Variation_217, 0x0140), "LOP": ("Age of the Last Magentic Loop Detection", Variation_217, 0x0120), "TRK": ("Actual Track Age Since First Occurrence", Variation_217, 0x0110), "MUL": ("Age of the Last Multilateration Detection", Variation_217, 0x0108)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PSR"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SSR"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MDA"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MFL"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MDS"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ADS"]) -> Variation_282: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ADB"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MD1"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MD2"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["LOP"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TRK"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MUL"]) -> Variation_217: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_387(Item):
     name = "290"
     title = "System Track Update Ages"
@@ -13439,7 +17558,52 @@ class Item_1647(Item):
     var = Variation_961
 class Variation_1346(Compound):
     fspec_size = None
-    items = [Item_873, Item_732, Item_994, Item_861, Item_1724, Item_1887, Item_484, Item_485, Item_1491, Item_628, Item_614, Item_1725, Item_545, Item_1647]
+    items_list = [Item_873, Item_732, Item_994, Item_861, Item_1724, Item_1887, Item_484, Item_485, Item_1491, Item_628, Item_614, Item_1725, Item_545, Item_1647]
+    items_dict = {"FPPSID": ("FPPS Identification Tag", Variation_1064, 0x8000), "CSN": ("Callsign", Variation_328, 0x4000), "IFPSFLIGHTID": ("IFPS_FLIGHT_ID", Variation_1102, 0x2000), "FLIGHTCAT": ("Flight Category", Variation_986, 0x1000), "TOA": ("Type of Aircraft", Variation_314, 0x0800), "WTC": ("Wake Turbulence Category", Variation_189, 0x0400), "ADEP": ("Departure Airport", Variation_314, 0x0200), "ADES": ("Destination Airport", Variation_314, 0x0180), "RWY": ("Runway Designation", Variation_297, 0x0140), "CFL": ("Current Cleared Flight Level", Variation_280, 0x0120), "CCP": ("Current Control Position", Variation_942, 0x0110), "TOD": ("Time of Departure", Variation_1262, 0x0108), "AST": ("Aircraft Stand", Variation_325, 0x0104), "STS": ("Stand Status", Variation_961, 0x0102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FPPSID"]) -> Variation_1064: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CSN"]) -> Variation_328: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["IFPSFLIGHTID"]) -> Variation_1102: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FLIGHTCAT"]) -> Variation_986: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TOA"]) -> Variation_314: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["WTC"]) -> Variation_189: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ADEP"]) -> Variation_314: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ADES"]) -> Variation_314: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RWY"]) -> Variation_297: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CFL"]) -> Variation_280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CCP"]) -> Variation_942: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TOD"]) -> Variation_1262: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AST"]) -> Variation_325: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["STS"]) -> Variation_961: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_411(Item):
     name = "390"
     title = "Flight Plan Related Data"
@@ -13478,7 +17642,28 @@ class Item_469(Item):
     var = Variation_1155
 class Variation_1335(Compound):
     fspec_size = None
-    items = [Item_525, Item_530, Item_547, Item_554, Item_538, Item_469]
+    items_list = [Item_525, Item_530, Item_547, Item_554, Item_538, Item_469]
+    items_dict = {"APC": ("Estimated Accuracy Of Track Position (Cartesian)", Variation_1156, 0x80), "APW": ("Estimated Accuracy Of Track Position (WGS84)", Variation_997, 0x40), "ATH": ("Estimated Accuracy Of Track Height", Variation_242, 0x20), "AVC": ("Estimated Accuracy Of Track Velocity (Cartesian)", Variation_1157, 0x10), "ARC": ("Estimated Accuracy Of Rate Of Climb / Descent", Variation_243, 0x08), "AAC": ("Estimated Accuracy Of Acceleration (Cartesian)", Variation_1155, 0x04)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["APC"]) -> Variation_1156: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["APW"]) -> Variation_997: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ATH"]) -> Variation_242: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AVC"]) -> Variation_1157: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ARC"]) -> Variation_243: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AAC"]) -> Variation_1155: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_434(Item):
     name = "500"
     title = "Estimated Accuracies"
@@ -13497,14 +17682,125 @@ class Item_457(Item):
     var = Variation_1238
 class Variation_1321(Compound):
     fspec_size = None
-    items = [Item_62, Item_45, Item_72, Item_290, Item_147, Item_149, Item_347, Item_349, Item_175, Item_372, Item_408, Item_311, Item_327, Item_387, Item_424, Item_225, Item_237, Item_234, Item_358, Item_383, Item_411, Item_395, Item_399, Item_434, Item_445, Item_453, Item_457, Item_1580, Item_1421]
+    items_list = [Item_62, Item_45, Item_72, Item_290, Item_147, Item_149, Item_347, Item_349, Item_175, Item_372, Item_408, Item_311, Item_327, Item_387, Item_424, Item_225, Item_237, Item_234, Item_358, Item_383, Item_411, Item_395, Item_399, Item_434, Item_445, Item_453, Item_457, Item_1580, Item_1421]
+    items_dict = {"010": ("Data Source Identifier", Variation_1065, 0x8000000000), "000": ("Message Type", Variation_186, 0x4000000000), "015": ("Service Identification", Variation_155, 0x2000000000), "140": ("Time of Track Information", Variation_311, 0x1000000000), "041": ("Position in WGS-84 Coordinates", Variation_1007, 0x0800000000), "042": ("Calculated Position in Cartesian Co-ordinates", Variation_1163, 0x0400000000), "202": ("Calculated Track Velocity in Cartesian Coordinates", Variation_1142, 0x0200000000), "210": ("Calculated Acceleration", Variation_931, 0x0180000000), "060": ("Mode-3/A Code in Octal Representation", Variation_900, 0x0140000000), "245": ("Target Identification", Variation_1085, 0x0120000000), "380": ("Mode-S / ADS-B Related Data", Variation_1352, 0x0110000000), "161": ("Track Number", Variation_873, 0x0108000000), "170": ("Track Status", Variation_1196, 0x0104000000), "290": ("System Track Update Ages", Variation_1357, 0x0102000000), "430": ("Phase of Flight", Variation_168, 0x0101800000), "090": ("Measured Flight Level", Variation_248, 0x0101400000), "093": ("Calculated Track Barometric Altitude", Variation_1038, 0x0101200000), "092": ("Calculated Track Geometric Altitude", Variation_257, 0x0101100000), "215": ("Calculated Rate Of Climb/Descent", Variation_258, 0x0101080000), "270": ("Target Size and Orientation", Variation_1192, 0x0101040000), "390": ("Flight Plan Related Data", Variation_1346, 0x0101020000), "300": ("Vehicle Fleet Identification", Variation_157, 0x0101018000), "310": ("Pre-programmed Message", Variation_1097, 0x0101014000), "500": ("Estimated Accuracies", Variation_1335, 0x0101012000), "600": ("Alert Messages", Variation_923, 0x0101011000), "605": ("Tracks in Alert", Variation_1233, 0x0101010800), "610": ("Holdbar Status", Variation_1238, 0x0101010400), "SP": ("Special Purpose Field", Variation_1281, 0x0101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010180)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1065: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_186: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["041"]) -> Variation_1007: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["042"]) -> Variation_1163: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["202"]) -> Variation_1142: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_931: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_900: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["245"]) -> Variation_1085: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["380"]) -> Variation_1352: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_873: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_1196: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["290"]) -> Variation_1357: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["430"]) -> Variation_168: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_248: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["093"]) -> Variation_1038: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["092"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["215"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["270"]) -> Variation_1192: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["390"]) -> Variation_1346: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["300"]) -> Variation_157: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["310"]) -> Variation_1097: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["500"]) -> Variation_1335: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["600"]) -> Variation_923: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["605"]) -> Variation_1233: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["610"]) -> Variation_1238: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_690(Item):
     name = "COMACAS"
     title = "Communications/ACAS Capability and Flight Status"
     var = Variation_953
 class Variation_1353(Compound):
     fspec_size = None
-    items = [Item_1098, Item_487, None, Item_690, None, None, None, Item_482, Item_812, None, Item_560]
+    items_list = [Item_1098, Item_487, None, Item_690, None, None, None, Item_482, Item_812, None, Item_560]
+    items_dict = {"MB": ("BDS", Variation_1230, 0x8000), "ADR": ("24 Bits Aircraft Address", Variation_296, 0x4000), "COMACAS": ("Communications/ACAS Capability and Flight Status", Variation_953, 0x1000), "ACT": ("Aircraft Derived Aircraft Type", Variation_314, 0x0180), "ECAT": ("Emitter Category", Variation_171, 0x0140), "AVTECH": ("Available Technologies", Variation_1139, 0x0110)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MB"]) -> Variation_1230: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ADR"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["COMACAS"]) -> Variation_953: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ACT"]) -> Variation_314: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ECAT"]) -> Variation_171: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AVTECH"]) -> Variation_1139: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_409(Item):
     name = "380"
     title = "Mode-S / ADS-B Related Data"
@@ -13539,7 +17835,46 @@ class Item_1111(Item):
     var = Variation_217
 class Variation_1358(Compound):
     fspec_size = None
-    items = [Item_1331, Item_1608, Item_1120, Item_1142, Item_1126, Item_493, Item_483, Item_1108, Item_1111, Item_1063, Item_1756, Item_1202]
+    items_list = [Item_1331, Item_1608, Item_1120, Item_1142, Item_1126, Item_493, Item_483, Item_1108, Item_1111, Item_1063, Item_1756, Item_1202]
+    items_dict = {"PSR": ("Age of the Last Primary Report Used to Update the Track", Variation_217, 0x8000), "SSR": ("Age of the Last Secondary Report Used to Update the Track", Variation_217, 0x4000), "MDA": ("Age of the Last Valid Mode A Report Used to Update the Track", Variation_217, 0x2000), "MFL": ("Age of the Last Valid and Credible Mode C Used to Update the Track", Variation_217, 0x1000), "MDS": ("Age of the Last Mode S Report Used to Update the Track", Variation_217, 0x0800), "ADS": ("Age of the Last ADS Report Used to Update the Track", Variation_282, 0x0400), "ADB": ("Age of the Last ADS-B Report Used to Update the Track", Variation_217, 0x0200), "MD1": ("Age of the Last Valid Mode 1 Used to Update the Track", Variation_217, 0x0180), "MD2": ("Age of the Last Valid Mode 2 Used to Update the Track", Variation_217, 0x0140), "LOP": ("Age of the Last Magentic Loop Detection", Variation_217, 0x0120), "TRK": ("Actual Track Age Since First Occurrence", Variation_217, 0x0110), "MUL": ("Age of the Last Multilateration Detection", Variation_217, 0x0108)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PSR"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SSR"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MDA"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MFL"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MDS"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ADS"]) -> Variation_282: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ADB"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MD1"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MD2"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["LOP"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TRK"]) -> Variation_217: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MUL"]) -> Variation_217: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_388(Item):
     name = "290"
     title = "System Track Update Ages"
@@ -13554,14 +17889,149 @@ class Item_860(Item):
     var = Variation_985
 class Variation_1345(Compound):
     fspec_size = None
-    items = [Item_873, Item_732, Item_994, Item_860, Item_1724, Item_1887, Item_484, Item_485, Item_1491, Item_628, Item_614, Item_1725, Item_545, Item_1647]
+    items_list = [Item_873, Item_732, Item_994, Item_860, Item_1724, Item_1887, Item_484, Item_485, Item_1491, Item_628, Item_614, Item_1725, Item_545, Item_1647]
+    items_dict = {"FPPSID": ("FPPS Identification Tag", Variation_1064, 0x8000), "CSN": ("Callsign", Variation_328, 0x4000), "IFPSFLIGHTID": ("IFPS_FLIGHT_ID", Variation_1102, 0x2000), "FLIGHTCAT": ("Flight Category", Variation_985, 0x1000), "TOA": ("Type of Aircraft", Variation_314, 0x0800), "WTC": ("Wake Turbulence Category", Variation_189, 0x0400), "ADEP": ("Departure Airport", Variation_314, 0x0200), "ADES": ("Destination Airport", Variation_314, 0x0180), "RWY": ("Runway Designation", Variation_297, 0x0140), "CFL": ("Current Cleared Flight Level", Variation_280, 0x0120), "CCP": ("Current Control Position", Variation_942, 0x0110), "TOD": ("Time of Departure", Variation_1262, 0x0108), "AST": ("Aircraft Stand", Variation_325, 0x0104), "STS": ("Stand Status", Variation_961, 0x0102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FPPSID"]) -> Variation_1064: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CSN"]) -> Variation_328: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["IFPSFLIGHTID"]) -> Variation_1102: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FLIGHTCAT"]) -> Variation_985: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TOA"]) -> Variation_314: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["WTC"]) -> Variation_189: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ADEP"]) -> Variation_314: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ADES"]) -> Variation_314: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RWY"]) -> Variation_297: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CFL"]) -> Variation_280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CCP"]) -> Variation_942: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TOD"]) -> Variation_1262: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AST"]) -> Variation_325: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["STS"]) -> Variation_961: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_410(Item):
     name = "390"
     title = "Flight Plan Related Data"
     var = Variation_1345
 class Variation_1322(Compound):
     fspec_size = None
-    items = [Item_62, Item_45, Item_72, Item_290, Item_147, Item_149, Item_347, Item_349, Item_175, Item_372, Item_409, Item_311, Item_328, Item_388, Item_424, Item_225, Item_236, Item_234, Item_358, Item_383, Item_410, Item_395, Item_399, Item_434, Item_445, Item_453, Item_457, Item_1580, Item_1421]
+    items_list = [Item_62, Item_45, Item_72, Item_290, Item_147, Item_149, Item_347, Item_349, Item_175, Item_372, Item_409, Item_311, Item_328, Item_388, Item_424, Item_225, Item_236, Item_234, Item_358, Item_383, Item_410, Item_395, Item_399, Item_434, Item_445, Item_453, Item_457, Item_1580, Item_1421]
+    items_dict = {"010": ("Data Source Identifier", Variation_1065, 0x8000000000), "000": ("Message Type", Variation_186, 0x4000000000), "015": ("Service Identification", Variation_155, 0x2000000000), "140": ("Time of Track Information", Variation_311, 0x1000000000), "041": ("Position in WGS-84 Coordinates", Variation_1007, 0x0800000000), "042": ("Calculated Position in Cartesian Co-ordinates", Variation_1163, 0x0400000000), "202": ("Calculated Track Velocity in Cartesian Coordinates", Variation_1142, 0x0200000000), "210": ("Calculated Acceleration", Variation_931, 0x0180000000), "060": ("Mode-3/A Code in Octal Representation", Variation_900, 0x0140000000), "245": ("Target Identification", Variation_1085, 0x0120000000), "380": ("Mode-S / ADS-B Related Data", Variation_1353, 0x0110000000), "161": ("Track Number", Variation_873, 0x0108000000), "170": ("Track Status", Variation_1197, 0x0104000000), "290": ("System Track Update Ages", Variation_1358, 0x0102000000), "430": ("Phase of Flight", Variation_168, 0x0101800000), "090": ("Measured Flight Level", Variation_248, 0x0101400000), "093": ("Calculated Track Barometric Altitude", Variation_1037, 0x0101200000), "092": ("Calculated Track Geometric Altitude", Variation_257, 0x0101100000), "215": ("Calculated Rate Of Climb/Descent", Variation_258, 0x0101080000), "270": ("Target Size and Orientation", Variation_1192, 0x0101040000), "390": ("Flight Plan Related Data", Variation_1345, 0x0101020000), "300": ("Vehicle Fleet Identification", Variation_157, 0x0101018000), "310": ("Pre-programmed Message", Variation_1097, 0x0101014000), "500": ("Estimated Accuracies", Variation_1335, 0x0101012000), "600": ("Alert Messages", Variation_923, 0x0101011000), "605": ("Tracks in Alert", Variation_1233, 0x0101010800), "610": ("Holdbar Status", Variation_1238, 0x0101010400), "SP": ("Special Purpose Field", Variation_1281, 0x0101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010180)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1065: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_186: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["140"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["041"]) -> Variation_1007: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["042"]) -> Variation_1163: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["202"]) -> Variation_1142: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["210"]) -> Variation_931: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_900: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["245"]) -> Variation_1085: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["380"]) -> Variation_1353: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["161"]) -> Variation_873: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["170"]) -> Variation_1197: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["290"]) -> Variation_1358: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["430"]) -> Variation_168: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["090"]) -> Variation_248: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["093"]) -> Variation_1037: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["092"]) -> Variation_257: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["215"]) -> Variation_258: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["270"]) -> Variation_1192: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["390"]) -> Variation_1345: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["300"]) -> Variation_157: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["310"]) -> Variation_1097: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["500"]) -> Variation_1335: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["600"]) -> Variation_923: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["605"]) -> Variation_1233: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["610"]) -> Variation_1238: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SP"]) -> Variation_1281: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_63(Item):
     name = "010"
     title = "Server Identification Tag"
@@ -13656,14 +18126,104 @@ class Item_1619(Item):
     var = Variation_328
 class Variation_1350(Compound):
     fspec_size = None
-    items = [Item_992, Item_1485, Item_1418, Item_1726, Item_545, Item_1646, Item_1562, Item_1619]
+    items_list = [Item_992, Item_1485, Item_1418, Item_1726, Item_545, Item_1646, Item_1562, Item_1619]
+    items_dict = {"IFI": ("IFPS FLIGHT ID", Variation_1098, 0x8000), "RVP": ("RVSM & Flight Priority", Variation_916, 0x4000), "RDS": ("Runway Designation", Variation_1026, 0x2000), "TOD": ("Time of Departure / Arrival", Variation_1260, 0x1000), "AST": ("Aircraft Stand", Variation_325, 0x0800), "STS": ("Stand Status", Variation_960, 0x0400), "SID": ("Standard Instrument Departure", Variation_328, 0x0200), "STAR": ("Standard Instrument Arrival", Variation_328, 0x0180)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["IFI"]) -> Variation_1098: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RVP"]) -> Variation_916: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RDS"]) -> Variation_1026: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TOD"]) -> Variation_1260: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AST"]) -> Variation_325: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["STS"]) -> Variation_960: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SID"]) -> Variation_328: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["STAR"]) -> Variation_328: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_437(Item):
     name = "500"
     title = "Supplementary Flight Data"
     var = Variation_1350
 class Variation_1323(Compound):
     fspec_size = None
-    items = [Item_63, Item_74, Item_78, Item_125, Item_93, Item_142, Item_158, Item_183, Item_414, Item_420, Item_422, Item_427, Item_428, Item_431, Item_432, Item_425, Item_426, Item_429, Item_437, None, Item_1421]
+    items_list = [Item_63, Item_74, Item_78, Item_125, Item_93, Item_142, Item_158, Item_183, Item_414, Item_420, Item_422, Item_427, Item_428, Item_431, Item_432, Item_425, Item_426, Item_429, Item_437, None, Item_1421]
+    items_dict = {"010": ("Server Identification Tag", Variation_1061, 0x800000), "015": ("User Number", Variation_235, 0x400000), "018": ("Data Source Identification Tag", Variation_1061, 0x200000), "035": ("Type of Message", Variation_979, 0x100000), "020": ("Time of ASTERIX Report Generation", Variation_311, 0x080000), "040": ("Track Number", Variation_235, 0x040000), "050": ("Composed Track Number", Variation_1215, 0x020000), "060": ("Track Mode 3/A", Variation_902, 0x018000), "400": ("Callsign", Variation_328, 0x014000), "410": ("Plan Number", Variation_235, 0x012000), "420": ("Flight Category", Variation_984, 0x011000), "440": ("Departure Aerodrome", Variation_314, 0x010800), "450": ("Destination Aerodrome", Variation_314, 0x010400), "480": ("Current Cleared Flight Level", Variation_280, 0x010200), "490": ("Current Control Position", Variation_941, 0x010180), "430": ("Type of Aircraft", Variation_314, 0x010140), "435": ("Wake Turbulence Category", Variation_189, 0x010120), "460": ("Allocated SSR Codes", Variation_1234, 0x010110), "500": ("Supplementary Flight Data", Variation_1350, 0x010108), "RE": ("Reserved Expansion Field", Variation_1280, 0x010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_235: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["018"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["035"]) -> Variation_979: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_235: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["050"]) -> Variation_1215: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["060"]) -> Variation_902: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["400"]) -> Variation_328: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["410"]) -> Variation_235: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["420"]) -> Variation_984: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["440"]) -> Variation_314: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["450"]) -> Variation_314: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["480"]) -> Variation_280: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["490"]) -> Variation_941: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["430"]) -> Variation_314: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["435"]) -> Variation_189: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["460"]) -> Variation_1234: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["500"]) -> Variation_1350: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RE"]) -> Variation_1280: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_126(Item):
     name = "036"
     title = "Data Source Identifier"
@@ -13806,7 +18366,115 @@ class Item_68(Item):
     var = Variation_155
 class Variation_1324(Compound):
     fspec_size = None
-    items = [Item_126, Item_128, Item_32, Item_51, Item_54, Item_75, Item_77, Item_79, Item_80, Item_103, Item_105, Item_101, Item_102, Item_104, Item_52, Item_55, Item_56, Item_57, Item_59, Item_64, Item_65, Item_69, Item_70, Item_82, Item_98, Item_99, Item_100, Item_53, Item_117, Item_118, Item_120, Item_121, Item_123, Item_66, Item_68]
+    items_list = [Item_126, Item_128, Item_32, Item_51, Item_54, Item_75, Item_77, Item_79, Item_80, Item_103, Item_105, Item_101, Item_102, Item_104, Item_52, Item_55, Item_56, Item_57, Item_59, Item_64, Item_65, Item_69, Item_70, Item_82, Item_98, Item_99, Item_100, Item_53, Item_117, Item_118, Item_120, Item_121, Item_123, Item_66, Item_68]
+    items_dict = {"036": ("Data Source Identifier", Variation_1061, 0x8000000000), "037": ("Data Destination Identifier", Variation_1061, 0x4000000000), "000": ("Message Type", Variation_156, 0x2000000000), "001": ("Result", Variation_939, 0x1000000000), "005": ("Mode S Address", Variation_296, 0x0800000000), "016": ("Packet Number", Variation_315, 0x0400000000), "017": ("Packet Number List", Variation_1228, 0x0200000000), "018": ("Mode S Packet Properties", Variation_874, 0x0180000000), "019": ("Mode S Packet", Variation_1279, 0x0140000000), "028": ("GICB Extraction Periodicity", Variation_268, 0x0120000000), "030": ("GICB Properties", Variation_1034, 0x0110000000), "025": ("GICB Number", Variation_315, 0x0108000000), "027": ("BDS Code", Variation_155, 0x0104000000), "029": ("GICB Extracted", Variation_327, 0x0102000000), "002": ("Time of Day", Variation_311, 0x0101800000), "006": ("Mode S Address List", Variation_1226, 0x0101400000), "007": ("Aircraft Data Link Command", Variation_1114, 0x0101200000), "008": ("Aircraft Data Link Status", Variation_1221, 0x0101100000), "009": ("Aircraft Data Link Report Request", Variation_1212, 0x0101080000), "010": ("Transponder Communications Capability", Variation_913, 0x0101040000), "011": ("Capability Report", Variation_327, 0x0101020000), "014": ("Aircraft Position in Polar Co-ordinates", Variation_1048, 0x0101018000), "015": ("Aircraft Position in Cartesian Co-ordinates", Variation_1166, 0x0101014000), "020": ("Broadcast Number", Variation_315, 0x0101012000), "021": ("Broadcast Properties", Variation_1035, 0x0101011000), "022": ("Broadcast Prefix", Variation_915, 0x0101010800), "023": ("Uplink or Downlink Broadcast", Variation_327, 0x0101010400), "004": ("II Code", Variation_1032, 0x0101010200), "031": ("Aircraft Identity", Variation_324, 0x0101010180), "032": ("Aircraft Mode A", Variation_1125, 0x0101010140), "033": ("Aircraft Height", Variation_1120, 0x0101010120), "034": ("Aircraft Speed", Variation_289, 0x0101010110), "035": ("Aircraft Heading", Variation_293, 0x0101010108), "012": ("Aircraft Coverage Quality Factor", Variation_980, 0x0101010104), "013": ("Aircraft CQF Calculation Method", Variation_155, 0x0101010102)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["036"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["037"]) -> Variation_1061: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["000"]) -> Variation_156: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["001"]) -> Variation_939: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["005"]) -> Variation_296: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["016"]) -> Variation_315: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["017"]) -> Variation_1228: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["018"]) -> Variation_874: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["019"]) -> Variation_1279: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["028"]) -> Variation_268: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_1034: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["025"]) -> Variation_315: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["027"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["029"]) -> Variation_327: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["002"]) -> Variation_311: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["006"]) -> Variation_1226: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["007"]) -> Variation_1114: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["008"]) -> Variation_1221: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["009"]) -> Variation_1212: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_913: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["011"]) -> Variation_327: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["014"]) -> Variation_1048: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["015"]) -> Variation_1166: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_315: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["021"]) -> Variation_1035: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["022"]) -> Variation_915: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["023"]) -> Variation_327: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["004"]) -> Variation_1032: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["031"]) -> Variation_324: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["032"]) -> Variation_1125: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["033"]) -> Variation_1120: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["034"]) -> Variation_289: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["035"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["012"]) -> Variation_980: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["013"]) -> Variation_155: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_1298(Item):
     name = "PNB"
     title = "Plot Number"
@@ -13825,7 +18493,22 @@ class Item_759(Item):
     var = Variation_1172
 class Variation_1356(Compound):
     fspec_size = None
-    items = [Item_1298, Item_1458, Item_1578, Item_759]
+    items_list = [Item_1298, Item_1458, Item_1578, Item_759]
+    items_dict = {"PNB": ("Plot Number", Variation_234, 0x80), "RPL": ("Replies/Plot Link", Variation_1266, 0x40), "SNB": ("Scan Number", Variation_191, 0x20), "DATE": ("Common and Plot Characteristics Date", Variation_1172, 0x10)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PNB"]) -> Variation_234: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RPL"]) -> Variation_1266: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SNB"]) -> Variation_191: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["DATE"]) -> Variation_1172: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_1339(Item):
     name = "PTL"
     title = "Plot/Track Link"
@@ -13872,7 +18555,43 @@ class Item_1000(Item):
     var = Variation_995
 class Variation_1359(Compound):
     fspec_size = None
-    items = [Item_1339, Item_548, Item_1761, Item_1243, Item_785, Item_1036, Item_1680, Item_1717, Item_543, Item_1697, Item_1000]
+    items_list = [Item_1339, Item_548, Item_1761, Item_1243, Item_785, Item_1036, Item_1680, Item_1717, Item_543, Item_1697, Item_1000]
+    items_dict = {"PTL": ("Plot/Track Link", Variation_892, 0x8000), "ATL": ("ADS-B/Track Link", Variation_1225, 0x4000), "TRN": ("Turn State", Variation_204, 0x2000), "NPP": ("Next Predicted Position", Variation_1031, 0x1000), "DLK": ("Data Link Characteristics", Variation_1265, 0x0800), "LCK": ("Lockout Characteristics", Variation_1010, 0x0400), "TC": ("Transition Code", Variation_919, 0x0200), "TLC": ("Track Life Cycle", Variation_924, 0x0180), "ASI": ("Adjacent Sensor Information", Variation_1255, 0x0140), "TES": ("Track Extrapolation Source", Variation_166, 0x0120), "IR": ("Identity Requested", Variation_995, 0x0110)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PTL"]) -> Variation_892: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ATL"]) -> Variation_1225: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TRN"]) -> Variation_204: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["NPP"]) -> Variation_1031: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["DLK"]) -> Variation_1265: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["LCK"]) -> Variation_1010: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TC"]) -> Variation_919: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TLC"]) -> Variation_924: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ASI"]) -> Variation_1255: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TES"]) -> Variation_166: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["IR"]) -> Variation_995: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_1519(Item):
     name = "SCO"
     title = "Score"
@@ -13891,7 +18610,22 @@ class Item_532(Item):
     var = Variation_288
 class Variation_1361(Compound):
     fspec_size = None
-    items = [Item_1519, Item_1596, Item_1489, Item_532]
+    items_list = [Item_1519, Item_1596, Item_1489, Item_532]
+    items_dict = {"SCO": ("Score", Variation_191, 0x80), "SRC": ("Signal/Clutter Ratio", Variation_272, 0x40), "RW": ("Range Width", Variation_288, 0x20), "AR": ("Ambiguous Range", Variation_288, 0x10)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SCO"]) -> Variation_191: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SRC"]) -> Variation_272: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RW"]) -> Variation_288: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["AR"]) -> Variation_288: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_1656(Item):
     name = "SUM"
     title = "Mode 5 Summary"
@@ -13918,7 +18652,28 @@ class Item_1078(Item):
     var = Variation_1117
 class Variation_1366(Compound):
     fspec_size = None
-    items = [Item_1656, Item_1299, Item_820, Item_1925, Item_868, Item_1078]
+    items_list = [Item_1656, Item_1299, Item_820, Item_1925, Item_868, Item_1078]
+    items_dict = {"SUM": ("Mode 5 Summary", Variation_1012, 0x80), "PNO": ("Mode 5 PIN / National Origin", Variation_884, 0x40), "EM1": ("Extended Mode 1 Code in Octal Representation", Variation_1116, 0x20), "XP": ("X Pulse Presence", Variation_887, 0x10), "FOM": ("Figure of Merit", Variation_890, 0x08), "M2": ("Mode 2 Code in Octal Representation", Variation_1117, 0x04)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SUM"]) -> Variation_1012: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PNO"]) -> Variation_884: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["EM1"]) -> Variation_1116: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["XP"]) -> Variation_887: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FOM"]) -> Variation_890: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["M2"]) -> Variation_1117: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_1657(Item):
     name = "SUM"
     title = "Mode 5 Summary"
@@ -13949,7 +18704,31 @@ class Item_1924(Item):
     var = Variation_886
 class Variation_1367(Compound):
     fspec_size = None
-    items = [Item_1657, Item_1296, Item_1306, Item_898, Item_819, Item_1731, Item_1924]
+    items_list = [Item_1657, Item_1296, Item_1306, Item_898, Item_819, Item_1731, Item_1924]
+    items_dict = {"SUM": ("Mode 5 Summary", Variation_1013, 0x80), "PMN": ("PIN/ National Origin/Mission Code", Variation_881, 0x40), "POS": ("Mode 5 Reported Position", Variation_1005, 0x20), "GA": ("Mode 5 GNSS-derived Altitude", Variation_876, 0x10), "EM1": ("Extended Mode 1 Code in Octal Representation", Variation_1115, 0x08), "TOS": ("Time Offset for POS and GA", Variation_219, 0x04), "XP": ("X Pulse Presence", Variation_886, 0x02)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SUM"]) -> Variation_1013: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PMN"]) -> Variation_881: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["POS"]) -> Variation_1005: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GA"]) -> Variation_876: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["EM1"]) -> Variation_1115: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TOS"]) -> Variation_219: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["XP"]) -> Variation_886: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_1297(Item):
     name = "PMN"
     title = "PIN/ National Origin/Mission Code"
@@ -13960,7 +18739,34 @@ class Item_867(Item):
     var = Variation_889
 class Variation_1368(Compound):
     fspec_size = None
-    items = [Item_1657, Item_1297, Item_1306, Item_898, Item_819, Item_1731, Item_1924, Item_867]
+    items_list = [Item_1657, Item_1297, Item_1306, Item_898, Item_819, Item_1731, Item_1924, Item_867]
+    items_dict = {"SUM": ("Mode 5 Summary", Variation_1013, 0x8000), "PMN": ("PIN/ National Origin/Mission Code", Variation_883, 0x4000), "POS": ("Mode 5 Reported Position", Variation_1005, 0x2000), "GA": ("Mode 5 GNSS-derived Altitude", Variation_876, 0x1000), "EM1": ("Extended Mode 1 Code in Octal Representation", Variation_1115, 0x0800), "TOS": ("Time Offset for POS and GA", Variation_219, 0x0400), "XP": ("X Pulse Presence", Variation_886, 0x0200), "FOM": ("Figure of Merit", Variation_889, 0x0180)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SUM"]) -> Variation_1013: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["PMN"]) -> Variation_883: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["POS"]) -> Variation_1005: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GA"]) -> Variation_876: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["EM1"]) -> Variation_1115: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TOS"]) -> Variation_219: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["XP"]) -> Variation_886: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["FOM"]) -> Variation_889: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_596(Item):
     name = "BPS"
     title = "Barometric Pressure Setting"
@@ -13995,7 +18801,34 @@ class Item_1137(Item):
     var = Variation_1366
 class Variation_1376(Compound):
     fspec_size = 1
-    items = [Item_596, Item_1553, Item_1211, Item_902, Item_1551, Item_1616, Item_1721, Item_1137]
+    items_list = [Item_596, Item_1553, Item_1211, Item_902, Item_1551, Item_1616, Item_1721, Item_1137]
+    items_dict = {"BPS": ("Barometric Pressure Setting", Variation_896, 0x80), "SH": ("Selected Heading", Variation_899, 0x40), "NAV": ("Navigation Mode", Variation_928, 0x20), "GAO": ("GPS Antenna Offset", Variation_155, 0x10), "SGV": ("Surface Ground Vector", Variation_1214, 0x08), "STA": ("Aircraft Status", Variation_1187, 0x04), "TNH": ("True North Heading", Variation_293, 0x02), "MES": ("Military Extended Squitter", Variation_1366, 0x01)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["BPS"]) -> Variation_896: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SH"]) -> Variation_899: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["NAV"]) -> Variation_928: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GAO"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SGV"]) -> Variation_1214: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["STA"]) -> Variation_1187: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TNH"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MES"]) -> Variation_1366: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_1212(Item):
     name = "NAV"
     title = "Navigation Mode"
@@ -14006,7 +18839,34 @@ class Item_1617(Item):
     var = Variation_1188
 class Variation_1377(Compound):
     fspec_size = 1
-    items = [Item_596, Item_1553, Item_1212, Item_902, Item_1551, Item_1617, Item_1721, Item_1137]
+    items_list = [Item_596, Item_1553, Item_1212, Item_902, Item_1551, Item_1617, Item_1721, Item_1137]
+    items_dict = {"BPS": ("Barometric Pressure Setting", Variation_896, 0x80), "SH": ("Selected Heading", Variation_899, 0x40), "NAV": ("Navigation Mode", Variation_929, 0x20), "GAO": ("GPS Antenna Offset", Variation_155, 0x10), "SGV": ("Surface Ground Vector", Variation_1214, 0x08), "STA": ("Aircraft Status", Variation_1188, 0x04), "TNH": ("True North Heading", Variation_293, 0x02), "MES": ("Military Extended Squitter", Variation_1366, 0x01)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["BPS"]) -> Variation_896: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SH"]) -> Variation_899: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["NAV"]) -> Variation_929: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["GAO"]) -> Variation_155: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["SGV"]) -> Variation_1214: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["STA"]) -> Variation_1188: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TNH"]) -> Variation_293: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MES"]) -> Variation_1366: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_740(Item):
     name = "CST"
     title = "Contributing Sensors With Local Tracknumbers"
@@ -14025,7 +18885,22 @@ class Item_1648(Item):
     var = Variation_1190
 class Variation_1378(Compound):
     fspec_size = 1
-    items = [Item_740, Item_734, Item_1792, Item_1648]
+    items_list = [Item_740, Item_734, Item_1792, Item_1648]
+    items_dict = {"CST": ("Contributing Sensors With Local Tracknumbers", Variation_1254, 0x80), "CSN": ("Contributing Sensors No Local Tracknumbers", Variation_1253, 0x40), "TVS": ("Calculated Track Velocity Relative to System Reference Point", Variation_1140, 0x20), "STS": ("Supplementary Track Status", Variation_1190, 0x10)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CST"]) -> Variation_1254: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CSN"]) -> Variation_1253: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TVS"]) -> Variation_1140: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["STS"]) -> Variation_1190: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_1117(Item):
     name = "MD5"
     title = "Mode 5 Reports"
@@ -14056,7 +18931,31 @@ class Item_717(Item):
     var = Variation_1356
 class Variation_1379(Compound):
     fspec_size = 1
-    items = [Item_1117, Item_1087, Item_1085, Item_1456, Item_843, Item_1482, Item_717]
+    items_list = [Item_1117, Item_1087, Item_1085, Item_1456, Item_843, Item_1482, Item_717]
+    items_dict = {"MD5": ("Mode 5 Reports", Variation_1367, 0x80), "M5N": ("Mode 5 Reports, New Format", Variation_1368, 0x40), "M4E": ("Extended Mode 4 Report", Variation_1176, 0x20), "RPC": ("Radar Plot Characteristics", Variation_1361, 0x10), "ERR": ("Extended Range Report", Variation_312, 0x08), "RTC": ("Radar Track Characteristics", Variation_1359, 0x04), "CPC": ("Common and Plot Characteristics", Variation_1356, 0x02)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["MD5"]) -> Variation_1367: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["M5N"]) -> Variation_1368: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["M4E"]) -> Variation_1176: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RPC"]) -> Variation_1361: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["ERR"]) -> Variation_312: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["RTC"]) -> Variation_1359: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["CPC"]) -> Variation_1356: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 
 # Uap set
 class Uap_0(UapSingle):
@@ -14142,7 +19041,7 @@ class Uap_39(UapSingle):
 class Uap_40(UapSingle):
     var = Variation_1324
 class Uap_41(UapMultiple):
-    lst = [("plot", Variation_1315), ("track", Variation_1316)]
+    uaps = {"plot": Variation_1315, "track": Variation_1316}
     selector = (["020", "TYP"], {0: "plot", 1: "track"})
 
 # Spec set
@@ -14243,235 +19142,235 @@ class AstSpec_45(AstRef):
 class Asterix_0(Asterix):
     cat = 1
     edition = (1, 2)
-    spec = AstSpec_41
+    astspec = AstSpec_41
 class Asterix_1(Asterix):
     cat = 1
     edition = (1, 3)
-    spec = AstSpec_41
+    astspec = AstSpec_41
 class Asterix_2(Asterix):
     cat = 1
     edition = (1, 4)
-    spec = AstSpec_41
+    astspec = AstSpec_41
 class Asterix_3(Asterix):
     cat = 2
     edition = (1, 0)
-    spec = AstSpec_16
+    astspec = AstSpec_16
 class Asterix_4(Asterix):
     cat = 2
     edition = (1, 1)
-    spec = AstSpec_16
+    astspec = AstSpec_16
 class Asterix_5(Asterix):
     cat = 4
     edition = (1, 12)
-    spec = AstSpec_12
+    astspec = AstSpec_12
 class Asterix_6(Asterix):
     cat = 8
     edition = (1, 2)
-    spec = AstSpec_17
+    astspec = AstSpec_17
 class Asterix_7(Asterix):
     cat = 8
     edition = (1, 3)
-    spec = AstSpec_17
+    astspec = AstSpec_17
 class Asterix_8(Asterix):
     cat = 9
     edition = (2, 1)
-    spec = AstSpec_22
+    astspec = AstSpec_22
 class Asterix_9(Asterix):
     cat = 10
     edition = (1, 1)
-    spec = AstSpec_20
+    astspec = AstSpec_20
 class Asterix_10(Asterix):
     cat = 11
     edition = (1, 2)
-    spec = AstSpec_37
+    astspec = AstSpec_37
 class Asterix_11(Asterix):
     cat = 11
     edition = (1, 3)
-    spec = AstSpec_38
+    astspec = AstSpec_38
 class Asterix_12(Asterix):
     cat = 15
     edition = (1, 0)
-    spec = AstSpec_23
+    astspec = AstSpec_23
 class Asterix_13(Asterix):
     cat = 15
     edition = (1, 1)
-    spec = AstSpec_23
+    astspec = AstSpec_23
 class Asterix_14(Asterix):
     cat = 16
     edition = (1, 0)
-    spec = AstSpec_27
+    astspec = AstSpec_27
 class Asterix_15(Asterix):
     cat = 17
     edition = (1, 3)
-    spec = AstSpec_26
+    astspec = AstSpec_26
 class Asterix_16(Asterix):
     cat = 18
     edition = (1, 7)
-    spec = AstSpec_40
+    astspec = AstSpec_40
 class Asterix_17(Asterix):
     cat = 19
     edition = (1, 3)
-    spec = AstSpec_19
+    astspec = AstSpec_19
 class Asterix_18(Asterix):
     cat = 20
     edition = (1, 9)
-    spec = AstSpec_32
+    astspec = AstSpec_32
 class Asterix_19(Asterix):
     cat = 20
     edition = (1, 10)
-    spec = AstSpec_31
+    astspec = AstSpec_31
 class Asterix_20(Asterix):
     cat = 21
     edition = (0, 23)
-    spec = AstSpec_0
+    astspec = AstSpec_0
 class Asterix_21(Asterix):
     cat = 21
     edition = (0, 24)
-    spec = AstSpec_1
+    astspec = AstSpec_1
 class Asterix_22(Asterix):
     cat = 21
     edition = (0, 25)
-    spec = AstSpec_1
+    astspec = AstSpec_1
 class Asterix_23(Asterix):
     cat = 21
     edition = (0, 26)
-    spec = AstSpec_2
+    astspec = AstSpec_2
 class Asterix_24(Asterix):
     cat = 21
     edition = (1, 4)
-    spec = AstSpec_42
+    astspec = AstSpec_42
 class Asterix_25(Asterix):
     cat = 21
     edition = (1, 5)
-    spec = AstSpec_43
+    astspec = AstSpec_43
 class Asterix_26(Asterix):
     cat = 21
     edition = (2, 1)
-    spec = AstSpec_6
+    astspec = AstSpec_6
 class Asterix_27(Asterix):
     cat = 21
     edition = (2, 2)
-    spec = AstSpec_7
+    astspec = AstSpec_7
 class Asterix_28(Asterix):
     cat = 21
     edition = (2, 3)
-    spec = AstSpec_4
+    astspec = AstSpec_4
 class Asterix_29(Asterix):
     cat = 21
     edition = (2, 4)
-    spec = AstSpec_4
+    astspec = AstSpec_4
 class Asterix_30(Asterix):
     cat = 21
     edition = (2, 5)
-    spec = AstSpec_3
+    astspec = AstSpec_3
 class Asterix_31(Asterix):
     cat = 21
     edition = (2, 6)
-    spec = AstSpec_5
+    astspec = AstSpec_5
 class Asterix_32(Asterix):
     cat = 23
     edition = (1, 2)
-    spec = AstSpec_24
+    astspec = AstSpec_24
 class Asterix_33(Asterix):
     cat = 23
     edition = (1, 3)
-    spec = AstSpec_24
+    astspec = AstSpec_24
 class Asterix_34(Asterix):
     cat = 25
     edition = (1, 5)
-    spec = AstSpec_25
+    astspec = AstSpec_25
 class Asterix_35(Asterix):
     cat = 32
     edition = (1, 1)
-    spec = AstSpec_39
+    astspec = AstSpec_39
 class Asterix_36(Asterix):
     cat = 34
     edition = (1, 27)
-    spec = AstSpec_13
+    astspec = AstSpec_13
 class Asterix_37(Asterix):
     cat = 34
     edition = (1, 28)
-    spec = AstSpec_14
+    astspec = AstSpec_14
 class Asterix_38(Asterix):
     cat = 34
     edition = (1, 29)
-    spec = AstSpec_15
+    astspec = AstSpec_15
 class Asterix_39(Asterix):
     cat = 48
     edition = (1, 11)
-    spec = AstSpec_45
+    astspec = AstSpec_45
 class Asterix_40(Asterix):
     cat = 48
     edition = (1, 27)
-    spec = AstSpec_34
+    astspec = AstSpec_34
 class Asterix_41(Asterix):
     cat = 48
     edition = (1, 28)
-    spec = AstSpec_35
+    astspec = AstSpec_35
 class Asterix_42(Asterix):
     cat = 48
     edition = (1, 29)
-    spec = AstSpec_33
+    astspec = AstSpec_33
 class Asterix_43(Asterix):
     cat = 48
     edition = (1, 30)
-    spec = AstSpec_33
+    astspec = AstSpec_33
 class Asterix_44(Asterix):
     cat = 48
     edition = (1, 31)
-    spec = AstSpec_36
+    astspec = AstSpec_36
 class Asterix_45(Asterix):
     cat = 62
     edition = (1, 2)
-    spec = AstSpec_44
+    astspec = AstSpec_44
 class Asterix_46(Asterix):
     cat = 62
     edition = (1, 17)
-    spec = AstSpec_8
+    astspec = AstSpec_8
 class Asterix_47(Asterix):
     cat = 62
     edition = (1, 18)
-    spec = AstSpec_11
+    astspec = AstSpec_11
 class Asterix_48(Asterix):
     cat = 62
     edition = (1, 19)
-    spec = AstSpec_10
+    astspec = AstSpec_10
 class Asterix_49(Asterix):
     cat = 62
     edition = (1, 20)
-    spec = AstSpec_9
+    astspec = AstSpec_9
 class Asterix_50(Asterix):
     cat = 63
     edition = (1, 6)
-    spec = AstSpec_29
+    astspec = AstSpec_29
 class Asterix_51(Asterix):
     cat = 65
     edition = (1, 4)
-    spec = AstSpec_18
+    astspec = AstSpec_18
 class Asterix_52(Asterix):
     cat = 65
     edition = (1, 5)
-    spec = AstSpec_18
+    astspec = AstSpec_18
 class Asterix_53(Asterix):
     cat = 65
     edition = (1, 6)
-    spec = AstSpec_18
+    astspec = AstSpec_18
 class Asterix_54(Asterix):
     cat = 205
     edition = (1, 0)
-    spec = AstSpec_28
+    astspec = AstSpec_28
 class Asterix_55(Asterix):
     cat = 240
     edition = (1, 3)
-    spec = AstSpec_21
+    astspec = AstSpec_21
 class Asterix_56(Asterix):
     cat = 247
     edition = (1, 2)
-    spec = AstSpec_30
+    astspec = AstSpec_30
 class Asterix_57(Asterix):
     cat = 247
     edition = (1, 3)
-    spec = AstSpec_30
+    astspec = AstSpec_30
 
 # Aliases
 Cat_001_1_2: TypeAlias = Asterix_0

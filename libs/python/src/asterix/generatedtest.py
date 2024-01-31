@@ -316,7 +316,11 @@ class Item_5(Item):
     var = Variation_5
 class Variation_38(Compound):
     fspec_size = None
-    items = [Item_5]
+    items_list = [Item_5]
+    items_dict = {"010": ("", Variation_5, 0x80)}
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_5:
+        return cls.items_dict[key][1] # type: ignore
 class Item_25(Item):
     name = "101"
     title = ""
@@ -327,7 +331,19 @@ class Item_26(Item):
     var = Variation_5
 class Variation_39(Compound):
     fspec_size = None
-    items = [Item_5, Item_25, Item_26]
+    items_list = [Item_5, Item_25, Item_26]
+    items_dict = {"010": ("", Variation_5, 0x80), "101": ("", Variation_5, 0x40), "102": ("", Variation_5, 0x20)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_5: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["101"]) -> Variation_5: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["102"]) -> Variation_5: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_27(Item):
     name = "201"
     title = ""
@@ -338,14 +354,35 @@ class Item_28(Item):
     var = Variation_12
 class Variation_40(Compound):
     fspec_size = None
-    items = [Item_5, Item_27, Item_28]
+    items_list = [Item_5, Item_27, Item_28]
+    items_dict = {"010": ("", Variation_5, 0x80), "201": ("", Variation_12, 0x40), "202": ("", Variation_12, 0x20)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_5: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["201"]) -> Variation_12: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["202"]) -> Variation_12: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_29(Item):
     name = "301"
     title = ""
     var = Variation_15
 class Variation_41(Compound):
     fspec_size = None
-    items = [Item_5, Item_29]
+    items_list = [Item_5, Item_29]
+    items_dict = {"010": ("", Variation_5, 0x80), "301": ("", Variation_15, 0x40)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_5: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["301"]) -> Variation_15: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_6(Item):
     name = "010"
     title = "Data Source Identifier"
@@ -404,21 +441,90 @@ class Item_22(Item):
     var = Variation_37
 class Variation_45(Compound):
     fspec_size = None
-    items = [Item_35, None, Item_39]
+    items_list = [Item_35, None, Item_39]
+    items_dict = {"I1": ("", Variation_5, 0x80), "I2": ("", Variation_5, 0x20)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I1"]) -> Variation_5: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I2"]) -> Variation_5: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_23(Item):
     name = "091"
     title = "Compound Fspec With Fx"
     var = Variation_45
 class Variation_46(Compound):
     fspec_size = 1
-    items = [Item_35, None, Item_39]
+    items_list = [Item_35, None, Item_39]
+    items_dict = {"I1": ("", Variation_5, 0x80), "I2": ("", Variation_5, 0x20)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I1"]) -> Variation_5: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I2"]) -> Variation_5: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_24(Item):
     name = "092"
     title = "Compound Fixed Size Fspec"
     var = Variation_46
 class Variation_42(Compound):
     fspec_size = None
-    items = [Item_6, Item_7, Item_9, Item_12, Item_13, Item_14, Item_15, Item_16, Item_17, Item_18, Item_19, Item_20, Item_21, Item_22, None, Item_23, Item_24]
+    items_list = [Item_6, Item_7, Item_9, Item_12, Item_13, Item_14, Item_15, Item_16, Item_17, Item_18, Item_19, Item_20, Item_21, Item_22, None, Item_23, Item_24]
+    items_dict = {"010": ("Data Source Identifier", Variation_28, 0x800000), "020": ("Different Contents", Variation_27, 0x400000), "030": ("Dependent Item", Variation_26, 0x200000), "040": ("Spare Items", Variation_24, 0x100000), "051": ("Element", Variation_5, 0x080000), "052": ("Group", Variation_23, 0x040000), "053": ("Extended With Trailing Fx", Variation_29, 0x020000), "054": ("Extended Without Trailing Fx", Variation_30, 0x018000), "061": ("Repetitive Regular", Variation_32, 0x014000), "062": ("Repetitive With Group", Variation_33, 0x012000), "063": ("Repetitive Fx", Variation_34, 0x011000), "071": ("Explicit None", Variation_35, 0x010800), "072": ("Explicit RE", Variation_36, 0x010400), "073": ("Explicit SP", Variation_37, 0x010200), "091": ("Compound Fspec With Fx", Variation_45, 0x010140), "092": ("Compound Fixed Size Fspec", Variation_46, 0x010120)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_28: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_27: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> Variation_26: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> Variation_24: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["051"]) -> Variation_5: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["052"]) -> Variation_23: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["053"]) -> Variation_29: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["054"]) -> Variation_30: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["061"]) -> Variation_32: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["062"]) -> Variation_33: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["063"]) -> Variation_34: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["071"]) -> Variation_35: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["072"]) -> Variation_36: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["073"]) -> Variation_37: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["091"]) -> Variation_45: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["092"]) -> Variation_46: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_8(Item):
     name = "020"
     title = "Target Report Descriptor"
@@ -429,26 +535,59 @@ class Item_10(Item):
     var = Variation_5
 class Variation_43(Compound):
     fspec_size = None
-    items = [Item_6, Item_8, Item_10]
+    items_list = [Item_6, Item_8, Item_10]
+    items_dict = {"010": ("Data Source Identifier", Variation_28, 0x80), "020": ("Target Report Descriptor", Variation_31, 0x40), "031": ("For Plots Only", Variation_5, 0x20)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_28: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_31: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["031"]) -> Variation_5: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Item_11(Item):
     name = "032"
     title = "For Tracks Only"
     var = Variation_12
 class Variation_44(Compound):
     fspec_size = None
-    items = [Item_6, Item_8, Item_11]
+    items_list = [Item_6, Item_8, Item_11]
+    items_dict = {"010": ("Data Source Identifier", Variation_28, 0x80), "020": ("Target Report Descriptor", Variation_31, 0x40), "032": ("For Tracks Only", Variation_12, 0x20)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Variation_28: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["020"]) -> Variation_31: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["032"]) -> Variation_12: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 class Variation_47(Compound):
     fspec_size = 1
-    items = [Item_35, Item_39]
+    items_list = [Item_35, Item_39]
+    items_dict = {"I1": ("", Variation_5, 0x80), "I2": ("", Variation_5, 0x40)}
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I1"]) -> Variation_5: ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I2"]) -> Variation_5: ...
+    @classmethod
+    def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]
 
 # Uap set
 class Uap_0(UapSingle):
     var = Variation_42
 class Uap_1(UapMultiple):
-    lst = [("plot", Variation_43), ("track", Variation_44)]
+    uaps = {"plot": Variation_43, "track": Variation_44}
     selector = (["020", "TYP"], {0: "plot", 1: "track"})
 class Uap_2(UapMultiple):
-    lst = [("uap1", Variation_39), ("uap2", Variation_40), ("uap3", Variation_41), ("uap4", Variation_38)]
+    uaps = {"uap1": Variation_39, "uap2": Variation_40, "uap3": Variation_41, "uap4": Variation_38}
     selector = None
 
 # Spec set
@@ -465,19 +604,19 @@ class AstSpec_3(AstRef):
 class Asterix_0(Asterix):
     cat = 0
     edition = (1, 0)
-    spec = AstSpec_0
+    astspec = AstSpec_0
 class Asterix_1(Asterix):
     cat = 0
     edition = (1, 0)
-    spec = AstSpec_3
+    astspec = AstSpec_3
 class Asterix_2(Asterix):
     cat = 1
     edition = (1, 0)
-    spec = AstSpec_1
+    astspec = AstSpec_1
 class Asterix_3(Asterix):
     cat = 2
     edition = (1, 0)
-    spec = AstSpec_2
+    astspec = AstSpec_2
 
 # Aliases
 Cat_000_1_0: TypeAlias = Asterix_0

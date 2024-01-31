@@ -6,6 +6,7 @@ module Language.Python (mkCode) where
 
 import Control.Monad
 import Data.Text (Text)
+import qualified Data.Text as T
 import Data.List
 import           Data.Text.Lazy.Builder     (Builder)
 import qualified Data.Text.Lazy.Builder     as BL
@@ -14,6 +15,8 @@ import           Data.Scientific
 import qualified Data.Map as Map
 import qualified Data.Set as Set
 import           Data.Set (Set)
+import           Data.Maybe
+import           Numeric (showHex)
 
 import           Asterix.Indent
 import qualified Asterix.Specs              as A
@@ -22,7 +25,6 @@ import           Struct
 {-
 import           Control.Monad.State
 import           Data.List (nub, sort, sortOn, sortBy, intersperse, inits)
-import           Data.Maybe (catMaybes)
 import           Data.Bool
 import           Data.String (IsString)
 import           Data.Text.Lazy.Builder (Builder)
@@ -33,7 +35,6 @@ import qualified Data.Text.Lazy as TL
 import qualified Data.Text.Lazy.Encoding as TL
 import qualified Data.ByteString as BS
 import qualified Data.ByteString.Lazy as BSL
-import           Numeric (showHex)
 import           Formatting as F
 import           Options.Applicative as Opt
 import           Data.FileEmbed (makeRelativeToProject, embedFile)
@@ -157,11 +158,52 @@ mkVariation db var = case var of
             case mn of
                 Nothing -> "fspec_size = None"
                 Just n -> fmt ("fspec_size = " % int) (div8 n)
-            let f :: Maybe Item -> Text
-                f Nothing = "None"
-                f (Just item) = nameOf "Item" $ indexOf (dbItem db) item
-            fmt ("items = " % stext)
-                (fmtList "[" "]" f lst)
+            do -- items_list
+                let f :: Maybe Item -> Text
+                    f Nothing = "None"
+                    f (Just item) = nameOf "Item" $ indexOf (dbItem db) item
+                fmt ("items_list = " % stext)
+                    (fmtList "[" "]" f lst)
+            do -- items_dict
+                let showFspec :: Fspec -> Text
+                    showFspec fspecs =
+                        let f = T.pack . reverse . take 2 . (<> "00") . reverse . flip showHex ""
+                        in mconcat $ fmap f fspecs
+                let f2 = \case
+                        Just (Item name title var2) -> Just (name, title, var2)
+                        _ -> Nothing
+                    f1 (name, title, var2) = sformat
+                        ("\"" % stext % "\": (\"" % stext % "\", " % stext % ", 0x" % stext % ")")
+                        name
+                        title
+                        (nameOf "Variation" $ indexOf (dbVariation db) var2)
+                        (showFspec $ fspecOf mn lst name)
+                fmt ("items_dict = " % stext)
+                    (fmtList "{" "}" f1 $ mapMaybe f2 lst)
+            do -- spec
+                let relevant = flip mapMaybe lst $ \case
+                        Just (Item name _title var2) -> Just (name, var2)
+                        _ -> Nothing
+                case relevant of
+                    [] -> pure ()
+                    [(name, var2)] -> do
+                        "@classmethod"
+                        fmt ("def spec(cls, key : Literal[\"" % stext % "\"]) -> " % stext % ":")
+                            name
+                            (nameOf "Variation" $ indexOf (dbVariation db) var2)
+                        indent $ do
+                            "return cls.items_dict[key][1] # type: ignore"
+                    _ -> do
+                        forM_ relevant $ \(name, var2) -> do
+                            "@overload"
+                            "@classmethod"
+                            fmt ("def spec(cls, key : Literal[\"" %
+                                 stext % "\"]) -> " % stext % ": ...")
+                                name
+                                (nameOf "Variation" $ indexOf (dbVariation db) var2)
+                        "@classmethod"
+                        "def spec(cls, key : Any) -> Any: return cls.items_dict[key][1]"
+
   where
     ix = indexOf (dbVariation db) var
     cls c = fmt ("class " % stext % "(" % stext % "):")
@@ -196,11 +238,11 @@ mkUap db (uap, ix) = case uap of
         cls "UapMultiple"
         indent $ do
             let f :: (A.UapName, Variation) -> Text
-                f (name, var) = sformat ("(\"" % stext % "\", " % stext % ")")
+                f (name, var) = sformat ("\"" % stext % "\": " % stext)
                     name
                     (nameOf "Variation" $ indexOf (dbVariation db) var)
-            fmt ("lst = " % stext)
-                (fmtList "[" "]" f lst)
+            fmt ("uaps = " % stext)
+                (fmtList "{" "}" f lst)
             case msel of
                 Nothing -> "selector = None"
                 Just (A.UapSelector item tab) -> do
@@ -238,7 +280,7 @@ mkAsterix db (Asterix cat (A.Edition a b) spec, ix) = do
     indent $ do
         fmt ("cat = " % int) cat
         fmt ("edition = (" % int % ", " % int % ")") a b
-        fmt ("spec = " % stext)
+        fmt ("astspec = " % stext)
             (nameOf "AstSpec" $ indexOf (dbSpec db) spec)
   where
     cls c = fmt ("class " % stext % "(" % stext % "):")

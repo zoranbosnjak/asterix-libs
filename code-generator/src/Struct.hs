@@ -12,15 +12,18 @@
 
 module Struct where
 
+import           Control.Applicative
 import           Control.Monad.State
 import           Control.Monad.RWS
-import           Data.List           (elemIndex)
+import           Data.List           (elemIndex, unfoldr)
 import           Data.Map            (Map)
 import qualified Data.Map            as Map
-import           Data.Maybe          (catMaybes)
+import           Data.Maybe
+import           Data.Bool
 import           Data.Set            (Set)
 import qualified Data.Set            as Set
 import           Data.Text           (Text)
+import           Data.Word
 
 import qualified Asterix.Specs       as A
 
@@ -29,6 +32,9 @@ type Path = [A.Name]
 
 -- | Size is bytes
 type ByteSize = Int
+
+-- | Fspec as list of octets
+type Fspec = [Word8]
 
 -- | Offset inside octet [0..7]
 newtype OctetOffset = OctetOffset Int
@@ -360,3 +366,59 @@ flattenVariationsAndItems = snd . evalRWS go ()
                 Spare _ _ -> pure ()
                 Item _ _ var -> goVar var
             tell [Right item]
+
+-- | Split list of 'Maybe' values to the lists of equal size append 'Nothing'
+chunksOf :: Int -> [Maybe a] -> [[Maybe a]]
+chunksOf n = unfoldr f
+  where
+    f [] = Nothing
+    f lst =
+        let (a,b) = splitAt n lst
+        in Just (take n (a <> repeat Nothing), b)
+
+-- | Fspec weight of selected (by name) item
+fspecChunkOf :: Num a => A.Name -> [Maybe Item] -> Maybe a
+fspecChunkOf name lst = listToMaybe $ do
+    (x, i) <- zip [(0::Int)..] (reverse lst)
+    item <- maybe empty pure i
+    name2 <- case item of
+        Spare _ _ -> empty
+        Item name2 _title _var -> pure name2
+    guard $ name == name2
+    pure (2^x)
+
+fspecMaxBytes :: Maybe ByteSize -> [a] -> ByteSize
+fspecMaxBytes mn lst = case mn of
+    Just m -> case divMod m 8 of    -- no FX
+        (n, 0) -> n
+        _ -> error "unexpected fx bit size"
+    Nothing -> case divMod (length lst) 7 of    -- 1 bit for FX
+        (n, 0) -> n
+        (n, _) -> succ n
+
+-- | Get 'Fspec' of compound subitem
+fspecOf :: Maybe A.RegisterSize -> [Maybe Item] -> A.Name -> Fspec
+fspecOf mn lst name = case mn of
+    Just _n ->
+        let itemGroups = chunksOf 8 $ take (fspecMaxBytes mn lst * 8) (lst <> repeat Nothing)
+            fspecs = fspecChunkOf name <$> itemGroups
+            results = maybe 0 id <$> fspecs
+        in case length (catMaybes fspecs) == 1 of
+            False -> error "unexpected fspecs bits"
+            True -> results
+    Nothing ->
+        -- If a particular FSPEC bit is set,
+        -- all FX bits left of this bit must be set too.
+        let itemGroups = reverse $ chunksOf 7 lst
+            fspecs = fspecChunkOf name <$> itemGroups
+            -- Infinite lists of FX flags, once the flag is set,
+            -- it remains set forever. It's processed in reverse.
+            fxBits = False : zipWith (\a b -> a || isJust b) fxBits fspecs
+            results = do
+                (mVal, fxFlag) <- zip fspecs fxBits
+                let val = maybe 0 (*2) mVal
+                    fx = bool 0 1 fxFlag
+                pure $ val+fx
+        in case length (catMaybes fspecs) == 1 of
+            False -> error "unexpected fspecs bits"
+            True -> reverse results

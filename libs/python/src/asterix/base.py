@@ -360,7 +360,8 @@ class Explicit(Variation):
 
 class Compound(Variation):
     fspec_size : Optional[int]
-    items : List[Optional[Type[ItemBase]]]
+    items_list : List[Optional[Type[ItemBase]]]
+    items_dict : Dict[str, Tuple[str, Type[Variation], int]]
 
 class Spare(ItemBase):
     bit_offset8 : int
@@ -380,7 +381,7 @@ class UapSingle(Uap):
     var : Type[Variation]
 
 class UapMultiple(Uap):
-    lst : List[Tuple[str, Type[Variation]]]
+    uaps : Dict[str, Type[Variation]]
     selector : Optional[Tuple[List[str], dict[int, str]]]
 
 # Spec
@@ -399,7 +400,7 @@ class AstRef(AstSpec):
 class Asterix:
     cat : int
     edition : Tuple[int, int]
-    spec : Type[AstSpec]
+    astspec : Type[AstSpec]
 
 '''
 class Variation:
