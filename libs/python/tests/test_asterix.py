@@ -8,6 +8,11 @@ from asterix.generatedtest import *
 Cat = Cat_000_1_0
 Ref = Ref_000_1_0
 
+'''
+TODO:
+- test: signed/unsigned... to/from... integer/quantity... conversion
+'''
+
 def test_raw() -> None:
     I = Cat.astspec.uap.var.spec('010')
     '''

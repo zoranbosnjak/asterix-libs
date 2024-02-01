@@ -422,3 +422,14 @@ fspecOf mn lst name = case mn of
         in case length (catMaybes fspecs) == 1 of
             False -> error "unexpected fspecs bits"
             True -> reverse results
+
+sizeOfVariation :: Variation -> Maybe Int
+sizeOfVariation = \case
+    Element _o n _cont -> Just n
+    Group lst -> fmap (foldr (+) 0) $ sequence $ fmap sizeOfItem lst
+    _ -> Nothing
+
+sizeOfItem :: Item -> Maybe Int
+sizeOfItem = \case
+    Spare _o n -> Just n
+    Item _name _title var -> sizeOfVariation var
