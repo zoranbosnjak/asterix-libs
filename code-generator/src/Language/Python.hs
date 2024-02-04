@@ -116,9 +116,9 @@ mkVariation db var = case var of
         let varName2 var2 = nameOf "Variation" $ indexOf (dbVariation db) var2
             items = catMaybes $ flip fmap lst $ \case
                 Spare _ _ -> Nothing
-                Item name _title var2 -> Just (name, var2)
+                Item name title var2 -> Just (name, title, var2)
         fmt (stext % "_Arg_Group = TypedDict('" % stext % "_Arg_Group', {") varName varName
-        indent $ forM_ items $ \(name, var2) -> do
+        indent $ forM_ items $ \(name, _title, var2) -> do
             fmt ("\"" % stext % "\": Union[" % stext % ", " % stext % "_Arg],")
                 name (varName2 var2) (varName2 var2)
         "})"
@@ -129,14 +129,16 @@ mkVariation db var = case var of
             case sizeOfVariation var of
                 Nothing -> error "unexpected non-fixed argument"
                 Just n -> fmt ("bit_size = " % int) n
-            do
+            do -- items_list
                 let f :: Item -> Text
                     f = nameOf "Item" . indexOf (dbItem db)
                 fmt ("items_list = " % stext)
                     (fmtList "[" "]" f lst)
-            do
-                let f (name, var2) = sformat ("\"" % stext % "\": " % stext)
-                        name (varName2 var2)
+            do -- items_dict
+                let f (name, title, var2) = sformat
+                        ("\"" % stext % "\": (" % stext % ")")
+                        name
+                        (nameOf "Item" $ indexOf (dbItem db) (Item name title var2))
                 fmt ("items_dict = " % stext)
                     (fmtList "{" "}" f items)
     Extended lst -> do
@@ -183,10 +185,9 @@ mkVariation db var = case var of
                         Just (Item name title var2) -> Just (name, title, var2)
                         _ -> Nothing
                     f1 (name, title, var2) = sformat
-                        ("\"" % stext % "\": (\"" % stext % "\", " % stext % ", 0x" % stext % ")")
+                        ("\"" % stext % "\": (" % stext % ", 0x" % stext % ")")
                         name
-                        title
-                        (nameOf "Variation" $ indexOf (dbVariation db) var2)
+                        (nameOf "Item" $ indexOf (dbItem db) (Item name title var2))
                         (showFspec $ fspecOf mn lst name)
                 fmt ("items_dict = " % stext)
                     (fmtList "{" "}" f1 $ mapMaybe f2 lst)

@@ -405,7 +405,7 @@ class Element(Variation):
 class Group(Variation):
     bit_size : ClassVar[int]
     items_list : ClassVar[List[Type[ItemBase]]]
-    items_dict : ClassVar[Dict[str, Type[Variation]]]
+    items_dict : ClassVar[Dict[str, Type[ItemBase]]]
 
 class Extended(Variation):
     items : ClassVar[List[Optional[Type[ItemBase]]]]
@@ -420,7 +420,7 @@ class Explicit(Variation):
 class Compound(Variation):
     fspec_size : ClassVar[Optional[int]]
     items_list : ClassVar[List[Optional[Type[ItemBase]]]]
-    items_dict : ClassVar[Dict[str, Tuple[str, Type[Variation], int]]]
+    items_dict : ClassVar[Dict[str, Tuple[Type[ItemBase], int]]]
 
 class Spare(ItemBase):
     bit_offset8 : ClassVar[int]

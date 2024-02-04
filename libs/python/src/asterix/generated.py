@@ -15161,7 +15161,7 @@ Variation_873_Arg : TypeAlias = Union[Raw, Variation_873_Arg_Group]
 class Variation_873(Group):
     bit_size = 16
     items_list = [Item_0, Item_889]
-    items_dict = {"FTN": Variation_422}
+    items_dict = {"FTN": (Item_889)}
 
 class Item_1313(Item):
     name = "PR"
@@ -15181,7 +15181,7 @@ Variation_874_Arg : TypeAlias = Union[Raw, Variation_874_Arg_Group]
 class Variation_874(Group):
     bit_size = 8
     items_list = [Item_0, Item_1313, Item_1337]
-    items_dict = {"PR": Variation_415, "PT": Variation_843}
+    items_dict = {"PR": (Item_1313), "PT": (Item_1337)}
 
 class Item_1426(Item):
     name = "REDRDP"
@@ -15205,7 +15205,7 @@ Variation_875_Arg : TypeAlias = Union[Raw, Variation_875_Arg_Group]
 class Variation_875(Group):
     bit_size = 8
     items_list = [Item_0, Item_1426, Item_1427, Item_29]
-    items_dict = {"REDRDP": Variation_410, "REDXMT": Variation_682}
+    items_dict = {"REDRDP": (Item_1426), "REDXMT": (Item_1427)}
 
 class Item_1435(Item):
     name = "RES"
@@ -15225,7 +15225,7 @@ Variation_876_Arg : TypeAlias = Union[Raw, Variation_876_Arg_Group]
 class Variation_876(Group):
     bit_size = 16
     items_list = [Item_0, Item_1435, Item_896]
-    items_dict = {"RES": Variation_358, "GA": Variation_522}
+    items_dict = {"RES": (Item_1435), "GA": (Item_896)}
 
 class Item_1437(Item):
     name = "RES"
@@ -15245,7 +15245,7 @@ Variation_877_Arg : TypeAlias = Union[Raw, Variation_877_Arg_Group]
 class Variation_877(Group):
     bit_size = 16
     items_list = [Item_0, Item_1437, Item_897]
-    items_dict = {"RES": Variation_358, "GA": Variation_522}
+    items_dict = {"RES": (Item_1437), "GA": (Item_897)}
 
 class Item_1858(Item):
     name = "VNS"
@@ -15271,7 +15271,7 @@ Variation_878_Arg : TypeAlias = Union[Raw, Variation_878_Arg_Group]
 class Variation_878(Group):
     bit_size = 8
     items_list = [Item_0, Item_1858, Item_1855, Item_1068]
-    items_dict = {"VNS": Variation_384, "VN": Variation_514, "LTT": Variation_774}
+    items_dict = {"VNS": (Item_1858), "VN": (Item_1855), "LTT": (Item_1068)}
 
 class Item_1856(Item):
     name = "VN"
@@ -15287,7 +15287,7 @@ Variation_879_Arg : TypeAlias = Union[Raw, Variation_879_Arg_Group]
 class Variation_879(Group):
     bit_size = 8
     items_list = [Item_0, Item_1858, Item_1856, Item_1068]
-    items_dict = {"VNS": Variation_384, "VN": Variation_515, "LTT": Variation_774}
+    items_dict = {"VNS": (Item_1858), "VN": (Item_1856), "LTT": (Item_1068)}
 
 class Item_1(Spare):
     bit_offset8 = 0
@@ -15305,7 +15305,7 @@ Variation_880_Arg : TypeAlias = Union[Raw, Variation_880_Arg_Group]
 class Variation_880(Group):
     bit_size = 16
     items_list = [Item_1, Item_413]
-    items_dict = {"3DH": Variation_522}
+    items_dict = {"3DH": (Item_413)}
 
 class Item_1293(Item):
     name = "PIN"
@@ -15337,7 +15337,7 @@ Variation_881_Arg : TypeAlias = Union[Raw, Variation_881_Arg_Group]
 class Variation_881(Group):
     bit_size = 32
     items_list = [Item_1, Item_1293, Item_1, Item_1214, Item_1208, Item_1, Item_1157]
-    items_dict = {"PIN": Variation_520, "NAV": Variation_473, "NAT": Variation_606, "MIS": Variation_518}
+    items_dict = {"PIN": (Item_1293), "NAV": (Item_1214), "NAT": (Item_1208), "MIS": (Item_1157)}
 
 class Item_2(Spare):
     bit_offset8 = 0
@@ -15352,7 +15352,7 @@ Variation_882_Arg : TypeAlias = Union[Raw, Variation_882_Arg_Group]
 class Variation_882(Group):
     bit_size = 32
     items_list = [Item_1, Item_1293, Item_2, Item_1208, Item_1, Item_1157]
-    items_dict = {"PIN": Variation_520, "NAT": Variation_606, "MIS": Variation_518}
+    items_dict = {"PIN": (Item_1293), "NAT": (Item_1208), "MIS": (Item_1157)}
 
 class Item_3(Spare):
     bit_offset8 = 0
@@ -15377,7 +15377,7 @@ Variation_883_Arg : TypeAlias = Union[Raw, Variation_883_Arg_Group]
 class Variation_883(Group):
     bit_size = 32
     items_list = [Item_1, Item_1293, Item_3, Item_1242, Item_1225]
-    items_dict = {"PIN": Variation_520, "NOV": Variation_644, "NO": Variation_775}
+    items_dict = {"PIN": (Item_1293), "NOV": (Item_1242), "NO": (Item_1225)}
 
 class Item_4(Spare):
     bit_offset8 = 0
@@ -15396,7 +15396,7 @@ Variation_884_Arg : TypeAlias = Union[Raw, Variation_884_Arg_Group]
 class Variation_884(Group):
     bit_size = 32
     items_list = [Item_1, Item_1293, Item_4, Item_1226]
-    items_dict = {"PIN": Variation_520, "NO": Variation_775}
+    items_dict = {"PIN": (Item_1293), "NO": (Item_1226)}
 
 class Item_1826(Item):
     name = "UPD"
@@ -15410,7 +15410,7 @@ Variation_885_Arg : TypeAlias = Union[Raw, Variation_885_Arg_Group]
 class Variation_885(Group):
     bit_size = 16
     items_list = [Item_1, Item_1826]
-    items_dict = {"UPD": Variation_525}
+    items_dict = {"UPD": (Item_1826)}
 
 class Item_1927(Item):
     name = "XP"
@@ -15454,7 +15454,7 @@ Variation_886_Arg : TypeAlias = Union[Raw, Variation_886_Arg_Group]
 class Variation_886(Group):
     bit_size = 8
     items_list = [Item_1, Item_1927, Item_1920, Item_1923, Item_1919, Item_1917, Item_1913]
-    items_dict = {"XP": Variation_500, "X5": Variation_585, "XC": Variation_667, "X3": Variation_758, "X2": Variation_838, "X1": Variation_868}
+    items_dict = {"XP": (Item_1927), "X5": (Item_1920), "XC": (Item_1923), "X3": (Item_1919), "X2": (Item_1917), "X1": (Item_1913)}
 
 class Item_1928(Item):
     name = "XP"
@@ -15478,7 +15478,7 @@ Variation_887_Arg : TypeAlias = Union[Raw, Variation_887_Arg_Group]
 class Variation_887(Group):
     bit_size = 8
     items_list = [Item_1, Item_1928, Item_1920, Item_1923, Item_1919, Item_1916, Item_1913]
-    items_dict = {"XP": Variation_500, "X5": Variation_585, "XC": Variation_667, "X3": Variation_758, "X2": Variation_781, "X1": Variation_868}
+    items_dict = {"XP": (Item_1928), "X5": (Item_1920), "XC": (Item_1923), "X3": (Item_1919), "X2": (Item_1916), "X1": (Item_1913)}
 
 class Item_804(Item):
     name = "DTI"
@@ -15516,7 +15516,7 @@ Variation_888_Arg : TypeAlias = Union[Raw, Variation_888_Arg_Group]
 class Variation_888(Group):
     bit_size = 8
     items_list = [Item_2, Item_804, Item_1129, Item_1818, Item_1852, Item_1269]
-    items_dict = {"DTI": Variation_582, "MDS": Variation_652, "UAT": Variation_750, "VDL": Variation_823, "OTR": Variation_863}
+    items_dict = {"DTI": (Item_804), "MDS": (Item_1129), "UAT": (Item_1818), "VDL": (Item_1852), "OTR": (Item_1269)}
 
 class Item_865(Item):
     name = "FOM"
@@ -15530,7 +15530,7 @@ Variation_889_Arg : TypeAlias = Union[Raw, Variation_889_Arg_Group]
 class Variation_889(Group):
     bit_size = 8
     items_list = [Item_2, Item_865]
-    items_dict = {"FOM": Variation_606}
+    items_dict = {"FOM": (Item_865)}
 
 class Item_866(Item):
     name = "FOM"
@@ -15544,7 +15544,7 @@ Variation_890_Arg : TypeAlias = Union[Raw, Variation_890_Arg_Group]
 class Variation_890(Group):
     bit_size = 8
     items_list = [Item_2, Item_866]
-    items_dict = {"FOM": Variation_606}
+    items_dict = {"FOM": (Item_866)}
 
 class Item_1352(Item):
     name = "QA4"
@@ -15582,7 +15582,7 @@ Variation_891_Arg : TypeAlias = Union[Raw, Variation_891_Arg_Group]
 class Variation_891(Group):
     bit_size = 8
     items_list = [Item_2, Item_1352, Item_1347, Item_1344, Item_1361, Item_1357]
-    items_dict = {"QA4": Variation_553, "QA2": Variation_633, "QA1": Variation_735, "QB2": Variation_810, "QB1": Variation_855}
+    items_dict = {"QA4": (Item_1352), "QA2": (Item_1347), "QA1": (Item_1344), "QB2": (Item_1361), "QB1": (Item_1357)}
 
 class Item_1518(Item):
     name = "SCN"
@@ -15626,7 +15626,7 @@ Variation_892_Arg : TypeAlias = Union[Raw, Variation_892_Arg_Group]
 class Variation_892(Group):
     bit_size = 24
     items_list = [Item_2, Item_1518, Item_1409, Item_474, Item_1610, Item_1333, Item_1294]
-    items_dict = {"SCN": Variation_577, "RC": Variation_611, "AC": Variation_708, "SSR": Variation_784, "PSR": Variation_851, "PLOTNR": Variation_234}
+    items_dict = {"SCN": (Item_1518), "RC": (Item_1409), "AC": (Item_474), "SSR": (Item_1610), "PSR": (Item_1333), "PLOTNR": (Item_1294)}
 
 class Item_1830(Item):
     name = "VA"
@@ -15646,7 +15646,7 @@ Variation_893_Arg : TypeAlias = Union[Raw, Variation_893_Arg_Group]
 class Variation_893(Group):
     bit_size = 16
     items_list = [Item_2, Item_1830, Item_1175]
-    items_dict = {"VA": Variation_566, "MODE3A": Variation_694}
+    items_dict = {"VA": (Item_1830), "MODE3A": (Item_1175)}
 
 Variation_894_Arg_Group = TypedDict('Variation_894_Arg_Group', {
     "X5": Union[Variation_585, Variation_585_Arg],
@@ -15659,7 +15659,7 @@ Variation_894_Arg : TypeAlias = Union[Raw, Variation_894_Arg_Group]
 class Variation_894(Group):
     bit_size = 8
     items_list = [Item_2, Item_1920, Item_1923, Item_1919, Item_1917, Item_1913]
-    items_dict = {"X5": Variation_585, "XC": Variation_667, "X3": Variation_758, "X2": Variation_838, "X1": Variation_868}
+    items_dict = {"X5": (Item_1920), "XC": (Item_1923), "X3": (Item_1919), "X2": (Item_1917), "X1": (Item_1913)}
 
 class Item_593(Item):
     name = "BPS"
@@ -15673,7 +15673,7 @@ Variation_895_Arg : TypeAlias = Union[Raw, Variation_895_Arg_Group]
 class Variation_895(Group):
     bit_size = 16
     items_list = [Item_3, Item_593]
-    items_dict = {"BPS": Variation_698}
+    items_dict = {"BPS": (Item_593)}
 
 class Item_594(Item):
     name = "BPS"
@@ -15687,7 +15687,7 @@ Variation_896_Arg : TypeAlias = Union[Raw, Variation_896_Arg_Group]
 class Variation_896(Group):
     bit_size = 16
     items_list = [Item_3, Item_594]
-    items_dict = {"BPS": Variation_697}
+    items_dict = {"BPS": (Item_594)}
 
 class Item_821(Item):
     name = "EM1"
@@ -15701,7 +15701,7 @@ Variation_897_Arg : TypeAlias = Union[Raw, Variation_897_Arg_Group]
 class Variation_897(Group):
     bit_size = 16
     items_list = [Item_3, Item_821]
-    items_dict = {"EM1": Variation_694}
+    items_dict = {"EM1": (Item_821)}
 
 class Item_890(Item):
     name = "FTN"
@@ -15715,7 +15715,7 @@ Variation_898_Arg : TypeAlias = Union[Raw, Variation_898_Arg_Group]
 class Variation_898(Group):
     bit_size = 16
     items_list = [Item_3, Item_890]
-    items_dict = {"FTN": Variation_693}
+    items_dict = {"FTN": (Item_890)}
 
 class Item_940(Item):
     name = "HDR"
@@ -15741,7 +15741,7 @@ Variation_899_Arg : TypeAlias = Union[Raw, Variation_899_Arg_Group]
 class Variation_899(Group):
     bit_size = 16
     items_list = [Item_3, Item_940, Item_1629, Item_1552]
-    items_dict = {"HDR": Variation_664, "STAT": Variation_712, "SH": Variation_848}
+    items_dict = {"HDR": (Item_940), "STAT": (Item_1629), "SH": (Item_1552)}
 
 class Item_1165(Item):
     name = "MOD3A"
@@ -15755,7 +15755,7 @@ Variation_900_Arg : TypeAlias = Union[Raw, Variation_900_Arg_Group]
 class Variation_900(Group):
     bit_size = 16
     items_list = [Item_3, Item_1165]
-    items_dict = {"MOD3A": Variation_694}
+    items_dict = {"MOD3A": (Item_1165)}
 
 class Item_1169(Item):
     name = "MODE2"
@@ -15769,7 +15769,7 @@ Variation_901_Arg : TypeAlias = Union[Raw, Variation_901_Arg_Group]
 class Variation_901(Group):
     bit_size = 16
     items_list = [Item_3, Item_1169]
-    items_dict = {"MODE2": Variation_694}
+    items_dict = {"MODE2": (Item_1169)}
 
 class Item_1171(Item):
     name = "MODE3A"
@@ -15783,7 +15783,7 @@ Variation_902_Arg : TypeAlias = Union[Raw, Variation_902_Arg_Group]
 class Variation_902(Group):
     bit_size = 16
     items_list = [Item_3, Item_1171]
-    items_dict = {"MODE3A": Variation_694}
+    items_dict = {"MODE3A": (Item_1171)}
 
 class Item_1173(Item):
     name = "MODE3A"
@@ -15797,7 +15797,7 @@ Variation_903_Arg : TypeAlias = Union[Raw, Variation_903_Arg_Group]
 class Variation_903(Group):
     bit_size = 16
     items_list = [Item_3, Item_1173]
-    items_dict = {"MODE3A": Variation_694}
+    items_dict = {"MODE3A": (Item_1173)}
 
 class Item_1174(Item):
     name = "MODE3A"
@@ -15811,7 +15811,7 @@ Variation_904_Arg : TypeAlias = Union[Raw, Variation_904_Arg_Group]
 class Variation_904(Group):
     bit_size = 16
     items_list = [Item_3, Item_1174]
-    items_dict = {"MODE3A": Variation_694}
+    items_dict = {"MODE3A": (Item_1174)}
 
 Variation_905_Arg_Group = TypedDict('Variation_905_Arg_Group', {
     "MODE3A": Union[Variation_694, Variation_694_Arg],
@@ -15820,7 +15820,7 @@ Variation_905_Arg : TypeAlias = Union[Raw, Variation_905_Arg_Group]
 class Variation_905(Group):
     bit_size = 16
     items_list = [Item_3, Item_1175]
-    items_dict = {"MODE3A": Variation_694}
+    items_dict = {"MODE3A": (Item_1175)}
 
 class Item_1253(Item):
     name = "OCT1"
@@ -15852,7 +15852,7 @@ Variation_906_Arg : TypeAlias = Union[Raw, Variation_906_Arg_Group]
 class Variation_906(Group):
     bit_size = 16
     items_list = [Item_3, Item_1253, Item_1254, Item_1255, Item_1256]
-    items_dict = {"OCT1": Variation_679, "OCT2": Variation_870, "OCT3": Variation_513, "OCT4": Variation_771}
+    items_dict = {"OCT1": (Item_1253), "OCT2": (Item_1254), "OCT3": (Item_1255), "OCT4": (Item_1256)}
 
 class Item_1340(Item):
     name = "PUN"
@@ -15866,7 +15866,7 @@ Variation_907_Arg : TypeAlias = Union[Raw, Variation_907_Arg_Group]
 class Variation_907(Group):
     bit_size = 8
     items_list = [Item_3, Item_1340]
-    items_dict = {"PUN": Variation_685}
+    items_dict = {"PUN": (Item_1340)}
 
 class Item_1353(Item):
     name = "QA4"
@@ -15946,7 +15946,7 @@ Variation_908_Arg : TypeAlias = Union[Raw, Variation_908_Arg_Group]
 class Variation_908(Group):
     bit_size = 16
     items_list = [Item_3, Item_1353, Item_1348, Item_1345, Item_1364, Item_1359, Item_1355, Item_1372, Item_1368, Item_1366, Item_1380, Item_1378, Item_1375]
-    items_dict = {"QA4": Variation_634, "QA2": Variation_736, "QA1": Variation_809, "QB4": Variation_856, "QB2": Variation_44, "QB1": Variation_363, "QC4": Variation_458, "QC2": Variation_554, "QC1": Variation_636, "QD4": Variation_739, "QD2": Variation_813, "QD1": Variation_857}
+    items_dict = {"QA4": (Item_1353), "QA2": (Item_1348), "QA1": (Item_1345), "QB4": (Item_1364), "QB2": (Item_1359), "QB1": (Item_1355), "QC4": (Item_1372), "QC2": (Item_1368), "QC1": (Item_1366), "QD4": (Item_1380), "QD2": (Item_1378), "QD1": (Item_1375)}
 
 class Item_1630(Item):
     name = "STAT"
@@ -15960,7 +15960,7 @@ Variation_909_Arg : TypeAlias = Union[Raw, Variation_909_Arg_Group]
 class Variation_909(Group):
     bit_size = 8
     items_list = [Item_3, Item_1630, Item_29]
-    items_dict = {"STAT": Variation_679}
+    items_dict = {"STAT": (Item_1630)}
 
 class Item_1758(Item):
     name = "TRK"
@@ -15974,7 +15974,7 @@ Variation_910_Arg : TypeAlias = Union[Raw, Variation_910_Arg_Group]
 class Variation_910(Group):
     bit_size = 16
     items_list = [Item_3, Item_1758]
-    items_dict = {"TRK": Variation_693}
+    items_dict = {"TRK": (Item_1758)}
 
 class Item_1760(Item):
     name = "TRN"
@@ -15988,7 +15988,7 @@ Variation_911_Arg : TypeAlias = Union[Raw, Variation_911_Arg_Group]
 class Variation_911(Group):
     bit_size = 16
     items_list = [Item_3, Item_1760]
-    items_dict = {"TRN": Variation_693}
+    items_dict = {"TRN": (Item_1760)}
 
 class Item_1762(Item):
     name = "TRNUM"
@@ -16002,7 +16002,7 @@ Variation_912_Arg : TypeAlias = Union[Raw, Variation_912_Arg_Group]
 class Variation_912(Group):
     bit_size = 16
     items_list = [Item_3, Item_1762]
-    items_dict = {"TRNUM": Variation_693}
+    items_dict = {"TRNUM": (Item_1762)}
 
 class Item_686(Item):
     name = "COM"
@@ -16016,7 +16016,7 @@ Variation_913_Arg : TypeAlias = Union[Raw, Variation_913_Arg_Group]
 class Variation_913(Group):
     bit_size = 8
     items_list = [Item_4, Item_686]
-    items_dict = {"COM": Variation_772}
+    items_dict = {"COM": (Item_686)}
 
 class Item_1217(Item):
     name = "NBR"
@@ -16030,7 +16030,7 @@ Variation_914_Arg : TypeAlias = Union[Raw, Variation_914_Arg_Group]
 class Variation_914(Group):
     bit_size = 32
     items_list = [Item_4, Item_1217]
-    items_dict = {"NBR": Variation_779}
+    items_dict = {"NBR": (Item_1217)}
 
 class Item_1319(Item):
     name = "PREFIX"
@@ -16044,7 +16044,7 @@ Variation_915_Arg : TypeAlias = Union[Raw, Variation_915_Arg_Group]
 class Variation_915(Group):
     bit_size = 32
     items_list = [Item_4, Item_1319]
-    items_dict = {"PREFIX": Variation_777}
+    items_dict = {"PREFIX": (Item_1319)}
 
 class Item_1487(Item):
     name = "RVSM"
@@ -16064,7 +16064,7 @@ Variation_916_Arg : TypeAlias = Union[Raw, Variation_916_Arg_Group]
 class Variation_916(Group):
     bit_size = 8
     items_list = [Item_4, Item_1487, Item_954]
-    items_dict = {"RVSM": Variation_770, "HPR": Variation_862}
+    items_dict = {"RVSM": (Item_1487), "HPR": (Item_954)}
 
 class Item_5(Spare):
     bit_offset8 = 0
@@ -16082,7 +16082,7 @@ Variation_917_Arg : TypeAlias = Union[Raw, Variation_917_Arg_Group]
 class Variation_917(Group):
     bit_size = 16
     items_list = [Item_5, Item_1669]
-    items_dict = {"TAR": Variation_847}
+    items_dict = {"TAR": (Item_1669)}
 
 class Item_6(Spare):
     bit_offset8 = 0
@@ -16100,7 +16100,7 @@ Variation_918_Arg : TypeAlias = Union[Raw, Variation_918_Arg_Group]
 class Variation_918(Group):
     bit_size = 16
     items_list = [Item_6, Item_1459]
-    items_dict = {"RPP": Variation_872}
+    items_dict = {"RPP": (Item_1459)}
 
 class Item_1689(Item):
     name = "TCOUNT1"
@@ -16144,7 +16144,7 @@ Variation_919_Arg : TypeAlias = Union[Raw, Variation_919_Arg_Group]
 class Variation_919(Group):
     bit_size = 48
     items_list = [Item_6, Item_1689, Item_1686, Item_1690, Item_1687, Item_1691, Item_1688]
-    items_dict = {"TCOUNT1": Variation_871, "TCODE1": Variation_606, "TCOUNT2": Variation_132, "TCODE2": Variation_694, "TCOUNT3": Variation_132, "TCODE3": Variation_694}
+    items_dict = {"TCOUNT1": (Item_1689), "TCODE1": (Item_1686), "TCOUNT2": (Item_1690), "TCODE2": (Item_1687), "TCOUNT3": (Item_1691), "TCODE3": (Item_1688)}
 
 class Item_465(Item):
     name = "A"
@@ -16170,7 +16170,7 @@ Variation_920_Arg : TypeAlias = Union[Raw, Variation_920_Arg_Group]
 class Variation_920(Group):
     bit_size = 16
     items_list = [Item_465, Item_989, Item_701]
-    items_dict = {"A": Variation_20, "IDENT": Variation_414, "COUNTER": Variation_845}
+    items_dict = {"A": (Item_465), "IDENT": (Item_989), "COUNTER": (Item_701)}
 
 class Item_471(Item):
     name = "AC"
@@ -16206,7 +16206,7 @@ Variation_921_Arg : TypeAlias = Union[Raw, Variation_921_Arg_Group]
 class Variation_921(Group):
     bit_size = 16
     items_list = [Item_471, Item_1161, Item_768, Item_28, Item_1281]
-    items_dict = {"AC": Variation_109, "MN": Variation_511, "DC": Variation_675, "PA": Variation_691}
+    items_dict = {"AC": (Item_471), "MN": (Item_1161), "DC": (Item_768), "PA": (Item_1281)}
 
 class Item_473(Item):
     name = "AC"
@@ -16248,7 +16248,7 @@ Variation_922_Arg : TypeAlias = Union[Raw, Variation_922_Arg_Group]
 class Variation_922(Group):
     bit_size = 16
     items_list = [Item_473, Item_1163, Item_770, Item_909, Item_31, Item_1628]
-    items_dict = {"AC": Variation_110, "MN": Variation_512, "DC": Variation_676, "GBS": Variation_836, "STAT": Variation_773}
+    items_dict = {"AC": (Item_473), "MN": (Item_1163), "DC": (Item_770), "GBS": (Item_909), "STAT": (Item_1628)}
 
 class Item_478(Item):
     name = "ACK"
@@ -16284,7 +16284,7 @@ Variation_923_Arg : TypeAlias = Union[Raw, Variation_923_Arg_Group]
 class Variation_923(Group):
     bit_size = 24
     items_list = [Item_478, Item_1660, Item_19, Item_546, Item_518]
-    items_dict = {"ACK": Variation_10, "SVR": Variation_396, "AT": Variation_155, "AN": Variation_155}
+    items_dict = {"ACK": (Item_478), "SVR": (Item_1660), "AT": (Item_546), "AN": (Item_518)}
 
 class Item_479(Item):
     name = "ACQI"
@@ -16310,7 +16310,7 @@ Variation_924_Arg : TypeAlias = Union[Raw, Variation_924_Arg_Group]
 class Variation_924(Group):
     bit_size = 32
     items_list = [Item_479, Item_1759, Item_1017]
-    items_dict = {"ACQI": Variation_108, "TRKUPDCTR": Variation_521, "LASTTRKUPD": Variation_267}
+    items_dict = {"ACQI": (Item_479), "TRKUPDCTR": (Item_1759), "LASTTRKUPD": (Item_1017)}
 
 class Item_521(Item):
     name = "ANT"
@@ -16346,7 +16346,7 @@ Variation_925_Arg : TypeAlias = Union[Raw, Variation_925_Arg_Group]
 class Variation_925(Group):
     bit_size = 8
     items_list = [Item_521, Item_630, Item_1271, Item_1192, Item_25]
-    items_dict = {"ANT": Variation_11, "CHAB": Variation_400, "OVL": Variation_565, "MSC": Variation_643}
+    items_dict = {"ANT": (Item_521), "CHAB": (Item_630), "OVL": (Item_1271), "MSC": (Item_1192)}
 
 class Item_631(Item):
     name = "CHAB"
@@ -16401,7 +16401,7 @@ Variation_926_Arg : TypeAlias = Union[Raw, Variation_926_Arg_Group]
 class Variation_926(Group):
     bit_size = 16
     items_list = [Item_521, Item_631, Item_1276, Item_1194, Item_1516, Item_784, Item_1275, Item_1273, Item_10]
-    items_dict = {"ANT": Variation_11, "CHAB": Variation_401, "OVLSUR": Variation_565, "MSC": Variation_643, "SCF": Variation_710, "DLF": Variation_785, "OVLSCF": Variation_861, "OVLDLF": Variation_60}
+    items_dict = {"ANT": (Item_521), "CHAB": (Item_631), "OVLSUR": (Item_1276), "MSC": (Item_1194), "SCF": (Item_1516), "DLF": (Item_784), "OVLSCF": (Item_1275), "OVLDLF": (Item_1273)}
 
 class Item_632(Item):
     name = "CHAB"
@@ -16418,7 +16418,7 @@ Variation_927_Arg : TypeAlias = Union[Raw, Variation_927_Arg_Group]
 class Variation_927(Group):
     bit_size = 8
     items_list = [Item_521, Item_632, Item_1271, Item_1194, Item_25]
-    items_dict = {"ANT": Variation_11, "CHAB": Variation_402, "OVL": Variation_565, "MSC": Variation_643}
+    items_dict = {"ANT": (Item_521), "CHAB": (Item_632), "OVL": (Item_1271), "MSC": (Item_1194)}
 
 class Item_523(Item):
     name = "AP"
@@ -16454,7 +16454,7 @@ Variation_928_Arg : TypeAlias = Union[Raw, Variation_928_Arg_Group]
 class Variation_928(Group):
     bit_size = 8
     items_list = [Item_523, Item_1857, Item_499, Item_515, Item_22]
-    items_dict = {"AP": Variation_12, "VN": Variation_392, "AH": Variation_431, "AM": Variation_530}
+    items_dict = {"AP": (Item_523), "VN": (Item_1857), "AH": (Item_499), "AM": (Item_515)}
 
 class Item_834(Item):
     name = "EP"
@@ -16474,7 +16474,7 @@ Variation_972_Arg : TypeAlias = Union[Raw, Variation_972_Arg_Group]
 class Variation_972(Group):
     bit_size = 2
     items_list = [Item_834, Item_1845]
-    items_dict = {"EP": Variation_630, "VAL": Variation_742}
+    items_dict = {"EP": (Item_834), "VAL": (Item_1845)}
 
 class Item_1144(Item):
     name = "MFM"
@@ -16496,7 +16496,7 @@ Variation_929_Arg : TypeAlias = Union[Raw, Variation_929_Arg_Group]
 class Variation_929(Group):
     bit_size = 8
     items_list = [Item_523, Item_1857, Item_499, Item_515, Item_1144, Item_27]
-    items_dict = {"AP": Variation_12, "VN": Variation_392, "AH": Variation_431, "AM": Variation_530, "MFM": Variation_972}
+    items_dict = {"AP": (Item_523), "VN": (Item_1857), "AH": (Item_499), "AM": (Item_515), "MFM": (Item_1144)}
 
 class Item_561(Item):
     name = "AX"
@@ -16516,7 +16516,7 @@ Variation_930_Arg : TypeAlias = Union[Raw, Variation_930_Arg_Group]
 class Variation_930(Group):
     bit_size = 16
     items_list = [Item_561, Item_564]
-    items_dict = {"AX": Variation_195, "AY": Variation_195}
+    items_dict = {"AX": (Item_561), "AY": (Item_564)}
 
 class Item_562(Item):
     name = "AX"
@@ -16536,7 +16536,7 @@ Variation_931_Arg : TypeAlias = Union[Raw, Variation_931_Arg_Group]
 class Variation_931(Group):
     bit_size = 16
     items_list = [Item_562, Item_565]
-    items_dict = {"AX": Variation_195, "AY": Variation_195}
+    items_dict = {"AX": (Item_562), "AY": (Item_565)}
 
 class Item_563(Item):
     name = "AX"
@@ -16556,7 +16556,7 @@ Variation_932_Arg : TypeAlias = Union[Raw, Variation_932_Arg_Group]
 class Variation_932(Group):
     bit_size = 16
     items_list = [Item_563, Item_566]
-    items_dict = {"AX": Variation_196, "AY": Variation_196}
+    items_dict = {"AX": (Item_563), "AY": (Item_566)}
 
 class Item_568(Item):
     name = "AZCON"
@@ -16588,7 +16588,7 @@ Variation_933_Arg : TypeAlias = Union[Raw, Variation_933_Arg_Group]
 class Variation_933(Group):
     bit_size = 64
     items_list = [Item_568, Item_815, Item_1440, Item_1439]
-    items_dict = {"AZCON": Variation_293, "ELCON": Variation_259, "RGCONSTOP": Variation_294, "RGCONSTART": Variation_294}
+    items_dict = {"AZCON": (Item_568), "ELCON": (Item_815), "RGCONSTOP": (Item_1440), "RGCONSTART": (Item_1439)}
 
 class Item_583(Item):
     name = "BIT1"
@@ -16644,7 +16644,7 @@ Variation_934_Arg : TypeAlias = Union[Raw, Variation_934_Arg_Group]
 class Variation_934(Group):
     bit_size = 8
     items_list = [Item_583, Item_584, Item_585, Item_586, Item_587, Item_588, Item_589, Item_590]
-    items_dict = {"BIT1": Variation_76, "BIT2": Variation_381, "BIT3": Variation_493, "BIT4": Variation_573, "BIT5": Variation_659, "BIT6": Variation_753, "BIT7": Variation_833, "BIT8": Variation_867}
+    items_dict = {"BIT1": (Item_583), "BIT2": (Item_584), "BIT3": (Item_585), "BIT4": (Item_586), "BIT5": (Item_587), "BIT6": (Item_588), "BIT7": (Item_589), "BIT8": (Item_590)}
 
 class Item_592(Item):
     name = "BKN"
@@ -16730,7 +16730,7 @@ Variation_935_Arg : TypeAlias = Union[Raw, Variation_935_Arg_Group]
 class Variation_935(Group):
     bit_size = 16
     items_list = [Item_592, Item_964, Item_968, Item_969, Item_970, Item_971, Item_972, Item_973, Item_974, Item_975, Item_965, Item_966, Item_967]
-    items_dict = {"BKN": Variation_127, "I1": Variation_637, "I2": Variation_740, "I3": Variation_815, "I4": Variation_859, "I5": Variation_47, "I6": Variation_364, "I7": Variation_459, "I8": Variation_556, "I9": Variation_637, "I10": Variation_740, "I11": Variation_815, "I12": Variation_859}
+    items_dict = {"BKN": (Item_592), "I1": (Item_964), "I2": (Item_968), "I3": (Item_969), "I4": (Item_970), "I5": (Item_971), "I6": (Item_972), "I7": (Item_973), "I8": (Item_974), "I9": (Item_975), "I10": (Item_965), "I11": (Item_966), "I12": (Item_967)}
 
 class Item_603(Item):
     name = "C"
@@ -16750,7 +16750,7 @@ Variation_936_Arg : TypeAlias = Union[Raw, Variation_936_Arg_Group]
 class Variation_936(Group):
     bit_size = 16
     items_list = [Item_603, Item_10, Item_1436]
-    items_dict = {"C": Variation_57, "RES": Variation_174}
+    items_dict = {"C": (Item_603), "RES": (Item_1436)}
 
 class Item_604(Item):
     name = "CA"
@@ -16770,7 +16770,7 @@ Variation_937_Arg : TypeAlias = Union[Raw, Variation_937_Arg_Group]
 class Variation_937(Group):
     bit_size = 8
     items_list = [Item_604, Item_1555, Item_22]
-    items_dict = {"CA": Variation_120, "SI": Variation_580}
+    items_dict = {"CA": (Item_604), "SI": (Item_1555)}
 
 class Item_609(Item):
     name = "CAT"
@@ -16796,7 +16796,7 @@ Variation_938_Arg : TypeAlias = Union[Raw, Variation_938_Arg_Group]
 class Variation_938(Group):
     bit_size = 24
     items_list = [Item_609, Item_1094, Item_1652]
-    items_dict = {"CAT": Variation_191, "MAIN": Variation_191, "SUB": Variation_191}
+    items_dict = {"CAT": (Item_609), "MAIN": (Item_1094), "SUB": (Item_1652)}
 
 class Item_612(Item):
     name = "CAUSE"
@@ -16816,7 +16816,7 @@ Variation_939_Arg : TypeAlias = Union[Raw, Variation_939_Arg_Group]
 class Variation_939(Group):
     bit_size = 8
     items_list = [Item_612, Item_781]
-    items_dict = {"CAUSE": Variation_128, "DIAG": Variation_687}
+    items_dict = {"CAUSE": (Item_612), "DIAG": (Item_781)}
 
 class Item_623(Item):
     name = "CEN"
@@ -16836,7 +16836,7 @@ Variation_940_Arg : TypeAlias = Union[Raw, Variation_940_Arg_Group]
 class Variation_940(Group):
     bit_size = 16
     items_list = [Item_623, Item_1303]
-    items_dict = {"CEN": Variation_155, "POS": Variation_155}
+    items_dict = {"CEN": (Item_623), "POS": (Item_1303)}
 
 class Item_624(Item):
     name = "CEN"
@@ -16856,7 +16856,7 @@ Variation_941_Arg : TypeAlias = Union[Raw, Variation_941_Arg_Group]
 class Variation_941(Group):
     bit_size = 16
     items_list = [Item_624, Item_1307]
-    items_dict = {"CEN": Variation_155, "POS": Variation_155}
+    items_dict = {"CEN": (Item_624), "POS": (Item_1307)}
 
 class Item_625(Item):
     name = "CENTRE"
@@ -16876,7 +16876,7 @@ Variation_942_Arg : TypeAlias = Union[Raw, Variation_942_Arg_Group]
 class Variation_942(Group):
     bit_size = 16
     items_list = [Item_625, Item_1310]
-    items_dict = {"CENTRE": Variation_155, "POSITION": Variation_155}
+    items_dict = {"CENTRE": (Item_625), "POSITION": (Item_1310)}
 
 class Item_641(Item):
     name = "CID"
@@ -16902,7 +16902,7 @@ Variation_943_Arg : TypeAlias = Union[Raw, Variation_943_Arg_Group]
 class Variation_943(Group):
     bit_size = 24
     items_list = [Item_641, Item_844, Item_730]
-    items_dict = {"CID": Variation_234, "ERRC": Variation_140, "CS": Variation_842}
+    items_dict = {"CID": (Item_641), "ERRC": (Item_844), "CS": (Item_730)}
 
 class Item_644(Item):
     name = "CLS"
@@ -16922,7 +16922,7 @@ Variation_944_Arg : TypeAlias = Union[Raw, Variation_944_Arg_Group]
 class Variation_944(Group):
     bit_size = 16
     items_list = [Item_644, Item_1315]
-    items_dict = {"CLS": Variation_227, "PRB": Variation_420}
+    items_dict = {"CLS": (Item_644), "PRB": (Item_1315)}
 
 class Item_667(Item):
     name = "COHAXHPX"
@@ -16954,7 +16954,7 @@ Variation_945_Arg : TypeAlias = Union[Raw, Variation_945_Arg_Group]
 class Variation_945(Group):
     bit_size = 32
     items_list = [Item_667, Item_668, Item_672, Item_652]
-    items_dict = {"COHAXHPX": Variation_197, "COHAXHPY": Variation_197, "COHAYHPX": Variation_197, "COAYHPY": Variation_197}
+    items_dict = {"COHAXHPX": (Item_667), "COHAXHPY": (Item_668), "COHAYHPX": (Item_672), "COAYHPY": (Item_652)}
 
 class Item_669(Item):
     name = "COHAXHVX"
@@ -16986,7 +16986,7 @@ Variation_946_Arg : TypeAlias = Union[Raw, Variation_946_Arg_Group]
 class Variation_946(Group):
     bit_size = 32
     items_list = [Item_669, Item_670, Item_673, Item_674]
-    items_dict = {"COHAXHVX": Variation_197, "COHAXHVY": Variation_197, "COHAYHVX": Variation_197, "COHAYHVY": Variation_197}
+    items_dict = {"COHAXHVX": (Item_669), "COHAXHVY": (Item_670), "COHAYHVX": (Item_673), "COHAYHVY": (Item_674)}
 
 class Item_676(Item):
     name = "COHVXHPX"
@@ -17018,7 +17018,7 @@ Variation_947_Arg : TypeAlias = Union[Raw, Variation_947_Arg_Group]
 class Variation_947(Group):
     bit_size = 32
     items_list = [Item_676, Item_677, Item_679, Item_680]
-    items_dict = {"COHVXHPX": Variation_197, "COHVXHPY": Variation_197, "COHVYHPX": Variation_197, "COHVYHPY": Variation_197}
+    items_dict = {"COHVXHPX": (Item_676), "COHVXHPY": (Item_677), "COHVYHPX": (Item_679), "COHVYHPY": (Item_680)}
 
 class Item_684(Item):
     name = "COM"
@@ -17074,7 +17074,7 @@ Variation_948_Arg : TypeAlias = Union[Raw, Variation_948_Arg_Group]
 class Variation_948(Group):
     bit_size = 16
     items_list = [Item_684, Item_1625, Item_1554, Item_29, Item_1198, Item_535, Item_504, Item_572, Item_574]
-    items_dict = {"COM": Variation_118, "STAT": Variation_598, "SI": Variation_829, "MSSC": Variation_53, "ARC": Variation_332, "AIC": Variation_474, "B1A": Variation_527, "B1B": Variation_685}
+    items_dict = {"COM": (Item_684), "STAT": (Item_1625), "SI": (Item_1554), "MSSC": (Item_1198), "ARC": (Item_535), "AIC": (Item_504), "B1A": (Item_572), "B1B": (Item_574)}
 
 class Item_685(Item):
     name = "COM"
@@ -17109,7 +17109,7 @@ Variation_949_Arg : TypeAlias = Union[Raw, Variation_949_Arg_Group]
 class Variation_949(Group):
     bit_size = 16
     items_list = [Item_685, Item_1622, Item_27, Item_1603, Item_535, Item_504, Item_572, Item_575]
-    items_dict = {"COM": Variation_119, "STAT": Variation_595, "SSC": Variation_53, "ARC": Variation_332, "AIC": Variation_474, "B1A": Variation_527, "B1B": Variation_685}
+    items_dict = {"COM": (Item_685), "STAT": (Item_1622), "SSC": (Item_1603), "ARC": (Item_535), "AIC": (Item_504), "B1A": (Item_572), "B1B": (Item_575)}
 
 class Item_1623(Item):
     name = "STAT"
@@ -17129,7 +17129,7 @@ Variation_950_Arg : TypeAlias = Union[Raw, Variation_950_Arg_Group]
 class Variation_950(Group):
     bit_size = 16
     items_list = [Item_685, Item_1623, Item_27, Item_1198, Item_535, Item_504, Item_572, Item_574]
-    items_dict = {"COM": Variation_119, "STAT": Variation_596, "MSSC": Variation_53, "ARC": Variation_332, "AIC": Variation_474, "B1A": Variation_527, "B1B": Variation_685}
+    items_dict = {"COM": (Item_685), "STAT": (Item_1623), "MSSC": (Item_1198), "ARC": (Item_535), "AIC": (Item_504), "B1A": (Item_572), "B1B": (Item_574)}
 
 class Item_1624(Item):
     name = "STAT"
@@ -17149,7 +17149,7 @@ Variation_951_Arg : TypeAlias = Union[Raw, Variation_951_Arg_Group]
 class Variation_951(Group):
     bit_size = 16
     items_list = [Item_685, Item_1624, Item_27, Item_1603, Item_535, Item_504, Item_572, Item_575]
-    items_dict = {"COM": Variation_119, "STAT": Variation_597, "SSC": Variation_53, "ARC": Variation_332, "AIC": Variation_474, "B1A": Variation_527, "B1B": Variation_685}
+    items_dict = {"COM": (Item_685), "STAT": (Item_1624), "SSC": (Item_1603), "ARC": (Item_535), "AIC": (Item_504), "B1A": (Item_572), "B1B": (Item_575)}
 
 class Item_1626(Item):
     name = "STAT"
@@ -17192,7 +17192,7 @@ Variation_952_Arg : TypeAlias = Union[Raw, Variation_952_Arg_Group]
 class Variation_952(Group):
     bit_size = 24
     items_list = [Item_685, Item_1626, Item_29, Item_1603, Item_535, Item_504, Item_572, Item_573, Item_472, Item_1162, Item_769, Item_19]
-    items_dict = {"COM": Variation_119, "STAT": Variation_603, "SSC": Variation_53, "ARC": Variation_332, "AIC": Variation_474, "B1A": Variation_527, "B1B": Variation_685, "AC": Variation_53, "MN": Variation_369, "DC": Variation_501}
+    items_dict = {"COM": (Item_685), "STAT": (Item_1626), "SSC": (Item_1603), "ARC": (Item_535), "AIC": (Item_504), "B1A": (Item_572), "B1B": (Item_573), "AC": (Item_472), "MN": (Item_1162), "DC": (Item_769)}
 
 class Item_1627(Item):
     name = "STAT"
@@ -17215,7 +17215,7 @@ Variation_953_Arg : TypeAlias = Union[Raw, Variation_953_Arg_Group]
 class Variation_953(Group):
     bit_size = 24
     items_list = [Item_685, Item_1627, Item_29, Item_1603, Item_535, Item_504, Item_572, Item_573, Item_472, Item_1162, Item_769, Item_19]
-    items_dict = {"COM": Variation_119, "STAT": Variation_604, "SSC": Variation_53, "ARC": Variation_332, "AIC": Variation_474, "B1A": Variation_527, "B1B": Variation_685, "AC": Variation_53, "MN": Variation_369, "DC": Variation_501}
+    items_dict = {"COM": (Item_685), "STAT": (Item_1627), "SSC": (Item_1603), "ARC": (Item_535), "AIC": (Item_504), "B1A": (Item_572), "B1B": (Item_573), "AC": (Item_472), "MN": (Item_1162), "DC": (Item_769)}
 
 class Item_741(Item):
     name = "CST"
@@ -17239,7 +17239,7 @@ Variation_954_Arg : TypeAlias = Union[Raw, Variation_954_Arg_Group]
 class Variation_954(Group):
     bit_size = 8
     items_list = [Item_741, Item_862, Item_15]
-    items_dict = {"CST": Variation_50, "FLT": Variation_366}
+    items_dict = {"CST": (Item_741), "FLT": (Item_862)}
 
 class Item_751(Item):
     name = "D"
@@ -17263,7 +17263,7 @@ Variation_955_Arg : TypeAlias = Union[Raw, Variation_955_Arg_Group]
 class Variation_955(Group):
     bit_size = 16
     items_list = [Item_751, Item_8, Item_606]
-    items_dict = {"D": Variation_38, "CAL": Variation_846}
+    items_dict = {"D": (Item_751), "CAL": (Item_606)}
 
 class Item_773(Item):
     name = "DCR"
@@ -17325,7 +17325,7 @@ Variation_956_Arg : TypeAlias = Union[Raw, Variation_956_Arg_Group]
 class Variation_956(Group):
     bit_size = 16
     items_list = [Item_773, Item_910, Item_1576, Item_1777, Item_1397, Item_1498, Item_1589, Item_29, Item_551, Item_537, Item_25]
-    items_dict = {"DCR": Variation_58, "GBS": Variation_360, "SIM": Variation_429, "TST": Variation_545, "RAB": Variation_656, "SAA": Variation_733, "SPI": Variation_782, "ATP": Variation_125, "ARC": Variation_594}
+    items_dict = {"DCR": (Item_773), "GBS": (Item_910), "SIM": (Item_1576), "TST": (Item_1777), "RAB": (Item_1397), "SAA": (Item_1498), "SPI": (Item_1589), "ATP": (Item_551), "ARC": (Item_537)}
 
 class Item_777(Item):
     name = "DEVX"
@@ -17351,7 +17351,7 @@ Variation_957_Arg : TypeAlias = Union[Raw, Variation_957_Arg_Group]
 class Variation_957(Group):
     bit_size = 32
     items_list = [Item_777, Item_778, Item_713]
-    items_dict = {"DEVX": Variation_214, "DEVY": Variation_214, "COVXY": Variation_249}
+    items_dict = {"DEVX": (Item_777), "DEVY": (Item_778), "COVXY": (Item_713)}
 
 class Item_789(Item):
     name = "DOP"
@@ -17377,7 +17377,7 @@ Variation_958_Arg : TypeAlias = Union[Raw, Variation_958_Arg_Group]
 class Variation_958(Group):
     bit_size = 48
     items_list = [Item_789, Item_517, Item_880]
-    items_dict = {"DOP": Variation_266, "AMB": Variation_266, "FRQ": Variation_263}
+    items_dict = {"DOP": (Item_789), "AMB": (Item_517), "FRQ": (Item_880)}
 
 class Item_795(Item):
     name = "DRHO"
@@ -17397,7 +17397,7 @@ Variation_959_Arg : TypeAlias = Union[Raw, Variation_959_Arg_Group]
 class Variation_959(Group):
     bit_size = 16
     items_list = [Item_795, Item_803]
-    items_dict = {"DRHO": Variation_194, "DTHETA": Variation_202}
+    items_dict = {"DRHO": (Item_795), "DTHETA": (Item_803)}
 
 class Item_824(Item):
     name = "EMP"
@@ -17417,7 +17417,7 @@ Variation_960_Arg : TypeAlias = Union[Raw, Variation_960_Arg_Group]
 class Variation_960(Group):
     bit_size = 8
     items_list = [Item_824, Item_555, Item_22]
-    items_dict = {"EMP": Variation_98, "AVL": Variation_505}
+    items_dict = {"EMP": (Item_824), "AVL": (Item_555)}
 
 class Item_825(Item):
     name = "EMP"
@@ -17437,7 +17437,7 @@ Variation_961_Arg : TypeAlias = Union[Raw, Variation_961_Arg_Group]
 class Variation_961(Group):
     bit_size = 8
     items_list = [Item_825, Item_556, Item_22]
-    items_dict = {"EMP": Variation_97, "AVL": Variation_504}
+    items_dict = {"EMP": (Item_825), "AVL": (Item_556)}
 
 class Item_829(Item):
     name = "EP"
@@ -17457,7 +17457,7 @@ Variation_962_Arg : TypeAlias = Union[Raw, Variation_962_Arg_Group]
 class Variation_962(Group):
     bit_size = 2
     items_list = [Item_829, Item_1832]
-    items_dict = {"EP": Variation_1, "VAL": Variation_375}
+    items_dict = {"EP": (Item_829), "VAL": (Item_1832)}
 
 class Item_830(Item):
     name = "EP"
@@ -17481,7 +17481,7 @@ Variation_963_Arg : TypeAlias = Union[Raw, Variation_963_Arg_Group]
 class Variation_963(Group):
     bit_size = 7
     items_list = [Item_830, Item_1839, Item_26]
-    items_dict = {"EP": Variation_39, "VAL": Variation_413}
+    items_dict = {"EP": (Item_830), "VAL": (Item_1839)}
 
 class Item_831(Item):
     name = "EP"
@@ -17501,7 +17501,7 @@ Variation_964_Arg : TypeAlias = Union[Raw, Variation_964_Arg_Group]
 class Variation_964(Group):
     bit_size = 3
     items_list = [Item_831, Item_1835]
-    items_dict = {"EP": Variation_40, "VAL": Variation_398}
+    items_dict = {"EP": (Item_831), "VAL": (Item_1835)}
 
 class Item_1836(Item):
     name = "VAL"
@@ -17516,7 +17516,7 @@ Variation_965_Arg : TypeAlias = Union[Raw, Variation_965_Arg_Group]
 class Variation_965(Group):
     bit_size = 3
     items_list = [Item_831, Item_1836]
-    items_dict = {"EP": Variation_40, "VAL": Variation_406}
+    items_dict = {"EP": (Item_831), "VAL": (Item_1836)}
 
 class Item_1837(Item):
     name = "VAL"
@@ -17531,7 +17531,7 @@ Variation_966_Arg : TypeAlias = Union[Raw, Variation_966_Arg_Group]
 class Variation_966(Group):
     bit_size = 3
     items_list = [Item_831, Item_1837]
-    items_dict = {"EP": Variation_40, "VAL": Variation_407}
+    items_dict = {"EP": (Item_831), "VAL": (Item_1837)}
 
 class Item_1838(Item):
     name = "VAL"
@@ -17546,7 +17546,7 @@ Variation_967_Arg : TypeAlias = Union[Raw, Variation_967_Arg_Group]
 class Variation_967(Group):
     bit_size = 4
     items_list = [Item_831, Item_1838]
-    items_dict = {"EP": Variation_40, "VAL": Variation_409}
+    items_dict = {"EP": (Item_831), "VAL": (Item_1838)}
 
 class Item_1840(Item):
     name = "VAL"
@@ -17561,7 +17561,7 @@ Variation_968_Arg : TypeAlias = Union[Raw, Variation_968_Arg_Group]
 class Variation_968(Group):
     bit_size = 7
     items_list = [Item_831, Item_1840]
-    items_dict = {"EP": Variation_40, "VAL": Variation_416}
+    items_dict = {"EP": (Item_831), "VAL": (Item_1840)}
 
 class Item_832(Item):
     name = "EP"
@@ -17581,7 +17581,7 @@ Variation_969_Arg : TypeAlias = Union[Raw, Variation_969_Arg_Group]
 class Variation_969(Group):
     bit_size = 3
     items_list = [Item_832, Item_1841]
-    items_dict = {"EP": Variation_454, "VAL": Variation_591}
+    items_dict = {"EP": (Item_832), "VAL": (Item_1841)}
 
 class Item_833(Item):
     name = "EP"
@@ -17601,7 +17601,7 @@ Variation_970_Arg : TypeAlias = Union[Raw, Variation_970_Arg_Group]
 class Variation_970(Group):
     bit_size = 2
     items_list = [Item_833, Item_1842]
-    items_dict = {"EP": Variation_551, "VAL": Variation_639}
+    items_dict = {"EP": (Item_833), "VAL": (Item_1842)}
 
 class Item_1843(Item):
     name = "VAL"
@@ -17616,7 +17616,7 @@ Variation_971_Arg : TypeAlias = Union[Raw, Variation_971_Arg_Group]
 class Variation_971(Group):
     bit_size = 4
     items_list = [Item_833, Item_1843]
-    items_dict = {"EP": Variation_551, "VAL": Variation_679}
+    items_dict = {"EP": (Item_833), "VAL": (Item_1843)}
 
 class Item_1846(Item):
     name = "VAL"
@@ -17631,7 +17631,7 @@ Variation_973_Arg : TypeAlias = Union[Raw, Variation_973_Arg_Group]
 class Variation_973(Group):
     bit_size = 3
     items_list = [Item_834, Item_1846]
-    items_dict = {"EP": Variation_630, "VAL": Variation_768}
+    items_dict = {"EP": (Item_834), "VAL": (Item_1846)}
 
 class Item_835(Item):
     name = "EP"
@@ -17651,7 +17651,7 @@ Variation_974_Arg : TypeAlias = Union[Raw, Variation_974_Arg_Group]
 class Variation_974(Group):
     bit_size = 2
     items_list = [Item_835, Item_1847]
-    items_dict = {"EP": Variation_732, "VAL": Variation_825}
+    items_dict = {"EP": (Item_835), "VAL": (Item_1847)}
 
 class Item_1848(Item):
     name = "VAL"
@@ -17666,7 +17666,7 @@ Variation_975_Arg : TypeAlias = Union[Raw, Variation_975_Arg_Group]
 class Variation_975(Group):
     bit_size = 2
     items_list = [Item_835, Item_1848]
-    items_dict = {"EP": Variation_732, "VAL": Variation_826}
+    items_dict = {"EP": (Item_835), "VAL": (Item_1848)}
 
 class Item_836(Item):
     name = "EP"
@@ -17686,7 +17686,7 @@ Variation_976_Arg : TypeAlias = Union[Raw, Variation_976_Arg_Group]
 class Variation_976(Group):
     bit_size = 4
     items_list = [Item_836, Item_1844]
-    items_dict = {"EP": Variation_551, "VAL": Variation_681}
+    items_dict = {"EP": (Item_836), "VAL": (Item_1844)}
 
 class Item_837(Item):
     name = "EP"
@@ -17706,7 +17706,7 @@ Variation_977_Arg : TypeAlias = Union[Raw, Variation_977_Arg_Group]
 class Variation_977(Group):
     bit_size = 2
     items_list = [Item_837, Item_1833]
-    items_dict = {"EP": Variation_653, "VAL": Variation_748}
+    items_dict = {"EP": (Item_837), "VAL": (Item_1833)}
 
 class Item_838(Item):
     name = "EP"
@@ -17726,7 +17726,7 @@ Variation_978_Arg : TypeAlias = Union[Raw, Variation_978_Arg_Group]
 class Variation_978(Group):
     bit_size = 2
     items_list = [Item_838, Item_1834]
-    items_dict = {"EP": Variation_491, "VAL": Variation_568}
+    items_dict = {"EP": (Item_838), "VAL": (Item_1834)}
 
 class Item_853(Item):
     name = "FAMILY"
@@ -17746,7 +17746,7 @@ Variation_979_Arg : TypeAlias = Union[Raw, Variation_979_Arg_Group]
 class Variation_979(Group):
     bit_size = 8
     items_list = [Item_853, Item_1209]
-    items_dict = {"FAMILY": Variation_131, "NATURE": Variation_689}
+    items_dict = {"FAMILY": (Item_853), "NATURE": (Item_1209)}
 
 class Item_881(Item):
     name = "FS"
@@ -17766,7 +17766,7 @@ Variation_980_Arg : TypeAlias = Union[Raw, Variation_980_Arg_Group]
 class Variation_980(Group):
     bit_size = 8
     items_list = [Item_881, Item_723]
-    items_dict = {"FS": Variation_9, "CQF": Variation_417}
+    items_dict = {"FS": (Item_881), "CQF": (Item_723)}
 
 class Item_883(Item):
     name = "FSI"
@@ -17786,7 +17786,7 @@ Variation_981_Arg : TypeAlias = Union[Raw, Variation_981_Arg_Group]
 class Variation_981(Group):
     bit_size = 32
     items_list = [Item_883, Item_1729]
-    items_dict = {"FSI": Variation_114, "TOMRP": Variation_526}
+    items_dict = {"FSI": (Item_883), "TOMRP": (Item_1729)}
 
 class Item_884(Item):
     name = "FSI"
@@ -17801,7 +17801,7 @@ Variation_982_Arg : TypeAlias = Union[Raw, Variation_982_Arg_Group]
 class Variation_982(Group):
     bit_size = 32
     items_list = [Item_884, Item_1729]
-    items_dict = {"FSI": Variation_115, "TOMRP": Variation_526}
+    items_dict = {"FSI": (Item_884), "TOMRP": (Item_1729)}
 
 class Item_903(Item):
     name = "GATOAT"
@@ -17833,7 +17833,7 @@ Variation_983_Arg : TypeAlias = Union[Raw, Variation_983_Arg_Group]
 class Variation_983(Group):
     bit_size = 8
     items_list = [Item_903, Item_875, Item_1486, Item_953, Item_29]
-    items_dict = {"GATOAT": Variation_111, "FR1FR2": Variation_507, "RVSM": Variation_674, "HPR": Variation_822}
+    items_dict = {"GATOAT": (Item_903), "FR1FR2": (Item_875), "RVSM": (Item_1486), "HPR": (Item_953)}
 
 class Item_876(Item):
     name = "FR1FR2"
@@ -17866,7 +17866,7 @@ Variation_984_Arg : TypeAlias = Union[Raw, Variation_984_Arg_Group]
 class Variation_984(Group):
     bit_size = 8
     items_list = [Item_903, Item_876, Item_1583, Item_1582, Item_1581, Item_29]
-    items_dict = {"GATOAT": Variation_111, "FR1FR2": Variation_508, "SP3": Variation_609, "SP2": Variation_702, "SP1": Variation_780}
+    items_dict = {"GATOAT": (Item_903), "FR1FR2": (Item_876), "SP3": (Item_1583), "SP2": (Item_1582), "SP1": (Item_1581)}
 
 class Item_904(Item):
     name = "GATOAT"
@@ -17898,7 +17898,7 @@ Variation_985_Arg : TypeAlias = Union[Raw, Variation_985_Arg_Group]
 class Variation_985(Group):
     bit_size = 8
     items_list = [Item_904, Item_877, Item_1488, Item_955, Item_29]
-    items_dict = {"GATOAT": Variation_111, "FR1FR2": Variation_507, "RVSM": Variation_674, "HPR": Variation_822}
+    items_dict = {"GATOAT": (Item_904), "FR1FR2": (Item_877), "RVSM": (Item_1488), "HPR": (Item_955)}
 
 class Item_878(Item):
     name = "FR1FR2"
@@ -17915,7 +17915,7 @@ Variation_986_Arg : TypeAlias = Union[Raw, Variation_986_Arg_Group]
 class Variation_986(Group):
     bit_size = 8
     items_list = [Item_904, Item_878, Item_1488, Item_955, Item_29]
-    items_dict = {"GATOAT": Variation_111, "FR1FR2": Variation_508, "RVSM": Variation_674, "HPR": Variation_822}
+    items_dict = {"GATOAT": (Item_904), "FR1FR2": (Item_878), "RVSM": (Item_1488), "HPR": (Item_955)}
 
 class Item_918(Item):
     name = "GS"
@@ -17935,7 +17935,7 @@ Variation_987_Arg : TypeAlias = Union[Raw, Variation_987_Arg_Group]
 class Variation_987(Group):
     bit_size = 32
     items_list = [Item_918, Item_1662]
-    items_dict = {"GS": Variation_256, "TA": Variation_293}
+    items_dict = {"GS": (Item_918), "TA": (Item_1662)}
 
 class Item_919(Item):
     name = "GSP"
@@ -17955,7 +17955,7 @@ Variation_988_Arg : TypeAlias = Union[Raw, Variation_988_Arg_Group]
 class Variation_988(Group):
     bit_size = 32
     items_list = [Item_919, Item_939]
-    items_dict = {"GSP": Variation_289, "HDG": Variation_293}
+    items_dict = {"GSP": (Item_919), "HDG": (Item_939)}
 
 class Item_920(Item):
     name = "GSP"
@@ -17975,7 +17975,7 @@ Variation_989_Arg : TypeAlias = Union[Raw, Variation_989_Arg_Group]
 class Variation_989(Group):
     bit_size = 32
     items_list = [Item_920, Item_1744]
-    items_dict = {"GSP": Variation_289, "TRA": Variation_293}
+    items_dict = {"GSP": (Item_920), "TRA": (Item_1744)}
 
 class Item_946(Item):
     name = "HGT"
@@ -18001,7 +18001,7 @@ Variation_990_Arg : TypeAlias = Union[Raw, Variation_990_Arg_Group]
 class Variation_990(Group):
     bit_size = 64
     items_list = [Item_946, Item_1022, Item_1049]
-    items_dict = {"HGT": Variation_237, "LAT": Variation_304, "LON": Variation_304}
+    items_dict = {"HGT": (Item_946), "LAT": (Item_1022), "LON": (Item_1049)}
 
 class Item_983(Item):
     name = "ICF"
@@ -18037,7 +18037,7 @@ Variation_991_Arg : TypeAlias = Union[Raw, Variation_991_Arg_Group]
 class Variation_991(Group):
     bit_size = 8
     items_list = [Item_983, Item_1043, Item_11, Item_1326, Item_1602]
-    items_dict = {"ICF": Variation_59, "LNAV": Variation_365, "PS": Variation_599, "SS": Variation_841}
+    items_dict = {"ICF": (Item_983), "LNAV": (Item_1043), "PS": (Item_1326), "SS": (Item_1602)}
 
 class Item_1136(Item):
     name = "ME"
@@ -18055,7 +18055,7 @@ Variation_992_Arg : TypeAlias = Union[Raw, Variation_992_Arg_Group]
 class Variation_992(Group):
     bit_size = 8
     items_list = [Item_983, Item_1043, Item_1136, Item_1326, Item_1602]
-    items_dict = {"ICF": Variation_59, "LNAV": Variation_365, "ME": Variation_479, "PS": Variation_599, "SS": Variation_841}
+    items_dict = {"ICF": (Item_983), "LNAV": (Item_1043), "ME": (Item_1136), "PS": (Item_1326), "SS": (Item_1602)}
 
 class Item_996(Item):
     name = "IM"
@@ -18075,7 +18075,7 @@ Variation_993_Arg : TypeAlias = Union[Raw, Variation_993_Arg_Group]
 class Variation_993(Group):
     bit_size = 16
     items_list = [Item_996, Item_541]
-    items_dict = {"IM": Variation_6, "AS": Variation_422}
+    items_dict = {"IM": (Item_996), "AS": (Item_541)}
 
 class Item_997(Item):
     name = "IM"
@@ -18095,7 +18095,7 @@ Variation_994_Arg : TypeAlias = Union[Raw, Variation_994_Arg_Group]
 class Variation_994(Group):
     bit_size = 16
     items_list = [Item_997, Item_978]
-    items_dict = {"IM": Variation_7, "IAS": Variation_422}
+    items_dict = {"IM": (Item_997), "IAS": (Item_978)}
 
 class Item_999(Item):
     name = "IR"
@@ -18115,7 +18115,7 @@ Variation_995_Arg : TypeAlias = Union[Raw, Variation_995_Arg_Group]
 class Variation_995(Group):
     bit_size = 8
     items_list = [Item_999, Item_1083]
-    items_dict = {"IR": Variation_46, "M3A": Variation_421}
+    items_dict = {"IR": (Item_999), "M3A": (Item_1083)}
 
 class Item_1018(Item):
     name = "LAT"
@@ -18135,7 +18135,7 @@ Variation_996_Arg : TypeAlias = Union[Raw, Variation_996_Arg_Group]
 class Variation_996(Group):
     bit_size = 32
     items_list = [Item_1018, Item_1045]
-    items_dict = {"LAT": Variation_292, "LON": Variation_292}
+    items_dict = {"LAT": (Item_1018), "LON": (Item_1045)}
 
 class Item_1019(Item):
     name = "LAT"
@@ -18155,7 +18155,7 @@ Variation_997_Arg : TypeAlias = Union[Raw, Variation_997_Arg_Group]
 class Variation_997(Group):
     bit_size = 32
     items_list = [Item_1019, Item_1046]
-    items_dict = {"LAT": Variation_261, "LON": Variation_261}
+    items_dict = {"LAT": (Item_1019), "LON": (Item_1046)}
 
 class Item_1020(Item):
     name = "LAT"
@@ -18181,7 +18181,7 @@ Variation_998_Arg : TypeAlias = Union[Raw, Variation_998_Arg_Group]
 class Variation_998(Group):
     bit_size = 80
     items_list = [Item_1020, Item_1047, Item_512]
-    items_dict = {"LAT": Variation_317, "LON": Variation_317, "ALT": Variation_240}
+    items_dict = {"LAT": (Item_1020), "LON": (Item_1047), "ALT": (Item_512)}
 
 Variation_999_Arg_Group = TypedDict('Variation_999_Arg_Group', {
     "LAT": Union[Variation_304, Variation_304_Arg],
@@ -18191,7 +18191,7 @@ Variation_999_Arg : TypeAlias = Union[Raw, Variation_999_Arg_Group]
 class Variation_999(Group):
     bit_size = 48
     items_list = [Item_1022, Item_1049]
-    items_dict = {"LAT": Variation_304, "LON": Variation_304}
+    items_dict = {"LAT": (Item_1022), "LON": (Item_1049)}
 
 class Item_1023(Item):
     name = "LAT"
@@ -18211,7 +18211,7 @@ Variation_1000_Arg : TypeAlias = Union[Raw, Variation_1000_Arg_Group]
 class Variation_1000(Group):
     bit_size = 48
     items_list = [Item_1023, Item_1050]
-    items_dict = {"LAT": Variation_305, "LON": Variation_305}
+    items_dict = {"LAT": (Item_1023), "LON": (Item_1050)}
 
 class Item_1024(Item):
     name = "LAT"
@@ -18231,7 +18231,7 @@ Variation_1001_Arg : TypeAlias = Union[Raw, Variation_1001_Arg_Group]
 class Variation_1001(Group):
     bit_size = 64
     items_list = [Item_1024, Item_1051]
-    items_dict = {"LAT": Variation_317, "LON": Variation_317}
+    items_dict = {"LAT": (Item_1024), "LON": (Item_1051)}
 
 class Item_1025(Item):
     name = "LAT"
@@ -18251,7 +18251,7 @@ Variation_1002_Arg : TypeAlias = Union[Raw, Variation_1002_Arg_Group]
 class Variation_1002(Group):
     bit_size = 64
     items_list = [Item_1025, Item_1052]
-    items_dict = {"LAT": Variation_318, "LON": Variation_318}
+    items_dict = {"LAT": (Item_1025), "LON": (Item_1052)}
 
 class Item_1026(Item):
     name = "LAT"
@@ -18271,7 +18271,7 @@ Variation_1003_Arg : TypeAlias = Union[Raw, Variation_1003_Arg_Group]
 class Variation_1003(Group):
     bit_size = 64
     items_list = [Item_1026, Item_1053]
-    items_dict = {"LAT": Variation_319, "LON": Variation_319}
+    items_dict = {"LAT": (Item_1026), "LON": (Item_1053)}
 
 class Item_1027(Item):
     name = "LAT"
@@ -18291,7 +18291,7 @@ Variation_1004_Arg : TypeAlias = Union[Raw, Variation_1004_Arg_Group]
 class Variation_1004(Group):
     bit_size = 64
     items_list = [Item_1027, Item_1054]
-    items_dict = {"LAT": Variation_320, "LON": Variation_320}
+    items_dict = {"LAT": (Item_1027), "LON": (Item_1054)}
 
 class Item_1028(Item):
     name = "LAT"
@@ -18311,7 +18311,7 @@ Variation_1005_Arg : TypeAlias = Union[Raw, Variation_1005_Arg_Group]
 class Variation_1005(Group):
     bit_size = 48
     items_list = [Item_1028, Item_1055]
-    items_dict = {"LAT": Variation_304, "LON": Variation_304}
+    items_dict = {"LAT": (Item_1028), "LON": (Item_1055)}
 
 class Item_1029(Item):
     name = "LAT"
@@ -18331,7 +18331,7 @@ Variation_1006_Arg : TypeAlias = Union[Raw, Variation_1006_Arg_Group]
 class Variation_1006(Group):
     bit_size = 64
     items_list = [Item_1029, Item_1056]
-    items_dict = {"LAT": Variation_317, "LON": Variation_317}
+    items_dict = {"LAT": (Item_1029), "LON": (Item_1056)}
 
 class Item_1030(Item):
     name = "LAT"
@@ -18351,7 +18351,7 @@ Variation_1007_Arg : TypeAlias = Union[Raw, Variation_1007_Arg_Group]
 class Variation_1007(Group):
     bit_size = 64
     items_list = [Item_1030, Item_1057]
-    items_dict = {"LAT": Variation_319, "LON": Variation_319}
+    items_dict = {"LAT": (Item_1030), "LON": (Item_1057)}
 
 class Item_1032(Item):
     name = "LAT"
@@ -18371,7 +18371,7 @@ Variation_1008_Arg : TypeAlias = Union[Raw, Variation_1008_Arg_Group]
 class Variation_1008(Group):
     bit_size = 48
     items_list = [Item_1032, Item_1059]
-    items_dict = {"LAT": Variation_304, "LON": Variation_304}
+    items_dict = {"LAT": (Item_1032), "LON": (Item_1059)}
 
 class Item_1033(Item):
     name = "LATITUDE"
@@ -18391,7 +18391,7 @@ Variation_1009_Arg : TypeAlias = Union[Raw, Variation_1009_Arg_Group]
 class Variation_1009(Group):
     bit_size = 64
     items_list = [Item_1033, Item_1061]
-    items_dict = {"LATITUDE": Variation_319, "LONGITUDE": Variation_319}
+    items_dict = {"LATITUDE": (Item_1033), "LONGITUDE": (Item_1061)}
 
 class Item_1065(Item):
     name = "LS"
@@ -18411,7 +18411,7 @@ Variation_1010_Arg : TypeAlias = Union[Raw, Variation_1010_Arg_Group]
 class Variation_1010(Group):
     bit_size = 16
     items_list = [Item_1065, Item_1044]
-    items_dict = {"LS": Variation_79, "LOCTIM": Variation_426}
+    items_dict = {"LS": (Item_1065), "LOCTIM": (Item_1044)}
 
 class Item_1086(Item):
     name = "M5"
@@ -18467,7 +18467,7 @@ Variation_1011_Arg : TypeAlias = Union[Raw, Variation_1011_Arg_Group]
 class Variation_1011(Group):
     bit_size = 8
     items_list = [Item_1086, Item_985, Item_754, Item_1073, Item_1075, Item_1079, Item_1106, Item_1911]
-    items_dict = {"M5": Variation_54, "ID": Variation_371, "DA": Variation_476, "M1": Variation_557, "M2": Variation_641, "M3": Variation_743, "MC": Variation_818, "X": Variation_869}
+    items_dict = {"M5": (Item_1086), "ID": (Item_985), "DA": (Item_754), "M1": (Item_1073), "M2": (Item_1075), "M3": (Item_1079), "MC": (Item_1106), "X": (Item_1911)}
 
 class Item_986(Item):
     name = "ID"
@@ -18513,7 +18513,7 @@ Variation_1012_Arg : TypeAlias = Union[Raw, Variation_1012_Arg_Group]
 class Variation_1012(Group):
     bit_size = 8
     items_list = [Item_1086, Item_986, Item_754, Item_1074, Item_1076, Item_1080, Item_1105, Item_1300]
-    items_dict = {"M5": Variation_54, "ID": Variation_372, "DA": Variation_476, "M1": Variation_558, "M2": Variation_642, "M3": Variation_744, "MC": Variation_808, "PO": Variation_865}
+    items_dict = {"M5": (Item_1086), "ID": (Item_986), "DA": (Item_754), "M1": (Item_1074), "M2": (Item_1076), "M3": (Item_1080), "MC": (Item_1105), "PO": (Item_1300)}
 
 class Item_755(Item):
     name = "DA"
@@ -18538,7 +18538,7 @@ Variation_1013_Arg : TypeAlias = Union[Raw, Variation_1013_Arg_Group]
 class Variation_1013(Group):
     bit_size = 8
     items_list = [Item_1086, Item_986, Item_755, Item_1074, Item_1076, Item_1080, Item_1107, Item_29]
-    items_dict = {"M5": Variation_54, "ID": Variation_372, "DA": Variation_477, "M1": Variation_558, "M2": Variation_642, "M3": Variation_744, "MC": Variation_819}
+    items_dict = {"M5": (Item_1086), "ID": (Item_986), "DA": (Item_755), "M1": (Item_1074), "M2": (Item_1076), "M3": (Item_1080), "MC": (Item_1107)}
 
 class Item_1102(Item):
     name = "MBDATA"
@@ -18564,7 +18564,7 @@ Variation_1014_Arg : TypeAlias = Union[Raw, Variation_1014_Arg_Group]
 class Variation_1014(Group):
     bit_size = 64
     items_list = [Item_1102, Item_578, Item_580]
-    items_dict = {"MBDATA": Variation_327, "BDS1": Variation_127, "BDS2": Variation_685}
+    items_dict = {"MBDATA": (Item_1102), "BDS1": (Item_578), "BDS2": (Item_580)}
 
 class Item_1103(Item):
     name = "MBDATA"
@@ -18590,7 +18590,7 @@ Variation_1015_Arg : TypeAlias = Union[Raw, Variation_1015_Arg_Group]
 class Variation_1015(Group):
     bit_size = 64
     items_list = [Item_1103, Item_579, Item_581]
-    items_dict = {"MBDATA": Variation_327, "BDS1": Variation_127, "BDS2": Variation_685}
+    items_dict = {"MBDATA": (Item_1103), "BDS1": (Item_579), "BDS2": (Item_581)}
 
 class Item_1104(Item):
     name = "MBDATA"
@@ -18606,7 +18606,7 @@ Variation_1016_Arg : TypeAlias = Union[Raw, Variation_1016_Arg_Group]
 class Variation_1016(Group):
     bit_size = 64
     items_list = [Item_1104, Item_579, Item_581]
-    items_dict = {"MBDATA": Variation_327, "BDS1": Variation_127, "BDS2": Variation_685}
+    items_dict = {"MBDATA": (Item_1104), "BDS1": (Item_579), "BDS2": (Item_581)}
 
 class Item_1199(Item):
     name = "MT"
@@ -18626,7 +18626,7 @@ Variation_1017_Arg : TypeAlias = Union[Raw, Variation_1017_Arg_Group]
 class Variation_1017(Group):
     bit_size = 8
     items_list = [Item_1199, Item_1438]
-    items_dict = {"MT": Variation_149, "RG": Variation_864}
+    items_dict = {"MT": (Item_1199), "RG": (Item_1438)}
 
 class Item_1204(Item):
     name = "MV"
@@ -18658,7 +18658,7 @@ Variation_1018_Arg : TypeAlias = Union[Raw, Variation_1018_Arg_Group]
 class Variation_1018(Group):
     bit_size = 16
     items_list = [Item_1204, Item_498, Item_513, Item_511]
-    items_dict = {"MV": Variation_64, "AH": Variation_373, "AM": Variation_483, "ALT": Variation_608}
+    items_dict = {"MV": (Item_1204), "AH": (Item_498), "AM": (Item_513), "ALT": (Item_511)}
 
 class Item_500(Item):
     name = "AH"
@@ -18680,7 +18680,7 @@ Variation_1019_Arg : TypeAlias = Union[Raw, Variation_1019_Arg_Group]
 class Variation_1019(Group):
     bit_size = 16
     items_list = [Item_1204, Item_500, Item_513, Item_509]
-    items_dict = {"MV": Variation_64, "AH": Variation_373, "AM": Variation_483, "ALT": Variation_608}
+    items_dict = {"MV": (Item_1204), "AH": (Item_500), "AM": (Item_513), "ALT": (Item_509)}
 
 class Item_1205(Item):
     name = "MV"
@@ -18707,7 +18707,7 @@ Variation_1020_Arg : TypeAlias = Union[Raw, Variation_1020_Arg_Group]
 class Variation_1020(Group):
     bit_size = 16
     items_list = [Item_1205, Item_501, Item_514, Item_509]
-    items_dict = {"MV": Variation_65, "AH": Variation_374, "AM": Variation_484, "ALT": Variation_608}
+    items_dict = {"MV": (Item_1205), "AH": (Item_501), "AM": (Item_514), "ALT": (Item_509)}
 
 class Item_1220(Item):
     name = "NBVB"
@@ -18727,7 +18727,7 @@ Variation_1021_Arg : TypeAlias = Union[Raw, Variation_1021_Arg_Group]
 class Variation_1021(Group):
     bit_size = 40
     items_list = [Item_1220, Item_1215]
-    items_dict = {"NBVB": Variation_235, "NBCELLS": Variation_298}
+    items_dict = {"NBVB": (Item_1220), "NBCELLS": (Item_1215)}
 
 class Item_1229(Item):
     name = "NOGO"
@@ -18765,7 +18765,7 @@ Variation_1022_Arg : TypeAlias = Union[Raw, Variation_1022_Arg_Group]
 class Variation_1022(Group):
     bit_size = 8
     items_list = [Item_1229, Item_1270, Item_1778, Item_1336, Item_1649, Item_29]
-    items_dict = {"NOGO": Variation_105, "OVL": Variation_443, "TSV": Variation_536, "PSS": Variation_672, "STTN": Variation_780}
+    items_dict = {"NOGO": (Item_1229), "OVL": (Item_1270), "TSV": (Item_1778), "PSS": (Item_1336), "STTN": (Item_1649)}
 
 class Item_1232(Item):
     name = "NOGO"
@@ -18815,7 +18815,7 @@ Variation_1023_Arg : TypeAlias = Union[Raw, Variation_1023_Arg_Group]
 class Variation_1023(Group):
     bit_size = 8
     items_list = [Item_1232, Item_1415, Item_1416, Item_1274, Item_1277, Item_1193, Item_1781, Item_29]
-    items_dict = {"NOGO": Variation_73, "RDPC": Variation_379, "RDPR": Variation_447, "OVLRDP": Variation_550, "OVLXMT": Variation_629, "MSC": Variation_745, "TSV": Variation_837}
+    items_dict = {"NOGO": (Item_1232), "RDPC": (Item_1415), "RDPR": (Item_1416), "OVLRDP": (Item_1274), "OVLXMT": (Item_1277), "MSC": (Item_1193), "TSV": (Item_1781)}
 
 class Item_1233(Item):
     name = "NOGO"
@@ -18853,7 +18853,7 @@ Variation_1024_Arg : TypeAlias = Union[Raw, Variation_1024_Arg_Group]
 class Variation_1024(Group):
     bit_size = 8
     items_list = [Item_1233, Item_1272, Item_1779, Item_782, Item_1786, Item_27]
-    items_dict = {"NOGO": Variation_103, "OVL": Variation_480, "TSV": Variation_584, "DIV": Variation_650, "TTF": Variation_754}
+    items_dict = {"NOGO": (Item_1233), "OVL": (Item_1272), "TSV": (Item_1779), "DIV": (Item_782), "TTF": (Item_1786)}
 
 class Item_1234(Item):
     name = "NOGO"
@@ -18875,7 +18875,7 @@ Variation_1025_Arg : TypeAlias = Union[Raw, Variation_1025_Arg_Group]
 class Variation_1025(Group):
     bit_size = 8
     items_list = [Item_1234, Item_1272, Item_1779, Item_1787, Item_25]
-    items_dict = {"NOGO": Variation_104, "OVL": Variation_480, "TSV": Variation_584, "TTF": Variation_661}
+    items_dict = {"NOGO": (Item_1234), "OVL": (Item_1272), "TSV": (Item_1779), "TTF": (Item_1787)}
 
 class Item_1246(Item):
     name = "NU1"
@@ -18901,7 +18901,7 @@ Variation_1026_Arg : TypeAlias = Union[Raw, Variation_1026_Arg_Group]
 class Variation_1026(Group):
     bit_size = 24
     items_list = [Item_1246, Item_1247, Item_1067]
-    items_dict = {"NU1": Variation_190, "NU2": Variation_190, "LTR": Variation_190}
+    items_dict = {"NU1": (Item_1246), "NU2": (Item_1247), "LTR": (Item_1067)}
 
 class Item_1264(Item):
     name = "ORG"
@@ -18937,7 +18937,7 @@ Variation_1027_Arg : TypeAlias = Union[Raw, Variation_1027_Arg_Group]
 class Variation_1027(Group):
     bit_size = 16
     items_list = [Item_1264, Item_962, Item_20, Item_887, Item_733]
-    items_dict = {"ORG": Variation_49, "I": Variation_408, "FSTLST": Variation_840, "CSN": Variation_155}
+    items_dict = {"ORG": (Item_1264), "I": (Item_962), "FSTLST": (Item_887), "CSN": (Item_733)}
 
 class Item_1291(Item):
     name = "PID"
@@ -18963,7 +18963,7 @@ Variation_1028_Arg : TypeAlias = Union[Raw, Variation_1028_Arg_Group]
 class Variation_1028(Group):
     bit_size = 48
     items_list = [Item_1291, Item_1713, Item_1448]
-    items_dict = {"PID": Variation_234, "TID": Variation_234, "RID": Variation_234}
+    items_dict = {"PID": (Item_1291), "TID": (Item_1713), "RID": (Item_1448)}
 
 class Item_1292(Item):
     name = "PID"
@@ -18983,7 +18983,7 @@ Variation_1029_Arg : TypeAlias = Union[Raw, Variation_1029_Arg_Group]
 class Variation_1029(Group):
     bit_size = 40
     items_list = [Item_1292, Item_1260]
-    items_dict = {"PID": Variation_235, "ON": Variation_298}
+    items_dict = {"PID": (Item_1292), "ON": (Item_1260)}
 
 class Item_1302(Item):
     name = "POL"
@@ -19009,7 +19009,7 @@ Variation_1030_Arg : TypeAlias = Union[Raw, Variation_1030_Arg_Group]
 class Variation_1030(Group):
     bit_size = 8
     items_list = [Item_1302, Item_1424, Item_1633, Item_27]
-    items_dict = {"POL": Variation_48, "REDRAD": Variation_410, "STC": Variation_673}
+    items_dict = {"POL": (Item_1302), "REDRAD": (Item_1424), "STC": (Item_1633)}
 
 class Item_1316(Item):
     name = "PREDRHO"
@@ -19083,7 +19083,7 @@ Variation_1031_Arg : TypeAlias = Union[Raw, Variation_1031_Arg_Group]
 class Variation_1031(Group):
     bit_size = 176
     items_list = [Item_1316, Item_1317, Item_849, Item_848, Item_851, Item_850, Item_1237, Item_1236, Item_1239, Item_1238, Item_1318]
-    items_dict = {"PREDRHO": Variation_285, "PREDTHETA": Variation_293, "EVOLRHOSTART": Variation_285, "EVOLRHOEND": Variation_285, "EVOLTHETASTART": Variation_293, "EVOLTHETAEND": Variation_293, "NOISERHOSTART": Variation_285, "NOISERHOEND": Variation_285, "NOISETHETASTART": Variation_293, "NOISETHETAEND": Variation_293, "PREDTIME": Variation_287}
+    items_dict = {"PREDRHO": (Item_1316), "PREDTHETA": (Item_1317), "EVOLRHOSTART": (Item_849), "EVOLRHOEND": (Item_848), "EVOLTHETASTART": (Item_851), "EVOLTHETAEND": (Item_850), "NOISERHOSTART": (Item_1237), "NOISERHOEND": (Item_1236), "NOISETHETASTART": (Item_1239), "NOISETHETAEND": (Item_1238), "PREDTIME": (Item_1318)}
 
 class Item_1320(Item):
     name = "PREVIOUSII"
@@ -19103,7 +19103,7 @@ Variation_1032_Arg : TypeAlias = Union[Raw, Variation_1032_Arg_Group]
 class Variation_1032(Group):
     bit_size = 8
     items_list = [Item_1320, Item_747]
-    items_dict = {"PREVIOUSII": Variation_127, "CURRENTII": Variation_685}
+    items_dict = {"PREVIOUSII": (Item_1320), "CURRENTII": (Item_747)}
 
 class Item_1321(Item):
     name = "PRG"
@@ -19123,7 +19123,7 @@ Variation_1033_Arg : TypeAlias = Union[Raw, Variation_1033_Arg_Group]
 class Variation_1033(Group):
     bit_size = 32
     items_list = [Item_1321, Item_1314]
-    items_dict = {"PRG": Variation_247, "PRB": Variation_255}
+    items_dict = {"PRG": (Item_1321), "PRB": (Item_1314)}
 
 class Item_1323(Item):
     name = "PRIORITY"
@@ -19161,7 +19161,7 @@ Variation_1034_Arg : TypeAlias = Union[Raw, Variation_1034_Arg_Group]
 class Variation_1034(Group):
     bit_size = 16
     items_list = [Item_1323, Item_25, Item_1285, Item_553, Item_1223, Item_1412, Item_25]
-    items_dict = {"PRIORITY": Variation_138, "PC": Variation_84, "AU": Variation_359, "NE": Variation_494, "RD": Variation_592}
+    items_dict = {"PRIORITY": (Item_1323), "PC": (Item_1285), "AU": (Item_553), "NE": (Item_1223), "RD": (Item_1412)}
 
 class Item_1324(Item):
     name = "PRIORITY"
@@ -19193,7 +19193,7 @@ Variation_1035_Arg : TypeAlias = Union[Raw, Variation_1035_Arg_Group]
 class Variation_1035(Group):
     bit_size = 48
     items_list = [Item_1324, Item_1311, Item_808, Item_708]
-    items_dict = {"PRIORITY": Variation_132, "POWER": Variation_690, "DURATION": Variation_206, "COVERAGE": Variation_313}
+    items_dict = {"PRIORITY": (Item_1324), "POWER": (Item_1311), "DURATION": (Item_808), "COVERAGE": (Item_708)}
 
 class Item_1384(Item):
     name = "QNH"
@@ -19213,7 +19213,7 @@ Variation_1036_Arg : TypeAlias = Union[Raw, Variation_1036_Arg_Group]
 class Variation_1036(Group):
     bit_size = 16
     items_list = [Item_1384, Item_744]
-    items_dict = {"QNH": Variation_56, "CTB": Variation_423}
+    items_dict = {"QNH": (Item_1384), "CTB": (Item_744)}
 
 class Item_1385(Item):
     name = "QNH"
@@ -19233,7 +19233,7 @@ Variation_1037_Arg : TypeAlias = Union[Raw, Variation_1037_Arg_Group]
 class Variation_1037(Group):
     bit_size = 16
     items_list = [Item_1385, Item_745]
-    items_dict = {"QNH": Variation_55, "CTBA": Variation_423}
+    items_dict = {"QNH": (Item_1385), "CTBA": (Item_745)}
 
 class Item_1386(Item):
     name = "QNH"
@@ -19248,7 +19248,7 @@ Variation_1038_Arg : TypeAlias = Union[Raw, Variation_1038_Arg_Group]
 class Variation_1038(Group):
     bit_size = 16
     items_list = [Item_1386, Item_745]
-    items_dict = {"QNH": Variation_56, "CTBA": Variation_423}
+    items_dict = {"QNH": (Item_1386), "CTBA": (Item_745)}
 
 class Item_1391(Item):
     name = "RA"
@@ -19298,7 +19298,7 @@ Variation_1039_Arg : TypeAlias = Union[Raw, Variation_1039_Arg_Group]
 class Variation_1039(Group):
     bit_size = 8
     items_list = [Item_1391, Item_1678, Item_1763, Item_540, Item_619, Item_1241, Item_1496]
-    items_dict = {"RA": Variation_74, "TC": Variation_399, "TS": Variation_562, "ARV": Variation_646, "CDTIA": Variation_709, "NOTTCAS": Variation_831, "SA": Variation_850}
+    items_dict = {"RA": (Item_1391), "TC": (Item_1678), "TS": (Item_1763), "ARV": (Item_540), "CDTIA": (Item_619), "NOTTCAS": (Item_1241), "SA": (Item_1496)}
 
 class Item_1419(Item):
     name = "RE"
@@ -19318,7 +19318,7 @@ Variation_1040_Arg : TypeAlias = Union[Raw, Variation_1040_Arg_Group]
 class Variation_1040(Group):
     bit_size = 16
     items_list = [Item_1419, Item_495]
-    items_dict = {"RE": Variation_198, "AE": Variation_203}
+    items_dict = {"RE": (Item_1419), "AE": (Item_495)}
 
 class Item_1420(Item):
     name = "RE"
@@ -19338,7 +19338,7 @@ Variation_1041_Arg : TypeAlias = Union[Raw, Variation_1041_Arg_Group]
 class Variation_1041(Group):
     bit_size = 16
     items_list = [Item_1420, Item_600]
-    items_dict = {"RE": Variation_91, "BVR": Variation_424}
+    items_dict = {"RE": (Item_1420), "BVR": (Item_600)}
 
 class Item_917(Item):
     name = "GS"
@@ -19359,7 +19359,7 @@ Variation_1042_Arg : TypeAlias = Union[Raw, Variation_1042_Arg_Group]
 class Variation_1042(Group):
     bit_size = 32
     items_list = [Item_1420, Item_917, Item_1663]
-    items_dict = {"RE": Variation_91, "GS": Variation_427, "TA": Variation_293}
+    items_dict = {"RE": (Item_1420), "GS": (Item_917), "TA": (Item_1663)}
 
 class Item_928(Item):
     name = "GVR"
@@ -19374,7 +19374,7 @@ Variation_1043_Arg : TypeAlias = Union[Raw, Variation_1043_Arg_Group]
 class Variation_1043(Group):
     bit_size = 16
     items_list = [Item_1420, Item_928]
-    items_dict = {"RE": Variation_91, "GVR": Variation_424}
+    items_dict = {"RE": (Item_1420), "GVR": (Item_928)}
 
 class Item_1673(Item):
     name = "TAS"
@@ -19389,7 +19389,7 @@ Variation_1044_Arg : TypeAlias = Union[Raw, Variation_1044_Arg_Group]
 class Variation_1044(Group):
     bit_size = 16
     items_list = [Item_1420, Item_1673]
-    items_dict = {"RE": Variation_91, "TAS": Variation_425}
+    items_dict = {"RE": (Item_1420), "TAS": (Item_1673)}
 
 class Item_1423(Item):
     name = "REDRAD"
@@ -19409,7 +19409,7 @@ Variation_1045_Arg : TypeAlias = Union[Raw, Variation_1045_Arg_Group]
 class Variation_1045(Group):
     bit_size = 8
     items_list = [Item_1423, Item_645, Item_22]
-    items_dict = {"REDRAD": Variation_124, "CLU": Variation_531}
+    items_dict = {"REDRAD": (Item_1423), "CLU": (Item_645)}
 
 class Item_1425(Item):
     name = "REDRAD"
@@ -19423,7 +19423,7 @@ Variation_1046_Arg : TypeAlias = Union[Raw, Variation_1046_Arg_Group]
 class Variation_1046(Group):
     bit_size = 8
     items_list = [Item_1425, Item_19]
-    items_dict = {"REDRAD": Variation_124}
+    items_dict = {"REDRAD": (Item_1425)}
 
 class Item_1441(Item):
     name = "RHO"
@@ -19443,7 +19443,7 @@ Variation_1047_Arg : TypeAlias = Union[Raw, Variation_1047_Arg_Group]
 class Variation_1047(Group):
     bit_size = 32
     items_list = [Item_1441, Item_1699]
-    items_dict = {"RHO": Variation_285, "THETA": Variation_293}
+    items_dict = {"RHO": (Item_1441), "THETA": (Item_1699)}
 
 class Item_1442(Item):
     name = "RHO"
@@ -19458,7 +19458,7 @@ Variation_1048_Arg : TypeAlias = Union[Raw, Variation_1048_Arg_Group]
 class Variation_1048(Group):
     bit_size = 32
     items_list = [Item_1442, Item_1699]
-    items_dict = {"RHO": Variation_288, "THETA": Variation_293}
+    items_dict = {"RHO": (Item_1442), "THETA": (Item_1699)}
 
 class Item_1443(Item):
     name = "RHO"
@@ -19478,7 +19478,7 @@ Variation_1049_Arg : TypeAlias = Union[Raw, Variation_1049_Arg_Group]
 class Variation_1049(Group):
     bit_size = 32
     items_list = [Item_1443, Item_1700]
-    items_dict = {"RHO": Variation_288, "THETA": Variation_293}
+    items_dict = {"RHO": (Item_1443), "THETA": (Item_1700)}
 
 class Item_1444(Item):
     name = "RHO"
@@ -19498,7 +19498,7 @@ Variation_1050_Arg : TypeAlias = Union[Raw, Variation_1050_Arg_Group]
 class Variation_1050(Group):
     bit_size = 32
     items_list = [Item_1444, Item_1698]
-    items_dict = {"RHO": Variation_265, "TH": Variation_293}
+    items_dict = {"RHO": (Item_1444), "TH": (Item_1698)}
 
 class Item_1446(Item):
     name = "RHOST"
@@ -19530,7 +19530,7 @@ Variation_1051_Arg : TypeAlias = Union[Raw, Variation_1051_Arg_Group]
 class Variation_1051(Group):
     bit_size = 64
     items_list = [Item_1446, Item_1445, Item_1702, Item_1701]
-    items_dict = {"RHOST": Variation_288, "RHOEND": Variation_288, "THETAST": Variation_293, "THETAEND": Variation_293}
+    items_dict = {"RHOST": (Item_1446), "RHOEND": (Item_1445), "THETAST": (Item_1702), "THETAEND": (Item_1701)}
 
 class Item_1447(Item):
     name = "RID"
@@ -19552,7 +19552,7 @@ Variation_1052_Arg : TypeAlias = Union[Raw, Variation_1052_Arg_Group]
 class Variation_1052(Group):
     bit_size = 96
     items_list = [Item_1447, Item_1026, Item_1053, Item_507]
-    items_dict = {"RID": Variation_234, "LAT": Variation_319, "LON": Variation_319, "ALT": Variation_249}
+    items_dict = {"RID": (Item_1447), "LAT": (Item_1026), "LON": (Item_1053), "ALT": (Item_507)}
 
 class Item_1451(Item):
     name = "RNG"
@@ -19572,7 +19572,7 @@ Variation_1053_Arg : TypeAlias = Union[Raw, Variation_1053_Arg_Group]
 class Variation_1053(Group):
     bit_size = 16
     items_list = [Item_1451, Item_570]
-    items_dict = {"RNG": Variation_198, "AZM": Variation_203}
+    items_dict = {"RNG": (Item_1451), "AZM": (Item_570)}
 
 class Item_1465(Item):
     name = "RS"
@@ -19604,7 +19604,7 @@ Variation_1054_Arg : TypeAlias = Union[Raw, Variation_1054_Arg_Group]
 class Variation_1054(Group):
     bit_size = 64
     items_list = [Item_1465, Item_1422, Item_1765, Item_1696]
-    items_dict = {"RS": Variation_285, "RE": Variation_285, "TS": Variation_293, "TE": Variation_293}
+    items_dict = {"RS": (Item_1465), "RE": (Item_1422), "TS": (Item_1765), "TE": (Item_1696)}
 
 class Item_1470(Item):
     name = "RSHPX"
@@ -19630,7 +19630,7 @@ Variation_1055_Arg : TypeAlias = Union[Raw, Variation_1055_Arg_Group]
 class Variation_1055(Group):
     bit_size = 40
     items_list = [Item_1470, Item_1471, Item_696]
-    items_dict = {"RSHPX": Variation_271, "RSHPY": Variation_271, "CORSHPXY": Variation_197}
+    items_dict = {"RSHPX": (Item_1470), "RSHPY": (Item_1471), "CORSHPXY": (Item_696)}
 
 class Item_1473(Item):
     name = "RSI"
@@ -19674,7 +19674,7 @@ Variation_1056_Arg : TypeAlias = Union[Raw, Variation_1056_Arg_Group]
 class Variation_1056(Group):
     bit_size = 16
     items_list = [Item_1473, Item_0, Item_1466, Item_1793, Item_1794, Item_1477, Item_1474, Item_27]
-    items_dict = {"RSI": Variation_155, "RS1090": Variation_376, "TX1030": Variation_486, "TX1090": Variation_570, "RSS": Variation_632, "RSO": Variation_751}
+    items_dict = {"RSI": (Item_1473), "RS1090": (Item_1466), "TX1030": (Item_1793), "TX1090": (Item_1794), "RSS": (Item_1477), "RSO": (Item_1474)}
 
 class Item_1484(Item):
     name = "RTYP"
@@ -19689,7 +19689,7 @@ Variation_1057_Arg : TypeAlias = Union[Raw, Variation_1057_Arg_Group]
 class Variation_1057(Group):
     bit_size = 8
     items_list = [Item_1484, Item_1438]
-    items_dict = {"RTYP": Variation_142, "RG": Variation_864}
+    items_dict = {"RTYP": (Item_1484), "RG": (Item_1438)}
 
 class Item_1492(Item):
     name = "S"
@@ -19709,7 +19709,7 @@ Variation_1058_Arg : TypeAlias = Union[Raw, Variation_1058_Arg_Group]
 class Variation_1058(Group):
     bit_size = 32
     items_list = [Item_1492, Item_810]
-    items_dict = {"S": Variation_259, "E": Variation_259}
+    items_dict = {"S": (Item_1492), "E": (Item_810)}
 
 class Item_1493(Item):
     name = "S"
@@ -19729,7 +19729,7 @@ Variation_1059_Arg : TypeAlias = Union[Raw, Variation_1059_Arg_Group]
 class Variation_1059(Group):
     bit_size = 32
     items_list = [Item_1493, Item_811]
-    items_dict = {"S": Variation_293, "E": Variation_293}
+    items_dict = {"S": (Item_1493), "E": (Item_811)}
 
 class Item_1501(Item):
     name = "SAC"
@@ -19767,7 +19767,7 @@ Variation_1060_Arg : TypeAlias = Union[Raw, Variation_1060_Arg_Group]
 class Variation_1060(Group):
     bit_size = 24
     items_list = [Item_1501, Item_1556, Item_2, Item_714, Item_1882, Item_1389]
-    items_dict = {"SAC": Variation_155, "SIC": Variation_155, "CP": Variation_527, "WO": Variation_609, "R": Variation_771}
+    items_dict = {"SAC": (Item_1501), "SIC": (Item_1556), "CP": (Item_714), "WO": (Item_1882), "R": (Item_1389)}
 
 class Item_1502(Item):
     name = "SAC"
@@ -19787,7 +19787,7 @@ Variation_1061_Arg : TypeAlias = Union[Raw, Variation_1061_Arg_Group]
 class Variation_1061(Group):
     bit_size = 16
     items_list = [Item_1502, Item_1557]
-    items_dict = {"SAC": Variation_155, "SIC": Variation_155}
+    items_dict = {"SAC": (Item_1502), "SIC": (Item_1557)}
 
 class Item_1801(Item):
     name = "TYP"
@@ -19803,7 +19803,7 @@ Variation_1062_Arg : TypeAlias = Union[Raw, Variation_1062_Arg_Group]
 class Variation_1062(Group):
     bit_size = 24
     items_list = [Item_1502, Item_1557, Item_3, Item_1801]
-    items_dict = {"SAC": Variation_155, "SIC": Variation_155, "TYP": Variation_686}
+    items_dict = {"SAC": (Item_1502), "SIC": (Item_1557), "TYP": (Item_1801)}
 
 class Item_1066(Item):
     name = "LTN"
@@ -19820,7 +19820,7 @@ Variation_1063_Arg : TypeAlias = Union[Raw, Variation_1063_Arg_Group]
 class Variation_1063(Group):
     bit_size = 40
     items_list = [Item_1502, Item_1557, Item_3, Item_1801, Item_1066]
-    items_dict = {"SAC": Variation_155, "SIC": Variation_155, "TYP": Variation_686, "LTN": Variation_234}
+    items_dict = {"SAC": (Item_1502), "SIC": (Item_1557), "TYP": (Item_1801), "LTN": (Item_1066)}
 
 class Item_1558(Item):
     name = "SIC"
@@ -19835,7 +19835,7 @@ Variation_1064_Arg : TypeAlias = Union[Raw, Variation_1064_Arg_Group]
 class Variation_1064(Group):
     bit_size = 16
     items_list = [Item_1502, Item_1558]
-    items_dict = {"SAC": Variation_155, "SIC": Variation_155}
+    items_dict = {"SAC": (Item_1502), "SIC": (Item_1558)}
 
 class Item_1503(Item):
     name = "SAC"
@@ -19850,7 +19850,7 @@ Variation_1065_Arg : TypeAlias = Union[Raw, Variation_1065_Arg_Group]
 class Variation_1065(Group):
     bit_size = 16
     items_list = [Item_1503, Item_1557]
-    items_dict = {"SAC": Variation_155, "SIC": Variation_155}
+    items_dict = {"SAC": (Item_1503), "SIC": (Item_1557)}
 
 class Item_1504(Item):
     name = "SACADJS"
@@ -19894,7 +19894,7 @@ Variation_1066_Arg : TypeAlias = Union[Raw, Variation_1066_Arg_Group]
 class Variation_1066(Group):
     bit_size = 56
     items_list = [Item_1504, Item_1559, Item_1714, Item_758, Item_797, Item_796]
-    items_dict = {"SACADJS": Variation_155, "SICADJS": Variation_155, "TIMEOFDAYSCN": Variation_287, "DATAUSE": Variation_143, "DRNA": Variation_852, "DRN": Variation_234}
+    items_dict = {"SACADJS": (Item_1504), "SICADJS": (Item_1559), "TIMEOFDAYSCN": (Item_1714), "DATAUSE": (Item_758), "DRNA": (Item_797), "DRN": (Item_796)}
 
 class Item_1510(Item):
     name = "SAS"
@@ -19915,7 +19915,7 @@ Variation_1067_Arg : TypeAlias = Union[Raw, Variation_1067_Arg_Group]
 class Variation_1067(Group):
     bit_size = 16
     items_list = [Item_1510, Item_1594, Item_511]
-    items_dict = {"SAS": Variation_62, "SRC": Variation_405, "ALT": Variation_608}
+    items_dict = {"SAS": (Item_1510), "SRC": (Item_1594), "ALT": (Item_511)}
 
 class Item_1511(Item):
     name = "SAS"
@@ -19936,7 +19936,7 @@ Variation_1068_Arg : TypeAlias = Union[Raw, Variation_1068_Arg_Group]
 class Variation_1068(Group):
     bit_size = 16
     items_list = [Item_1511, Item_1495, Item_509]
-    items_dict = {"SAS": Variation_61, "S": Variation_404, "ALT": Variation_608}
+    items_dict = {"SAS": (Item_1511), "S": (Item_1495), "ALT": (Item_509)}
 
 class Item_1597(Item):
     name = "SRC"
@@ -19952,7 +19952,7 @@ Variation_1069_Arg : TypeAlias = Union[Raw, Variation_1069_Arg_Group]
 class Variation_1069(Group):
     bit_size = 16
     items_list = [Item_1511, Item_1597, Item_509]
-    items_dict = {"SAS": Variation_61, "SRC": Variation_404, "ALT": Variation_608}
+    items_dict = {"SAS": (Item_1511), "SRC": (Item_1597), "ALT": (Item_509)}
 
 class Item_1522(Item):
     name = "SDAZR"
@@ -19972,7 +19972,7 @@ Variation_1070_Arg : TypeAlias = Union[Raw, Variation_1070_Arg_Group]
 class Variation_1070(Group):
     bit_size = 24
     items_list = [Item_1522, Item_653]
-    items_dict = {"SDAZR": Variation_290, "COAZRAZ": Variation_197}
+    items_dict = {"SDAZR": (Item_1522), "COAZRAZ": (Item_653)}
 
 class Item_1524(Item):
     name = "SDDA"
@@ -19992,7 +19992,7 @@ Variation_1071_Arg : TypeAlias = Union[Raw, Variation_1071_Arg_Group]
 class Variation_1071(Group):
     bit_size = 24
     items_list = [Item_1524, Item_654]
-    items_dict = {"SDDA": Variation_284, "CODADV": Variation_197}
+    items_dict = {"SDDA": (Item_1524), "CODADV": (Item_654)}
 
 class Item_1528(Item):
     name = "SDELR"
@@ -20012,7 +20012,7 @@ Variation_1072_Arg : TypeAlias = Union[Raw, Variation_1072_Arg_Group]
 class Variation_1072(Group):
     bit_size = 24
     items_list = [Item_1528, Item_661]
-    items_dict = {"SDELR": Variation_291, "COELREL": Variation_197}
+    items_dict = {"SDELR": (Item_1528), "COELREL": (Item_661)}
 
 class Item_1533(Item):
     name = "SDHPX"
@@ -20038,7 +20038,7 @@ Variation_1073_Arg : TypeAlias = Union[Raw, Variation_1073_Arg_Group]
 class Variation_1073(Group):
     bit_size = 40
     items_list = [Item_1533, Item_1534, Item_698]
-    items_dict = {"SDHPX": Variation_281, "SDHPY": Variation_281, "COSDHPXY": Variation_197}
+    items_dict = {"SDHPX": (Item_1533), "SDHPY": (Item_1534), "COSDHPXY": (Item_698)}
 
 class Item_1538(Item):
     name = "SDRA"
@@ -20064,7 +20064,7 @@ Variation_1074_Arg : TypeAlias = Union[Raw, Variation_1074_Arg_Group]
 class Variation_1074(Group):
     bit_size = 32
     items_list = [Item_1538, Item_693, Item_694]
-    items_dict = {"SDRA": Variation_286, "CORAR": Variation_197, "CORARR": Variation_197}
+    items_dict = {"SDRA": (Item_1538), "CORAR": (Item_693), "CORARR": (Item_694)}
 
 class Item_1540(Item):
     name = "SDRR"
@@ -20084,7 +20084,7 @@ Variation_1075_Arg : TypeAlias = Union[Raw, Variation_1075_Arg_Group]
 class Variation_1075(Group):
     bit_size = 32
     items_list = [Item_1540, Item_695]
-    items_dict = {"SDRR": Variation_309, "CORRR": Variation_197}
+    items_dict = {"SDRR": (Item_1540), "CORRR": (Item_695)}
 
 class Item_1543(Item):
     name = "SDVA"
@@ -20110,7 +20110,7 @@ Variation_1076_Arg : TypeAlias = Union[Raw, Variation_1076_Arg_Group]
 class Variation_1076(Group):
     bit_size = 32
     items_list = [Item_1543, Item_703, Item_707]
-    items_dict = {"SDVA": Variation_276, "COVAGH": Variation_197, "COVAVV": Variation_197}
+    items_dict = {"SDVA": (Item_1543), "COVAGH": (Item_703), "COVAVV": (Item_707)}
 
 class Item_1544(Item):
     name = "SDVV"
@@ -20130,7 +20130,7 @@ Variation_1077_Arg : TypeAlias = Union[Raw, Variation_1077_Arg_Group]
 class Variation_1077(Group):
     bit_size = 24
     items_list = [Item_1544, Item_709]
-    items_dict = {"SDVV": Variation_275, "COVVGH": Variation_197}
+    items_dict = {"SDVV": (Item_1544), "COVVGH": (Item_709)}
 
 class Item_1561(Item):
     name = "SID"
@@ -20150,7 +20150,7 @@ Variation_1078_Arg : TypeAlias = Union[Raw, Variation_1078_Arg_Group]
 class Variation_1078(Group):
     bit_size = 8
     items_list = [Item_1561, Item_1651]
-    items_dict = {"SID": Variation_127, "STYP": Variation_688}
+    items_dict = {"SID": (Item_1561), "STYP": (Item_1651)}
 
 class Item_1566(Item):
     name = "SIGX"
@@ -20182,7 +20182,7 @@ Variation_1079_Arg : TypeAlias = Union[Raw, Variation_1079_Arg_Group]
 class Variation_1079(Group):
     bit_size = 32
     items_list = [Item_1566, Item_1567, Item_1565, Item_1564]
-    items_dict = {"SIGX": Variation_218, "SIGY": Variation_218, "SIGV": Variation_221, "SIGH": Variation_225}
+    items_dict = {"SIGX": (Item_1566), "SIGY": (Item_1567), "SIGV": (Item_1565), "SIGH": (Item_1564)}
 
 class Item_1599(Item):
     name = "SRG"
@@ -20202,7 +20202,7 @@ Variation_1080_Arg : TypeAlias = Union[Raw, Variation_1080_Arg_Group]
 class Variation_1080(Group):
     bit_size = 32
     items_list = [Item_1599, Item_1593]
-    items_dict = {"SRG": Variation_247, "SRB": Variation_255}
+    items_dict = {"SRG": (Item_1599), "SRB": (Item_1593)}
 
 class Item_1620(Item):
     name = "STARTAZ"
@@ -20234,7 +20234,7 @@ Variation_1081_Arg : TypeAlias = Union[Raw, Variation_1081_Arg_Group]
 class Variation_1081(Group):
     bit_size = 96
     items_list = [Item_1620, Item_827, Item_1621, Item_621]
-    items_dict = {"STARTAZ": Variation_293, "ENDAZ": Variation_293, "STARTRG": Variation_315, "CELLDUR": Variation_321}
+    items_dict = {"STARTAZ": (Item_1620), "ENDAZ": (Item_827), "STARTRG": (Item_1621), "CELLDUR": (Item_621)}
 
 class Item_622(Item):
     name = "CELLDUR"
@@ -20251,7 +20251,7 @@ Variation_1082_Arg : TypeAlias = Union[Raw, Variation_1082_Arg_Group]
 class Variation_1082(Group):
     bit_size = 96
     items_list = [Item_1620, Item_827, Item_1621, Item_622]
-    items_dict = {"STARTAZ": Variation_293, "ENDAZ": Variation_293, "STARTRG": Variation_315, "CELLDUR": Variation_322}
+    items_dict = {"STARTAZ": (Item_1620), "ENDAZ": (Item_827), "STARTRG": (Item_1621), "CELLDUR": (Item_622)}
 
 class Item_1637(Item):
     name = "STI"
@@ -20271,7 +20271,7 @@ Variation_1083_Arg : TypeAlias = Union[Raw, Variation_1083_Arg_Group]
 class Variation_1083(Group):
     bit_size = 56
     items_list = [Item_1637, Item_15, Item_636]
-    items_dict = {"STI": Variation_92, "CHR": Variation_326}
+    items_dict = {"STI": (Item_1637), "CHR": (Item_636)}
 
 class Item_1638(Item):
     name = "STI"
@@ -20286,7 +20286,7 @@ Variation_1084_Arg : TypeAlias = Union[Raw, Variation_1084_Arg_Group]
 class Variation_1084(Group):
     bit_size = 56
     items_list = [Item_1638, Item_15, Item_636]
-    items_dict = {"STI": Variation_93, "CHR": Variation_326}
+    items_dict = {"STI": (Item_1638), "CHR": (Item_636)}
 
 class Item_1707(Item):
     name = "TID"
@@ -20301,7 +20301,7 @@ Variation_1085_Arg : TypeAlias = Union[Raw, Variation_1085_Arg_Group]
 class Variation_1085(Group):
     bit_size = 56
     items_list = [Item_1638, Item_15, Item_1707]
-    items_dict = {"STI": Variation_93, "TID": Variation_326}
+    items_dict = {"STI": (Item_1638), "TID": (Item_1707)}
 
 class Item_1639(Item):
     name = "STI"
@@ -20321,7 +20321,7 @@ Variation_1086_Arg : TypeAlias = Union[Raw, Variation_1086_Arg_Group]
 class Variation_1086(Group):
     bit_size = 56
     items_list = [Item_1639, Item_15, Item_637]
-    items_dict = {"STI": Variation_94, "CHR": Variation_326}
+    items_dict = {"STI": (Item_1639), "CHR": (Item_637)}
 
 class Item_1644(Item):
     name = "STR"
@@ -20347,7 +20347,7 @@ Variation_1087_Arg : TypeAlias = Union[Raw, Variation_1087_Arg_Group]
 class Variation_1087(Group):
     bit_size = 32
     items_list = [Item_1644, Item_828, Item_567]
-    items_dict = {"STR": Variation_155, "ENDR": Variation_155, "AZ": Variation_293}
+    items_dict = {"STR": (Item_1644), "ENDR": (Item_828), "AZ": (Item_567)}
 
 class Item_1681(Item):
     name = "TCA"
@@ -20427,7 +20427,7 @@ Variation_1088_Arg : TypeAlias = Union[Raw, Variation_1088_Arg_Group]
 class Variation_1088(Group):
     bit_size = 120
     items_list = [Item_1681, Item_1221, Item_1692, Item_510, Item_1021, Item_1048, Item_1338, Item_1694, Item_1743, Item_1722, Item_1733, Item_1790]
-    items_dict = {"TCA": Variation_75, "NC": Variation_380, "TCPN": Variation_518, "ALT": Variation_239, "LAT": Variation_304, "LON": Variation_304, "PT": Variation_130, "TD": Variation_671, "TRA": Variation_832, "TOA": Variation_866, "TOV": Variation_306, "TTR": Variation_273}
+    items_dict = {"TCA": (Item_1681), "NC": (Item_1221), "TCPN": (Item_1692), "ALT": (Item_510), "LAT": (Item_1021), "LON": (Item_1048), "PT": (Item_1338), "TD": (Item_1694), "TRA": (Item_1743), "TOA": (Item_1722), "TOV": (Item_1733), "TTR": (Item_1790)}
 
 class Item_1682(Item):
     name = "TCA"
@@ -20487,7 +20487,7 @@ Variation_1089_Arg : TypeAlias = Union[Raw, Variation_1089_Arg_Group]
 class Variation_1089(Group):
     bit_size = 120
     items_list = [Item_1682, Item_1222, Item_1693, Item_510, Item_1031, Item_1058, Item_1338, Item_1695, Item_1745, Item_1723, Item_1733, Item_1790]
-    items_dict = {"TCA": Variation_75, "NC": Variation_380, "TCPN": Variation_518, "ALT": Variation_239, "LAT": Variation_304, "LON": Variation_304, "PT": Variation_130, "TD": Variation_671, "TRA": Variation_832, "TOA": Variation_866, "TOV": Variation_306, "TTR": Variation_273}
+    items_dict = {"TCA": (Item_1682), "NC": (Item_1222), "TCPN": (Item_1693), "ALT": (Item_510), "LAT": (Item_1031), "LON": (Item_1058), "PT": (Item_1338), "TD": (Item_1695), "TRA": (Item_1745), "TOA": (Item_1723), "TOV": (Item_1733), "TTR": (Item_1790)}
 
 class Item_1703(Item):
     name = "TI"
@@ -20507,7 +20507,7 @@ Variation_1090_Arg : TypeAlias = Union[Raw, Variation_1090_Arg_Group]
 class Variation_1090(Group):
     bit_size = 16
     items_list = [Item_1703, Item_15, Item_1454, Item_29]
-    items_dict = {"TI": Variation_101, "ROT": Variation_150}
+    items_dict = {"TI": (Item_1703), "ROT": (Item_1454)}
 
 class Item_1706(Item):
     name = "TID"
@@ -20533,7 +20533,7 @@ Variation_1091_Arg : TypeAlias = Union[Raw, Variation_1091_Arg_Group]
 class Variation_1091(Group):
     bit_size = 8
     items_list = [Item_1706, Item_716, Item_731]
-    items_dict = {"TID": Variation_127, "CP": Variation_679, "CS": Variation_860}
+    items_dict = {"TID": (Item_1706), "CP": (Item_716), "CS": (Item_731)}
 
 class Item_1712(Item):
     name = "TID"
@@ -20568,7 +20568,7 @@ Variation_1092_Arg : TypeAlias = Union[Raw, Variation_1092_Arg_Group]
 class Variation_1092(Group):
     bit_size = 168
     items_list = [Item_1712, Item_1026, Item_1053, Item_507, Item_1789, Item_3, Item_549, Item_1286]
-    items_dict = {"TID": Variation_234, "LAT": Variation_319, "LON": Variation_319, "ALT": Variation_249, "TTO": Variation_316, "ATO": Variation_701, "PCI": Variation_235}
+    items_dict = {"TID": (Item_1712), "LAT": (Item_1026), "LON": (Item_1053), "ALT": (Item_507), "TTO": (Item_1789), "ATO": (Item_549), "PCI": (Item_1286)}
 
 class Item_1734(Item):
     name = "TP1A"
@@ -20624,7 +20624,7 @@ Variation_1093_Arg : TypeAlias = Union[Raw, Variation_1093_Arg_Group]
 class Variation_1093(Group):
     bit_size = 8
     items_list = [Item_1734, Item_1735, Item_1736, Item_1737, Item_1738, Item_1739, Item_1740, Item_1741]
-    items_dict = {"TP1A": Variation_71, "TP1B": Variation_357, "TP2A": Variation_492, "TP2B": Variation_552, "TP3A": Variation_658, "TP3B": Variation_734, "TP4A": Variation_830, "TP4B": Variation_853}
+    items_dict = {"TP1A": (Item_1734), "TP1B": (Item_1735), "TP2A": (Item_1736), "TP2B": (Item_1737), "TP3A": (Item_1738), "TP3B": (Item_1739), "TP4A": (Item_1740), "TP4B": (Item_1741)}
 
 class Item_1746(Item):
     name = "TRANS"
@@ -20656,7 +20656,7 @@ Variation_1094_Arg : TypeAlias = Union[Raw, Variation_1094_Arg_Group]
 class Variation_1094(Group):
     bit_size = 8
     items_list = [Item_1746, Item_1060, Item_1854, Item_486, Item_29]
-    items_dict = {"TRANS": Variation_96, "LONG": Variation_506, "VERT": Variation_670, "ADF": Variation_821}
+    items_dict = {"TRANS": (Item_1746), "LONG": (Item_1060), "VERT": (Item_1854), "ADF": (Item_486)}
 
 class Item_1747(Item):
     name = "TRB"
@@ -20676,7 +20676,7 @@ Variation_1095_Arg : TypeAlias = Union[Raw, Variation_1095_Arg_Group]
 class Variation_1095(Group):
     bit_size = 8
     items_list = [Item_1747, Item_1195]
-    items_dict = {"TRB": Variation_29, "MSG": Variation_418}
+    items_dict = {"TRB": (Item_1747), "MSG": (Item_1195)}
 
 class Item_1196(Item):
     name = "MSG"
@@ -20691,7 +20691,7 @@ Variation_1096_Arg : TypeAlias = Union[Raw, Variation_1096_Arg_Group]
 class Variation_1096(Group):
     bit_size = 8
     items_list = [Item_1747, Item_1196]
-    items_dict = {"TRB": Variation_29, "MSG": Variation_419}
+    items_dict = {"TRB": (Item_1747), "MSG": (Item_1196)}
 
 class Item_1748(Item):
     name = "TRB"
@@ -20711,7 +20711,7 @@ Variation_1097_Arg : TypeAlias = Union[Raw, Variation_1097_Arg_Group]
 class Variation_1097(Group):
     bit_size = 8
     items_list = [Item_1748, Item_1197]
-    items_dict = {"TRB": Variation_29, "MSG": Variation_418}
+    items_dict = {"TRB": (Item_1748), "MSG": (Item_1197)}
 
 class Item_1796(Item):
     name = "TYP"
@@ -20735,7 +20735,7 @@ Variation_1098_Arg : TypeAlias = Union[Raw, Variation_1098_Arg_Group]
 class Variation_1098(Group):
     bit_size = 32
     items_list = [Item_1796, Item_13, Item_1216]
-    items_dict = {"TYP": Variation_106, "NBR": Variation_778}
+    items_dict = {"TYP": (Item_1796), "NBR": (Item_1216)}
 
 class Item_1219(Item):
     name = "NBR"
@@ -20750,7 +20750,7 @@ Variation_1099_Arg : TypeAlias = Union[Raw, Variation_1099_Arg_Group]
 class Variation_1099(Group):
     bit_size = 32
     items_list = [Item_1796, Item_13, Item_1219]
-    items_dict = {"TYP": Variation_106, "NBR": Variation_778}
+    items_dict = {"TYP": (Item_1796), "NBR": (Item_1219)}
 
 class Item_1799(Item):
     name = "TYP"
@@ -20802,7 +20802,7 @@ Variation_1100_Arg : TypeAlias = Union[Raw, Variation_1100_Arg_Group]
 class Variation_1100(Group):
     bit_size = 32
     items_list = [Item_1799, Item_760, Item_30, Item_949, Item_1, Item_1154, Item_557, Item_7, Item_1546]
-    items_dict = {"TYP": Variation_136, "DAY": Variation_767, "HOR": Variation_607, "MIN": Variation_519, "AVS": Variation_70, "SEC": Variation_519}
+    items_dict = {"TYP": (Item_1799), "DAY": (Item_760), "HOR": (Item_949), "MIN": (Item_1154), "AVS": (Item_557), "SEC": (Item_1546)}
 
 class Item_1800(Item):
     name = "TYP"
@@ -20841,7 +20841,7 @@ Variation_1101_Arg : TypeAlias = Union[Raw, Variation_1101_Arg_Group]
 class Variation_1101(Group):
     bit_size = 32
     items_list = [Item_1800, Item_760, Item_30, Item_950, Item_1, Item_1155, Item_559, Item_7, Item_1547]
-    items_dict = {"TYP": Variation_137, "DAY": Variation_767, "HOR": Variation_607, "MIN": Variation_519, "AVS": Variation_70, "SEC": Variation_519}
+    items_dict = {"TYP": (Item_1800), "DAY": (Item_760), "HOR": (Item_950), "MIN": (Item_1155), "AVS": (Item_559), "SEC": (Item_1547)}
 
 class Item_1803(Item):
     name = "TYP"
@@ -20861,7 +20861,7 @@ Variation_1102_Arg : TypeAlias = Union[Raw, Variation_1102_Arg_Group]
 class Variation_1102(Group):
     bit_size = 32
     items_list = [Item_1803, Item_13, Item_1218]
-    items_dict = {"TYP": Variation_107, "NBR": Variation_777}
+    items_dict = {"TYP": (Item_1803), "NBR": (Item_1218)}
 
 class Item_1804(Item):
     name = "TYP"
@@ -20917,7 +20917,7 @@ Variation_1103_Arg : TypeAlias = Union[Raw, Variation_1103_Arg_Group]
 class Variation_1103(Group):
     bit_size = 56
     items_list = [Item_1804, Item_1650, Item_534, Item_1399, Item_1407, Item_1200, Item_1788, Item_1708]
-    items_dict = {"TYP": Variation_133, "STYP": Variation_771, "ARA": Variation_231, "RAC": Variation_844, "RAT": Variation_428, "MTE": Variation_527, "TTI": Variation_668, "TID": Variation_849}
+    items_dict = {"TYP": (Item_1804), "STYP": (Item_1650), "ARA": (Item_534), "RAC": (Item_1399), "RAT": (Item_1407), "MTE": (Item_1200), "TTI": (Item_1788), "TID": (Item_1708)}
 
 class Item_1805(Item):
     name = "TYP"
@@ -20949,7 +20949,7 @@ Variation_1104_Arg : TypeAlias = Union[Raw, Variation_1104_Arg_Group]
 class Variation_1104(Group):
     bit_size = 8
     items_list = [Item_1805, Item_1574, Item_1394, Item_1775, Item_27]
-    items_dict = {"TYP": Variation_121, "SIM": Variation_528, "RAB": Variation_657, "TST": Variation_752}
+    items_dict = {"TYP": (Item_1805), "SIM": (Item_1574), "RAB": (Item_1394), "TST": (Item_1775)}
 
 class Item_1806(Item):
     name = "TYP"
@@ -20993,7 +20993,7 @@ Variation_1105_Arg : TypeAlias = Union[Raw, Variation_1105_Arg_Group]
 class Variation_1105(Group):
     bit_size = 32
     items_list = [Item_1806, Item_761, Item_30, Item_951, Item_1, Item_1156, Item_558, Item_7, Item_1548]
-    items_dict = {"TYP": Variation_137, "DAY": Variation_766, "HOR": Variation_607, "MIN": Variation_519, "AVS": Variation_70, "SEC": Variation_519}
+    items_dict = {"TYP": (Item_1806), "DAY": (Item_761), "HOR": (Item_951), "MIN": (Item_1156), "AVS": (Item_558), "SEC": (Item_1548)}
 
 class Item_1807(Item):
     name = "TYP"
@@ -21013,7 +21013,7 @@ Variation_1106_Arg : TypeAlias = Union[Raw, Variation_1106_Arg_Group]
 class Variation_1106(Group):
     bit_size = 16
     items_list = [Item_1807, Item_699]
-    items_dict = {"TYP": Variation_134, "COUNT": Variation_776}
+    items_dict = {"TYP": (Item_1807), "COUNT": (Item_699)}
 
 class Item_1808(Item):
     name = "TYP"
@@ -21028,7 +21028,7 @@ Variation_1107_Arg : TypeAlias = Union[Raw, Variation_1107_Arg_Group]
 class Variation_1107(Group):
     bit_size = 16
     items_list = [Item_1808, Item_699]
-    items_dict = {"TYP": Variation_135, "COUNT": Variation_776}
+    items_dict = {"TYP": (Item_1808), "COUNT": (Item_699)}
 
 class Item_1809(Item):
     name = "TYPE"
@@ -21054,7 +21054,7 @@ Variation_1108_Arg : TypeAlias = Union[Raw, Variation_1108_Arg_Group]
 class Variation_1108(Group):
     bit_size = 8
     items_list = [Item_1809, Item_1266, Item_1632]
-    items_dict = {"TYPE": Variation_129, "ORIGIN": Variation_669, "STATE": Variation_839}
+    items_dict = {"TYPE": (Item_1809), "ORIGIN": (Item_1266), "STATE": (Item_1632)}
 
 class Item_1810(Item):
     name = "TYPE"
@@ -21074,7 +21074,7 @@ Variation_1109_Arg : TypeAlias = Union[Raw, Variation_1109_Arg_Group]
 class Variation_1109(Group):
     bit_size = 24
     items_list = [Item_1810, Item_1434]
-    items_dict = {"TYPE": Variation_165, "REPLYNBR": Variation_234}
+    items_dict = {"TYPE": (Item_1810), "REPLYNBR": (Item_1434)}
 
 class Item_1811(Item):
     name = "TYPE"
@@ -21100,7 +21100,7 @@ Variation_1110_Arg : TypeAlias = Union[Raw, Variation_1110_Arg_Group]
 class Variation_1110(Group):
     bit_size = 48
     items_list = [Item_1811, Item_1429, Item_10, Item_749]
-    items_dict = {"TYPE": Variation_163, "REF": Variation_43, "CV": Variation_313}
+    items_dict = {"TYPE": (Item_1811), "REF": (Item_1429), "CV": (Item_749)}
 
 class Item_1812(Item):
     name = "TYPE"
@@ -21126,7 +21126,7 @@ Variation_1111_Arg : TypeAlias = Union[Raw, Variation_1111_Arg_Group]
 class Variation_1111(Group):
     bit_size = 48
     items_list = [Item_1812, Item_1428, Item_10, Item_700]
-    items_dict = {"TYPE": Variation_164, "REF": Variation_42, "COUNT": Variation_315}
+    items_dict = {"TYPE": (Item_1812), "REF": (Item_1428), "COUNT": (Item_700)}
 
 class Item_1821(Item):
     name = "UCI6"
@@ -21146,7 +21146,7 @@ Variation_1112_Arg : TypeAlias = Union[Raw, Variation_1112_Arg_Group]
 class Variation_1112(Group):
     bit_size = 24
     items_list = [Item_1821, Item_1034]
-    items_dict = {"UCI6": Variation_229, "LCI6": Variation_696}
+    items_dict = {"UCI6": (Item_1821), "LCI6": (Item_1034)}
 
 class Item_1822(Item):
     name = "UCI9"
@@ -21166,7 +21166,7 @@ Variation_1113_Arg : TypeAlias = Union[Raw, Variation_1113_Arg_Group]
 class Variation_1113(Group):
     bit_size = 24
     items_list = [Item_1822, Item_1035]
-    items_dict = {"UCI9": Variation_229, "LCI9": Variation_696}
+    items_dict = {"UCI9": (Item_1822), "LCI9": (Item_1035)}
 
 class Item_1825(Item):
     name = "UM"
@@ -21198,7 +21198,7 @@ Variation_1114_Arg : TypeAlias = Union[Raw, Variation_1114_Arg_Group]
 class Variation_1114(Group):
     bit_size = 8
     items_list = [Item_1825, Item_786, Item_1820, Item_771, Item_22]
-    items_dict = {"UM": Variation_89, "DM": Variation_336, "UC": Variation_502, "DC": Variation_586}
+    items_dict = {"UM": (Item_1825), "DM": (Item_786), "UC": (Item_1820), "DC": (Item_771)}
 
 class Item_1827(Item):
     name = "V"
@@ -21234,7 +21234,7 @@ Variation_1115_Arg : TypeAlias = Union[Raw, Variation_1115_Arg_Group]
 class Variation_1115(Group):
     bit_size = 16
     items_list = [Item_1827, Item_892, Item_1004, Item_16, Item_817]
-    items_dict = {"V": Variation_13, "G": Variation_338, "L": Variation_461, "EM1": Variation_694}
+    items_dict = {"V": (Item_1827), "G": (Item_892), "L": (Item_1004), "EM1": (Item_817)}
 
 class Item_1828(Item):
     name = "V"
@@ -21255,7 +21255,7 @@ Variation_1116_Arg : TypeAlias = Union[Raw, Variation_1116_Arg_Group]
 class Variation_1116(Group):
     bit_size = 16
     items_list = [Item_1828, Item_7, Item_1005, Item_16, Item_817]
-    items_dict = {"V": Variation_14, "L": Variation_462, "EM1": Variation_694}
+    items_dict = {"V": (Item_1828), "L": (Item_1005), "EM1": (Item_817)}
 
 class Item_1009(Item):
     name = "L"
@@ -21276,7 +21276,7 @@ Variation_1117_Arg : TypeAlias = Union[Raw, Variation_1117_Arg_Group]
 class Variation_1117(Group):
     bit_size = 16
     items_list = [Item_1828, Item_7, Item_1009, Item_16, Item_1168]
-    items_dict = {"V": Variation_14, "L": Variation_466, "MODE2": Variation_694}
+    items_dict = {"V": (Item_1828), "L": (Item_1009), "MODE2": (Item_1168)}
 
 class Item_12(Spare):
     bit_offset8 = 2
@@ -21358,7 +21358,7 @@ Variation_1118_Arg : TypeAlias = Union[Raw, Variation_1118_Arg_Group]
 class Variation_1118(Group):
     bit_size = 32
     items_list = [Item_1828, Item_892, Item_12, Item_1176, Item_3, Item_1366, Item_1344, Item_1369, Item_1349, Item_1371, Item_1351, Item_1356, Item_1374, Item_1360, Item_1377, Item_1363, Item_1381]
-    items_dict = {"V": Variation_14, "G": Variation_338, "MODEC": Variation_693, "QC1": Variation_636, "QA1": Variation_735, "QC2": Variation_812, "QA2": Variation_854, "QC4": Variation_45, "QA4": Variation_362, "QB1": Variation_457, "QD1": Variation_555, "QB2": Variation_635, "QD2": Variation_738, "QB4": Variation_811, "QD4": Variation_858}
+    items_dict = {"V": (Item_1828), "G": (Item_892), "MODEC": (Item_1176), "QC1": (Item_1366), "QA1": (Item_1344), "QC2": (Item_1369), "QA2": (Item_1349), "QC4": (Item_1371), "QA4": (Item_1351), "QB1": (Item_1356), "QD1": (Item_1374), "QB2": (Item_1360), "QD2": (Item_1377), "QB4": (Item_1363), "QD4": (Item_1381)}
 
 class Item_856(Item):
     name = "FL"
@@ -21374,7 +21374,7 @@ Variation_1119_Arg : TypeAlias = Union[Raw, Variation_1119_Arg_Group]
 class Variation_1119(Group):
     bit_size = 16
     items_list = [Item_1828, Item_892, Item_856]
-    items_dict = {"V": Variation_14, "G": Variation_338, "FL": Variation_524}
+    items_dict = {"V": (Item_1828), "G": (Item_892), "FL": (Item_856)}
 
 class Item_857(Item):
     name = "FL"
@@ -21390,7 +21390,7 @@ Variation_1120_Arg : TypeAlias = Union[Raw, Variation_1120_Arg_Group]
 class Variation_1120(Group):
     bit_size = 16
     items_list = [Item_1828, Item_892, Item_857]
-    items_dict = {"V": Variation_14, "G": Variation_338, "FL": Variation_523}
+    items_dict = {"V": (Item_1828), "G": (Item_892), "FL": (Item_857)}
 
 class Item_947(Item):
     name = "HGT"
@@ -21406,7 +21406,7 @@ Variation_1121_Arg : TypeAlias = Union[Raw, Variation_1121_Arg_Group]
 class Variation_1121(Group):
     bit_size = 16
     items_list = [Item_1828, Item_892, Item_947]
-    items_dict = {"V": Variation_14, "G": Variation_338, "HGT": Variation_523}
+    items_dict = {"V": (Item_1828), "G": (Item_892), "HGT": (Item_947)}
 
 class Item_1007(Item):
     name = "L"
@@ -21428,7 +21428,7 @@ Variation_1122_Arg : TypeAlias = Union[Raw, Variation_1122_Arg_Group]
 class Variation_1122(Group):
     bit_size = 8
     items_list = [Item_1828, Item_892, Item_1007, Item_1166]
-    items_dict = {"V": Variation_14, "G": Variation_338, "L": Variation_464, "MODE1": Variation_606}
+    items_dict = {"V": (Item_1828), "G": (Item_892), "L": (Item_1007), "MODE1": (Item_1166)}
 
 Variation_1123_Arg_Group = TypedDict('Variation_1123_Arg_Group', {
     "V": Union[Variation_14, Variation_14_Arg],
@@ -21440,7 +21440,7 @@ Variation_1123_Arg : TypeAlias = Union[Raw, Variation_1123_Arg_Group]
 class Variation_1123(Group):
     bit_size = 16
     items_list = [Item_1828, Item_892, Item_1009, Item_16, Item_1169]
-    items_dict = {"V": Variation_14, "G": Variation_338, "L": Variation_466, "MODE2": Variation_694}
+    items_dict = {"V": (Item_1828), "G": (Item_892), "L": (Item_1009), "MODE2": (Item_1169)}
 
 class Item_1011(Item):
     name = "L"
@@ -21457,7 +21457,7 @@ Variation_1124_Arg : TypeAlias = Union[Raw, Variation_1124_Arg_Group]
 class Variation_1124(Group):
     bit_size = 16
     items_list = [Item_1828, Item_892, Item_1011, Item_16, Item_1175]
-    items_dict = {"V": Variation_14, "G": Variation_338, "L": Variation_468, "MODE3A": Variation_694}
+    items_dict = {"V": (Item_1828), "G": (Item_892), "L": (Item_1011), "MODE3A": (Item_1175)}
 
 class Item_1012(Item):
     name = "L"
@@ -21479,7 +21479,7 @@ Variation_1125_Arg : TypeAlias = Union[Raw, Variation_1125_Arg_Group]
 class Variation_1125(Group):
     bit_size = 16
     items_list = [Item_1828, Item_892, Item_1012, Item_16, Item_1164]
-    items_dict = {"V": Variation_14, "G": Variation_338, "L": Variation_469, "MOD3A": Variation_694}
+    items_dict = {"V": (Item_1828), "G": (Item_892), "L": (Item_1012), "MOD3A": (Item_1164)}
 
 Variation_1126_Arg_Group = TypedDict('Variation_1126_Arg_Group', {
     "V": Union[Variation_14, Variation_14_Arg],
@@ -21491,7 +21491,7 @@ Variation_1126_Arg : TypeAlias = Union[Raw, Variation_1126_Arg_Group]
 class Variation_1126(Group):
     bit_size = 16
     items_list = [Item_1828, Item_892, Item_1012, Item_16, Item_1175]
-    items_dict = {"V": Variation_14, "G": Variation_338, "L": Variation_469, "MODE3A": Variation_694}
+    items_dict = {"V": (Item_1828), "G": (Item_892), "L": (Item_1012), "MODE3A": (Item_1175)}
 
 class Item_1014(Item):
     name = "L"
@@ -21508,7 +21508,7 @@ Variation_1127_Arg : TypeAlias = Union[Raw, Variation_1127_Arg_Group]
 class Variation_1127(Group):
     bit_size = 16
     items_list = [Item_1828, Item_892, Item_1014, Item_16, Item_1175]
-    items_dict = {"V": Variation_14, "G": Variation_338, "L": Variation_471, "MODE3A": Variation_694}
+    items_dict = {"V": (Item_1828), "G": (Item_892), "L": (Item_1014), "MODE3A": (Item_1175)}
 
 class Item_1015(Item):
     name = "L"
@@ -21530,7 +21530,7 @@ Variation_1128_Arg : TypeAlias = Union[Raw, Variation_1128_Arg_Group]
 class Variation_1128(Group):
     bit_size = 16
     items_list = [Item_1828, Item_892, Item_1015, Item_16, Item_1172]
-    items_dict = {"V": Variation_14, "G": Variation_338, "L": Variation_472, "MODE3A": Variation_694}
+    items_dict = {"V": (Item_1828), "G": (Item_892), "L": (Item_1015), "MODE3A": (Item_1172)}
 
 class Item_893(Item):
     name = "G"
@@ -21551,7 +21551,7 @@ Variation_1129_Arg : TypeAlias = Union[Raw, Variation_1129_Arg_Group]
 class Variation_1129(Group):
     bit_size = 16
     items_list = [Item_1828, Item_893, Item_508]
-    items_dict = {"V": Variation_14, "G": Variation_339, "ALT": Variation_524}
+    items_dict = {"V": (Item_1828), "G": (Item_893), "ALT": (Item_508)}
 
 class Item_1829(Item):
     name = "V"
@@ -21644,7 +21644,7 @@ Variation_1130_Arg : TypeAlias = Union[Raw, Variation_1130_Arg_Group]
 class Variation_1130(Group):
     bit_size = 32
     items_list = [Item_1829, Item_894, Item_12, Item_1176, Item_3, Item_1367, Item_1346, Item_1370, Item_1350, Item_1373, Item_1354, Item_1358, Item_1376, Item_1362, Item_1379, Item_1365, Item_1382]
-    items_dict = {"V": Variation_14, "G": Variation_338, "MODEC": Variation_693, "QC1": Variation_636, "QA1": Variation_735, "QC2": Variation_812, "QA2": Variation_854, "QC4": Variation_45, "QA4": Variation_362, "QB1": Variation_457, "QD1": Variation_555, "QB2": Variation_635, "QD2": Variation_737, "QB4": Variation_811, "QD4": Variation_858}
+    items_dict = {"V": (Item_1829), "G": (Item_894), "MODEC": (Item_1176), "QC1": (Item_1367), "QA1": (Item_1346), "QC2": (Item_1370), "QA2": (Item_1350), "QC4": (Item_1373), "QA4": (Item_1354), "QB1": (Item_1358), "QD1": (Item_1376), "QB2": (Item_1362), "QD2": (Item_1379), "QB4": (Item_1365), "QD4": (Item_1382)}
 
 class Item_629(Item):
     name = "CH"
@@ -21661,7 +21661,7 @@ Variation_1131_Arg : TypeAlias = Union[Raw, Variation_1131_Arg_Group]
 class Variation_1131(Group):
     bit_size = 16
     items_list = [Item_1829, Item_894, Item_629, Item_16, Item_1175]
-    items_dict = {"V": Variation_14, "G": Variation_338, "CH": Variation_478, "MODE3A": Variation_694}
+    items_dict = {"V": (Item_1829), "G": (Item_894), "CH": (Item_629), "MODE3A": (Item_1175)}
 
 Variation_1132_Arg_Group = TypedDict('Variation_1132_Arg_Group', {
     "V": Union[Variation_14, Variation_14_Arg],
@@ -21672,7 +21672,7 @@ Variation_1132_Arg : TypeAlias = Union[Raw, Variation_1132_Arg_Group]
 class Variation_1132(Group):
     bit_size = 16
     items_list = [Item_1829, Item_894, Item_857]
-    items_dict = {"V": Variation_14, "G": Variation_338, "FL": Variation_523}
+    items_dict = {"V": (Item_1829), "G": (Item_894), "FL": (Item_857)}
 
 class Item_1006(Item):
     name = "L"
@@ -21689,7 +21689,7 @@ Variation_1133_Arg : TypeAlias = Union[Raw, Variation_1133_Arg_Group]
 class Variation_1133(Group):
     bit_size = 16
     items_list = [Item_1829, Item_894, Item_1006, Item_16, Item_1175]
-    items_dict = {"V": Variation_14, "G": Variation_338, "L": Variation_463, "MODE3A": Variation_694}
+    items_dict = {"V": (Item_1829), "G": (Item_894), "L": (Item_1006), "MODE3A": (Item_1175)}
 
 class Item_1008(Item):
     name = "L"
@@ -21711,7 +21711,7 @@ Variation_1134_Arg : TypeAlias = Union[Raw, Variation_1134_Arg_Group]
 class Variation_1134(Group):
     bit_size = 8
     items_list = [Item_1829, Item_894, Item_1008, Item_1167]
-    items_dict = {"V": Variation_14, "G": Variation_338, "L": Variation_465, "MODE1": Variation_606}
+    items_dict = {"V": (Item_1829), "G": (Item_894), "L": (Item_1008), "MODE1": (Item_1167)}
 
 class Item_1010(Item):
     name = "L"
@@ -21733,7 +21733,7 @@ Variation_1135_Arg : TypeAlias = Union[Raw, Variation_1135_Arg_Group]
 class Variation_1135(Group):
     bit_size = 16
     items_list = [Item_1829, Item_894, Item_1010, Item_16, Item_1170]
-    items_dict = {"V": Variation_14, "G": Variation_338, "L": Variation_467, "MODE2": Variation_694}
+    items_dict = {"V": (Item_1829), "G": (Item_894), "L": (Item_1010), "MODE2": (Item_1170)}
 
 Variation_1136_Arg_Group = TypedDict('Variation_1136_Arg_Group', {
     "V": Union[Variation_14, Variation_14_Arg],
@@ -21745,7 +21745,7 @@ Variation_1136_Arg : TypeAlias = Union[Raw, Variation_1136_Arg_Group]
 class Variation_1136(Group):
     bit_size = 16
     items_list = [Item_1829, Item_894, Item_1012, Item_16, Item_1175]
-    items_dict = {"V": Variation_14, "G": Variation_338, "L": Variation_469, "MODE3A": Variation_694}
+    items_dict = {"V": (Item_1829), "G": (Item_894), "L": (Item_1012), "MODE3A": (Item_1175)}
 
 class Item_1013(Item):
     name = "L"
@@ -21762,7 +21762,7 @@ Variation_1137_Arg : TypeAlias = Union[Raw, Variation_1137_Arg_Group]
 class Variation_1137(Group):
     bit_size = 16
     items_list = [Item_1829, Item_894, Item_1013, Item_16, Item_1175]
-    items_dict = {"V": Variation_14, "G": Variation_338, "L": Variation_470, "MODE3A": Variation_694}
+    items_dict = {"V": (Item_1829), "G": (Item_894), "L": (Item_1013), "MODE3A": (Item_1175)}
 
 class Item_1042(Item):
     name = "LMC"
@@ -21778,7 +21778,7 @@ Variation_1138_Arg : TypeAlias = Union[Raw, Variation_1138_Arg_Group]
 class Variation_1138(Group):
     bit_size = 16
     items_list = [Item_1829, Item_894, Item_1042]
-    items_dict = {"V": Variation_14, "G": Variation_338, "LMC": Variation_523}
+    items_dict = {"V": (Item_1829), "G": (Item_894), "LMC": (Item_1042)}
 
 class Item_1851(Item):
     name = "VDL"
@@ -21804,7 +21804,7 @@ Variation_1139_Arg : TypeAlias = Union[Raw, Variation_1139_Arg_Group]
 class Variation_1139(Group):
     bit_size = 8
     items_list = [Item_1851, Item_1127, Item_1817, Item_19]
-    items_dict = {"VDL": Variation_90, "MDS": Variation_367, "UAT": Variation_499}
+    items_dict = {"VDL": (Item_1851), "MDS": (Item_1127), "UAT": (Item_1817)}
 
 class Item_1869(Item):
     name = "VX"
@@ -21824,7 +21824,7 @@ Variation_1140_Arg : TypeAlias = Union[Raw, Variation_1140_Arg_Group]
 class Variation_1140(Group):
     bit_size = 32
     items_list = [Item_1869, Item_1873]
-    items_dict = {"VX": Variation_250, "VY": Variation_250}
+    items_dict = {"VX": (Item_1869), "VY": (Item_1873)}
 
 class Item_1870(Item):
     name = "VX"
@@ -21844,7 +21844,7 @@ Variation_1141_Arg : TypeAlias = Union[Raw, Variation_1141_Arg_Group]
 class Variation_1141(Group):
     bit_size = 32
     items_list = [Item_1870, Item_1874]
-    items_dict = {"VX": Variation_250, "VY": Variation_250}
+    items_dict = {"VX": (Item_1870), "VY": (Item_1874)}
 
 class Item_1871(Item):
     name = "VX"
@@ -21864,7 +21864,7 @@ Variation_1142_Arg : TypeAlias = Union[Raw, Variation_1142_Arg_Group]
 class Variation_1142(Group):
     bit_size = 32
     items_list = [Item_1871, Item_1875]
-    items_dict = {"VX": Variation_250, "VY": Variation_250}
+    items_dict = {"VX": (Item_1871), "VY": (Item_1875)}
 
 class Item_1872(Item):
     name = "VX"
@@ -21884,7 +21884,7 @@ Variation_1143_Arg : TypeAlias = Union[Raw, Variation_1143_Arg_Group]
 class Variation_1143(Group):
     bit_size = 32
     items_list = [Item_1872, Item_1876]
-    items_dict = {"VX": Variation_252, "VY": Variation_252}
+    items_dict = {"VX": (Item_1872), "VY": (Item_1876)}
 
 class Item_1885(Item):
     name = "WS"
@@ -21940,7 +21940,7 @@ Variation_1144_Arg : TypeAlias = Union[Raw, Variation_1144_Arg_Group]
 class Variation_1144(Group):
     bit_size = 64
     items_list = [Item_1885, Item_1878, Item_1719, Item_1750, Item_22, Item_1886, Item_1879, Item_1720, Item_1751]
-    items_dict = {"WS": Variation_66, "WD": Variation_377, "TMP": Variation_487, "TRB": Variation_571, "WSD": Variation_264, "WDD": Variation_269, "TMPD": Variation_251, "TRBD": Variation_191}
+    items_dict = {"WS": (Item_1885), "WD": (Item_1878), "TMP": (Item_1719), "TRB": (Item_1750), "WSD": (Item_1886), "WDD": (Item_1879), "TMPD": (Item_1720), "TRBD": (Item_1751)}
 
 class Item_1889(Item):
     name = "X"
@@ -21960,7 +21960,7 @@ Variation_1145_Arg : TypeAlias = Union[Raw, Variation_1145_Arg_Group]
 class Variation_1145(Group):
     bit_size = 16
     items_list = [Item_1889, Item_1932]
-    items_dict = {"X": Variation_197, "Y": Variation_197}
+    items_dict = {"X": (Item_1889), "Y": (Item_1932)}
 
 class Item_1890(Item):
     name = "X"
@@ -21980,7 +21980,7 @@ Variation_1146_Arg : TypeAlias = Union[Raw, Variation_1146_Arg_Group]
 class Variation_1146(Group):
     bit_size = 24
     items_list = [Item_1890, Item_1934]
-    items_dict = {"X": Variation_228, "Y": Variation_695}
+    items_dict = {"X": (Item_1890), "Y": (Item_1934)}
 
 class Item_1891(Item):
     name = "X"
@@ -22006,7 +22006,7 @@ Variation_1147_Arg : TypeAlias = Union[Raw, Variation_1147_Arg_Group]
 class Variation_1147(Group):
     bit_size = 32
     items_list = [Item_1891, Item_1935, Item_671]
-    items_dict = {"X": Variation_230, "Y": Variation_699, "COHAXY": Variation_197}
+    items_dict = {"X": (Item_1891), "Y": (Item_1935), "COHAXY": (Item_671)}
 
 class Item_1892(Item):
     name = "X"
@@ -22032,7 +22032,7 @@ Variation_1148_Arg : TypeAlias = Union[Raw, Variation_1148_Arg_Group]
 class Variation_1148(Group):
     bit_size = 40
     items_list = [Item_1892, Item_1933, Item_678]
-    items_dict = {"X": Variation_275, "Y": Variation_275, "COHVXY": Variation_197}
+    items_dict = {"X": (Item_1892), "Y": (Item_1933), "COHVXY": (Item_678)}
 
 class Item_697(Item):
     name = "CORSHVXY"
@@ -22048,7 +22048,7 @@ Variation_1149_Arg : TypeAlias = Union[Raw, Variation_1149_Arg_Group]
 class Variation_1149(Group):
     bit_size = 40
     items_list = [Item_1892, Item_1933, Item_697]
-    items_dict = {"X": Variation_275, "Y": Variation_275, "CORSHVXY": Variation_197}
+    items_dict = {"X": (Item_1892), "Y": (Item_1933), "CORSHVXY": (Item_697)}
 
 class Item_1893(Item):
     name = "X"
@@ -22068,7 +22068,7 @@ Variation_1150_Arg : TypeAlias = Union[Raw, Variation_1150_Arg_Group]
 class Variation_1150(Group):
     bit_size = 40
     items_list = [Item_1893, Item_1936]
-    items_dict = {"X": Variation_295, "Y": Variation_700}
+    items_dict = {"X": (Item_1893), "Y": (Item_1936)}
 
 class Item_1894(Item):
     name = "X"
@@ -22088,7 +22088,7 @@ Variation_1151_Arg : TypeAlias = Union[Raw, Variation_1151_Arg_Group]
 class Variation_1151(Group):
     bit_size = 16
     items_list = [Item_1894, Item_1937]
-    items_dict = {"X": Variation_216, "Y": Variation_216}
+    items_dict = {"X": (Item_1894), "Y": (Item_1937)}
 
 class Item_1895(Item):
     name = "X"
@@ -22108,7 +22108,7 @@ Variation_1152_Arg : TypeAlias = Union[Raw, Variation_1152_Arg_Group]
 class Variation_1152(Group):
     bit_size = 32
     items_list = [Item_1895, Item_1938]
-    items_dict = {"X": Variation_271, "Y": Variation_271}
+    items_dict = {"X": (Item_1895), "Y": (Item_1938)}
 
 class Item_1896(Item):
     name = "X"
@@ -22128,7 +22128,7 @@ Variation_1153_Arg : TypeAlias = Union[Raw, Variation_1153_Arg_Group]
 class Variation_1153(Group):
     bit_size = 16
     items_list = [Item_1896, Item_1939]
-    items_dict = {"X": Variation_215, "Y": Variation_215}
+    items_dict = {"X": (Item_1896), "Y": (Item_1939)}
 
 class Item_1897(Item):
     name = "X"
@@ -22154,7 +22154,7 @@ Variation_1154_Arg : TypeAlias = Union[Raw, Variation_1154_Arg_Group]
 class Variation_1154(Group):
     bit_size = 48
     items_list = [Item_1897, Item_1940, Item_1930]
-    items_dict = {"X": Variation_279, "Y": Variation_279, "XY": Variation_279}
+    items_dict = {"X": (Item_1897), "Y": (Item_1940), "XY": (Item_1930)}
 
 class Item_1898(Item):
     name = "X"
@@ -22174,7 +22174,7 @@ Variation_1155_Arg : TypeAlias = Union[Raw, Variation_1155_Arg_Group]
 class Variation_1155(Group):
     bit_size = 16
     items_list = [Item_1898, Item_1941]
-    items_dict = {"X": Variation_212, "Y": Variation_212}
+    items_dict = {"X": (Item_1898), "Y": (Item_1941)}
 
 class Item_1899(Item):
     name = "X"
@@ -22194,7 +22194,7 @@ Variation_1156_Arg : TypeAlias = Union[Raw, Variation_1156_Arg_Group]
 class Variation_1156(Group):
     bit_size = 16
     items_list = [Item_1899, Item_1942]
-    items_dict = {"X": Variation_214, "Y": Variation_214}
+    items_dict = {"X": (Item_1899), "Y": (Item_1942)}
 
 class Item_1900(Item):
     name = "X"
@@ -22214,7 +22214,7 @@ Variation_1157_Arg : TypeAlias = Union[Raw, Variation_1157_Arg_Group]
 class Variation_1157(Group):
     bit_size = 16
     items_list = [Item_1900, Item_1943]
-    items_dict = {"X": Variation_210, "Y": Variation_210}
+    items_dict = {"X": (Item_1900), "Y": (Item_1943)}
 
 class Item_1901(Item):
     name = "X"
@@ -22240,7 +22240,7 @@ Variation_1158_Arg : TypeAlias = Union[Raw, Variation_1158_Arg_Group]
 class Variation_1158(Group):
     bit_size = 48
     items_list = [Item_1901, Item_1944, Item_1931]
-    items_dict = {"X": Variation_281, "Y": Variation_281, "XY": Variation_279}
+    items_dict = {"X": (Item_1901), "Y": (Item_1944), "XY": (Item_1931)}
 
 class Item_1902(Item):
     name = "X"
@@ -22266,7 +22266,7 @@ Variation_1159_Arg : TypeAlias = Union[Raw, Variation_1159_Arg_Group]
 class Variation_1159(Group):
     bit_size = 64
     items_list = [Item_1902, Item_1945, Item_1962]
-    items_dict = {"X": Variation_299, "Y": Variation_299, "Z": Variation_240}
+    items_dict = {"X": (Item_1902), "Y": (Item_1945), "Z": (Item_1962)}
 
 class Item_1903(Item):
     name = "X"
@@ -22286,7 +22286,7 @@ Variation_1160_Arg : TypeAlias = Union[Raw, Variation_1160_Arg_Group]
 class Variation_1160(Group):
     bit_size = 32
     items_list = [Item_1903, Item_1947]
-    items_dict = {"X": Variation_237, "Y": Variation_237}
+    items_dict = {"X": (Item_1903), "Y": (Item_1947)}
 
 class Item_1904(Item):
     name = "X"
@@ -22306,7 +22306,7 @@ Variation_1161_Arg : TypeAlias = Union[Raw, Variation_1161_Arg_Group]
 class Variation_1161(Group):
     bit_size = 48
     items_list = [Item_1904, Item_1948]
-    items_dict = {"X": Variation_299, "Y": Variation_299}
+    items_dict = {"X": (Item_1904), "Y": (Item_1948)}
 
 class Item_1905(Item):
     name = "X"
@@ -22332,7 +22332,7 @@ Variation_1162_Arg : TypeAlias = Union[Raw, Variation_1162_Arg_Group]
 class Variation_1162(Group):
     bit_size = 24
     items_list = [Item_1905, Item_1949, Item_1040]
-    items_dict = {"X": Variation_155, "Y": Variation_155, "LENGTH": Variation_155}
+    items_dict = {"X": (Item_1905), "Y": (Item_1949), "LENGTH": (Item_1040)}
 
 class Item_1906(Item):
     name = "X"
@@ -22352,7 +22352,7 @@ Variation_1163_Arg : TypeAlias = Union[Raw, Variation_1163_Arg_Group]
 class Variation_1163(Group):
     bit_size = 32
     items_list = [Item_1906, Item_1950]
-    items_dict = {"X": Variation_237, "Y": Variation_237}
+    items_dict = {"X": (Item_1906), "Y": (Item_1950)}
 
 class Item_1907(Item):
     name = "X"
@@ -22372,7 +22372,7 @@ Variation_1164_Arg : TypeAlias = Union[Raw, Variation_1164_Arg_Group]
 class Variation_1164(Group):
     bit_size = 32
     items_list = [Item_1907, Item_1951]
-    items_dict = {"X": Variation_253, "Y": Variation_253}
+    items_dict = {"X": (Item_1907), "Y": (Item_1951)}
 
 class Item_1908(Item):
     name = "X"
@@ -22392,7 +22392,7 @@ Variation_1165_Arg : TypeAlias = Union[Raw, Variation_1165_Arg_Group]
 class Variation_1165(Group):
     bit_size = 32
     items_list = [Item_1908, Item_1946]
-    items_dict = {"X": Variation_255, "Y": Variation_255}
+    items_dict = {"X": (Item_1908), "Y": (Item_1946)}
 
 class Item_1952(Item):
     name = "Y"
@@ -22407,7 +22407,7 @@ Variation_1166_Arg : TypeAlias = Union[Raw, Variation_1166_Arg_Group]
 class Variation_1166(Group):
     bit_size = 32
     items_list = [Item_1908, Item_1952]
-    items_dict = {"X": Variation_255, "Y": Variation_255}
+    items_dict = {"X": (Item_1908), "Y": (Item_1952)}
 
 class Item_1909(Item):
     name = "X"
@@ -22433,7 +22433,7 @@ Variation_1167_Arg : TypeAlias = Union[Raw, Variation_1167_Arg_Group]
 class Variation_1167(Group):
     bit_size = 48
     items_list = [Item_1909, Item_1953, Item_1016]
-    items_dict = {"X": Variation_236, "Y": Variation_236, "L": Variation_235}
+    items_dict = {"X": (Item_1909), "Y": (Item_1953), "L": (Item_1016)}
 
 class Item_1910(Item):
     name = "X"
@@ -22453,7 +22453,7 @@ Variation_1168_Arg : TypeAlias = Union[Raw, Variation_1168_Arg_Group]
 class Variation_1168(Group):
     bit_size = 48
     items_list = [Item_1910, Item_1954]
-    items_dict = {"X": Variation_299, "Y": Variation_299}
+    items_dict = {"X": (Item_1910), "Y": (Item_1954)}
 
 class Item_1912(Item):
     name = "X1"
@@ -22473,7 +22473,7 @@ Variation_1169_Arg : TypeAlias = Union[Raw, Variation_1169_Arg_Group]
 class Variation_1169(Group):
     bit_size = 16
     items_list = [Item_1912, Item_1956]
-    items_dict = {"X1": Variation_155, "Y1": Variation_155}
+    items_dict = {"X1": (Item_1912), "Y1": (Item_1956)}
 
 class Item_1914(Item):
     name = "X1"
@@ -22505,7 +22505,7 @@ Variation_1170_Arg : TypeAlias = Union[Raw, Variation_1170_Arg_Group]
 class Variation_1170(Group):
     bit_size = 32
     items_list = [Item_1914, Item_1957, Item_1918, Item_1959]
-    items_dict = {"X1": Variation_155, "Y1": Variation_155, "X2": Variation_155, "Y2": Variation_155}
+    items_dict = {"X1": (Item_1914), "Y1": (Item_1957), "X2": (Item_1918), "Y2": (Item_1959)}
 
 class Item_1921(Item):
     name = "XA"
@@ -22535,7 +22535,7 @@ Variation_1171_Arg : TypeAlias = Union[Raw, Variation_1171_Arg_Group]
 class Variation_1171(Group):
     bit_size = 8
     items_list = [Item_1921, Item_7, Item_1922, Item_17, Item_1915, Item_27]
-    items_dict = {"XA": Variation_35, "XC": Variation_445, "X2": Variation_726}
+    items_dict = {"XA": (Item_1921), "XC": (Item_1922), "X2": (Item_1915)}
 
 class Item_1955(Item):
     name = "Y1"
@@ -22591,7 +22591,7 @@ Variation_1172_Arg : TypeAlias = Union[Raw, Variation_1172_Arg_Group]
 class Variation_1172(Group):
     bit_size = 32
     items_list = [Item_1955, Item_1958, Item_1960, Item_1961, Item_1072, Item_1077, Item_752, Item_753]
-    items_dict = {"Y1": Variation_132, "Y2": Variation_690, "Y3": Variation_132, "Y4": Variation_690, "M1": Variation_132, "M2": Variation_690, "D1": Variation_132, "D2": Variation_690}
+    items_dict = {"Y1": (Item_1955), "Y2": (Item_1958), "Y3": (Item_1960), "Y4": (Item_1961), "M1": (Item_1072), "M2": (Item_1077), "D1": (Item_752), "D2": (Item_753)}
 
 class Item_1301(Item):
     name = "POA"
@@ -24804,7 +24804,7 @@ class Item_1749(Item):
 class Variation_1375(Compound):
     fspec_size = None
     items_list = [Item_1884, Item_1877, Item_1718, Item_1749]
-    items_dict = {"WS": ("Wind Speed", Variation_264, 0x80), "WD": ("Wind Direction", Variation_269, 0x40), "TMP": ("Temperature", Variation_251, 0x20), "TRB": ("Turbulence", Variation_191, 0x10)}
+    items_dict = {"WS": (Item_1884, 0x80), "WD": (Item_1877, 0x40), "TMP": (Item_1718, 0x20), "TRB": (Item_1749, 0x10)}
     @overload
     @classmethod
     def spec(cls, key : Literal["WS"]) -> Variation_264: ...
@@ -24849,7 +24849,7 @@ class Item_1710(Item):
 class Variation_1371(Compound):
     fspec_size = None
     items_list = [Item_1715, Item_1710]
-    items_dict = {"TIS": ("Trajectory Intent Status", Variation_1202, 0x80), "TID": ("Trajectory Intent Data", Variation_1257, 0x40)}
+    items_dict = {"TIS": (Item_1715, 0x80), "TID": (Item_1710, 0x40)}
     @overload
     @classmethod
     def spec(cls, key : Literal["TIS"]) -> Variation_1202: ...
@@ -24878,7 +24878,7 @@ class Item_1580(Item):
 class Variation_1282(Compound):
     fspec_size = None
     items_list = [Item_60, Item_137, Item_107, Item_274, Item_214, Item_286, Item_222, Item_352, Item_366, Item_292, Item_298, Item_301, Item_303, Item_304, Item_306, Item_309, Item_317, Item_321, Item_238, Item_119, Item_341, Item_84, Item_361, Item_294, Item_296, Item_262, None, None, None, None, None, None, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x8000000000), "040": ("Target Report Descriptor", Variation_956, 0x4000000000), "030": ("Time of Day", Variation_311, 0x2000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_999, 0x1000000000), "080": ("Target Address", Variation_296, 0x0800000000), "140": ("Geometric Altitude", Variation_257, 0x0400000000), "090": ("Figure of Merit", Variation_921, 0x0200000000), "210": ("Link Technology Indicator", Variation_888, 0x0180000000), "230": ("Roll Angle", Variation_246, 0x0140000000), "145": ("Flight Level", Variation_248, 0x0120000000), "150": ("Air Speed", Variation_993, 0x0110000000), "151": ("True Airspeed", Variation_264, 0x0108000000), "152": ("Magnetic Heading", Variation_293, 0x0104000000), "155": ("Barometric Vertical Rate", Variation_258, 0x0102000000), "157": ("Geometric Vertical Rate", Variation_258, 0x0101800000), "160": ("Ground Vector", Variation_987, 0x0101400000), "165": ("Rate Of Turn", Variation_1216, 0x0101200000), "170": ("Target Identification", Variation_326, 0x0101100000), "095": ("Velocity Accuracy", Variation_155, 0x0101080000), "032": ("Time of Day Accuracy", Variation_220, 0x0101040000), "200": ("Target Status", Variation_161, 0x0101020000), "020": ("Emitter Category", Variation_172, 0x0101018000), "220": ("Met Information", Variation_1375, 0x0101014000), "146": ("Intermediate State Selected Altitude", Variation_1069, 0x0101012000), "148": ("Final State Selected Altitude", Variation_1019, 0x0101011000), "110": ("Trajectory Intent", Variation_1371, 0x0101010800), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010104), "SP": ("Special Purpose Field", Variation_1281, 0x0101010102)}
+    items_dict = {"010": (Item_60, 0x8000000000), "040": (Item_137, 0x4000000000), "030": (Item_107, 0x2000000000), "130": (Item_274, 0x1000000000), "080": (Item_214, 0x0800000000), "140": (Item_286, 0x0400000000), "090": (Item_222, 0x0200000000), "210": (Item_352, 0x0180000000), "230": (Item_366, 0x0140000000), "145": (Item_292, 0x0120000000), "150": (Item_298, 0x0110000000), "151": (Item_301, 0x0108000000), "152": (Item_303, 0x0104000000), "155": (Item_304, 0x0102000000), "157": (Item_306, 0x0101800000), "160": (Item_309, 0x0101400000), "165": (Item_317, 0x0101200000), "170": (Item_321, 0x0101100000), "095": (Item_238, 0x0101080000), "032": (Item_119, 0x0101040000), "200": (Item_341, 0x0101020000), "020": (Item_84, 0x0101018000), "220": (Item_361, 0x0101014000), "146": (Item_294, 0x0101012000), "148": (Item_296, 0x0101011000), "110": (Item_262, 0x0101010800), "RE": (Item_1421, 0x0101010104), "SP": (Item_1580, 0x0101010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -24975,7 +24975,7 @@ class Item_275(Item):
 class Variation_1283(Compound):
     fspec_size = None
     items_list = [Item_60, Item_137, Item_107, Item_275, Item_214, Item_286, Item_222, Item_352, Item_366, Item_292, Item_298, Item_301, Item_303, Item_304, Item_306, Item_309, Item_317, Item_321, Item_238, Item_119, Item_341, Item_84, Item_361, Item_294, Item_296, Item_262, None, None, None, None, None, None, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x8000000000), "040": ("Target Report Descriptor", Variation_956, 0x4000000000), "030": ("Time of Day", Variation_311, 0x2000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_1001, 0x1000000000), "080": ("Target Address", Variation_296, 0x0800000000), "140": ("Geometric Altitude", Variation_257, 0x0400000000), "090": ("Figure of Merit", Variation_921, 0x0200000000), "210": ("Link Technology Indicator", Variation_888, 0x0180000000), "230": ("Roll Angle", Variation_246, 0x0140000000), "145": ("Flight Level", Variation_248, 0x0120000000), "150": ("Air Speed", Variation_993, 0x0110000000), "151": ("True Airspeed", Variation_264, 0x0108000000), "152": ("Magnetic Heading", Variation_293, 0x0104000000), "155": ("Barometric Vertical Rate", Variation_258, 0x0102000000), "157": ("Geometric Vertical Rate", Variation_258, 0x0101800000), "160": ("Ground Vector", Variation_987, 0x0101400000), "165": ("Rate Of Turn", Variation_1216, 0x0101200000), "170": ("Target Identification", Variation_326, 0x0101100000), "095": ("Velocity Accuracy", Variation_155, 0x0101080000), "032": ("Time of Day Accuracy", Variation_220, 0x0101040000), "200": ("Target Status", Variation_161, 0x0101020000), "020": ("Emitter Category", Variation_172, 0x0101018000), "220": ("Met Information", Variation_1375, 0x0101014000), "146": ("Intermediate State Selected Altitude", Variation_1069, 0x0101012000), "148": ("Final State Selected Altitude", Variation_1019, 0x0101011000), "110": ("Trajectory Intent", Variation_1371, 0x0101010800), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010104), "SP": ("Special Purpose Field", Variation_1281, 0x0101010102)}
+    items_dict = {"010": (Item_60, 0x8000000000), "040": (Item_137, 0x4000000000), "030": (Item_107, 0x2000000000), "130": (Item_275, 0x1000000000), "080": (Item_214, 0x0800000000), "140": (Item_286, 0x0400000000), "090": (Item_222, 0x0200000000), "210": (Item_352, 0x0180000000), "230": (Item_366, 0x0140000000), "145": (Item_292, 0x0120000000), "150": (Item_298, 0x0110000000), "151": (Item_301, 0x0108000000), "152": (Item_303, 0x0104000000), "155": (Item_304, 0x0102000000), "157": (Item_306, 0x0101800000), "160": (Item_309, 0x0101400000), "165": (Item_317, 0x0101200000), "170": (Item_321, 0x0101100000), "095": (Item_238, 0x0101080000), "032": (Item_119, 0x0101040000), "200": (Item_341, 0x0101020000), "020": (Item_84, 0x0101018000), "220": (Item_361, 0x0101014000), "146": (Item_294, 0x0101012000), "148": (Item_296, 0x0101011000), "110": (Item_262, 0x0101010800), "RE": (Item_1421, 0x0101010104), "SP": (Item_1580, 0x0101010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -25077,7 +25077,7 @@ class Item_281(Item):
 class Variation_1284(Compound):
     fspec_size = None
     items_list = [Item_60, Item_137, Item_107, Item_275, Item_214, Item_286, Item_222, Item_352, Item_366, Item_292, Item_298, Item_301, Item_303, Item_304, Item_306, Item_309, Item_317, Item_321, Item_238, Item_119, Item_341, Item_84, Item_361, Item_294, Item_296, Item_262, Item_191, Item_281, None, None, None, None, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x8000000000), "040": ("Target Report Descriptor", Variation_956, 0x4000000000), "030": ("Time of Day", Variation_311, 0x2000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_1001, 0x1000000000), "080": ("Target Address", Variation_296, 0x0800000000), "140": ("Geometric Altitude", Variation_257, 0x0400000000), "090": ("Figure of Merit", Variation_921, 0x0200000000), "210": ("Link Technology Indicator", Variation_888, 0x0180000000), "230": ("Roll Angle", Variation_246, 0x0140000000), "145": ("Flight Level", Variation_248, 0x0120000000), "150": ("Air Speed", Variation_993, 0x0110000000), "151": ("True Airspeed", Variation_264, 0x0108000000), "152": ("Magnetic Heading", Variation_293, 0x0104000000), "155": ("Barometric Vertical Rate", Variation_258, 0x0102000000), "157": ("Geometric Vertical Rate", Variation_258, 0x0101800000), "160": ("Ground Vector", Variation_987, 0x0101400000), "165": ("Rate Of Turn", Variation_1216, 0x0101200000), "170": ("Target Identification", Variation_326, 0x0101100000), "095": ("Velocity Accuracy", Variation_155, 0x0101080000), "032": ("Time of Day Accuracy", Variation_220, 0x0101040000), "200": ("Target Status", Variation_161, 0x0101020000), "020": ("Emitter Category", Variation_172, 0x0101018000), "220": ("Met Information", Variation_1375, 0x0101014000), "146": ("Intermediate State Selected Altitude", Variation_1069, 0x0101012000), "148": ("Final State Selected Altitude", Variation_1019, 0x0101011000), "110": ("Trajectory Intent", Variation_1371, 0x0101010800), "070": ("Mode 3/A Code in Octal Representation", Variation_1124, 0x0101010400), "131": ("Signal Amplitude", Variation_155, 0x0101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010104), "SP": ("Special Purpose Field", Variation_1281, 0x0101010102)}
+    items_dict = {"010": (Item_60, 0x8000000000), "040": (Item_137, 0x4000000000), "030": (Item_107, 0x2000000000), "130": (Item_275, 0x1000000000), "080": (Item_214, 0x0800000000), "140": (Item_286, 0x0400000000), "090": (Item_222, 0x0200000000), "210": (Item_352, 0x0180000000), "230": (Item_366, 0x0140000000), "145": (Item_292, 0x0120000000), "150": (Item_298, 0x0110000000), "151": (Item_301, 0x0108000000), "152": (Item_303, 0x0104000000), "155": (Item_304, 0x0102000000), "157": (Item_306, 0x0101800000), "160": (Item_309, 0x0101400000), "165": (Item_317, 0x0101200000), "170": (Item_321, 0x0101100000), "095": (Item_238, 0x0101080000), "032": (Item_119, 0x0101040000), "200": (Item_341, 0x0101020000), "020": (Item_84, 0x0101018000), "220": (Item_361, 0x0101014000), "146": (Item_294, 0x0101012000), "148": (Item_296, 0x0101011000), "110": (Item_262, 0x0101010800), "070": (Item_191, 0x0101010400), "131": (Item_281, 0x0101010200), "RE": (Item_1421, 0x0101010104), "SP": (Item_1580, 0x0101010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -25445,7 +25445,7 @@ class Item_1514(Item):
 class Variation_1332(Compound):
     fspec_size = None
     items_list = [Item_522, Item_1752, Item_1084, Item_1383, Item_1704, Item_1095, Item_912, Item_858, Item_1001, Item_882, Item_542, Item_1674, Item_1145, Item_601, Item_929, Item_925, Item_1671, Item_1705, Item_1764, Item_1138, Item_1452, Item_533, Item_1514]
-    items_dict = {"AOS": ("Aircraft Operational Status Age", Variation_211, 0x80000000), "TRD": ("Target Report Descriptor Age", Variation_211, 0x40000000), "M3A": ("Mode 3/A Age", Variation_211, 0x20000000), "QI": ("Quality Indicators Age", Variation_211, 0x10000000), "TI1": ("Trajectory Intent Age", Variation_211, 0x08000000), "MAM": ("Message Amplitude Age", Variation_211, 0x04000000), "GH": ("Geometric Height Age", Variation_211, 0x02000000), "FL": ("Flight Level Age", Variation_211, 0x01800000), "ISA": ("Intermediate State Selected Altitude Age", Variation_211, 0x01400000), "FSA": ("Final State Selected Altitude Age", Variation_211, 0x01200000), "AS": ("Air Speed Age", Variation_211, 0x01100000), "TAS": ("True Air Speed Age", Variation_211, 0x01080000), "MH": ("Magnetic Heading Age", Variation_211, 0x01040000), "BVR": ("Barometric Vertical Rate Age", Variation_211, 0x01020000), "GVR": ("Geometric Vertical Rate Age", Variation_211, 0x01018000), "GV": ("Ground Vector Age", Variation_211, 0x01014000), "TAR": ("Track Angle Rate Age", Variation_211, 0x01012000), "TI2": ("Target Identification Age", Variation_211, 0x01011000), "TS": ("Target Status Age", Variation_211, 0x01010800), "MET": ("Met Information Age", Variation_211, 0x01010400), "ROA": ("Roll Angle Age", Variation_211, 0x01010200), "ARA": ("ACAS Resolution Advisory Age", Variation_211, 0x01010180), "SCC": ("Surface Capabilities and Characteristics Age", Variation_211, 0x01010140)}
+    items_dict = {"AOS": (Item_522, 0x80000000), "TRD": (Item_1752, 0x40000000), "M3A": (Item_1084, 0x20000000), "QI": (Item_1383, 0x10000000), "TI1": (Item_1704, 0x08000000), "MAM": (Item_1095, 0x04000000), "GH": (Item_912, 0x02000000), "FL": (Item_858, 0x01800000), "ISA": (Item_1001, 0x01400000), "FSA": (Item_882, 0x01200000), "AS": (Item_542, 0x01100000), "TAS": (Item_1674, 0x01080000), "MH": (Item_1145, 0x01040000), "BVR": (Item_601, 0x01020000), "GVR": (Item_929, 0x01018000), "GV": (Item_925, 0x01014000), "TAR": (Item_1671, 0x01012000), "TI2": (Item_1705, 0x01011000), "TS": (Item_1764, 0x01010800), "MET": (Item_1138, 0x01010400), "ROA": (Item_1452, 0x01010200), "ARA": (Item_533, 0x01010180), "SCC": (Item_1514, 0x01010140)}
     @overload
     @classmethod
     def spec(cls, key : Literal["AOS"]) -> Variation_211: ...
@@ -25527,7 +25527,7 @@ class Item_390(Item):
 class Variation_1285(Compound):
     fspec_size = None
     items_list = [Item_60, Item_138, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_353, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x80000000000000), "040": ("Target Report Descriptor", Variation_1177, 0x40000000000000), "161": ("Track Number", Variation_912, 0x20000000000000), "015": ("Service Identification", Variation_155, 0x10000000000000), "071": ("Time of Applicability for Position", Variation_311, 0x08000000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_999, 0x04000000000000), "131": ("High-Resolution Position in WGS-84 Co-ordinates", Variation_1002, 0x02000000000000), "072": ("Time of Applicability for Velocity", Variation_311, 0x01800000000000), "150": ("Air Speed", Variation_993, 0x01400000000000), "151": ("True Airspeed", Variation_1044, 0x01200000000000), "080": ("Target Address", Variation_296, 0x01100000000000), "073": ("Time of Message Reception for Position", Variation_311, 0x01080000000000), "074": ("Time of Message Reception of Position-High Precision", Variation_981, 0x01040000000000), "075": ("Time of Message Reception for Velocity", Variation_311, 0x01020000000000), "076": ("Time of Message Reception of Velocity-High Precision", Variation_982, 0x01018000000000), "140": ("Geometric Height", Variation_257, 0x01014000000000), "090": ("Quality Indicators", Variation_1206, 0x01012000000000), "210": ("MOPS Version", Variation_878, 0x01011000000000), "070": ("Mode 3/A Code in Octal Representation", Variation_905, 0x01010800000000), "230": ("Roll Angle", Variation_246, 0x01010400000000), "145": ("Flight Level", Variation_248, 0x01010200000000), "152": ("Magnetic Heading", Variation_293, 0x01010180000000), "200": ("Target Status", Variation_992, 0x01010140000000), "155": ("Barometric Vertical Rate", Variation_1041, 0x01010120000000), "157": ("Geometric Vertical Rate", Variation_1043, 0x01010110000000), "160": ("Airborne Ground Vector", Variation_1042, 0x01010108000000), "165": ("Track Angle Rate", Variation_917, 0x01010104000000), "077": ("Time of ASTERIX Report Transmission", Variation_311, 0x01010102000000), "170": ("Target Identification", Variation_326, 0x01010101800000), "020": ("Emitter Category", Variation_160, 0x01010101400000), "220": ("Met Information", Variation_1375, 0x01010101200000), "146": ("Selected Altitude", Variation_1068, 0x01010101100000), "148": ("Final State Selected Altitude", Variation_1020, 0x01010101080000), "110": ("Trajectory Intent", Variation_1371, 0x01010101040000), "016": ("Service Management", Variation_209, 0x01010101020000), "008": ("Aircraft Operational Status", Variation_1039, 0x01010101018000), "271": ("Surface Capabilities and Characteristics", Variation_1174, 0x01010101014000), "132": ("Message Amplitude", Variation_193, 0x01010101012000), "250": ("Mode S MB Data", Variation_1230, 0x01010101011000), "260": ("ACAS Resolution Advisory Report", Variation_1103, 0x01010101010800), "400": ("Receiver ID", Variation_155, 0x01010101010400), "295": ("Data Ages", Variation_1332, 0x01010101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010101010104), "SP": ("Special Purpose Field", Variation_1281, 0x01010101010102)}
+    items_dict = {"010": (Item_60, 0x80000000000000), "040": (Item_138, 0x40000000000000), "161": (Item_314, 0x20000000000000), "015": (Item_72, 0x10000000000000), "071": (Item_200, 0x08000000000000), "130": (Item_274, 0x04000000000000), "131": (Item_279, 0x02000000000000), "072": (Item_201, 0x01800000000000), "150": (Item_298, 0x01400000000000), "151": (Item_302, 0x01200000000000), "080": (Item_214, 0x01100000000000), "073": (Item_202, 0x01080000000000), "074": (Item_204, 0x01040000000000), "075": (Item_205, 0x01020000000000), "076": (Item_207, 0x01018000000000), "140": (Item_287, 0x01014000000000), "090": (Item_228, 0x01012000000000), "210": (Item_353, 0x01011000000000), "070": (Item_190, 0x01010800000000), "230": (Item_366, 0x01010400000000), "145": (Item_292, 0x01010200000000), "152": (Item_303, 0x01010180000000), "200": (Item_343, 0x01010140000000), "155": (Item_305, 0x01010120000000), "157": (Item_307, 0x01010110000000), "160": (Item_308, 0x01010108000000), "165": (Item_318, 0x01010104000000), "077": (Item_209, 0x01010102000000), "170": (Item_321, 0x01010101800000), "020": (Item_83, 0x01010101400000), "220": (Item_361, 0x01010101200000), "146": (Item_295, 0x01010101100000), "148": (Item_297, 0x01010101080000), "110": (Item_262, 0x01010101040000), "016": (Item_76, 0x01010101020000), "008": (Item_58, 0x01010101018000), "271": (Item_385, 0x01010101014000), "132": (Item_282, 0x01010101012000), "250": (Item_376, 0x01010101011000), "260": (Item_381, 0x01010101010800), "400": (Item_418, 0x01010101010400), "295": (Item_390, 0x01010101010200), "RE": (Item_1421, 0x01010101010104), "SP": (Item_1580, 0x01010101010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -25672,7 +25672,7 @@ class Item_354(Item):
 class Variation_1286(Compound):
     fspec_size = None
     items_list = [Item_60, Item_138, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_354, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x80000000000000), "040": ("Target Report Descriptor", Variation_1177, 0x40000000000000), "161": ("Track Number", Variation_912, 0x20000000000000), "015": ("Service Identification", Variation_155, 0x10000000000000), "071": ("Time of Applicability for Position", Variation_311, 0x08000000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_999, 0x04000000000000), "131": ("High-Resolution Position in WGS-84 Co-ordinates", Variation_1002, 0x02000000000000), "072": ("Time of Applicability for Velocity", Variation_311, 0x01800000000000), "150": ("Air Speed", Variation_993, 0x01400000000000), "151": ("True Airspeed", Variation_1044, 0x01200000000000), "080": ("Target Address", Variation_296, 0x01100000000000), "073": ("Time of Message Reception for Position", Variation_311, 0x01080000000000), "074": ("Time of Message Reception of Position-High Precision", Variation_981, 0x01040000000000), "075": ("Time of Message Reception for Velocity", Variation_311, 0x01020000000000), "076": ("Time of Message Reception of Velocity-High Precision", Variation_982, 0x01018000000000), "140": ("Geometric Height", Variation_257, 0x01014000000000), "090": ("Quality Indicators", Variation_1206, 0x01012000000000), "210": ("MOPS Version", Variation_879, 0x01011000000000), "070": ("Mode 3/A Code in Octal Representation", Variation_905, 0x01010800000000), "230": ("Roll Angle", Variation_246, 0x01010400000000), "145": ("Flight Level", Variation_248, 0x01010200000000), "152": ("Magnetic Heading", Variation_293, 0x01010180000000), "200": ("Target Status", Variation_992, 0x01010140000000), "155": ("Barometric Vertical Rate", Variation_1041, 0x01010120000000), "157": ("Geometric Vertical Rate", Variation_1043, 0x01010110000000), "160": ("Airborne Ground Vector", Variation_1042, 0x01010108000000), "165": ("Track Angle Rate", Variation_917, 0x01010104000000), "077": ("Time of ASTERIX Report Transmission", Variation_311, 0x01010102000000), "170": ("Target Identification", Variation_326, 0x01010101800000), "020": ("Emitter Category", Variation_160, 0x01010101400000), "220": ("Met Information", Variation_1375, 0x01010101200000), "146": ("Selected Altitude", Variation_1068, 0x01010101100000), "148": ("Final State Selected Altitude", Variation_1020, 0x01010101080000), "110": ("Trajectory Intent", Variation_1371, 0x01010101040000), "016": ("Service Management", Variation_209, 0x01010101020000), "008": ("Aircraft Operational Status", Variation_1039, 0x01010101018000), "271": ("Surface Capabilities and Characteristics", Variation_1174, 0x01010101014000), "132": ("Message Amplitude", Variation_193, 0x01010101012000), "250": ("Mode S MB Data", Variation_1230, 0x01010101011000), "260": ("ACAS Resolution Advisory Report", Variation_1103, 0x01010101010800), "400": ("Receiver ID", Variation_155, 0x01010101010400), "295": ("Data Ages", Variation_1332, 0x01010101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010101010104), "SP": ("Special Purpose Field", Variation_1281, 0x01010101010102)}
+    items_dict = {"010": (Item_60, 0x80000000000000), "040": (Item_138, 0x40000000000000), "161": (Item_314, 0x20000000000000), "015": (Item_72, 0x10000000000000), "071": (Item_200, 0x08000000000000), "130": (Item_274, 0x04000000000000), "131": (Item_279, 0x02000000000000), "072": (Item_201, 0x01800000000000), "150": (Item_298, 0x01400000000000), "151": (Item_302, 0x01200000000000), "080": (Item_214, 0x01100000000000), "073": (Item_202, 0x01080000000000), "074": (Item_204, 0x01040000000000), "075": (Item_205, 0x01020000000000), "076": (Item_207, 0x01018000000000), "140": (Item_287, 0x01014000000000), "090": (Item_228, 0x01012000000000), "210": (Item_354, 0x01011000000000), "070": (Item_190, 0x01010800000000), "230": (Item_366, 0x01010400000000), "145": (Item_292, 0x01010200000000), "152": (Item_303, 0x01010180000000), "200": (Item_343, 0x01010140000000), "155": (Item_305, 0x01010120000000), "157": (Item_307, 0x01010110000000), "160": (Item_308, 0x01010108000000), "165": (Item_318, 0x01010104000000), "077": (Item_209, 0x01010102000000), "170": (Item_321, 0x01010101800000), "020": (Item_83, 0x01010101400000), "220": (Item_361, 0x01010101200000), "146": (Item_295, 0x01010101100000), "148": (Item_297, 0x01010101080000), "110": (Item_262, 0x01010101040000), "016": (Item_76, 0x01010101020000), "008": (Item_58, 0x01010101018000), "271": (Item_385, 0x01010101014000), "132": (Item_282, 0x01010101012000), "250": (Item_376, 0x01010101011000), "260": (Item_381, 0x01010101010800), "400": (Item_418, 0x01010101010400), "295": (Item_390, 0x01010101010200), "RE": (Item_1421, 0x01010101010104), "SP": (Item_1580, 0x01010101010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -25822,7 +25822,7 @@ class Item_1506(Item):
 class Variation_1333(Compound):
     fspec_size = None
     items_list = [Item_522, Item_1752, Item_1084, Item_1383, Item_1704, Item_1095, Item_912, Item_858, Item_1506, Item_882, Item_542, Item_1674, Item_1145, Item_601, Item_929, Item_925, Item_1671, Item_1705, Item_1764, Item_1138, Item_1452, Item_533, Item_1514]
-    items_dict = {"AOS": ("Aircraft Operational Status Age", Variation_211, 0x80000000), "TRD": ("Target Report Descriptor Age", Variation_211, 0x40000000), "M3A": ("Mode 3/A Age", Variation_211, 0x20000000), "QI": ("Quality Indicators Age", Variation_211, 0x10000000), "TI1": ("Trajectory Intent Age", Variation_211, 0x08000000), "MAM": ("Message Amplitude Age", Variation_211, 0x04000000), "GH": ("Geometric Height Age", Variation_211, 0x02000000), "FL": ("Flight Level Age", Variation_211, 0x01800000), "SAL": ("Selected Altitude Age", Variation_211, 0x01400000), "FSA": ("Final State Selected Altitude Age", Variation_211, 0x01200000), "AS": ("Air Speed Age", Variation_211, 0x01100000), "TAS": ("True Air Speed Age", Variation_211, 0x01080000), "MH": ("Magnetic Heading Age", Variation_211, 0x01040000), "BVR": ("Barometric Vertical Rate Age", Variation_211, 0x01020000), "GVR": ("Geometric Vertical Rate Age", Variation_211, 0x01018000), "GV": ("Ground Vector Age", Variation_211, 0x01014000), "TAR": ("Track Angle Rate Age", Variation_211, 0x01012000), "TI2": ("Target Identification Age", Variation_211, 0x01011000), "TS": ("Target Status Age", Variation_211, 0x01010800), "MET": ("Met Information Age", Variation_211, 0x01010400), "ROA": ("Roll Angle Age", Variation_211, 0x01010200), "ARA": ("ACAS Resolution Advisory Age", Variation_211, 0x01010180), "SCC": ("Surface Capabilities and Characteristics Age", Variation_211, 0x01010140)}
+    items_dict = {"AOS": (Item_522, 0x80000000), "TRD": (Item_1752, 0x40000000), "M3A": (Item_1084, 0x20000000), "QI": (Item_1383, 0x10000000), "TI1": (Item_1704, 0x08000000), "MAM": (Item_1095, 0x04000000), "GH": (Item_912, 0x02000000), "FL": (Item_858, 0x01800000), "SAL": (Item_1506, 0x01400000), "FSA": (Item_882, 0x01200000), "AS": (Item_542, 0x01100000), "TAS": (Item_1674, 0x01080000), "MH": (Item_1145, 0x01040000), "BVR": (Item_601, 0x01020000), "GVR": (Item_929, 0x01018000), "GV": (Item_925, 0x01014000), "TAR": (Item_1671, 0x01012000), "TI2": (Item_1705, 0x01011000), "TS": (Item_1764, 0x01010800), "MET": (Item_1138, 0x01010400), "ROA": (Item_1452, 0x01010200), "ARA": (Item_533, 0x01010180), "SCC": (Item_1514, 0x01010140)}
     @overload
     @classmethod
     def spec(cls, key : Literal["AOS"]) -> Variation_211: ...
@@ -25904,7 +25904,7 @@ class Item_391(Item):
 class Variation_1287(Compound):
     fspec_size = None
     items_list = [Item_60, Item_139, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_353, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_391, None, None, None, None, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x80000000000000), "040": ("Target Report Descriptor", Variation_1178, 0x40000000000000), "161": ("Track Number", Variation_912, 0x20000000000000), "015": ("Service Identification", Variation_155, 0x10000000000000), "071": ("Time of Applicability for Position", Variation_311, 0x08000000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_999, 0x04000000000000), "131": ("High-Resolution Position in WGS-84 Co-ordinates", Variation_1002, 0x02000000000000), "072": ("Time of Applicability for Velocity", Variation_311, 0x01800000000000), "150": ("Air Speed", Variation_993, 0x01400000000000), "151": ("True Airspeed", Variation_1044, 0x01200000000000), "080": ("Target Address", Variation_296, 0x01100000000000), "073": ("Time of Message Reception for Position", Variation_311, 0x01080000000000), "074": ("Time of Message Reception of Position-High Precision", Variation_981, 0x01040000000000), "075": ("Time of Message Reception for Velocity", Variation_311, 0x01020000000000), "076": ("Time of Message Reception of Velocity-High Precision", Variation_982, 0x01018000000000), "140": ("Geometric Height", Variation_257, 0x01014000000000), "090": ("Quality Indicators", Variation_1206, 0x01012000000000), "210": ("MOPS Version", Variation_878, 0x01011000000000), "070": ("Mode 3/A Code in Octal Representation", Variation_905, 0x01010800000000), "230": ("Roll Angle", Variation_246, 0x01010400000000), "145": ("Flight Level", Variation_248, 0x01010200000000), "152": ("Magnetic Heading", Variation_293, 0x01010180000000), "200": ("Target Status", Variation_992, 0x01010140000000), "155": ("Barometric Vertical Rate", Variation_1041, 0x01010120000000), "157": ("Geometric Vertical Rate", Variation_1043, 0x01010110000000), "160": ("Airborne Ground Vector", Variation_1042, 0x01010108000000), "165": ("Track Angle Rate", Variation_917, 0x01010104000000), "077": ("Time of ASTERIX Report Transmission", Variation_311, 0x01010102000000), "170": ("Target Identification", Variation_326, 0x01010101800000), "020": ("Emitter Category", Variation_160, 0x01010101400000), "220": ("Met Information", Variation_1375, 0x01010101200000), "146": ("Selected Altitude", Variation_1068, 0x01010101100000), "148": ("Final State Selected Altitude", Variation_1020, 0x01010101080000), "110": ("Trajectory Intent", Variation_1371, 0x01010101040000), "016": ("Service Management", Variation_209, 0x01010101020000), "008": ("Aircraft Operational Status", Variation_1039, 0x01010101018000), "271": ("Surface Capabilities and Characteristics", Variation_1174, 0x01010101014000), "132": ("Message Amplitude", Variation_193, 0x01010101012000), "250": ("Mode S MB Data", Variation_1230, 0x01010101011000), "260": ("ACAS Resolution Advisory Report", Variation_1103, 0x01010101010800), "400": ("Receiver ID", Variation_155, 0x01010101010400), "295": ("Data Ages", Variation_1333, 0x01010101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010101010104), "SP": ("Special Purpose Field", Variation_1281, 0x01010101010102)}
+    items_dict = {"010": (Item_60, 0x80000000000000), "040": (Item_139, 0x40000000000000), "161": (Item_314, 0x20000000000000), "015": (Item_72, 0x10000000000000), "071": (Item_200, 0x08000000000000), "130": (Item_274, 0x04000000000000), "131": (Item_279, 0x02000000000000), "072": (Item_201, 0x01800000000000), "150": (Item_298, 0x01400000000000), "151": (Item_302, 0x01200000000000), "080": (Item_214, 0x01100000000000), "073": (Item_202, 0x01080000000000), "074": (Item_204, 0x01040000000000), "075": (Item_205, 0x01020000000000), "076": (Item_207, 0x01018000000000), "140": (Item_287, 0x01014000000000), "090": (Item_228, 0x01012000000000), "210": (Item_353, 0x01011000000000), "070": (Item_190, 0x01010800000000), "230": (Item_366, 0x01010400000000), "145": (Item_292, 0x01010200000000), "152": (Item_303, 0x01010180000000), "200": (Item_343, 0x01010140000000), "155": (Item_305, 0x01010120000000), "157": (Item_307, 0x01010110000000), "160": (Item_308, 0x01010108000000), "165": (Item_318, 0x01010104000000), "077": (Item_209, 0x01010102000000), "170": (Item_321, 0x01010101800000), "020": (Item_83, 0x01010101400000), "220": (Item_361, 0x01010101200000), "146": (Item_295, 0x01010101100000), "148": (Item_297, 0x01010101080000), "110": (Item_262, 0x01010101040000), "016": (Item_76, 0x01010101020000), "008": (Item_58, 0x01010101018000), "271": (Item_385, 0x01010101014000), "132": (Item_282, 0x01010101012000), "250": (Item_376, 0x01010101011000), "260": (Item_381, 0x01010101010800), "400": (Item_418, 0x01010101010400), "295": (Item_391, 0x01010101010200), "RE": (Item_1421, 0x01010101010104), "SP": (Item_1580, 0x01010101010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -26059,7 +26059,7 @@ class Item_384(Item):
 class Variation_1288(Compound):
     fspec_size = None
     items_list = [Item_60, Item_140, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_354, Item_190, Item_366, Item_292, Item_303, Item_342, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_384, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x80000000000000), "040": ("Target Report Descriptor", Variation_1179, 0x40000000000000), "161": ("Track Number", Variation_912, 0x20000000000000), "015": ("Service Identification", Variation_155, 0x10000000000000), "071": ("Time of Applicability for Position", Variation_311, 0x08000000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_999, 0x04000000000000), "131": ("High-Resolution Position in WGS-84 Co-ordinates", Variation_1002, 0x02000000000000), "072": ("Time of Applicability for Velocity", Variation_311, 0x01800000000000), "150": ("Air Speed", Variation_993, 0x01400000000000), "151": ("True Airspeed", Variation_1044, 0x01200000000000), "080": ("Target Address", Variation_296, 0x01100000000000), "073": ("Time of Message Reception for Position", Variation_311, 0x01080000000000), "074": ("Time of Message Reception of Position-High Precision", Variation_981, 0x01040000000000), "075": ("Time of Message Reception for Velocity", Variation_311, 0x01020000000000), "076": ("Time of Message Reception of Velocity-High Precision", Variation_982, 0x01018000000000), "140": ("Geometric Height", Variation_257, 0x01014000000000), "090": ("Quality Indicators", Variation_1206, 0x01012000000000), "210": ("MOPS Version", Variation_879, 0x01011000000000), "070": ("Mode 3/A Code in Octal Representation", Variation_905, 0x01010800000000), "230": ("Roll Angle", Variation_246, 0x01010400000000), "145": ("Flight Level", Variation_248, 0x01010200000000), "152": ("Magnetic Heading", Variation_293, 0x01010180000000), "200": ("Target Status", Variation_991, 0x01010140000000), "155": ("Barometric Vertical Rate", Variation_1041, 0x01010120000000), "157": ("Geometric Vertical Rate", Variation_1043, 0x01010110000000), "160": ("Airborne Ground Vector", Variation_1042, 0x01010108000000), "165": ("Track Angle Rate", Variation_917, 0x01010104000000), "077": ("Time of ASTERIX Report Transmission", Variation_311, 0x01010102000000), "170": ("Target Identification", Variation_326, 0x01010101800000), "020": ("Emitter Category", Variation_160, 0x01010101400000), "220": ("Met Information", Variation_1375, 0x01010101200000), "146": ("Selected Altitude", Variation_1068, 0x01010101100000), "148": ("Final State Selected Altitude", Variation_1020, 0x01010101080000), "110": ("Trajectory Intent", Variation_1371, 0x01010101040000), "016": ("Service Management", Variation_209, 0x01010101020000), "008": ("Aircraft Operational Status", Variation_1039, 0x01010101018000), "271": ("Surface Capabilities and Characteristics", Variation_1173, 0x01010101014000), "132": ("Message Amplitude", Variation_193, 0x01010101012000), "250": ("Mode S MB Data", Variation_1230, 0x01010101011000), "260": ("ACAS Resolution Advisory Report", Variation_1103, 0x01010101010800), "400": ("Receiver ID", Variation_155, 0x01010101010400), "295": ("Data Ages", Variation_1332, 0x01010101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010101010104), "SP": ("Special Purpose Field", Variation_1281, 0x01010101010102)}
+    items_dict = {"010": (Item_60, 0x80000000000000), "040": (Item_140, 0x40000000000000), "161": (Item_314, 0x20000000000000), "015": (Item_72, 0x10000000000000), "071": (Item_200, 0x08000000000000), "130": (Item_274, 0x04000000000000), "131": (Item_279, 0x02000000000000), "072": (Item_201, 0x01800000000000), "150": (Item_298, 0x01400000000000), "151": (Item_302, 0x01200000000000), "080": (Item_214, 0x01100000000000), "073": (Item_202, 0x01080000000000), "074": (Item_204, 0x01040000000000), "075": (Item_205, 0x01020000000000), "076": (Item_207, 0x01018000000000), "140": (Item_287, 0x01014000000000), "090": (Item_228, 0x01012000000000), "210": (Item_354, 0x01011000000000), "070": (Item_190, 0x01010800000000), "230": (Item_366, 0x01010400000000), "145": (Item_292, 0x01010200000000), "152": (Item_303, 0x01010180000000), "200": (Item_342, 0x01010140000000), "155": (Item_305, 0x01010120000000), "157": (Item_307, 0x01010110000000), "160": (Item_308, 0x01010108000000), "165": (Item_318, 0x01010104000000), "077": (Item_209, 0x01010102000000), "170": (Item_321, 0x01010101800000), "020": (Item_83, 0x01010101400000), "220": (Item_361, 0x01010101200000), "146": (Item_295, 0x01010101100000), "148": (Item_297, 0x01010101080000), "110": (Item_262, 0x01010101040000), "016": (Item_76, 0x01010101020000), "008": (Item_58, 0x01010101018000), "271": (Item_384, 0x01010101014000), "132": (Item_282, 0x01010101012000), "250": (Item_376, 0x01010101011000), "260": (Item_381, 0x01010101010800), "400": (Item_418, 0x01010101010400), "295": (Item_390, 0x01010101010200), "RE": (Item_1421, 0x01010101010104), "SP": (Item_1580, 0x01010101010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -26199,7 +26199,7 @@ class Variation_1288(Compound):
 class Variation_1289(Compound):
     fspec_size = None
     items_list = [Item_60, Item_140, Item_314, Item_72, Item_200, Item_274, Item_279, Item_201, Item_298, Item_302, Item_214, Item_202, Item_204, Item_205, Item_207, Item_287, Item_228, Item_354, Item_190, Item_366, Item_292, Item_303, Item_343, Item_305, Item_307, Item_308, Item_318, Item_209, Item_321, Item_83, Item_361, Item_295, Item_297, Item_262, Item_76, Item_58, Item_385, Item_282, Item_376, Item_381, Item_418, Item_390, None, None, None, None, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identification", Variation_1061, 0x80000000000000), "040": ("Target Report Descriptor", Variation_1179, 0x40000000000000), "161": ("Track Number", Variation_912, 0x20000000000000), "015": ("Service Identification", Variation_155, 0x10000000000000), "071": ("Time of Applicability for Position", Variation_311, 0x08000000000000), "130": ("Position in WGS-84 Co-ordinates", Variation_999, 0x04000000000000), "131": ("High-Resolution Position in WGS-84 Co-ordinates", Variation_1002, 0x02000000000000), "072": ("Time of Applicability for Velocity", Variation_311, 0x01800000000000), "150": ("Air Speed", Variation_993, 0x01400000000000), "151": ("True Airspeed", Variation_1044, 0x01200000000000), "080": ("Target Address", Variation_296, 0x01100000000000), "073": ("Time of Message Reception for Position", Variation_311, 0x01080000000000), "074": ("Time of Message Reception of Position-High Precision", Variation_981, 0x01040000000000), "075": ("Time of Message Reception for Velocity", Variation_311, 0x01020000000000), "076": ("Time of Message Reception of Velocity-High Precision", Variation_982, 0x01018000000000), "140": ("Geometric Height", Variation_257, 0x01014000000000), "090": ("Quality Indicators", Variation_1206, 0x01012000000000), "210": ("MOPS Version", Variation_879, 0x01011000000000), "070": ("Mode 3/A Code in Octal Representation", Variation_905, 0x01010800000000), "230": ("Roll Angle", Variation_246, 0x01010400000000), "145": ("Flight Level", Variation_248, 0x01010200000000), "152": ("Magnetic Heading", Variation_293, 0x01010180000000), "200": ("Target Status", Variation_992, 0x01010140000000), "155": ("Barometric Vertical Rate", Variation_1041, 0x01010120000000), "157": ("Geometric Vertical Rate", Variation_1043, 0x01010110000000), "160": ("Airborne Ground Vector", Variation_1042, 0x01010108000000), "165": ("Track Angle Rate", Variation_917, 0x01010104000000), "077": ("Time of ASTERIX Report Transmission", Variation_311, 0x01010102000000), "170": ("Target Identification", Variation_326, 0x01010101800000), "020": ("Emitter Category", Variation_160, 0x01010101400000), "220": ("Met Information", Variation_1375, 0x01010101200000), "146": ("Selected Altitude", Variation_1068, 0x01010101100000), "148": ("Final State Selected Altitude", Variation_1020, 0x01010101080000), "110": ("Trajectory Intent", Variation_1371, 0x01010101040000), "016": ("Service Management", Variation_209, 0x01010101020000), "008": ("Aircraft Operational Status", Variation_1039, 0x01010101018000), "271": ("Surface Capabilities and Characteristics", Variation_1174, 0x01010101014000), "132": ("Message Amplitude", Variation_193, 0x01010101012000), "250": ("Mode S MB Data", Variation_1230, 0x01010101011000), "260": ("ACAS Resolution Advisory Report", Variation_1103, 0x01010101010800), "400": ("Receiver ID", Variation_155, 0x01010101010400), "295": ("Data Ages", Variation_1332, 0x01010101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010101010104), "SP": ("Special Purpose Field", Variation_1281, 0x01010101010102)}
+    items_dict = {"010": (Item_60, 0x80000000000000), "040": (Item_140, 0x40000000000000), "161": (Item_314, 0x20000000000000), "015": (Item_72, 0x10000000000000), "071": (Item_200, 0x08000000000000), "130": (Item_274, 0x04000000000000), "131": (Item_279, 0x02000000000000), "072": (Item_201, 0x01800000000000), "150": (Item_298, 0x01400000000000), "151": (Item_302, 0x01200000000000), "080": (Item_214, 0x01100000000000), "073": (Item_202, 0x01080000000000), "074": (Item_204, 0x01040000000000), "075": (Item_205, 0x01020000000000), "076": (Item_207, 0x01018000000000), "140": (Item_287, 0x01014000000000), "090": (Item_228, 0x01012000000000), "210": (Item_354, 0x01011000000000), "070": (Item_190, 0x01010800000000), "230": (Item_366, 0x01010400000000), "145": (Item_292, 0x01010200000000), "152": (Item_303, 0x01010180000000), "200": (Item_343, 0x01010140000000), "155": (Item_305, 0x01010120000000), "157": (Item_307, 0x01010110000000), "160": (Item_308, 0x01010108000000), "165": (Item_318, 0x01010104000000), "077": (Item_209, 0x01010102000000), "170": (Item_321, 0x01010101800000), "020": (Item_83, 0x01010101400000), "220": (Item_361, 0x01010101200000), "146": (Item_295, 0x01010101100000), "148": (Item_297, 0x01010101080000), "110": (Item_262, 0x01010101040000), "016": (Item_76, 0x01010101020000), "008": (Item_58, 0x01010101018000), "271": (Item_385, 0x01010101014000), "132": (Item_282, 0x01010101012000), "250": (Item_376, 0x01010101011000), "260": (Item_381, 0x01010101010800), "400": (Item_418, 0x01010101010400), "295": (Item_390, 0x01010101010200), "RE": (Item_1421, 0x01010101010104), "SP": (Item_1580, 0x01010101010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -26519,7 +26519,7 @@ class Item_597(Item):
 class Variation_1325(Compound):
     fspec_size = None
     items_list = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_687, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_1099, Item_976, Item_1089, Item_597]
-    items_dict = {"ADR": ("Target Address", Variation_296, 0x80000000), "ID": ("Target Identification", Variation_326, 0x40000000), "MHG": ("Magnetic Heading", Variation_293, 0x20000000), "IAS": ("Indicated Airspeed/Mach No", Variation_994, 0x10000000), "TAS": ("True Airspeed", Variation_264, 0x08000000), "SAL": ("Selected Altitude", Variation_1067, 0x04000000), "FSS": ("Final State Selected Altitude", Variation_1018, 0x02000000), "TIS": ("Trajectory Intent Status", Variation_1203, 0x01800000), "TID": ("Trajectory Intent Data", Variation_1258, 0x01400000), "COM": ("Communications/ACAS Capability and Flight Status", Variation_949, 0x01200000), "SAB": ("Status Reported by ADS-B", Variation_922, 0x01100000), "ACS": ("ACAS Resolution Advisory Report", Variation_327, 0x01080000), "BVR": ("Barometric Vertical Rate", Variation_258, 0x01040000), "GVR": ("Geometric Vertical Rate", Variation_258, 0x01020000), "RAN": ("Roll Angle", Variation_246, 0x01018000), "TAR": ("Track Angle Rate", Variation_1090, 0x01014000), "TAN": ("Track Angle", Variation_293, 0x01012000), "GS": ("Ground Speed", Variation_256, 0x01011000), "VUN": ("Velocity Uncertainty", Variation_155, 0x01010800), "MET": ("Meteorological Data", Variation_1144, 0x01010400), "EMC": ("Emitter Category", Variation_173, 0x01010200), "POS": ("Position", Variation_1008, 0x01010180), "GAL": ("Geometric Altitude", Variation_257, 0x01010140), "PUN": ("Position Uncertainty", Variation_907, 0x01010120), "MB": ("MODE S MB DATA", Variation_1230, 0x01010110), "IAR": ("Indicated Airspeed", Variation_264, 0x01010108), "MAC": ("Mach Number", Variation_278, 0x01010104), "BPS": ("Barometric Pressure Setting (derived from Mode S BDS 4,0)", Variation_895, 0x01010102)}
+    items_dict = {"ADR": (Item_488, 0x80000000), "ID": (Item_987, 0x40000000), "MHG": (Item_1146, 0x20000000), "IAS": (Item_980, 0x10000000), "TAS": (Item_1675, 0x08000000), "SAL": (Item_1505, 0x04000000), "FSS": (Item_885, 0x02000000), "TIS": (Item_1716, 0x01800000), "TID": (Item_1711, 0x01400000), "COM": (Item_687, 0x01200000), "SAB": (Item_1499, 0x01100000), "ACS": (Item_480, 0x01080000), "BVR": (Item_599, 0x01040000), "GVR": (Item_927, 0x01020000), "RAN": (Item_1404, 0x01018000), "TAR": (Item_1670, 0x01014000), "TAN": (Item_1666, 0x01012000), "GS": (Item_916, 0x01011000), "VUN": (Item_1866, 0x01010800), "MET": (Item_1139, 0x01010400), "EMC": (Item_822, 0x01010200), "POS": (Item_1308, 0x01010180), "GAL": (Item_900, 0x01010140), "PUN": (Item_1341, 0x01010120), "MB": (Item_1099, 0x01010110), "IAR": (Item_976, 0x01010108), "MAC": (Item_1089, 0x01010104), "BPS": (Item_597, 0x01010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["ADR"]) -> Variation_296: ...
@@ -26676,7 +26676,7 @@ class Item_1160(Item):
 class Variation_1372(Compound):
     fspec_size = None
     items_list = [Item_1757, Item_1332, Item_1609, Item_1128, Item_492, Item_846, Item_1850, Item_1816, Item_1064, Item_1160]
-    items_dict = {"TRK": ("Track Age", Variation_217, 0x8000), "PSR": ("PSR Age", Variation_217, 0x4000), "SSR": ("SSR Age", Variation_217, 0x2000), "MDS": ("Mode S Age", Variation_217, 0x1000), "ADS": ("ADS-C Age", Variation_282, 0x0800), "ES": ("ADS-B Extended Squitter Age", Variation_217, 0x0400), "VDL": ("ADS-B VDL Mode 4 Age", Variation_217, 0x0200), "UAT": ("ADS-B UAT Age", Variation_217, 0x0180), "LOP": ("Loop Age", Variation_217, 0x0140), "MLT": ("Multilateration Age", Variation_217, 0x0120)}
+    items_dict = {"TRK": (Item_1757, 0x8000), "PSR": (Item_1332, 0x4000), "SSR": (Item_1609, 0x2000), "MDS": (Item_1128, 0x1000), "ADS": (Item_492, 0x0800), "ES": (Item_846, 0x0400), "VDL": (Item_1850, 0x0200), "UAT": (Item_1816, 0x0180), "LOP": (Item_1064, 0x0140), "MLT": (Item_1160, 0x0120)}
     @overload
     @classmethod
     def spec(cls, key : Literal["TRK"]) -> Variation_217: ...
@@ -26879,7 +26879,7 @@ class Item_598(Item):
 class Variation_1354(Compound):
     fspec_size = None
     items_list = [Item_1143, Item_1109, Item_1112, Item_1121, Item_1114, Item_1116, Item_1147, Item_979, Item_1676, Item_1507, Item_886, Item_1709, Item_683, Item_1500, Item_481, Item_602, Item_930, Item_1405, Item_1672, Item_1667, Item_921, Item_1867, Item_1140, Item_823, Item_1309, Item_901, Item_1342, Item_1100, Item_977, Item_1090, Item_598]
-    items_dict = {"MFL": ("Measured Flight Level Age", Variation_217, 0x8000000000), "MD1": ("Mode 1 Age", Variation_217, 0x4000000000), "MD2": ("Mode 2 Age", Variation_217, 0x2000000000), "MDA": ("Mode 3/A Age", Variation_217, 0x1000000000), "MD4": ("Mode 4 Age", Variation_217, 0x0800000000), "MD5": ("Mode 5 Age", Variation_217, 0x0400000000), "MHG": ("Magnetic Heading Age", Variation_217, 0x0200000000), "IAS": ("Indicated Airspeed / Mach Nb Age", Variation_217, 0x0180000000), "TAS": ("True Airspeed Age", Variation_217, 0x0140000000), "SAL": ("Selected Altitude Age", Variation_217, 0x0120000000), "FSS": ("Final State Selected Altitude Age", Variation_217, 0x0110000000), "TID": ("Trajectory Intent Age", Variation_217, 0x0108000000), "COM": ("Communication/ACAS Capability and Flight Status Age", Variation_217, 0x0104000000), "SAB": ("Status Reported by ADS-B Age", Variation_217, 0x0102000000), "ACS": ("ACAS Resolution Advisory Report Age", Variation_217, 0x0101800000), "BVR": ("Barometric Vertical Rate Age", Variation_217, 0x0101400000), "GVR": ("Geometrical Vertical Rate Age", Variation_217, 0x0101200000), "RAN": ("Roll Angle Age", Variation_217, 0x0101100000), "TAR": ("Track Angle Rate Age", Variation_217, 0x0101080000), "TAN": ("Track Angle Age", Variation_217, 0x0101040000), "GSP": ("Ground Speed Age", Variation_217, 0x0101020000), "VUN": ("Velocity Uncertainty Age", Variation_217, 0x0101018000), "MET": ("Meteorological Data Age", Variation_217, 0x0101014000), "EMC": ("Emitter Category Age", Variation_217, 0x0101012000), "POS": ("Position Age", Variation_217, 0x0101011000), "GAL": ("Geometric Altitude Age", Variation_217, 0x0101010800), "PUN": ("Position Uncertainty Age", Variation_217, 0x0101010400), "MB": ("Mode S MB Data Age", Variation_217, 0x0101010200), "IAR": ("Indicated Airspeed Data Age", Variation_217, 0x0101010180), "MAC": ("Mach Number Data Age", Variation_217, 0x0101010140), "BPS": ("Barometric Pressure Setting Data Age", Variation_217, 0x0101010120)}
+    items_dict = {"MFL": (Item_1143, 0x8000000000), "MD1": (Item_1109, 0x4000000000), "MD2": (Item_1112, 0x2000000000), "MDA": (Item_1121, 0x1000000000), "MD4": (Item_1114, 0x0800000000), "MD5": (Item_1116, 0x0400000000), "MHG": (Item_1147, 0x0200000000), "IAS": (Item_979, 0x0180000000), "TAS": (Item_1676, 0x0140000000), "SAL": (Item_1507, 0x0120000000), "FSS": (Item_886, 0x0110000000), "TID": (Item_1709, 0x0108000000), "COM": (Item_683, 0x0104000000), "SAB": (Item_1500, 0x0102000000), "ACS": (Item_481, 0x0101800000), "BVR": (Item_602, 0x0101400000), "GVR": (Item_930, 0x0101200000), "RAN": (Item_1405, 0x0101100000), "TAR": (Item_1672, 0x0101080000), "TAN": (Item_1667, 0x0101040000), "GSP": (Item_921, 0x0101020000), "VUN": (Item_1867, 0x0101018000), "MET": (Item_1140, 0x0101014000), "EMC": (Item_823, 0x0101012000), "POS": (Item_1309, 0x0101011000), "GAL": (Item_901, 0x0101010800), "PUN": (Item_1342, 0x0101010400), "MB": (Item_1100, 0x0101010200), "IAR": (Item_977, 0x0101010180), "MAC": (Item_1090, 0x0101010140), "BPS": (Item_598, 0x0101010120)}
     @overload
     @classmethod
     def spec(cls, key : Literal["MFL"]) -> Variation_217: ...
@@ -27095,7 +27095,7 @@ class Item_1287(Item):
 class Variation_1369(Compound):
     fspec_size = None
     items_list = [Item_1665, Item_729, Item_993, Item_854, Item_1664, Item_1888, Item_776, Item_800, Item_1418, Item_628, Item_746, Item_1727, Item_545, Item_1646, Item_1635, Item_1618, Item_1288, Item_1287]
-    items_dict = {"TAG": ("FPPS Identification Tag", Variation_1061, 0x800000), "CS": ("Callsign", Variation_328, 0x400000), "IFI": ("IFPS_FLIGHT_ID", Variation_1099, 0x200000), "FCT": ("Flight Category", Variation_983, 0x100000), "TAC": ("Type of Aircraft", Variation_314, 0x080000), "WTC": ("Wake Turbulence Category", Variation_190, 0x040000), "DEP": ("Departure Airport", Variation_314, 0x020000), "DST": ("Destination Airport", Variation_314, 0x018000), "RDS": ("Runway Designation", Variation_1026, 0x014000), "CFL": ("Current Cleared Flight Level", Variation_280, 0x012000), "CTL": ("Current Control Position", Variation_942, 0x011000), "TOD": ("Time of Departure / Arrival", Variation_1261, 0x010800), "AST": ("Aircraft Stand", Variation_325, 0x010400), "STS": ("Stand Status", Variation_960, 0x010200), "STD": ("Standard Instrument Departure", Variation_328, 0x010180), "STA": ("Standard Instrument Arrival", Variation_328, 0x010140), "PEM": ("Pre-Emergency Mode 3/A", Variation_893, 0x010120), "PEC": ("Pre-Emergency Callsign", Variation_328, 0x010110)}
+    items_dict = {"TAG": (Item_1665, 0x800000), "CS": (Item_729, 0x400000), "IFI": (Item_993, 0x200000), "FCT": (Item_854, 0x100000), "TAC": (Item_1664, 0x080000), "WTC": (Item_1888, 0x040000), "DEP": (Item_776, 0x020000), "DST": (Item_800, 0x018000), "RDS": (Item_1418, 0x014000), "CFL": (Item_628, 0x012000), "CTL": (Item_746, 0x011000), "TOD": (Item_1727, 0x010800), "AST": (Item_545, 0x010400), "STS": (Item_1646, 0x010200), "STD": (Item_1635, 0x010180), "STA": (Item_1618, 0x010140), "PEM": (Item_1288, 0x010120), "PEC": (Item_1287, 0x010110)}
     @overload
     @classmethod
     def spec(cls, key : Literal["TAG"]) -> Variation_1061: ...
@@ -27207,7 +27207,7 @@ class Item_1926(Item):
 class Variation_1365(Compound):
     fspec_size = None
     items_list = [Item_1655, Item_1295, Item_1305, Item_899, Item_818, Item_1730, Item_1926]
-    items_dict = {"SUM": ("Mode 5 Summary", Variation_1011, 0x80), "PMN": ("Mode 5 PIN/ National Origin/Mission Code", Variation_882, 0x40), "POS": ("Mode 5 Reported Position", Variation_999, 0x20), "GA": ("Mode 5 GNSS-derived Altitude", Variation_877, 0x10), "EM1": ("Extended Mode 1 Code in Octal Representation", Variation_897, 0x08), "TOS": ("Time Offset for POS and GA", Variation_199, 0x04), "XP": ("X Pulse Presence", Variation_894, 0x02)}
+    items_dict = {"SUM": (Item_1655, 0x80), "PMN": (Item_1295, 0x40), "POS": (Item_1305, 0x20), "GA": (Item_899, 0x10), "EM1": (Item_818, 0x08), "TOS": (Item_1730, 0x04), "XP": (Item_1926, 0x02)}
     @overload
     @classmethod
     def spec(cls, key : Literal["SUM"]) -> Variation_1011: ...
@@ -27291,7 +27291,7 @@ class Item_539(Item):
 class Variation_1334(Compound):
     fspec_size = None
     items_list = [Item_524, Item_702, Item_529, Item_497, Item_470, Item_552, Item_466, Item_539]
-    items_dict = {"APC": ("Estimated Accuracy Of Track Position (Cartesian)", Variation_1152, 0x8000), "COV": ("XY Covariance Component", Variation_242, 0x4000), "APW": ("Estimated Accuracy Of Track Position (WGS-84)", Variation_996, 0x2000), "AGA": ("Estimated Accuracy Of Calculated Track Geometric Altitude", Variation_222, 0x1000), "ABA": ("Estimated Accuracy Of Calculated Track Barometric Altitude", Variation_213, 0x0800), "ATV": ("Estimated Accuracy Of Track Velocity (Cartesian)", Variation_1153, 0x0400), "AA": ("Estimated Accuracy Of Acceleration (Cartesian)", Variation_1151, 0x0200), "ARC": ("Estimated Accuracy Of Rate Of Climb/Descent", Variation_223, 0x0180)}
+    items_dict = {"APC": (Item_524, 0x8000), "COV": (Item_702, 0x4000), "APW": (Item_529, 0x2000), "AGA": (Item_497, 0x1000), "ABA": (Item_470, 0x0800), "ATV": (Item_552, 0x0400), "AA": (Item_466, 0x0200), "ARC": (Item_539, 0x0180)}
     @overload
     @classmethod
     def spec(cls, key : Literal["APC"]) -> Variation_1152: ...
@@ -27358,7 +27358,7 @@ class Item_1802(Item):
 class Variation_1363(Compound):
     fspec_size = None
     items_list = [Item_1560, Item_1304, Item_942, Item_1122, Item_1118, Item_1802]
-    items_dict = {"SID": ("Sensor Identification", Variation_1061, 0x80), "POS": ("Measured Position", Variation_1049, 0x40), "HEIGHT": ("Measured 3-D Height", Variation_270, 0x20), "MDC": ("", Variation_1138, 0x10), "MDA": ("", Variation_1133, 0x08), "TYP": ("", Variation_1104, 0x04)}
+    items_dict = {"SID": (Item_1560, 0x80), "POS": (Item_1304, 0x40), "HEIGHT": (Item_942, 0x20), "MDC": (Item_1122, 0x10), "MDA": (Item_1118, 0x08), "TYP": (Item_1802, 0x04)}
     @overload
     @classmethod
     def spec(cls, key : Literal["SID"]) -> Variation_1061: ...
@@ -27389,7 +27389,7 @@ class Item_401(Item):
 class Variation_1290(Compound):
     fspec_size = None
     items_list = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_404, Item_141, Item_215, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_401, None, None, None, None, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000000000), "015": ("Service Identification", Variation_155, 0x2000000000), "070": ("Time Of Track Information", Variation_311, 0x1000000000), "105": ("Calculated Position In WGS-84 Co-ordinates", Variation_1001, 0x0800000000), "100": ("Calculated Track Position (Cartesian)", Variation_1161, 0x0400000000), "185": ("Calculated Track Velocity (Cartesian)", Variation_1141, 0x0200000000), "210": ("Calculated Acceleration (Cartesian)", Variation_930, 0x0180000000), "060": ("Track Mode 3/A Code", Variation_1131, 0x0140000000), "245": ("Target Identification", Variation_1083, 0x0120000000), "380": ("Aircraft Derived Data", Variation_1325, 0x0110000000), "040": ("Track Number", Variation_234, 0x0108000000), "080": ("Track Status", Variation_1198, 0x0104000000), "290": ("System Track Update Ages", Variation_1372, 0x0102000000), "200": ("Mode of Movement", Variation_1094, 0x0101800000), "295": ("Track Data Ages", Variation_1354, 0x0101400000), "136": ("Measured Flight Level", Variation_248, 0x0101200000), "130": ("Calculated Track Geometric Altitude", Variation_257, 0x0101100000), "135": ("Calculated Track Barometric Altitude", Variation_1036, 0x0101080000), "220": ("Calculated Rate of Climb/Descent", Variation_258, 0x0101040000), "390": ("Flight Plan Related Data", Variation_1369, 0x0101020000), "270": ("Target Size and Orientation", Variation_1192, 0x0101018000), "300": ("Vehicle Fleet Identification", Variation_167, 0x0101014000), "110": ("Mode 5 Data Reports and Extended Mode 1 Code", Variation_1365, 0x0101012000), "120": ("Track Mode 2 Code", Variation_901, 0x0101011000), "510": ("Composed Track Number", Variation_1194, 0x0101010800), "500": ("Estimated Accuracies", Variation_1334, 0x0101010400), "340": ("Measured Information", Variation_1363, 0x0101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010104), "SP": ("Special Purpose Field", Variation_1281, 0x0101010102)}
+    items_dict = {"010": (Item_61, 0x8000000000), "015": (Item_72, 0x2000000000), "070": (Item_197, 0x1000000000), "105": (Item_251, 0x0800000000), "100": (Item_240, 0x0400000000), "185": (Item_332, 0x0200000000), "210": (Item_351, 0x0180000000), "060": (Item_184, 0x0140000000), "245": (Item_370, 0x0120000000), "380": (Item_404, 0x0110000000), "040": (Item_141, 0x0108000000), "080": (Item_215, 0x0104000000), "290": (Item_389, 0x0102000000), "200": (Item_337, 0x0101800000), "295": (Item_392, 0x0101400000), "136": (Item_284, 0x0101200000), "130": (Item_272, 0x0101100000), "135": (Item_283, 0x0101080000), "220": (Item_360, 0x0101040000), "390": (Item_412, 0x0101020000), "270": (Item_383, 0x0101018000), "300": (Item_396, 0x0101014000), "110": (Item_259, 0x0101012000), "120": (Item_271, 0x0101011000), "510": (Item_438, 0x0101010800), "500": (Item_433, 0x0101010400), "340": (Item_401, 0x0101010200), "RE": (Item_1421, 0x0101010104), "SP": (Item_1580, 0x0101010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -27499,7 +27499,7 @@ class Item_595(Item):
 class Variation_1326(Compound):
     fspec_size = None
     items_list = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_688, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_582, Item_976, Item_1089, Item_595]
-    items_dict = {"ADR": ("Target Address", Variation_296, 0x80000000), "ID": ("Target Identification", Variation_326, 0x40000000), "MHG": ("Magnetic Heading", Variation_293, 0x20000000), "IAS": ("Indicated Airspeed/Mach No", Variation_994, 0x10000000), "TAS": ("True Airspeed", Variation_264, 0x08000000), "SAL": ("Selected Altitude", Variation_1067, 0x04000000), "FSS": ("Final State Selected Altitude", Variation_1018, 0x02000000), "TIS": ("Trajectory Intent Status", Variation_1203, 0x01800000), "TID": ("Trajectory Intent Data", Variation_1258, 0x01400000), "COM": ("Communications/ACAS Capability and Flight Status", Variation_951, 0x01200000), "SAB": ("Status Reported by ADS-B", Variation_922, 0x01100000), "ACS": ("ACAS Resolution Advisory Report", Variation_327, 0x01080000), "BVR": ("Barometric Vertical Rate", Variation_258, 0x01040000), "GVR": ("Geometric Vertical Rate", Variation_258, 0x01020000), "RAN": ("Roll Angle", Variation_246, 0x01018000), "TAR": ("Track Angle Rate", Variation_1090, 0x01014000), "TAN": ("Track Angle", Variation_293, 0x01012000), "GS": ("Ground Speed", Variation_256, 0x01011000), "VUN": ("Velocity Uncertainty", Variation_155, 0x01010800), "MET": ("Meteorological Data", Variation_1144, 0x01010400), "EMC": ("Emitter Category", Variation_173, 0x01010200), "POS": ("Position", Variation_1008, 0x01010180), "GAL": ("Geometric Altitude", Variation_257, 0x01010140), "PUN": ("Position Uncertainty", Variation_907, 0x01010120), "BDSDATA": ("BDS Register DATA", Variation_1230, 0x01010110), "IAR": ("Indicated Airspeed", Variation_264, 0x01010108), "MAC": ("Mach Number", Variation_278, 0x01010104), "BPS": ("Barometric Pressure Setting", Variation_895, 0x01010102)}
+    items_dict = {"ADR": (Item_488, 0x80000000), "ID": (Item_987, 0x40000000), "MHG": (Item_1146, 0x20000000), "IAS": (Item_980, 0x10000000), "TAS": (Item_1675, 0x08000000), "SAL": (Item_1505, 0x04000000), "FSS": (Item_885, 0x02000000), "TIS": (Item_1716, 0x01800000), "TID": (Item_1711, 0x01400000), "COM": (Item_688, 0x01200000), "SAB": (Item_1499, 0x01100000), "ACS": (Item_480, 0x01080000), "BVR": (Item_599, 0x01040000), "GVR": (Item_927, 0x01020000), "RAN": (Item_1404, 0x01018000), "TAR": (Item_1670, 0x01014000), "TAN": (Item_1666, 0x01012000), "GS": (Item_916, 0x01011000), "VUN": (Item_1866, 0x01010800), "MET": (Item_1139, 0x01010400), "EMC": (Item_822, 0x01010200), "POS": (Item_1308, 0x01010180), "GAL": (Item_900, 0x01010140), "PUN": (Item_1341, 0x01010120), "BDSDATA": (Item_582, 0x01010110), "IAR": (Item_976, 0x01010108), "MAC": (Item_1089, 0x01010104), "BPS": (Item_595, 0x01010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["ADR"]) -> Variation_296: ...
@@ -27606,7 +27606,7 @@ class Item_941(Item):
 class Variation_1362(Compound):
     fspec_size = None
     items_list = [Item_1560, Item_1304, Item_941, Item_1122, Item_1118, Item_1802]
-    items_dict = {"SID": ("Sensor Identification", Variation_1061, 0x80), "POS": ("Measured Position", Variation_1049, 0x40), "HEIGHT": ("Measured 3-D Height", Variation_240, 0x20), "MDC": ("", Variation_1138, 0x10), "MDA": ("", Variation_1133, 0x08), "TYP": ("", Variation_1104, 0x04)}
+    items_dict = {"SID": (Item_1560, 0x80), "POS": (Item_1304, 0x40), "HEIGHT": (Item_941, 0x20), "MDC": (Item_1122, 0x10), "MDA": (Item_1118, 0x08), "TYP": (Item_1802, 0x04)}
     @overload
     @classmethod
     def spec(cls, key : Literal["SID"]) -> Variation_1061: ...
@@ -27637,7 +27637,7 @@ class Item_400(Item):
 class Variation_1291(Compound):
     fspec_size = None
     items_list = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_405, Item_141, Item_217, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_400, None, None, None, None, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000000000), "015": ("Service Identification", Variation_155, 0x2000000000), "070": ("Time Of Track Information", Variation_311, 0x1000000000), "105": ("Calculated Position In WGS-84 Co-ordinates", Variation_1001, 0x0800000000), "100": ("Calculated Track Position (Cartesian)", Variation_1161, 0x0400000000), "185": ("Calculated Track Velocity (Cartesian)", Variation_1141, 0x0200000000), "210": ("Calculated Acceleration (Cartesian)", Variation_930, 0x0180000000), "060": ("Track Mode 3/A Code", Variation_1131, 0x0140000000), "245": ("Target Identification", Variation_1083, 0x0120000000), "380": ("Aircraft Derived Data", Variation_1326, 0x0110000000), "040": ("Track Number", Variation_234, 0x0108000000), "080": ("Track Status", Variation_1200, 0x0104000000), "290": ("System Track Update Ages", Variation_1372, 0x0102000000), "200": ("Mode of Movement", Variation_1094, 0x0101800000), "295": ("Track Data Ages", Variation_1354, 0x0101400000), "136": ("Measured Flight Level", Variation_248, 0x0101200000), "130": ("Calculated Track Geometric Altitude", Variation_257, 0x0101100000), "135": ("Calculated Track Barometric Altitude", Variation_1036, 0x0101080000), "220": ("Calculated Rate of Climb/Descent", Variation_258, 0x0101040000), "390": ("Flight Plan Related Data", Variation_1369, 0x0101020000), "270": ("Target Size and Orientation", Variation_1192, 0x0101018000), "300": ("Vehicle Fleet Identification", Variation_167, 0x0101014000), "110": ("Mode 5 Data Reports and Extended Mode 1 Code", Variation_1365, 0x0101012000), "120": ("Track Mode 2 Code", Variation_901, 0x0101011000), "510": ("Composed Track Number", Variation_1194, 0x0101010800), "500": ("Estimated Accuracies", Variation_1334, 0x0101010400), "340": ("Measured Information", Variation_1362, 0x0101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010104), "SP": ("Special Purpose Field", Variation_1281, 0x0101010102)}
+    items_dict = {"010": (Item_61, 0x8000000000), "015": (Item_72, 0x2000000000), "070": (Item_197, 0x1000000000), "105": (Item_251, 0x0800000000), "100": (Item_240, 0x0400000000), "185": (Item_332, 0x0200000000), "210": (Item_351, 0x0180000000), "060": (Item_184, 0x0140000000), "245": (Item_370, 0x0120000000), "380": (Item_405, 0x0110000000), "040": (Item_141, 0x0108000000), "080": (Item_217, 0x0104000000), "290": (Item_389, 0x0102000000), "200": (Item_337, 0x0101800000), "295": (Item_392, 0x0101400000), "136": (Item_284, 0x0101200000), "130": (Item_272, 0x0101100000), "135": (Item_283, 0x0101080000), "220": (Item_360, 0x0101040000), "390": (Item_412, 0x0101020000), "270": (Item_383, 0x0101018000), "300": (Item_396, 0x0101014000), "110": (Item_259, 0x0101012000), "120": (Item_271, 0x0101011000), "510": (Item_438, 0x0101010800), "500": (Item_433, 0x0101010400), "340": (Item_400, 0x0101010200), "RE": (Item_1421, 0x0101010104), "SP": (Item_1580, 0x0101010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -27732,7 +27732,7 @@ class Variation_1291(Compound):
 class Variation_1327(Compound):
     fspec_size = None
     items_list = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_688, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_1099, Item_976, Item_1089, Item_595]
-    items_dict = {"ADR": ("Target Address", Variation_296, 0x80000000), "ID": ("Target Identification", Variation_326, 0x40000000), "MHG": ("Magnetic Heading", Variation_293, 0x20000000), "IAS": ("Indicated Airspeed/Mach No", Variation_994, 0x10000000), "TAS": ("True Airspeed", Variation_264, 0x08000000), "SAL": ("Selected Altitude", Variation_1067, 0x04000000), "FSS": ("Final State Selected Altitude", Variation_1018, 0x02000000), "TIS": ("Trajectory Intent Status", Variation_1203, 0x01800000), "TID": ("Trajectory Intent Data", Variation_1258, 0x01400000), "COM": ("Communications/ACAS Capability and Flight Status", Variation_951, 0x01200000), "SAB": ("Status Reported by ADS-B", Variation_922, 0x01100000), "ACS": ("ACAS Resolution Advisory Report", Variation_327, 0x01080000), "BVR": ("Barometric Vertical Rate", Variation_258, 0x01040000), "GVR": ("Geometric Vertical Rate", Variation_258, 0x01020000), "RAN": ("Roll Angle", Variation_246, 0x01018000), "TAR": ("Track Angle Rate", Variation_1090, 0x01014000), "TAN": ("Track Angle", Variation_293, 0x01012000), "GS": ("Ground Speed", Variation_256, 0x01011000), "VUN": ("Velocity Uncertainty", Variation_155, 0x01010800), "MET": ("Meteorological Data", Variation_1144, 0x01010400), "EMC": ("Emitter Category", Variation_173, 0x01010200), "POS": ("Position", Variation_1008, 0x01010180), "GAL": ("Geometric Altitude", Variation_257, 0x01010140), "PUN": ("Position Uncertainty", Variation_907, 0x01010120), "MB": ("MODE S MB DATA", Variation_1230, 0x01010110), "IAR": ("Indicated Airspeed", Variation_264, 0x01010108), "MAC": ("Mach Number", Variation_278, 0x01010104), "BPS": ("Barometric Pressure Setting", Variation_895, 0x01010102)}
+    items_dict = {"ADR": (Item_488, 0x80000000), "ID": (Item_987, 0x40000000), "MHG": (Item_1146, 0x20000000), "IAS": (Item_980, 0x10000000), "TAS": (Item_1675, 0x08000000), "SAL": (Item_1505, 0x04000000), "FSS": (Item_885, 0x02000000), "TIS": (Item_1716, 0x01800000), "TID": (Item_1711, 0x01400000), "COM": (Item_688, 0x01200000), "SAB": (Item_1499, 0x01100000), "ACS": (Item_480, 0x01080000), "BVR": (Item_599, 0x01040000), "GVR": (Item_927, 0x01020000), "RAN": (Item_1404, 0x01018000), "TAR": (Item_1670, 0x01014000), "TAN": (Item_1666, 0x01012000), "GS": (Item_916, 0x01011000), "VUN": (Item_1866, 0x01010800), "MET": (Item_1139, 0x01010400), "EMC": (Item_822, 0x01010200), "POS": (Item_1308, 0x01010180), "GAL": (Item_900, 0x01010140), "PUN": (Item_1341, 0x01010120), "MB": (Item_1099, 0x01010110), "IAR": (Item_976, 0x01010108), "MAC": (Item_1089, 0x01010104), "BPS": (Item_595, 0x01010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["ADR"]) -> Variation_296: ...
@@ -27834,7 +27834,7 @@ class Item_216(Item):
 class Variation_1292(Compound):
     fspec_size = None
     items_list = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_406, Item_141, Item_216, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_400, None, None, None, None, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000000000), "015": ("Service Identification", Variation_155, 0x2000000000), "070": ("Time Of Track Information", Variation_311, 0x1000000000), "105": ("Calculated Position In WGS-84 Co-ordinates", Variation_1001, 0x0800000000), "100": ("Calculated Track Position (Cartesian)", Variation_1161, 0x0400000000), "185": ("Calculated Track Velocity (Cartesian)", Variation_1141, 0x0200000000), "210": ("Calculated Acceleration (Cartesian)", Variation_930, 0x0180000000), "060": ("Track Mode 3/A Code", Variation_1131, 0x0140000000), "245": ("Target Identification", Variation_1083, 0x0120000000), "380": ("Aircraft Derived Data", Variation_1327, 0x0110000000), "040": ("Track Number", Variation_234, 0x0108000000), "080": ("Track Status", Variation_1199, 0x0104000000), "290": ("System Track Update Ages", Variation_1372, 0x0102000000), "200": ("Mode of Movement", Variation_1094, 0x0101800000), "295": ("Track Data Ages", Variation_1354, 0x0101400000), "136": ("Measured Flight Level", Variation_248, 0x0101200000), "130": ("Calculated Track Geometric Altitude", Variation_257, 0x0101100000), "135": ("Calculated Track Barometric Altitude", Variation_1036, 0x0101080000), "220": ("Calculated Rate of Climb/Descent", Variation_258, 0x0101040000), "390": ("Flight Plan Related Data", Variation_1369, 0x0101020000), "270": ("Target Size and Orientation", Variation_1192, 0x0101018000), "300": ("Vehicle Fleet Identification", Variation_167, 0x0101014000), "110": ("Mode 5 Data Reports and Extended Mode 1 Code", Variation_1365, 0x0101012000), "120": ("Track Mode 2 Code", Variation_901, 0x0101011000), "510": ("Composed Track Number", Variation_1194, 0x0101010800), "500": ("Estimated Accuracies", Variation_1334, 0x0101010400), "340": ("Measured Information", Variation_1362, 0x0101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010104), "SP": ("Special Purpose Field", Variation_1281, 0x0101010102)}
+    items_dict = {"010": (Item_61, 0x8000000000), "015": (Item_72, 0x2000000000), "070": (Item_197, 0x1000000000), "105": (Item_251, 0x0800000000), "100": (Item_240, 0x0400000000), "185": (Item_332, 0x0200000000), "210": (Item_351, 0x0180000000), "060": (Item_184, 0x0140000000), "245": (Item_370, 0x0120000000), "380": (Item_406, 0x0110000000), "040": (Item_141, 0x0108000000), "080": (Item_216, 0x0104000000), "290": (Item_389, 0x0102000000), "200": (Item_337, 0x0101800000), "295": (Item_392, 0x0101400000), "136": (Item_284, 0x0101200000), "130": (Item_272, 0x0101100000), "135": (Item_283, 0x0101080000), "220": (Item_360, 0x0101040000), "390": (Item_412, 0x0101020000), "270": (Item_383, 0x0101018000), "300": (Item_396, 0x0101014000), "110": (Item_259, 0x0101012000), "120": (Item_271, 0x0101011000), "510": (Item_438, 0x0101010800), "500": (Item_433, 0x0101010400), "340": (Item_400, 0x0101010200), "RE": (Item_1421, 0x0101010104), "SP": (Item_1580, 0x0101010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -27929,7 +27929,7 @@ class Variation_1292(Compound):
 class Variation_1328(Compound):
     fspec_size = None
     items_list = [Item_488, Item_987, Item_1146, Item_980, Item_1675, Item_1505, Item_885, Item_1716, Item_1711, Item_688, Item_1499, Item_480, Item_599, Item_927, Item_1404, Item_1670, Item_1666, Item_916, Item_1866, Item_1139, Item_822, Item_1308, Item_900, Item_1341, Item_1099, Item_976, Item_1089, Item_597]
-    items_dict = {"ADR": ("Target Address", Variation_296, 0x80000000), "ID": ("Target Identification", Variation_326, 0x40000000), "MHG": ("Magnetic Heading", Variation_293, 0x20000000), "IAS": ("Indicated Airspeed/Mach No", Variation_994, 0x10000000), "TAS": ("True Airspeed", Variation_264, 0x08000000), "SAL": ("Selected Altitude", Variation_1067, 0x04000000), "FSS": ("Final State Selected Altitude", Variation_1018, 0x02000000), "TIS": ("Trajectory Intent Status", Variation_1203, 0x01800000), "TID": ("Trajectory Intent Data", Variation_1258, 0x01400000), "COM": ("Communications/ACAS Capability and Flight Status", Variation_951, 0x01200000), "SAB": ("Status Reported by ADS-B", Variation_922, 0x01100000), "ACS": ("ACAS Resolution Advisory Report", Variation_327, 0x01080000), "BVR": ("Barometric Vertical Rate", Variation_258, 0x01040000), "GVR": ("Geometric Vertical Rate", Variation_258, 0x01020000), "RAN": ("Roll Angle", Variation_246, 0x01018000), "TAR": ("Track Angle Rate", Variation_1090, 0x01014000), "TAN": ("Track Angle", Variation_293, 0x01012000), "GS": ("Ground Speed", Variation_256, 0x01011000), "VUN": ("Velocity Uncertainty", Variation_155, 0x01010800), "MET": ("Meteorological Data", Variation_1144, 0x01010400), "EMC": ("Emitter Category", Variation_173, 0x01010200), "POS": ("Position", Variation_1008, 0x01010180), "GAL": ("Geometric Altitude", Variation_257, 0x01010140), "PUN": ("Position Uncertainty", Variation_907, 0x01010120), "MB": ("MODE S MB DATA", Variation_1230, 0x01010110), "IAR": ("Indicated Airspeed", Variation_264, 0x01010108), "MAC": ("Mach Number", Variation_278, 0x01010104), "BPS": ("Barometric Pressure Setting (derived from Mode S BDS 4,0)", Variation_895, 0x01010102)}
+    items_dict = {"ADR": (Item_488, 0x80000000), "ID": (Item_987, 0x40000000), "MHG": (Item_1146, 0x20000000), "IAS": (Item_980, 0x10000000), "TAS": (Item_1675, 0x08000000), "SAL": (Item_1505, 0x04000000), "FSS": (Item_885, 0x02000000), "TIS": (Item_1716, 0x01800000), "TID": (Item_1711, 0x01400000), "COM": (Item_688, 0x01200000), "SAB": (Item_1499, 0x01100000), "ACS": (Item_480, 0x01080000), "BVR": (Item_599, 0x01040000), "GVR": (Item_927, 0x01020000), "RAN": (Item_1404, 0x01018000), "TAR": (Item_1670, 0x01014000), "TAN": (Item_1666, 0x01012000), "GS": (Item_916, 0x01011000), "VUN": (Item_1866, 0x01010800), "MET": (Item_1139, 0x01010400), "EMC": (Item_822, 0x01010200), "POS": (Item_1308, 0x01010180), "GAL": (Item_900, 0x01010140), "PUN": (Item_1341, 0x01010120), "MB": (Item_1099, 0x01010110), "IAR": (Item_976, 0x01010108), "MAC": (Item_1089, 0x01010104), "BPS": (Item_597, 0x01010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["ADR"]) -> Variation_296: ...
@@ -28026,7 +28026,7 @@ class Item_407(Item):
 class Variation_1293(Compound):
     fspec_size = None
     items_list = [Item_61, None, Item_72, Item_197, Item_251, Item_240, Item_332, Item_351, Item_184, Item_370, Item_407, Item_141, Item_216, Item_389, Item_337, Item_392, Item_284, Item_272, Item_283, Item_360, Item_412, Item_383, Item_396, Item_259, Item_271, Item_438, Item_433, Item_401, None, None, None, None, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000000000), "015": ("Service Identification", Variation_155, 0x2000000000), "070": ("Time Of Track Information", Variation_311, 0x1000000000), "105": ("Calculated Position In WGS-84 Co-ordinates", Variation_1001, 0x0800000000), "100": ("Calculated Track Position (Cartesian)", Variation_1161, 0x0400000000), "185": ("Calculated Track Velocity (Cartesian)", Variation_1141, 0x0200000000), "210": ("Calculated Acceleration (Cartesian)", Variation_930, 0x0180000000), "060": ("Track Mode 3/A Code", Variation_1131, 0x0140000000), "245": ("Target Identification", Variation_1083, 0x0120000000), "380": ("Aircraft Derived Data", Variation_1328, 0x0110000000), "040": ("Track Number", Variation_234, 0x0108000000), "080": ("Track Status", Variation_1199, 0x0104000000), "290": ("System Track Update Ages", Variation_1372, 0x0102000000), "200": ("Mode of Movement", Variation_1094, 0x0101800000), "295": ("Track Data Ages", Variation_1354, 0x0101400000), "136": ("Measured Flight Level", Variation_248, 0x0101200000), "130": ("Calculated Track Geometric Altitude", Variation_257, 0x0101100000), "135": ("Calculated Track Barometric Altitude", Variation_1036, 0x0101080000), "220": ("Calculated Rate of Climb/Descent", Variation_258, 0x0101040000), "390": ("Flight Plan Related Data", Variation_1369, 0x0101020000), "270": ("Target Size and Orientation", Variation_1192, 0x0101018000), "300": ("Vehicle Fleet Identification", Variation_167, 0x0101014000), "110": ("Mode 5 Data Reports and Extended Mode 1 Code", Variation_1365, 0x0101012000), "120": ("Track Mode 2 Code", Variation_901, 0x0101011000), "510": ("Composed Track Number", Variation_1194, 0x0101010800), "500": ("Estimated Accuracies", Variation_1334, 0x0101010400), "340": ("Measured Information", Variation_1363, 0x0101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010104), "SP": ("Special Purpose Field", Variation_1281, 0x0101010102)}
+    items_dict = {"010": (Item_61, 0x8000000000), "015": (Item_72, 0x2000000000), "070": (Item_197, 0x1000000000), "105": (Item_251, 0x0800000000), "100": (Item_240, 0x0400000000), "185": (Item_332, 0x0200000000), "210": (Item_351, 0x0180000000), "060": (Item_184, 0x0140000000), "245": (Item_370, 0x0120000000), "380": (Item_407, 0x0110000000), "040": (Item_141, 0x0108000000), "080": (Item_216, 0x0104000000), "290": (Item_389, 0x0102000000), "200": (Item_337, 0x0101800000), "295": (Item_392, 0x0101400000), "136": (Item_284, 0x0101200000), "130": (Item_272, 0x0101100000), "135": (Item_283, 0x0101080000), "220": (Item_360, 0x0101040000), "390": (Item_412, 0x0101020000), "270": (Item_383, 0x0101018000), "300": (Item_396, 0x0101014000), "110": (Item_259, 0x0101012000), "120": (Item_271, 0x0101011000), "510": (Item_438, 0x0101010800), "500": (Item_433, 0x0101010400), "340": (Item_401, 0x0101010200), "RE": (Item_1421, 0x0101010104), "SP": (Item_1580, 0x0101010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -28206,7 +28206,7 @@ class Item_626(Item):
 class Variation_1329(Compound):
     fspec_size = None
     items_list = [Item_502, Item_1081, Item_721, Item_718, Item_1782, Item_801, Item_475, Item_1187, Item_869, Item_626]
-    items_dict = {"AI1": ("Aircraft Identifier (in 7 Characters) of Aircraft 1 Involved in the Conflict", Variation_328, 0x8000), "M31": ("Mode 3/A Code Aircraft 1", Variation_903, 0x4000), "CPW": ("Predicted Conflict Position Target 1 in WGS-84 Coordinates", Variation_998, 0x2000), "CPC": ("Predicted Conflict Position for the Aircraft 1 Involved in the Conflict", Variation_1159, 0x1000), "TT1": ("Time to Runway Threshold for First Approaching Aircraft in a RIMCA", Variation_311, 0x0800), "DT1": ("Distance to Runway Threshold for Aircraft 1 Involved in a RIMCA", Variation_271, 0x0400), "AC1": ("Characteristics of Aircraft 1 Involved in the Conflict", Variation_1191, 0x0200), "MS1": ("Aircraft Identification Downloaded from Aircraft 1 Involved in the Conflict If Equipped with a Mode-S Transponder", Variation_325, 0x0180), "FP1": ("Number of the Flight Plan Correlated to Aircraft 1 Involved in the Conflict", Variation_914, 0x0140), "CF1": ("Cleared Flight Level for Aircraft 1 Involved in the Conflict", Variation_280, 0x0120)}
+    items_dict = {"AI1": (Item_502, 0x8000), "M31": (Item_1081, 0x4000), "CPW": (Item_721, 0x2000), "CPC": (Item_718, 0x1000), "TT1": (Item_1782, 0x0800), "DT1": (Item_801, 0x0400), "AC1": (Item_475, 0x0200), "MS1": (Item_1187, 0x0180), "FP1": (Item_869, 0x0140), "CF1": (Item_626, 0x0120)}
     @overload
     @classmethod
     def spec(cls, key : Literal["AI1"]) -> Variation_328: ...
@@ -28269,7 +28269,7 @@ class Item_615(Item):
 class Variation_1338(Compound):
     fspec_size = None
     items_list = [Item_646, Item_613, Item_715, Item_615]
-    items_dict = {"CN": ("Conflict Nature", Variation_1193, 0x80), "CC": ("Conflict Classification", Variation_1091, 0x40), "CP": ("Conflict Probability", Variation_208, 0x20), "CD": ("Conflict Duration", Variation_311, 0x10)}
+    items_dict = {"CN": (Item_646, 0x80), "CC": (Item_613, 0x40), "CP": (Item_715, 0x20), "CD": (Item_615, 0x10)}
     @overload
     @classmethod
     def spec(cls, key : Literal["CN"]) -> Variation_1193: ...
@@ -28324,7 +28324,7 @@ class Item_1206(Item):
 class Variation_1370(Compound):
     fspec_size = None
     items_list = [Item_1679, Item_1683, Item_638, Item_1148, Item_750, Item_1206]
-    items_dict = {"TC": ("Time to Conflict", Variation_311, 0x80), "TCA": ("Time to Closest Approach", Variation_311, 0x40), "CHS": ("Current Horizontal Separation", Variation_307, 0x20), "MHS": ("Estimated Minimum Horizontal Separation", Variation_271, 0x10), "CVS": ("Current Vertical Separation", Variation_270, 0x08), "MVS": ("Estimated Minimum Vertical Separation", Variation_270, 0x04)}
+    items_dict = {"TC": (Item_1679, 0x80), "TCA": (Item_1683, 0x40), "CHS": (Item_638, 0x20), "MHS": (Item_1148, 0x10), "CVS": (Item_750, 0x08), "MVS": (Item_1206, 0x04)}
     @overload
     @classmethod
     def spec(cls, key : Literal["TC"]) -> Variation_311: ...
@@ -28400,7 +28400,7 @@ class Item_895(Item):
 class Variation_1331(Compound):
     fspec_size = None
     items_list = [Item_519, Item_607, Item_1480, Item_1481, Item_1512, Item_895]
-    items_dict = {"AN": ("Area Name", Variation_326, 0x80), "CAN": ("Crossing Area Name", Variation_328, 0x40), "RT1": ("Runway/Taxiway Designator 1", Variation_328, 0x20), "RT2": ("Runway/Taxiway Designator 2", Variation_328, 0x10), "SB": ("Stop Bar Designator", Variation_328, 0x08), "G": ("Gate Designator", Variation_328, 0x04)}
+    items_dict = {"AN": (Item_519, 0x80), "CAN": (Item_607, 0x40), "RT1": (Item_1480, 0x20), "RT2": (Item_1481, 0x10), "SB": (Item_1512, 0x08), "G": (Item_895, 0x04)}
     @overload
     @classmethod
     def spec(cls, key : Literal["AN"]) -> Variation_326: ...
@@ -28486,7 +28486,7 @@ class Item_627(Item):
 class Variation_1330(Compound):
     fspec_size = None
     items_list = [Item_503, Item_1082, Item_722, Item_719, Item_1783, Item_802, Item_476, Item_1188, Item_870, Item_627]
-    items_dict = {"AI2": ("Aircraft Identifier (in 7 Characters) of Aircraft 2 Involved in the Conflict", Variation_328, 0x8000), "M32": ("Mode 3/A Code Aircraft 2", Variation_904, 0x4000), "CPW": ("Predicted Conflict Position Target 2 in WGS-84 Coordinates", Variation_998, 0x2000), "CPL": ("Predicted Conflict Position for the Aircraft 2 Involved in the Conflict", Variation_1159, 0x1000), "TT2": ("Time to Runway Threshold for Second Approaching Aircraft in a RIMCA", Variation_311, 0x0800), "DT2": ("Distance to Runway Threshold for Aircraft 2 Involved in a RIMCA", Variation_271, 0x0400), "AC2": ("Characteristics of Aircraft 2 Involved in the Conflict", Variation_1191, 0x0200), "MS2": ("Aircraft Identification Downloaded From Aircraft 2 Involved in the Conflict If Eequipped With a Mode-S Transponder", Variation_325, 0x0180), "FP2": ("Number of the Flight Plan Correlated to Aircraft 2 Involved in the Conflict", Variation_914, 0x0140), "CF2": ("Cleared Flight Level for Aircraft 2 Involved in the Conflict", Variation_280, 0x0120)}
+    items_dict = {"AI2": (Item_503, 0x8000), "M32": (Item_1082, 0x4000), "CPW": (Item_722, 0x2000), "CPL": (Item_719, 0x1000), "TT2": (Item_1783, 0x0800), "DT2": (Item_802, 0x0400), "AC2": (Item_476, 0x0200), "MS2": (Item_1188, 0x0180), "FP2": (Item_870, 0x0140), "CF2": (Item_627, 0x0120)}
     @overload
     @classmethod
     def spec(cls, key : Literal["AI2"]) -> Variation_328: ...
@@ -28534,7 +28534,7 @@ class Item_256(Item):
 class Variation_1294(Compound):
     fspec_size = None
     items_list = [Item_61, Item_34, Item_71, Item_94, Item_130, Item_154, Item_178, Item_109, Item_319, Item_265, Item_186, Item_208, Item_203, Item_206, Item_239, Item_124, Item_330, Item_256, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x800000), "000": ("Message Type", Variation_169, 0x400000), "015": ("SDPS Identifier", Variation_1252, 0x200000), "020": ("Time of Message", Variation_311, 0x100000), "040": ("Alert Identifier", Variation_234, 0x080000), "045": ("Alert Status", Variation_909, 0x040000), "060": ("Safety Net Function and System Status", Variation_1201, 0x020000), "030": ("Track Number 1", Variation_234, 0x018000), "170": ("Aircraft Identification and Characteristics 1", Variation_1329, 0x014000), "120": ("Conflict Characteristics", Variation_1338, 0x012000), "070": ("Conflict Timing and Separation", Variation_1370, 0x011000), "076": ("Vertical Deviation", Variation_240, 0x010800), "074": ("Longitudinal Deviation", Variation_241, 0x010400), "075": ("Transversal Distance Deviation", Variation_299, 0x010200), "100": ("Area Definition", Variation_1331, 0x010180), "035": ("Track Number 2", Variation_234, 0x010140), "171": ("Aircraft Identification and Characteristics 2", Variation_1330, 0x010120), "110": ("FDPS Sector Control Identification", Variation_1240, 0x010110), "RE": ("Reserved Expansion Field", Variation_1280, 0x010104), "SP": ("Special Purpose Field", Variation_1281, 0x010102)}
+    items_dict = {"010": (Item_61, 0x800000), "000": (Item_34, 0x400000), "015": (Item_71, 0x200000), "020": (Item_94, 0x100000), "040": (Item_130, 0x080000), "045": (Item_154, 0x040000), "060": (Item_178, 0x020000), "030": (Item_109, 0x018000), "170": (Item_319, 0x014000), "120": (Item_265, 0x012000), "070": (Item_186, 0x011000), "076": (Item_208, 0x010800), "074": (Item_203, 0x010400), "075": (Item_206, 0x010200), "100": (Item_239, 0x010180), "035": (Item_124, 0x010140), "171": (Item_330, 0x010120), "110": (Item_256, 0x010110), "RE": (Item_1421, 0x010104), "SP": (Item_1580, 0x010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -28637,7 +28637,7 @@ class Item_1131(Item):
 class Variation_1340(Compound):
     fspec_size = None
     items_list = [Item_682, None, None, Item_1335, Item_1612, Item_1131]
-    items_dict = {"COM": ("Common Part", Variation_1023, 0x80), "PSR": ("Specific Status Information for a PSR Sensor", Variation_925, 0x10), "SSR": ("Specific Status Information for a SSR Sensor", Variation_927, 0x08), "MDS": ("Specific Status Information for a Mode S Sensor", Variation_926, 0x04)}
+    items_dict = {"COM": (Item_682, 0x80), "PSR": (Item_1335, 0x10), "SSR": (Item_1612, 0x08), "MDS": (Item_1131, 0x04)}
     @overload
     @classmethod
     def spec(cls, key : Literal["COM"]) -> Variation_1023: ...
@@ -28682,7 +28682,7 @@ class Item_1130(Item):
 class Variation_1339(Compound):
     fspec_size = None
     items_list = [Item_681, None, None, Item_1334, Item_1611, Item_1130]
-    items_dict = {"COM": ("Common Part", Variation_875, 0x80), "PSR": ("Specific Processing Mode Information for a PSR Sensor", Variation_1030, 0x10), "SSR": ("Specific Processing Mode Information for a SSR Sensor", Variation_1046, 0x08), "MDS": ("Specific Processing Mode Information for a Mode S Sensor", Variation_1045, 0x04)}
+    items_dict = {"COM": (Item_681, 0x80), "PSR": (Item_1334, 0x10), "SSR": (Item_1611, 0x08), "MDS": (Item_1130, 0x04)}
     @overload
     @classmethod
     def spec(cls, key : Literal["COM"]) -> Variation_875: ...
@@ -28732,7 +28732,7 @@ class Item_221(Item):
 class Variation_1295(Compound):
     fspec_size = None
     items_list = [Item_61, Item_35, Item_107, Item_85, Item_144, Item_167, Item_182, Item_188, Item_242, Item_254, Item_263, Item_221, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_175, 0x4000), "030": ("Time of Day", Variation_311, 0x2000), "020": ("Sector Number", Variation_224, 0x1000), "041": ("Antenna Rotation Speed", Variation_287, 0x0800), "050": ("System Configuration and Status", Variation_1340, 0x0400), "060": ("System Processing Mode", Variation_1339, 0x0200), "070": ("Message Count Values", Variation_1263, 0x0180), "100": ("Generic Polar Window", Variation_1051, 0x0140), "110": ("Data Filter", Variation_158, 0x0120), "120": ("3D-Position Of Data Source", Variation_990, 0x0110), "090": ("Collimation Error", Variation_1053, 0x0108), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    items_dict = {"010": (Item_61, 0x8000), "000": (Item_35, 0x4000), "030": (Item_107, 0x2000), "020": (Item_85, 0x1000), "041": (Item_144, 0x0800), "050": (Item_167, 0x0400), "060": (Item_182, 0x0200), "070": (Item_188, 0x0180), "100": (Item_242, 0x0140), "110": (Item_254, 0x0120), "120": (Item_263, 0x0110), "090": (Item_221, 0x0108), "RE": (Item_1421, 0x0104), "SP": (Item_1580, 0x0102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -28792,7 +28792,7 @@ class Item_189(Item):
 class Variation_1296(Compound):
     fspec_size = None
     items_list = [Item_61, Item_36, Item_107, Item_85, Item_144, Item_167, Item_182, Item_189, Item_242, Item_254, Item_263, Item_221, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_176, 0x4000), "030": ("Time of Day", Variation_311, 0x2000), "020": ("Sector Number", Variation_224, 0x1000), "041": ("Antenna Rotation Speed", Variation_287, 0x0800), "050": ("System Configuration and Status", Variation_1340, 0x0400), "060": ("System Processing Mode", Variation_1339, 0x0200), "070": ("Message Count Values", Variation_1264, 0x0180), "100": ("Generic Polar Window", Variation_1051, 0x0140), "110": ("Data Filter", Variation_158, 0x0120), "120": ("3D-Position Of Data Source", Variation_990, 0x0110), "090": ("Collimation Error", Variation_1053, 0x0108), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    items_dict = {"010": (Item_61, 0x8000), "000": (Item_36, 0x4000), "030": (Item_107, 0x2000), "020": (Item_85, 0x1000), "041": (Item_144, 0x0800), "050": (Item_167, 0x0400), "060": (Item_182, 0x0200), "070": (Item_189, 0x0180), "100": (Item_242, 0x0140), "110": (Item_254, 0x0120), "120": (Item_263, 0x0110), "090": (Item_221, 0x0108), "RE": (Item_1421, 0x0104), "SP": (Item_1580, 0x0102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -28847,7 +28847,7 @@ class Item_37(Item):
 class Variation_1297(Compound):
     fspec_size = None
     items_list = [Item_61, Item_37, Item_107, Item_85, Item_144, Item_167, Item_182, Item_189, Item_242, Item_254, Item_263, Item_221, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_177, 0x4000), "030": ("Time of Day", Variation_311, 0x2000), "020": ("Sector Number", Variation_224, 0x1000), "041": ("Antenna Rotation Speed", Variation_287, 0x0800), "050": ("System Configuration and Status", Variation_1340, 0x0400), "060": ("System Processing Mode", Variation_1339, 0x0200), "070": ("Message Count Values", Variation_1264, 0x0180), "100": ("Generic Polar Window", Variation_1051, 0x0140), "110": ("Data Filter", Variation_158, 0x0120), "120": ("3D-Position Of Data Source", Variation_990, 0x0110), "090": ("Collimation Error", Variation_1053, 0x0108), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    items_dict = {"010": (Item_61, 0x8000), "000": (Item_37, 0x4000), "030": (Item_107, 0x2000), "020": (Item_85, 0x1000), "041": (Item_144, 0x0800), "050": (Item_167, 0x0400), "060": (Item_182, 0x0200), "070": (Item_189, 0x0180), "100": (Item_242, 0x0140), "110": (Item_254, 0x0120), "120": (Item_263, 0x0110), "090": (Item_221, 0x0108), "RE": (Item_1421, 0x0104), "SP": (Item_1580, 0x0102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -28932,7 +28932,7 @@ class Item_218(Item):
 class Variation_1298(Compound):
     fspec_size = None
     items_list = [Item_61, Item_38, Item_85, Item_107, Item_144, Item_166, Item_180, Item_196, Item_241, Item_220, Item_218, None, Item_1580, None]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_178, 0x4000), "020": ("Sector Number", Variation_224, 0x2000), "030": ("Time of Day", Variation_311, 0x1000), "041": ("Antenna Rotation Speed", Variation_287, 0x0800), "050": ("Station Configuration Status", Variation_1273, 0x0400), "060": ("Station Processing Mode", Variation_1273, 0x0200), "070": ("Plot Count Values", Variation_1235, 0x0180), "100": ("Dynamic Window Type 1", Variation_1054, 0x0140), "090": ("Collimation Error", Variation_1040, 0x0120), "080": ("Warning/Error Conditions", Variation_1273, 0x0110), "SP": ("Special Purpose Field", Variation_1281, 0x0104)}
+    items_dict = {"010": (Item_61, 0x8000), "000": (Item_38, 0x4000), "020": (Item_85, 0x2000), "030": (Item_107, 0x1000), "041": (Item_144, 0x0800), "050": (Item_166, 0x0400), "060": (Item_180, 0x0200), "070": (Item_196, 0x0180), "100": (Item_241, 0x0140), "090": (Item_220, 0x0120), "080": (Item_218, 0x0110), "SP": (Item_1580, 0x0104)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -29031,7 +29031,7 @@ class Item_129(Item):
 class Variation_1299(Compound):
     fspec_size = None
     items_list = [Item_61, Item_39, Item_96, Item_127, Item_122, Item_131, Item_164, Item_231, Item_246, Item_261, Item_270, Item_129, Item_1580, None]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_179, 0x4000), "020": ("Vector Qualifier", Variation_1208, 0x2000), "036": ("Sequence of Cartesian Vectors in SPF Notation", Variation_1269, 0x1000), "034": ("Sequence of Polar Vectors in SPF Notation", Variation_1256, 0x0800), "040": ("Contour Identifier", Variation_1027, 0x0400), "050": ("Sequence of Contour Points in SPF Notation", Variation_1271, 0x0200), "090": ("Time of Day", Variation_311, 0x0180), "100": ("Processing Status", Variation_1189, 0x0140), "110": ("Station Configuration Status", Variation_1273, 0x0120), "120": ("Total Number of Items Constituting One Weather Picture", Variation_235, 0x0110), "038": ("Sequence of Weather Vectors in SPF Notation", Variation_1272, 0x0108), "SP": ("Special Purpose Field", Variation_1281, 0x0104)}
+    items_dict = {"010": (Item_61, 0x8000), "000": (Item_39, 0x4000), "020": (Item_96, 0x2000), "036": (Item_127, 0x1000), "034": (Item_122, 0x0800), "040": (Item_131, 0x0400), "050": (Item_164, 0x0200), "090": (Item_231, 0x0180), "100": (Item_246, 0x0140), "110": (Item_261, 0x0120), "120": (Item_270, 0x0110), "038": (Item_129, 0x0108), "SP": (Item_1580, 0x0104)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -29103,7 +29103,7 @@ class Item_165(Item):
 class Variation_1300(Compound):
     fspec_size = None
     items_list = [Item_61, Item_40, Item_72, Item_108, Item_81, Item_136, Item_165, None, None, None, None, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_180, 0x4000), "015": ("Service Identification", Variation_155, 0x2000), "030": ("Time of Message", Variation_311, 0x1000), "020": ("Batch Number", Variation_191, 0x0800), "040": ("SDPS Configuration and Status", Variation_1022, 0x0400), "050": ("Service Status Report", Variation_181, 0x0200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    items_dict = {"010": (Item_61, 0x8000), "000": (Item_40, 0x4000), "015": (Item_72, 0x2000), "030": (Item_108, 0x1000), "020": (Item_81, 0x0800), "040": (Item_136, 0x0400), "050": (Item_165, 0x0200), "RE": (Item_1421, 0x0104), "SP": (Item_1580, 0x0102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -29183,7 +29183,7 @@ class Item_458(Item):
 class Variation_1301(Compound):
     fspec_size = None
     items_list = [Item_61, Item_41, Item_289, Item_441, Item_442, Item_443, Item_444, Item_447, Item_455, Item_458, None, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_182, 0x4000), "140": ("Time of Day", Variation_311, 0x2000), "550": ("System Status", Variation_1025, 0x1000), "551": ("Tracking Processor Detailed Status", Variation_1093, 0x0800), "552": ("Remote Sensor Detailed Status", Variation_1250, 0x0400), "553": ("Reference Transponder Detailed Status", Variation_1209, 0x0200), "600": ("Position of the MLT System Reference Point", Variation_1002, 0x0180), "610": ("Height of the MLT System Reference Point", Variation_249, 0x0140), "620": ("WGS-84 Undulation", Variation_194, 0x0120), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    items_dict = {"010": (Item_61, 0x8000), "000": (Item_41, 0x4000), "140": (Item_289, 0x2000), "550": (Item_441, 0x1000), "551": (Item_442, 0x0800), "552": (Item_443, 0x0400), "553": (Item_444, 0x0200), "600": (Item_447, 0x0180), "610": (Item_455, 0x0140), "620": (Item_458, 0x0120), "RE": (Item_1421, 0x0104), "SP": (Item_1580, 0x0102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -29332,7 +29332,7 @@ class Item_350(Item):
 class Variation_1302(Compound):
     fspec_size = None
     items_list = [Item_61, Item_44, Item_92, Item_289, Item_146, Item_134, Item_152, Item_335, Item_345, Item_312, Item_322, Item_176, Item_362, Item_371, Item_377, Item_396, Item_224, Item_232, Item_383, Item_440, Item_398, Item_436, Item_386, Item_278, Item_350, None, Item_1580, Item_1421]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "000": ("Message Type", Variation_185, 0x40000000), "020": ("Target Report Descriptor", Variation_1220, 0x20000000), "140": ("Time of Day", Variation_311, 0x10000000), "041": ("Position in WGS-84 Co-ordinates", Variation_1003, 0x08000000), "040": ("Measured Position in Polar Co-ordinates", Variation_1050, 0x04000000), "042": ("Position in Cartesian Co-ordinates", Variation_1160, 0x02000000), "200": ("Calculated Track Velocity in Polar Co-ordinates", Variation_989, 0x01800000), "202": ("Calculated Track Velocity in Cartesian Co-ordinates", Variation_1143, 0x01400000), "161": ("Track Number", Variation_910, 0x01200000), "170": ("Track Status", Variation_1181, 0x01100000), "060": ("Mode-3/A Code in Octal Representation", Variation_1136, 0x01080000), "220": ("Target Address", Variation_296, 0x01040000), "245": ("Target Identification", Variation_1084, 0x01020000), "250": ("Mode S MB Data", Variation_1245, 0x01018000), "300": ("Vehicle Fleet Identification", Variation_167, 0x01014000), "090": ("Flight Level in Binary Representation", Variation_1132, 0x01012000), "091": ("Measured Height", Variation_257, 0x01011000), "270": ("Target Size and Orientation", Variation_1192, 0x01010800), "550": ("System Status", Variation_1024, 0x01010400), "310": ("Pre-programmed Message", Variation_1096, 0x01010200), "500": ("Standard Deviation of Position", Variation_957, 0x01010180), "280": ("Presence", Variation_1244, 0x01010140), "131": ("Amplitude of Primary Plot", Variation_155, 0x01010120), "210": ("Calculated Acceleration", Variation_932, 0x01010110), "SP": ("Special Purpose Field", Variation_1281, 0x01010104), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010102)}
+    items_dict = {"010": (Item_61, 0x80000000), "000": (Item_44, 0x40000000), "020": (Item_92, 0x20000000), "140": (Item_289, 0x10000000), "041": (Item_146, 0x08000000), "040": (Item_134, 0x04000000), "042": (Item_152, 0x02000000), "200": (Item_335, 0x01800000), "202": (Item_345, 0x01400000), "161": (Item_312, 0x01200000), "170": (Item_322, 0x01100000), "060": (Item_176, 0x01080000), "220": (Item_362, 0x01040000), "245": (Item_371, 0x01020000), "250": (Item_377, 0x01018000), "300": (Item_396, 0x01014000), "090": (Item_224, 0x01012000), "091": (Item_232, 0x01011000), "270": (Item_383, 0x01010800), "550": (Item_440, 0x01010400), "310": (Item_398, 0x01010200), "500": (Item_436, 0x01010180), "280": (Item_386, 0x01010140), "131": (Item_278, 0x01010120), "210": (Item_350, 0x01010110), "SP": (Item_1580, 0x01010104), "RE": (Item_1421, 0x01010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -29471,7 +29471,7 @@ class Item_171(Item):
 class Variation_1303(Compound):
     fspec_size = None
     items_list = [Item_61, Item_46, Item_97, Item_110, Item_143, Item_148, Item_156, Item_157, Item_169, Item_170, Item_171, Item_289, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_187, 0x4000), "020": ("Video Record Header", Variation_315, 0x2000), "030": ("Video Summary", Variation_1224, 0x1000), "040": ("Video Header Nano", Variation_1082, 0x0800), "041": ("Video Header Femto", Variation_1081, 0x0400), "048": ("Video Cells Resolution & Data Compression Indicator", Variation_936, 0x0200), "049": ("Video Octets & Video Cells Counters", Variation_1021, 0x0180), "050": ("Video Block Low Data Volume", Variation_1227, 0x0140), "051": ("Video Block Medium Data Volume", Variation_1231, 0x0120), "052": ("Video Block High Data Volume", Variation_1232, 0x0110), "140": ("Time of Day", Variation_311, 0x0108), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    items_dict = {"010": (Item_61, 0x8000), "000": (Item_46, 0x4000), "020": (Item_97, 0x2000), "030": (Item_110, 0x1000), "040": (Item_143, 0x0800), "041": (Item_148, 0x0400), "048": (Item_156, 0x0200), "049": (Item_157, 0x0180), "050": (Item_169, 0x0140), "051": (Item_170, 0x0120), "052": (Item_171, 0x0110), "140": (Item_289, 0x0108), "RE": (Item_1421, 0x0104), "SP": (Item_1580, 0x0102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -29561,7 +29561,7 @@ class Item_249(Item):
 class Variation_1304(Compound):
     fspec_size = None
     items_list = [Item_61, Item_47, Item_95, Item_106, Item_181, Item_199, Item_211, Item_229, Item_249]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Message Type", Variation_188, 0x4000), "020": ("Vector Qualifier", Variation_1207, 0x2000), "030": ("Sequence of Cartesian Vectors", Variation_1270, 0x1000), "060": ("Synchronisation/Control Signal", Variation_1211, 0x0800), "070": ("Time of Day", Variation_311, 0x0400), "080": ("Processing Status", Variation_1189, 0x0200), "090": ("Radar Configuration and Status", Variation_1251, 0x0180), "100": ("Vector Count", Variation_235, 0x0140)}
+    items_dict = {"010": (Item_61, 0x8000), "000": (Item_47, 0x4000), "020": (Item_95, 0x2000), "030": (Item_106, 0x1000), "060": (Item_181, 0x0800), "070": (Item_199, 0x0400), "080": (Item_211, 0x0200), "090": (Item_229, 0x0180), "100": (Item_249, 0x0140)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -29651,7 +29651,7 @@ class Item_1267(Item):
 class Variation_1351(Compound):
     fspec_size = None
     items_list = [Item_1038, Item_1880, Item_948, Item_1267]
-    items_dict = {"LEN": ("Target Length", Variation_274, 0x80), "WDT": ("Target Width", Variation_274, 0x40), "HGT": ("Target Height", Variation_274, 0x20), "ORT": ("Target Orientation", Variation_293, 0x10)}
+    items_dict = {"LEN": (Item_1038, 0x80), "WDT": (Item_1880, 0x40), "HGT": (Item_948, 0x20), "ORT": (Item_1267, 0x10)}
     @overload
     @classmethod
     def spec(cls, key : Literal["LEN"]) -> Variation_274: ...
@@ -29701,7 +29701,7 @@ class Item_952(Item):
 class Variation_1355(Compound):
     fspec_size = None
     items_list = [Item_1280, Item_956, Item_952]
-    items_dict = {"P84": ("Horizontal Position in WGS-84 Coordinates", Variation_1009, 0x80), "HPR": ("Horizontal Position Resolution", Variation_1055, 0x40), "HPP": ("Horizontal Position Precision", Variation_1073, 0x20)}
+    items_dict = {"P84": (Item_1280, 0x80), "HPR": (Item_956, 0x40), "HPP": (Item_952, 0x20)}
     @overload
     @classmethod
     def spec(cls, key : Literal["P84"]) -> Variation_1009: ...
@@ -29763,7 +29763,7 @@ class Item_662(Item):
 class Variation_1347(Compound):
     fspec_size = None
     items_list = [Item_911, Item_1469, Item_1530, Item_639, Item_640, Item_663, Item_664, Item_662]
-    items_dict = {"GH": ("Geometric Height (WGS-84)", Variation_302, 0x8000), "RSGH": ("Geometric Height Resolution", Variation_310, 0x4000), "SDGH": ("Geometric Height Precision", Variation_310, 0x2000), "CI6": ("Confidence Interval for Geometric Height (67%)", Variation_1112, 0x1000), "CI9": ("Confidence Interval for Geometric Height (95%)", Variation_1113, 0x0800), "COGHHP": ("Correlation of Geometric Height and Horizontal Position", Variation_1145, 0x0400), "COGHHV": ("Correlation of Geometric Height and Horizontal Velocity", Variation_1145, 0x0200), "COGHHA": ("Correlation of Geometric Height and Horizontal Acceleration", Variation_1145, 0x0180)}
+    items_dict = {"GH": (Item_911, 0x8000), "RSGH": (Item_1469, 0x4000), "SDGH": (Item_1530, 0x2000), "CI6": (Item_639, 0x1000), "CI9": (Item_640, 0x0800), "COGHHP": (Item_663, 0x0400), "COGHHV": (Item_664, 0x0200), "COGHHA": (Item_662, 0x0180)}
     @overload
     @classmethod
     def spec(cls, key : Literal["GH"]) -> Variation_302: ...
@@ -29820,7 +29820,7 @@ class Item_675(Item):
 class Variation_1349(Compound):
     fspec_size = None
     items_list = [Item_960, Item_1472, Item_1535, Item_675]
-    items_dict = {"HV": ("Horizontal Velocity Vector", Variation_1150, 0x80), "RSHV": ("Horizontal Velocity Resolution", Variation_1149, 0x40), "SDHV": ("Horizontal Velocity Precision", Variation_1148, 0x20), "COHVHP": ("Correlation of Horizontal Velocity and Horizontal Position", Variation_947, 0x10)}
+    items_dict = {"HV": (Item_960, 0x80), "RSHV": (Item_1472, 0x40), "SDHV": (Item_1535, 0x20), "COHVHP": (Item_675, 0x10)}
     @overload
     @classmethod
     def spec(cls, key : Literal["HV"]) -> Variation_1150: ...
@@ -29865,7 +29865,7 @@ class Item_666(Item):
 class Variation_1348(Compound):
     fspec_size = None
     items_list = [Item_931, Item_1532, Item_665, Item_666]
-    items_dict = {"HA": ("Horizontal Acceleration Vector", Variation_1146, 0x80), "SDHA": ("Horizontal Acceleration Precision", Variation_1147, 0x40), "COHAHP": ("Correlation of Horizontal Acceleration and Horizontal Position", Variation_945, 0x20), "COHAHV": ("Correlation of Horizontal Acceleration and Horizontal Velocity", Variation_946, 0x10)}
+    items_dict = {"HA": (Item_931, 0x80), "SDHA": (Item_1532, 0x40), "COHAHP": (Item_665, 0x20), "COHAHV": (Item_666, 0x10)}
     @overload
     @classmethod
     def spec(cls, key : Literal["HA"]) -> Variation_1146: ...
@@ -29920,7 +29920,7 @@ class Item_710(Item):
 class Variation_1374(Compound):
     fspec_size = None
     items_list = [Item_1868, Item_1479, Item_1545, Item_711, Item_712, Item_710]
-    items_dict = {"VV": ("Vertical Velocity", Variation_303, 0x80), "RSVV": ("Vertical Velocity Resolution", Variation_275, 0x40), "SDVV": ("Vertical Velocity Precision", Variation_1077, 0x20), "COVVHP": ("Correlation of Vertical Velocity and Horizontal Position", Variation_1145, 0x10), "COVVHV": ("Correlation of Vertical Velocity and Horizontal Velocity", Variation_1145, 0x08), "COVVHA": ("Correlation of Vertical Velocity and Horizontal Acceleration", Variation_1145, 0x04)}
+    items_dict = {"VV": (Item_1868, 0x80), "RSVV": (Item_1479, 0x40), "SDVV": (Item_1545, 0x20), "COVVHP": (Item_711, 0x10), "COVVHV": (Item_712, 0x08), "COVVHA": (Item_710, 0x04)}
     @overload
     @classmethod
     def spec(cls, key : Literal["VV"]) -> Variation_303: ...
@@ -29976,7 +29976,7 @@ class Item_704(Item):
 class Variation_1373(Compound):
     fspec_size = None
     items_list = [Item_1831, Item_1478, Item_705, Item_706, Item_704]
-    items_dict = {"VA": ("Vertical Acceleration", Variation_245, 0x80), "RSVA": ("Vertical Acceleration Precision", Variation_1076, 0x40), "COVAHP": ("Correlation of Vertical Acceleration and Horizontal Position", Variation_1145, 0x20), "COVAHV": ("Correlation of Vertical Acceleration and Horizontal Velocity", Variation_1145, 0x10), "COVAHA": ("Correlation of Vertical Acceleration and Horizontal Acceleration", Variation_1145, 0x08)}
+    items_dict = {"VA": (Item_1831, 0x80), "RSVA": (Item_1478, 0x40), "COVAHP": (Item_705, 0x20), "COVAHV": (Item_706, 0x10), "COVAHA": (Item_704, 0x08)}
     @overload
     @classmethod
     def spec(cls, key : Literal["VA"]) -> Variation_245: ...
@@ -30049,7 +30049,7 @@ class Item_1539(Item):
 class Variation_1360(Compound):
     fspec_size = None
     items_list = [Item_1388, Item_1475, Item_1537, Item_1462, Item_1476, Item_1541, Item_1390, Item_1539]
-    items_dict = {"R": ("Range", Variation_300, 0x8000), "RSR": ("Range Resolution", Variation_308, 0x4000), "SDR": ("Range Precision", Variation_308, 0x2000), "RR": ("Range Rate", Variation_301, 0x1000), "RSRR": ("Range Rate Resolution", Variation_309, 0x0800), "SDRR": ("Range Rate Precision", Variation_1075, 0x0400), "RA": ("Range Acceleration", Variation_254, 0x0200), "SDRA": ("Range Acceleration Precision", Variation_1074, 0x0180)}
+    items_dict = {"R": (Item_1388, 0x8000), "RSR": (Item_1475, 0x4000), "SDR": (Item_1537, 0x2000), "RR": (Item_1462, 0x1000), "RSRR": (Item_1476, 0x0800), "SDRR": (Item_1541, 0x0400), "RA": (Item_1390, 0x0200), "SDRA": (Item_1539, 0x0180)}
     @overload
     @classmethod
     def spec(cls, key : Literal["R"]) -> Variation_300: ...
@@ -30136,7 +30136,7 @@ class Item_656(Item):
 class Variation_1343(Compound):
     fspec_size = None
     items_list = [Item_809, Item_1526, Item_756, Item_1525, Item_658, Item_660, Item_659, Item_655, Item_657, Item_656]
-    items_dict = {"DV": ("Doppler Velocity", Variation_303, 0x8000), "SDDV": ("Precision of Doppler Velocity", Variation_283, 0x4000), "DA": ("Doppler Acceleration", Variation_254, 0x2000), "SDDA": ("Precision of Doppler Acceleration", Variation_1071, 0x1000), "CODVR": ("Correlation of Doppler Velocity and Range", Variation_197, 0x0800), "CODVRR": ("Correlation of Doppler Velocity and Range Rate", Variation_197, 0x0400), "CODVRA": ("Correlation of Doppler Velocity and Range Acceleration", Variation_197, 0x0200), "CODAR": ("Correlation of Doppler Acceleration and Range", Variation_197, 0x0180), "CODARR": ("Correlation of Doppler Acceleration and Range Rate", Variation_197, 0x0140), "CODARA": ("Correlation of Doppler Acceleration and Range Acceleration", Variation_197, 0x0120)}
+    items_dict = {"DV": (Item_809, 0x8000), "SDDV": (Item_1526, 0x4000), "DA": (Item_756, 0x2000), "SDDA": (Item_1525, 0x1000), "CODVR": (Item_658, 0x0800), "CODVRR": (Item_660, 0x0400), "CODVRA": (Item_659, 0x0200), "CODAR": (Item_655, 0x0180), "CODARR": (Item_657, 0x0140), "CODARA": (Item_656, 0x0120)}
     @overload
     @classmethod
     def spec(cls, key : Literal["DV"]) -> Variation_303: ...
@@ -30204,7 +30204,7 @@ class Item_569(Item):
 class Variation_1336(Compound):
     fspec_size = None
     items_list = [Item_567, Item_1467, Item_1521, Item_571, Item_1523, Item_569]
-    items_dict = {"AZ": ("Azimuth", Variation_293, 0x80), "RSAZ": ("Azimuth Resolution", Variation_290, 0x40), "SDASZ": ("Standard Deviation of Azimuth", Variation_290, 0x20), "AZR": ("Azimuth Rate", Variation_259, 0x10), "SDAZR": ("Standard Deviation of Azimuth Rate", Variation_1070, 0x08), "AZEX": ("Azimuth Extent", Variation_1059, 0x04)}
+    items_dict = {"AZ": (Item_567, 0x80), "RSAZ": (Item_1467, 0x40), "SDASZ": (Item_1521, 0x20), "AZR": (Item_571, 0x10), "SDAZR": (Item_1523, 0x08), "AZEX": (Item_569, 0x04)}
     @overload
     @classmethod
     def spec(cls, key : Literal["AZ"]) -> Variation_293: ...
@@ -30265,7 +30265,7 @@ class Item_816(Item):
 class Variation_1344(Compound):
     fspec_size = None
     items_list = [Item_814, Item_1468, Item_1527, Item_841, Item_1529, Item_816]
-    items_dict = {"EL": ("Elevation", Variation_259, 0x80), "RSEL": ("Elevation Resolution", Variation_290, 0x40), "SDEL": ("Standard Deviation of Elevation", Variation_290, 0x20), "ER": ("Elevation Rate", Variation_260, 0x10), "SDER": ("Standard Deviation of Elevation Rate", Variation_1072, 0x08), "ELEX": ("Elevation Extent", Variation_1058, 0x04)}
+    items_dict = {"EL": (Item_814, 0x80), "RSEL": (Item_1468, 0x40), "SDEL": (Item_1527, 0x20), "ER": (Item_841, 0x10), "SDER": (Item_1529, 0x08), "ELEX": (Item_816, 0x04)}
     @overload
     @classmethod
     def spec(cls, key : Literal["EL"]) -> Variation_259: ...
@@ -30316,7 +30316,7 @@ class Item_1461(Item):
 class Variation_1342(Compound):
     fspec_size = None
     items_list = [Item_793, Item_794, Item_1460, Item_1461]
-    items_dict = {"DPP": ("Direct Path - Power", Variation_192, 0x80), "DPS": ("Direct Path - Signal to Noise Ratio (SNR)", Variation_192, 0x40), "RPP": ("Reflected Path - Power", Variation_918, 0x20), "RPS": ("Reflected Path - Signal to Noise Ratio (SNR)", Variation_192, 0x10)}
+    items_dict = {"DPP": (Item_793, 0x80), "DPS": (Item_794, 0x40), "RPP": (Item_1460, 0x20), "RPS": (Item_1461, 0x10)}
     @overload
     @classmethod
     def spec(cls, key : Literal["DPP"]) -> Variation_192: ...
@@ -30346,7 +30346,7 @@ class Item_464(Item):
 class Variation_1305(Compound):
     fspec_size = None
     items_list = [Item_61, Item_48, Item_72, Item_87, Item_111, Item_293, Item_316, Item_329, Item_168, Item_382, Item_393, Item_416, Item_446, Item_449, Item_450, Item_451, Item_452, Item_454, Item_430, Item_459, Item_460, Item_461, Item_462, Item_463, Item_464, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "000": ("Message Type", Variation_1017, 0x40000000), "015": ("Service Identification", Variation_155, 0x20000000), "020": ("Target Report Descriptor", Variation_1195, 0x10000000), "030": ("Warning/Error Conditions", Variation_1273, 0x08000000), "145": ("Time of Applicability", Variation_311, 0x04000000), "161": ("Track/Plot Number", Variation_235, 0x02000000), "170": ("Track/Plot Status", Variation_1180, 0x01800000), "050": ("Update Period", Variation_885, 0x01400000), "270": ("Target Size & Orientation", Variation_1351, 0x01200000), "300": ("Object Classification", Variation_1242, 0x01100000), "400": ("Measurement Identifier", Variation_1029, 0x01080000), "600": ("Horizontal Position Information", Variation_1355, 0x01040000), "601": ("Geometric Height Information", Variation_1347, 0x01020000), "602": ("Horizontal Velocity Information", Variation_1349, 0x01018000), "603": ("Horizontal Acceleration Information", Variation_1348, 0x01014000), "604": ("Vertical Velocity Information", Variation_1374, 0x01012000), "605": ("Vertical Velocity Information", Variation_1373, 0x01011000), "480": ("Associations", Variation_1229, 0x01010800), "625": ("Range Information", Variation_1360, 0x01010400), "626": ("Doppler Information", Variation_1343, 0x01010200), "627": ("Azimuth Information", Variation_1336, 0x01010180), "628": ("Elevation Information", Variation_1344, 0x01010140), "630": ("Path Quality", Variation_1342, 0x01010120), "631": ("Contour (Azimuth, Elevation Angle, Range Extent)", Variation_1236, 0x01010110), "SP": ("Special Purpose Field", Variation_1281, 0x01010108)}
+    items_dict = {"010": (Item_61, 0x80000000), "000": (Item_48, 0x40000000), "015": (Item_72, 0x20000000), "020": (Item_87, 0x10000000), "030": (Item_111, 0x08000000), "145": (Item_293, 0x04000000), "161": (Item_316, 0x02000000), "170": (Item_329, 0x01800000), "050": (Item_168, 0x01400000), "270": (Item_382, 0x01200000), "300": (Item_393, 0x01100000), "400": (Item_416, 0x01080000), "600": (Item_446, 0x01040000), "601": (Item_449, 0x01020000), "602": (Item_450, 0x01018000), "603": (Item_451, 0x01014000), "604": (Item_452, 0x01012000), "605": (Item_454, 0x01011000), "480": (Item_430, 0x01010800), "625": (Item_459, 0x01010400), "626": (Item_460, 0x01010200), "627": (Item_461, 0x01010180), "628": (Item_462, 0x01010140), "630": (Item_463, 0x01010120), "631": (Item_464, 0x01010110), "SP": (Item_1580, 0x01010108)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -30467,7 +30467,7 @@ class Item_269(Item):
 class Variation_1306(Compound):
     fspec_size = None
     items_list = [Item_61, Item_49, Item_73, Item_199, Item_243, Item_250, Item_338, Item_260, Item_269, None, None, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Report Type", Variation_170, 0x4000), "015": ("Service Type and Identification", Variation_1078, 0x2000), "070": ("Time of Day", Variation_311, 0x1000), "100": ("Ground Station Status", Variation_1205, 0x0800), "101": ("Service Configuration", Variation_1210, 0x0400), "200": ("Operational Range", Variation_205, 0x0200), "110": ("Service Status", Variation_1175, 0x0180), "120": ("Service Statistics", Variation_1267, 0x0140), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    items_dict = {"010": (Item_61, 0x8000), "000": (Item_49, 0x4000), "015": (Item_73, 0x2000), "070": (Item_199, 0x1000), "100": (Item_243, 0x0800), "101": (Item_250, 0x0400), "200": (Item_338, 0x0200), "110": (Item_260, 0x0180), "120": (Item_269, 0x0140), "RE": (Item_1421, 0x0104), "SP": (Item_1580, 0x0102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -30553,7 +30553,7 @@ class Item_456(Item):
 class Variation_1307(Compound):
     fspec_size = None
     items_list = [Item_61, Item_50, Item_336, Item_72, Item_86, Item_199, Item_248, Item_253, Item_264, Item_288, Item_1580, Item_448, Item_456]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "000": ("Report Type", Variation_1057, 0x4000), "200": ("Message Identification", Variation_298, 0x2000), "015": ("Service Identification", Variation_155, 0x1000), "020": ("Service Designator", Variation_326, 0x0800), "070": ("Time of Day", Variation_311, 0x0400), "100": ("System and Service Status", Variation_1204, 0x0200), "105": ("System and Service Error Codes", Variation_1223, 0x0180), "120": ("Component Status", Variation_1241, 0x0140), "140": ("Service Statistics", Variation_1268, 0x0120), "SP": ("Special Purpose Field", Variation_1281, 0x0110), "600": ("Position of the System Reference Point", Variation_1004, 0x0108), "610": ("Height of the System Reference Point", Variation_249, 0x0104)}
+    items_dict = {"010": (Item_61, 0x8000), "000": (Item_50, 0x4000), "200": (Item_336, 0x2000), "015": (Item_72, 0x1000), "020": (Item_86, 0x0800), "070": (Item_199, 0x0400), "100": (Item_248, 0x0200), "105": (Item_253, 0x0180), "120": (Item_264, 0x0140), "140": (Item_288, 0x0120), "SP": (Item_1580, 0x0110), "600": (Item_448, 0x0108), "610": (Item_456, 0x0104)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -30665,7 +30665,7 @@ class Item_403(Item):
 class Variation_1308(Compound):
     fspec_size = None
     items_list = [Item_61, Item_67, Item_33, Item_402, Item_359, Item_363, Item_289, Item_155, Item_192, Item_159, Item_344, Item_367, Item_369, Item_355, Item_403, None, None, None, None, None, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x800000), "012": ("Data Destination Identifier", Variation_1061, 0x400000), "000": ("Message Type", Variation_159, 0x200000), "350": ("Cluster Station/Node List", Variation_1252, 0x100000), "220": ("Aircraft Address", Variation_296, 0x080000), "221": ("Duplicate Address Reference Number (DRN)", Variation_234, 0x040000), "140": ("Time of Day", Variation_311, 0x020000), "045": ("Calculated Position in WGS-84 Coordinates", Variation_1000, 0x018000), "070": ("Mode 3/A Code in Octal Representation", Variation_1128, 0x014000), "050": ("Flight Level in Binary Representation", Variation_1129, 0x012000), "200": ("Track Velocity in Polar Co-ordinates", Variation_988, 0x011000), "230": ("Transponder Capability", Variation_937, 0x010800), "240": ("Track Status", Variation_954, 0x010400), "210": ("Mode S Address List", Variation_1226, 0x010200), "360": ("Cluster Controller Command State", Variation_155, 0x010180), "SP": ("Special Purpose Field", Variation_1281, 0x010102)}
+    items_dict = {"010": (Item_61, 0x800000), "012": (Item_67, 0x400000), "000": (Item_33, 0x200000), "350": (Item_402, 0x100000), "220": (Item_359, 0x080000), "221": (Item_363, 0x040000), "140": (Item_289, 0x020000), "045": (Item_155, 0x018000), "070": (Item_192, 0x014000), "050": (Item_159, 0x012000), "200": (Item_344, 0x011000), "230": (Item_367, 0x010800), "240": (Item_369, 0x010400), "210": (Item_355, 0x010200), "360": (Item_403, 0x010180), "SP": (Item_1580, 0x010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -30756,7 +30756,7 @@ class Item_423(Item):
 class Variation_1309(Compound):
     fspec_size = None
     items_list = [Item_61, Item_72, Item_42, Item_289, Item_340, Item_394, Item_417, Item_419, Item_421, Item_423, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "015": ("Service Identification", Variation_155, 0x4000), "000": ("Message Type", Variation_183, 0x2000), "140": ("Time of Day", Variation_311, 0x1000), "200": ("System Configuration Reporting Period", Variation_206, 0x0800), "300": ("Pair Identification", Variation_1248, 0x0400), "400": ("Position of the System Reference Point", Variation_1003, 0x0200), "405": ("Height of System Reference Point", Variation_249, 0x0180), "410": ("Transmitter Properties", Variation_1259, 0x0140), "420": ("Receiver Properties", Variation_1249, 0x0120), "SP": ("Special Purpose Field", Variation_1281, 0x0110)}
+    items_dict = {"010": (Item_61, 0x8000), "015": (Item_72, 0x4000), "000": (Item_42, 0x2000), "140": (Item_289, 0x1000), "200": (Item_340, 0x0800), "300": (Item_394, 0x0400), "400": (Item_417, 0x0200), "405": (Item_419, 0x0180), "410": (Item_421, 0x0140), "420": (Item_423, 0x0120), "SP": (Item_1580, 0x0110)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -30887,7 +30887,7 @@ class Item_339(Item):
 class Variation_1310(Compound):
     fspec_size = None
     items_list = [Item_61, Item_72, Item_43, Item_107, Item_135, Item_230, Item_162, Item_177, Item_187, Item_213, Item_247, Item_255, Item_266, Item_273, Item_285, Item_299, Item_310, Item_320, Item_331, Item_333, Item_339, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "015": ("Service Identification", Variation_155, 0x40000000), "000": ("Message Type", Variation_184, 0x20000000), "030": ("Time of Day", Variation_311, 0x10000000), "040": ("Report Number", Variation_155, 0x08000000), "090": ("Radio Channel Name", Variation_328, 0x04000000), "050": ("Position in WGS-84 Coordinates", Variation_1006, 0x02000000), "060": ("Position in Cartesian Coordinates", Variation_1168, 0x01800000), "070": ("Local Bearing", Variation_277, 0x01400000), "080": ("System Bearing", Variation_277, 0x01200000), "100": ("Quality of Measurement", Variation_155, 0x01100000), "110": ("Estimated Uncertainty", Variation_207, 0x01080000), "120": ("Contributing Sensors", Variation_1222, 0x01040000), "130": ("Conflicting Transmitter Position in WGS-84 Coordinates", Variation_1006, 0x01020000), "140": ("Conflicting Transmitter Position in Cartesian Coordinates", Variation_1168, 0x01018000), "150": ("Conflicting Transmitter Estimated Uncertainty", Variation_207, 0x01014000), "160": ("Track Number", Variation_234, 0x01012000), "170": ("Sensor Identification", Variation_155, 0x01011000), "180": ("Signal Level", Variation_244, 0x01010800), "190": ("Signal Quality", Variation_155, 0x01010400), "200": ("Signal Elevation", Variation_246, 0x01010200), "SP": ("Special Purpose Field", Variation_1281, 0x01010180)}
+    items_dict = {"010": (Item_61, 0x80000000), "015": (Item_72, 0x40000000), "000": (Item_43, 0x20000000), "030": (Item_107, 0x10000000), "040": (Item_135, 0x08000000), "090": (Item_230, 0x04000000), "050": (Item_162, 0x02000000), "060": (Item_177, 0x01800000), "070": (Item_187, 0x01400000), "080": (Item_213, 0x01200000), "100": (Item_247, 0x01100000), "110": (Item_255, 0x01080000), "120": (Item_266, 0x01040000), "130": (Item_273, 0x01020000), "140": (Item_285, 0x01018000), "150": (Item_299, 0x01014000), "160": (Item_310, 0x01012000), "170": (Item_320, 0x01011000), "180": (Item_331, 0x01010800), "190": (Item_333, 0x01010400), "200": (Item_339, 0x01010200), "SP": (Item_1580, 0x01010180)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -31001,7 +31001,7 @@ class Item_235(Item):
 class Variation_1311(Compound):
     fspec_size = None
     items_list = [Item_61, Item_72, Item_108, Item_163, Item_179, Item_198, Item_212, Item_219, Item_227, Item_233, Item_235, None, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x8000), "015": ("Service Identification", Variation_155, 0x4000), "030": ("Time of Message", Variation_311, 0x2000), "050": ("Sensor Identifier", Variation_1061, 0x1000), "060": ("Sensor Configuration and Status", Variation_1186, 0x0800), "070": ("Time Stamping Bias", Variation_238, 0x0400), "080": ("SSR / Mode S Range Gain and Bias", Variation_1080, 0x0200), "081": ("SSR Mode S Azimuth Bias", Variation_262, 0x0180), "090": ("PSR Range Gain and Bias", Variation_1033, 0x0140), "091": ("PSR Azimuth Bias", Variation_262, 0x0120), "092": ("PSR Elevation Bias", Variation_262, 0x0110), "RE": ("Reserved Expansion Field", Variation_1280, 0x0104), "SP": ("Special Purpose Field", Variation_1281, 0x0102)}
+    items_dict = {"010": (Item_61, 0x8000), "015": (Item_72, 0x4000), "030": (Item_108, 0x2000), "050": (Item_163, 0x1000), "060": (Item_179, 0x0800), "070": (Item_198, 0x0400), "080": (Item_212, 0x0200), "081": (Item_219, 0x0180), "090": (Item_227, 0x0140), "091": (Item_233, 0x0120), "092": (Item_235, 0x0110), "RE": (Item_1421, 0x0104), "SP": (Item_1580, 0x0102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -31053,7 +31053,7 @@ class Item_439(Item):
 class Variation_1312(Compound):
     fspec_size = None
     items_list = [Item_61, Item_72, Item_289, Item_439, None, Item_1580, Item_1421]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80), "015": ("Service Identification", Variation_155, 0x40), "140": ("Time of Day", Variation_311, 0x20), "550": ("Category Version Number Report", Variation_1239, 0x10), "SP": ("Special Purpose Field", Variation_1281, 0x04), "RE": ("Reserved Expansion Field", Variation_1280, 0x02)}
+    items_dict = {"010": (Item_61, 0x80), "015": (Item_72, 0x40), "140": (Item_289, 0x20), "550": (Item_439, 0x10), "SP": (Item_1580, 0x04), "RE": (Item_1421, 0x02)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -31159,7 +31159,7 @@ class Item_1531(Item):
 class Variation_1341(Compound):
     fspec_size = None
     items_list = [Item_788, Item_1536, Item_1531]
-    items_dict = {"DOP": ("DOP of Position", Variation_1154, 0x80), "SDP": ("Standard Deviation of Position", Variation_1158, 0x40), "SDH": ("Standard Deviation of Geometric Height (WGS 84)", Variation_271, 0x20)}
+    items_dict = {"DOP": (Item_788, 0x80), "SDP": (Item_1536, 0x40), "SDH": (Item_1531, 0x20)}
     @overload
     @classmethod
     def spec(cls, key : Literal["DOP"]) -> Variation_1154: ...
@@ -31216,7 +31216,7 @@ class Item_161(Item):
 class Variation_1313(Compound):
     fspec_size = None
     items_list = [Item_61, Item_88, Item_289, Item_145, Item_153, Item_313, Item_323, Item_195, Item_346, Item_224, Item_244, Item_362, Item_373, Item_258, Item_252, Item_348, Item_396, Item_397, Item_435, Item_415, Item_374, Item_365, Item_380, Item_113, Item_173, Item_161, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "020": ("Target Report Descriptor", Variation_1213, 0x40000000), "140": ("Time of Day", Variation_311, 0x20000000), "041": ("Position In WGS-84 Coordinates", Variation_1001, 0x10000000), "042": ("Position in Cartesian Coordinates", Variation_1168, 0x08000000), "161": ("Track Number", Variation_911, 0x04000000), "170": ("Track Status", Variation_1182, 0x02000000), "070": ("Mode-3/A Code in Octal Representation", Variation_1137, 0x01800000), "202": ("Calculated Track Velocity in Cartesian Coordinates", Variation_1140, 0x01400000), "090": ("Flight Level in Binary Representation", Variation_1132, 0x01200000), "100": ("Mode C Code", Variation_1130, 0x01100000), "220": ("Target Address", Variation_296, 0x01080000), "245": ("Target Identification", Variation_1086, 0x01040000), "110": ("Measured Height (Local Cartesian Coordinates)", Variation_257, 0x01020000), "105": ("Geometric Height (WGS-84)", Variation_257, 0x01018000), "210": ("Calculated Acceleration", Variation_930, 0x01014000), "300": ("Vehicle Fleet Identification", Variation_167, 0x01012000), "310": ("Pre-programmed Message", Variation_1095, 0x01011000), "500": ("Position Accuracy", Variation_1341, 0x01010800), "400": ("Contributing Devices", Variation_1237, 0x01010400), "250": ("BDS Register Data", Variation_1246, 0x01010200), "230": ("Communications/ACAS Capability and Flight Status", Variation_950, 0x01010180), "260": ("ACAS Resolution Advisory Report", Variation_327, 0x01010140), "030": ("Warning/Error Conditions", Variation_1278, 0x01010120), "055": ("Mode-1 Code in Octal Representation", Variation_1134, 0x01010110), "050": ("Mode-2 Code in Octal Representation", Variation_1135, 0x01010108), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010104), "SP": ("Special Purpose Field", Variation_1281, 0x01010102)}
+    items_dict = {"010": (Item_61, 0x80000000), "020": (Item_88, 0x40000000), "140": (Item_289, 0x20000000), "041": (Item_145, 0x10000000), "042": (Item_153, 0x08000000), "161": (Item_313, 0x04000000), "170": (Item_323, 0x02000000), "070": (Item_195, 0x01800000), "202": (Item_346, 0x01400000), "090": (Item_224, 0x01200000), "100": (Item_244, 0x01100000), "220": (Item_362, 0x01080000), "245": (Item_373, 0x01040000), "110": (Item_258, 0x01020000), "105": (Item_252, 0x01018000), "210": (Item_348, 0x01014000), "300": (Item_396, 0x01012000), "310": (Item_397, 0x01011000), "500": (Item_435, 0x01010800), "400": (Item_415, 0x01010400), "250": (Item_374, 0x01010200), "230": (Item_365, 0x01010180), "260": (Item_380, 0x01010140), "030": (Item_113, 0x01010120), "055": (Item_173, 0x01010110), "050": (Item_161, 0x01010108), "RE": (Item_1421, 0x01010104), "SP": (Item_1580, 0x01010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -31318,7 +31318,7 @@ class Item_378(Item):
 class Variation_1314(Compound):
     fspec_size = None
     items_list = [Item_61, Item_88, Item_289, Item_145, Item_153, Item_313, Item_324, Item_195, Item_346, Item_224, Item_244, Item_362, Item_373, Item_258, Item_252, Item_348, Item_396, Item_397, Item_435, Item_415, Item_378, Item_365, Item_380, Item_113, Item_173, Item_161, Item_1421, Item_1580]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "020": ("Target Report Descriptor", Variation_1213, 0x40000000), "140": ("Time of Day", Variation_311, 0x20000000), "041": ("Position In WGS-84 Coordinates", Variation_1001, 0x10000000), "042": ("Position in Cartesian Coordinates", Variation_1168, 0x08000000), "161": ("Track Number", Variation_911, 0x04000000), "170": ("Track Status", Variation_1183, 0x02000000), "070": ("Mode-3/A Code in Octal Representation", Variation_1137, 0x01800000), "202": ("Calculated Track Velocity in Cartesian Coordinates", Variation_1140, 0x01400000), "090": ("Flight Level in Binary Representation", Variation_1132, 0x01200000), "100": ("Mode C Code", Variation_1130, 0x01100000), "220": ("Target Address", Variation_296, 0x01080000), "245": ("Target Identification", Variation_1086, 0x01040000), "110": ("Measured Height (Local Cartesian Coordinates)", Variation_257, 0x01020000), "105": ("Geometric Height (WGS-84)", Variation_257, 0x01018000), "210": ("Calculated Acceleration", Variation_930, 0x01014000), "300": ("Vehicle Fleet Identification", Variation_167, 0x01012000), "310": ("Pre-programmed Message", Variation_1095, 0x01011000), "500": ("Position Accuracy", Variation_1341, 0x01010800), "400": ("Contributing Devices", Variation_1237, 0x01010400), "250": ("Mode S MB Data", Variation_1246, 0x01010200), "230": ("Communications/ACAS Capability and Flight Status", Variation_950, 0x01010180), "260": ("ACAS Resolution Advisory Report", Variation_327, 0x01010140), "030": ("Warning/Error Conditions", Variation_1278, 0x01010120), "055": ("Mode-1 Code in Octal Representation", Variation_1134, 0x01010110), "050": ("Mode-2 Code in Octal Representation", Variation_1135, 0x01010108), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010104), "SP": ("Special Purpose Field", Variation_1281, 0x01010102)}
+    items_dict = {"010": (Item_61, 0x80000000), "020": (Item_88, 0x40000000), "140": (Item_289, 0x20000000), "041": (Item_145, 0x10000000), "042": (Item_153, 0x08000000), "161": (Item_313, 0x04000000), "170": (Item_324, 0x02000000), "070": (Item_195, 0x01800000), "202": (Item_346, 0x01400000), "090": (Item_224, 0x01200000), "100": (Item_244, 0x01100000), "220": (Item_362, 0x01080000), "245": (Item_373, 0x01040000), "110": (Item_258, 0x01020000), "105": (Item_252, 0x01018000), "210": (Item_348, 0x01014000), "300": (Item_396, 0x01012000), "310": (Item_397, 0x01011000), "500": (Item_435, 0x01010800), "400": (Item_415, 0x01010400), "250": (Item_378, 0x01010200), "230": (Item_365, 0x01010180), "260": (Item_380, 0x01010140), "030": (Item_113, 0x01010120), "055": (Item_173, 0x01010110), "050": (Item_161, 0x01010108), "RE": (Item_1421, 0x01010104), "SP": (Item_1580, 0x01010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -31480,7 +31480,7 @@ class Item_300(Item):
 class Variation_1315(Compound):
     fspec_size = None
     items_list = [Item_61, Item_89, Item_132, Item_194, Item_226, Item_276, Item_291, Item_160, Item_267, Item_280, Item_210, Item_245, Item_174, Item_112, Item_300, None, None, None, None, Item_1580, None]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x800000), "020": ("Target Report Descriptor", Variation_1217, 0x400000), "040": ("Measured Position in Polar Co-ordinates", Variation_1047, 0x200000), "070": ("Mode-3/A Code in Octal Representation", Variation_1127, 0x100000), "090": ("Mode-C Code in Binary Representation", Variation_1121, 0x080000), "130": ("Radar Plot Characteristics", Variation_1273, 0x040000), "141": ("Truncated Time of Day", Variation_287, 0x020000), "050": ("Mode-2 Code in Octal Representation", Variation_1123, 0x018000), "120": ("Measured Radial Doppler Speed", Variation_201, 0x014000), "131": ("Received Power", Variation_193, 0x012000), "080": ("Mode-3/A Code Confidence Indicator", Variation_908, 0x011000), "100": ("Mode-C Code and Code Confidence Indicator", Variation_1118, 0x010800), "060": ("Mode-2 Code Confidence Indicator", Variation_908, 0x010400), "030": ("Warning/Error Conditions", Variation_1274, 0x010200), "150": ("Presence of X-Pulse", Variation_1171, 0x010180), "SP": ("Special Purpose Field", Variation_1281, 0x010104)}
+    items_dict = {"010": (Item_61, 0x800000), "020": (Item_89, 0x400000), "040": (Item_132, 0x200000), "070": (Item_194, 0x100000), "090": (Item_226, 0x080000), "130": (Item_276, 0x040000), "141": (Item_291, 0x020000), "050": (Item_160, 0x018000), "120": (Item_267, 0x014000), "131": (Item_280, 0x012000), "080": (Item_210, 0x011000), "100": (Item_245, 0x010800), "060": (Item_174, 0x010400), "030": (Item_112, 0x010200), "150": (Item_300, 0x010180), "SP": (Item_1580, 0x010104)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -31561,7 +31561,7 @@ class Item_357(Item):
 class Variation_1316(Compound):
     fspec_size = None
     items_list = [Item_61, Item_89, Item_315, Item_132, Item_150, Item_334, Item_194, Item_226, Item_291, Item_276, Item_280, Item_267, Item_326, Item_357, Item_160, Item_210, Item_245, Item_174, Item_112, Item_1580, None, Item_300]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "020": ("Target Report Descriptor", Variation_1217, 0x40000000), "161": ("Track Plot Number", Variation_234, 0x20000000), "040": ("Measured Position in Polar Co-ordinates", Variation_1047, 0x10000000), "042": ("Calculated Position in Cartesian Co-ordinates", Variation_1164, 0x08000000), "200": ("Calculated Track Velocity in Polar Co-ordinates", Variation_988, 0x04000000), "070": ("Mode-3/A Code in Octal Representation", Variation_1127, 0x02000000), "090": ("Mode-C Code in Binary Representation", Variation_1121, 0x01800000), "141": ("Truncated Time of Day", Variation_287, 0x01400000), "130": ("Radar Plot Characteristics", Variation_1273, 0x01200000), "131": ("Received Power", Variation_193, 0x01100000), "120": ("Measured Radial Doppler Speed", Variation_201, 0x01080000), "170": ("Track Status", Variation_1185, 0x01040000), "210": ("Track Quality", Variation_1273, 0x01020000), "050": ("Mode-2 Code in Octal Representation", Variation_1123, 0x01018000), "080": ("Mode-3/A Code Confidence Indicator", Variation_908, 0x01014000), "100": ("Mode-C Code and Code Confidence Indicator", Variation_1118, 0x01012000), "060": ("Mode-2 Code Confidence Indicator", Variation_908, 0x01011000), "030": ("Warning/Error Conditions", Variation_1274, 0x01010800), "SP": ("Special Purpose Field", Variation_1281, 0x01010400), "150": ("Presence of X-Pulse", Variation_1171, 0x01010180)}
+    items_dict = {"010": (Item_61, 0x80000000), "020": (Item_89, 0x40000000), "161": (Item_315, 0x20000000), "040": (Item_132, 0x10000000), "042": (Item_150, 0x08000000), "200": (Item_334, 0x04000000), "070": (Item_194, 0x02000000), "090": (Item_226, 0x01800000), "141": (Item_291, 0x01400000), "130": (Item_276, 0x01200000), "131": (Item_280, 0x01100000), "120": (Item_267, 0x01080000), "170": (Item_326, 0x01040000), "210": (Item_357, 0x01020000), "050": (Item_160, 0x01018000), "080": (Item_210, 0x01014000), "100": (Item_245, 0x01012000), "060": (Item_174, 0x01011000), "030": (Item_112, 0x01010800), "SP": (Item_1580, 0x01010400), "150": (Item_300, 0x01010180)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -31687,7 +31687,7 @@ class Item_526(Item):
 class Variation_1364(Compound):
     fspec_size = None
     items_list = [Item_1600, Item_1601, Item_1509, Item_1325, Item_1284, Item_1457, Item_526]
-    items_dict = {"SRL": ("SSR Plot Runlength", Variation_226, 0x80), "SRR": ("Number of Received Replies for (M)SSR", Variation_191, 0x40), "SAM": ("Amplitude of (M)SSR Reply", Variation_193, 0x20), "PRL": ("Primary Plot Runlength", Variation_226, 0x10), "PAM": ("Amplitude of Primary Plot", Variation_193, 0x08), "RPD": ("Difference in Range Between PSR and SSR Plot", Variation_200, 0x04), "APD": ("Difference in Azimuth Between PSR and SSR Plot", Variation_203, 0x02)}
+    items_dict = {"SRL": (Item_1600, 0x80), "SRR": (Item_1601, 0x40), "SAM": (Item_1509, 0x20), "PRL": (Item_1325, 0x10), "PAM": (Item_1284, 0x08), "RPD": (Item_1457, 0x04), "APD": (Item_526, 0x02)}
     @overload
     @classmethod
     def spec(cls, key : Literal["SRL"]) -> Variation_226: ...
@@ -31766,7 +31766,7 @@ class Item_1417(Item):
 class Variation_1337(Compound):
     fspec_size = None
     items_list = [Item_605, Item_1417]
-    items_dict = {"CAL": ("Calculated Doppler Speed", Variation_955, 0x80), "RDS": ("Raw Doppler Speed", Variation_1243, 0x40)}
+    items_dict = {"CAL": (Item_605, 0x80), "RDS": (Item_1417, 0x40)}
     @overload
     @classmethod
     def spec(cls, key : Literal["CAL"]) -> Variation_955: ...
@@ -31800,7 +31800,7 @@ class Item_185(Item):
 class Variation_1317(Compound):
     fspec_size = None
     items_list = [Item_61, Item_289, Item_90, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_375, Item_313, Item_151, Item_334, Item_325, Item_356, Item_115, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "140": ("Time of Day", Variation_311, 0x40000000), "020": ("Target Report Descriptor", Variation_1218, 0x20000000), "040": ("Measured Position in Polar Co-ordinates", Variation_1048, 0x10000000), "070": ("Mode-3/A Code in Octal Representation", Variation_1126, 0x08000000), "090": ("Flight Level in Binary Representation", Variation_1119, 0x04000000), "130": ("Radar Plot Characteristics", Variation_1364, 0x02000000), "220": ("Aircraft Address", Variation_296, 0x01800000), "240": ("Aircraft Identification", Variation_326, 0x01400000), "250": ("BDS Register Data", Variation_1247, 0x01200000), "161": ("Track Number", Variation_911, 0x01100000), "042": ("Calculated Position in Cartesian Co-ordinates", Variation_1165, 0x01080000), "200": ("Calculated Track Velocity in Polar Co-ordinates", Variation_988, 0x01040000), "170": ("Track Status", Variation_1184, 0x01020000), "210": ("Track Quality", Variation_1079, 0x01018000), "030": ("Warning/Error Conditions and Target Classification", Variation_1276, 0x01014000), "080": ("Mode-3/A Code Confidence Indicator", Variation_908, 0x01012000), "100": ("Mode-C Code and Code Confidence Indicator", Variation_1118, 0x01011000), "110": ("Height Measured by a 3D Radar", Variation_880, 0x01010800), "120": ("Radial Doppler Speed", Variation_1337, 0x01010400), "230": ("Communications/ACAS Capability and Flight Status", Variation_948, 0x01010200), "260": ("ACAS Resolution Advisory Report", Variation_327, 0x01010180), "055": ("Mode-1 Code in Octal Representation", Variation_1122, 0x01010140), "050": ("Mode-2 Code in Octal Representation", Variation_1123, 0x01010120), "065": ("Mode-1 Code Confidence Indicator", Variation_891, 0x01010110), "060": ("Mode-2 Code Confidence Indicator", Variation_908, 0x01010108), "SP": ("Special Purpose Field", Variation_1281, 0x01010104), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010102)}
+    items_dict = {"010": (Item_61, 0x80000000), "140": (Item_289, 0x40000000), "020": (Item_90, 0x20000000), "040": (Item_133, 0x10000000), "070": (Item_193, 0x08000000), "090": (Item_223, 0x04000000), "130": (Item_277, 0x02000000), "220": (Item_359, 0x01800000), "240": (Item_368, 0x01400000), "250": (Item_375, 0x01200000), "161": (Item_313, 0x01100000), "042": (Item_151, 0x01080000), "200": (Item_334, 0x01040000), "170": (Item_325, 0x01020000), "210": (Item_356, 0x01018000), "030": (Item_115, 0x01014000), "080": (Item_210, 0x01012000), "100": (Item_245, 0x01011000), "110": (Item_257, 0x01010800), "120": (Item_268, 0x01010400), "230": (Item_364, 0x01010200), "260": (Item_380, 0x01010180), "055": (Item_172, 0x01010140), "050": (Item_160, 0x01010120), "065": (Item_185, 0x01010110), "060": (Item_174, 0x01010108), "SP": (Item_1580, 0x01010104), "RE": (Item_1421, 0x01010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -31902,7 +31902,7 @@ class Item_114(Item):
 class Variation_1318(Compound):
     fspec_size = None
     items_list = [Item_61, Item_289, Item_90, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_379, Item_313, Item_151, Item_334, Item_325, Item_356, Item_114, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "140": ("Time of Day", Variation_311, 0x40000000), "020": ("Target Report Descriptor", Variation_1218, 0x20000000), "040": ("Measured Position in Polar Co-ordinates", Variation_1048, 0x10000000), "070": ("Mode-3/A Code in Octal Representation", Variation_1126, 0x08000000), "090": ("Flight Level in Binary Representation", Variation_1119, 0x04000000), "130": ("Radar Plot Characteristics", Variation_1364, 0x02000000), "220": ("Aircraft Address", Variation_296, 0x01800000), "240": ("Aircraft Identification", Variation_326, 0x01400000), "250": ("Mode S MB Data", Variation_1247, 0x01200000), "161": ("Track Number", Variation_911, 0x01100000), "042": ("Calculated Position in Cartesian Co-ordinates", Variation_1165, 0x01080000), "200": ("Calculated Track Velocity in Polar Co-ordinates", Variation_988, 0x01040000), "170": ("Track Status", Variation_1184, 0x01020000), "210": ("Track Quality", Variation_1079, 0x01018000), "030": ("Warning/Error Conditions and Target Classification", Variation_1275, 0x01014000), "080": ("Mode-3/A Code Confidence Indicator", Variation_908, 0x01012000), "100": ("Mode-C Code and Code Confidence Indicator", Variation_1118, 0x01011000), "110": ("Height Measured by a 3D Radar", Variation_880, 0x01010800), "120": ("Radial Doppler Speed", Variation_1337, 0x01010400), "230": ("Communications/ACAS Capability and Flight Status", Variation_948, 0x01010200), "260": ("ACAS Resolution Advisory Report", Variation_327, 0x01010180), "055": ("Mode-1 Code in Octal Representation", Variation_1122, 0x01010140), "050": ("Mode-2 Code in Octal Representation", Variation_1123, 0x01010120), "065": ("Mode-1 Code Confidence Indicator", Variation_891, 0x01010110), "060": ("Mode-2 Code Confidence Indicator", Variation_908, 0x01010108), "SP": ("Special Purpose Field", Variation_1281, 0x01010104), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010102)}
+    items_dict = {"010": (Item_61, 0x80000000), "140": (Item_289, 0x40000000), "020": (Item_90, 0x20000000), "040": (Item_133, 0x10000000), "070": (Item_193, 0x08000000), "090": (Item_223, 0x04000000), "130": (Item_277, 0x02000000), "220": (Item_359, 0x01800000), "240": (Item_368, 0x01400000), "250": (Item_379, 0x01200000), "161": (Item_313, 0x01100000), "042": (Item_151, 0x01080000), "200": (Item_334, 0x01040000), "170": (Item_325, 0x01020000), "210": (Item_356, 0x01018000), "030": (Item_114, 0x01014000), "080": (Item_210, 0x01012000), "100": (Item_245, 0x01011000), "110": (Item_257, 0x01010800), "120": (Item_268, 0x01010400), "230": (Item_364, 0x01010200), "260": (Item_380, 0x01010180), "055": (Item_172, 0x01010140), "050": (Item_160, 0x01010120), "065": (Item_185, 0x01010110), "060": (Item_174, 0x01010108), "SP": (Item_1580, 0x01010104), "RE": (Item_1421, 0x01010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -31994,7 +31994,7 @@ class Variation_1318(Compound):
 class Variation_1319(Compound):
     fspec_size = None
     items_list = [Item_61, Item_289, Item_90, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_379, Item_313, Item_151, Item_334, Item_325, Item_356, Item_115, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "140": ("Time of Day", Variation_311, 0x40000000), "020": ("Target Report Descriptor", Variation_1218, 0x20000000), "040": ("Measured Position in Polar Co-ordinates", Variation_1048, 0x10000000), "070": ("Mode-3/A Code in Octal Representation", Variation_1126, 0x08000000), "090": ("Flight Level in Binary Representation", Variation_1119, 0x04000000), "130": ("Radar Plot Characteristics", Variation_1364, 0x02000000), "220": ("Aircraft Address", Variation_296, 0x01800000), "240": ("Aircraft Identification", Variation_326, 0x01400000), "250": ("Mode S MB Data", Variation_1247, 0x01200000), "161": ("Track Number", Variation_911, 0x01100000), "042": ("Calculated Position in Cartesian Co-ordinates", Variation_1165, 0x01080000), "200": ("Calculated Track Velocity in Polar Co-ordinates", Variation_988, 0x01040000), "170": ("Track Status", Variation_1184, 0x01020000), "210": ("Track Quality", Variation_1079, 0x01018000), "030": ("Warning/Error Conditions and Target Classification", Variation_1276, 0x01014000), "080": ("Mode-3/A Code Confidence Indicator", Variation_908, 0x01012000), "100": ("Mode-C Code and Code Confidence Indicator", Variation_1118, 0x01011000), "110": ("Height Measured by a 3D Radar", Variation_880, 0x01010800), "120": ("Radial Doppler Speed", Variation_1337, 0x01010400), "230": ("Communications/ACAS Capability and Flight Status", Variation_948, 0x01010200), "260": ("ACAS Resolution Advisory Report", Variation_327, 0x01010180), "055": ("Mode-1 Code in Octal Representation", Variation_1122, 0x01010140), "050": ("Mode-2 Code in Octal Representation", Variation_1123, 0x01010120), "065": ("Mode-1 Code Confidence Indicator", Variation_891, 0x01010110), "060": ("Mode-2 Code Confidence Indicator", Variation_908, 0x01010108), "SP": ("Special Purpose Field", Variation_1281, 0x01010104), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010102)}
+    items_dict = {"010": (Item_61, 0x80000000), "140": (Item_289, 0x40000000), "020": (Item_90, 0x20000000), "040": (Item_133, 0x10000000), "070": (Item_193, 0x08000000), "090": (Item_223, 0x04000000), "130": (Item_277, 0x02000000), "220": (Item_359, 0x01800000), "240": (Item_368, 0x01400000), "250": (Item_379, 0x01200000), "161": (Item_313, 0x01100000), "042": (Item_151, 0x01080000), "200": (Item_334, 0x01040000), "170": (Item_325, 0x01020000), "210": (Item_356, 0x01018000), "030": (Item_115, 0x01014000), "080": (Item_210, 0x01012000), "100": (Item_245, 0x01011000), "110": (Item_257, 0x01010800), "120": (Item_268, 0x01010400), "230": (Item_364, 0x01010200), "260": (Item_380, 0x01010180), "055": (Item_172, 0x01010140), "050": (Item_160, 0x01010120), "065": (Item_185, 0x01010110), "060": (Item_174, 0x01010108), "SP": (Item_1580, 0x01010104), "RE": (Item_1421, 0x01010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -32096,7 +32096,7 @@ class Item_116(Item):
 class Variation_1320(Compound):
     fspec_size = None
     items_list = [Item_61, Item_289, Item_91, Item_133, Item_193, Item_223, Item_277, Item_359, Item_368, Item_375, Item_313, Item_151, Item_334, Item_325, Item_356, Item_116, Item_210, Item_245, Item_257, Item_268, Item_364, Item_380, Item_172, Item_160, Item_185, Item_174, Item_1580, Item_1421]
-    items_dict = {"010": ("Data Source Identifier", Variation_1061, 0x80000000), "140": ("Time of Day", Variation_311, 0x40000000), "020": ("Target Report Descriptor", Variation_1219, 0x20000000), "040": ("Measured Position in Polar Co-ordinates", Variation_1048, 0x10000000), "070": ("Mode-3/A Code in Octal Representation", Variation_1126, 0x08000000), "090": ("Flight Level in Binary Representation", Variation_1119, 0x04000000), "130": ("Radar Plot Characteristics", Variation_1364, 0x02000000), "220": ("Aircraft Address", Variation_296, 0x01800000), "240": ("Aircraft Identification", Variation_326, 0x01400000), "250": ("BDS Register Data", Variation_1247, 0x01200000), "161": ("Track Number", Variation_911, 0x01100000), "042": ("Calculated Position in Cartesian Co-ordinates", Variation_1165, 0x01080000), "200": ("Calculated Track Velocity in Polar Co-ordinates", Variation_988, 0x01040000), "170": ("Track Status", Variation_1184, 0x01020000), "210": ("Track Quality", Variation_1079, 0x01018000), "030": ("Warning/Error Conditions and Target Classification", Variation_1277, 0x01014000), "080": ("Mode-3/A Code Confidence Indicator", Variation_908, 0x01012000), "100": ("Mode-C Code and Code Confidence Indicator", Variation_1118, 0x01011000), "110": ("Height Measured by a 3D Radar", Variation_880, 0x01010800), "120": ("Radial Doppler Speed", Variation_1337, 0x01010400), "230": ("Communications/ACAS Capability and Flight Status", Variation_948, 0x01010200), "260": ("ACAS Resolution Advisory Report", Variation_327, 0x01010180), "055": ("Mode-1 Code in Octal Representation", Variation_1122, 0x01010140), "050": ("Mode-2 Code in Octal Representation", Variation_1123, 0x01010120), "065": ("Mode-1 Code Confidence Indicator", Variation_891, 0x01010110), "060": ("Mode-2 Code Confidence Indicator", Variation_908, 0x01010108), "SP": ("Special Purpose Field", Variation_1281, 0x01010104), "RE": ("Reserved Expansion Field", Variation_1280, 0x01010102)}
+    items_dict = {"010": (Item_61, 0x80000000), "140": (Item_289, 0x40000000), "020": (Item_91, 0x20000000), "040": (Item_133, 0x10000000), "070": (Item_193, 0x08000000), "090": (Item_223, 0x04000000), "130": (Item_277, 0x02000000), "220": (Item_359, 0x01800000), "240": (Item_368, 0x01400000), "250": (Item_375, 0x01200000), "161": (Item_313, 0x01100000), "042": (Item_151, 0x01080000), "200": (Item_334, 0x01040000), "170": (Item_325, 0x01020000), "210": (Item_356, 0x01018000), "030": (Item_116, 0x01014000), "080": (Item_210, 0x01012000), "100": (Item_245, 0x01011000), "110": (Item_257, 0x01010800), "120": (Item_268, 0x01010400), "230": (Item_364, 0x01010200), "260": (Item_380, 0x01010180), "055": (Item_172, 0x01010140), "050": (Item_160, 0x01010120), "065": (Item_185, 0x01010110), "060": (Item_174, 0x01010108), "SP": (Item_1580, 0x01010104), "RE": (Item_1421, 0x01010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -32263,7 +32263,7 @@ class Item_560(Item):
 class Variation_1352(Compound):
     fspec_size = None
     items_list = [Item_1098, Item_487, None, Item_689, None, None, None, Item_482, Item_812, None, Item_560]
-    items_dict = {"MB": ("BDS", Variation_1230, 0x8000), "ADR": ("24 Bits Aircraft Address", Variation_296, 0x4000), "COMACAS": ("Communications/ACAS Capability and Flight Status", Variation_952, 0x1000), "ACT": ("Aircraft Derived Aircraft Type", Variation_314, 0x0180), "ECAT": ("Emitter Category", Variation_171, 0x0140), "AVTECH": ("Available Technologies", Variation_1139, 0x0110)}
+    items_dict = {"MB": (Item_1098, 0x8000), "ADR": (Item_487, 0x4000), "COMACAS": (Item_689, 0x1000), "ACT": (Item_482, 0x0180), "ECAT": (Item_812, 0x0140), "AVTECH": (Item_560, 0x0110)}
     @overload
     @classmethod
     def spec(cls, key : Literal["MB"]) -> Variation_1230: ...
@@ -32364,7 +32364,7 @@ class Item_1202(Item):
 class Variation_1357(Compound):
     fspec_size = None
     items_list = [Item_1330, Item_1607, Item_1119, Item_1141, Item_1125, Item_493, Item_483, Item_1108, Item_1110, Item_1063, Item_1756, Item_1202]
-    items_dict = {"PSR": ("Age of The Last Primary Detection Used to Update the Track", Variation_217, 0x8000), "SSR": ("Age of the Last Secondary Detection Used to Update the Track", Variation_217, 0x4000), "MDA": ("Age of the Last Mode A Detection Used to Update the Track", Variation_217, 0x2000), "MFL": ("Age of the Last Mode C Detection Used to Update the Track", Variation_217, 0x1000), "MDS": ("Age of the Last Mode S Detection Used to Update the Track", Variation_217, 0x0800), "ADS": ("Age of the Last ADS Report Used to Update the Track", Variation_282, 0x0400), "ADB": ("Age of the Last ADS-B Report Used to Update the Track", Variation_217, 0x0200), "MD1": ("Age of the Last Valid Mode 1 Used to Update the Track", Variation_217, 0x0180), "MD2": ("Age of the Last Mode 2 Used to Update the Track", Variation_217, 0x0140), "LOP": ("Age of the Last Magentic Loop Detection", Variation_217, 0x0120), "TRK": ("Actual Track Age Since First Occurrence", Variation_217, 0x0110), "MUL": ("Age of the Last Multilateration Detection", Variation_217, 0x0108)}
+    items_dict = {"PSR": (Item_1330, 0x8000), "SSR": (Item_1607, 0x4000), "MDA": (Item_1119, 0x2000), "MFL": (Item_1141, 0x1000), "MDS": (Item_1125, 0x0800), "ADS": (Item_493, 0x0400), "ADB": (Item_483, 0x0200), "MD1": (Item_1108, 0x0180), "MD2": (Item_1110, 0x0140), "LOP": (Item_1063, 0x0120), "TRK": (Item_1756, 0x0110), "MUL": (Item_1202, 0x0108)}
     @overload
     @classmethod
     def spec(cls, key : Literal["PSR"]) -> Variation_217: ...
@@ -32498,7 +32498,7 @@ class Item_1647(Item):
 class Variation_1346(Compound):
     fspec_size = None
     items_list = [Item_873, Item_732, Item_994, Item_861, Item_1724, Item_1887, Item_484, Item_485, Item_1491, Item_628, Item_614, Item_1725, Item_545, Item_1647]
-    items_dict = {"FPPSID": ("FPPS Identification Tag", Variation_1064, 0x8000), "CSN": ("Callsign", Variation_328, 0x4000), "IFPSFLIGHTID": ("IFPS_FLIGHT_ID", Variation_1102, 0x2000), "FLIGHTCAT": ("Flight Category", Variation_986, 0x1000), "TOA": ("Type of Aircraft", Variation_314, 0x0800), "WTC": ("Wake Turbulence Category", Variation_189, 0x0400), "ADEP": ("Departure Airport", Variation_314, 0x0200), "ADES": ("Destination Airport", Variation_314, 0x0180), "RWY": ("Runway Designation", Variation_297, 0x0140), "CFL": ("Current Cleared Flight Level", Variation_280, 0x0120), "CCP": ("Current Control Position", Variation_942, 0x0110), "TOD": ("Time of Departure", Variation_1262, 0x0108), "AST": ("Aircraft Stand", Variation_325, 0x0104), "STS": ("Stand Status", Variation_961, 0x0102)}
+    items_dict = {"FPPSID": (Item_873, 0x8000), "CSN": (Item_732, 0x4000), "IFPSFLIGHTID": (Item_994, 0x2000), "FLIGHTCAT": (Item_861, 0x1000), "TOA": (Item_1724, 0x0800), "WTC": (Item_1887, 0x0400), "ADEP": (Item_484, 0x0200), "ADES": (Item_485, 0x0180), "RWY": (Item_1491, 0x0140), "CFL": (Item_628, 0x0120), "CCP": (Item_614, 0x0110), "TOD": (Item_1725, 0x0108), "AST": (Item_545, 0x0104), "STS": (Item_1647, 0x0102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["FPPSID"]) -> Variation_1064: ...
@@ -32593,7 +32593,7 @@ class Item_469(Item):
 class Variation_1335(Compound):
     fspec_size = None
     items_list = [Item_525, Item_530, Item_547, Item_554, Item_538, Item_469]
-    items_dict = {"APC": ("Estimated Accuracy Of Track Position (Cartesian)", Variation_1156, 0x80), "APW": ("Estimated Accuracy Of Track Position (WGS84)", Variation_997, 0x40), "ATH": ("Estimated Accuracy Of Track Height", Variation_242, 0x20), "AVC": ("Estimated Accuracy Of Track Velocity (Cartesian)", Variation_1157, 0x10), "ARC": ("Estimated Accuracy Of Rate Of Climb / Descent", Variation_243, 0x08), "AAC": ("Estimated Accuracy Of Acceleration (Cartesian)", Variation_1155, 0x04)}
+    items_dict = {"APC": (Item_525, 0x80), "APW": (Item_530, 0x40), "ATH": (Item_547, 0x20), "AVC": (Item_554, 0x10), "ARC": (Item_538, 0x08), "AAC": (Item_469, 0x04)}
     @overload
     @classmethod
     def spec(cls, key : Literal["APC"]) -> Variation_1156: ...
@@ -32639,7 +32639,7 @@ class Item_457(Item):
 class Variation_1321(Compound):
     fspec_size = None
     items_list = [Item_62, Item_45, Item_72, Item_290, Item_147, Item_149, Item_347, Item_349, Item_175, Item_372, Item_408, Item_311, Item_327, Item_387, Item_424, Item_225, Item_237, Item_234, Item_358, Item_383, Item_411, Item_395, Item_399, Item_434, Item_445, Item_453, Item_457, Item_1580, Item_1421]
-    items_dict = {"010": ("Data Source Identifier", Variation_1065, 0x8000000000), "000": ("Message Type", Variation_186, 0x4000000000), "015": ("Service Identification", Variation_155, 0x2000000000), "140": ("Time of Track Information", Variation_311, 0x1000000000), "041": ("Position in WGS-84 Coordinates", Variation_1007, 0x0800000000), "042": ("Calculated Position in Cartesian Co-ordinates", Variation_1163, 0x0400000000), "202": ("Calculated Track Velocity in Cartesian Coordinates", Variation_1142, 0x0200000000), "210": ("Calculated Acceleration", Variation_931, 0x0180000000), "060": ("Mode-3/A Code in Octal Representation", Variation_900, 0x0140000000), "245": ("Target Identification", Variation_1085, 0x0120000000), "380": ("Mode-S / ADS-B Related Data", Variation_1352, 0x0110000000), "161": ("Track Number", Variation_873, 0x0108000000), "170": ("Track Status", Variation_1196, 0x0104000000), "290": ("System Track Update Ages", Variation_1357, 0x0102000000), "430": ("Phase of Flight", Variation_168, 0x0101800000), "090": ("Measured Flight Level", Variation_248, 0x0101400000), "093": ("Calculated Track Barometric Altitude", Variation_1038, 0x0101200000), "092": ("Calculated Track Geometric Altitude", Variation_257, 0x0101100000), "215": ("Calculated Rate Of Climb/Descent", Variation_258, 0x0101080000), "270": ("Target Size and Orientation", Variation_1192, 0x0101040000), "390": ("Flight Plan Related Data", Variation_1346, 0x0101020000), "300": ("Vehicle Fleet Identification", Variation_157, 0x0101018000), "310": ("Pre-programmed Message", Variation_1097, 0x0101014000), "500": ("Estimated Accuracies", Variation_1335, 0x0101012000), "600": ("Alert Messages", Variation_923, 0x0101011000), "605": ("Tracks in Alert", Variation_1233, 0x0101010800), "610": ("Holdbar Status", Variation_1238, 0x0101010400), "SP": ("Special Purpose Field", Variation_1281, 0x0101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010180)}
+    items_dict = {"010": (Item_62, 0x8000000000), "000": (Item_45, 0x4000000000), "015": (Item_72, 0x2000000000), "140": (Item_290, 0x1000000000), "041": (Item_147, 0x0800000000), "042": (Item_149, 0x0400000000), "202": (Item_347, 0x0200000000), "210": (Item_349, 0x0180000000), "060": (Item_175, 0x0140000000), "245": (Item_372, 0x0120000000), "380": (Item_408, 0x0110000000), "161": (Item_311, 0x0108000000), "170": (Item_327, 0x0104000000), "290": (Item_387, 0x0102000000), "430": (Item_424, 0x0101800000), "090": (Item_225, 0x0101400000), "093": (Item_237, 0x0101200000), "092": (Item_234, 0x0101100000), "215": (Item_358, 0x0101080000), "270": (Item_383, 0x0101040000), "390": (Item_411, 0x0101020000), "300": (Item_395, 0x0101018000), "310": (Item_399, 0x0101014000), "500": (Item_434, 0x0101012000), "600": (Item_445, 0x0101011000), "605": (Item_453, 0x0101010800), "610": (Item_457, 0x0101010400), "SP": (Item_1580, 0x0101010200), "RE": (Item_1421, 0x0101010180)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1065: ...
@@ -32739,7 +32739,7 @@ class Item_690(Item):
 class Variation_1353(Compound):
     fspec_size = None
     items_list = [Item_1098, Item_487, None, Item_690, None, None, None, Item_482, Item_812, None, Item_560]
-    items_dict = {"MB": ("BDS", Variation_1230, 0x8000), "ADR": ("24 Bits Aircraft Address", Variation_296, 0x4000), "COMACAS": ("Communications/ACAS Capability and Flight Status", Variation_953, 0x1000), "ACT": ("Aircraft Derived Aircraft Type", Variation_314, 0x0180), "ECAT": ("Emitter Category", Variation_171, 0x0140), "AVTECH": ("Available Technologies", Variation_1139, 0x0110)}
+    items_dict = {"MB": (Item_1098, 0x8000), "ADR": (Item_487, 0x4000), "COMACAS": (Item_690, 0x1000), "ACT": (Item_482, 0x0180), "ECAT": (Item_812, 0x0140), "AVTECH": (Item_560, 0x0110)}
     @overload
     @classmethod
     def spec(cls, key : Literal["MB"]) -> Variation_1230: ...
@@ -32805,7 +32805,7 @@ class Item_1111(Item):
 class Variation_1358(Compound):
     fspec_size = None
     items_list = [Item_1331, Item_1608, Item_1120, Item_1142, Item_1126, Item_493, Item_483, Item_1108, Item_1111, Item_1063, Item_1756, Item_1202]
-    items_dict = {"PSR": ("Age of the Last Primary Report Used to Update the Track", Variation_217, 0x8000), "SSR": ("Age of the Last Secondary Report Used to Update the Track", Variation_217, 0x4000), "MDA": ("Age of the Last Valid Mode A Report Used to Update the Track", Variation_217, 0x2000), "MFL": ("Age of the Last Valid and Credible Mode C Used to Update the Track", Variation_217, 0x1000), "MDS": ("Age of the Last Mode S Report Used to Update the Track", Variation_217, 0x0800), "ADS": ("Age of the Last ADS Report Used to Update the Track", Variation_282, 0x0400), "ADB": ("Age of the Last ADS-B Report Used to Update the Track", Variation_217, 0x0200), "MD1": ("Age of the Last Valid Mode 1 Used to Update the Track", Variation_217, 0x0180), "MD2": ("Age of the Last Valid Mode 2 Used to Update the Track", Variation_217, 0x0140), "LOP": ("Age of the Last Magentic Loop Detection", Variation_217, 0x0120), "TRK": ("Actual Track Age Since First Occurrence", Variation_217, 0x0110), "MUL": ("Age of the Last Multilateration Detection", Variation_217, 0x0108)}
+    items_dict = {"PSR": (Item_1331, 0x8000), "SSR": (Item_1608, 0x4000), "MDA": (Item_1120, 0x2000), "MFL": (Item_1142, 0x1000), "MDS": (Item_1126, 0x0800), "ADS": (Item_493, 0x0400), "ADB": (Item_483, 0x0200), "MD1": (Item_1108, 0x0180), "MD2": (Item_1111, 0x0140), "LOP": (Item_1063, 0x0120), "TRK": (Item_1756, 0x0110), "MUL": (Item_1202, 0x0108)}
     @overload
     @classmethod
     def spec(cls, key : Literal["PSR"]) -> Variation_217: ...
@@ -32864,7 +32864,7 @@ class Item_860(Item):
 class Variation_1345(Compound):
     fspec_size = None
     items_list = [Item_873, Item_732, Item_994, Item_860, Item_1724, Item_1887, Item_484, Item_485, Item_1491, Item_628, Item_614, Item_1725, Item_545, Item_1647]
-    items_dict = {"FPPSID": ("FPPS Identification Tag", Variation_1064, 0x8000), "CSN": ("Callsign", Variation_328, 0x4000), "IFPSFLIGHTID": ("IFPS_FLIGHT_ID", Variation_1102, 0x2000), "FLIGHTCAT": ("Flight Category", Variation_985, 0x1000), "TOA": ("Type of Aircraft", Variation_314, 0x0800), "WTC": ("Wake Turbulence Category", Variation_189, 0x0400), "ADEP": ("Departure Airport", Variation_314, 0x0200), "ADES": ("Destination Airport", Variation_314, 0x0180), "RWY": ("Runway Designation", Variation_297, 0x0140), "CFL": ("Current Cleared Flight Level", Variation_280, 0x0120), "CCP": ("Current Control Position", Variation_942, 0x0110), "TOD": ("Time of Departure", Variation_1262, 0x0108), "AST": ("Aircraft Stand", Variation_325, 0x0104), "STS": ("Stand Status", Variation_961, 0x0102)}
+    items_dict = {"FPPSID": (Item_873, 0x8000), "CSN": (Item_732, 0x4000), "IFPSFLIGHTID": (Item_994, 0x2000), "FLIGHTCAT": (Item_860, 0x1000), "TOA": (Item_1724, 0x0800), "WTC": (Item_1887, 0x0400), "ADEP": (Item_484, 0x0200), "ADES": (Item_485, 0x0180), "RWY": (Item_1491, 0x0140), "CFL": (Item_628, 0x0120), "CCP": (Item_614, 0x0110), "TOD": (Item_1725, 0x0108), "AST": (Item_545, 0x0104), "STS": (Item_1647, 0x0102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["FPPSID"]) -> Variation_1064: ...
@@ -32919,7 +32919,7 @@ class Item_410(Item):
 class Variation_1322(Compound):
     fspec_size = None
     items_list = [Item_62, Item_45, Item_72, Item_290, Item_147, Item_149, Item_347, Item_349, Item_175, Item_372, Item_409, Item_311, Item_328, Item_388, Item_424, Item_225, Item_236, Item_234, Item_358, Item_383, Item_410, Item_395, Item_399, Item_434, Item_445, Item_453, Item_457, Item_1580, Item_1421]
-    items_dict = {"010": ("Data Source Identifier", Variation_1065, 0x8000000000), "000": ("Message Type", Variation_186, 0x4000000000), "015": ("Service Identification", Variation_155, 0x2000000000), "140": ("Time of Track Information", Variation_311, 0x1000000000), "041": ("Position in WGS-84 Coordinates", Variation_1007, 0x0800000000), "042": ("Calculated Position in Cartesian Co-ordinates", Variation_1163, 0x0400000000), "202": ("Calculated Track Velocity in Cartesian Coordinates", Variation_1142, 0x0200000000), "210": ("Calculated Acceleration", Variation_931, 0x0180000000), "060": ("Mode-3/A Code in Octal Representation", Variation_900, 0x0140000000), "245": ("Target Identification", Variation_1085, 0x0120000000), "380": ("Mode-S / ADS-B Related Data", Variation_1353, 0x0110000000), "161": ("Track Number", Variation_873, 0x0108000000), "170": ("Track Status", Variation_1197, 0x0104000000), "290": ("System Track Update Ages", Variation_1358, 0x0102000000), "430": ("Phase of Flight", Variation_168, 0x0101800000), "090": ("Measured Flight Level", Variation_248, 0x0101400000), "093": ("Calculated Track Barometric Altitude", Variation_1037, 0x0101200000), "092": ("Calculated Track Geometric Altitude", Variation_257, 0x0101100000), "215": ("Calculated Rate Of Climb/Descent", Variation_258, 0x0101080000), "270": ("Target Size and Orientation", Variation_1192, 0x0101040000), "390": ("Flight Plan Related Data", Variation_1345, 0x0101020000), "300": ("Vehicle Fleet Identification", Variation_157, 0x0101018000), "310": ("Pre-programmed Message", Variation_1097, 0x0101014000), "500": ("Estimated Accuracies", Variation_1335, 0x0101012000), "600": ("Alert Messages", Variation_923, 0x0101011000), "605": ("Tracks in Alert", Variation_1233, 0x0101010800), "610": ("Holdbar Status", Variation_1238, 0x0101010400), "SP": ("Special Purpose Field", Variation_1281, 0x0101010200), "RE": ("Reserved Expansion Field", Variation_1280, 0x0101010180)}
+    items_dict = {"010": (Item_62, 0x8000000000), "000": (Item_45, 0x4000000000), "015": (Item_72, 0x2000000000), "140": (Item_290, 0x1000000000), "041": (Item_147, 0x0800000000), "042": (Item_149, 0x0400000000), "202": (Item_347, 0x0200000000), "210": (Item_349, 0x0180000000), "060": (Item_175, 0x0140000000), "245": (Item_372, 0x0120000000), "380": (Item_409, 0x0110000000), "161": (Item_311, 0x0108000000), "170": (Item_328, 0x0104000000), "290": (Item_388, 0x0102000000), "430": (Item_424, 0x0101800000), "090": (Item_225, 0x0101400000), "093": (Item_236, 0x0101200000), "092": (Item_234, 0x0101100000), "215": (Item_358, 0x0101080000), "270": (Item_383, 0x0101040000), "390": (Item_410, 0x0101020000), "300": (Item_395, 0x0101018000), "310": (Item_399, 0x0101014000), "500": (Item_434, 0x0101012000), "600": (Item_445, 0x0101011000), "605": (Item_453, 0x0101010800), "610": (Item_457, 0x0101010400), "SP": (Item_1580, 0x0101010200), "RE": (Item_1421, 0x0101010180)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1065: ...
@@ -33129,7 +33129,7 @@ class Item_1619(Item):
 class Variation_1350(Compound):
     fspec_size = None
     items_list = [Item_992, Item_1485, Item_1418, Item_1726, Item_545, Item_1646, Item_1562, Item_1619]
-    items_dict = {"IFI": ("IFPS FLIGHT ID", Variation_1098, 0x8000), "RVP": ("RVSM & Flight Priority", Variation_916, 0x4000), "RDS": ("Runway Designation", Variation_1026, 0x2000), "TOD": ("Time of Departure / Arrival", Variation_1260, 0x1000), "AST": ("Aircraft Stand", Variation_325, 0x0800), "STS": ("Stand Status", Variation_960, 0x0400), "SID": ("Standard Instrument Departure", Variation_328, 0x0200), "STAR": ("Standard Instrument Arrival", Variation_328, 0x0180)}
+    items_dict = {"IFI": (Item_992, 0x8000), "RVP": (Item_1485, 0x4000), "RDS": (Item_1418, 0x2000), "TOD": (Item_1726, 0x1000), "AST": (Item_545, 0x0800), "STS": (Item_1646, 0x0400), "SID": (Item_1562, 0x0200), "STAR": (Item_1619, 0x0180)}
     @overload
     @classmethod
     def spec(cls, key : Literal["IFI"]) -> Variation_1098: ...
@@ -33166,7 +33166,7 @@ class Item_437(Item):
 class Variation_1323(Compound):
     fspec_size = None
     items_list = [Item_63, Item_74, Item_78, Item_125, Item_93, Item_142, Item_158, Item_183, Item_414, Item_420, Item_422, Item_427, Item_428, Item_431, Item_432, Item_425, Item_426, Item_429, Item_437, None, Item_1421]
-    items_dict = {"010": ("Server Identification Tag", Variation_1061, 0x800000), "015": ("User Number", Variation_235, 0x400000), "018": ("Data Source Identification Tag", Variation_1061, 0x200000), "035": ("Type of Message", Variation_979, 0x100000), "020": ("Time of ASTERIX Report Generation", Variation_311, 0x080000), "040": ("Track Number", Variation_235, 0x040000), "050": ("Composed Track Number", Variation_1215, 0x020000), "060": ("Track Mode 3/A", Variation_902, 0x018000), "400": ("Callsign", Variation_328, 0x014000), "410": ("Plan Number", Variation_235, 0x012000), "420": ("Flight Category", Variation_984, 0x011000), "440": ("Departure Aerodrome", Variation_314, 0x010800), "450": ("Destination Aerodrome", Variation_314, 0x010400), "480": ("Current Cleared Flight Level", Variation_280, 0x010200), "490": ("Current Control Position", Variation_941, 0x010180), "430": ("Type of Aircraft", Variation_314, 0x010140), "435": ("Wake Turbulence Category", Variation_189, 0x010120), "460": ("Allocated SSR Codes", Variation_1234, 0x010110), "500": ("Supplementary Flight Data", Variation_1350, 0x010108), "RE": ("Reserved Expansion Field", Variation_1280, 0x010102)}
+    items_dict = {"010": (Item_63, 0x800000), "015": (Item_74, 0x400000), "018": (Item_78, 0x200000), "035": (Item_125, 0x100000), "020": (Item_93, 0x080000), "040": (Item_142, 0x040000), "050": (Item_158, 0x020000), "060": (Item_183, 0x018000), "400": (Item_414, 0x014000), "410": (Item_420, 0x012000), "420": (Item_422, 0x011000), "440": (Item_427, 0x010800), "450": (Item_428, 0x010400), "480": (Item_431, 0x010200), "490": (Item_432, 0x010180), "430": (Item_425, 0x010140), "435": (Item_426, 0x010120), "460": (Item_429, 0x010110), "500": (Item_437, 0x010108), "RE": (Item_1421, 0x010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_1061: ...
@@ -33409,7 +33409,7 @@ class Item_68(Item):
 class Variation_1324(Compound):
     fspec_size = None
     items_list = [Item_126, Item_128, Item_32, Item_51, Item_54, Item_75, Item_77, Item_79, Item_80, Item_103, Item_105, Item_101, Item_102, Item_104, Item_52, Item_55, Item_56, Item_57, Item_59, Item_64, Item_65, Item_69, Item_70, Item_82, Item_98, Item_99, Item_100, Item_53, Item_117, Item_118, Item_120, Item_121, Item_123, Item_66, Item_68]
-    items_dict = {"036": ("Data Source Identifier", Variation_1061, 0x8000000000), "037": ("Data Destination Identifier", Variation_1061, 0x4000000000), "000": ("Message Type", Variation_156, 0x2000000000), "001": ("Result", Variation_939, 0x1000000000), "005": ("Mode S Address", Variation_296, 0x0800000000), "016": ("Packet Number", Variation_315, 0x0400000000), "017": ("Packet Number List", Variation_1228, 0x0200000000), "018": ("Mode S Packet Properties", Variation_874, 0x0180000000), "019": ("Mode S Packet", Variation_1279, 0x0140000000), "028": ("GICB Extraction Periodicity", Variation_268, 0x0120000000), "030": ("GICB Properties", Variation_1034, 0x0110000000), "025": ("GICB Number", Variation_315, 0x0108000000), "027": ("BDS Code", Variation_155, 0x0104000000), "029": ("GICB Extracted", Variation_327, 0x0102000000), "002": ("Time of Day", Variation_311, 0x0101800000), "006": ("Mode S Address List", Variation_1226, 0x0101400000), "007": ("Aircraft Data Link Command", Variation_1114, 0x0101200000), "008": ("Aircraft Data Link Status", Variation_1221, 0x0101100000), "009": ("Aircraft Data Link Report Request", Variation_1212, 0x0101080000), "010": ("Transponder Communications Capability", Variation_913, 0x0101040000), "011": ("Capability Report", Variation_327, 0x0101020000), "014": ("Aircraft Position in Polar Co-ordinates", Variation_1048, 0x0101018000), "015": ("Aircraft Position in Cartesian Co-ordinates", Variation_1166, 0x0101014000), "020": ("Broadcast Number", Variation_315, 0x0101012000), "021": ("Broadcast Properties", Variation_1035, 0x0101011000), "022": ("Broadcast Prefix", Variation_915, 0x0101010800), "023": ("Uplink or Downlink Broadcast", Variation_327, 0x0101010400), "004": ("II Code", Variation_1032, 0x0101010200), "031": ("Aircraft Identity", Variation_324, 0x0101010180), "032": ("Aircraft Mode A", Variation_1125, 0x0101010140), "033": ("Aircraft Height", Variation_1120, 0x0101010120), "034": ("Aircraft Speed", Variation_289, 0x0101010110), "035": ("Aircraft Heading", Variation_293, 0x0101010108), "012": ("Aircraft Coverage Quality Factor", Variation_980, 0x0101010104), "013": ("Aircraft CQF Calculation Method", Variation_155, 0x0101010102)}
+    items_dict = {"036": (Item_126, 0x8000000000), "037": (Item_128, 0x4000000000), "000": (Item_32, 0x2000000000), "001": (Item_51, 0x1000000000), "005": (Item_54, 0x0800000000), "016": (Item_75, 0x0400000000), "017": (Item_77, 0x0200000000), "018": (Item_79, 0x0180000000), "019": (Item_80, 0x0140000000), "028": (Item_103, 0x0120000000), "030": (Item_105, 0x0110000000), "025": (Item_101, 0x0108000000), "027": (Item_102, 0x0104000000), "029": (Item_104, 0x0102000000), "002": (Item_52, 0x0101800000), "006": (Item_55, 0x0101400000), "007": (Item_56, 0x0101200000), "008": (Item_57, 0x0101100000), "009": (Item_59, 0x0101080000), "010": (Item_64, 0x0101040000), "011": (Item_65, 0x0101020000), "014": (Item_69, 0x0101018000), "015": (Item_70, 0x0101014000), "020": (Item_82, 0x0101012000), "021": (Item_98, 0x0101011000), "022": (Item_99, 0x0101010800), "023": (Item_100, 0x0101010400), "004": (Item_53, 0x0101010200), "031": (Item_117, 0x0101010180), "032": (Item_118, 0x0101010140), "033": (Item_120, 0x0101010120), "034": (Item_121, 0x0101010110), "035": (Item_123, 0x0101010108), "012": (Item_66, 0x0101010104), "013": (Item_68, 0x0101010102)}
     @overload
     @classmethod
     def spec(cls, key : Literal["036"]) -> Variation_1061: ...
@@ -33542,7 +33542,7 @@ class Item_759(Item):
 class Variation_1356(Compound):
     fspec_size = None
     items_list = [Item_1298, Item_1458, Item_1578, Item_759]
-    items_dict = {"PNB": ("Plot Number", Variation_234, 0x80), "RPL": ("Replies/Plot Link", Variation_1266, 0x40), "SNB": ("Scan Number", Variation_191, 0x20), "DATE": ("Common and Plot Characteristics Date", Variation_1172, 0x10)}
+    items_dict = {"PNB": (Item_1298, 0x80), "RPL": (Item_1458, 0x40), "SNB": (Item_1578, 0x20), "DATE": (Item_759, 0x10)}
     @overload
     @classmethod
     def spec(cls, key : Literal["PNB"]) -> Variation_234: ...
@@ -33617,7 +33617,7 @@ class Item_1000(Item):
 class Variation_1359(Compound):
     fspec_size = None
     items_list = [Item_1339, Item_548, Item_1761, Item_1243, Item_785, Item_1036, Item_1680, Item_1717, Item_543, Item_1697, Item_1000]
-    items_dict = {"PTL": ("Plot/Track Link", Variation_892, 0x8000), "ATL": ("ADS-B/Track Link", Variation_1225, 0x4000), "TRN": ("Turn State", Variation_204, 0x2000), "NPP": ("Next Predicted Position", Variation_1031, 0x1000), "DLK": ("Data Link Characteristics", Variation_1265, 0x0800), "LCK": ("Lockout Characteristics", Variation_1010, 0x0400), "TC": ("Transition Code", Variation_919, 0x0200), "TLC": ("Track Life Cycle", Variation_924, 0x0180), "ASI": ("Adjacent Sensor Information", Variation_1255, 0x0140), "TES": ("Track Extrapolation Source", Variation_166, 0x0120), "IR": ("Identity Requested", Variation_995, 0x0110)}
+    items_dict = {"PTL": (Item_1339, 0x8000), "ATL": (Item_548, 0x4000), "TRN": (Item_1761, 0x2000), "NPP": (Item_1243, 0x1000), "DLK": (Item_785, 0x0800), "LCK": (Item_1036, 0x0400), "TC": (Item_1680, 0x0200), "TLC": (Item_1717, 0x0180), "ASI": (Item_543, 0x0140), "TES": (Item_1697, 0x0120), "IR": (Item_1000, 0x0110)}
     @overload
     @classmethod
     def spec(cls, key : Literal["PTL"]) -> Variation_892: ...
@@ -33678,7 +33678,7 @@ class Item_532(Item):
 class Variation_1361(Compound):
     fspec_size = None
     items_list = [Item_1519, Item_1596, Item_1489, Item_532]
-    items_dict = {"SCO": ("Score", Variation_191, 0x80), "SRC": ("Signal/Clutter Ratio", Variation_272, 0x40), "RW": ("Range Width", Variation_288, 0x20), "AR": ("Ambiguous Range", Variation_288, 0x10)}
+    items_dict = {"SCO": (Item_1519, 0x80), "SRC": (Item_1596, 0x40), "RW": (Item_1489, 0x20), "AR": (Item_532, 0x10)}
     @overload
     @classmethod
     def spec(cls, key : Literal["SCO"]) -> Variation_191: ...
@@ -33728,7 +33728,7 @@ class Item_1078(Item):
 class Variation_1366(Compound):
     fspec_size = None
     items_list = [Item_1656, Item_1299, Item_820, Item_1925, Item_868, Item_1078]
-    items_dict = {"SUM": ("Mode 5 Summary", Variation_1012, 0x80), "PNO": ("Mode 5 PIN / National Origin", Variation_884, 0x40), "EM1": ("Extended Mode 1 Code in Octal Representation", Variation_1116, 0x20), "XP": ("X Pulse Presence", Variation_887, 0x10), "FOM": ("Figure of Merit", Variation_890, 0x08), "M2": ("Mode 2 Code in Octal Representation", Variation_1117, 0x04)}
+    items_dict = {"SUM": (Item_1656, 0x80), "PNO": (Item_1299, 0x40), "EM1": (Item_820, 0x20), "XP": (Item_1925, 0x10), "FOM": (Item_868, 0x08), "M2": (Item_1078, 0x04)}
     @overload
     @classmethod
     def spec(cls, key : Literal["SUM"]) -> Variation_1012: ...
@@ -33789,7 +33789,7 @@ class Item_1924(Item):
 class Variation_1367(Compound):
     fspec_size = None
     items_list = [Item_1657, Item_1296, Item_1306, Item_898, Item_819, Item_1731, Item_1924]
-    items_dict = {"SUM": ("Mode 5 Summary", Variation_1013, 0x80), "PMN": ("PIN/ National Origin/Mission Code", Variation_881, 0x40), "POS": ("Mode 5 Reported Position", Variation_1005, 0x20), "GA": ("Mode 5 GNSS-derived Altitude", Variation_876, 0x10), "EM1": ("Extended Mode 1 Code in Octal Representation", Variation_1115, 0x08), "TOS": ("Time Offset for POS and GA", Variation_219, 0x04), "XP": ("X Pulse Presence", Variation_886, 0x02)}
+    items_dict = {"SUM": (Item_1657, 0x80), "PMN": (Item_1296, 0x40), "POS": (Item_1306, 0x20), "GA": (Item_898, 0x10), "EM1": (Item_819, 0x08), "TOS": (Item_1731, 0x04), "XP": (Item_1924, 0x02)}
     @overload
     @classmethod
     def spec(cls, key : Literal["SUM"]) -> Variation_1013: ...
@@ -33828,7 +33828,7 @@ class Item_867(Item):
 class Variation_1368(Compound):
     fspec_size = None
     items_list = [Item_1657, Item_1297, Item_1306, Item_898, Item_819, Item_1731, Item_1924, Item_867]
-    items_dict = {"SUM": ("Mode 5 Summary", Variation_1013, 0x8000), "PMN": ("PIN/ National Origin/Mission Code", Variation_883, 0x4000), "POS": ("Mode 5 Reported Position", Variation_1005, 0x2000), "GA": ("Mode 5 GNSS-derived Altitude", Variation_876, 0x1000), "EM1": ("Extended Mode 1 Code in Octal Representation", Variation_1115, 0x0800), "TOS": ("Time Offset for POS and GA", Variation_219, 0x0400), "XP": ("X Pulse Presence", Variation_886, 0x0200), "FOM": ("Figure of Merit", Variation_889, 0x0180)}
+    items_dict = {"SUM": (Item_1657, 0x8000), "PMN": (Item_1297, 0x4000), "POS": (Item_1306, 0x2000), "GA": (Item_898, 0x1000), "EM1": (Item_819, 0x0800), "TOS": (Item_1731, 0x0400), "XP": (Item_1924, 0x0200), "FOM": (Item_867, 0x0180)}
     @overload
     @classmethod
     def spec(cls, key : Literal["SUM"]) -> Variation_1013: ...
@@ -33900,7 +33900,7 @@ class Item_1137(Item):
 class Variation_1376(Compound):
     fspec_size = 1
     items_list = [Item_596, Item_1553, Item_1211, Item_902, Item_1551, Item_1616, Item_1721, Item_1137]
-    items_dict = {"BPS": ("Barometric Pressure Setting", Variation_896, 0x80), "SH": ("Selected Heading", Variation_899, 0x40), "NAV": ("Navigation Mode", Variation_928, 0x20), "GAO": ("GPS Antenna Offset", Variation_155, 0x10), "SGV": ("Surface Ground Vector", Variation_1214, 0x08), "STA": ("Aircraft Status", Variation_1187, 0x04), "TNH": ("True North Heading", Variation_293, 0x02), "MES": ("Military Extended Squitter", Variation_1366, 0x01)}
+    items_dict = {"BPS": (Item_596, 0x80), "SH": (Item_1553, 0x40), "NAV": (Item_1211, 0x20), "GAO": (Item_902, 0x10), "SGV": (Item_1551, 0x08), "STA": (Item_1616, 0x04), "TNH": (Item_1721, 0x02), "MES": (Item_1137, 0x01)}
     @overload
     @classmethod
     def spec(cls, key : Literal["BPS"]) -> Variation_896: ...
@@ -33942,7 +33942,7 @@ class Item_1617(Item):
 class Variation_1377(Compound):
     fspec_size = 1
     items_list = [Item_596, Item_1553, Item_1212, Item_902, Item_1551, Item_1617, Item_1721, Item_1137]
-    items_dict = {"BPS": ("Barometric Pressure Setting", Variation_896, 0x80), "SH": ("Selected Heading", Variation_899, 0x40), "NAV": ("Navigation Mode", Variation_929, 0x20), "GAO": ("GPS Antenna Offset", Variation_155, 0x10), "SGV": ("Surface Ground Vector", Variation_1214, 0x08), "STA": ("Aircraft Status", Variation_1188, 0x04), "TNH": ("True North Heading", Variation_293, 0x02), "MES": ("Military Extended Squitter", Variation_1366, 0x01)}
+    items_dict = {"BPS": (Item_596, 0x80), "SH": (Item_1553, 0x40), "NAV": (Item_1212, 0x20), "GAO": (Item_902, 0x10), "SGV": (Item_1551, 0x08), "STA": (Item_1617, 0x04), "TNH": (Item_1721, 0x02), "MES": (Item_1137, 0x01)}
     @overload
     @classmethod
     def spec(cls, key : Literal["BPS"]) -> Variation_896: ...
@@ -33994,7 +33994,7 @@ class Item_1648(Item):
 class Variation_1378(Compound):
     fspec_size = 1
     items_list = [Item_740, Item_734, Item_1792, Item_1648]
-    items_dict = {"CST": ("Contributing Sensors With Local Tracknumbers", Variation_1254, 0x80), "CSN": ("Contributing Sensors No Local Tracknumbers", Variation_1253, 0x40), "TVS": ("Calculated Track Velocity Relative to System Reference Point", Variation_1140, 0x20), "STS": ("Supplementary Track Status", Variation_1190, 0x10)}
+    items_dict = {"CST": (Item_740, 0x80), "CSN": (Item_734, 0x40), "TVS": (Item_1792, 0x20), "STS": (Item_1648, 0x10)}
     @overload
     @classmethod
     def spec(cls, key : Literal["CST"]) -> Variation_1254: ...
@@ -34049,7 +34049,7 @@ class Item_717(Item):
 class Variation_1379(Compound):
     fspec_size = 1
     items_list = [Item_1117, Item_1087, Item_1085, Item_1456, Item_843, Item_1482, Item_717]
-    items_dict = {"MD5": ("Mode 5 Reports", Variation_1367, 0x80), "M5N": ("Mode 5 Reports, New Format", Variation_1368, 0x40), "M4E": ("Extended Mode 4 Report", Variation_1176, 0x20), "RPC": ("Radar Plot Characteristics", Variation_1361, 0x10), "ERR": ("Extended Range Report", Variation_312, 0x08), "RTC": ("Radar Track Characteristics", Variation_1359, 0x04), "CPC": ("Common and Plot Characteristics", Variation_1356, 0x02)}
+    items_dict = {"MD5": (Item_1117, 0x80), "M5N": (Item_1087, 0x40), "M4E": (Item_1085, 0x20), "RPC": (Item_1456, 0x10), "ERR": (Item_843, 0x08), "RTC": (Item_1482, 0x04), "CPC": (Item_717, 0x02)}
     @overload
     @classmethod
     def spec(cls, key : Literal["MD5"]) -> Variation_1367: ...

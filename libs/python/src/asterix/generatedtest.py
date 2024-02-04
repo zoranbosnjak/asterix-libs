@@ -433,7 +433,7 @@ Variation_23_Arg : TypeAlias = Union[Raw, Variation_23_Arg_Group]
 class Variation_23(Group):
     bit_size = 32
     items_list = [Item_33, Item_2, Item_39, Item_42, Item_1, Item_45]
-    items_dict = {"I1": Variation_3, "I2": Variation_5, "I3": Variation_2, "I4": Variation_22}
+    items_dict = {"I1": (Item_33), "I2": (Item_39), "I3": (Item_42), "I4": (Item_45)}
 
 class Item_34(Item):
     name = "I1"
@@ -461,7 +461,7 @@ Variation_24_Arg : TypeAlias = Union[Raw, Variation_24_Arg_Group]
 class Variation_24(Group):
     bit_size = 24
     items_list = [Item_34, Item_3, Item_40, Item_4]
-    items_dict = {"I1": Variation_4, "I2": Variation_20}
+    items_dict = {"I1": (Item_34), "I2": (Item_40)}
 
 class Item_35(Item):
     name = "I1"
@@ -476,7 +476,7 @@ Variation_25_Arg : TypeAlias = Union[Raw, Variation_25_Arg_Group]
 class Variation_25(Group):
     bit_size = 16
     items_list = [Item_35, Item_39]
-    items_dict = {"I1": Variation_5, "I2": Variation_5}
+    items_dict = {"I1": (Item_35), "I2": (Item_39)}
 
 class Item_47(Item):
     name = "IM"
@@ -496,7 +496,7 @@ Variation_26_Arg : TypeAlias = Union[Raw, Variation_26_Arg_Group]
 class Variation_26(Group):
     bit_size = 16
     items_list = [Item_47, Item_46]
-    items_dict = {"IM": Variation_0, "IAS": Variation_21}
+    items_dict = {"IM": (Item_47), "IAS": (Item_46)}
 
 class Item_53(Item):
     name = "R"
@@ -598,7 +598,7 @@ Variation_27_Arg : TypeAlias = Union[Raw, Variation_27_Arg_Group]
 class Variation_27(Group):
     bit_size = 408
     items_list = [Item_53, Item_59, Item_54, Item_55, Item_56, Item_0, Item_37, Item_41, Item_48, Item_49, Item_50, Item_51, Item_52, Item_30, Item_31, Item_32]
-    items_dict = {"R": Variation_5, "T": Variation_6, "S1": Variation_18, "S2": Variation_16, "S3": Variation_11, "I1": Variation_8, "I2": Variation_7, "Q1LAT": Variation_14, "Q2LON": Variation_14, "Q3": Variation_13, "Q4": Variation_9, "Q5": Variation_10, "B1": Variation_19, "B2": Variation_17, "B3": Variation_17}
+    items_dict = {"R": (Item_53), "T": (Item_59), "S1": (Item_54), "S2": (Item_55), "S3": (Item_56), "I1": (Item_37), "I2": (Item_41), "Q1LAT": (Item_48), "Q2LON": (Item_49), "Q3": (Item_50), "Q4": (Item_51), "Q5": (Item_52), "B1": (Item_30), "B2": (Item_31), "B3": (Item_32)}
 
 class Item_57(Item):
     name = "SAC"
@@ -618,7 +618,7 @@ Variation_28_Arg : TypeAlias = Union[Raw, Variation_28_Arg_Group]
 class Variation_28(Group):
     bit_size = 16
     items_list = [Item_57, Item_58]
-    items_dict = {"SAC": Variation_5, "SIC": Variation_5}
+    items_dict = {"SAC": (Item_57), "SIC": (Item_58)}
 
 class Item_38(Item):
     name = "I2"
@@ -683,7 +683,7 @@ class Item_5(Item):
 class Variation_38(Compound):
     fspec_size = None
     items_list = [Item_5]
-    items_dict = {"010": ("", Variation_5, 0x80)}
+    items_dict = {"010": (Item_5, 0x80)}
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_5:
         return cls.items_dict[key][1] # type: ignore
@@ -701,7 +701,7 @@ class Item_26(Item):
 class Variation_39(Compound):
     fspec_size = None
     items_list = [Item_5, Item_25, Item_26]
-    items_dict = {"010": ("", Variation_5, 0x80), "101": ("", Variation_5, 0x40), "102": ("", Variation_5, 0x20)}
+    items_dict = {"010": (Item_5, 0x80), "101": (Item_25, 0x40), "102": (Item_26, 0x20)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_5: ...
@@ -728,7 +728,7 @@ class Item_28(Item):
 class Variation_40(Compound):
     fspec_size = None
     items_list = [Item_5, Item_27, Item_28]
-    items_dict = {"010": ("", Variation_5, 0x80), "201": ("", Variation_12, 0x40), "202": ("", Variation_12, 0x20)}
+    items_dict = {"010": (Item_5, 0x80), "201": (Item_27, 0x40), "202": (Item_28, 0x20)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_5: ...
@@ -750,7 +750,7 @@ class Item_29(Item):
 class Variation_41(Compound):
     fspec_size = None
     items_list = [Item_5, Item_29]
-    items_dict = {"010": ("", Variation_5, 0x80), "301": ("", Variation_15, 0x40)}
+    items_dict = {"010": (Item_5, 0x80), "301": (Item_29, 0x40)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_5: ...
@@ -834,7 +834,7 @@ class Item_22(Item):
 class Variation_45(Compound):
     fspec_size = None
     items_list = [Item_35, None, Item_39]
-    items_dict = {"I1": ("", Variation_5, 0x80), "I2": ("", Variation_5, 0x20)}
+    items_dict = {"I1": (Item_35, 0x80), "I2": (Item_39, 0x20)}
     @overload
     @classmethod
     def spec(cls, key : Literal["I1"]) -> Variation_5: ...
@@ -853,7 +853,7 @@ class Item_23(Item):
 class Variation_46(Compound):
     fspec_size = 1
     items_list = [Item_35, None, Item_39]
-    items_dict = {"I1": ("", Variation_5, 0x80), "I2": ("", Variation_5, 0x20)}
+    items_dict = {"I1": (Item_35, 0x80), "I2": (Item_39, 0x20)}
     @overload
     @classmethod
     def spec(cls, key : Literal["I1"]) -> Variation_5: ...
@@ -872,7 +872,7 @@ class Item_24(Item):
 class Variation_42(Compound):
     fspec_size = None
     items_list = [Item_6, Item_7, Item_9, Item_12, Item_13, Item_14, Item_15, Item_16, Item_17, Item_18, Item_19, Item_20, Item_21, Item_22, None, Item_23, Item_24]
-    items_dict = {"010": ("Data Source Identifier", Variation_28, 0x800000), "020": ("Different Contents", Variation_27, 0x400000), "030": ("Dependent Item", Variation_26, 0x200000), "040": ("Spare Items", Variation_24, 0x100000), "051": ("Element", Variation_5, 0x080000), "052": ("Group", Variation_23, 0x040000), "053": ("Extended With Trailing Fx", Variation_29, 0x020000), "054": ("Extended Without Trailing Fx", Variation_30, 0x018000), "061": ("Repetitive Regular", Variation_32, 0x014000), "062": ("Repetitive With Group", Variation_33, 0x012000), "063": ("Repetitive Fx", Variation_34, 0x011000), "071": ("Explicit None", Variation_35, 0x010800), "072": ("Explicit RE", Variation_36, 0x010400), "073": ("Explicit SP", Variation_37, 0x010200), "091": ("Compound Fspec With Fx", Variation_45, 0x010140), "092": ("Compound Fixed Size Fspec", Variation_46, 0x010120)}
+    items_dict = {"010": (Item_6, 0x800000), "020": (Item_7, 0x400000), "030": (Item_9, 0x200000), "040": (Item_12, 0x100000), "051": (Item_13, 0x080000), "052": (Item_14, 0x040000), "053": (Item_15, 0x020000), "054": (Item_16, 0x018000), "061": (Item_17, 0x014000), "062": (Item_18, 0x012000), "063": (Item_19, 0x011000), "071": (Item_20, 0x010800), "072": (Item_21, 0x010400), "073": (Item_22, 0x010200), "091": (Item_23, 0x010140), "092": (Item_24, 0x010120)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_28: ...
@@ -938,7 +938,7 @@ class Item_10(Item):
 class Variation_43(Compound):
     fspec_size = None
     items_list = [Item_6, Item_8, Item_10]
-    items_dict = {"010": ("Data Source Identifier", Variation_28, 0x80), "020": ("Target Report Descriptor", Variation_31, 0x40), "031": ("For Plots Only", Variation_5, 0x20)}
+    items_dict = {"010": (Item_6, 0x80), "020": (Item_8, 0x40), "031": (Item_10, 0x20)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_28: ...
@@ -960,7 +960,7 @@ class Item_11(Item):
 class Variation_44(Compound):
     fspec_size = None
     items_list = [Item_6, Item_8, Item_11]
-    items_dict = {"010": ("Data Source Identifier", Variation_28, 0x80), "020": ("Target Report Descriptor", Variation_31, 0x40), "032": ("For Tracks Only", Variation_12, 0x20)}
+    items_dict = {"010": (Item_6, 0x80), "020": (Item_8, 0x40), "032": (Item_11, 0x20)}
     @overload
     @classmethod
     def spec(cls, key : Literal["010"]) -> Variation_28: ...
@@ -977,7 +977,7 @@ class Variation_44(Compound):
 class Variation_47(Compound):
     fspec_size = 1
     items_list = [Item_35, Item_39]
-    items_dict = {"I1": ("", Variation_5, 0x80), "I2": ("", Variation_5, 0x40)}
+    items_dict = {"I1": (Item_35, 0x80), "I2": (Item_39, 0x40)}
     @overload
     @classmethod
     def spec(cls, key : Literal["I1"]) -> Variation_5: ...
