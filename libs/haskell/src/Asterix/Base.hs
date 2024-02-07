@@ -2,6 +2,7 @@
 
 module Asterix.Base where
 
+import           GHC.TypeLits
 import           Control.Applicative
 import           Control.Monad
 import           Data.Function       (fix)
@@ -13,31 +14,51 @@ import           Asterix.Parsing
 import           Asterix.Schema
 import           Bits
 
-data Variation bs
-    = Element bs Int Int VContent
-    | Group bs [Item bs]
-    | Extended bs [Maybe (Item bs)]
-    | Repetitive bs [Variation bs]
+data UVariation bs
+    = Element bs VContent
+    | Group bs [UItem bs]
+    | Extended bs [Maybe (UItem bs)]
+    | Repetitive bs [UVariation bs]
     | Explicit bs
-    | Compound bs [Item bs]
-    deriving (Eq, Show, Functor)
+    | Compound bs [UItem bs]
+    deriving (Show, Eq, Functor)
 
-data Item bs
-    = Spare bs Int Int
-    | Item Text Text (Variation bs)
-    deriving (Eq, Show, Functor)
+data UItem bs
+    = USpare bs
+    | UItem Text Text (UVariation bs)
+    deriving (Show, Eq, Functor)
 
-newtype Record bs = Record (Variation bs)
-    deriving (Eq, Show, Functor)
+newtype URecord bs = URecord (UVariation bs)
+    deriving (Show, Eq, Functor)
+
+newtype UExpansion bs = UExpansion (UVariation bs)
+    deriving (Show, Eq, Functor)
 
 -- | Use type parameter, to avoid runtime check for the common case (single).
-data Datablock (single :: Bool) bs where
-    DatablockSingle :: [Record bs] -> Datablock 'True bs
-    DatablockMultiple :: [(Text, Record bs)] -> Datablock 'False bs
+data UDatablock (single :: Bool) bs where
+    UDatablockSingle :: bs -> [URecord bs] -> UDatablock 'True bs
+    UDatablockMultiple :: bs -> [(Text, URecord bs)] -> UDatablock 'False bs
 
-deriving instance Eq bs => Eq (Datablock single bs)
-deriving instance Show bs => Show (Datablock single bs)
-deriving instance Functor (Datablock single)
+deriving instance Eq bs => Eq (UDatablock single bs)
+deriving instance Show bs => Show (UDatablock single bs)
+deriving instance Functor (UDatablock single)
+
+newtype Variation (t :: TVariation) bs = Variation (UVariation bs)
+    deriving (Show, Eq, Functor)
+
+newtype Item (t :: TItem) bs = Item (UItem bs)
+    deriving (Show, Eq, Functor)
+
+newtype Record (cat :: Nat) (ed :: TEdition) (t :: [Maybe TItem]) bs
+    = Record (URecord bs)
+    deriving (Show, Eq, Functor)
+
+newtype Expansion (cat :: Nat) (ed :: TEdition) (t :: [Maybe TItem]) bs
+    = Expansion (UExpansion bs)
+    deriving (Show, Eq, Functor)
+
+newtype Datablock (uap :: TUap) bs = Datablock (UDatablock (IsSingleUap uap) bs)
+    deriving (Show, Eq, Functor)
 
 -- | Parse something, return actual bits, together with the result.
 parseBitsWith :: Parsing a -> Parsing (Bits, a)
@@ -48,28 +69,28 @@ parseBitsWith act = do
     let n = Bits.length s1 - Bits.length s2
     pure (Bits.take n s1, result)
 
-parseVariation :: VVariation -> Parsing (Variation Bits)
-parseVariation = \case
-    VElement o n vcont ->
-        Element <$> fetch n <*> pure o <*> pure n <*> pure vcont
+parseUVariation :: VVariation -> Parsing (UVariation Bits)
+parseUVariation = \case
+    VElement _o n vcont ->
+        Element <$> fetch n <*> pure vcont
     VGroup lst -> do
-        (s, items) <- parseBitsWith (mapM parseItem lst)
+        (s, items) <- parseBitsWith (mapM parseUItem lst)
         pure (Group s items)
-    VExtended ts tss -> do
+    VExtended ts -> do
         let go = \case
                 [] -> pure []
-                (Just i : xs) -> (:) <$> fmap Just (parseItem i) <*> go xs
+                (Just i : xs) -> (:) <$> fmap Just (parseUItem i) <*> go xs
                 (Nothing : xs) -> do
                     fx <- fetchBool
                     case fx of
                         False -> pure [Nothing]
                         True  -> (:) <$> pure Nothing <*> go xs
-        (s, lst) <- parseBitsWith $ go (ts <> join tss)
+        (s, lst) <- parseBitsWith (go ts)
         pure $ Extended s lst
     VRepetitive mn var -> case mn of
         Nothing -> do
             let go = do
-                    x <- parseVariation var
+                    x <- parseUVariation var
                     fx <- fetchBool
                     case fx of
                         False -> pure [x]
@@ -79,7 +100,7 @@ parseVariation = \case
         Just n1 -> do
             (s, vars) <- parseBitsWith $ do
                 n2 <- Bits.getNumberAligned <$> fetch (n1*8)
-                sequence (replicate n2 $ parseVariation var)
+                sequence (replicate n2 $ parseUVariation var)
             pure $ Repetitive s vars
     VExplicit -> do
         (s, _) <- parseBitsWith $ do
@@ -104,33 +125,32 @@ parseVariation = \case
             forM (zip fspec lst) $ \case
                 (False, _) -> pure Nothing
                 (True, Nothing) -> throw ItemPresenceError
-                (True, Just i) -> Just <$> parseItem i
+                (True, Just i) -> Just <$> parseUItem i
         pure $ Compound s $ catMaybes items
 
-parseItem :: VItem -> Parsing (Item Bits)
-parseItem = \case
-    VSpare o n ->
-        Spare <$> fetch n <*> pure o <*> pure n
+parseUItem :: VItem -> Parsing (UItem Bits)
+parseUItem = \case
+    VSpare _o n ->
+        USpare <$> fetch n
     VItem name title var ->
-        Item <$> pure name <*> pure title <*> parseVariation var
+        UItem <$> pure name <*> pure title <*> parseUVariation var
 
 -- | Single UAP datablock parser.
-parseDatablock :: VVariation -> Parsing (Datablock 'True Bits)
-parseDatablock var = eof >>= \case
-    True -> pure $ DatablockSingle []
-    False -> do
-        x <- parseVariation var
-        parseDatablock var >>= \case
-            DatablockSingle lst -> pure $ DatablockSingle (Record x : lst)
+parseUDatablock :: VVariation -> Parsing (UDatablock 'True Bits)
+parseUDatablock vvar = uncurry UDatablockSingle <$> parseBitsWith f
+  where
+    f = eof >>= \case
+        True -> pure []
+        False -> (:) <$> (URecord <$> parseUVariation vvar) <*> f
 
 -- | Try to parse with different UAPs, where each record in a datablock
 -- can potentially be of a different UAP.
-parseDatablockTryWith :: Bits -> [(Text, VVariation)] -> [Datablock 'False Bits]
-parseDatablockTryWith s probes
-    | Bits.null s = pure $ DatablockMultiple []
+parseUDatablockTryWith :: Bits -> [(Text, VVariation)] -> [UDatablock 'False Bits]
+parseUDatablockTryWith s probes
+    | Bits.null s = pure $ UDatablockMultiple s []
     | otherwise = do
         (name, var) <- probes
-        case runParser (parseVariation var) s of
-            Left _ -> empty
-            Right (v, s') -> parseDatablockTryWith s' probes >>= \case
-                DatablockMultiple lst -> pure $ DatablockMultiple ((name, Record v) : lst)
+        case runParser (parseUVariation var) s of
+            Left _ -> []
+            Right (v, s') -> parseUDatablockTryWith s' probes >>= \case
+                UDatablockMultiple _ lst -> [UDatablockMultiple s ((name, URecord v) : lst)]

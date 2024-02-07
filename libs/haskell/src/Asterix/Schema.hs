@@ -243,6 +243,10 @@ data TUap
     | TUapMultiple
         [(Symbol, TVariation)] -- [(uap name, ...)]
 
+type family IsSingleUap uap where
+    IsSingleUap (TUapSingle _) = 'True
+    IsSingleUap (TUapMultiple _) = 'False
+
 data VUap
     = VUapSingle VVariation
     | VUapMultiple [(Text, VVariation)]
