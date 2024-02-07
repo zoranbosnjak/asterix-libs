@@ -27,6 +27,7 @@ runhaskell $EXTENSIONS -iother -isrc ./src/Main.hs --help
 
 # select target language
 lang=python
+lang=haskell
 
 # generate code for test run
 runhaskell $EXTENSIONS -iother -isrc ./src/Main.hs \

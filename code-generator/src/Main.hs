@@ -25,10 +25,12 @@ import           Asterix.Specs
 import           Asterix.Specs.Validation (validate)
 
 import qualified Language.Python
+import qualified Language.Haskell
 
 languages :: [(Text, Text -> Text -> [Asterix] -> Builder)]
 languages =
     [ ("python", Language.Python.mkCode)
+    , ("haskell", Language.Haskell.mkCode)
     ]
 
 data Options = Options

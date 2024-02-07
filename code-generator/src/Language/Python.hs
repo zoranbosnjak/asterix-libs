@@ -2,43 +2,22 @@
 
 module Language.Python (mkCode) where
 
-import Control.Monad
-import Data.Text (Text)
-import qualified Data.Text as T
-import Data.List
-import           Data.Text.Lazy.Builder     (Builder)
-import qualified Data.Text.Lazy.Builder     as BL
-import           Formatting                 as F
-import           Data.Scientific
-import           Data.Set (Set)
+import           Control.Monad
+import           Data.List
 import           Data.Maybe
-import           Numeric (showHex)
+import           Data.Scientific
+import           Data.Set               (Set)
+import           Data.Text              (Text)
+import qualified Data.Text              as T
+import           Data.Text.Lazy.Builder (Builder)
+import qualified Data.Text.Lazy.Builder as BL
+import           Formatting             as F
+import           Numeric                (showHex)
 
 import           Asterix.Indent
-import qualified Asterix.Specs              as A
+import qualified Asterix.Specs          as A
+import           Fmt
 import           Struct
-
--- | The same as 'line $ bformat (formating) arg1 arg2 ...'
-fmt :: Format (BlockM Builder ()) a -> a
-fmt m = runFormat m line
-
-nameOf :: Integral a => Text -> a -> Text
-nameOf = sformat (stext % "_" % int)
-
-nameOfAst :: Asterix -> Text
-nameOfAst (Asterix cat (A.Edition a b) spec) = sformat
-    (stext % "_" % left 3 '0' % "_" % int % "_" % int)
-    at cat a b
-  where
-    at = case spec of
-             AstCat _ -> "Cat"
-             AstRef _ -> "Ref"
-
-fmtList :: Text -> Text -> (a -> Text) -> [a] -> Text
-fmtList open close f lst
-    = open
-    <> mconcat (intersperse ", " $ fmap f lst)
-    <> close
 
 mkContent :: (Content, Int) -> BlockM Builder ()
 mkContent (cont, ix) = case cont of
@@ -85,11 +64,6 @@ mkContent (cont, ix) = case cont of
     cls c = fmt ("class " % stext % "(" % stext % "):")
         (nameOf "Content" ix) c
 
-div8 :: Integral a => a -> a
-div8 n = case divMod n 8 of
-    (a, 0) -> a
-    _ -> error "unexpected value"
-
 mkVariation :: AsterixDb EMap -> Variation -> BlockM Builder ()
 mkVariation db var = case var of
     Element (OctetOffset o) n cont -> do
@@ -128,7 +102,7 @@ mkVariation db var = case var of
         indent $ do
             case sizeOfVariation var of
                 Nothing -> error "unexpected non-fixed argument"
-                Just n -> fmt ("bit_size = " % int) n
+                Just n  -> fmt ("bit_size = " % int) n
             do -- items_list
                 let f :: Item -> Text
                     f = nameOf "Item" . indexOf (dbItem db)
@@ -145,7 +119,7 @@ mkVariation db var = case var of
         cls "Extended"
         indent $ do
             let f :: Maybe Item -> Text
-                f Nothing = "None"
+                f Nothing     = "None"
                 f (Just item) = nameOf "Item" $ indexOf (dbItem db) item
             fmt ("items = " % stext)
                 (fmtList "[" "]" f lst)
@@ -154,25 +128,25 @@ mkVariation db var = case var of
         indent $ do
             case rt of
                 A.RepetitiveRegular n -> fmt ("rep = " % int) (div8 n)
-                A.RepetitiveFx -> "rep = None"
+                A.RepetitiveFx        -> "rep = None"
             fmt ("var = " % stext)
                 (nameOf "Variation" $ indexOf (dbVariation db) var2)
     Explicit et -> do
         cls "Explicit"
         indent $ do
             fmt ("t = " % stext) $ case et of
-                Nothing -> "None"
-                Just A.ReservedExpansion  -> "ReservedExpansion"
-                Just A.SpecialPurpose -> "SpecialPurpose"
+                Nothing                  -> "None"
+                Just A.ReservedExpansion -> "ReservedExpansion"
+                Just A.SpecialPurpose    -> "SpecialPurpose"
     Compound mn lst -> do
         cls "Compound"
         indent $ do
             case mn of
                 Nothing -> "fspec_size = None"
-                Just n -> fmt ("fspec_size = " % int) (div8 n)
+                Just n  -> fmt ("fspec_size = " % int) (div8 n)
             do -- items_list
                 let f :: Maybe Item -> Text
-                    f Nothing = "None"
+                    f Nothing     = "None"
                     f (Just item) = nameOf "Item" $ indexOf (dbItem db) item
                 fmt ("items_list = " % stext)
                     (fmtList "[" "]" f lst)

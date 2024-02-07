@@ -18,8 +18,8 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://zoranbosnjak.github.io/asterix-lib-generator/python.html"
-"Bug Tracker" = "https://github.com/zoranbosnjak/asterix-lib-generator/issues"
+"Homepage" = "https://zoranbosnjak.github.io/asterix-libs"
+"Bug Tracker" = "https://github.com/zoranbosnjak/asterix-libs/issues"
 
 [tool.pytest.ini_options]
 pythonpath = [
