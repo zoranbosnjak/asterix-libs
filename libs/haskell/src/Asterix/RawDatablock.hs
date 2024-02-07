@@ -10,6 +10,8 @@
 module Asterix.RawDatablock where
 
 import           Control.Monad
+import           Data.Word
+import           Data.List (sortOn, groupBy)
 
 import           Asterix.Parsing
 import           Bits
@@ -52,3 +54,21 @@ mkDatablock cat records = Datablock
   where
     n = div (BitsBuilder.length records) 8
     (n1, n2) = divMod (n + 3) 256
+
+-- | Group records of the same category together, optionally reorder datablocks.
+groupRecords :: Bool -> [Datablock Bits] -> [Datablock BitsBuilder]
+groupRecords allowReorder = fmap combine . groupBy compareCats . shuffle
+  where
+    shuffle :: [Datablock Bits] -> [Datablock Bits]
+    shuffle = case allowReorder of
+        False -> id
+        True -> sortOn (\x -> dbCategory x :: Int)
+
+    compareCats :: Datablock Bits -> Datablock Bits -> Bool
+    compareCats db1 db2 = (dbCategory db1 :: Int) == dbCategory db2
+
+    combine :: [Datablock Bits] -> Datablock BitsBuilder
+    combine lst = mkDatablock cat (mconcat $ fmap (fromBits . dbData) lst)
+      where
+        cat :: Word8
+        cat = dbCategory $ Prelude.head lst
