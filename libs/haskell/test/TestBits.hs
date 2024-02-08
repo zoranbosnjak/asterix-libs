@@ -1,4 +1,4 @@
-module TestBytes where
+module TestBits where
 
 import Test.Tasty
 import Test.Tasty.QuickCheck as QC

@@ -35,7 +35,7 @@ eof = fmap Bits.null get
 fetch :: Int -> Parsing Bits
 fetch n = do
     s <- get
-    when (Bits.length s < n) $ throw Overflow
+    when (bitLength s < n) $ throw Overflow
     let (a, b) = Bits.splitAt n s
     put b
     pure a

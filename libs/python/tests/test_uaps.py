@@ -3,7 +3,7 @@
 import pytest
 
 '''
-from asterix.generated_test import *
+from . import generated import *
 
 def test_single() -> None:
     """ Single UAP

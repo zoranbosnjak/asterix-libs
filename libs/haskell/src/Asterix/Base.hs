@@ -66,7 +66,7 @@ parseBitsWith act = do
     s1 <- get
     result <- act
     s2 <- get
-    let n = Bits.length s1 - Bits.length s2
+    let n = bitLength s1 - bitLength s2
     pure (Bits.take n s1, result)
 
 parseUVariation :: VVariation -> Parsing (UVariation Bits)

@@ -15,7 +15,6 @@ import           Data.List (sortOn, groupBy)
 
 import           Asterix.Parsing
 import           Bits
-import           BitsBuilder
 
 newtype Datablock bs = Datablock { unDatablock :: bs }
     deriving (Show, Eq, Functor)
@@ -34,7 +33,7 @@ parseDatablock = do
     s <- get
     _cat <- fetchWord8
     n <- (* 8) . Bits.getNumberAligned <$> fetch 16
-    when (Bits.length s < n) $ throw Overflow
+    when (bitLength s < n) $ throw Overflow
     let (a,b) = Bits.splitAt n s
     put b
     pure $ Datablock a
@@ -45,18 +44,18 @@ parseDatablocks = eof >>= \case
     False -> (:) <$> parseDatablock <*> parseDatablocks
 
 
-mkDatablock :: Integral cat => cat -> BitsBuilder -> Datablock BitsBuilder
+mkDatablock :: Integral cat => cat -> Builder -> Datablock Builder
 mkDatablock cat records = Datablock
     ( word8 (fromIntegral cat)
    <> word8 (fromIntegral n1)
    <> word8 (fromIntegral n2)
    <> records)
   where
-    n = div (BitsBuilder.length records) 8
+    n = div (bitLength records) 8
     (n1, n2) = divMod (n + 3) 256
 
 -- | Group records of the same category together, optionally reorder datablocks.
-groupRecords :: Bool -> [Datablock Bits] -> [Datablock BitsBuilder]
+groupRecords :: Bool -> [Datablock Bits] -> [Datablock Builder]
 groupRecords allowReorder = fmap combine . groupBy compareCats . shuffle
   where
     shuffle :: [Datablock Bits] -> [Datablock Bits]
@@ -67,7 +66,7 @@ groupRecords allowReorder = fmap combine . groupBy compareCats . shuffle
     compareCats :: Datablock Bits -> Datablock Bits -> Bool
     compareCats db1 db2 = (dbCategory db1 :: Int) == dbCategory db2
 
-    combine :: [Datablock Bits] -> Datablock BitsBuilder
+    combine :: [Datablock Bits] -> Datablock Builder
     combine lst = mkDatablock cat (mconcat $ fmap (fromBits . dbData) lst)
       where
         cat :: Word8
