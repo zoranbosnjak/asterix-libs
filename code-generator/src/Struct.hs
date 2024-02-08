@@ -1,7 +1,5 @@
--- | Asterix structures and helper functions
+-- | Asterix structures and helper functions for source code generation
 --
--- Simplified structures for source code generation
--- Asterix database, which collects same items
 
 {-
 -- 'AsterixDb' - Asterix database is a collection of all components, without
@@ -13,17 +11,17 @@
 module Struct where
 
 import           Control.Applicative
-import           Control.Monad.State
 import           Control.Monad.RWS
+import           Control.Monad.State
+import           Data.Bool
 import           Data.List           (elemIndex, unfoldr)
 import           Data.Map            (Map)
 import qualified Data.Map            as Map
 import           Data.Maybe
-import           Data.Bool
 import           Data.Set            (Set)
 import qualified Data.Set            as Set
-import           Data.Text           (Text)
 import           Data.Word
+import           GHC.Generics        (Generic)
 
 import qualified Asterix.Specs       as A
 
@@ -38,7 +36,7 @@ type Fspec = [Word8]
 
 -- | Offset inside octet [0..7]
 newtype OctetOffset = OctetOffset Int
-    deriving (Eq, Ord, Show)
+    deriving (Generic, Eq, Ord, Show)
 
 instance Semigroup OctetOffset where
     OctetOffset x <> OctetOffset y = OctetOffset (mod (x+y) 8)
@@ -50,37 +48,30 @@ instance Monoid OctetOffset where
 octetOffset :: Int -> OctetOffset
 octetOffset n = OctetOffset (mod n 8)
 
-data Content
-    = ContentRaw
-    | ContentTable [(Int, Text)]
-    | ContentString A.StringType
-    | ContentInteger A.Signedness
-    | ContentQuantity A.Signedness A.Number A.Unit
-    deriving (Eq, Ord, Show)
-
 data Variation
-    = Element OctetOffset A.RegisterSize Content
+    = Element OctetOffset A.RegisterSize A.Rule
     | Group [Item]
     | Extended [Maybe Item]
     | Repetitive A.RepetitiveType Variation
     | Explicit (Maybe A.ExplicitType)
+    | RandomFieldSequencing
     | Compound (Maybe A.RegisterSize) [Maybe Item]
-    deriving (Eq, Ord, Show)
+    deriving (Generic, Eq, Ord, Show)
 
 data Item
     = Spare OctetOffset A.RegisterSize
     | Item A.Name A.Title Variation
-    deriving (Eq, Ord, Show)
+    deriving (Generic, Eq, Ord, Show)
 
 data Uap
     = Uap Variation
     | Uaps [(A.UapName, Variation)] (Maybe A.UapSelector)
-    deriving (Eq, Ord, Show)
+    deriving (Generic, Eq, Ord, Show)
 
 data AstSpec
     = AstCat Uap
     | AstRef Variation
-    deriving (Eq, Show)
+    deriving (Generic, Eq, Show)
 
 instance Ord AstSpec where
     compare (AstCat _) (AstRef _) = LT
@@ -96,7 +87,7 @@ data Asterix = Asterix
     { astCat     :: Cat
     , astEdition :: A.Edition
     , astSpec    :: AstSpec
-    } deriving (Eq, Show)
+    } deriving (Generic, Eq, Show)
 
 instance Ord Asterix where
     compare a b
@@ -109,20 +100,6 @@ evalNumber = \case
     A.NumInt i -> fromIntegral i
     A.NumDiv a b -> evalNumber a / evalNumber b
     A.NumPow a b -> fromIntegral (a ^ b)
-
-deriveContent :: A.Content -> Content
-deriveContent = \case
-    A.ContentRaw -> ContentRaw
-    A.ContentTable lst -> ContentTable lst
-    A.ContentString st -> ContentString st
-    A.ContentInteger sig _constr -> ContentInteger sig
-    A.ContentQuantity sig lsb unit _constr -> ContentQuantity sig lsb unit
-    A.ContentBds _t -> ContentRaw
-
-deriveRule :: A.Rule -> Content
-deriveRule = \case
-    A.ContextFree cont -> deriveContent cont
-    A.Dependent _ _ -> ContentRaw
 
 -- | Split list by 'Nothing'
 unconcatMaybe :: Eq a => [Maybe a] -> [[Maybe a]]
@@ -147,7 +124,7 @@ deriveVariation = \case
     A.Element n rule -> do
         o <- get
         modify (<> octetOffset n)
-        pure $ Element o n (deriveRule rule)
+        pure $ Element o n rule
     A.Group lst -> do
         Group <$> mapM deriveItem lst
     A.Extended lst -> do
@@ -162,14 +139,14 @@ deriveVariation = \case
         var2 <- deriveVariation var
         case rt of
             A.RepetitiveRegular _ -> pure ()
-            A.RepetitiveFx -> modify (<> octetOffset 1) -- FX bit
+            A.RepetitiveFx        -> modify (<> octetOffset 1) -- FX bit
         byteAligned "repetitive (post)"
         pure $ Repetitive rt var2
     A.Explicit t -> do
         byteAligned "explicit (pre)"
         pure $ Explicit t
     A.RandomFieldSequencing -> do
-        error "Random Field Sequencing is not supported."
+        pure RandomFieldSequencing
     A.Compound mn lst' -> do
         byteAligned "compound (pre)"
         items <- forM lst $ \case
@@ -224,7 +201,8 @@ deriveAsterix = \case
 -- | Database of all distinct asterix components. It's parametrized over some
 -- container, to be used in different contexts.
 data AsterixDb f = AsterixDb
-    { dbContent   :: f Content
+    { dbContent   :: f A.Content
+    , dbRule      :: f A.Rule
     , dbVariation :: f Variation
     , dbItem      :: f Item
     , dbUapSel    :: f A.UapSelector
@@ -242,8 +220,11 @@ data FocusDb f a = FocusDb
 modifyDb :: FocusDb f a -> (f a -> f a) -> AsterixDb f -> AsterixDb f
 modifyDb l f db = setDb l db $ f $ getDb l db
 
-lContent :: FocusDb f Content
+lContent :: FocusDb f A.Content
 lContent = FocusDb dbContent (\db x -> db {dbContent = x})
+
+lRule :: FocusDb f A.Rule
+lRule = FocusDb dbRule (\db x -> db {dbRule = x})
 
 lVariation :: FocusDb f Variation
 lVariation = FocusDb dbVariation (\db x -> db {dbVariation = x})
@@ -266,25 +247,33 @@ lAst = FocusDb dbAst (\db x -> db {dbAst = x})
 dbInsert :: Ord a => FocusDb Set a -> a -> State (AsterixDb Set) ()
 dbInsert l x = modify $ modifyDb l (Set.insert x)
 
-saveContent :: Content -> State (AsterixDb Set) ()
+saveContent :: A.Content -> State (AsterixDb Set) ()
 saveContent = dbInsert lContent
+
+saveRule :: A.Rule -> State (AsterixDb Set) ()
+saveRule rule = do
+    case rule of
+        A.ContextFree cont    -> saveContent cont
+        A.Dependent _name lst -> mapM_ (saveContent . snd) lst
+    dbInsert lRule rule
 
 saveVariation :: Variation -> State (AsterixDb Set) ()
 saveVariation var = do
     dbInsert lVariation var
     case var of
-        Element _o _n cont   -> saveContent cont
-        Group lst         -> mapM_ saveItem lst
-        Extended lst      -> mapM_ saveItem (catMaybes lst)
-        Repetitive _t v   -> saveVariation v
-        Explicit _t       -> pure ()
-        Compound _t lst   -> mapM_ saveItem (catMaybes lst)
+        Element _o _n rule    -> saveRule rule
+        Group lst             -> mapM_ saveItem lst
+        Extended lst          -> mapM_ saveItem (catMaybes lst)
+        Repetitive _t v       -> saveVariation v
+        Explicit _t           -> pure ()
+        RandomFieldSequencing -> pure ()
+        Compound _t lst       -> mapM_ saveItem (catMaybes lst)
 
 saveItem :: Item -> State (AsterixDb Set) ()
 saveItem item = do
     dbInsert lItem item
     case item of
-        Spare _o _n              -> pure ()
+        Spare _o _n           -> pure ()
         Item _name _title var -> saveVariation var
 
 saveUap :: Uap -> State (AsterixDb Set) ()
@@ -307,7 +296,7 @@ saveAsterix ast@(Asterix _cat _ed spec) = do
 -- | Create asterix database
 asterixDb :: Foldable t => t Asterix -> AsterixDb Set
 asterixDb lst = execState (mapM_ saveAsterix lst)
-    (AsterixDb mempty mempty mempty mempty mempty mempty mempty)
+    (AsterixDb mempty mempty mempty mempty mempty mempty mempty mempty)
 
 -- | Enumerated distinct values.
 newtype EMap a = EMap { unEMap :: Map a Int }
@@ -315,14 +304,14 @@ newtype EMap a = EMap { unEMap :: Map a Int }
 -- | Enumerated database items. Each Set element gets its sequence number.
 enumDb :: AsterixDb Set -> AsterixDb EMap
 enumDb db = AsterixDb
-    { dbContent   = f dbContent
-    , dbVariation = f dbVariation
-    , dbItem      = f dbItem
-    , dbUapSel    = f dbUapSel
-    , dbUap       = f dbUap
-    , dbSpec      = f dbSpec
-    , dbAst       = f dbAst
-    }
+    (f dbContent)
+    (f dbRule)
+    (f dbVariation)
+    (f dbItem)
+    (f dbUapSel)
+    (f dbUap)
+    (f dbSpec)
+    (f dbAst)
   where
     f :: Ord a => (AsterixDb Set -> Set a) -> EMap a
     f sel = EMap $ Map.fromList $ zip (Set.toAscList $ sel db) [0..]
@@ -345,25 +334,26 @@ flattenVariationsAndItems = snd . evalRWS go ()
             Just var -> goVar var >> go
             Nothing -> case Set.lookupMin items of
                 Just item -> goItem item >> go
-                Nothing -> pure ()
+                Nothing   -> pure ()
     goVar var = do
         (vars, items) <- get
         put (Set.delete var vars, items)
         when (Set.member var vars) $ do
             case var of
-                Element _ _ _ -> pure ()
-                Group lst -> mapM_ goItem lst
-                Extended lst -> mapM_ (maybe (pure ()) goItem) lst
-                Repetitive _ var2 -> goVar var2
-                Explicit _ -> pure ()
-                Compound _ lst -> mapM_ (maybe (pure ()) goItem) lst
+                Element _ _ _         -> pure ()
+                Group lst             -> mapM_ goItem lst
+                Extended lst          -> mapM_ (maybe (pure ()) goItem) lst
+                Repetitive _ var2     -> goVar var2
+                Explicit _            -> pure ()
+                RandomFieldSequencing -> pure ()
+                Compound _ lst        -> mapM_ (maybe (pure ()) goItem) lst
             tell [Left var]
     goItem item = do
         (vars, items) <- get
         put (vars, Set.delete item items)
         when (Set.member item items) $ do
             case item of
-                Spare _ _ -> pure ()
+                Spare _ _    -> pure ()
                 Item _ _ var -> goVar var
             tell [Right item]
 
@@ -382,7 +372,7 @@ fspecChunkOf name lst = listToMaybe $ do
     (x, i) <- zip [(0::Int)..] (reverse lst)
     item <- maybe empty pure i
     name2 <- case item of
-        Spare _ _ -> empty
+        Spare _ _              -> empty
         Item name2 _title _var -> pure name2
     guard $ name == name2
     pure (2^x)
@@ -391,7 +381,7 @@ fspecMaxBytes :: Maybe ByteSize -> [a] -> ByteSize
 fspecMaxBytes mn lst = case mn of
     Just m -> case divMod m 8 of    -- no FX
         (n, 0) -> n
-        _ -> error "unexpected fx bit size"
+        _      -> error "unexpected fx bit size"
     Nothing -> case divMod (length lst) 7 of    -- 1 bit for FX
         (n, 0) -> n
         (n, _) -> succ n
@@ -405,7 +395,7 @@ fspecOf mn lst name = case mn of
             results = maybe 0 id <$> fspecs
         in case length (catMaybes fspecs) == 1 of
             False -> error "unexpected fspecs bits"
-            True -> results
+            True  -> results
     Nothing ->
         -- If a particular FSPEC bit is set,
         -- all FX bits left of this bit must be set too.
@@ -421,7 +411,7 @@ fspecOf mn lst name = case mn of
                 pure $ val+fx
         in case length (catMaybes fspecs) == 1 of
             False -> error "unexpected fspecs bits"
-            True -> reverse results
+            True  -> reverse results
 
 sizeOfVariation :: Variation -> Maybe Int
 sizeOfVariation = \case

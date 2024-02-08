@@ -19,6 +19,7 @@ import qualified Asterix.Specs          as A
 import           Fmt
 import           Struct
 
+{-
 mkContent :: (Content, Int) -> BlockM Builder ()
 mkContent (cont, ix) = case cont of
     ContentRaw -> do
@@ -284,6 +285,8 @@ mkManifest lst = do
     let f :: Asterix -> Text
         f ast = sformat stext (nameOfAst ast)
     fmt ("manifest = " % stext) (fmtList "[" "]" f lst)
+-}
+
 
 {-
 -- | Name of argument with given (variation) index.
@@ -1109,6 +1112,7 @@ programManifest specs = enclose "manifest = {" "}" $ do
 mkCode :: Text -> Text -> [A.Asterix] -> Builder
 mkCode ref ver specs' = render "    " "\n" $ do
     "# Asterix specifications" :: BlockM Builder ()
+    {-
     ""
     "# This file is generated, DO NOT EDIT!"
     "# For more details, see:"
@@ -1151,6 +1155,7 @@ mkCode ref ver specs' = render "    " "\n" $ do
     "# Manifest"
     ""
     mkManifest specs
+-}
   where
     specs :: [Asterix]
     specs = sort $ nub $ fmap deriveAsterix specs'

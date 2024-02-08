@@ -14,51 +14,99 @@ import qualified Asterix.Specs          as A
 import           Fmt
 import           Struct
 
-mkContent :: (Content, Int) -> BlockM Builder ()
+-- The following functions is a pretty printer trick
+-- which follows the shape of the data structure. In this case,
+-- the parentheses are on the correct place automatically.
+numberToText :: A.Number -> Text
+numberToText = f1 where
+    f1 = \case
+        A.NumInt i -> case i >= 0 of
+            True -> sformat ("'TNumInt 'TPlus " % int) i
+            False -> sformat ("'TNumInt 'TMinus " % int) (i * (-1))
+        other -> f2 other
+    f2 = \case
+        A.NumDiv a b -> sformat ("'TNumDiv (" % stext % ") (" % stext % ")") (f1 a) (f1 b)
+        other -> f3 other
+    f3 = \case
+        A.NumPow a b -> sformat ("'TNumPow " % int % " " % int) a b
+        other -> f1 other
+
+constrainToText :: A.Constrain -> Text
+constrainToText = \case
+    A.EqualTo n -> "'( 'EqualTo, " <> numberToText n <> ")"
+    A.NotEqualTo n -> "'( 'NotEqualTo, " <> numberToText n <> ")"
+    A.GreaterThan n -> "'( 'GreaterThan, " <> numberToText n <> ")"
+    A.GreaterThanOrEqualTo n -> "'( 'GreaterThanOrEqualTo, " <> numberToText n <> ")"
+    A.LessThan n -> "'( 'LessThan, " <> numberToText n <> ")"
+    A.LessThanOrEqualTo n -> "'( 'LessThanOrEqualTo, " <> numberToText n <> ")"
+
+mkContent :: (A.Content, Int) -> BlockM Builder ()
 mkContent (cont, ix) = case cont of
-    ContentRaw -> do
+    A.ContentRaw -> do
         fmt ("type " % stext % " = 'TContentRaw") t
-    ContentTable lst -> do
+    A.ContentTable lst -> do
         let f :: (Int, Text) -> Text
             f (a,b) = sformat ("'( " % int % ", \"" % stext % "\")") a b
         fmt ("type " % stext % " = 'TContentTable " % stext) t (fmtList "'[ " "]" f lst)
-    ContentString st -> do
+    A.ContentString st -> do
         fmt ("type " % stext % " = 'TContentString " % stext) t $ case st of
             A.StringAscii -> "'StringAscii"
             A.StringICAO  -> "'StringICAO"
             A.StringOctal -> "'StringOctal"
-    ContentInteger sig -> do
-        fmt ("type " % stext % " = 'TContentInteger " % stext) t $ case sig of
-            A.Signed   -> "'Signed"
-            A.Unsigned -> "'Unsigned"
-    ContentQuantity sig' lsb' unit -> do
+    A.ContentInteger sig cons -> do
+        fmt ("type " % stext % " = 'TContentInteger " % stext % " " % stext) t
+            ( case sig of
+                 A.Signed   -> "'Signed"
+                 A.Unsigned -> "'Unsigned")
+            (fmtList "'[ " "]" constrainToText cons)
+    A.ContentQuantity sig' lsb' unit cons -> do
         let sig = case sig' of
                 A.Signed   -> "'Signed"
                 A.Unsigned -> "'Unsigned"
-            -- The following 'lsb*' functions is a pretty printer trick
-            -- which follows the shape of the data structure. In this case,
-            -- the parentheses are on the correct place automatically.
-            lsb1 = \case
-                A.NumInt i -> case i >= 0 of
-                    True -> sformat ("'TNumInt 'TPlus " % int) i
-                    False -> sformat ("'TNumInt 'TMinus " % int) (i * (-1))
-                other -> lsb2 other
-            lsb2 = \case
-                A.NumDiv a b -> sformat ("'TNumDiv (" % stext % ") (" % stext % ")") (lsb1 a) (lsb1 b)
-                other -> lsb3 other
-            lsb3 = \case
-                A.NumPow a b -> sformat ("'TNumPow " % int % " " % int) a b
-                other -> lsb1 other
         fmt ("type " % stext % " = 'TContentQuantity " % stext
-             % " (" % stext % ") \"" % stext % "\"") t sig (lsb1 lsb') unit
+             % " (" % stext % ") \"" % stext % "\" " % stext)
+            t
+            sig
+            (numberToText lsb')
+            unit
+            (fmtList "'[ " "]" constrainToText cons)
+    A.ContentBds bt -> do
+        let x = case bt of
+                A.BdsWithAddress -> "'TBdsWithAddress"
+                A.BdsAt Nothing -> "('TBdsAt 'Nothing)"
+                A.BdsAt (Just (A.BdsAddr addr)) -> sformat
+                    ("('TBdsAt ('Just " % int % "))") addr
+        fmt ("type " % stext % " = 'TContentBds " % stext) t x
   where
     t = nameOf "TContent" ix
 
+mkRule :: AsterixDb EMap -> (A.Rule, Int) -> BlockM Builder ()
+mkRule db (rule, ix) = case rule of
+    A.ContextFree cont -> do
+        fmt ("type " % stext % " = 'TContextFree " % stext)
+            t
+            (nameOf "TContent" $ indexOf (dbContent db) cont)
+    A.Dependent name lst -> do
+        let fText = sformat ("\"" % stext % "\"")
+            fLst (i, cont) = sformat
+                ("'(" % int % ", " % stext % ")")
+                i
+                (nameOf "TContent" $ indexOf (dbContent db) cont)
+        fmt ("type " % stext % " = 'TDependent " % stext % " " % stext)
+            t
+            (fmtList "'[ " "]" fText name)
+            (fmtList "'[ " "]" fLst lst)
+  where
+    t = nameOf "TRule" ix
+
 mkVariation :: AsterixDb EMap -> (Variation, Int) -> BlockM Builder ()
 mkVariation db (var, ix) = case var of
-    Element _ n cont -> do
-        fmt ("type " % stext % " = 'TElement " % int % " " % stext) t n
-            (nameOf "TContent" $ indexOf (dbContent db) cont)
+    Element (OctetOffset o) n rule -> do
+        fmt ("type " % stext % " = 'TElement " % int % " " % int % " " % stext)
+            t
+            o
+            n
+            (nameOf "TRule" $ indexOf (dbRule db) rule)
     Group lst -> do
         let f :: Item -> Text
             f = nameOf "TItem" . indexOf (dbItem db)
@@ -87,15 +135,18 @@ mkVariation db (var, ix) = case var of
                 Just item -> "'Just " <> nameOf "TItem" (indexOf (dbItem db) item)
         fmt ("type " % stext % " = 'TCompound " % stext % " " % stext) t mn
             (fmtList "'[ " "]" f lst)
+    RandomFieldSequencing -> do
+        fmt ("type " % stext % " = 'TRandomFieldSequencing") t
   where
     t = nameOf "TVariation" ix
 
 mkItem :: AsterixDb EMap -> (Item, Int) -> BlockM Builder ()
 mkItem db (item, ix) = case item of
-    Spare _o n -> do
-        fmt ("type " % stext % " = 'TSpare " % int) t n
+    Spare (OctetOffset o) n -> do
+        fmt ("type " % stext % " = 'TSpare " % int % " " % int) t o n
     Item name title var -> do
-        fmt ("type " % stext % " = 'TItem \"" % stext % "\" \"" % stext % "\" " % stext) t name title
+        fmt ("type " % stext % " = 'TItem \"" % stext % "\" \"" %
+             stext % "\" " % stext) t name title
             (nameOf "TVariation" $ indexOf (dbVariation db) var)
   where
     t = nameOf "TItem" ix
@@ -175,6 +226,9 @@ mkCode ref ver specs' = render "    " "\n" $ do
     ""
     "-- | Content set"
     sequence_ (fmap mkContent $ enumList $ dbContent db)
+    ""
+    "-- | Rule set"
+    sequence_ (fmap (mkRule db) $ enumList $ dbRule db)
     ""
     "-- | Variation set"
     sequence_ (fmap (mkVariation db) $ enumList $ dbVariation db)
