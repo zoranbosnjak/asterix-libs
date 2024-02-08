@@ -2,9 +2,9 @@ import Test.Tasty
 --import Test.Tasty.QuickCheck as QC
 --import Test.Tasty.HUnit
 
-import TestBytes
+import TestBits
 
 main :: IO ()
 main = defaultMain $ testGroup "Tests"
-    [ TestBytes.tests
+    [ TestBits.tests
     ]
