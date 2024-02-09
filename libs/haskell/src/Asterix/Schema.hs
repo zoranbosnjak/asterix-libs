@@ -422,3 +422,4 @@ data VAsterix = VAsterix Int VEdition VSpec
 instance (KnownNat n, IsSchema ed VEdition, IsSchema spec VSpec)
     => IsSchema ('TAsterix n ed spec) VAsterix where
     schema = VAsterix (nv (Proxy @n)) (schema @ed) (schema @spec)
+

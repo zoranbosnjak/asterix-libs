@@ -26,6 +26,9 @@ type Parsing = StateT Bits (Either AsterixError)
 runParser :: Parsing a -> Bits -> Either AsterixError (a, Bits)
 runParser = runStateT
 
+runParser' :: Parsing a -> Bits -> Either AsterixError a
+runParser' p x = fst <$> runParser p x
+
 throw :: AsterixError -> Parsing a
 throw = lift . Left
 

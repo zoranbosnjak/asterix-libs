@@ -15,7 +15,7 @@ import           Asterix.Schema
 import           Bits
 
 data UVariation bs
-    = Element bs VContent
+    = Element bs VRule
     | Group bs [UItem bs]
     | Extended bs [Maybe (UItem bs)]
     | Repetitive bs [UVariation bs]
@@ -71,8 +71,8 @@ parseBitsWith act = do
 
 parseUVariation :: VVariation -> Parsing (UVariation Bits)
 parseUVariation = \case
-    VElement _o n vcont ->
-        Element <$> fetch n <*> pure vcont
+    VElement _o n vrule ->
+        Element <$> fetch n <*> pure vrule
     VGroup lst -> do
         (s, items) <- parseBitsWith (mapM parseUItem lst)
         pure (Group s items)
@@ -108,6 +108,8 @@ parseUVariation = \case
             when (n <= 0) $ throw ExplicitError
             fetch (8 * pred n)
         pure $ Explicit s
+    VRandomFieldSequencing -> do
+        undefined
     VCompound mn lst -> do
         (s, items) <- parseBitsWith $ do
             fspec' <- case mn of

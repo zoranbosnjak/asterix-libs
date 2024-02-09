@@ -1,3 +1,0 @@
--- | Type safe asterix data manipulation.
--- Use this module, when all parameters (cat, edition, item names...)
--- are known at compile time.

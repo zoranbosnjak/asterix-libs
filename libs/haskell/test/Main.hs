@@ -1,10 +1,14 @@
 import Test.Tasty
---import Test.Tasty.QuickCheck as QC
---import Test.Tasty.HUnit
 
 import TestBits
+import TestDatablock
+import TestGeneric
+import TestSpecific
 
 main :: IO ()
-main = defaultMain $ testGroup "Tests"
+main = defaultMain $ testGroup "Asterix tests"
     [ TestBits.tests
+    , TestDatablock.tests
+    , TestGeneric.tests
+    , TestSpecific.tests
     ]
