@@ -1,23 +1,41 @@
 cabal-version:      3.0
 name:               generator
 version:            0.8.0
-synopsis:           Asterix source code generator.
+synopsis:           Asterix lib source code generator
 -- description:
-homepage:           https://zoranbosnjak.github.io/asterix-libs/
+homepage:           https://github.com/zoranbosnjak/asterix-libs
 bug-reports:        https://github.com/zoranbosnjak/asterix-libs/issues
 license:            BSD-3-Clause
 license-file:       LICENSE
 author:             Zoran Bošnjak
-maintainer:         zoran.bosnjak@sloveniacontrol.si
+maintainer:         zoran.bosnjak@via.si
 -- copyright:
 category:           Data
 build-type:         Simple
 extra-doc-files:    CHANGELOG.md
 -- extra-source-files:
 
-common deps
+executable code-generator
+    default-language: GHC2021
+    hs-source-dirs:   src
+    main-is:          Main.hs
+    ghc-options:
+        -O2 -rtsopts -funbox-strict-fields -with-rtsopts=-T -threaded
+        -Wall
+        -Wincomplete-uni-patterns
+        -Wincomplete-record-updates
+        -Wcompat
+        -Widentities
+        -Wredundant-constraints
+    other-modules:
+        Paths_generator
+        Struct
+        Fmt
+        Language.Python
+        Language.Haskell
+    -- other-extensions:
     build-depends:
-        base < 5
+        base ^>=4.17.2.1
         , aspecs
         , with-utf8
         , optparse-applicative
@@ -30,67 +48,3 @@ common deps
         , formatting
         , scientific
         , time
-
-common opts
-    other-extensions: AllowAmbiguousTypes
-    default-language: Haskell2010
-    default-extensions:
-        ApplicativeDo
-        BangPatterns
-        ConstraintKinds
-        DataKinds
-        DefaultSignatures
-        DeriveFoldable
-        DeriveFunctor
-        DeriveGeneric
-        DeriveLift
-        DeriveTraversable
-        DerivingStrategies
-        EmptyCase
-        ExistentialQuantification
-        FlexibleContexts
-        FlexibleInstances
-        FunctionalDependencies
-        GADTs
-        GeneralizedNewtypeDeriving
-        InstanceSigs
-        KindSignatures
-        LambdaCase
-        MultiParamTypeClasses
-        MultiWayIf
-        NamedFieldPuns
-        OverloadedStrings
-        PatternSynonyms
-        RankNTypes
-        ScopedTypeVariables
-        StandaloneDeriving
-        TupleSections
-        TypeApplications
-        TypeFamilies
-        TypeFamilyDependencies
-        TypeOperators
-
-common app
-    other-modules:
-        Paths_generator
-        Struct
-        Fmt
-        Language.Python
-        Language.Haskell
-    default-language: Haskell2010
-
-    ghc-options:
-        -O2 -rtsopts -funbox-strict-fields -with-rtsopts=-T -threaded
-        -Wall
-        -Wincomplete-uni-patterns
-        -Wincomplete-record-updates
-        -Wcompat
-        -Widentities
-        -Wredundant-constraints
-    default-extensions: StrictData
-    build-depends:
-
-executable ast-code-generator
-    import: deps, opts, app
-    hs-source-dirs: src
-    main-is: Main.hs

@@ -1,5 +1,7 @@
 -- | Asterix source code (lib) generator.
 
+{-# LANGUAGE OverloadedStrings #-}
+
 module Main where
 
 import           Control.Monad

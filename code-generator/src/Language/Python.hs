@@ -1,15 +1,17 @@
 -- | Generate asterix 'python' source code.
 
+{-# LANGUAGE OverloadedStrings #-}
+
 module Language.Python (mkCode) where
 
-import           Control.Monad
-import           Data.List
-import           Data.Maybe
-import           Data.Scientific
 import           Data.Set               (Set)
 import           Data.Text              (Text)
-import qualified Data.Text              as T
 import           Data.Text.Lazy.Builder (Builder)
+import           Data.List (nub, sort)
+import           Control.Monad
+import           Data.Maybe
+import           Data.Scientific
+import qualified Data.Text              as T
 import qualified Data.Text.Lazy.Builder as BL
 import           Formatting             as F
 import           Numeric                (showHex)

@@ -1,9 +1,8 @@
 {-# LANGUAGE NumericUnderscores #-}
 
-module BenchBits where
+import Test.Tasty.Bench
 
 {-
-import Test.Tasty.Bench
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
 import qualified Data.ByteString.Lazy as Bsl
@@ -12,7 +11,7 @@ import qualified Data.List
 import Data.Word
 import Data.Maybe
 
-import Bytes
+import Bits
 import qualified Asterix.RawDatablock as Db
 
 benchInspect :: Benchmark

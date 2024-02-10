@@ -1,6 +1,8 @@
 -- | Asterix structures and helper functions for source code generation
 --
 
+{-# LANGUAGE LambdaCase #-}
+
 {-
 -- 'AsterixDb' - Asterix database is a collection of all components, without
 -- duplications (the same definitions can be reused). For example,

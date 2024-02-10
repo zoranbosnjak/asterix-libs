@@ -1,5 +1,7 @@
 -- | Working with datagrams and raw datablocks
 
+{-# LANGUAGE OverloadedStrings #-}
+
 module TestDatablock where
 
 import           Control.Monad

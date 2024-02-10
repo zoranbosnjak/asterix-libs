@@ -3,75 +3,19 @@ name:               asterix-lib
 version:            0.1.0
 synopsis:           asterix data processing library
 -- description:
-homepage:           https://zoranbosnjak.github.io/asterix-libs/
+homepage:           https://github.com/zoranbosnjak/asterix-libs
 license:            BSD-3-Clause
 license-file:       LICENSE
 author:             Zoran Bošnjak
-maintainer:         zoran.bosnjak@sloveniacontrol.si
+maintainer:         zoran.bosnjak@via.si
 -- copyright:
 category:           Data
 build-type:         Simple
 extra-doc-files:    CHANGELOG.md
 -- extra-source-files:
 
-common deps
-    build-depends:
-      base < 5
-      , bytestring
-      , text
-      , transformers
-
-common opts
-    default-language: Haskell2010
-    default-extensions:
-        ApplicativeDo
-        BangPatterns
-        ConstraintKinds
-        DataKinds
-        DefaultSignatures
-        DeriveFoldable
-        DeriveFunctor
-        DeriveGeneric
-        DeriveLift
-        DeriveTraversable
-        DerivingStrategies
-        EmptyCase
-        ExistentialQuantification
-        FlexibleContexts
-        FlexibleInstances
-        FunctionalDependencies
-        GADTs
-        GeneralizedNewtypeDeriving
-        InstanceSigs
-        KindSignatures
-        LambdaCase
-        MultiParamTypeClasses
-        MultiWayIf
-        NamedFieldPuns
-        OverloadedStrings
-        PatternSynonyms
-        RankNTypes
-        ScopedTypeVariables
-        StandaloneDeriving
-        TupleSections
-        TypeApplications
-        TypeFamilies
-        TypeFamilyDependencies
-        TypeOperators
-
-common warnings
-    ghc-options: -Wall
-
-library
-    import:           deps, opts, warnings
-    exposed-modules:
-        Bits
-        Asterix.Parsing
-        Asterix.RawDatablock
-        Asterix.Schema
-        Asterix.Base
-    -- other-modules:
-    hs-source-dirs: src
+common base
+    default-language: GHC2021
     ghc-options:
         -O2 -funbox-strict-fields -threaded
         -Wall
@@ -80,10 +24,32 @@ library
         -Wcompat
         -Widentities
         -Wredundant-constraints
+    build-depends:
+      base ^>=4.17.2.1
+      , bytestring
+      , text
+      , transformers
+
+library
+    import:           base
+    exposed-modules:
+        Bits
+        Asterix.Parsing
+        Asterix.RawDatablock
+        Asterix.Schema
+        Asterix.Base
+    -- other-modules:
+    -- other-extensions:
+    hs-source-dirs:   src
 
 test-suite asterix-lib-test
-    import:           deps, opts, warnings
-    -- other-modules:
+    import:           base
+    other-modules:
+        TestBits
+        TestDatablock
+        TestSpecific
+        TestGeneric
+    -- other-extensions:
     type:             exitcode-stdio-1.0
     hs-source-dirs:   test
     main-is:          Main.hs
@@ -92,13 +58,12 @@ test-suite asterix-lib-test
         , tasty
         , tasty-quickcheck
         , tasty-hunit
-        , tasty-bench
 
-benchmark bench-bytes
-    import:           deps, opts, warnings
+benchmark bench-bits
+    import:           base
     type:             exitcode-stdio-1.0
     hs-source-dirs:   test
-    main-is:          BenchBytes.hs
+    main-is:          BenchBits.hs
     ghc-options:      "-with-rtsopts=-A32m"
     if impl(ghc >= 8.6)
         ghc-options: -fproc-alignment=64

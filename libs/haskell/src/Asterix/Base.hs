@@ -1,5 +1,9 @@
 -- | Base asterix processing
 
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE TypeFamilies #-}
+
 module Asterix.Base where
 
 import           GHC.TypeLits

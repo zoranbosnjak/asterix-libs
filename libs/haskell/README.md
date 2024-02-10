@@ -16,5 +16,6 @@ runhaskell $EXTENSIONS -Wall -isrc -itest test/Main.hs
 cabal build -j
 
 # run benchmarks
+cabal update # if necessary
 cabal bench
 ```

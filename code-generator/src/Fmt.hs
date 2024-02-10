@@ -1,5 +1,7 @@
 -- | Common code formatting helper functions.
 
+{-# LANGUAGE OverloadedStrings #-}
+
 module Fmt where
 
 import           Data.List              (intersperse)

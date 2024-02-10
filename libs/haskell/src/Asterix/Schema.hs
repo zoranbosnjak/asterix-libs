@@ -2,6 +2,9 @@
 
 {-# LANGUAGE AllowAmbiguousTypes  #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE TypeFamilies #-}
 
 module Asterix.Schema where
 
@@ -326,15 +329,14 @@ instance MNat mn => IsSchema ('TCompound mn '[]) VVariation where
     schema = VCompound (mInt @mn) []
 
 instance
-    ( MNat mn, IsSchema ('TCompound mn ts) VVariation
+    ( IsSchema ('TCompound mn ts) VVariation
     ) => IsSchema ('TCompound mn ('Nothing ': ts)) VVariation where
     schema = case schema @('TCompound mn ts) of
         VCompound mn xs -> VCompound mn (Nothing : xs)
         _               -> err
 
 instance
-    ( MNat mn
-    , IsSchema t VItem
+    ( IsSchema t VItem
     , IsSchema ('TCompound mn ts) VVariation
     ) => IsSchema ('TCompound mn ('Just t ': ts)) VVariation where
     schema = case schema @('TCompound mn ts) of
@@ -422,4 +424,3 @@ data VAsterix = VAsterix Int VEdition VSpec
 instance (KnownNat n, IsSchema ed VEdition, IsSchema spec VSpec)
     => IsSchema ('TAsterix n ed spec) VAsterix where
     schema = VAsterix (nv (Proxy @n)) (schema @ed) (schema @spec)
-

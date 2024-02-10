@@ -1,9 +1,12 @@
 -- | Generate asterix 'haskell' source code.
 
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+
 module Language.Haskell (mkCode) where
 
 import           Control.Monad
-import           Data.List
+import           Data.List              (sort, nub)
 import           Data.Text              (Text)
 import           Data.Text.Lazy.Builder (Builder)
 import qualified Data.Text.Lazy.Builder as BL

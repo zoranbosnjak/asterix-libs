@@ -1,3 +1,6 @@
+
+{-# LANGUAGE LambdaCase #-}
+
 module TestBits where
 
 import Control.Monad

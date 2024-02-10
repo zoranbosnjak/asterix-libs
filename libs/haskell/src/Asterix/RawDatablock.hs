@@ -7,6 +7,8 @@
 --    'len' is 2 octet long
 --    'records' represents the actual bytes of data
 
+{-# LANGUAGE LambdaCase #-}
+
 module Asterix.RawDatablock where
 
 import           Control.Monad
