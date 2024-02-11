@@ -4,8 +4,13 @@
 -- For more details, see:
 --    - https://github.com/zoranbosnjak/asterix-specs
 
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DataKinds #-}
+
 -- Types are BIG, disable depth checking.
 {-# OPTIONS_GHC -freduction-depth=0 #-}
+
+module Generated where
 
 import           Data.Text
 
@@ -96,9 +101,9 @@ type TVariation_33 = 'TExtended '[ 'Just TItem_60, 'Just TItem_36, 'Nothing, 'Ju
 type TVariation_34 = 'TRepetitive ('Just 1) TVariation_5
 type TVariation_35 = 'TRepetitive ('Just 1) TVariation_27
 type TVariation_36 = 'TRepetitive 'Nothing TVariation_4
-type TVariation_37 = 'TExplicit
-type TVariation_38 = 'TExplicit
-type TVariation_39 = 'TExplicit
+type TVariation_37 = 'TExplicit 'Nothing
+type TVariation_38 = 'TExplicit ('Just 'ReservedExpansion)
+type TVariation_39 = 'TExplicit ('Just 'SpecialPurpose)
 type TVariation_40 = 'TCompound 'Nothing '[ 'Just TItem_5]
 type TVariation_41 = 'TCompound 'Nothing '[ 'Just TItem_5, 'Just TItem_25, 'Just TItem_26]
 type TVariation_42 = 'TCompound 'Nothing '[ 'Just TItem_5, 'Just TItem_27, 'Just TItem_28]

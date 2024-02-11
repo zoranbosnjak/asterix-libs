@@ -47,8 +47,8 @@ test-suite asterix-lib-test
     other-modules:
         TestBits
         TestDatablock
-        TestSpecific
         TestGeneric
+        TestSpecific
     -- other-extensions:
     type:             exitcode-stdio-1.0
     hs-source-dirs:   test

@@ -243,6 +243,11 @@ instance
     ) => IsSchema ('TDependent name lst) VRule where
     schema = VDependent (schema @name) (schema @lst)
 
+data ExplicitType
+    = ReservedExpansion
+    | SpecialPurpose
+    deriving (Generic, Eq, Show)
+
 data TVariation
     = TElement
         Nat -- bit offset
@@ -255,7 +260,7 @@ data TVariation
     | TRepetitive
         (Maybe Nat) -- header length (Nothing for FX type)
         TVariation
-    | TExplicit
+    | TExplicit (Maybe ExplicitType)
     | TCompound
         (Maybe Nat) -- fixed fspec length or fx based
         [Maybe TItem] -- Nothing = empty slot
@@ -278,7 +283,7 @@ data VVariation
     | VGroup [VItem]
     | VExtended [Maybe VItem]
     | VRepetitive (Maybe Int) VVariation
-    | VExplicit
+    | VExplicit (Maybe ExplicitType)
     | VCompound (Maybe Int) [Maybe VItem]
     | VRandomFieldSequencing
     deriving (Generic, Eq, Show)
@@ -322,8 +327,14 @@ instance
     ) => IsSchema ('TRepetitive mn var) VVariation where
     schema = VRepetitive (mInt @mn) (schema @var)
 
-instance IsSchema 'TExplicit VVariation where
-    schema = VExplicit
+instance IsSchema ('TExplicit 'Nothing) VVariation where
+    schema = VExplicit Nothing
+
+instance IsSchema ('TExplicit ('Just 'ReservedExpansion)) VVariation where
+    schema = VExplicit (Just ReservedExpansion)
+
+instance IsSchema ('TExplicit ('Just 'SpecialPurpose)) VVariation where
+    schema = VExplicit (Just SpecialPurpose)
 
 instance MNat mn => IsSchema ('TCompound mn '[]) VVariation where
     schema = VCompound (mInt @mn) []

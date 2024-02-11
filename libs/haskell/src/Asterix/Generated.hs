@@ -4,8 +4,13 @@
 -- For more details, see:
 --    - https://github.com/zoranbosnjak/asterix-specs
 
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DataKinds #-}
+
 -- Types are BIG, disable depth checking.
 {-# OPTIONS_GHC -freduction-depth=0 #-}
+
+module Asterix.Generated where
 
 import           Data.Text
 
@@ -2865,9 +2870,9 @@ type TVariation_1338 = 'TRepetitive 'Nothing TVariation_148
 type TVariation_1339 = 'TRepetitive 'Nothing TVariation_149
 type TVariation_1340 = 'TRepetitive 'Nothing TVariation_150
 type TVariation_1341 = 'TRepetitive 'Nothing TVariation_151
-type TVariation_1342 = 'TExplicit
-type TVariation_1343 = 'TExplicit
-type TVariation_1344 = 'TExplicit
+type TVariation_1342 = 'TExplicit 'Nothing
+type TVariation_1343 = 'TExplicit ('Just 'ReservedExpansion)
+type TVariation_1344 = 'TExplicit ('Just 'SpecialPurpose)
 type TVariation_1345 = 'TCompound 'Nothing '[ 'Just TItem_60, 'Just TItem_137, 'Just TItem_107, 'Just TItem_274, 'Just TItem_214, 'Just TItem_286, 'Just TItem_222, 'Just TItem_353, 'Just TItem_367, 'Just TItem_293, 'Just TItem_299, 'Just TItem_302, 'Just TItem_304, 'Just TItem_305, 'Just TItem_307, 'Just TItem_310, 'Just TItem_318, 'Just TItem_322, 'Just TItem_238, 'Just TItem_119, 'Just TItem_342, 'Just TItem_84, 'Just TItem_362, 'Just TItem_295, 'Just TItem_297, 'Just TItem_262, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Just TItem_1428, 'Just TItem_1587]
 type TVariation_1346 = 'TCompound 'Nothing '[ 'Just TItem_60, 'Just TItem_137, 'Just TItem_107, 'Just TItem_275, 'Just TItem_214, 'Just TItem_286, 'Just TItem_222, 'Just TItem_353, 'Just TItem_367, 'Just TItem_293, 'Just TItem_299, 'Just TItem_302, 'Just TItem_304, 'Just TItem_305, 'Just TItem_307, 'Just TItem_310, 'Just TItem_318, 'Just TItem_322, 'Just TItem_238, 'Just TItem_119, 'Just TItem_342, 'Just TItem_84, 'Just TItem_362, 'Just TItem_295, 'Just TItem_297, 'Just TItem_262, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Just TItem_1428, 'Just TItem_1587]
 type TVariation_1347 = 'TCompound 'Nothing '[ 'Just TItem_60, 'Just TItem_137, 'Just TItem_107, 'Just TItem_275, 'Just TItem_214, 'Just TItem_286, 'Just TItem_222, 'Just TItem_353, 'Just TItem_367, 'Just TItem_293, 'Just TItem_299, 'Just TItem_302, 'Just TItem_304, 'Just TItem_305, 'Just TItem_307, 'Just TItem_310, 'Just TItem_318, 'Just TItem_322, 'Just TItem_238, 'Just TItem_119, 'Just TItem_342, 'Just TItem_84, 'Just TItem_362, 'Just TItem_295, 'Just TItem_297, 'Just TItem_262, 'Just TItem_191, 'Just TItem_281, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Just TItem_1428, 'Just TItem_1587]

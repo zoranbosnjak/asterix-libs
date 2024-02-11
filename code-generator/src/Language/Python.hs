@@ -1,5 +1,7 @@
 -- | Generate asterix 'python' source code.
 
+{-# OPTIONS_GHC -Wno-all #-}
+
 {-# LANGUAGE OverloadedStrings #-}
 
 module Language.Python (mkCode) where
@@ -1111,8 +1113,8 @@ programManifest specs = enclose "manifest = {" "}" $ do
 -}
 
 -- | Source code generator entry point.
-mkCode :: Text -> Text -> [A.Asterix] -> Builder
-mkCode ref ver specs' = render "    " "\n" $ do
+mkCode :: Bool -> Text -> Text -> [A.Asterix] -> Builder
+mkCode test ref ver specs' = render "    " "\n" $ do
     "# Asterix specifications" :: BlockM Builder ()
     {-
     ""

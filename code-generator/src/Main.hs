@@ -29,7 +29,7 @@ import           Asterix.Specs.Validation (validate)
 import qualified Language.Python
 import qualified Language.Haskell
 
-languages :: [(Text, Text -> Text -> [Asterix] -> Builder)]
+languages :: [(Text, Bool -> Text -> Text -> [Asterix] -> Builder)]
 languages =
     [ ("python", Language.Python.mkCode)
     , ("haskell", Language.Haskell.mkCode)
@@ -39,6 +39,7 @@ data Options = Options
     { optLanguage    :: Text
     , optTimestamp   :: Integer
     , optReference   :: Text
+    , optTest        :: Bool
     , optPaths       :: [FilePath]
     , optShowVersion :: Bool
     } deriving (Show)
@@ -59,10 +60,12 @@ parseOptions = Options
        <> showDefault
        <> value "unknown"
         )
+    <*> switch (long "test"
+       <> help "Generate test output")
     <*> some (Opt.argument str (metavar "PATH..."
        <> help ("Spec input file(s), supported formats: " ++ show syntaxList)))
     <*> switch (long "show-version"
-       <> help "Show version text and exit" )
+       <> help "Show version text and exit")
   where
     syntaxList = do
         (shortName, _, _) <- availableDecoders
@@ -110,4 +113,4 @@ main = withUtf8 $ do
     mkCode <- maybe (fail "Unsupported language") pure $
         lookup (optLanguage cmdOptions) languages
     BSL.putStr $ TL.encodeUtf8 $ BL.toLazyText $ mkCode
-        (optReference cmdOptions) versionText specs
+        (optTest cmdOptions) (optReference cmdOptions) versionText specs

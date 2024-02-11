@@ -31,7 +31,7 @@ lang=haskell
 
 # generate code for test run
 runhaskell $EXTENSIONS -iother -isrc ./src/Main.hs \
-    --language $lang $TESTSPECS
+    --test --language $lang $TESTSPECS
 
 # generate code with all defined specs
 runhaskell $EXTENSIONS -iother -isrc ./src/Main.hs \

@@ -4,10 +4,10 @@
 
 module Bits where
 
-import           Data.Monoid
 import qualified Data.Bits
 import           Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
+import           Data.Monoid
 import           Data.String
 import           Data.Word
 import           Prelude         hiding (length, splitAt)
@@ -30,6 +30,9 @@ instance HasLength Bits where
 -- | Bitstring builder, optimized for constructing.
 data Builder = Builder (Endo [Bits]) !Int -- (endo, bit length)
 
+instance IsString Builder where
+    fromString = fromBits . fromString
+
 instance Semigroup Builder where
     Builder f1 n1 <> Builder f2 n2 = Builder (f1 <> f2) (n1+n2)
 
@@ -42,6 +45,12 @@ instance HasLength Builder where
 -- | Primary way to create Bits is from ByteString.
 mkBits :: ByteString -> Bits
 mkBits s = Bits s 0 (BS.length s * 8)
+
+fromUInteger :: Int -> Int -> Int -> Bits
+fromUInteger _o _n _x = undefined -- TODO: add tests
+
+toUInteger :: Bits -> Int
+toUInteger = undefined -- TODO: add tests
 
 null :: Bits -> Bool
 null = (<= 0) . bitLength

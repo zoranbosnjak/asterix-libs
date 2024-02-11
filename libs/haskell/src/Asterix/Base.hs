@@ -22,9 +22,10 @@ data UVariation bs
     = Element bs VRule
     | Group bs [UItem bs]
     | Extended bs [Maybe (UItem bs)]
-    | Repetitive bs [UVariation bs]
-    | Explicit bs
-    | Compound bs [UItem bs]
+    | Repetitive bs (Maybe Int) [UVariation bs]
+    | Explicit bs (Maybe ExplicitType) bs
+    | Compound bs [Maybe (Maybe (UItem bs))]
+    | RandomFieldSequencing -- TODO
     deriving (Show, Eq, Functor)
 
 data UItem bs
@@ -38,14 +39,10 @@ newtype URecord bs = URecord (UVariation bs)
 newtype UExpansion bs = UExpansion (UVariation bs)
     deriving (Show, Eq, Functor)
 
--- | Use type parameter, to avoid runtime check for the common case (single).
-data UDatablock (single :: Bool) bs where
-    UDatablockSingle :: bs -> [URecord bs] -> UDatablock 'True bs
-    UDatablockMultiple :: bs -> [(Text, URecord bs)] -> UDatablock 'False bs
-
-deriving instance Eq bs => Eq (UDatablock single bs)
-deriving instance Show bs => Show (UDatablock single bs)
-deriving instance Functor (UDatablock single)
+data UDatablock bs
+    = UDatablockSingle bs [URecord bs]
+    | UDatablockMultiple bs [(Text, URecord bs)]
+    deriving (Show, Eq, Functor)
 
 newtype Variation (t :: TVariation) bs = Variation (UVariation bs)
     deriving (Show, Eq, Functor)
@@ -61,8 +58,48 @@ newtype Expansion (cat :: Nat) (ed :: TEdition) (t :: [Maybe TItem]) bs
     = Expansion (UExpansion bs)
     deriving (Show, Eq, Functor)
 
-newtype Datablock (uap :: TUap) bs = Datablock (UDatablock (IsSingleUap uap) bs)
+newtype Datablock (uap :: TUap) bs = Datablock (UDatablock bs)
     deriving (Show, Eq, Functor)
+
+unDatablock :: UDatablock bs -> bs
+unDatablock = \case
+    UDatablockSingle bs _ -> bs
+    UDatablockMultiple bs _ -> bs
+
+unUVariation :: UVariation bs -> bs
+unUVariation = \case
+    Element bs _ -> bs
+    Group bs _ -> bs
+    Extended bs _ -> bs
+    Repetitive bs _ _ -> bs
+    Explicit bs _ _ -> bs
+    Compound bs _ -> bs
+
+unUItem :: UItem bs -> bs
+unUItem = \case
+    USpare bs -> bs
+    UItem _ _ var -> unUVariation var
+
+mkElement :: Int -> Int -> Int -> Builder
+mkElement o n x = fromBits $ fromUInteger o n x
+
+mkGroup :: [UItem Builder] -> Builder
+mkGroup = mconcat . fmap unUItem
+
+mkExtended :: [Maybe (UItem Builder)] -> Builder
+mkExtended = undefined
+
+mkRepetitive :: Maybe Int -> [UVariation Builder] -> Builder
+mkRepetitive = undefined
+
+mkExplicit :: Builder -> Builder
+mkExplicit = undefined
+
+mkUDatablockSingle :: Int -> [URecord Builder] -> UDatablock Builder
+mkUDatablockSingle = undefined
+
+mkUDatablockMultiple :: Int -> [(Text, URecord Builder)] -> UDatablock Builder
+mkUDatablockMultiple = undefined
 
 -- | Parse something, return actual bits, together with the result.
 parseBitsWith :: Parsing a -> Parsing (Bits, a)
@@ -100,21 +137,22 @@ parseUVariation = \case
                         False -> pure [x]
                         True  -> (:) <$> pure x <*> go
             (s, vars) <- parseBitsWith go
-            pure $ Repetitive s vars
+            pure $ Repetitive s mn vars
         Just n1 -> do
             (s, vars) <- parseBitsWith $ do
                 n2 <- Bits.getNumberAligned <$> fetch (n1*8)
                 sequence (replicate n2 $ parseUVariation var)
-            pure $ Repetitive s vars
-    VExplicit -> do
+            pure $ Repetitive s mn vars
+    VExplicit met -> do
         (s, _) <- parseBitsWith $ do
             n <- fmap fromIntegral fetchWord8
             when (n <= 0) $ throw ExplicitError
             fetch (8 * pred n)
-        pure $ Explicit s
+        pure $ Explicit s met undefined
     VRandomFieldSequencing -> do
         undefined
-    VCompound mn lst -> do
+    VCompound _mn _lst -> do
+        undefined {-
         (s, items) <- parseBitsWith $ do
             fspec' <- case mn of
                 Nothing -> fix $ \loop -> do
@@ -133,6 +171,7 @@ parseUVariation = \case
                 (True, Nothing) -> throw ItemPresenceError
                 (True, Just i) -> Just <$> parseUItem i
         pure $ Compound s $ catMaybes items
+        -}
 
 parseUItem :: VItem -> Parsing (UItem Bits)
 parseUItem = \case
@@ -141,17 +180,20 @@ parseUItem = \case
     VItem name title var ->
         UItem <$> pure name <*> pure title <*> parseUVariation var
 
+parseURecord :: VVariation -> Parsing (URecord Bits)
+parseURecord vvar = URecord <$> parseUVariation vvar
+
 -- | Single UAP datablock parser.
-parseUDatablock :: VVariation -> Parsing (UDatablock 'True Bits)
+parseUDatablock :: VVariation -> Parsing (UDatablock Bits)
 parseUDatablock vvar = uncurry UDatablockSingle <$> parseBitsWith f
   where
     f = eof >>= \case
         True -> pure []
-        False -> (:) <$> (URecord <$> parseUVariation vvar) <*> f
+        False -> (:) <$> (parseURecord vvar) <*> f
 
 -- | Try to parse with different UAPs, where each record in a datablock
 -- can potentially be of a different UAP.
-parseUDatablockTryWith :: Bits -> [(Text, VVariation)] -> [UDatablock 'False Bits]
+parseUDatablockTryWith :: Bits -> [(Text, VVariation)] -> [UDatablock Bits]
 parseUDatablockTryWith s probes
     | Bits.null s = pure $ UDatablockMultiple s []
     | otherwise = do
@@ -159,4 +201,5 @@ parseUDatablockTryWith s probes
         case runParser (parseUVariation var) s of
             Left _ -> []
             Right (v, s') -> parseUDatablockTryWith s' probes >>= \case
+                UDatablockSingle _ _ -> error "internal error"
                 UDatablockMultiple _ lst -> [UDatablockMultiple s ((name, URecord v) : lst)]

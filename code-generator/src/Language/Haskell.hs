@@ -127,8 +127,12 @@ mkVariation db (var, ix) = case var of
                 A.RepetitiveFx -> "'Nothing"
             var2 = nameOf "TVariation" $ indexOf (dbVariation db) var2'
         fmt ("type " % stext % " = 'TRepetitive " % stext % " " % stext) t rt var2
-    Explicit _ -> do
-        fmt ("type " % stext % " = 'TExplicit") t
+    Explicit mt -> do
+        let met = case mt of
+                Nothing -> "'Nothing"
+                Just A.ReservedExpansion -> "('Just 'ReservedExpansion)"
+                Just A.SpecialPurpose -> "('Just 'SpecialPurpose)"
+        fmt ("type " % stext % " = 'TExplicit " % stext) t met
     Compound mn' lst -> do
         let mn = case mn' of
                 Nothing -> "'Nothing"
@@ -206,16 +210,23 @@ mkManifest lst = do
     ps = ["["] <> repeat ","
 
 -- | Source code generator entry point.
-mkCode :: Text -> Text -> [A.Asterix] -> Builder
-mkCode ref ver specs' = render "    " "\n" $ do
+mkCode :: Bool -> Text -> Text -> [A.Asterix] -> Builder
+mkCode test ref ver specs' = render "    " "\n" $ do
     "-- | Asterix specifications" :: BlockM Builder ()
     ""
     "-- This file is generated, DO NOT EDIT!"
     "-- For more details, see:"
     "--    - https://github.com/zoranbosnjak/asterix-specs"
     ""
+    "{-# LANGUAGE OverloadedStrings #-}"
+    "{-# LANGUAGE DataKinds #-}"
+    ""
     "-- Types are BIG, disable depth checking."
     "{-# OPTIONS_GHC -freduction-depth=0 #-}"
+    ""
+    case test of
+        True  -> "module Generated where"
+        False -> "module Asterix.Generated where"
     ""
     "import           Data.Text"
     ""
