@@ -104,16 +104,16 @@ type TVariation_36 = 'TRepetitive 'Nothing TVariation_4
 type TVariation_37 = 'TExplicit 'Nothing
 type TVariation_38 = 'TExplicit ('Just 'ReservedExpansion)
 type TVariation_39 = 'TExplicit ('Just 'SpecialPurpose)
-type TVariation_40 = 'TCompound 'Nothing '[ 'Just TItem_5]
-type TVariation_41 = 'TCompound 'Nothing '[ 'Just TItem_5, 'Just TItem_25, 'Just TItem_26]
-type TVariation_42 = 'TCompound 'Nothing '[ 'Just TItem_5, 'Just TItem_27, 'Just TItem_28]
-type TVariation_43 = 'TCompound 'Nothing '[ 'Just TItem_5, 'Just TItem_29]
-type TVariation_44 = 'TCompound 'Nothing '[ 'Just TItem_6, 'Just TItem_7, 'Just TItem_9, 'Just TItem_12, 'Just TItem_13, 'Just TItem_14, 'Just TItem_15, 'Just TItem_16, 'Just TItem_17, 'Just TItem_18, 'Just TItem_19, 'Just TItem_20, 'Just TItem_21, 'Just TItem_22, 'Nothing, 'Just TItem_23, 'Just TItem_24]
-type TVariation_45 = 'TCompound 'Nothing '[ 'Just TItem_6, 'Just TItem_8, 'Just TItem_10]
-type TVariation_46 = 'TCompound 'Nothing '[ 'Just TItem_6, 'Just TItem_8, 'Just TItem_11]
-type TVariation_47 = 'TCompound 'Nothing '[ 'Just TItem_35, 'Nothing, 'Just TItem_39]
-type TVariation_48 = 'TCompound ('Just 1) '[ 'Just TItem_35, 'Nothing, 'Just TItem_39]
-type TVariation_49 = 'TCompound ('Just 1) '[ 'Just TItem_35, 'Just TItem_39]
+type TVariation_40 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_5]
+type TVariation_41 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_5, 'CompoundSubitem TItem_25, 'CompoundSubitem TItem_26]
+type TVariation_42 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_5, 'CompoundSubitem TItem_27, 'CompoundSubitem TItem_28]
+type TVariation_43 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_5, 'CompoundSubitem TItem_29]
+type TVariation_44 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_6, 'CompoundSubitem TItem_7, 'CompoundSubitem TItem_9, 'CompoundSubitem TItem_12, 'CompoundSubitem TItem_13, 'CompoundSubitem TItem_14, 'CompoundSubitem TItem_15, 'CompoundSubitem TItem_16, 'CompoundSubitem TItem_17, 'CompoundSubitem TItem_18, 'CompoundSubitem TItem_19, 'CompoundSubitem TItem_20, 'CompoundSubitem TItem_21, 'CompoundSubitem TItem_22, 'CompoundSpare, 'CompoundSubitem TItem_23, 'CompoundSubitem TItem_24]
+type TVariation_45 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_6, 'CompoundSubitem TItem_8, 'CompoundSubitem TItem_10]
+type TVariation_46 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_6, 'CompoundSubitem TItem_8, 'CompoundSubitem TItem_11]
+type TVariation_47 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_35, 'CompoundSpare, 'CompoundSubitem TItem_39]
+type TVariation_48 = 'TCompound ('Just 1) '[ 'CompoundSubitem TItem_35, 'CompoundSubitem TItem_39]
+type TVariation_49 = 'TCompound ('Just 1) '[ 'CompoundSubitem TItem_35, 'CompoundSpare, 'CompoundSubitem TItem_39]
 
 -- | Item set
 type TItem_0 = 'TSpare 4 4
@@ -140,7 +140,7 @@ type TItem_20 = 'TItem "071" "Explicit None" TVariation_37
 type TItem_21 = 'TItem "072" "Explicit RE" TVariation_38
 type TItem_22 = 'TItem "073" "Explicit SP" TVariation_39
 type TItem_23 = 'TItem "091" "Compound Fspec With Fx" TVariation_47
-type TItem_24 = 'TItem "092" "Compound Fixed Size Fspec" TVariation_48
+type TItem_24 = 'TItem "092" "Compound Fixed Size Fspec" TVariation_49
 type TItem_25 = 'TItem "101" "" TVariation_5
 type TItem_26 = 'TItem "102" "" TVariation_5
 type TItem_27 = 'TItem "201" "" TVariation_12
@@ -187,7 +187,7 @@ type TUap_2 = 'TUapMultiple '[ '("uap1", TVariation_41), '("uap2", TVariation_42
 type TSpec_0 = 'TCat TUap_0
 type TSpec_1 = 'TCat TUap_1
 type TSpec_2 = 'TCat TUap_2
-type TSpec_3 = 'TRef TVariation_49
+type TSpec_3 = 'TRef TVariation_48
 
 -- | Asterix set
 type TAsterix_0 = 'TAsterix 0 ('TEdition 1 0) TSpec_0

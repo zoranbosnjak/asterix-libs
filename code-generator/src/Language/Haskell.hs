@@ -138,12 +138,11 @@ mkVariation db (var, ix) = case var of
                 Nothing -> "'Nothing"
                 Just n  -> sformat ("('Just " % int % ")") (div8 n)
             f = \case
-                Nothing -> "'Nothing"
-                Just item -> "'Just " <> nameOf "TItem" (indexOf (dbItem db) item)
+                CompoundSubitem item -> "'CompoundSubitem " <> nameOf "TItem" (indexOf (dbItem db) item)
+                CompoundSpare -> "'CompoundSpare"
+                CompoundRFS -> "'CompoundRFS"
         fmt ("type " % stext % " = 'TCompound " % stext % " " % stext) t mn
             (fmtList "'[ " "]" f lst)
-    RandomFieldSequencing -> do
-        fmt ("type " % stext % " = 'TRandomFieldSequencing") t
   where
     t = nameOf "TVariation" ix
 

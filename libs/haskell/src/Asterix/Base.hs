@@ -5,6 +5,7 @@
 {-# LANGUAGE TypeFamilies #-}
 
 -- {-# OPTIONS_GHC -Wno-all #-}
+{-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Asterix.Base where
 
@@ -13,16 +14,16 @@ import           Control.Applicative
 import           Control.Monad
 import           Control.Monad.Trans.Class
 import           Control.Monad.Trans.RWS
-import           Data.Function       (fix)
-import           Data.Maybe
 import           Data.Word
-import           Data.ByteString as BS
+import           Data.Maybe
+import           Data.Map as Map
+import           Data.Function (fix)
+import           Data.Bits
+import           Data.ByteString (ByteString)
+import qualified Data.ByteString as BS
 import           Data.Text           (Text)
-import           Prelude
 
 import           Asterix.Schema
---import           Asterix.Parsing
---import           Bits
 
 data ParserError
     = Overflow -- Not enough data available
@@ -30,6 +31,7 @@ data ParserError
     | ItemPresenceError -- Item presence indication for non-defined item
     | ExplicitError -- Explicit item size error
     | ValidationError -- Data validation error
+    | RfsError -- Problem with parsing RFS
     | MultipleDatablockError -- Unable to parse multi UAP datablock
     deriving (Show, Eq)
 
@@ -49,6 +51,7 @@ throw = lift . Left
 eof :: Parser Bool
 eof = (>=) <$> get <*> asks snd
 
+-- | Make sure that n-bits are available, return start of block
 fetch :: BitSize -> Parser BitOffset
 fetch n = do
     totalSize <- asks snd
@@ -58,31 +61,53 @@ fetch n = do
     put offset2
     pure offset1
 
--- | Parse something, return result with actual bits.
-parseWithBits :: Parser a -> Parser (a, (BitOffset, BitSize))
-parseWithBits act = do
+-- | Get word8, assume byte alignment
+fetchWord8 :: Parser Word8
+fetchWord8 = do
+    offset <- fetch 8
+    bytes <- asks fst
+    pure $ BS.index bytes (div offset 8)
+
+-- | Get bytestring, assume byte alignment
+fetchBytes :: Int -> Parser ByteString
+fetchBytes = undefined
+
+-- | Get single bit
+fetchBit :: Parser Bool
+fetchBit = do
+    offset <- fetch 1
+    bytes <- asks fst
+    pure $ Data.Bits.testBit (BS.index bytes (div offset 8)) (7 - mod offset 8)
+
+byteStringToNumber :: Num a => ByteString -> a
+byteStringToNumber = undefined
+
+unpackWord8 :: Word8 -> [Bool]
+unpackWord8 w = [Data.Bits.testBit w i | i <- [7,6..0]]
+
+data Sized a = Sized BitOffset BitSize a
+    deriving (Show, Eq)
+
+-- | Parse something, augment with actual offset and bit size.
+parseSized :: Parser a -> Parser (Sized a)
+parseSized act = do
     offset1 <- get
     result <- act
     offset2 <- get
-    pure (result, (offset1, offset2-offset1))
+    pure $ Sized offset1 (offset2-offset1) result
 
 data UVariation
-    = Element BitOffset BitSize VRule
-    | Group BitOffset BitSize [UItem]
-    | Extended BitOffset BitSize [Maybe UItem] [Maybe VItem] -- present, non-present
-    | Repetitive BitOffset BitSize (Maybe Int) [UVariation]
-    | Explicit BitOffset BitSize (Maybe ExplicitType) Word8
-    | Compound BitOffset BitSize
-        (Either Int Int) -- fixed/actual bytes of fspec
-        [Maybe (Either VItem UItem)] -- non-spare items (defined/present)
-    | RandomFieldSequencing BitOffset BitSize
-        [VItem] -- defined items (uap without RFS)
-        [(Int, UItem)] -- present items
+    = Element VRule
+    | Group [Sized UItem]
+    | Extended [Sized UItem]
+    | Repetitive [Sized UVariation]
+    | Explicit (Maybe ExplicitType) Word8
+    | Compound [Sized UItem]
     deriving (Show, Eq)
 
 data UItem
-    = USpare BitOffset BitSize
-    | UItem Text Text UVariation
+    = USpare
+    | UItem Text Text (Sized UVariation)
     deriving (Show, Eq)
 
 newtype URecord = URecord UVariation
@@ -96,79 +121,85 @@ data UDatablock
     | UDatablockMultiple BitOffset BitSize [(Text, URecord)]
     deriving (Show, Eq)
 
-parseUVariation :: VVariation -> Parser UVariation
-parseUVariation = \case
-    VElement _o n vrule ->
-        Element <$> fetch n <*> pure n <*> pure vrule
-    VGroup lst -> do
-        (items, (o, n)) <- parseWithBits (mapM parseUItem lst)
-        pure (Group o n items)
-    _ -> undefined
-    {-
-    VExtended ts -> do
-        let go = \case
-                [] -> pure []
-                (Just i : xs) -> (:) <$> fmap Just (parseUItem i) <*> go xs
-                (Nothing : xs) -> do
-                    fx <- fetchBool
-                    case fx of
-                        False -> pure [Nothing]
-                        True  -> (:) <$> pure Nothing <*> go xs
-        (s, lst) <- parseBitsWith (go ts)
-        pure $ Extended s lst
+parseUVariation :: VVariation -> Parser (Sized UVariation)
+parseUVariation vvar = parseSized $ case vvar of
+    VElement _ n vrule -> fmap Element $ do
+        void $ fetch n
+        pure vrule
+    VGroup lst -> fmap Group $ do
+        mapM parseUItem lst
+    VExtended ts -> fmap Extended (f ts) where
+        f :: [Maybe VItem] -> Parser [Sized UItem]
+        f = \case
+            [] -> pure []
+            Just i : xs -> (:) <$> parseUItem i <*> f xs
+            Nothing : xs -> do
+                fx <- fetchBit
+                case fx of
+                    False -> pure []
+                    True -> f xs
     VRepetitive mn var -> case mn of
-        Nothing -> do
-            let go = do
-                    x <- parseUVariation var
-                    fx <- fetchBool
-                    case fx of
-                        False -> pure [x]
-                        True  -> (:) <$> pure x <*> go
-            (s, vars) <- parseBitsWith go
-            pure $ Repetitive s mn vars
-        Just n1 -> do
-            (s, vars) <- parseBitsWith $ do
-                n2 <- Bits.getNumberAligned <$> fetch (n1*8)
-                sequence (replicate n2 $ parseUVariation var)
-            pure $ Repetitive s mn vars
+        Nothing -> fmap Repetitive vars where
+            vars :: Parser [Sized UVariation]
+            vars = do
+                x <- parseUVariation var
+                fx <- fetchBit
+                case fx of
+                    False -> pure [x]
+                    True  -> (:) <$> pure x <*> vars
+        Just n1 -> fmap Repetitive $ do
+            n2 <- byteStringToNumber <$> fetchBytes n1
+            sequence (replicate n2 $ parseUVariation var)
     VExplicit met -> do
-        (s, _) <- parseBitsWith $ do
-            n <- fmap fromIntegral fetchWord8
-            when (n <= 0) $ throw ExplicitError
-            fetch (8 * pred n)
-        pure $ Explicit s met undefined
-    VRandomFieldSequencing -> do
-        undefined
-    VCompound _mn _lst -> do
-        undefined {-
-        (s, items) <- parseBitsWith $ do
-            fspec' <- case mn of
-                Nothing -> fix $ \loop -> do
-                    w <- fmap unpackWord8 fetchWord8
-                    let (flags, fx) = (init w, last w)
-                    case fx of
-                        False -> pure flags
-                        True  -> (<>) <$> pure flags <*> loop
-                Just n -> do
-                    ws <- sequence (replicate n fetchWord8)
-                    pure $ join $ fmap unpackWord8 ws
-            let fspec = reverse $ dropWhile (== False) $ reverse fspec'
-            when (Prelude.length fspec > Prelude.length lst) $ throw FxError
-            forM (zip fspec lst) $ \case
-                (False, _) -> pure Nothing
-                (True, Nothing) -> throw ItemPresenceError
-                (True, Just i) -> Just <$> parseUItem i
-        pure $ Compound s $ catMaybes items
-        -}
--}
+        n <- fetchWord8
+        when (n <= 0) $ throw ExplicitError
+        void $ fetchBytes (pred $ fromIntegral n)
+        pure $ Explicit met n
+    VCompound mn lst -> fmap Compound $ do
+        fspecBits <- case mn of
+            Nothing -> fix $ \loop -> do
+                w <- fmap unpackWord8 fetchWord8
+                let (flags, fx) = (init w, last w)
+                case fx of
+                    False -> pure flags
+                    True  -> (<>) <$> pure flags <*> loop
+            Just n -> do
+                ws <- sequence (replicate n fetchWord8)
+                pure (join $ fmap unpackWord8 ws)
+        let fspec = reverse $ dropWhile (== False) $ reverse fspecBits
+        when (length fspec > length lst) $ throw FxError
+        items <- forM (zip fspec lst) $ \case
+            (False, _) -> pure []
+            (True, x) -> case x of
+                CompoundSpare -> throw ItemPresenceError
+                CompoundSubitem i -> pure <$> parseUItem i
+                CompoundRFS -> do
+                    itemCount <- fmap fromIntegral fetchWord8
+                    sequence (replicate itemCount f)
+                      where
+                        f :: Parser (Sized UItem)
+                        f = do
+                            frn :: Int <- fmap fromIntegral fetchWord8
+                            let frames = catMaybes (lst >>= \case
+                                    CompoundSubitem i -> pure (Just i)
+                                    CompoundSpare -> pure Nothing
+                                    CompoundRFS -> pure Nothing)
+                                framesMap = Map.fromList (zip [1..] frames)
+                            i <- case Map.lookup frn framesMap of
+                                Nothing -> throw RfsError
+                                Just i -> pure i
+                            parseUItem i
+        pure $ join items
 
-parseUItem :: VItem -> Parser UItem
-parseUItem = \case
-    VSpare _o n ->
-        USpare <$> get <*> fetch n
+parseUItem :: VItem -> Parser (Sized UItem)
+parseUItem i = parseSized $ case i of
+    VSpare _o n -> do
+        void $ fetch n
+        pure USpare
     VItem name title var ->
         UItem <$> pure name <*> pure title <*> parseUVariation var
 
+{-
 parseURecord :: VVariation -> Parser URecord
 parseURecord vvar = URecord <$> parseUVariation vvar
 
@@ -178,7 +209,7 @@ parseUExpansion vvar = UExpansion <$> parseUVariation vvar
 -- | Single UAP datablock parser.
 parseUDatablock :: VVariation -> Parser UDatablock
 parseUDatablock vvar = do
-    (lst, (o, n)) <- parseWithBits f
+    (lst, (o, n)) <- parseSized f
     pure $ UDatablockSingle o n lst
   where
     f = eof >>= \case
@@ -193,7 +224,7 @@ parseUDatablockTryWith probes = do
     (bytes, totalSize) <- ask
     offset <- get
     let results = go (bytes, totalSize) offset
-    when (Prelude.null results) $ do
+    when (null results) $ do
         throw MultipleDatablockError
     put totalSize
     pure $ fmap (UDatablockMultiple offset (totalSize - offset)) results
@@ -213,8 +244,14 @@ parseUDatablockTryWith probes = do
 newtype Variation (t :: TVariation) = Variation UVariation
     deriving (Show, Eq)
 
+parseVariation :: forall t. IsSchema t VVariation => Parser (Variation t)
+parseVariation = Variation <$> parseUVariation (schema @t)
+
 newtype Item (t :: TItem) = Item UItem
     deriving (Show, Eq)
+
+parseItem :: forall t. IsSchema t VItem => Parser (Item t)
+parseItem = Item <$> parseUItem (schema @t)
 
 newtype Record (cat :: Nat) (ed :: TEdition) (t :: [Maybe TItem])
     = Record URecord
@@ -248,4 +285,5 @@ mkUDatablockSingle = undefined
 
 mkUDatablockMultiple :: Int -> [(Text, URecord Builder)] -> UDatablock Builder
 mkUDatablockMultiple = undefined
+-}
 -}

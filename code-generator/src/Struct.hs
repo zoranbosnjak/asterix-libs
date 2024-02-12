@@ -50,14 +50,19 @@ instance Monoid OctetOffset where
 octetOffset :: Int -> OctetOffset
 octetOffset n = OctetOffset (mod n 8)
 
+data CompoundSubitem
+    = CompoundSubitem Item
+    | CompoundSpare
+    | CompoundRFS
+    deriving (Generic, Eq, Ord, Show)
+
 data Variation
     = Element OctetOffset A.RegisterSize A.Rule
     | Group [Item]
     | Extended [Maybe Item]
     | Repetitive A.RepetitiveType Variation
     | Explicit (Maybe A.ExplicitType)
-    | RandomFieldSequencing
-    | Compound (Maybe A.RegisterSize) [Maybe Item]
+    | Compound (Maybe A.RegisterSize) [CompoundSubitem]
     deriving (Generic, Eq, Ord, Show)
 
 data Item
@@ -148,12 +153,15 @@ deriveVariation = \case
         byteAligned "explicit (pre)"
         pure $ Explicit t
     A.RandomFieldSequencing -> do
-        pure RandomFieldSequencing
+        -- This is handled as special case inside Compound,
+        -- so it should never be relevant here.
+        error "internal error"
     A.Compound mn lst' -> do
         byteAligned "compound (pre)"
         items <- forM lst $ \case
-            Nothing -> pure Nothing
-            Just item -> Just <$> deriveItem item
+            Nothing -> pure CompoundSpare
+            Just (A.Item _name _title A.RandomFieldSequencing _doc) -> pure CompoundRFS
+            Just item -> CompoundSubitem <$> deriveItem item
         byteAligned "compound (post)"
         pure $ Compound mn items
       where
@@ -268,8 +276,10 @@ saveVariation var = do
         Extended lst          -> mapM_ saveItem (catMaybes lst)
         Repetitive _t v       -> saveVariation v
         Explicit _t           -> pure ()
-        RandomFieldSequencing -> pure ()
-        Compound _t lst       -> mapM_ saveItem (catMaybes lst)
+        Compound _t lst       -> forM_ lst $ \case
+            CompoundSubitem i -> saveItem i
+            CompoundSpare -> pure ()
+            CompoundRFS -> pure ()
 
 saveItem :: Item -> State (AsterixDb Set) ()
 saveItem item = do
@@ -347,8 +357,10 @@ flattenVariationsAndItems = snd . evalRWS go ()
                 Extended lst          -> mapM_ (maybe (pure ()) goItem) lst
                 Repetitive _ var2     -> goVar var2
                 Explicit _            -> pure ()
-                RandomFieldSequencing -> pure ()
-                Compound _ lst        -> mapM_ (maybe (pure ()) goItem) lst
+                Compound _ lst        -> forM_ lst $ \case
+                    CompoundSubitem i -> goItem i
+                    CompoundSpare -> pure ()
+                    CompoundRFS -> pure ()
             tell [Left var]
     goItem item = do
         (vars, items) <- get

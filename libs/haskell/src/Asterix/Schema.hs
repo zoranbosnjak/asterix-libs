@@ -248,6 +248,12 @@ data ExplicitType
     | SpecialPurpose
     deriving (Generic, Eq, Show)
 
+data CompoundSubitem a
+    = CompoundSubitem a
+    | CompoundSpare
+    | CompoundRFS
+    deriving (Generic, Eq, Show)
+
 data TVariation
     = TElement
         Nat -- bit offset
@@ -263,8 +269,7 @@ data TVariation
     | TExplicit (Maybe ExplicitType)
     | TCompound
         (Maybe Nat) -- fixed fspec length or fx based
-        [Maybe TItem] -- Nothing = empty slot
-    | TRandomFieldSequencing
+        [CompoundSubitem TItem]
 
 data TItem
     = TSpare
@@ -284,8 +289,7 @@ data VVariation
     | VExtended [Maybe VItem]
     | VRepetitive (Maybe Int) VVariation
     | VExplicit (Maybe ExplicitType)
-    | VCompound (Maybe Int) [Maybe VItem]
-    | VRandomFieldSequencing
+    | VCompound (Maybe Int) [CompoundSubitem VItem]
     deriving (Generic, Eq, Show)
 
 data VItem
@@ -341,23 +345,27 @@ instance MNat mn => IsSchema ('TCompound mn '[]) VVariation where
 
 instance
     ( IsSchema ('TCompound mn ts) VVariation
-    ) => IsSchema ('TCompound mn ('Nothing ': ts)) VVariation where
+    ) => IsSchema ('TCompound mn ('CompoundSpare ': ts)) VVariation where
     schema = case schema @('TCompound mn ts) of
-        VCompound mn xs -> VCompound mn (Nothing : xs)
+        VCompound mn xs -> VCompound mn (CompoundSpare : xs)
+        _               -> err
+
+instance
+    ( IsSchema ('TCompound mn ts) VVariation
+    ) => IsSchema ('TCompound mn ('CompoundRFS ': ts)) VVariation where
+    schema = case schema @('TCompound mn ts) of
+        VCompound mn xs -> VCompound mn (CompoundRFS : xs)
         _               -> err
 
 instance
     ( IsSchema t VItem
     , IsSchema ('TCompound mn ts) VVariation
-    ) => IsSchema ('TCompound mn ('Just t ': ts)) VVariation where
+    ) => IsSchema ('TCompound mn ('CompoundSubitem t ': ts)) VVariation where
     schema = case schema @('TCompound mn ts) of
         VCompound mn xs ->
             let x = schema @t
-             in VCompound mn (Just x : xs)
+             in VCompound mn (CompoundSubitem x : xs)
         _ -> err
-
-instance IsSchema 'TRandomFieldSequencing VVariation where
-    schema = VRandomFieldSequencing
 
 instance
     ( KnownNat o
