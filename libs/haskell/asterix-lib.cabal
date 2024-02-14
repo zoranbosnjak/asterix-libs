@@ -29,6 +29,7 @@ common base
       , bytestring
       , text
       , transformers
+      , some
 
 library
     import:           base

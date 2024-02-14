@@ -1,9 +1,17 @@
 -- |
--- Module : Bits
--- Bits and Bytes manipulation
+-- Module : Builder
 
-module Bits where
+{-# LANGUAGE DataKinds #-}
 
+-- TODO: remove this
+{-# OPTIONS_GHC -Wno-unused-imports #-}
+
+module BitString.Builder
+( module BitString.Builder
+, module BitString
+) where
+
+import           GHC.TypeLits
 import qualified Data.Bits
 import           Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
@@ -12,43 +20,43 @@ import           Data.String
 import           Data.Word
 import           Prelude         hiding (length, splitAt)
 
-class HasLength t where
-    bitLength :: t -> Int
+import           Alignment
+import           BitString
 
--- | Bitstring, optimized for parsing.
--- Semigroup instance would not be efficient and is not provided.
--- Use Builder when general concatination is required.
-data Bits = Bits !ByteString !Int !Int -- (data, bit offset, bit length)
-    deriving (Show)
+-- | Bits builder, optimized for constructing.
+data Builder (a :: Nat) (b :: Nat) = Builder (Endo [SomeA BitString]) !BitSize
 
-instance IsString Bits where
-    fromString = mkBits . fromString
+{-
+fromAlignedBits :: Bits 0 0 -> Builder 0 0
+fromAlignedBits = undefined
 
-instance HasLength Bits where
-    bitLength (Bits _s _o n) = n
+instance IsString (Builder 0 0) where
+    fromString = fromAlignedBits . fromString
 
--- | Bitstring builder, optimized for constructing.
-data Builder = Builder (Endo [Bits]) !Int -- (endo, bit length)
+appendAligned :: Builder 0 0 -> Builder 0 0 -> Builder 0 0
+appendAligned = undefined -- Builder f1 n1 <> Builder f2 n2 = Builder (f1 <> f2) (n1+n2)
 
-instance IsString Builder where
-    fromString = fromBits . fromString
+instance Semigroup (Builder 0 0) where
+    (<>) = appendAligned
 
-instance Semigroup Builder where
-    Builder f1 n1 <> Builder f2 n2 = Builder (f1 <> f2) (n1+n2)
-
-instance Monoid Builder where
+instance Monoid (Builder 0 0) where
     mempty = Builder mempty 0
 
-instance HasLength Builder where
+instance HasBitLength (Builder a b) where
     bitLength (Builder _endo n) = n
 
--- | Primary way to create Bits is from ByteString.
-mkBits :: ByteString -> Bits
-mkBits s = Bits s 0 (BS.length s * 8)
+fromNonAlignedBits :: Bits a b -> Builder a b
+fromNonAlignedBits = undefined
 
+appendNonAligned :: Builder a b -> Builder b c -> Builder a c
+appendNonAligned = undefined
+
+{-
+-- | Create Bits from unsigned integer.
 fromUInteger :: Int -> Int -> Int -> Bits
 fromUInteger _o _n _x = undefined -- TODO: add tests
 
+-- | Convert Bits to unsigned integer.
 toUInteger :: Bits -> Int
 toUInteger = undefined -- TODO: add tests
 
@@ -117,8 +125,14 @@ word8 x = Builder (Endo f) 8 where
     f :: [Bits] -> [Bits]
     f lst = Bits (BS.singleton x) 0 8 : lst
 
+-}
+-}
+
 -- | Final converter to resulting ByteStrings (do not concatinate)
 -- Proper bit alignment is asumed, that is: every list element is aligned.
-toByteStrings :: Builder -> [ByteString]
+toByteStrings :: Builder 0 0 -> [ByteString]
+toByteStrings = undefined
+{-
 toByteStrings (Builder (Endo f) _ln) = g <$> f [] where
     g (Bits bs o n) = BS.take (div n 8) $ BS.drop (div o 8) bs
+-}

@@ -4,97 +4,38 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TypeFamilies #-}
 
+-- TODO: remove this
 -- {-# OPTIONS_GHC -Wno-all #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Asterix.Base where
 
 import           GHC.TypeLits
-import           Control.Applicative
 import           Control.Monad
 import           Control.Monad.Trans.Class
 import           Control.Monad.Trans.RWS
 import           Data.Word
 import           Data.Maybe
-import           Data.Map as Map
+import qualified Data.Map as Map
 import           Data.Function (fix)
 import           Data.Bits
 import           Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
 import           Data.Text           (Text)
 
+import           BitString as B
+import           BitString.Builder as BB
+import           Asterix.Parsing
 import           Asterix.Schema
 
-data ParserError
-    = Overflow -- Not enough data available
-    | FxError -- Fx bit is set when it is not suppose to be
-    | ItemPresenceError -- Item presence indication for non-defined item
-    | ExplicitError -- Explicit item size error
-    | ValidationError -- Data validation error
-    | RfsError -- Problem with parsing RFS
-    | MultipleDatablockError -- Unable to parse multi UAP datablock
-    deriving (Show, Eq)
-
-type BitOffset = Int
-type BitSize = Int
-
-type Parser = RWST (ByteString, BitSize) () BitOffset (Either ParserError)
-
-runParser :: Parser a -> ByteString -> BitOffset -> Either ParserError (a, BitOffset)
-runParser act bytes offset = f <$> runRWST act (bytes, BS.length bytes * 8) offset
-  where
-    f (result, offset', ()) = (result, offset')
-
-throw :: ParserError -> Parser a
-throw = lift . Left
-
-eof :: Parser Bool
-eof = (>=) <$> get <*> asks snd
-
--- | Make sure that n-bits are available, return start of block
-fetch :: BitSize -> Parser BitOffset
-fetch n = do
-    totalSize <- asks snd
-    offset1 <- get
-    let offset2 = offset1 + n
-    when (offset2 > totalSize) $ throw Overflow
-    put offset2
-    pure offset1
-
--- | Get word8, assume byte alignment
-fetchWord8 :: Parser Word8
-fetchWord8 = do
-    offset <- fetch 8
-    bytes <- asks fst
-    pure $ BS.index bytes (div offset 8)
-
--- | Get bytestring, assume byte alignment
-fetchBytes :: Int -> Parser ByteString
-fetchBytes = undefined
-
--- | Get single bit
-fetchBit :: Parser Bool
-fetchBit = do
-    offset <- fetch 1
-    bytes <- asks fst
-    pure $ Data.Bits.testBit (BS.index bytes (div offset 8)) (7 - mod offset 8)
-
+{-
 byteStringToNumber :: Num a => ByteString -> a
-byteStringToNumber = undefined
+byteStringToNumber = BS.foldl' f 0 where
+    f :: Num a => a -> Word8 -> a
+    f acc x = acc * 256 + fromIntegral x
 
 unpackWord8 :: Word8 -> [Bool]
 unpackWord8 w = [Data.Bits.testBit w i | i <- [7,6..0]]
-
-data Sized a = Sized BitOffset BitSize a
-    deriving (Show, Eq)
-
--- | Parse something, augment with actual offset and bit size.
-parseSized :: Parser a -> Parser (Sized a)
-parseSized act = do
-    offset1 <- get
-    result <- act
-    offset2 <- get
-    pure $ Sized offset1 (offset2-offset1) result
 
 data UVariation
     = Element VRule
@@ -117,8 +58,8 @@ newtype UExpansion = UExpansion UVariation
     deriving (Show, Eq)
 
 data UDatablock
-    = UDatablockSingle BitOffset BitSize [URecord]
-    | UDatablockMultiple BitOffset BitSize [(Text, URecord)]
+    = UDatablockSingle [Sized URecord]
+    | UDatablockMultiple [(Text, Sized URecord)]
     deriving (Show, Eq)
 
 parseUVariation :: VVariation -> Parser (Sized UVariation)
@@ -199,19 +140,17 @@ parseUItem i = parseSized $ case i of
     VItem name title var ->
         UItem <$> pure name <*> pure title <*> parseUVariation var
 
-{-
-parseURecord :: VVariation -> Parser URecord
-parseURecord vvar = URecord <$> parseUVariation vvar
+parseURecord :: VVariation -> Parser (Sized URecord)
+parseURecord vvar = fmap URecord <$> parseUVariation vvar
 
-parseUExpansion :: VVariation -> Parser UExpansion
-parseUExpansion vvar = UExpansion <$> parseUVariation vvar
+parseUExpansion :: VVariation -> Parser (Sized UExpansion)
+parseUExpansion vvar = fmap UExpansion <$> parseUVariation vvar
 
 -- | Single UAP datablock parser.
-parseUDatablock :: VVariation -> Parser UDatablock
-parseUDatablock vvar = do
-    (lst, (o, n)) <- parseSized f
-    pure $ UDatablockSingle o n lst
+parseUDatablock :: VVariation -> Parser (Sized UDatablock)
+parseUDatablock vvar = parseSized $ fmap UDatablockSingle f
   where
+    f :: Parser [Sized URecord]
     f = eof >>= \case
         True -> pure []
         False -> (:) <$> (parseURecord vvar) <*> f
@@ -219,24 +158,24 @@ parseUDatablock vvar = do
 -- | Try to parse with different UAPs, where each record in a datablock
 -- can potentially be of a different UAP. Instead of a single datablock,
 -- this function returns a list of one or more possible answers.
-parseUDatablockTryWith :: [(Text, VVariation)] -> Parser [UDatablock]
-parseUDatablockTryWith probes = do
+parseUDatablockTryWith :: [(Text, VVariation)] -> Parser (Sized [UDatablock])
+parseUDatablockTryWith probes = parseSized $ do
     (bytes, totalSize) <- ask
     offset <- get
     let results = go (bytes, totalSize) offset
     when (null results) $ do
         throw MultipleDatablockError
     put totalSize
-    pure $ fmap (UDatablockMultiple offset (totalSize - offset)) results
+    pure $ fmap UDatablockMultiple results
   where
-    go :: (ByteString, BitSize) -> BitOffset -> [[(Text, URecord)]]
+    go :: (ByteString, BitSize) -> BitOffset -> [[(Text, Sized URecord)]]
     go (bytes, totalSize) offset
-        | offset == totalSize = pure []
-        | offset > totalSize = Control.Applicative.empty
+        | offset == totalSize = [[]] -- done
+        | offset > totalSize = [] -- no solution
         | otherwise = do
             (name, vvar) <- probes
             case runParser (parseURecord vvar) bytes offset of
-                Left _err -> Control.Applicative.empty
+                Left _err -> [] -- no solution
                 Right (r, offset') -> (:)
                     <$> pure (name, r)
                     <*> go (bytes, totalSize) offset'
@@ -244,18 +183,22 @@ parseUDatablockTryWith probes = do
 newtype Variation (t :: TVariation) = Variation UVariation
     deriving (Show, Eq)
 
-parseVariation :: forall t. IsSchema t VVariation => Parser (Variation t)
-parseVariation = Variation <$> parseUVariation (schema @t)
+parseVariation :: forall t. IsSchema t VVariation => Parser (Sized (Variation t))
+parseVariation = fmap Variation <$> parseUVariation (schema @t)
 
 newtype Item (t :: TItem) = Item UItem
     deriving (Show, Eq)
 
-parseItem :: forall t. IsSchema t VItem => Parser (Item t)
-parseItem = Item <$> parseUItem (schema @t)
+parseItem :: forall t. IsSchema t VItem => Parser (Sized (Item t))
+parseItem = fmap Item <$> parseUItem (schema @t)
 
 newtype Record (cat :: Nat) (ed :: TEdition) (t :: [Maybe TItem])
     = Record URecord
     deriving (Show, Eq)
+
+parseRecord :: forall cat ed t. IsSchema t VVariation
+    => Parser (Sized (Record cat ed t))
+parseRecord = fmap Record <$> parseURecord (schema @t)
 
 newtype Expansion (cat :: Nat) (ed :: TEdition) (t :: [Maybe TItem])
     = Expansion UExpansion
@@ -264,21 +207,23 @@ newtype Expansion (cat :: Nat) (ed :: TEdition) (t :: [Maybe TItem])
 newtype Datablock (uap :: TUap) = Datablock UDatablock
     deriving (Show, Eq)
 
+-- Constructing
+
 {-
-mkElement :: Int -> Int -> Int -> Builder
-mkElement o n x = fromBits $ fromUInteger o n x
+mkUElement :: BitOffset -> BitSize -> Int -> Builder
+mkUElement offset n value = undefined -- = fromBits $ fromUInteger o n x
 
-mkGroup :: [UItem Builder] -> Builder
-mkGroup = mconcat . fmap unUItem
+mkUGroup :: [UItem Builder] -> Builder
+mkUGroup = mconcat . fmap unUItem
 
-mkExtended :: [Maybe (UItem Builder)] -> Builder
-mkExtended = undefined
+mkUExtended :: [Maybe (UItem Builder)] -> Builder
+mkUExtended = undefined
 
-mkRepetitive :: Maybe Int -> [UVariation Builder] -> Builder
-mkRepetitive = undefined
+mkURepetitive :: Maybe Int -> [UVariation Builder] -> Builder
+mkURepetitive = undefined
 
-mkExplicit :: Builder -> Builder
-mkExplicit = undefined
+mkUExplicit :: Builder -> Builder
+mkUExplicit = undefined
 
 mkUDatablockSingle :: Int -> [URecord Builder] -> UDatablock Builder
 mkUDatablockSingle = undefined

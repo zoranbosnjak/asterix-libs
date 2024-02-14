@@ -10,6 +10,11 @@
 
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DataKinds #-}
+
+-- TODO: remove this
+-- {-# OPTIONS_GHC -Wno-all #-}
+{-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module TestGeneric where
 
@@ -19,18 +24,21 @@ import Test.Tasty
 -- import Test.Tasty.QuickCheck as QC
 -- import Test.Tasty.HUnit
 
-import Bits
+import BitString as B
+import BitString.Builder as BB
 import Asterix.Base
 import Asterix.Schema
 --import Generated
 
 -- Examples --
 
+{-
 -- | Generate sample datagram, of all categories, all data bits set to 'val'
-sampleDatagram :: Bool -> [(Int, VUap)] -> Map Int VVariation -> Builder
+sampleDatagram :: Bool -> [(Int, VUap)] -> Map Int (VVariation 0 0) -> Builder 0 0
 sampleDatagram val cats _refs
-    = toByteStrings $ mconcat $ fmap (unDatablock . genCat) cats
+    = toByteStrings $ mconcat $ undefined -- fmap (unDatablock . genCat) cats
   where
+    {-
     genCat :: (Int, VUap) -> UDatablock Builder
     genCat (cat, uap) = case uap of
         VUapSingle vvar -> mkUDatablockSingle cat
@@ -73,7 +81,9 @@ sampleDatagram val cats _refs
             in USpare bs
         VItem name title vvar ->
             UItem name title (genVariation vvar)
+-}
 
+{-
 -- | Try to parse, check if valid
 isValidAsterix :: Map Int VUap -> Map Int VVariation -> ByteString -> Bool
 isValidAsterix _cats _refs _s = undefined
@@ -102,3 +112,5 @@ tests :: TestTree
 tests = testGroup "Generic asterix tests"
     [
     ]
+-}
+-}
