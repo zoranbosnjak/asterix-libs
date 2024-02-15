@@ -18,6 +18,7 @@ import           Data.Kind
 import           Data.Text
 import           Data.Word
 import           Data.Some
+import           Data.GADT.Show
 
 import           Alignment
 
@@ -77,9 +78,11 @@ data Content n s intNum floatNum
         (BdsType n)
     deriving (Show, Eq, Ord)
 
+type TContent = Content Nat Symbol TNumber TNumber
+
 data TRule
-    = TContextFree (Content Nat Symbol TNumber TNumber)
-    | TDependent [Symbol] [(Nat, Content Nat Symbol TNumber TNumber)]
+    = TContextFree TContent
+    | TDependent [Symbol] [(Nat, TContent)]
 
 data ExplicitType
     = ReservedExpansion
@@ -118,9 +121,9 @@ data TItem
         Symbol -- title
         TVariation
 
-newtype Record t = TRecord [CompoundSubitem t]
+data Record t = Record [CompoundSubitem t]
 
-newtype Expansion t = TExpansion [CompoundSubitem t]
+data Expansion n t = Expansion n [CompoundSubitem t]
 
 data TUap
     = TUapSingle (Record TItem)
@@ -132,19 +135,26 @@ data Edition a b = Edition a b
 -- | Asterix specification at type level
 data TSpec
     = TCat Nat (Edition Nat Nat) TUap
-    | TRef Nat (Edition Nat Nat) (Expansion TItem)
+    | TRef Nat (Edition Nat Nat) (Expansion Nat TItem)
 
 -- Value level definitions
+
+type VContent = Content Int Text Int Double
 
 data RuleType
     = RTContextFree
     | RTDependent
 
 data VRule (t :: RuleType) where
-    VContextFree :: Content Int Text Int Double
+    VContextFree :: VContent
         -> VRule RTContextFree
-    VDependent :: [Text] -> [(Int, Content Int Text Int Double)]
+    VDependent :: [Text] -> [(Int, VContent)]
         -> VRule RTDependent
+
+deriving instance Show (VRule t)
+
+instance GShow VRule where
+    gshowsPrec = defaultGshowsPrec
 
 data VariationType
     = VTElement
@@ -152,8 +162,8 @@ data VariationType
     | VTExtended
     | VTRepetitive
     | VTExplicit
-    | VTRFS
     | VTCompound
+    deriving (Show, Eq, Ord)
 
 data VVariation (t :: VariationType) where
     VElement    :: BitOffsetMod8 -> BitSize -> Some VRule -> VVariation 'VTElement
@@ -163,17 +173,29 @@ data VVariation (t :: VariationType) where
     VExplicit   :: Maybe ExplicitType -> VVariation 'VTExplicit
     VCompound   :: Maybe Int -> [CompoundSubitem (Some VItem)] -> VVariation 'VTCompound
 
+deriving instance Show (VVariation t)
+
+instance GShow VVariation where
+    gshowsPrec = defaultGshowsPrec
+
 data ItemType
     = ITSpare
     | ITItem
+    deriving (Show, Eq, Ord)
 
 data VItem (t :: ItemType) where
     VSpare :: BitOffsetMod8 -> BitSize -> VItem 'ITSpare
     VItem  :: Text -> Text -> Some VVariation -> VItem 'ITItem
 
+deriving instance Show (VItem t)
+
+instance GShow VItem where
+    gshowsPrec = defaultGshowsPrec
+
 data UapType
     = UTSingle
     | UTMultiple
+    deriving (Show, Eq, Ord)
 
 data VUap (t :: UapType) where
     UapSingle :: Record (Some VItem)
@@ -188,26 +210,223 @@ data SpecType
     = STCat
     | STRef
 
-data VSpec (t :: SpecType) where
-    VCat :: Cat -> Edition Int Int -> Some VUap -> VSpec 'STCat
-    VRef :: Cat -> Edition Int Int -> Expansion (Some VItem) -> VSpec 'STRef
+data VAstSpec (t :: SpecType) where
+    VCat :: Cat -> Edition Int Int -> Some VUap -> VAstSpec 'STCat
+    VRef :: Cat -> Edition Int Int -> Expansion Int (Some VItem) -> VAstSpec 'STRef
 
 -- Conversion from types to terms
 
 err :: a
 err = error "internal error"
 
--- | Nat value
-nv :: (KnownNat n, Num a) => Proxy n -> a
-nv = fromIntegral . natVal
-
--- | Symbol value
-sv :: KnownSymbol s => Proxy s -> Text
-sv = Data.Text.pack . symbolVal
-
 class IsSchema t a where
     schema :: a
 
+-- Nat -> Int
+
+instance
+    ( KnownNat n
+    , Num b
+    ) => IsSchema n b where
+    schema = fromIntegral $ natVal (Proxy @n)
+
+-- Symbol -> Text
+
+instance
+    ( KnownSymbol s
+    ) => IsSchema s Text where
+    schema = Data.Text.pack $ symbolVal (Proxy @s)
+
+-- Maybe a
+
+instance IsSchema 'Nothing (Maybe a) where
+    schema = Nothing
+
+instance
+    ( IsSchema x a
+    ) => IsSchema ('Just x) (Maybe a) where
+    schema = Just (schema @x)
+
+-- '[] -> []
+
+instance IsSchema '[] [a] where
+    schema = []
+
+instance
+    ( IsSchema t a
+    , IsSchema ts [a]
+    ) => IsSchema (t ': ts) [a] where
+    schema = schema @t : schema @ts
+
+-- '(ta, tb) -> (a, b)
+
+instance
+    ( IsSchema ta a
+    , IsSchema tb b
+    ) => IsSchema '(ta, tb) (a, b) where
+    schema = (schema @ta, schema @tb)
+
+--  Number
+
+instance
+    ( Num n
+    ) => IsSchema 'Plus n where
+    schema = 1
+
+instance
+    ( Num n
+    ) => IsSchema 'Minus n where
+    schema = -1
+
+instance
+    ( Num b
+    , IsSchema plusMinus Int
+    , IsSchema n b
+    ) => IsSchema ('TNumInt plusMinus n) b where
+    schema = (fromIntegral $ schema @plusMinus @Int) * schema @n
+
+instance
+    ( IsSchema a c
+    , IsSchema b c
+    , Fractional c
+    ) => IsSchema ('TNumDiv a b) c where
+    schema = schema @a / schema @b
+
+instance
+    ( Num c
+    , IsSchema a Integer
+    , IsSchema b Integer
+    ) => IsSchema ('TNumPow a b) c where
+    schema = fromIntegral (schema @a :: Integer) ^ (schema @b :: Integer)
+
+-- String type
+
+instance IsSchema 'StringAscii StringType where schema = StringAscii
+instance IsSchema 'StringICAO StringType where schema = StringICAO
+instance IsSchema 'StringOctal StringType where schema = StringOctal
+
+-- Signedness
+
+instance IsSchema 'Signed Signedness where schema = Signed
+instance IsSchema 'Unsigned Signedness where schema = Unsigned
+
+-- Constrain
+
+instance IsSchema 'EqualTo Constrain where schema = EqualTo
+instance IsSchema 'NotEqualTo Constrain where schema = NotEqualTo
+instance IsSchema 'GreaterThan Constrain where schema = GreaterThan
+instance IsSchema 'GreaterThanOrEqualTo Constrain where schema = GreaterThanOrEqualTo
+instance IsSchema 'LessThan Constrain where schema = LessThan
+instance IsSchema 'LessThanOrEqualTo Constrain where schema = LessThanOrEqualTo
+
+-- Bds type
+
+instance IsSchema 'BdsWithAddress (BdsType Int) where
+    schema = BdsWithAddress
+
+instance
+    ( IsSchema mn (Maybe Int)
+    ) => IsSchema ('BdsAt mn) (BdsType Int) where
+    schema = BdsAt (schema @mn)
+
+-- ContentRaw
+
+instance IsSchema 'ContentRaw VContent where
+    schema = ContentRaw
+
+-- ContentTable
+
+instance
+    ( IsSchema lst [(Int, Text)]
+    ) => IsSchema ('ContentTable lst) VContent where
+    schema = ContentTable (schema @lst)
+
+-- ContentString
+
+instance
+    ( IsSchema st StringType
+    ) => IsSchema ('ContentString st) VContent where
+    schema = ContentString (schema @st)
+
+-- ContentInteger
+
+instance
+    ( IsSchema sig Signedness
+    , IsSchema cons [(Constrain, Int)]
+    ) => IsSchema ('ContentInteger sig cons) VContent where
+    schema = ContentInteger (schema @sig) (schema @cons)
+
+-- Content quantity
+
+instance
+    ( IsSchema sig Signedness
+    , IsSchema lsb Double
+    , IsSchema unit Text
+    , IsSchema cons [(Constrain, Double)]
+    ) => IsSchema ('ContentQuantity sig lsb unit cons) VContent where
+    schema = ContentQuantity (schema @sig) (schema @lsb) (schema @unit) (schema @cons)
+
+-- Content BDS
+
+instance
+    ( IsSchema bt (BdsType Int)
+    ) => IsSchema ('ContentBds bt) VContent where
+    schema = ContentBds (schema @bt)
+
+-- TRule -> VRule
+
+instance
+    ( IsSchema cont VContent
+    ) => IsSchema ('TContextFree cont) (VRule 'RTContextFree) where
+    schema = VContextFree (schema @cont)
+
+instance
+    ( IsSchema name [Text]
+    , IsSchema lst [(Int, VContent)]
+    ) => IsSchema ('TDependent name lst) (VRule 'RTDependent) where
+    schema = VDependent (schema @name) (schema @lst)
+
+-- TVariation -> VVariation
+
+{-
+instance
+    ( IsSchema o BitOffsetMod8
+    , IsSchema n BitSize
+    , IsSchema rule (VRule t)
+    ) => IsSchema ('TElement o n rule) (VVariation 'VTElement) where
+    schema = VElement (schema @o) (schema @n) (mkSome $ schema @rule @(VRule t))
+-}
+
+
+
+
+
+-- TSpare -> VSpare
+
+instance
+    ( IsSchema offsetMod8 BitOffsetMod8
+    , IsSchema n BitSize
+    ) => IsSchema ('TSpare offsetMod8 n) (VItem 'ITSpare) where
+    schema = VSpare (schema @offsetMod8) (schema @n)
+
+-- TItem -> VItem
+
+instance
+    ( IsSchema name Text
+    , IsSchema title Text
+    , IsSchema var (VVariation t)
+    ) => IsSchema ('TItem name title var) (VItem 'ITItem) where
+    schema = VItem (schema @name) (schema @title) (mkSome $ schema @var @(VVariation t))
+
+{-
+instance
+    ( IsSchema a Int
+    , IsSchema b Int
+    ) => IsSchema ('Edition a b) (Edition Int Int) where
+    schema = Edition (schema @a) (schema @b) -- (nv (Proxy @a)) (nv (Proxy @b))
+-}
+
+{-
 instance
     ( KnownNat a
     , KnownNat b
@@ -218,17 +437,16 @@ instance
     ( KnownNat cat
     , IsSchema ed (Edition Int Int)
     , IsSchema uap (Some VUap)
-    ) => IsSchema ('TCat cat ed uap) (VSpec 'STCat) where
+    ) => IsSchema ('TCat cat ed uap) (VAstSpec 'STCat) where
     schema = VCat (nv (Proxy @cat)) (schema @ed) (schema @uap)
 
 instance
     ( KnownNat cat
     , IsSchema ed (Edition Int Int)
-    , IsSchema exp (Expansion (Some VItem))
-    ) => IsSchema ('TRef cat ed exp) (VSpec 'STRef) where
+    , IsSchema exp (Expansion Int (Some VItem))
+    ) => IsSchema ('TRef cat ed exp) (VAstSpec 'STRef) where
     schema = VRef (nv (Proxy @cat)) (schema @ed) (schema @exp)
 
-{-
 instance KnownNat n => IsSchema n Int where
     schema = nv (Proxy @n)
 
@@ -295,29 +513,10 @@ class IsNum t where evalNum :: VNumber -> t
 instance IsNum Integer where evalNum = evalNumInteger
 instance IsNum Double where evalNum = evalNumDouble
 
-instance IsSchema 'EqualTo Constrain where schema = EqualTo
-instance IsSchema 'NotEqualTo Constrain where schema = NotEqualTo
-instance IsSchema 'GreaterThan Constrain where schema = GreaterThan
-instance IsSchema 'GreaterThanOrEqualTo Constrain where schema = GreaterThanOrEqualTo
-instance IsSchema 'LessThan Constrain where schema = LessThan
-instance IsSchema 'LessThanOrEqualTo Constrain where schema = LessThanOrEqualTo
-
-instance IsSchema 'Signed Signedness where schema = Signed
-instance IsSchema 'Unsigned Signedness where schema = Unsigned
-
-instance IsSchema 'StringAscii StringType where schema = StringAscii
-instance IsSchema 'StringICAO StringType where schema = StringICAO
-instance IsSchema 'StringOctal StringType where schema = StringOctal
-
 data VBdsType
     = VBdsWithAddress
     | VBdsAt (Maybe Int)
     deriving (Eq, Show)
-
-instance IsSchema 'TBdsWithAddress VBdsType where schema = VBdsWithAddress
-instance IsSchema ('TBdsAt 'Nothing) VBdsType where schema = VBdsAt Nothing
-instance KnownNat n => IsSchema ('TBdsAt ('Just n)) VBdsType where
-    schema = VBdsAt $ Just $ nv (Proxy @n)
 
 data VContent
     = VContentRaw
@@ -327,20 +526,6 @@ data VContent
     | VContentQuantity Signedness Double Text [(Constrain, Double)]
     | VContentBds VBdsType
     deriving (Eq, Show)
-
-instance IsSchema 'TContentRaw VContent where
-    schema = VContentRaw
-
-instance IsSchema ('TContentTable '[]) VContent where
-    schema = VContentTable []
-
-instance ( IsSchema ('TContentTable ts) VContent , KnownNat n, KnownSymbol s
-    ) => IsSchema ('TContentTable ('(n,s) ': ts)) VContent where
-    schema = case schema @('TContentTable ts) of
-        VContentTable xs ->
-            let x = (nv (Proxy @n), sv (Proxy @s))
-            in VContentTable (x : xs)
-        _ -> err
 
 instance
     IsSchema st StringType => IsSchema ('TContentString st) VContent where

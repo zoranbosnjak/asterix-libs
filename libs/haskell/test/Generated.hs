@@ -13,6 +13,7 @@
 module Generated where
 
 import           Data.Text
+import           Data.Some
 
 import           Asterix.Schema
 
@@ -23,25 +24,25 @@ version :: Text
 version = "19700101.0"
 
 -- | Content set
-type TContent_0 = 'TContentRaw
-type TContent_1 = 'TContentTable '[ '( 0, "Air Speed = IAS, LSB (Bit-1) = 2^-14 NM/s"), '( 1, "Air Speed = Mach, LSB (Bit-1) = 0.001")]
-type TContent_2 = 'TContentTable '[ '( 0, "Plot"), '( 1, "Track")]
-type TContent_3 = 'TContentTable '[ '( 0, "Test 0"), '( 1, "Test 1"), '( 2, "Test 2"), '( 3, "Test 3")]
-type TContent_4 = 'TContentString 'StringAscii
-type TContent_5 = 'TContentString 'StringICAO
-type TContent_6 = 'TContentString 'StringOctal
-type TContent_7 = 'TContentInteger 'Signed '[ '( 'GreaterThanOrEqualTo, 'TNumInt 'TMinus 10), '( 'LessThanOrEqualTo, 'TNumInt 'TPlus 10)]
-type TContent_8 = 'TContentInteger 'Unsigned '[ '( 'GreaterThanOrEqualTo, 'TNumInt 'TPlus 10), '( 'LessThanOrEqualTo, 'TNumInt 'TPlus 15)]
-type TContent_9 = 'TContentQuantity 'Signed ('TNumDiv ('TNumInt 'TPlus 180) ('TNumPow 2 23)) "°" '[ '( 'GreaterThanOrEqualTo, 'TNumInt 'TMinus 180), '( 'LessThan, 'TNumInt 'TPlus 180)]
-type TContent_10 = 'TContentQuantity 'Signed ('TNumDiv ('TNumInt 'TPlus 180) ('TNumPow 2 23)) "°" '[ '( 'GreaterThanOrEqualTo, 'TNumInt 'TMinus 90), '( 'LessThanOrEqualTo, 'TNumInt 'TPlus 90)]
-type TContent_11 = 'TContentQuantity 'Unsigned ('TNumInt 'TPlus 1) "" '[ ]
-type TContent_12 = 'TContentQuantity 'Unsigned ('TNumInt 'TPlus 1) "kt" '[ '( 'GreaterThanOrEqualTo, 'TNumInt 'TPlus 0), '( 'LessThanOrEqualTo, 'TNumInt 'TPlus 1100)]
-type TContent_13 = 'TContentQuantity 'Unsigned ('TNumDiv ('TNumInt 'TMinus 1) ('TNumInt 'TPlus 2)) "" '[ ]
-type TContent_14 = 'TContentQuantity 'Unsigned ('TNumDiv ('TNumInt 'TPlus 1) ('TNumInt 'TPlus 1000)) "Mach" '[ ]
-type TContent_15 = 'TContentQuantity 'Unsigned ('TNumDiv ('TNumInt 'TPlus 1) ('TNumPow 2 14)) "NM/s" '[ ]
-type TContent_16 = 'TContentBds 'TBdsWithAddress
-type TContent_17 = 'TContentBds ('TBdsAt 'Nothing)
-type TContent_18 = 'TContentBds ('TBdsAt ('Just 48))
+type TContent_0 = 'ContentRaw
+type TContent_1 = 'ContentTable '[ '( 0, "Air Speed = IAS, LSB (Bit-1) = 2^-14 NM/s"), '( 1, "Air Speed = Mach, LSB (Bit-1) = 0.001")]
+type TContent_2 = 'ContentTable '[ '( 0, "Plot"), '( 1, "Track")]
+type TContent_3 = 'ContentTable '[ '( 0, "Test 0"), '( 1, "Test 1"), '( 2, "Test 2"), '( 3, "Test 3")]
+type TContent_4 = 'ContentString 'StringAscii
+type TContent_5 = 'ContentString 'StringICAO
+type TContent_6 = 'ContentString 'StringOctal
+type TContent_7 = 'ContentInteger 'Signed '[ '( 'GreaterThanOrEqualTo, 'TNumInt 'Minus 10), '( 'LessThanOrEqualTo, 'TNumInt 'Plus 10)]
+type TContent_8 = 'ContentInteger 'Unsigned '[ '( 'GreaterThanOrEqualTo, 'TNumInt 'Plus 10), '( 'LessThanOrEqualTo, 'TNumInt 'Plus 15)]
+type TContent_9 = 'ContentQuantity 'Signed ('TNumDiv ('TNumInt 'Plus 180) ('TNumPow 2 23)) "°" '[ '( 'GreaterThanOrEqualTo, 'TNumInt 'Minus 180), '( 'LessThan, 'TNumInt 'Plus 180)]
+type TContent_10 = 'ContentQuantity 'Signed ('TNumDiv ('TNumInt 'Plus 180) ('TNumPow 2 23)) "°" '[ '( 'GreaterThanOrEqualTo, 'TNumInt 'Minus 90), '( 'LessThanOrEqualTo, 'TNumInt 'Plus 90)]
+type TContent_11 = 'ContentQuantity 'Unsigned ('TNumInt 'Plus 1) "" '[ ]
+type TContent_12 = 'ContentQuantity 'Unsigned ('TNumInt 'Plus 1) "kt" '[ '( 'GreaterThanOrEqualTo, 'TNumInt 'Plus 0), '( 'LessThanOrEqualTo, 'TNumInt 'Plus 1100)]
+type TContent_13 = 'ContentQuantity 'Unsigned ('TNumDiv ('TNumInt 'Minus 1) ('TNumInt 'Plus 2)) "" '[ ]
+type TContent_14 = 'ContentQuantity 'Unsigned ('TNumDiv ('TNumInt 'Plus 1) ('TNumInt 'Plus 1000)) "Mach" '[ ]
+type TContent_15 = 'ContentQuantity 'Unsigned ('TNumDiv ('TNumInt 'Plus 1) ('TNumPow 2 14)) "NM/s" '[ ]
+type TContent_16 = 'ContentBds 'BdsWithAddress
+type TContent_17 = 'ContentBds ('BdsAt 'Nothing)
+type TContent_18 = 'ContentBds ('BdsAt ('Just 48))
 
 -- | Rule set
 type TRule_0 = 'TContextFree TContent_0
@@ -108,12 +109,15 @@ type TVariation_40 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_5]
 type TVariation_41 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_5, 'CompoundSubitem TItem_25, 'CompoundSubitem TItem_26]
 type TVariation_42 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_5, 'CompoundSubitem TItem_27, 'CompoundSubitem TItem_28]
 type TVariation_43 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_5, 'CompoundSubitem TItem_29]
-type TVariation_44 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_6, 'CompoundSubitem TItem_7, 'CompoundSubitem TItem_9, 'CompoundSubitem TItem_12, 'CompoundSubitem TItem_13, 'CompoundSubitem TItem_14, 'CompoundSubitem TItem_15, 'CompoundSubitem TItem_16, 'CompoundSubitem TItem_17, 'CompoundSubitem TItem_18, 'CompoundSubitem TItem_19, 'CompoundSubitem TItem_20, 'CompoundSubitem TItem_21, 'CompoundSubitem TItem_22, 'CompoundSpare, 'CompoundSubitem TItem_23, 'CompoundSubitem TItem_24]
+type TVariation_44 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_6, 'CompoundSubitem TItem_7, 'CompoundSubitem TItem_9, 'CompoundSubitem TItem_12, 'CompoundSubitem TItem_13, 'CompoundSubitem TItem_14, 'CompoundSubitem TItem_15, 'CompoundSubitem TItem_16, 'CompoundSubitem TItem_17, 'CompoundSubitem TItem_18, 'CompoundSubitem TItem_19, 'CompoundSubitem TItem_20, 'CompoundSubitem TItem_21, 'CompoundSubitem TItem_22, 'CompoundRFS, 'CompoundSubitem TItem_23, 'CompoundSubitem TItem_24]
 type TVariation_45 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_6, 'CompoundSubitem TItem_8, 'CompoundSubitem TItem_10]
 type TVariation_46 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_6, 'CompoundSubitem TItem_8, 'CompoundSubitem TItem_11]
 type TVariation_47 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_35, 'CompoundSpare, 'CompoundSubitem TItem_39]
 type TVariation_48 = 'TCompound ('Just 1) '[ 'CompoundSubitem TItem_35, 'CompoundSubitem TItem_39]
 type TVariation_49 = 'TCompound ('Just 1) '[ 'CompoundSubitem TItem_35, 'CompoundSpare, 'CompoundSubitem TItem_39]
+
+s1 :: Some VVariation
+s1 = mkSome (schema @TVariation_0 @(VVariation 'VTElement))
 
 -- | Item set
 type TItem_0 = 'TSpare 4 4
@@ -178,35 +182,47 @@ type TItem_58 = 'TItem "SIC" "System Identification Code" TVariation_5
 type TItem_59 = 'TItem "T" "Table" TVariation_6
 type TItem_60 = 'TItem "TYP" "" TVariation_1
 
+-- | Record set
+type TRecord_0 = 'Record '[ 'CompoundSubitem TItem_5]
+type TRecord_1 = 'Record '[ 'CompoundSubitem TItem_5, 'CompoundSubitem TItem_25, 'CompoundSubitem TItem_26]
+type TRecord_2 = 'Record '[ 'CompoundSubitem TItem_5, 'CompoundSubitem TItem_27, 'CompoundSubitem TItem_28]
+type TRecord_3 = 'Record '[ 'CompoundSubitem TItem_5, 'CompoundSubitem TItem_29]
+type TRecord_4 = 'Record '[ 'CompoundSubitem TItem_6, 'CompoundSubitem TItem_7, 'CompoundSubitem TItem_9, 'CompoundSubitem TItem_12, 'CompoundSubitem TItem_13, 'CompoundSubitem TItem_14, 'CompoundSubitem TItem_15, 'CompoundSubitem TItem_16, 'CompoundSubitem TItem_17, 'CompoundSubitem TItem_18, 'CompoundSubitem TItem_19, 'CompoundSubitem TItem_20, 'CompoundSubitem TItem_21, 'CompoundSubitem TItem_22, 'CompoundRFS, 'CompoundSubitem TItem_23, 'CompoundSubitem TItem_24]
+type TRecord_5 = 'Record '[ 'CompoundSubitem TItem_6, 'CompoundSubitem TItem_8, 'CompoundSubitem TItem_10]
+type TRecord_6 = 'Record '[ 'CompoundSubitem TItem_6, 'CompoundSubitem TItem_8, 'CompoundSubitem TItem_11]
+
+-- | Expansion set
+type TExpansion_0 = 'Expansion 8 '[ 'CompoundSubitem TItem_35, 'CompoundSubitem TItem_39]
+
 -- | Uap set
-type TUap_0 = 'TUapSingle TVariation_44
-type TUap_1 = 'TUapMultiple '[ '("plot", TVariation_45), '("track", TVariation_46)]
-type TUap_2 = 'TUapMultiple '[ '("uap1", TVariation_41), '("uap2", TVariation_42), '("uap3", TVariation_43), '("uap4", TVariation_40)]
+type TUap_0 = 'TUapSingle TRecord_4
+type TUap_1 = 'TUapMultiple '[ '("plot", TRecord_5), '("track", TRecord_6)]
+type TUap_2 = 'TUapMultiple '[ '("uap1", TRecord_1), '("uap2", TRecord_2), '("uap3", TRecord_3), '("uap4", TRecord_0)]
 
--- | Spec set
-type TSpec_0 = 'TCat TUap_0
-type TSpec_1 = 'TCat TUap_1
-type TSpec_2 = 'TCat TUap_2
-type TSpec_3 = 'TRef TVariation_48
-
--- | Asterix set
-type TAsterix_0 = 'TAsterix 0 ('TEdition 1 0) TSpec_0
-type TAsterix_1 = 'TAsterix 0 ('TEdition 1 0) TSpec_3
-type TAsterix_2 = 'TAsterix 1 ('TEdition 1 0) TSpec_1
-type TAsterix_3 = 'TAsterix 2 ('TEdition 1 0) TSpec_2
+-- | Asterix spec set
+type TAstSpec_0 = 'TCat 0 ('Edition 1 0) TUap_0
+type TAstSpec_1 = 'TRef 0 ('Edition 1 0) TExpansion_0
+type TAstSpec_2 = 'TCat 1 ('Edition 1 0) TUap_1
+type TAstSpec_3 = 'TCat 2 ('Edition 1 0) TUap_2
 
 -- | Aliases
-type Cat_000_1_0 = TAsterix_0
-type Ref_000_1_0 = TAsterix_1
-type Cat_001_1_0 = TAsterix_2
-type Cat_002_1_0 = TAsterix_3
+type Cat_000_1_0 = TAstSpec_0
+type Ref_000_1_0 = TAstSpec_1
+type Cat_001_1_0 = TAstSpec_2
+type Cat_002_1_0 = TAstSpec_3
 
 -- | Manifest
-manifest :: [VAsterix]
+manifest :: [Some VAstSpec]
 manifest =
-    [ schema @Cat_000_1_0
+    [ --schema @Cat_000_1_0
+    {-
     , schema @Ref_000_1_0
     , schema @Cat_001_1_0
     , schema @Cat_002_1_0
+    -}
     ]
 
+main :: IO ()
+main = do
+    pure ()
+    print s1

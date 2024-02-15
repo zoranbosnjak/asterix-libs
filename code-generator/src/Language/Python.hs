@@ -1161,6 +1161,7 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     mkManifest specs
 -}
   where
+    {-
     specs :: [Asterix]
     specs = sort $ nub $ fmap deriveAsterix specs'
 
@@ -1169,3 +1170,4 @@ mkCode test ref ver specs' = render "    " "\n" $ do
 
     db :: AsterixDb EMap
     db = enumDb $ dbSet
+-}

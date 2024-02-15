@@ -24,8 +24,8 @@ numberToText :: A.Number -> Text
 numberToText = f1 where
     f1 = \case
         A.NumInt i -> case i >= 0 of
-            True -> sformat ("'TNumInt 'TPlus " % int) i
-            False -> sformat ("'TNumInt 'TMinus " % int) (i * (-1))
+            True -> sformat ("'TNumInt 'Plus " % int) i
+            False -> sformat ("'TNumInt 'Minus " % int) (i * (-1))
         other -> f2 other
     f2 = \case
         A.NumDiv a b -> sformat ("'TNumDiv (" % stext % ") (" % stext % ")") (f1 a) (f1 b)
@@ -46,18 +46,18 @@ constrainToText = \case
 mkContent :: (A.Content, Int) -> BlockM Builder ()
 mkContent (cont, ix) = case cont of
     A.ContentRaw -> do
-        fmt ("type " % stext % " = 'TContentRaw") t
+        fmt ("type " % stext % " = 'ContentRaw") t
     A.ContentTable lst -> do
         let f :: (Int, Text) -> Text
             f (a,b) = sformat ("'( " % int % ", \"" % stext % "\")") a b
-        fmt ("type " % stext % " = 'TContentTable " % stext) t (fmtList "'[ " "]" f lst)
+        fmt ("type " % stext % " = 'ContentTable " % stext) t (fmtList "'[ " "]" f lst)
     A.ContentString st -> do
-        fmt ("type " % stext % " = 'TContentString " % stext) t $ case st of
+        fmt ("type " % stext % " = 'ContentString " % stext) t $ case st of
             A.StringAscii -> "'StringAscii"
             A.StringICAO  -> "'StringICAO"
             A.StringOctal -> "'StringOctal"
     A.ContentInteger sig cons -> do
-        fmt ("type " % stext % " = 'TContentInteger " % stext % " " % stext) t
+        fmt ("type " % stext % " = 'ContentInteger " % stext % " " % stext) t
             ( case sig of
                  A.Signed   -> "'Signed"
                  A.Unsigned -> "'Unsigned")
@@ -66,7 +66,7 @@ mkContent (cont, ix) = case cont of
         let sig = case sig' of
                 A.Signed   -> "'Signed"
                 A.Unsigned -> "'Unsigned"
-        fmt ("type " % stext % " = 'TContentQuantity " % stext
+        fmt ("type " % stext % " = 'ContentQuantity " % stext
              % " (" % stext % ") \"" % stext % "\" " % stext)
             t
             sig
@@ -75,11 +75,11 @@ mkContent (cont, ix) = case cont of
             (fmtList "'[ " "]" constrainToText cons)
     A.ContentBds bt -> do
         let x = case bt of
-                A.BdsWithAddress -> "'TBdsWithAddress"
-                A.BdsAt Nothing -> "('TBdsAt 'Nothing)"
+                A.BdsWithAddress -> "'BdsWithAddress"
+                A.BdsAt Nothing -> "('BdsAt 'Nothing)"
                 A.BdsAt (Just (A.BdsAddr addr)) -> sformat
-                    ("('TBdsAt ('Just " % int % "))") addr
-        fmt ("type " % stext % " = 'TContentBds " % stext) t x
+                    ("('BdsAt ('Just " % int % "))") addr
+        fmt ("type " % stext % " = 'ContentBds " % stext) t x
   where
     t = nameOf "TContent" ix
 
@@ -157,53 +157,71 @@ mkItem db (item, ix) = case item of
   where
     t = nameOf "TItem" ix
 
+mkRecord :: AsterixDb EMap -> (Record, Int) -> BlockM Builder ()
+mkRecord db (Record lst, ix) = do
+    fmt ("type " % stext % " = 'Record " % stext) t (fmtList "'[ " "]" f lst)
+  where
+    t = nameOf "TRecord" ix
+    f = \case
+        CompoundSubitem item -> sformat
+            ("'CompoundSubitem " % stext)
+            (nameOf "TItem" $ indexOf (dbItem db) item)
+        CompoundSpare -> "'CompoundSpare"
+        CompoundRFS -> "'CompoundRFS"
+
+mkExpansion :: AsterixDb EMap -> (Expansion, Int) -> BlockM Builder ()
+mkExpansion db (Expansion n lst, ix) = do
+    fmt ("type " % stext % " = 'Expansion " % int % " " % stext)
+        t n (fmtList "'[ " "]" f lst)
+  where
+    t = nameOf "TExpansion" ix
+    f = \case
+        CompoundSubitem item -> sformat
+            ("'CompoundSubitem " % stext)
+            (nameOf "TItem" $ indexOf (dbItem db) item)
+        CompoundSpare -> "'CompoundSpare"
+        CompoundRFS -> "'CompoundRFS"
+
 mkUap :: AsterixDb EMap -> (Uap, Int) -> BlockM Builder ()
 mkUap db (uap, ix) = case uap of
-    Uap var -> do
+    Uap record -> do
         fmt ("type " % stext % " = 'TUapSingle " % stext) t
-            (nameOf "TVariation" $ indexOf (dbVariation db) var)
+            (nameOf "TRecord" $ indexOf (dbRecord db) record)
     Uaps lst _sel -> do
-        let f (a, var) = sformat ("'(\"" % stext % "\", " % stext % ")") a
-                (nameOf "TVariation" $ indexOf (dbVariation db) var)
+        let f (a, record) = sformat ("'(\"" % stext % "\", " % stext % ")") a
+                (nameOf "TRecord" $ indexOf (dbRecord db) record)
         fmt ("type " % stext % " = 'TUapMultiple " % stext) t
             (fmtList "'[ " "]" f lst)
   where
     t = nameOf "TUap" ix
 
-mkSpec :: AsterixDb EMap -> (AstSpec, Int) -> BlockM Builder ()
-mkSpec db (spec, ix) = case spec of
-    AstCat uap -> do
-        fmt ("type " % stext % " = 'TCat " % stext) t
-            (nameOf "TUap" $ indexOf (dbUap db) uap)
-    AstRef var -> do
-        fmt ("type " % stext % " = 'TRef " % stext) t
-            (nameOf "TVariation" $ indexOf (dbVariation db) var)
+mkAstSpec :: AsterixDb EMap -> (AstSpec, Int) -> BlockM Builder ()
+mkAstSpec db (astSpec, ix) = do
+    let (at, cat, ed, s) = case astSpec of
+            AstCat (Cat c) e uap ->
+                ("'TCat", c, e, nameOf "TUap" $ indexOf (dbUap db) uap)
+            AstRef (Cat c) e expansion ->
+                ("'TRef", c, e, nameOf "TExpansion" $ indexOf (dbExpansion db) expansion)
+    fmt ("type " % stext % " = " % stext % " " % int % " (" % stext % ") " % stext)
+        t at cat (mkEdition ed) s
   where
-    t = nameOf "TSpec" ix
+    t = nameOf "TAstSpec" ix
+    mkEdition (A.Edition a b) = sformat
+        ("'Edition " % int % " " % int) a b
 
-mkAsterix :: AsterixDb EMap -> (Asterix, Int) -> BlockM Builder ()
-mkAsterix db ((Asterix cat (A.Edition a b) spec), ix) = do
-    fmt ("type " % stext % " = 'TAsterix " % int % " " % stext % " " % stext)
-        t
-        cat
-        (sformat ("('TEdition " % int % " " % int % ")") a b)
-        (nameOf "TSpec" $ indexOf (dbSpec db) spec)
-  where
-    t = nameOf "TAsterix" ix
-
-mkAlias :: (Asterix, Int) -> BlockM Builder ()
-mkAlias (ast, ix) = do
+mkAlias :: (AstSpec, Int) -> BlockM Builder ()
+mkAlias (astSpec, ix) = do
     fmt ("type " % stext % " = " % stext)
-        (nameOfAst ast)
-        (nameOf "TAsterix" ix)
+        (nameOfAst astSpec)
+        (nameOf "TAstSpec" ix)
 
-mkManifest :: [Asterix] -> BlockM Builder ()
+mkManifest :: [AstSpec] -> BlockM Builder ()
 mkManifest lst = do
-    "manifest :: [VAsterix]"
+    "manifest :: [Some VAstSpec]"
     "manifest ="
     indent $ do
-        forM_ (zip ps lst) $ \(p, ast) -> do
-            fmt (stext % " schema @" % stext) p (nameOfAst ast)
+        forM_ (zip ps lst) $ \(p, astSpec) -> do
+            fmt (stext % " schema @" % stext) p (nameOfAst astSpec)
         "]"
   where
     ps = ["["] <> repeat ","
@@ -228,6 +246,7 @@ mkCode test ref ver specs' = render "    " "\n" $ do
         False -> "module Asterix.Generated where"
     ""
     "import           Data.Text"
+    "import           Data.Some (Some)"
     ""
     "import           Asterix.Schema"
     ""
@@ -249,24 +268,27 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     "-- | Item set"
     sequence_ (fmap (mkItem db) $ enumList $ dbItem db)
     ""
+    "-- | Record set"
+    sequence_ (fmap (mkRecord db) $ enumList $ dbRecord db)
+    ""
+    "-- | Expansion set"
+    sequence_ (fmap (mkExpansion db) $ enumList $ dbExpansion db)
+    ""
     "-- | Uap set"
     sequence_ (fmap (mkUap db) $ enumList $ dbUap db)
     ""
-    "-- | Spec set"
-    sequence_ (fmap (mkSpec db) $ enumList $ dbSpec db)
-    ""
-    "-- | Asterix set"
-    sequence_ (fmap (mkAsterix db) $ enumList $ dbAst db)
+    "-- | Asterix spec set"
+    sequence_ (fmap (mkAstSpec db) $ enumList $ dbAstSpec db)
     ""
     "-- | Aliases"
-    sequence_ $ fmap mkAlias $ enumList $ dbAst db
+    sequence_ $ fmap mkAlias $ enumList $ dbAstSpec db
     ""
     "-- | Manifest"
     mkManifest specs
     ""
   where
-    specs :: [Asterix]
-    specs = sort $ nub $ fmap deriveAsterix specs'
+    specs :: [AstSpec]
+    specs = sort $ nub $ fmap deriveAstSpec specs'
 
     db :: AsterixDb EMap
     db = enumDb $ asterixDb specs

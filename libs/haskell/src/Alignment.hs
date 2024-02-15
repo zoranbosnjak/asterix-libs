@@ -25,12 +25,12 @@ class UnWrapInt t where
     unWrapInt :: t -> Int
 
 -- | Absolute bit offset from the start of input
-newtype BitOffset = BitOffset Int deriving (Eq, Show)
+newtype BitOffset = BitOffset Int deriving (Eq, Show, Num)
 
 instance UnWrapInt BitOffset where unWrapInt (BitOffset i) = i
 
 -- | Bit offset modulo 8, that is [0..7], where 0 means byte aligned.
-newtype BitOffsetMod8 = BitOffsetMod8 Int deriving (Eq, Show)
+newtype BitOffsetMod8 = BitOffsetMod8 Int deriving (Eq, Show, Num)
 
 instance UnWrapInt BitOffsetMod8 where unWrapInt (BitOffsetMod8 i) = i
 
@@ -44,7 +44,7 @@ instance Monoid BitOffsetMod8 where
     mempty = BitOffsetMod8 0
 
 -- | Size in bits.
-newtype BitSize = BitSize Int deriving (Eq, Show)
+newtype BitSize = BitSize Int deriving (Eq, Show, Num)
 
 instance UnWrapInt BitSize where unWrapInt (BitSize i) = i
 

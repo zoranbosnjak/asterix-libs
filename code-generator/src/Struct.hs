@@ -70,37 +70,41 @@ data Item
     | Item A.Name A.Title Variation
     deriving (Generic, Eq, Ord, Show)
 
+newtype Record = Record [CompoundSubitem]
+    deriving (Generic, Eq, Ord, Show)
+
+data Expansion = Expansion A.RegisterSize [CompoundSubitem]
+    deriving (Generic, Eq, Ord, Show)
+
 data Uap
-    = Uap Variation
-    | Uaps [(A.UapName, Variation)] (Maybe A.UapSelector)
+    = Uap Record
+    | Uaps [(A.UapName, Record)] (Maybe A.UapSelector)
+    deriving (Generic, Eq, Ord, Show)
+
+newtype Cat = Cat Int
     deriving (Generic, Eq, Ord, Show)
 
 data AstSpec
-    = AstCat Uap
-    | AstRef Variation
+    = AstCat Cat A.Edition Uap
+    | AstRef Cat A.Edition Expansion
     deriving (Generic, Eq, Show)
 
 instance Ord AstSpec where
-    compare (AstCat _) (AstRef _) = LT
-    compare (AstRef _) (AstCat _) = GT
-    compare (AstCat a) (AstCat b) = compare a b
-    compare (AstRef a) (AstRef b) = compare a b
-
--- | Category number
-type Cat = Int
-
--- | Derived Asterix structure
-data Asterix = Asterix
-    { astCat     :: Cat
-    , astEdition :: A.Edition
-    , astSpec    :: AstSpec
-    } deriving (Generic, Eq, Show)
-
-instance Ord Asterix where
     compare a b
-        = compare (astCat a) (astCat b)
-       <> compare (astEdition a) (astEdition b)
-       <> compare (astSpec a) (astSpec b)
+        = compare (catOf a) (catOf b)
+       <> compare (editionOf a) (editionOf b)
+       <> cmp a b
+      where
+        catOf = \case
+            AstCat cat _ _ -> cat
+            AstRef cat _ _ -> cat
+        editionOf = \case
+            AstCat _ ed _ -> ed
+            AstRef _ ed _ -> ed
+        cmp (AstCat _ _ _) (AstRef _ _ _) = LT
+        cmp (AstRef _ _ _) (AstCat _ _ _) = GT
+        cmp (AstCat _ _ uap1) (AstCat _ _ uap2) = compare uap1 uap2
+        cmp (AstRef _ _ e1) (AstRef _ _ e2) = compare e1 e2
 
 evalNumber :: Fractional a => A.Number -> a
 evalNumber = \case
@@ -153,10 +157,9 @@ deriveVariation = \case
         byteAligned "explicit (pre)"
         pure $ Explicit t
     A.RandomFieldSequencing -> do
-        -- This is handled as special case inside Compound,
-        -- so it should never be relevant here.
+        -- This is handled as special case inside Compound.
         error "internal error"
-    A.Compound mn lst' -> do
+    A.Compound mn lst -> do
         byteAligned "compound (pre)"
         items <- forM lst $ \case
             Nothing -> pure CompoundSpare
@@ -164,11 +167,6 @@ deriveVariation = \case
             Just item -> CompoundSubitem <$> deriveItem item
         byteAligned "compound (post)"
         pure $ Compound mn items
-      where
-        removeRfs = \case
-            Just (A.Item _name _title A.RandomFieldSequencing _doc) -> Nothing
-            other -> other
-        lst = fmap removeRfs lst'
 
 deriveItem :: A.Item -> State OctetOffset Item
 deriveItem = \case
@@ -181,16 +179,18 @@ deriveItem = \case
         <*> pure title
         <*> deriveVariation var
 
-deriveAsterix :: A.Asterix -> Asterix
-deriveAsterix = \case
+deriveAstSpec :: A.Asterix -> AstSpec
+deriveAstSpec = \case
     A.AsterixBasic (A.Basic cat _title edition _date _preamble items uap) ->
-        Asterix cat edition $ AstCat $ case uap of
-            A.Uap lst -> Uap $ mkVar $ mkToplevel items lst
+        AstCat (Cat cat) edition $ case uap of
+            A.Uap lst -> Uap $ mkRecord $ mkVar $ mkToplevel items lst
             A.Uaps lst2 sel ->
-                let uaps = [(name, mkVar $ mkToplevel items lst) | (name, lst) <- lst2]
+                let uaps = do
+                        (name, lst) <- lst2
+                        pure (name, mkRecord $ mkVar $ mkToplevel items lst)
                 in Uaps uaps sel
     A.AsterixExpansion (A.Expansion cat _title edition _date var) ->
-        Asterix cat edition (AstRef $ mkVar var)
+        AstRef (Cat cat) edition (mkExpansion var)
   where
     -- | Create toplevel compound item (which represents a category).
     mkToplevel :: [A.Item] -> [Maybe A.Name] -> A.Variation
@@ -208,6 +208,16 @@ deriveAsterix = \case
     mkVar :: A.Variation -> Variation
     mkVar var = evalState (deriveVariation var) mempty
 
+    mkRecord :: Variation -> Record
+    mkRecord = \case
+        Compound Nothing lst -> Record lst
+        _ -> error "unexpected variation"
+
+    mkExpansion :: A.Variation -> Expansion
+    mkExpansion var = case mkVar var of
+        Compound (Just n) lst -> Expansion n lst
+        _ -> error "unexpected variation"
+
 -- | Database of all distinct asterix components. It's parametrized over some
 -- container, to be used in different contexts.
 data AsterixDb f = AsterixDb
@@ -215,10 +225,11 @@ data AsterixDb f = AsterixDb
     , dbRule      :: f A.Rule
     , dbVariation :: f Variation
     , dbItem      :: f Item
+    , dbRecord    :: f Record
+    , dbExpansion :: f Expansion
     , dbUapSel    :: f A.UapSelector
     , dbUap       :: f Uap
-    , dbSpec      :: f AstSpec
-    , dbAst       :: f Asterix
+    , dbAstSpec   :: f AstSpec
     }
 
 -- | Simple version of 'lens' over AsterixDb
@@ -242,17 +253,20 @@ lVariation = FocusDb dbVariation (\db x -> db {dbVariation = x})
 lItem :: FocusDb f Item
 lItem = FocusDb dbItem (\db x -> db {dbItem = x})
 
+lRecord :: FocusDb f Record
+lRecord = FocusDb dbRecord (\db x -> db {dbRecord = x})
+
+lExpansion :: FocusDb f Expansion
+lExpansion = FocusDb dbExpansion (\db x -> db {dbExpansion = x})
+
 lUapSel :: FocusDb f A.UapSelector
 lUapSel = FocusDb dbUapSel (\db x -> db {dbUapSel = x})
 
 lUap :: FocusDb f Uap
 lUap = FocusDb dbUap (\db x -> db {dbUap = x})
 
-lSpec :: FocusDb f AstSpec
-lSpec = FocusDb dbSpec (\db x -> db {dbSpec = x})
-
-lAst :: FocusDb f Asterix
-lAst = FocusDb dbAst (\db x -> db {dbAst = x})
+lAstSpec :: FocusDb f AstSpec
+lAstSpec = FocusDb dbAstSpec (\db x -> db {dbAstSpec = x})
 
 dbInsert :: Ord a => FocusDb Set a -> a -> State (AsterixDb Set) ()
 dbInsert l x = modify $ modifyDb l (Set.insert x)
@@ -288,27 +302,36 @@ saveItem item = do
         Spare _o _n           -> pure ()
         Item _name _title var -> saveVariation var
 
+saveRecord :: Record -> State (AsterixDb Set) ()
+saveRecord x@(Record lst) = do
+    dbInsert lRecord x
+    saveVariation $ Compound Nothing lst
+
+saveExpansion :: Expansion -> State (AsterixDb Set) ()
+saveExpansion x@(Expansion n lst) = do
+    dbInsert lExpansion x
+    saveVariation $ Compound (Just n) lst
+
 saveUap :: Uap -> State (AsterixDb Set) ()
 saveUap uap = do
     dbInsert lUap uap
     case uap of
-        Uap var       -> saveVariation var
+        Uap record -> saveRecord record
         Uaps lst msel -> do
             maybe (pure ()) (dbInsert lUapSel) msel
-            forM_ lst $ \(_name, var) -> saveVariation var
+            forM_ lst $ \(_name, record) -> saveRecord record
 
-saveAsterix :: Asterix -> State (AsterixDb Set) ()
-saveAsterix ast@(Asterix _cat _ed spec) = do
-    dbInsert lAst ast
-    dbInsert lSpec spec
-    case spec of
-        AstCat uap -> saveUap uap
-        AstRef var -> saveVariation var
+saveAstSpec :: AstSpec -> State (AsterixDb Set) ()
+saveAstSpec astSpec = do
+    dbInsert lAstSpec astSpec
+    case astSpec of
+        AstCat _cat _edition uap -> saveUap uap
+        AstRef _cat _edition expansion -> saveExpansion expansion
 
--- | Create asterix database
-asterixDb :: Foldable t => t Asterix -> AsterixDb Set
-asterixDb lst = execState (mapM_ saveAsterix lst)
-    (AsterixDb mempty mempty mempty mempty mempty mempty mempty mempty)
+-- | Create asterix specs database
+asterixDb :: Foldable t => t AstSpec -> AsterixDb Set
+asterixDb lst = execState (mapM_ saveAstSpec lst)
+    (AsterixDb mempty mempty mempty mempty mempty mempty mempty mempty mempty)
 
 -- | Enumerated distinct values.
 newtype EMap a = EMap { unEMap :: Map a Int }
@@ -320,10 +343,11 @@ enumDb db = AsterixDb
     (f dbRule)
     (f dbVariation)
     (f dbItem)
+    (f dbRecord)
+    (f dbExpansion)
     (f dbUapSel)
     (f dbUap)
-    (f dbSpec)
-    (f dbAst)
+    (f dbAstSpec)
   where
     f :: Ord a => (AsterixDb Set -> Set a) -> EMap a
     f sel = EMap $ Map.fromList $ zip (Set.toAscList $ sel db) [0..]
