@@ -4,16 +4,16 @@
 -- For more details, see:
 --    - https://github.com/zoranbosnjak/asterix-specs
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DataKinds #-}
 
 -- Types are BIG, disable depth checking.
 {-# OPTIONS_GHC -freduction-depth=0 #-}
 
 module Generated where
 
+import           Data.Some      (Some)
 import           Data.Text
-import           Data.Some
 
 import           Asterix.Schema
 
@@ -116,9 +116,6 @@ type TVariation_47 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_35, 'Compound
 type TVariation_48 = 'TCompound ('Just 1) '[ 'CompoundSubitem TItem_35, 'CompoundSubitem TItem_39]
 type TVariation_49 = 'TCompound ('Just 1) '[ 'CompoundSubitem TItem_35, 'CompoundSpare, 'CompoundSubitem TItem_39]
 
-s1 :: Some VVariation
-s1 = mkSome (schema @TVariation_0 @(VVariation 'VTElement))
-
 -- | Item set
 type TItem_0 = 'TSpare 4 4
 type TItem_1 = 'TSpare 4 8
@@ -214,15 +211,9 @@ type Cat_002_1_0 = TAstSpec_3
 -- | Manifest
 manifest :: [Some VAstSpec]
 manifest =
-    [ --schema @Cat_000_1_0
-    {-
+    [ schema @Cat_000_1_0
     , schema @Ref_000_1_0
     , schema @Cat_001_1_0
     , schema @Cat_002_1_0
-    -}
     ]
 
-main :: IO ()
-main = do
-    pure ()
-    print s1

@@ -1,5 +1,6 @@
 -- | Generate asterix 'python' source code.
 
+-- TODO: remove
 {-# OPTIONS_GHC -Wno-all #-}
 
 {-# LANGUAGE OverloadedStrings #-}
@@ -1116,12 +1117,12 @@ programManifest specs = enclose "manifest = {" "}" $ do
 mkCode :: Bool -> Text -> Text -> [A.Asterix] -> Builder
 mkCode test ref ver specs' = render "    " "\n" $ do
     "# Asterix specifications" :: BlockM Builder ()
-    {-
     ""
     "# This file is generated, DO NOT EDIT!"
     "# For more details, see:"
     "#     - https://github.com/zoranbosnjak/asterix-specs"
     ""
+    {-
     "from asterix.base import *"
     ""
     line $ "reference = \"" <> BL.fromText ref <> "\""
@@ -1161,13 +1162,11 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     mkManifest specs
 -}
   where
-    {-
-    specs :: [Asterix]
-    specs = sort $ nub $ fmap deriveAsterix specs'
+    specs :: [AstSpec]
+    specs = sort $ nub $ fmap deriveAstSpec specs'
 
     dbSet :: AsterixDb Set
     dbSet = asterixDb specs
 
     db :: AsterixDb EMap
     db = enumDb $ dbSet
--}

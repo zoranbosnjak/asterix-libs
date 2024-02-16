@@ -4,16 +4,16 @@
 -- For more details, see:
 --    - https://github.com/zoranbosnjak/asterix-specs
 
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 -- Types are BIG, disable depth checking.
 {-# OPTIONS_GHC -freduction-depth=0 #-}
 
 module Asterix.Generated where
 
-import           Data.Text
 import           Data.Some (Some)
+import           Data.Text
 
 import           Asterix.Schema
 
