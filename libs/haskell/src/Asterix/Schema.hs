@@ -5,8 +5,13 @@
 {-# LANGUAGE DataKinds            #-}
 {-# LANGUAGE GADTs                #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE TypeFamilies         #-}
 
-module Asterix.Schema where
+module Asterix.Schema
+( module Asterix.Schema
+, Text
+, Some
+) where
 
 import           Data.GADT.Show
 import           Data.Proxy
@@ -19,6 +24,14 @@ import           GHC.TypeLits
 import           Alignment
 
 -- 'common' and 'type level' definitions
+
+type family Length xs where
+    Length '[] = 0
+    Length (x ': xs) = 1 + Length xs
+
+type family Times a b where
+    Times 1 a = a
+    Times n a = a + Times (n-1) a
 
 data PlusMinus
     = Plus
@@ -532,6 +545,7 @@ instance
     ( t ~ Some VItem
     , IsSchema n Int
     , IsSchema k [CompoundSubitem (Some VItem)]
+    , Length k <= Times 8 n
     ) => IsSchema ('Expansion n k) (Expansion Int t) where
     schema = Expansion (schema @n) (schema @k)
 

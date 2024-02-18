@@ -12,9 +12,6 @@
 
 module Asterix.Generated where
 
-import           Data.Some (Some)
-import           Data.Text
-
 import           Asterix.Schema
 
 reference :: Text
@@ -4994,10 +4991,10 @@ type TRecord_41 = 'Record '[ 'CompoundSubitem TItem_63, 'CompoundSubitem TItem_7
 type TRecord_42 = 'Record '[ 'CompoundSubitem TItem_126, 'CompoundSubitem TItem_128, 'CompoundSubitem TItem_32, 'CompoundSubitem TItem_51, 'CompoundSubitem TItem_54, 'CompoundSubitem TItem_75, 'CompoundSubitem TItem_77, 'CompoundSubitem TItem_79, 'CompoundSubitem TItem_80, 'CompoundSubitem TItem_103, 'CompoundSubitem TItem_105, 'CompoundSubitem TItem_101, 'CompoundSubitem TItem_102, 'CompoundSubitem TItem_104, 'CompoundSubitem TItem_52, 'CompoundSubitem TItem_55, 'CompoundSubitem TItem_56, 'CompoundSubitem TItem_57, 'CompoundSubitem TItem_59, 'CompoundSubitem TItem_64, 'CompoundSubitem TItem_65, 'CompoundSubitem TItem_69, 'CompoundSubitem TItem_70, 'CompoundSubitem TItem_82, 'CompoundSubitem TItem_98, 'CompoundSubitem TItem_99, 'CompoundSubitem TItem_100, 'CompoundSubitem TItem_53, 'CompoundSubitem TItem_117, 'CompoundSubitem TItem_118, 'CompoundSubitem TItem_120, 'CompoundSubitem TItem_121, 'CompoundSubitem TItem_123, 'CompoundSubitem TItem_66, 'CompoundSubitem TItem_68]
 
 -- | Expansion set
-type TExpansion_0 = 'Expansion 8 '[ 'CompoundSubitem TItem_601, 'CompoundSubitem TItem_1560, 'CompoundSubitem TItem_1218, 'CompoundSubitem TItem_908, 'CompoundSubitem TItem_1558, 'CompoundSubitem TItem_1623, 'CompoundSubitem TItem_1728, 'CompoundSubitem TItem_1144]
-type TExpansion_1 = 'Expansion 8 '[ 'CompoundSubitem TItem_601, 'CompoundSubitem TItem_1560, 'CompoundSubitem TItem_1219, 'CompoundSubitem TItem_908, 'CompoundSubitem TItem_1558, 'CompoundSubitem TItem_1624, 'CompoundSubitem TItem_1728, 'CompoundSubitem TItem_1144]
-type TExpansion_2 = 'Expansion 8 '[ 'CompoundSubitem TItem_746, 'CompoundSubitem TItem_740, 'CompoundSubitem TItem_1799, 'CompoundSubitem TItem_1655]
-type TExpansion_3 = 'Expansion 8 '[ 'CompoundSubitem TItem_1124, 'CompoundSubitem TItem_1094, 'CompoundSubitem TItem_1092, 'CompoundSubitem TItem_1463, 'CompoundSubitem TItem_849, 'CompoundSubitem TItem_1489, 'CompoundSubitem TItem_723]
+type TExpansion_0 = 'Expansion 1 '[ 'CompoundSubitem TItem_601, 'CompoundSubitem TItem_1560, 'CompoundSubitem TItem_1218, 'CompoundSubitem TItem_908, 'CompoundSubitem TItem_1558, 'CompoundSubitem TItem_1623, 'CompoundSubitem TItem_1728, 'CompoundSubitem TItem_1144]
+type TExpansion_1 = 'Expansion 1 '[ 'CompoundSubitem TItem_601, 'CompoundSubitem TItem_1560, 'CompoundSubitem TItem_1219, 'CompoundSubitem TItem_908, 'CompoundSubitem TItem_1558, 'CompoundSubitem TItem_1624, 'CompoundSubitem TItem_1728, 'CompoundSubitem TItem_1144]
+type TExpansion_2 = 'Expansion 1 '[ 'CompoundSubitem TItem_746, 'CompoundSubitem TItem_740, 'CompoundSubitem TItem_1799, 'CompoundSubitem TItem_1655]
+type TExpansion_3 = 'Expansion 1 '[ 'CompoundSubitem TItem_1124, 'CompoundSubitem TItem_1094, 'CompoundSubitem TItem_1092, 'CompoundSubitem TItem_1463, 'CompoundSubitem TItem_849, 'CompoundSubitem TItem_1489, 'CompoundSubitem TItem_723]
 
 -- | Uap set
 type TUap_0 = 'TUapSingle TRecord_0

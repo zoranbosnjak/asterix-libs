@@ -4,16 +4,13 @@
 -- For more details, see:
 --    - https://github.com/zoranbosnjak/asterix-specs
 
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 -- Types are BIG, disable depth checking.
 {-# OPTIONS_GHC -freduction-depth=0 #-}
 
 module Generated where
-
-import           Data.Some      (Some)
-import           Data.Text
 
 import           Asterix.Schema
 
@@ -115,6 +112,7 @@ type TVariation_46 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_6, 'CompoundS
 type TVariation_47 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_35, 'CompoundSpare, 'CompoundSubitem TItem_39]
 type TVariation_48 = 'TCompound ('Just 1) '[ 'CompoundSubitem TItem_35, 'CompoundSubitem TItem_39]
 type TVariation_49 = 'TCompound ('Just 1) '[ 'CompoundSubitem TItem_35, 'CompoundSpare, 'CompoundSubitem TItem_39]
+type TVariation_50 = 'TCompound ('Just 2) '[ 'CompoundSubitem TItem_35, 'CompoundSpare, 'CompoundSpare, 'CompoundSubitem TItem_39, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSubitem TItem_44]
 
 -- | Item set
 type TItem_0 = 'TSpare 4 4
@@ -189,7 +187,8 @@ type TRecord_5 = 'Record '[ 'CompoundSubitem TItem_6, 'CompoundSubitem TItem_8, 
 type TRecord_6 = 'Record '[ 'CompoundSubitem TItem_6, 'CompoundSubitem TItem_8, 'CompoundSubitem TItem_11]
 
 -- | Expansion set
-type TExpansion_0 = 'Expansion 8 '[ 'CompoundSubitem TItem_35, 'CompoundSubitem TItem_39]
+type TExpansion_0 = 'Expansion 1 '[ 'CompoundSubitem TItem_35, 'CompoundSubitem TItem_39]
+type TExpansion_1 = 'Expansion 2 '[ 'CompoundSubitem TItem_35, 'CompoundSpare, 'CompoundSpare, 'CompoundSubitem TItem_39, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSubitem TItem_44]
 
 -- | Uap set
 type TUap_0 = 'TUapSingle TRecord_4
@@ -199,20 +198,23 @@ type TUap_2 = 'TUapMultiple '[ '("uap1", TRecord_1), '("uap2", TRecord_2), '("ua
 -- | Asterix spec set
 type TAstSpec_0 = 'TCat 0 ('Edition 1 0) TUap_0
 type TAstSpec_1 = 'TRef 0 ('Edition 1 0) TExpansion_0
-type TAstSpec_2 = 'TCat 1 ('Edition 1 0) TUap_1
-type TAstSpec_3 = 'TCat 2 ('Edition 1 0) TUap_2
+type TAstSpec_2 = 'TRef 0 ('Edition 1 1) TExpansion_1
+type TAstSpec_3 = 'TCat 1 ('Edition 1 0) TUap_1
+type TAstSpec_4 = 'TCat 2 ('Edition 1 0) TUap_2
 
 -- | Aliases
 type Cat_000_1_0 = TAstSpec_0
 type Ref_000_1_0 = TAstSpec_1
-type Cat_001_1_0 = TAstSpec_2
-type Cat_002_1_0 = TAstSpec_3
+type Ref_000_1_1 = TAstSpec_2
+type Cat_001_1_0 = TAstSpec_3
+type Cat_002_1_0 = TAstSpec_4
 
 -- | Manifest
 manifest :: [Some VAstSpec]
 manifest =
     [ schema @Cat_000_1_0
     , schema @Ref_000_1_0
+    , schema @Ref_000_1_1
     , schema @Cat_001_1_0
     , schema @Cat_002_1_0
     ]

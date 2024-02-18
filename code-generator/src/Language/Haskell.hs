@@ -172,7 +172,7 @@ mkRecord db (Record lst, ix) = do
 mkExpansion :: AsterixDb EMap -> (Expansion, Int) -> BlockM Builder ()
 mkExpansion db (Expansion n lst, ix) = do
     fmt ("type " % stext % " = 'Expansion " % int % " " % stext)
-        t n (fmtList "'[ " "]" f lst)
+        t (div8 n) (fmtList "'[ " "]" f lst)
   where
     t = nameOf "TExpansion" ix
     f = \case
@@ -244,9 +244,6 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     case test of
         True  -> "module Generated where"
         False -> "module Asterix.Generated where"
-    ""
-    "import           Data.Some (Some)"
-    "import           Data.Text"
     ""
     "import           Asterix.Schema"
     ""
