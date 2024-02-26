@@ -6,7 +6,7 @@
 {-
 -- 'AsterixDb' - Asterix database is a collection of all components, without
 -- duplications (the same definitions can be reused). For example,
--- 'I010/SAC' and 'I010/SIC' fields normally share exactly the same structure,
+-- items '010/SAC' and '010/SIC' normally share exactly the same structure,
 -- so it is stored in a database only once.
 -}
 
@@ -16,6 +16,7 @@ import           Control.Applicative
 import           Control.Monad.RWS
 import           Control.Monad.State
 import           Data.Bool
+import           Data.Foldable       (toList)
 import           Data.List           (elemIndex, unfoldr)
 import           Data.Map            (Map)
 import qualified Data.Map            as Map
@@ -57,7 +58,7 @@ data CompoundSubitem
     deriving (Generic, Eq, Ord, Show)
 
 data Variation
-    = Element OctetOffset A.RegisterSize A.Rule
+    = Element OctetOffset A.RegisterSize (A.Rule A.Content)
     | Group [Item]
     | Extended [Maybe Item]
     | Repetitive A.RepetitiveType Variation
@@ -67,7 +68,7 @@ data Variation
 
 data Item
     = Spare OctetOffset A.RegisterSize
-    | Item A.Name A.Title Variation
+    | Item A.Name A.Title (A.Rule Variation)
     deriving (Generic, Eq, Ord, Show)
 
 newtype Record = Record [CompoundSubitem]
@@ -163,7 +164,10 @@ deriveVariation = \case
         byteAligned "compound (pre)"
         items <- forM lst $ \case
             Nothing -> pure CompoundSpare
-            Just (A.Item _name _title A.RandomFieldSequencing _doc) -> pure CompoundRFS
+            Just (A.Item _name _title (A.ContextFree A.RandomFieldSequencing) _doc) ->
+                pure CompoundRFS
+            Just (A.Item _name _title (A.Dependent _ _ _) _doc) ->
+                error "unexpected dependent subitem"
             Just item -> CompoundSubitem <$> deriveItem item
         byteAligned "compound (post)"
         pure $ Compound mn items
@@ -174,10 +178,10 @@ deriveItem = \case
         o <- get
         modify (<> octetOffset n)
         pure $ Spare o n
-    A.Item name title var _doc -> Item
+    A.Item name title rule _doc -> Item
         <$> pure name
         <*> pure title
-        <*> deriveVariation var
+        <*> traverse deriveVariation rule
 
 deriveAstSpec :: A.Asterix -> AstSpec
 deriveAstSpec = \case
@@ -222,8 +226,9 @@ deriveAstSpec = \case
 -- container, to be used in different contexts.
 data AsterixDb f = AsterixDb
     { dbContent   :: f A.Content
-    , dbRule      :: f A.Rule
+    , dbRuleContent :: f (A.Rule A.Content)
     , dbVariation :: f Variation
+    , dbRuleVariation :: f (A.Rule Variation)
     , dbItem      :: f Item
     , dbRecord    :: f Record
     , dbExpansion :: f Expansion
@@ -244,11 +249,14 @@ modifyDb l f db = setDb l db $ f $ getDb l db
 lContent :: FocusDb f A.Content
 lContent = FocusDb dbContent (\db x -> db {dbContent = x})
 
-lRule :: FocusDb f A.Rule
-lRule = FocusDb dbRule (\db x -> db {dbRule = x})
+lRuleContent :: FocusDb f (A.Rule A.Content)
+lRuleContent = FocusDb dbRuleContent (\db x -> db {dbRuleContent = x})
 
 lVariation :: FocusDb f Variation
 lVariation = FocusDb dbVariation (\db x -> db {dbVariation = x})
+
+lRuleVariation :: FocusDb f (A.Rule Variation)
+lRuleVariation = FocusDb dbRuleVariation (\db x -> db {dbRuleVariation = x})
 
 lItem :: FocusDb f Item
 lItem = FocusDb dbItem (\db x -> db {dbItem = x})
@@ -274,18 +282,20 @@ dbInsert l x = modify $ modifyDb l (Set.insert x)
 saveContent :: A.Content -> State (AsterixDb Set) ()
 saveContent = dbInsert lContent
 
-saveRule :: A.Rule -> State (AsterixDb Set) ()
-saveRule rule = do
-    case rule of
-        A.ContextFree cont    -> saveContent cont
-        A.Dependent _name lst -> mapM_ (saveContent . snd) lst
-    dbInsert lRule rule
+saveRule :: Ord a
+    => (a -> State (AsterixDb Set) ())
+    -> FocusDb Set (A.Rule a)
+    -> A.Rule a
+    -> State (AsterixDb Set) ()
+saveRule save focus rule = do
+    mapM_ save $ toList rule
+    dbInsert focus rule
 
 saveVariation :: Variation -> State (AsterixDb Set) ()
 saveVariation var = do
     dbInsert lVariation var
     case var of
-        Element _o _n rule    -> saveRule rule
+        Element _o _n rule    -> saveRule saveContent lRuleContent rule
         Group lst             -> mapM_ saveItem lst
         Extended lst          -> mapM_ saveItem (catMaybes lst)
         Repetitive _t v       -> saveVariation v
@@ -300,7 +310,7 @@ saveItem item = do
     dbInsert lItem item
     case item of
         Spare _o _n           -> pure ()
-        Item _name _title var -> saveVariation var
+        Item _name _title rule -> saveRule saveVariation lRuleVariation rule
 
 saveRecord :: Record -> State (AsterixDb Set) ()
 saveRecord x@(Record lst) = do
@@ -331,7 +341,7 @@ saveAstSpec astSpec = do
 -- | Create asterix specs database
 asterixDb :: Foldable t => t AstSpec -> AsterixDb Set
 asterixDb lst = execState (mapM_ saveAstSpec lst)
-    (AsterixDb mempty mempty mempty mempty mempty mempty mempty mempty mempty)
+    (AsterixDb mempty mempty mempty mempty mempty mempty mempty mempty mempty mempty)
 
 -- | Enumerated distinct values.
 newtype EMap a = EMap { unEMap :: Map a Int }
@@ -340,8 +350,9 @@ newtype EMap a = EMap { unEMap :: Map a Int }
 enumDb :: AsterixDb Set -> AsterixDb EMap
 enumDb db = AsterixDb
     (f dbContent)
-    (f dbRule)
+    (f dbRuleContent)
     (f dbVariation)
+    (f dbRuleVariation)
     (f dbItem)
     (f dbRecord)
     (f dbExpansion)
@@ -360,7 +371,7 @@ enumList :: EMap k -> [(k, Int)]
 enumList = Map.toList . unEMap
 
 -- | Variations and Items are defined by mutual recursion.
--- Reorder variations and items, such that any var/item is defined before it's referenced.
+-- Reorder variations and items, such that any var/item is defined before being referenced.
 flattenVariationsAndItems :: (Set Variation, Set Item) -> [Either Variation Item]
 flattenVariationsAndItems = snd . evalRWS go ()
   where
@@ -392,7 +403,7 @@ flattenVariationsAndItems = snd . evalRWS go ()
         when (Set.member item items) $ do
             case item of
                 Spare _ _    -> pure ()
-                Item _ _ var -> goVar var
+                Item _ _ rule -> mapM_ goVar $ toList rule
             tell [Right item]
 
 -- | Split list of 'Maybe' values to the lists of equal size append 'Nothing'
@@ -457,7 +468,12 @@ sizeOfVariation = \case
     Group lst -> fmap (foldr (+) 0) $ sequence $ fmap sizeOfItem lst
     _ -> Nothing
 
+sizeOfRuleVariation :: A.Rule Variation -> Maybe Int
+sizeOfRuleVariation = \case
+    A.ContextFree var -> sizeOfVariation var
+    A.Dependent _ dv _ -> sizeOfVariation dv
+
 sizeOfItem :: Item -> Maybe Int
 sizeOfItem = \case
     Spare _o n -> Just n
-    Item _name _title var -> sizeOfVariation var
+    Item _name _title rule -> sizeOfRuleVariation rule

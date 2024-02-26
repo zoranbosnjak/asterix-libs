@@ -5,7 +5,7 @@
 
 {-# LANGUAGE OverloadedStrings #-}
 
-module Language.Python (mkCode) where
+module Language.Python where
 
 import           Data.Set               (Set)
 import           Data.Text              (Text)

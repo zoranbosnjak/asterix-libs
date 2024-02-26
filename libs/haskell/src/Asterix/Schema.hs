@@ -89,9 +89,9 @@ data Content n s intNum floatNum
 
 type TContent = Content Nat Symbol TNumber TNumber
 
-data TRule
-    = TContextFree TContent
-    | TDependent [Symbol] [(Nat, TContent)]
+data TRule a
+    = TContextFree a
+    | TDependent [[Symbol]] a [([Nat], a)]
 
 data ExplicitType
     = ReservedExpansion
@@ -108,7 +108,7 @@ data TVariation
     = TElement
         Nat -- bit offsetMod
         Nat -- bit length
-        TRule
+        (TRule TContent)
     | TGroup
         [TItem]
     | TExtended
@@ -128,7 +128,7 @@ data TItem
     | TItem
         Symbol -- name
         Symbol -- title
-        TVariation
+        (TRule TVariation)
 
 data Record t = Record [CompoundSubitem t]
     deriving (Show, Eq, Ord)

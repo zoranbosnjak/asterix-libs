@@ -3,7 +3,7 @@
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module Language.Haskell (mkCode) where
+module Language.Haskell where
 
 import           Control.Monad
 import           Data.List              (sort, nub)
@@ -16,6 +16,10 @@ import           Asterix.Indent
 import qualified Asterix.Specs          as A
 import           Fmt
 import           Struct
+
+-- | Helper function to create type level list.
+fmtTList :: (a -> Text) -> [a] -> Text
+fmtTList = fmtList "'[ " "]"
 
 -- The following functions is a pretty printer trick
 -- which follows the shape of the data structure. In this case,
@@ -50,19 +54,19 @@ mkContent (cont, ix) = case cont of
     A.ContentTable lst -> do
         let f :: (Int, Text) -> Text
             f (a,b) = sformat ("'( " % int % ", \"" % stext % "\")") a b
-        fmt ("type " % stext % " = 'ContentTable " % stext) t (fmtList "'[ " "]" f lst)
+        fmt ("type " % stext % " = 'ContentTable " % stext) t (fmtTList f lst)
     A.ContentString st -> do
         fmt ("type " % stext % " = 'ContentString " % stext) t $ case st of
             A.StringAscii -> "'StringAscii"
             A.StringICAO  -> "'StringICAO"
             A.StringOctal -> "'StringOctal"
-    A.ContentInteger sig cons -> do
+    A.ContentInteger sig cstr -> do
         fmt ("type " % stext % " = 'ContentInteger " % stext % " " % stext) t
             ( case sig of
                  A.Signed   -> "'Signed"
                  A.Unsigned -> "'Unsigned")
-            (fmtList "'[ " "]" constrainToText cons)
-    A.ContentQuantity sig' lsb' unit cons -> do
+            (fmtTList constrainToText cstr)
+    A.ContentQuantity sig' lsb' unit cstr -> do
         let sig = case sig' of
                 A.Signed   -> "'Signed"
                 A.Unsigned -> "'Unsigned"
@@ -72,7 +76,7 @@ mkContent (cont, ix) = case cont of
             sig
             (numberToText lsb')
             unit
-            (fmtList "'[ " "]" constrainToText cons)
+            (fmtTList constrainToText cstr)
     A.ContentBds bt -> do
         let x = case bt of
                 A.BdsWithAddress -> "'BdsWithAddress"
@@ -83,24 +87,25 @@ mkContent (cont, ix) = case cont of
   where
     t = nameOf "TContent" ix
 
-mkRule :: AsterixDb EMap -> (A.Rule, Int) -> BlockM Builder ()
-mkRule db (rule, ix) = case rule of
+mkRuleContent :: AsterixDb EMap -> (A.Rule A.Content, Int) -> BlockM Builder ()
+mkRuleContent db (rule, ix) = case rule of
     A.ContextFree cont -> do
         fmt ("type " % stext % " = 'TContextFree " % stext)
             t
             (nameOf "TContent" $ indexOf (dbContent db) cont)
-    A.Dependent name lst -> do
+    A.Dependent items dv lst -> do
         let fText = sformat ("\"" % stext % "\"")
-            fLst (i, cont) = sformat
-                ("'(" % int % ", " % stext % ")")
-                i
+            fLst (xs, cont) = sformat
+                ("'( " % stext % ", " % stext % ")")
+                (fmtTList (sformat int) xs)
                 (nameOf "TContent" $ indexOf (dbContent db) cont)
-        fmt ("type " % stext % " = 'TDependent " % stext % " " % stext)
+        fmt ("type " % stext % " = 'TDependent " % stext % " " % stext % " " % stext)
             t
-            (fmtList "'[ " "]" fText name)
-            (fmtList "'[ " "]" fLst lst)
+            (fmtTList (fmtTList fText) items)
+            (nameOf "TContent" $ indexOf (dbContent db) dv)
+            (fmtTList fLst lst)
   where
-    t = nameOf "TRule" ix
+    t = nameOf "TRuleContent" ix
 
 mkVariation :: AsterixDb EMap -> (Variation, Int) -> BlockM Builder ()
 mkVariation db (var, ix) = case var of
@@ -109,18 +114,18 @@ mkVariation db (var, ix) = case var of
             t
             o
             n
-            (nameOf "TRule" $ indexOf (dbRule db) rule)
+            (nameOf "TRuleContent" $ indexOf (dbRuleContent db) rule)
     Group lst -> do
         let f :: Item -> Text
             f = nameOf "TItem" . indexOf (dbItem db)
         fmt ("type " % stext % " = 'TGroup " % stext) t
-            (fmtList "'[ " "]" f lst)
+            (fmtTList f lst)
     Extended lst -> do
         let f = \case
                 Nothing -> "'Nothing"
                 Just item -> "'Just " <> nameOf "TItem" (indexOf (dbItem db) item)
         fmt ("type " % stext % " = 'TExtended " % stext) t
-            (fmtList "'[ " "]" f lst)
+            (fmtTList f lst)
     Repetitive rt' var2' -> do
         let rt = case rt' of
                 A.RepetitiveRegular n -> sformat ("('Just " % int % ")") (div8 n)
@@ -142,7 +147,7 @@ mkVariation db (var, ix) = case var of
                 CompoundSpare -> "'CompoundSpare"
                 CompoundRFS -> "'CompoundRFS"
         fmt ("type " % stext % " = 'TCompound " % stext % " " % stext) t mn
-            (fmtList "'[ " "]" f lst)
+            (fmtTList f lst)
   where
     t = nameOf "TVariation" ix
 
@@ -150,16 +155,18 @@ mkItem :: AsterixDb EMap -> (Item, Int) -> BlockM Builder ()
 mkItem db (item, ix) = case item of
     Spare (OctetOffset o) n -> do
         fmt ("type " % stext % " = 'TSpare " % int % " " % int) t o n
-    Item name title var -> do
+    Item name title rule -> do
+        pure () {-
         fmt ("type " % stext % " = 'TItem \"" % stext % "\" \"" %
              stext % "\" " % stext) t name title
             (nameOf "TVariation" $ indexOf (dbVariation db) var)
+        -}
   where
     t = nameOf "TItem" ix
 
 mkRecord :: AsterixDb EMap -> (Record, Int) -> BlockM Builder ()
 mkRecord db (Record lst, ix) = do
-    fmt ("type " % stext % " = 'Record " % stext) t (fmtList "'[ " "]" f lst)
+    fmt ("type " % stext % " = 'Record " % stext) t (fmtTList f lst)
   where
     t = nameOf "TRecord" ix
     f = \case
@@ -172,7 +179,7 @@ mkRecord db (Record lst, ix) = do
 mkExpansion :: AsterixDb EMap -> (Expansion, Int) -> BlockM Builder ()
 mkExpansion db (Expansion n lst, ix) = do
     fmt ("type " % stext % " = 'Expansion " % int % " " % stext)
-        t (div8 n) (fmtList "'[ " "]" f lst)
+        t (div8 n) (fmtTList f lst)
   where
     t = nameOf "TExpansion" ix
     f = \case
@@ -191,7 +198,7 @@ mkUap db (uap, ix) = case uap of
         let f (a, record) = sformat ("'(\"" % stext % "\", " % stext % ")") a
                 (nameOf "TRecord" $ indexOf (dbRecord db) record)
         fmt ("type " % stext % " = 'TUapMultiple " % stext) t
-            (fmtList "'[ " "]" f lst)
+            (fmtTList f lst)
   where
     t = nameOf "TUap" ix
 
@@ -256,12 +263,13 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     "-- | Content set"
     sequence_ (fmap mkContent $ enumList $ dbContent db)
     ""
-    "-- | Rule set"
-    sequence_ (fmap (mkRule db) $ enumList $ dbRule db)
+    "-- | Rule Content set"
+    sequence_ (fmap (mkRuleContent db) $ enumList $ dbRuleContent db)
     ""
     "-- | Variation set"
     sequence_ (fmap (mkVariation db) $ enumList $ dbVariation db)
     ""
+    {-
     "-- | Item set"
     sequence_ (fmap (mkItem db) $ enumList $ dbItem db)
     ""
@@ -283,6 +291,7 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     "-- | Manifest"
     mkManifest specs
     ""
+    -}
   where
     specs :: [AstSpec]
     specs = sort $ nub $ fmap deriveAstSpec specs'
