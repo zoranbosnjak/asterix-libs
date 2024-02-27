@@ -156,15 +156,13 @@ data RuleType
     = RTContextFree
     | RTDependent
 
-data VRule (t :: RuleType) where
-    VContextFree :: VContent
-        -> VRule RTContextFree
-    VDependent :: [Text] -> [(Int, VContent)]
-        -> VRule RTDependent
+data VRule a (t :: RuleType) where
+    VContextFree :: a -> VRule a RTContextFree
+    VDependent :: [[Text]] -> a -> [([Int], a)] -> VRule a RTDependent
 
-deriving instance Show (VRule t)
+deriving instance Show a => Show (VRule a t)
 
-instance GShow VRule where
+instance Show a => GShow (VRule a) where
     gshowsPrec = defaultGshowsPrec
 
 data VariationType
@@ -177,7 +175,7 @@ data VariationType
     deriving (Show, Eq, Ord)
 
 data VVariation (t :: VariationType) where
-    VElement    :: BitOffsetMod8 -> BitSize -> Some VRule -> VVariation 'VTElement
+    VElement    :: BitOffsetMod8 -> BitSize -> Some (VRule VContent) -> VVariation 'VTElement
     VGroup      :: [Some VItem] -> VVariation 'VTGroup
     VExtended   :: [Maybe (Some VItem)] -> VVariation 'VTExtended
     VRepetitive :: Maybe Int -> (Some VVariation) -> VVariation 'VTRepetitive
@@ -196,7 +194,7 @@ data ItemType
 
 data VItem (t :: ItemType) where
     VSpare :: BitOffsetMod8 -> BitSize -> VItem 'ITSpare
-    VItem  :: Text -> Text -> Some VVariation -> VItem 'ITItem
+    VItem  :: Text -> Text -> Some (VRule (Some VVariation)) -> VItem 'ITItem
 
 deriving instance Show (VItem t)
 
@@ -449,26 +447,27 @@ instance
 
 instance
     ( t ~ 'RTContextFree
-    , IsSchema cont VContent
-    ) => IsSchema ('TContextFree cont) (VRule t) where
-    schema = VContextFree (schema @cont)
+    , IsSchema a b
+    ) => IsSchema ('TContextFree a) (VRule b t) where
+    schema = VContextFree (schema @a @b)
 
 instance
     ( t ~ 'RTDependent
-    , IsSchema name [Text]
-    , IsSchema lst [(Int, VContent)]
-    ) => IsSchema ('TDependent name lst) (VRule t) where
-    schema = VDependent (schema @name) (schema @lst)
+    , IsSchema names [[Text]]
+    , IsSchema dv b
+    , IsSchema lst [([Int], b)]
+    ) => IsSchema ('TDependent names dv lst) (VRule b t) where
+    schema = VDependent (schema @names) (schema @dv) (schema @lst)
 
 -- TElement -> VVariation
 
 instance
-    ( t ~ 'VTElement
+    ( vt ~ 'VTElement
     , IsSchema o BitOffsetMod8
     , IsSchema n BitSize
-    , IsSchema rule (VRule r)
-    ) => IsSchema ('TElement o n rule) (VVariation t) where
-    schema = VElement (schema @o) (schema @n) (mkSome $ schema @rule @(VRule r))
+    , IsSchema rule (VRule VContent rt)
+    ) => IsSchema ('TElement o n rule) (VVariation vt) where
+    schema =VElement (schema @o) (schema @n) (mkSome $ schema @rule @(VRule VContent rt))
 
 -- TGroup -> VVariation
 
@@ -527,9 +526,10 @@ instance
     ( t ~ 'ITItem
     , IsSchema name Text
     , IsSchema title Text
-    , IsSchema var (VVariation v)
-    ) => IsSchema ('TItem name title var) (VItem t) where
-    schema = VItem (schema @name) (schema @title) (mkSome $ schema @var @(VVariation v))
+    , IsSchema rule (VRule (Some VVariation) rt)
+    ) => IsSchema ('TItem name title rule) (VItem t) where
+    schema = VItem (schema @name) (schema @title)
+        (mkSome $ schema @rule @(VRule (Some VVariation) rt))
 
 -- Record TItem -> Record (Some VItem)
 

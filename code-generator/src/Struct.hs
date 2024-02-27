@@ -178,10 +178,17 @@ deriveItem = \case
         o <- get
         modify (<> octetOffset n)
         pure $ Spare o n
-    A.Item name title rule _doc -> Item
-        <$> pure name
-        <*> pure title
-        <*> traverse deriveVariation rule
+    A.Item name title rule _doc -> do
+        -- We need to traverse the 'rule' and derive each variation inside
+        -- the rule. But we also need to reset the offset back to the
+        -- starting point on each step, such that the offset is eventually
+        -- moved forward only once.
+        o <- get -- this is starting offset
+        let f x = put o >> deriveVariation x -- reset offset on each step
+        Item
+            <$> pure name
+            <*> pure title
+            <*> traverse f rule
 
 deriveAstSpec :: A.Asterix -> AstSpec
 deriveAstSpec = \case

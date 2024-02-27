@@ -87,25 +87,26 @@ mkContent (cont, ix) = case cont of
   where
     t = nameOf "TContent" ix
 
-mkRuleContent :: AsterixDb EMap -> (A.Rule A.Content, Int) -> BlockM Builder ()
-mkRuleContent db (rule, ix) = case rule of
-    A.ContextFree cont -> do
+mkRule :: Ord a => Text -> EMap a -> (A.Rule a, Int) -> BlockM Builder ()
+mkRule name db (rule, ix) = case rule of
+    A.ContextFree x -> do
         fmt ("type " % stext % " = 'TContextFree " % stext)
             t
-            (nameOf "TContent" $ indexOf (dbContent db) cont)
+            (nameOf tName $ indexOf db x)
     A.Dependent items dv lst -> do
         let fText = sformat ("\"" % stext % "\"")
             fLst (xs, cont) = sformat
                 ("'( " % stext % ", " % stext % ")")
                 (fmtTList (sformat int) xs)
-                (nameOf "TContent" $ indexOf (dbContent db) cont)
+                (nameOf tName $ indexOf db cont)
         fmt ("type " % stext % " = 'TDependent " % stext % " " % stext % " " % stext)
             t
             (fmtTList (fmtTList fText) items)
-            (nameOf "TContent" $ indexOf (dbContent db) dv)
+            (nameOf tName $ indexOf db dv)
             (fmtTList fLst lst)
   where
-    t = nameOf "TRuleContent" ix
+    tName = "T" <> name
+    t = nameOf ("TRule" <> name) ix
 
 mkVariation :: AsterixDb EMap -> (Variation, Int) -> BlockM Builder ()
 mkVariation db (var, ix) = case var of
@@ -156,11 +157,9 @@ mkItem db (item, ix) = case item of
     Spare (OctetOffset o) n -> do
         fmt ("type " % stext % " = 'TSpare " % int % " " % int) t o n
     Item name title rule -> do
-        pure () {-
         fmt ("type " % stext % " = 'TItem \"" % stext % "\" \"" %
-             stext % "\" " % stext) t name title
-            (nameOf "TVariation" $ indexOf (dbVariation db) var)
-        -}
+            stext % "\" " % stext) t name title
+            (nameOf "TRuleVariation" $ indexOf (dbRuleVariation db) rule)
   where
     t = nameOf "TItem" ix
 
@@ -264,12 +263,14 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     sequence_ (fmap mkContent $ enumList $ dbContent db)
     ""
     "-- | Rule Content set"
-    sequence_ (fmap (mkRuleContent db) $ enumList $ dbRuleContent db)
+    sequence_ (fmap (mkRule "Content" $ dbContent db) $ enumList $ dbRuleContent db)
     ""
     "-- | Variation set"
     sequence_ (fmap (mkVariation db) $ enumList $ dbVariation db)
     ""
-    {-
+    "-- | Rule Variation set"
+    sequence_ (fmap (mkRule "Variation" $ dbVariation db) $ enumList $ dbRuleVariation db)
+    ""
     "-- | Item set"
     sequence_ (fmap (mkItem db) $ enumList $ dbItem db)
     ""
@@ -291,7 +292,6 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     "-- | Manifest"
     mkManifest specs
     ""
-    -}
   where
     specs :: [AstSpec]
     specs = sort $ nub $ fmap deriveAstSpec specs'
