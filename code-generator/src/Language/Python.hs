@@ -1,8 +1,6 @@
 -- | Generate asterix 'python' source code.
 
--- TODO: remove
-{-# OPTIONS_GHC -Wno-all #-}
-
+{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Language.Python where
@@ -10,7 +8,7 @@ module Language.Python where
 import           Data.Set               (Set)
 import           Data.Text              (Text)
 import           Data.Text.Lazy.Builder (Builder)
-import           Data.List (nub, sort)
+import           Data.List (nub, sort, intersperse)
 import           Control.Monad
 import           Data.Maybe
 import           Data.Scientific
@@ -24,22 +22,21 @@ import qualified Asterix.Specs          as A
 import           Fmt
 import           Struct
 
-{-
-mkContent :: (Content, Int) -> BlockM Builder ()
+mkContent :: (A.Content, Int) -> BlockM Builder ()
 mkContent (cont, ix) = case cont of
-    ContentRaw -> do
+    A.ContentRaw -> do
         clsArg "Raw"
         cls "ContentRaw"
         indent $ do
             "pass"
-    ContentTable lst -> do
+    A.ContentTable lst -> do
         let f :: (Int, Text) -> Text
             f (a,b) = sformat (int % ": \"" % stext % "\"") a b
         clsArg "Raw"
         cls "ContentTable"
         indent $ do
             fmt ("tab = " % stext) (fmtList "{ " " }" f lst)
-    ContentString st -> do
+    A.ContentString st -> do
         clsArg "Union[Raw, str]"
         cls "ContentString"
         indent $ do
@@ -47,14 +44,14 @@ mkContent (cont, ix) = case cont of
                 A.StringAscii -> "StringAscii"
                 A.StringICAO  -> "StringICAO"
                 A.StringOctal -> "StringOctal"
-    ContentInteger sig -> do
+    A.ContentInteger sig _cstr -> do
         clsArg "Raw"
         cls "ContentInteger"
         indent $ do
             fmt ("sig = " % stext) $ case sig of
                 A.Signed   -> "Signed"
                 A.Unsigned -> "Unsigned"
-    ContentQuantity sig lsb unit -> do
+    A.ContentQuantity sig lsb unit _cstr -> do
         clsArg $ sformat ("Union[Raw, float, Tuple[float, Literal[\"" % stext % "\"]]]") unit
         cls "ContentQuantity"
         indent $ do
@@ -64,6 +61,17 @@ mkContent (cont, ix) = case cont of
             fmt ("lsb = " % scifmt Generic Nothing)
                 (fromFloatDigits (evalNumber lsb :: Double))
             fmt ("unit = \"" % stext % "\"") unit
+    A.ContentBds bt -> do
+        clsArg "Raw"
+        cls "ContentBds"
+        indent $ case bt of
+            A.BdsWithAddress -> do
+                "t = BdsWithAddress"
+            A.BdsAt mAddr -> do
+                "t = BdsAt"
+                fmt ("addr = " % stext) $ case mAddr of
+                    Nothing -> "None"
+                    Just (A.BdsAddr addr) -> sformat int addr
   where
     clsArg = fmt (stext % "_Arg : TypeAlias = " % stext)
         (nameOf "Content" ix)
@@ -72,8 +80,9 @@ mkContent (cont, ix) = case cont of
 
 mkVariation :: AsterixDb EMap -> Variation -> BlockM Builder ()
 mkVariation db var = case var of
-    Element (OctetOffset o) n cont -> do
-        let contName = nameOf "Content" $ indexOf (dbContent db) cont
+    Element (OctetOffset o) n rule -> do
+        let cont = unRule rule
+            contName = nameOf "Content" $ indexOf (dbContent db) cont
         fmt (stext % "_Arg : TypeAlias = " % stext % "_Arg") varName contName
         cls "Element"
         indent $ do
@@ -98,7 +107,8 @@ mkVariation db var = case var of
                 Spare _ _ -> Nothing
                 Item name title var2 -> Just (name, title, var2)
         fmt (stext % "_Arg_Group = TypedDict('" % stext % "_Arg_Group', {") varName varName
-        indent $ forM_ items $ \(name, _title, var2) -> do
+        indent $ forM_ items $ \(name, _title, rule2) -> do
+            let var2 = unRule rule2
             fmt ("\"" % stext % "\": Union[" % stext % ", " % stext % "_Arg],")
                 name (varName2 var2) (varName2 var2)
         "})"
@@ -144,7 +154,8 @@ mkVariation db var = case var of
                 Nothing                  -> "None"
                 Just A.ReservedExpansion -> "ReservedExpansion"
                 Just A.SpecialPurpose    -> "SpecialPurpose"
-    Compound mn lst -> do
+    Compound mn lst' -> do
+        let lst = fmap simplifyCompoundSubitem lst'
         cls "Compound"
         indent $ do
             case mn of
@@ -173,7 +184,7 @@ mkVariation db var = case var of
                     (fmtList "{" "}" f1 $ mapMaybe f2 lst)
             do -- spec
                 let relevant = flip mapMaybe lst $ \case
-                        Just (Item name _title var2) -> Just (name, var2)
+                        Just (Item name _title rule2) -> Just (name, unRule rule2)
                         _ -> Nothing
                 case relevant of
                     [] -> pure ()
@@ -209,31 +220,58 @@ mkItem db item = case item of
         indent $ do
             fmt ("bit_offset8 = " % int) o
             fmt ("bit_size = " % int) n
-    Item name title var -> do
+    Item name title rule -> do
         cls "Item"
         indent $ do
             fmt ("name = \"" % stext % "\"") name
             fmt ("title = \"" % stext % "\"") title
             fmt ("var = " % stext)
-                (nameOf "Variation" $ indexOf (dbVariation db) var)
+                (nameOf "Variation" $ indexOf (dbVariation db) (unRule rule))
     where
         ix = indexOf (dbItem db) item
         cls c = fmt ("class " % stext % "(" % stext % "):") (nameOf "Item" ix) c
 
+mkRecord :: AsterixDb EMap -> (Record, Int) -> BlockM Builder ()
+mkRecord db (Record lst', ix) = do
+    let lst = fmap simplifyCompoundSubitem lst'
+    cls "Record"
+    indent $ do
+        let f :: Maybe Item -> Text
+            f Nothing     = "None"
+            f (Just item) = nameOf "Item" $ indexOf (dbItem db) item
+        fmt ("items = " % stext)
+            (fmtList "[" "]" f lst)
+  where
+    cls c = fmt ("class " % stext % "(" % stext % "):") (nameOf "Record" ix) c
+
+mkExpansion :: AsterixDb EMap -> (Expansion, Int) -> BlockM Builder ()
+mkExpansion db (Expansion n lst', ix) = do
+    let lst = fmap simplifyCompoundSubitem lst'
+    cls "Expansion"
+    indent $ do
+        fmt ("fspec_bytes = " % int) (div8 n)
+        let f :: Maybe Item -> Text
+            f Nothing     = "None"
+            f (Just item) = nameOf "Item" $ indexOf (dbItem db) item
+        fmt ("items = " % stext)
+            (fmtList "[" "]" f lst)
+  where
+    cls c = fmt ("class " % stext % "(" % stext % "):") (nameOf "Expansion" ix) c
+
 mkUap :: AsterixDb EMap -> (Uap, Int) -> BlockM Builder ()
 mkUap db (uap, ix) = case uap of
-    Uap var -> do
+    Uap record -> do
         cls "UapSingle"
         indent $ do
-            fmt ("var = " % stext)
-                (nameOf "Variation" $ indexOf (dbVariation db) var)
+            fmt ("record = " % stext)
+                (nameOf "Record" $ indexOf (dbRecord db) record)
     Uaps lst msel -> do
         cls "UapMultiple"
         indent $ do
-            let f :: (A.UapName, Variation) -> Text
-                f (name, var) = sformat ("\"" % stext % "\": " % stext)
+            let f :: (A.UapName, Record) -> Text
+                f (name, record) = sformat ("\"" % stext % "\": " % stext)
                     name
-                    (nameOf "Variation" $ indexOf (dbVariation db) var)
+                    (nameOf "Record" $ indexOf (dbRecord db) record)
             fmt ("uaps = " % stext)
                 (fmtList "{" "}" f lst)
             case msel of
@@ -251,47 +289,37 @@ mkUap db (uap, ix) = case uap of
     cls c = fmt ("class " % stext % "(" % stext % "):")
         (nameOf "Uap" ix) c
 
-mkSpec :: AsterixDb EMap -> (AstSpec, Int) -> BlockM Builder ()
-mkSpec db (uap, ix) = case uap of
-    AstCat uap2 -> do
+mkAstSpec :: AsterixDb EMap -> (AstSpec, Int) -> BlockM Builder ()
+mkAstSpec db (astSpec, ix) = case astSpec of
+    AstCat (Cat cat) (A.Edition a b) uap -> do
         cls "AstCat"
         indent $ do
+            fmt ("cat = " % int) cat
+            fmt ("edition = (" % int % ", " % int % ")") a b
             fmt ("uap = " % stext)
-                (nameOf "Uap" $ indexOf (dbUap db) uap2)
-    AstRef var -> do
+                (nameOf "Uap" $ indexOf (dbUap db) uap)
+    AstRef (Cat cat) (A.Edition a b) expan -> do
         cls "AstRef"
         indent $ do
-            fmt ("var = " % stext)
-                (nameOf "Variation" $ indexOf (dbVariation db) var)
+            fmt ("cat = " % int) cat
+            fmt ("edition = (" % int % ", " % int % ")") a b
+            fmt ("expansion = " % stext)
+                (nameOf "Expansion" $ indexOf (dbExpansion db) expan)
   where
     cls c = fmt ("class " % stext % "(" % stext % "):")
         (nameOf "AstSpec" ix) c
 
-mkAsterix :: AsterixDb EMap -> (Asterix, Int) -> BlockM Builder ()
-mkAsterix db (Asterix cat (A.Edition a b) spec, ix) = do
-    cls "Asterix"
-    indent $ do
-        fmt ("cat = " % int) cat
-        fmt ("edition = (" % int % ", " % int % ")") a b
-        fmt ("astspec = " % stext)
-            (nameOf "AstSpec" $ indexOf (dbSpec db) spec)
-  where
-    cls c = fmt ("class " % stext % "(" % stext % "):")
-        (nameOf "Asterix" ix) c
-
-mkAlias :: (Asterix, Int) -> BlockM Builder ()
-mkAlias (ast, ix) = do
+mkAlias :: (AstSpec, Int) -> BlockM Builder ()
+mkAlias (astSpec, ix) = do
     fmt (stext % ": TypeAlias = " % stext)
-        (nameOfAst ast)
-        (nameOf "Asterix" ix)
+        (nameOfAst astSpec)
+        (nameOf "AstSpec" ix)
 
-mkManifest :: [Asterix] -> BlockM Builder ()
+mkManifest :: [AstSpec] -> BlockM Builder ()
 mkManifest lst = do
-    let f :: Asterix -> Text
+    let f :: AstSpec -> Text
         f ast = sformat stext (nameOfAst ast)
     fmt ("manifest = " % stext) (fmtList "[" "]" f lst)
--}
-
 
 {-
 -- | Name of argument with given (variation) index.
@@ -1115,14 +1143,13 @@ programManifest specs = enclose "manifest = {" "}" $ do
 
 -- | Source code generator entry point.
 mkCode :: Bool -> Text -> Text -> [A.Asterix] -> Builder
-mkCode test ref ver specs' = render "    " "\n" $ do
+mkCode _testSpecs ref ver specs' = render "    " "\n" $ do
     "# Asterix specifications" :: BlockM Builder ()
     ""
     "# This file is generated, DO NOT EDIT!"
     "# For more details, see:"
     "#     - https://github.com/zoranbosnjak/asterix-specs"
     ""
-    {-
     "from asterix.base import *"
     ""
     line $ "reference = \"" <> BL.fromText ref <> "\""
@@ -1130,7 +1157,7 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     ""
     "# Content set"
     ""
-    sequence_ $ intersperse "" $ fmap mkContent $ enumList $ dbContent db
+    sequence_ (intersperse "" $ fmap mkContent $ enumList $ dbContent db)
     ""
     "# Variation and Item set"
     ""
@@ -1139,28 +1166,31 @@ mkCode test ref ver specs' = render "    " "\n" $ do
             f = \case
                 Left var -> mkVariation db var
                 Right item -> mkItem db item
-        sequence $ intersperse "" $ fmap f lst
+        sequence_ $ intersperse "" $ fmap f lst
+    ""
+    "# Record set"
+    ""
+    sequence_ $ intersperse "" $ fmap (mkRecord db) $ enumList $ dbRecord db
+    ""
+    "# Expansion set"
+    ""
+    sequence_ $ intersperse "" $ fmap (mkExpansion db) $ enumList $ dbExpansion db
     ""
     "# Uap set"
     ""
     sequence_ $ intersperse "" $ fmap (mkUap db) $ enumList $ dbUap db
     ""
-    "# Spec set"
+    "# Asterix spec set"
     ""
-    sequence_ $ intersperse "" $ fmap (mkSpec db) $ enumList $ dbSpec db
-    ""
-    "# Asterix set"
-    ""
-    sequence_ $ intersperse ""  $ fmap (mkAsterix db) $ enumList $ dbAst db
+    sequence_ $ intersperse "" $ fmap (mkAstSpec db) $ enumList $ dbAstSpec db
     ""
     "# Aliases"
     ""
-    sequence_ $ fmap mkAlias $ enumList $ dbAst db
+    sequence_ $ fmap mkAlias $ enumList $ dbAstSpec db
     ""
     "# Manifest"
     ""
     mkManifest specs
--}
   where
     specs :: [AstSpec]
     specs = sort $ nub $ fmap deriveAstSpec specs'

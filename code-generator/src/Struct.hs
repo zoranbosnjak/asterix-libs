@@ -57,6 +57,11 @@ data CompoundSubitem
     | CompoundRFS
     deriving (Generic, Eq, Ord, Show)
 
+simplifyCompoundSubitem :: CompoundSubitem -> Maybe Item
+simplifyCompoundSubitem = \case
+    CompoundSubitem i -> Just i
+    _ -> Nothing
+
 data Variation
     = Element OctetOffset A.RegisterSize (A.Rule A.Content)
     | Group [Item]
@@ -469,6 +474,12 @@ fspecOf mn lst name = case mn of
             False -> error "unexpected fspecs bits"
             True  -> reverse results
 
+-- | Get context free value or default
+unRule :: A.Rule a -> a
+unRule = \case
+    A.ContextFree x -> x
+    A.Dependent _ dv _ -> dv
+
 sizeOfVariation :: Variation -> Maybe Int
 sizeOfVariation = \case
     Element _o n _cont -> Just n
@@ -476,9 +487,7 @@ sizeOfVariation = \case
     _ -> Nothing
 
 sizeOfRuleVariation :: A.Rule Variation -> Maybe Int
-sizeOfRuleVariation = \case
-    A.ContextFree var -> sizeOfVariation var
-    A.Dependent _ dv _ -> sizeOfVariation dv
+sizeOfRuleVariation = sizeOfVariation . unRule
 
 sizeOfItem :: Item -> Maybe Int
 sizeOfItem = \case

@@ -320,6 +320,17 @@ class ReservedExpansion(ExplicitType):
 class SpecialPurpose(ExplicitType):
     pass
 
+# Bds Type
+
+class BdsType:
+    pass
+
+class BdsWithAddress(BdsType):
+    pass
+
+class BdsAt(BdsType):
+    pass
+
 # Content
 
 class Content:
@@ -367,6 +378,14 @@ class ContentQuantity(Content):
         elif isinstance(arg, tuple):
             x = arg[0]
         return cls.sig.convert(n, round(x/cls.lsb))
+
+class ContentBds(Content):
+    t : ClassVar[Type[BdsType]]
+    addr : ClassVar[Optional[int]]
+
+    @classmethod
+    def from_arg(cls, n : int, arg : int) -> int:
+        return arg
 
 # Variation, Item
 
@@ -431,32 +450,36 @@ class Item(ItemBase):
     title : ClassVar[str]
     var : ClassVar[Type[Variation]]
 
+class Record:
+    items : ClassVar[List[Optional[Type[ItemBase]]]]
+
+class Expansion:
+    fspec_bytes : ClassVar[int]
+    items : ClassVar[List[Optional[Type[ItemBase]]]]
+
 # Uap
 
 class Uap:
     pass
 
 class UapSingle(Uap):
-    var : ClassVar[Type[Variation]]
+    record : ClassVar[Type[Record]]
 
 class UapMultiple(Uap):
-    uaps : ClassVar[Dict[str, Type[Variation]]]
+    uaps : ClassVar[Dict[str, Type[Record]]]
     selector : ClassVar[Optional[Tuple[List[str], dict[int, str]]]]
 
-# Spec
+# Asterix Spec
 
 class AstSpec:
     pass
 
 class AstCat(AstSpec):
+    cat : ClassVar[int]
+    edition : ClassVar[Tuple[int, int]]
     uap : ClassVar[Type[Uap]]
 
 class AstRef(AstSpec):
-    var : ClassVar[Type[Variation]]
-
-# Asterix
-
-class Asterix:
     cat : ClassVar[int]
     edition : ClassVar[Tuple[int, int]]
-    astspec : ClassVar[Type[AstSpec]]
+    expansion : ClassVar[Type[Expansion]]
