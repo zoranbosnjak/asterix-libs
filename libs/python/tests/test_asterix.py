@@ -3,12 +3,10 @@
 import pytest
 
 from asterix.base import Bits
-'''
-from generated import *
+from . generated import *
 
 Cat = Cat_000_1_0
 Ref = Ref_000_1_0
-'''
 
 '''
 TODO:
@@ -16,8 +14,8 @@ TODO:
 '''
 
 def test_raw() -> None:
+    I = Cat.uap.record.spec('010')
     '''
-    I = Cat.astspec.uap.var.spec('010')
     i0 = I(0)
     assert i0.to_uinteger() == 0
     assert str(i0.unparse_bits()) == '00000000'

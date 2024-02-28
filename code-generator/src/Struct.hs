@@ -51,24 +51,13 @@ instance Monoid OctetOffset where
 octetOffset :: Int -> OctetOffset
 octetOffset n = OctetOffset (mod n 8)
 
-data CompoundSubitem
-    = CompoundSubitem Item
-    | CompoundSpare
-    | CompoundRFS
-    deriving (Generic, Eq, Ord, Show)
-
-simplifyCompoundSubitem :: CompoundSubitem -> Maybe Item
-simplifyCompoundSubitem = \case
-    CompoundSubitem i -> Just i
-    _ -> Nothing
-
 data Variation
     = Element OctetOffset A.RegisterSize (A.Rule A.Content)
     | Group [Item]
     | Extended [Maybe Item]
     | Repetitive A.RepetitiveType Variation
     | Explicit (Maybe A.ExplicitType)
-    | Compound (Maybe A.RegisterSize) [CompoundSubitem]
+    | Compound [Maybe Item]
     deriving (Generic, Eq, Ord, Show)
 
 data Item
@@ -76,10 +65,17 @@ data Item
     | Item A.Name A.Title (A.Rule Variation)
     deriving (Generic, Eq, Ord, Show)
 
-newtype Record = Record [CompoundSubitem]
+{- Generalize and use 'UapItem a' from specs
+data RecordSubitem
+    = RecordSubitem Item
+    | RecordSubitemSpare
+    | RecordSubitemRFS
     deriving (Generic, Eq, Ord, Show)
 
-data Expansion = Expansion A.RegisterSize [CompoundSubitem]
+newtype Record = Record [RecordSubitem]
+    deriving (Generic, Eq, Ord, Show)
+
+data Expansion = Expansion A.RegisterSize [Maybe Item]
     deriving (Generic, Eq, Ord, Show)
 
 data Uap
@@ -195,6 +191,7 @@ deriveItem = \case
             <*> pure title
             <*> traverse f rule
 
+{-
 deriveAstSpec :: A.Asterix -> AstSpec
 deriveAstSpec = \case
     A.AsterixBasic (A.Basic cat _title edition _date _preamble items uap) ->
@@ -493,3 +490,5 @@ sizeOfItem :: Item -> Maybe Int
 sizeOfItem = \case
     Spare _o n -> Just n
     Item _name _title rule -> sizeOfRuleVariation rule
+-}
+-}
