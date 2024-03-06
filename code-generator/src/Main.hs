@@ -5,14 +5,11 @@
 module Main where
 
 import           Control.Monad
-import           Data.ByteString          (ByteString)
-import qualified Data.ByteString          as BS
-import qualified Data.ByteString.Lazy     as BSL
 import           Data.Text                (Text)
 import qualified Data.Text.IO             as T
 import           Data.Text.Lazy.Builder   (Builder)
-import qualified Data.Text.Lazy.Builder   as BL
-import qualified Data.Text.Lazy.Encoding  as TL
+import qualified Data.Text.Lazy.Builder   as T
+import qualified Data.Text.Lazy.IO        as TL
 import qualified Data.Time.Calendar
 import qualified Data.Time.Clock          as Clock
 import qualified Data.Time.Clock.POSIX    as Time
@@ -24,10 +21,11 @@ import           Paths_generator          (version)
 import           System.Exit              (exitSuccess)
 
 import           Asterix.Specs
-import           Asterix.Specs.Validation (validate)
+import           Asterix.Specs.Syntaxes
+import           Asterix.Specs.Validation (runErrM, validate)
 
-import qualified Language.Python
 import qualified Language.Haskell
+import qualified Language.Python
 
 languages :: [(Text, Bool -> Text -> Text -> [Asterix] -> Builder)]
 languages =
@@ -68,8 +66,10 @@ parseOptions = Options
        <> help "Show version text and exit")
   where
     syntaxList = do
-        (shortName, _, _) <- availableDecoders
-        pure shortName
+        (shortName, coder) <- syntaxes
+        case cDecoder coder of
+            Nothing -> empty
+            Just _  -> pure shortName
 
 opts :: ParserInfo Options
 opts = info (helper <*> versionOption <*> parseOptions)
@@ -79,13 +79,13 @@ opts = info (helper <*> versionOption <*> parseOptions)
         (showVersion version)
         (Opt.long "version" <> Opt.help "Show version")
 
-loadSpec :: (FilePath -> IO ByteString) -> FilePath -> IO Asterix
+loadSpec :: (FilePath -> IO Text) -> FilePath -> IO Asterix
 loadSpec getS path = do
     syntax <- maybe (die "unknown syntax") pure (lookup fmt syntaxes)
-    decoder <- maybe (die "no decoder") pure (syntaxDecoder syntax)
+    decoder <- maybe (die "no decoder") pure (cDecoder syntax)
     s <- getS path
     ast <- either die pure (decoder path s)
-    case validate False ast of
+    case runErrM (validate ast) of
         []   -> pure ast
         _lst -> die "validation errors"
   where
@@ -109,8 +109,8 @@ main = withUtf8 $ do
     when (optShowVersion cmdOptions) $ do
         T.putStr versionText
         exitSuccess
-    specs <- mapM (loadSpec BS.readFile) (optPaths cmdOptions)
+    specs <- mapM (loadSpec T.readFile) (optPaths cmdOptions)
     mkCode <- maybe (fail "Unsupported language") pure $
         lookup (optLanguage cmdOptions) languages
-    BSL.putStr $ TL.encodeUtf8 $ BL.toLazyText $ mkCode
+    TL.putStr $ T.toLazyText $ mkCode
         (optTest cmdOptions) (optReference cmdOptions) versionText specs

@@ -14,7 +14,7 @@ let
 
   haskellPackages = pkgs.haskellPackages.override {
     overrides = haskellPackagesNew: haskellPackagesOld: rec {
-      aspecs = haskellPackagesNew.callPackage "${aspecsDir}/tools" {packages=pkgs; inShell=false;};
+      aspecs = haskellPackagesNew.callPackage "${aspecsDir}/aspecs" {packages=pkgs; inShell=false;};
     };
   };
 

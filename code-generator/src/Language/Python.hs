@@ -1,18 +1,21 @@
 -- | Generate asterix 'python' source code.
 
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
+
+-- TODO: remove this
+{-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Language.Python where
 
-import           Data.Set               (Set)
-import           Data.Text              (Text)
-import           Data.Text.Lazy.Builder (Builder)
-import           Data.List (nub, sort, intersperse)
 import           Control.Monad
+import           Data.List              (intersperse, nub, sort)
 import           Data.Maybe
 import           Data.Scientific
+import           Data.Set               (Set)
+import           Data.Text              (Text)
 import qualified Data.Text              as T
+import           Data.Text.Lazy.Builder (Builder)
 import qualified Data.Text.Lazy.Builder as BL
 import           Formatting             as F
 import           Numeric                (showHex)
@@ -22,6 +25,7 @@ import qualified Asterix.Specs          as A
 import           Fmt
 import           Struct
 
+{-
 mkContent :: (A.Content, Int) -> BlockM Builder ()
 mkContent (cont, ix) = case cont of
     A.ContentRaw -> do
@@ -1140,10 +1144,11 @@ programManifest specs = enclose "manifest = {" "}" $ do
             pure $ fmt stext ( edition <> ": " <> cls <> ",")
 
 -}
+-}
 
 -- | Source code generator entry point.
 mkCode :: Bool -> Text -> Text -> [A.Asterix] -> Builder
-mkCode _testSpecs ref ver specs' = render "    " "\n" $ do
+mkCode _testSpecs ref ver _specs' = render "    " "\n" $ do
     "# Asterix specifications" :: BlockM Builder ()
     ""
     "# This file is generated, DO NOT EDIT!"
@@ -1155,6 +1160,7 @@ mkCode _testSpecs ref ver specs' = render "    " "\n" $ do
     line $ "reference = \"" <> BL.fromText ref <> "\""
     line $ "version = \"" <> BL.fromText ver <> "\""
     ""
+    {-
     "# Content set"
     ""
     sequence_ (intersperse "" $ fmap mkContent $ enumList $ dbContent db)
@@ -1191,12 +1197,15 @@ mkCode _testSpecs ref ver specs' = render "    " "\n" $ do
     "# Manifest"
     ""
     mkManifest specs
+-}
+{-
   where
-    specs :: [AstSpec]
-    specs = sort $ nub $ fmap deriveAstSpec specs'
+    specs :: [Asterix]
+    specs = sort $ nub $ fmap deriveAsterix specs'
 
     dbSet :: AsterixDb Set
     dbSet = asterixDb specs
 
     db :: AsterixDb EMap
     db = enumDb $ dbSet
+-}

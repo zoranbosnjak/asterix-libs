@@ -6,7 +6,7 @@
 
 module Paths_generator where
 
-import Data.Version
+import           Data.Version
 
 -- | Empty version, for development mode.
 version :: Data.Version.Version

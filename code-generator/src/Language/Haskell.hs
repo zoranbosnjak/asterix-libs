@@ -1,12 +1,19 @@
 -- | Generate asterix 'haskell' source code.
 
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
+
+-- TODO: remove this
+{-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Language.Haskell where
 
 import           Control.Monad
-import           Data.List              (sort, nub)
+import           Data.Coerce
+import           Data.Bool
+import           Data.String
+import           Data.Text as T
+import           Data.List              (nub, sort)
 import           Data.Text              (Text)
 import           Data.Text.Lazy.Builder (Builder)
 import qualified Data.Text.Lazy.Builder as BL
@@ -17,6 +24,86 @@ import qualified Asterix.Specs          as A
 import           Fmt
 import           Struct
 
+-- | Intermediate type for pretty printing
+data T
+    = TInt Integer
+    | TText Text
+    | TTuple [T]
+    | TList [T]
+    | TProduct Text [T]
+
+instance IsString T where
+    fromString s = TProduct (T.pack s) []
+
+-- | Line gets rendered to: "type T{TEXT}_{INT} = {T}"
+data Line = Line Text Int T
+
+class Convert t where
+    convert :: t -> T
+
+instance Convert Integer where
+    convert = TInt
+
+instance Convert Int where
+    convert = TInt . fromIntegral
+
+instance Convert Text where
+    convert = TText
+
+instance Convert a => Convert (Maybe a) where
+    convert = \case
+        Nothing -> "'Nothing"
+        Just x -> TProduct "'Just" [convert x]
+
+instance Convert a => Convert [a] where
+    convert = TList . fmap convert
+
+instance (Convert a, Convert b) => Convert (a,b) where
+    convert (a, b) = TTuple [convert a, convert b]
+
+instance Convert A.Number where
+    convert = \case
+        A.NumInt i -> TProduct "'TNumInt"
+            [ bool "'Minus" "'Plus" (i >= 0)
+            , convert i
+            ]
+        A.NumDiv a b -> TProduct "'TNumDiv"
+            [convert a, convert b]
+        A.NumPow a b -> TProduct "'TNumPow"
+            [convert a, convert b]
+
+instance Convert A.Constrain where
+    convert = \case
+        A.EqualTo n -> TProduct "'EqualTo" [convert n]
+        A.NotEqualTo n -> TProduct "'NotEqualTo" [convert n]
+        A.GreaterThan n -> TProduct "'GreaterThan" [convert n]
+        A.GreaterThanOrEqualTo n -> TProduct "'GreaterThanOrEqualTo" [convert n]
+        A.LessThan n -> TProduct "'LessThan" [convert n]
+        A.LessThanOrEqualTo n -> TProduct "'LessThanOrEqualTo" [convert n]
+
+instance Convert A.BdsType where
+    convert = \case
+        A.BdsWithAddress -> "'BdsWithAddress"
+        A.BdsAt mAddr -> TProduct "'BdsAt" [convert $ fmap (coerce @A.BdsAddr @Int) mAddr]
+
+instance Convert A.Content where
+    convert = \case
+        A.ContentRaw -> "'TContentRaw"
+        A.ContentTable lst -> TProduct "'TContentTable" (fmap convert lst)
+        A.ContentString t -> TProduct "'TContentString" [fromString ("'" <> show t)]
+        A.ContentInteger sig cstr -> TProduct "'TContentInteger"
+            [ fromString ("'" <> show sig)
+            , TList $ fmap convert cstr
+            ]
+        A.ContentQuantity sig lsb unit cstr -> TProduct "'TContentQuantity"
+            [ fromString ("'" <> show sig)
+            , convert lsb
+            , convert (coerce unit :: Text)
+            , TList $ fmap convert cstr
+            ]
+        A.ContentBds t -> TProduct "'TContentBds" [convert t]
+
+{-
 -- | Helper function to create type level list.
 fmtTList :: (a -> Text) -> [a] -> Text
 fmtTList = fmtList "'[ " "]"
@@ -66,7 +153,7 @@ mkContent (cont, ix) = case cont of
                  A.Signed   -> "'Signed"
                  A.Unsigned -> "'Unsigned")
             (fmtTList constrainToText cstr)
-    A.ContentQuantity sig' lsb' unit cstr -> do
+    A.ContentQuantity sig' lsb' (A.Unit unit) cstr -> do
         let sig = case sig' of
                 A.Signed   -> "'Signed"
                 A.Unsigned -> "'Unsigned"
@@ -93,12 +180,15 @@ mkRule name db (rule, ix) = case rule of
         fmt ("type " % stext % " = 'TContextFree " % stext)
             t
             (nameOf tName $ indexOf db x)
-    A.Dependent items dv lst -> do
+    A.Dependent items' dv lst -> do
         let fText = sformat ("\"" % stext % "\"")
             fLst (xs, cont) = sformat
                 ("'( " % stext % ", " % stext % ")")
                 (fmtTList (sformat int) xs)
                 (nameOf tName $ indexOf db cont)
+            items = do
+                A.ItemPath p <- items'
+                pure [n | A.ItemName n <- p]
         fmt ("type " % stext % " = 'TDependent " % stext % " " % stext % " " % stext)
             t
             (fmtTList (fmtTList fText) items)
@@ -108,6 +198,7 @@ mkRule name db (rule, ix) = case rule of
     tName = "T" <> name
     t = nameOf ("TRule" <> name) ix
 
+{-
 mkVariation :: AsterixDb EMap -> (Variation, Int) -> BlockM Builder ()
 mkVariation db (var, ix) = case var of
     Element (OctetOffset o) n rule -> do
@@ -231,6 +322,7 @@ mkManifest lst = do
         "]"
   where
     ps = ["["] <> repeat ","
+-}
 
 -- | Source code generator entry point.
 mkCode :: Bool -> Text -> Text -> [A.Asterix] -> Builder
@@ -247,9 +339,7 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     "-- Types are BIG, disable depth checking."
     "{-# OPTIONS_GHC -freduction-depth=0 #-}"
     ""
-    case test of
-        True  -> "module Generated where"
-        False -> "module Asterix.Generated where"
+    bool "module Asterix.Generated where" "module Generated where" test
     ""
     "import           Asterix.Schema"
     ""
@@ -265,6 +355,7 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     "-- | Rule Content set"
     sequence_ (fmap (mkRule "Content" $ dbContent db) $ enumList $ dbRuleContent db)
     ""
+    {-
     "-- | Variation set"
     sequence_ (fmap (mkVariation db) $ enumList $ dbVariation db)
     ""
@@ -292,9 +383,11 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     "-- | Manifest"
     mkManifest specs
     ""
+-}
   where
-    specs :: [AstSpec]
-    specs = sort $ nub $ fmap deriveAstSpec specs'
+    specs :: [Asterix]
+    specs = sort $ nub $ fmap deriveAsterix specs'
 
     db :: AsterixDb EMap
     db = enumDb $ asterixDb specs
+-}

@@ -1,7 +1,7 @@
 -- | Common code formatting helper functions.
 
+{-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE LambdaCase #-}
 
 module Fmt where
 
@@ -21,12 +21,12 @@ fmt m = runFormat m line
 nameOf :: Integral a => Text -> a -> Text
 nameOf = sformat (stext % "_" % int)
 
-nameOfAst :: AstSpec -> Text
+nameOfAst :: Asterix -> Text
 nameOfAst = \case
-    AstCat cat ed _ -> f "Cat" cat ed
-    AstRef cat ed _ -> f "Ref" cat ed
+    AsterixBasic cat ed _ -> f "Cat" cat ed
+    AsterixExpansion cat ed _ -> f "Ref" cat ed
   where
-    f astType (Cat cat) (A.Edition a b) = sformat
+    f astType (A.CatNum cat) (A.Edition a b) = sformat
         (stext % "_" % left 3 '0' % "_" % int % "_" % int)
         astType cat a b
 

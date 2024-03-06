@@ -12,12 +12,20 @@ nix-build
 ```bash
 nix-shell
 
-# check defined and used references
-tagref
-
 # fix permissions if necessary
 chmod go-w .ghci
 chmod go-w .
+
+# check defined and used references
+tagref
+
+# lint
+hlint {path}
+find . | grep "\.hs$" | xargs hlint
+
+# auto adjust style
+stylish-haskell --inplace {path}
+find . | grep "\.hs$" | xargs stylish-haskell --inplace
 
 # run 'ghcid'
 ghcid "--command=ghci -Wall -iother -isrc src/Main.hs"
