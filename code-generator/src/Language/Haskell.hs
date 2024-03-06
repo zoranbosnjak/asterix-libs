@@ -13,6 +13,7 @@ import           Data.Coerce
 import           Data.Bool
 import           Data.String
 import           Data.Text as T
+import qualified Data.List as L
 import           Data.List              (nub, sort)
 import           Data.Text              (Text)
 import           Data.Text.Lazy.Builder (Builder)
@@ -28,15 +29,32 @@ import           Struct
 data T
     = TInt Integer
     | TText Text
-    | TTuple [T]
-    | TList [T]
+    | TList Text Text [T]
     | TProduct Text [T]
 
 instance IsString T where
     fromString s = TProduct (T.pack s) []
 
--- | Line gets rendered to: "type T{TEXT}_{INT} = {T}"
-data Line = Line Text Int T
+-- | Pretty printer
+pp :: T -> Builder
+pp = f1 where
+    f1 = \case
+        TInt i -> bformat int i
+        other -> f2 other
+    f2 = \case
+        TText t -> "\"" <> bformat stext t <> "\""
+        other -> f3 other
+    f3 = \case
+        TList a b lst -> BL.fromText a
+            <> mconcat (L.intersperse ", " (fmap fN lst))
+            <> BL.fromText b
+        other -> f4 other
+    f4 = \case
+        TProduct t lst -> bformat stext t
+            <> " "
+            <> mconcat (L.intersperse " " (fmap fN lst))
+        other -> fN other
+    fN other = "(" <> f1 other <> ")"
 
 class Convert t where
     convert :: t -> T
@@ -56,10 +74,10 @@ instance Convert a => Convert (Maybe a) where
         Just x -> TProduct "'Just" [convert x]
 
 instance Convert a => Convert [a] where
-    convert = TList . fmap convert
+    convert = TList "'[ " "]" . fmap convert
 
 instance (Convert a, Convert b) => Convert (a,b) where
-    convert (a, b) = TTuple [convert a, convert b]
+    convert (a, b) = TList "'( " ")" [convert a, convert b]
 
 instance Convert A.Number where
     convert = \case
@@ -84,24 +102,25 @@ instance Convert A.Constrain where
 instance Convert A.BdsType where
     convert = \case
         A.BdsWithAddress -> "'BdsWithAddress"
-        A.BdsAt mAddr -> TProduct "'BdsAt" [convert $ fmap (coerce @A.BdsAddr @Int) mAddr]
+        A.BdsAt mAddr -> TProduct "'BdsAt"
+            [convert $ fmap (coerce @A.BdsAddr @Int) mAddr]
 
 instance Convert A.Content where
     convert = \case
-        A.ContentRaw -> "'TContentRaw"
-        A.ContentTable lst -> TProduct "'TContentTable" (fmap convert lst)
-        A.ContentString t -> TProduct "'TContentString" [fromString ("'" <> show t)]
-        A.ContentInteger sig cstr -> TProduct "'TContentInteger"
+        A.ContentRaw -> "'ContentRaw"
+        A.ContentTable lst -> TProduct "'ContentTable" [convert lst]
+        A.ContentString t -> TProduct "'ContentString" [fromString ("'" <> show t)]
+        A.ContentInteger sig cstr -> TProduct "'ContentInteger"
             [ fromString ("'" <> show sig)
-            , TList $ fmap convert cstr
+            , convert cstr
             ]
-        A.ContentQuantity sig lsb unit cstr -> TProduct "'TContentQuantity"
+        A.ContentQuantity sig lsb unit cstr -> TProduct "'ContentQuantity"
             [ fromString ("'" <> show sig)
             , convert lsb
             , convert (coerce unit :: Text)
-            , TList $ fmap convert cstr
+            , convert cstr
             ]
-        A.ContentBds t -> TProduct "'TContentBds" [convert t]
+        A.ContentBds t -> TProduct "'ContentBds" [convert t]
 
 {-
 -- | Helper function to create type level list.
@@ -323,6 +342,16 @@ mkManifest lst = do
   where
     ps = ["["] <> repeat ","
 -}
+-}
+
+-- | Render line in the form "type T{TEXT}_{INT} = {T}"
+mkLine :: Text -> Int -> T -> Builder
+mkLine x i t = bformat
+    ("type T" % stext % "_" % int % " = " % builder)
+    x i (pp t)
+
+mkContent :: (A.Content, Int) -> BlockM Builder ()
+mkContent (cont, ix) = lineBlockM $ mkLine "Content" ix (convert cont)
 
 -- | Source code generator entry point.
 mkCode :: Bool -> Text -> Text -> [A.Asterix] -> Builder
@@ -351,16 +380,17 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     ""
     "-- | Content set"
     sequence_ (fmap mkContent $ enumList $ dbContent db)
+    {-
     ""
     "-- | Rule Content set"
     sequence_ (fmap (mkRule "Content" $ dbContent db) $ enumList $ dbRuleContent db)
     ""
-    {-
     "-- | Variation set"
     sequence_ (fmap (mkVariation db) $ enumList $ dbVariation db)
     ""
     "-- | Rule Variation set"
-    sequence_ (fmap (mkRule "Variation" $ dbVariation db) $ enumList $ dbRuleVariation db)
+    sequence_ (fmap (mkRule "Variation" $ dbVariation db) $ enumList $
+        dbRuleVariation db)
     ""
     "-- | Item set"
     sequence_ (fmap (mkItem db) $ enumList $ dbItem db)
@@ -383,11 +413,10 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     "-- | Manifest"
     mkManifest specs
     ""
--}
+    -}
   where
     specs :: [Asterix]
     specs = sort $ nub $ fmap deriveAsterix specs'
 
     db :: AsterixDb EMap
     db = enumDb $ asterixDb specs
--}
