@@ -1,6 +1,6 @@
 -- | Generate asterix 'python' source code.
 
-{-# LANGUAGE LambdaCase        #-}
+-- {-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 -- TODO: remove this

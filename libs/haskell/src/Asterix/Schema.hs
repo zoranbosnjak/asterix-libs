@@ -60,14 +60,14 @@ data Signedness
     | Unsigned
     deriving (Show, Eq, Ord)
 
-data Constrain
-    = EqualTo
-    | NotEqualTo
-    | GreaterThan
-    | GreaterThanOrEqualTo
-    | LessThan
-    | LessThanOrEqualTo
-    deriving (Show, Eq, Ord)
+data Constrain a
+    = EqualTo a
+    | NotEqualTo a
+    | GreaterThan a
+    | GreaterThanOrEqualTo a
+    | LessThan a
+    | LessThanOrEqualTo a
+    deriving (Show, Eq, Ord, Functor)
 
 data Content n s intNum floatNum
     = ContentRaw
@@ -77,12 +77,12 @@ data Content n s intNum floatNum
         StringType
     | ContentInteger
         Signedness
-        [(Constrain, intNum)]
+        [Constrain intNum]
     | ContentQuantity
         Signedness
         floatNum -- lsb
         s  -- unit
-        [(Constrain, floatNum)]
+        [Constrain floatNum]
     | ContentBds
         (BdsType n)
     deriving (Show, Eq, Ord)
@@ -96,12 +96,6 @@ data TRule a
 data ExplicitType
     = ReservedExpansion
     | SpecialPurpose
-    deriving (Show, Eq, Ord)
-
-data CompoundSubitem a
-    = CompoundSubitem a
-    | CompoundSpare
-    | CompoundRFS
     deriving (Show, Eq, Ord)
 
 data TVariation
@@ -118,8 +112,7 @@ data TVariation
         TVariation
     | TExplicit (Maybe ExplicitType)
     | TCompound
-        (Maybe Nat) -- fixed fspec length or fx based
-        [CompoundSubitem TItem]
+        [Maybe TItem] -- Nothing = Spare bit
 
 data TItem
     = TSpare
@@ -130,23 +123,29 @@ data TItem
         Symbol -- title
         (TRule TVariation)
 
-data Record t = Record [CompoundSubitem t]
+data UapItem t
+    = UapItem t
+    | UapItemSpare
+    | UapItemRFS
     deriving (Show, Eq, Ord)
 
-data Expansion n t = Expansion n [CompoundSubitem t]
+newtype Record t = Record [UapItem t]
+    deriving (Show, Eq, Ord)
+
+data Expansion n t = Expansion n [Maybe t]
     deriving (Show, Eq, Ord)
 
 data TUap
     = TUapSingle (Record TItem)
-    | TUapMultiple [(Symbol, (Record TItem))]
+    | TUapMultiple [(Symbol, Record TItem)]
 
 data Edition a b = Edition a b
     deriving (Show, Eq, Ord)
 
 -- | Asterix specification at type level
-data TSpec
-    = TCat Nat (Edition Nat Nat) TUap
-    | TRef Nat (Edition Nat Nat) (Expansion Nat TItem)
+data TAsterix
+    = TBasic Nat (Edition Nat Nat) TUap
+    | TExpansion Nat (Edition Nat Nat) (Expansion Nat TItem)
 
 -- Value level definitions
 
@@ -180,7 +179,7 @@ data VVariation (t :: VariationType) where
     VExtended   :: [Maybe (Some VItem)] -> VVariation 'VTExtended
     VRepetitive :: Maybe Int -> (Some VVariation) -> VVariation 'VTRepetitive
     VExplicit   :: Maybe ExplicitType -> VVariation 'VTExplicit
-    VCompound   :: Maybe Int -> [CompoundSubitem (Some VItem)] -> VVariation 'VTCompound
+    VCompound   :: [Maybe (Some VItem)] -> VVariation 'VTCompound
 
 deriving instance Show (VVariation t)
 
@@ -217,20 +216,20 @@ deriving instance Show (VUap t)
 instance GShow VUap where
     gshowsPrec = defaultGshowsPrec
 
-newtype Cat = Cat { unCat :: Word8 }
+newtype CatNum = CatNum Word8
     deriving (Show, Eq, Ord, Num)
 
-data SpecType
-    = STCat
-    | STRef
+data AsterixType
+    = AsterixBasic
+    | AsterixExpansion
 
-data VAstSpec (t :: SpecType) where
-    VCat :: Cat -> Edition Int Int -> Some VUap -> VAstSpec 'STCat
-    VRef :: Cat -> Edition Int Int -> Expansion Int (Some VItem) -> VAstSpec 'STRef
+data VAsterix (t :: AsterixType) where
+    VBasic :: CatNum -> Edition Int Int -> Some VUap -> VAsterix 'AsterixBasic
+    VExpansion :: CatNum -> Edition Int Int -> Expansion Int (Some VItem) -> VAsterix 'AsterixExpansion
 
-deriving instance Show (VAstSpec t)
+deriving instance Show (VAsterix t)
 
-instance GShow VAstSpec where
+instance GShow VAsterix where
     gshowsPrec = defaultGshowsPrec
 
 -- Conversion from types to terms
@@ -325,7 +324,7 @@ instance
     , IsSchema plusMinus Int
     , IsSchema n b
     ) => IsSchema ('TNumInt plusMinus n) b where
-    schema = (fromIntegral $ schema @plusMinus @Int) * schema @n
+    schema = fromIntegral (schema @plusMinus @Int) * schema @n
 
 instance
     ( IsSchema a c
@@ -352,6 +351,8 @@ instance t ~ StringType => IsSchema 'StringOctal t where schema = StringOctal
 instance t ~ Signedness => IsSchema 'Signed t where schema = Signed
 instance t ~ Signedness => IsSchema 'Unsigned t where schema = Unsigned
 
+{-
+TODO...
 -- Constrain
 
 instance t ~ Constrain => IsSchema 'EqualTo t where schema = EqualTo
@@ -360,6 +361,7 @@ instance t ~ Constrain => IsSchema 'GreaterThan t where schema = GreaterThan
 instance t ~ Constrain => IsSchema 'GreaterThanOrEqualTo t where schema = GreaterThanOrEqualTo
 instance t ~ Constrain => IsSchema 'LessThan t where schema = LessThan
 instance t ~ Constrain => IsSchema 'LessThanOrEqualTo t where schema = LessThanOrEqualTo
+-}
 
 -- Explicit type
 instance t ~ ExplicitType => IsSchema 'ReservedExpansion t where schema = ReservedExpansion
@@ -379,18 +381,18 @@ instance
     schema = BdsAt (schema @mn)
 
 instance
-    ( t ~ CompoundSubitem a
+    ( t ~ UapItem a
     , IsSchema k a
-    ) => IsSchema ('CompoundSubitem k) t where
-    schema = CompoundSubitem (schema @k)
+    ) => IsSchema ('UapItem k) t where
+    schema = UapItem (schema @k)
 
 instance
-    ( t ~ CompoundSubitem a
-    ) => IsSchema 'CompoundSpare t where schema = CompoundSpare
+    ( t ~ UapItem a
+    ) => IsSchema 'UapItemSpare t where schema = UapItemSpare
 
 instance
-    ( t ~ CompoundSubitem a
-    ) => IsSchema 'CompoundRFS t where schema = CompoundRFS
+    ( t ~ UapItem a
+    ) => IsSchema 'UapItemRFS t where schema = UapItemRFS
 
 -- ContentRaw
 
@@ -420,7 +422,7 @@ instance
 instance
     ( t ~ VContent
     , IsSchema sig Signedness
-    , IsSchema cons [(Constrain, Int)]
+    , IsSchema cons [Constrain Int]
     ) => IsSchema ('ContentInteger sig cons) t where
     schema = ContentInteger (schema @sig) (schema @cons)
 
@@ -431,7 +433,7 @@ instance
     , IsSchema sig Signedness
     , IsSchema lsb Double
     , IsSchema unit Text
-    , IsSchema cons [(Constrain, Double)]
+    , IsSchema cons [Constrain Double]
     ) => IsSchema ('ContentQuantity sig lsb unit cons) t where
     schema = ContentQuantity (schema @sig) (schema @lsb) (schema @unit) (schema @cons)
 
@@ -507,9 +509,9 @@ instance
 instance
     ( t ~ 'VTCompound
     , IsSchema mn (Maybe Int)
-    , IsSchema lst [CompoundSubitem (Some VItem)]
-    ) => IsSchema ('TCompound mn lst) (VVariation t) where
-    schema = VCompound (schema @mn) (schema @lst)
+    , IsSchema lst [Maybe (Some VItem)]
+    ) => IsSchema ('TCompound lst) (VVariation t) where
+    schema = VCompound (schema @lst)
 
 -- TSpare -> VSpare
 
@@ -535,7 +537,7 @@ instance
 
 instance
     ( t ~ Some VItem
-    , IsSchema k [CompoundSubitem (Some VItem)]
+    , IsSchema k [UapItem (Some VItem)]
     ) => IsSchema ('Record k) (Record t) where
     schema = Record (schema @k)
 
@@ -544,7 +546,7 @@ instance
 instance
     ( t ~ Some VItem
     , IsSchema n Int
-    , IsSchema k [CompoundSubitem (Some VItem)]
+    , IsSchema k [Maybe (Some VItem)]
     , Length k <= Times 8 n
     ) => IsSchema ('Expansion n k) (Expansion Int t) where
     schema = Expansion (schema @n) (schema @k)
@@ -574,22 +576,22 @@ instance
     ) => IsSchema ('Edition a b) t where
     schema = Edition (schema @a) (schema @b)
 
--- TAstSpec -> VAstSpec (Cat)
+-- TAsterix -> VAsterix (Basic)
 
 instance
-    ( t ~ 'STCat
+    ( t ~ 'AsterixBasic
     , IsSchema ed (Edition Int Int)
-    , IsSchema cat Cat
+    , IsSchema cat CatNum
     , IsSchema uap (VUap u)
-    ) => IsSchema ('TCat cat ed uap) (VAstSpec t) where
-    schema = VCat (schema @cat) (schema @ed) (mkSome $ schema @uap @(VUap u))
+    ) => IsSchema ('TBasic cat ed uap) (VAsterix t) where
+    schema = VBasic (schema @cat) (schema @ed) (mkSome $ schema @uap @(VUap u))
 
--- TAstSpec -> VAstSpec (Ref)
+-- TAsterix -> VAsterix (Expansion)
 
 instance
-    ( t ~ 'STRef
+    ( t ~ 'AsterixExpansion
     , IsSchema ed (Edition Int Int)
-    , IsSchema cat Cat
+    , IsSchema cat CatNum
     , IsSchema expansion (Expansion Int (Some VItem))
-    ) => IsSchema ('TRef cat ed expansion) (VAstSpec t) where
-    schema = VRef (schema @cat) (schema @ed) (schema @expansion)
+    ) => IsSchema ('TExpansion cat ed expansion) (VAsterix t) where
+    schema = VExpansion (schema @cat) (schema @ed) (schema @expansion)

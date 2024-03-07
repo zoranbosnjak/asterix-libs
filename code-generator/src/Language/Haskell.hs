@@ -29,32 +29,29 @@ import           Struct
 data T
     = TInt Integer
     | TText Text
+    | TSymbol Text
     | TList Text Text [T]
     | TProduct Text [T]
 
 instance IsString T where
-    fromString s = TProduct (T.pack s) []
+    fromString = TSymbol . T.pack
 
 -- | Pretty printer
-pp :: T -> Builder
-pp = f1 where
-    f1 = \case
-        TInt i -> bformat int i
-        other -> f2 other
-    f2 = \case
-        TText t -> "\"" <> bformat stext t <> "\""
-        other -> f3 other
-    f3 = \case
-        TList a b lst -> BL.fromText a
-            <> mconcat (L.intersperse ", " (fmap fN lst))
-            <> BL.fromText b
-        other -> f4 other
-    f4 = \case
-        TProduct t lst -> bformat stext t
-            <> " "
-            <> mconcat (L.intersperse " " (fmap fN lst))
-        other -> fN other
-    fN other = "(" <> f1 other <> ")"
+pp :: Bool -> T -> Builder
+pp needParen = \case
+    TInt i -> bformat int i
+    TText t -> "\"" <> bformat stext t <> "\""
+    TSymbol t -> bformat stext t
+    TList a b lst -> BL.fromText a
+        <> mconcat (L.intersperse ", " (fmap (pp False) lst))
+        <> BL.fromText b
+    TProduct t lst ->
+        paren "("
+        <> bformat stext t <> " "
+        <> mconcat (L.intersperse " " (fmap (pp True) lst))
+        <> paren ")"
+  where
+    paren = flip (bool "") needParen
 
 class Convert t where
     convert :: t -> T
@@ -76,14 +73,14 @@ instance Convert a => Convert (Maybe a) where
 instance Convert a => Convert [a] where
     convert = TList "'[ " "]" . fmap convert
 
-instance (Convert a, Convert b) => Convert (a,b) where
+instance (Convert a, Convert b) => Convert (a, b) where
     convert (a, b) = TList "'( " ")" [convert a, convert b]
 
 instance Convert A.Number where
     convert = \case
         A.NumInt i -> TProduct "'TNumInt"
             [ bool "'Minus" "'Plus" (i >= 0)
-            , convert i
+            , convert (abs i)
             ]
         A.NumDiv a b -> TProduct "'TNumDiv"
             [convert a, convert b]
@@ -122,105 +119,47 @@ instance Convert A.Content where
             ]
         A.ContentBds t -> TProduct "'ContentBds" [convert t]
 
-{-
--- | Helper function to create type level list.
-fmtTList :: (a -> Text) -> [a] -> Text
-fmtTList = fmtList "'[ " "]"
+data Augmented a b = Augmented Text a b
 
--- The following functions is a pretty printer trick
--- which follows the shape of the data structure. In this case,
--- the parentheses are on the correct place automatically.
-numberToText :: A.Number -> Text
-numberToText = f1 where
-    f1 = \case
-        A.NumInt i -> case i >= 0 of
-            True -> sformat ("'TNumInt 'Plus " % int) i
-            False -> sformat ("'TNumInt 'Minus " % int) (i * (-1))
-        other -> f2 other
-    f2 = \case
-        A.NumDiv a b -> sformat ("'TNumDiv (" % stext % ") (" % stext % ")") (f1 a) (f1 b)
-        other -> f3 other
-    f3 = \case
-        A.NumPow a b -> sformat ("'TNumPow " % int % " " % int) a b
-        other -> f1 other
+augment :: Text -> a -> [(b, Int)] -> [(Augmented a b, Int)]
+augment name a lst = do
+    (x, n) <- lst
+    pure (Augmented name a x, n)
 
-constrainToText :: A.Constrain -> Text
-constrainToText = \case
-    A.EqualTo n -> "'( 'EqualTo, " <> numberToText n <> ")"
-    A.NotEqualTo n -> "'( 'NotEqualTo, " <> numberToText n <> ")"
-    A.GreaterThan n -> "'( 'GreaterThan, " <> numberToText n <> ")"
-    A.GreaterThanOrEqualTo n -> "'( 'GreaterThanOrEqualTo, " <> numberToText n <> ")"
-    A.LessThan n -> "'( 'LessThan, " <> numberToText n <> ")"
-    A.LessThanOrEqualTo n -> "'( 'LessThanOrEqualTo, " <> numberToText n <> ")"
-
-mkContent :: (A.Content, Int) -> BlockM Builder ()
-mkContent (cont, ix) = case cont of
-    A.ContentRaw -> do
-        fmt ("type " % stext % " = 'ContentRaw") t
-    A.ContentTable lst -> do
-        let f :: (Int, Text) -> Text
-            f (a,b) = sformat ("'( " % int % ", \"" % stext % "\")") a b
-        fmt ("type " % stext % " = 'ContentTable " % stext) t (fmtTList f lst)
-    A.ContentString st -> do
-        fmt ("type " % stext % " = 'ContentString " % stext) t $ case st of
-            A.StringAscii -> "'StringAscii"
-            A.StringICAO  -> "'StringICAO"
-            A.StringOctal -> "'StringOctal"
-    A.ContentInteger sig cstr -> do
-        fmt ("type " % stext % " = 'ContentInteger " % stext % " " % stext) t
-            ( case sig of
-                 A.Signed   -> "'Signed"
-                 A.Unsigned -> "'Unsigned")
-            (fmtTList constrainToText cstr)
-    A.ContentQuantity sig' lsb' (A.Unit unit) cstr -> do
-        let sig = case sig' of
-                A.Signed   -> "'Signed"
-                A.Unsigned -> "'Unsigned"
-        fmt ("type " % stext % " = 'ContentQuantity " % stext
-             % " (" % stext % ") \"" % stext % "\" " % stext)
-            t
-            sig
-            (numberToText lsb')
-            unit
-            (fmtTList constrainToText cstr)
-    A.ContentBds bt -> do
-        let x = case bt of
-                A.BdsWithAddress -> "'BdsWithAddress"
-                A.BdsAt Nothing -> "('BdsAt 'Nothing)"
-                A.BdsAt (Just (A.BdsAddr addr)) -> sformat
-                    ("('BdsAt ('Just " % int % "))") addr
-        fmt ("type " % stext % " = 'ContentBds " % stext) t x
-  where
-    t = nameOf "TContent" ix
-
-mkRule :: Ord a => Text -> EMap a -> (A.Rule a, Int) -> BlockM Builder ()
-mkRule name db (rule, ix) = case rule of
-    A.ContextFree x -> do
-        fmt ("type " % stext % " = 'TContextFree " % stext)
-            t
-            (nameOf tName $ indexOf db x)
-    A.Dependent items' dv lst -> do
-        let fText = sformat ("\"" % stext % "\"")
-            fLst (xs, cont) = sformat
-                ("'( " % stext % ", " % stext % ")")
-                (fmtTList (sformat int) xs)
-                (nameOf tName $ indexOf db cont)
-            items = do
-                A.ItemPath p <- items'
-                pure [n | A.ItemName n <- p]
-        fmt ("type " % stext % " = 'TDependent " % stext % " " % stext % " " % stext)
-            t
-            (fmtTList (fmtTList fText) items)
-            (nameOf tName $ indexOf db dv)
-            (fmtTList fLst lst)
-  where
-    tName = "T" <> name
-    t = nameOf ("TRule" <> name) ix
+instance Convert (Augmented (EMap a) (A.Rule a)) where
+    convert (Augmented name mp rule) = case rule of
 
 {-
-mkVariation :: AsterixDb EMap -> (Variation, Int) -> BlockM Builder ()
-mkVariation db (var, ix) = case var of
-    Element (OctetOffset o) n rule -> do
+data Reference a = Reference Text (EMap a) a
+
+mkRef :: (Functor f1, Functor f2)
+    => Text -> EMap a -> f1 (f2 a, b) -> f1 (f2 (Reference a), b)
+mkRef name mp = fmap act where
+    act (x, n) = (fmap (Reference name  mp) x, n)
+
+instance Ord a => Convert (Reference a) where
+    convert (Reference target mp x) =
+        TSymbol $ sformat ("T" % stext % "_" % int) target (indexOf mp x)
+
+instance Convert a => Convert (A.Rule a) where
+    convert = \case
+        A.ContextFree x -> TProduct "'TContextFree" [convert x]
+        A.Dependent items dv lst -> TProduct "'TDependent"
+            [ convert (coerce items :: [[Text]])
+            , convert dv
+            , convert lst
+            ]
+
+{-
+instance Convert Variation where
+    convert = \case
+        A.Element o n rule -> TProduct "'TElement"
+            [ convert (coerce o :: Int)
+            , convert (coerce n :: Int)
+            , convert rule
+            ]
+        _ -> "()"
+
         fmt ("type " % stext % " = 'TElement " % int % " " % int % " " % stext)
             t
             o
@@ -262,6 +201,7 @@ mkVariation db (var, ix) = case var of
   where
     t = nameOf "TVariation" ix
 
+{-
 mkItem :: AsterixDb EMap -> (Item, Int) -> BlockM Builder ()
 mkItem db (item, ix) = case item of
     Spare (OctetOffset o) n -> do
@@ -343,15 +283,16 @@ mkManifest lst = do
     ps = ["["] <> repeat ","
 -}
 -}
+-}
 
 -- | Render line in the form "type T{TEXT}_{INT} = {T}"
 mkLine :: Text -> Int -> T -> Builder
 mkLine x i t = bformat
     ("type T" % stext % "_" % int % " = " % builder)
-    x i (pp t)
+    x i (pp False t)
 
-mkContent :: (A.Content, Int) -> BlockM Builder ()
-mkContent (cont, ix) = lineBlockM $ mkLine "Content" ix (convert cont)
+mkType :: Convert t => Text -> (t, Int) -> BlockM Builder ()
+mkType name (t, ix) = lineBlockM $ mkLine name ix (convert t)
 
 -- | Source code generator entry point.
 mkCode :: Bool -> Text -> Text -> [A.Asterix] -> Builder
@@ -379,13 +320,16 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     line $ "version = \"" <> BL.fromText ver <> "\""
     ""
     "-- | Content set"
-    sequence_ (fmap mkContent $ enumList $ dbContent db)
-    {-
+    mapM_ (mkType "Content") (enumList $ dbContent db)
     ""
     "-- | Rule Content set"
-    sequence_ (fmap (mkRule "Content" $ dbContent db) $ enumList $ dbRuleContent db)
+    mapM_ (mkType "RuleContent") (augment "Content" (dbContent db) $ enumList $ dbRuleContent db)
+    {-
+    mapM_ (mkType "RuleContent") (mkRef "Content" (dbContent db) $ enumList $ dbRuleContent db)
     ""
     "-- | Variation set"
+    mapM_ (mkType "Variation") (enumList $ dbVariation db)
+    sequence_ (fmap (mkType "Variation") $ enumList $ dbVariation db)
     sequence_ (fmap (mkVariation db) $ enumList $ dbVariation db)
     ""
     "-- | Rule Variation set"

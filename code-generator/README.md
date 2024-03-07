@@ -28,7 +28,7 @@ stylish-haskell --inplace {path}
 find . | grep "\.hs$" | xargs stylish-haskell --inplace
 
 # run 'ghcid'
-ghcid "--command=ghci -Wall -iother -isrc src/Main.hs"
+ghcid --no-title --lint "--command=ghci -Wall -iother -isrc src/Main.hs"
 
 # run program, show usage
 runhaskell $EXTENSIONS -iother -isrc ./src/Main.hs --help

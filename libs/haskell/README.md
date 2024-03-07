@@ -6,8 +6,8 @@
 nix-shell
 
 # use 'ghcid'
-ghcid "--command=ghci -Wall -iother -isrc src/Asterix.hs"
-ghcid "--command=ghci -Wall -iother -isrc -itest test/Main.hs"
+ghcid --no-title --lint "--command=ghci -Wall -iother -isrc src/Asterix.hs"
+ghcid --no-title --lint "--command=ghci -Wall -iother -isrc -itest test/Main.hs"
 
 # run tests
 runhaskell $EXTENSIONS -Wall -isrc -itest test/Main.hs
