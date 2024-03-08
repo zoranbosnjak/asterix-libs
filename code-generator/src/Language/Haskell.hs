@@ -3,26 +3,20 @@
 {-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
 
--- TODO: remove this
-{-# OPTIONS_GHC -Wno-unused-imports #-}
-
 module Language.Haskell where
 
-import           Control.Monad
 import           Data.Coerce
 import           Data.Bool
 import           Data.String
 import           Data.Text as T
 import qualified Data.List as L
 import           Data.List              (nub, sort)
-import           Data.Text              (Text)
 import           Data.Text.Lazy.Builder (Builder)
 import qualified Data.Text.Lazy.Builder as BL
 import           Formatting             as F
 
 import           Asterix.Indent
 import qualified Asterix.Specs          as A
-import           Fmt
 import           Struct
 
 -- | Intermediate type for pretty printing
@@ -36,7 +30,7 @@ data T
 instance IsString T where
     fromString = TSymbol . T.pack
 
--- | Pretty printer
+-- | Pretty printer for 'T'
 pp :: Bool -> T -> Builder
 pp needParen = \case
     TInt i -> bformat int i
@@ -102,8 +96,19 @@ instance Convert A.BdsType where
         A.BdsAt mAddr -> TProduct "'BdsAt"
             [convert $ fmap (coerce @A.BdsAddr @Int) mAddr]
 
-instance Convert A.Content where
+instance Convert A.RepetitiveType where
     convert = \case
+        A.RepetitiveRegular n -> TProduct "'Just"
+            [convert (coerce n :: Int)]
+        A.RepetitiveFx -> "'Nothing"
+
+instance Convert A.ExplicitType where
+    convert = \case
+        A.ReservedExpansion -> "'ReservedExpansion"
+        A.SpecialPurpose -> "'SpecialPurpose"
+
+instance Convert (Augmented A.Content) where
+    convert (Augmented _db content) = case content of
         A.ContentRaw -> "'ContentRaw"
         A.ContentTable lst -> TProduct "'ContentTable" [convert lst]
         A.ContentString t -> TProduct "'ContentString" [fromString ("'" <> show t)]
@@ -119,27 +124,17 @@ instance Convert A.Content where
             ]
         A.ContentBds t -> TProduct "'ContentBds" [convert t]
 
-data Augmented a b = Augmented Text a b
+newtype Symbol = Symbol Text
+    deriving (Eq, Ord)
 
-augment :: Text -> a -> [(b, Int)] -> [(Augmented a b, Int)]
-augment name a lst = do
-    (x, n) <- lst
-    pure (Augmented name a x, n)
+instance Convert Symbol where
+    convert = TSymbol . coerce
 
-instance Convert (Augmented (EMap a) (A.Rule a)) where
-    convert (Augmented name mp rule) = case rule of
+refName :: Ord a => Text -> EMap a -> a -> Text
+refName name mp x = sformat ("T" % stext % "_" % int) name (indexOf mp x)
 
-{-
-data Reference a = Reference Text (EMap a) a
-
-mkRef :: (Functor f1, Functor f2)
-    => Text -> EMap a -> f1 (f2 a, b) -> f1 (f2 (Reference a), b)
-mkRef name mp = fmap act where
-    act (x, n) = (fmap (Reference name  mp) x, n)
-
-instance Ord a => Convert (Reference a) where
-    convert (Reference target mp x) =
-        TSymbol $ sformat ("T" % stext % "_" % int) target (indexOf mp x)
+-- | In some cases, we need database object in convert instance.
+data Augmented t = Augmented (AsterixDb EMap) t
 
 instance Convert a => Convert (A.Rule a) where
     convert = \case
@@ -150,107 +145,96 @@ instance Convert a => Convert (A.Rule a) where
             , convert lst
             ]
 
-{-
-instance Convert Variation where
-    convert = \case
+instance Convert (Augmented (A.Rule A.Content)) where
+    convert (Augmented db rule) =
+        convert (fmap (Symbol . refName "Content" (dbContent db)) rule)
+
+instance Convert (Augmented Variation) where
+    convert (Augmented db var) = case var of
         A.Element o n rule -> TProduct "'TElement"
             [ convert (coerce o :: Int)
             , convert (coerce n :: Int)
-            , convert rule
+            , convert (refRule rule)
             ]
-        _ -> "()"
+        A.Group lst -> TProduct "'TGroup"
+            [ convert $ fmap refItem lst
+            ]
+        A.Extended lst -> TProduct "'TExtended"
+            [ convert $ fmap (fmap refItem) lst
+            ]
+        A.Repetitive rt var2 -> TProduct "'TRepetitive"
+            [ convert rt
+            , convert $ refVariation var2
+            ]
+        A.Explicit met -> TProduct "'TExplicit"
+            [ convert met
+            ]
+        A.Compound lst -> TProduct "'TCompound"
+            [ convert $ fmap (fmap refItem) lst
+            ]
+      where
+        refRule = Symbol . refName "RuleContent" (dbRuleContent db)
+        refItem = Symbol . refName "Item" (dbItem db)
+        refVariation = Symbol . refName "Variation" (dbVariation db)
 
-        fmt ("type " % stext % " = 'TElement " % int % " " % int % " " % stext)
-            t
-            o
-            n
-            (nameOf "TRuleContent" $ indexOf (dbRuleContent db) rule)
-    Group lst -> do
-        let f :: Item -> Text
-            f = nameOf "TItem" . indexOf (dbItem db)
-        fmt ("type " % stext % " = 'TGroup " % stext) t
-            (fmtTList f lst)
-    Extended lst -> do
-        let f = \case
-                Nothing -> "'Nothing"
-                Just item -> "'Just " <> nameOf "TItem" (indexOf (dbItem db) item)
-        fmt ("type " % stext % " = 'TExtended " % stext) t
-            (fmtTList f lst)
-    Repetitive rt' var2' -> do
-        let rt = case rt' of
-                A.RepetitiveRegular n -> sformat ("('Just " % int % ")") (div8 n)
-                A.RepetitiveFx -> "'Nothing"
-            var2 = nameOf "TVariation" $ indexOf (dbVariation db) var2'
-        fmt ("type " % stext % " = 'TRepetitive " % stext % " " % stext) t rt var2
-    Explicit mt -> do
-        let met = case mt of
-                Nothing -> "'Nothing"
-                Just A.ReservedExpansion -> "('Just 'ReservedExpansion)"
-                Just A.SpecialPurpose -> "('Just 'SpecialPurpose)"
-        fmt ("type " % stext % " = 'TExplicit " % stext) t met
-    Compound mn' lst -> do
-        let mn = case mn' of
-                Nothing -> "'Nothing"
-                Just n  -> sformat ("('Just " % int % ")") (div8 n)
-            f = \case
-                CompoundSubitem item -> "'CompoundSubitem " <> nameOf "TItem" (indexOf (dbItem db) item)
-                CompoundSpare -> "'CompoundSpare"
-                CompoundRFS -> "'CompoundRFS"
-        fmt ("type " % stext % " = 'TCompound " % stext % " " % stext) t mn
-            (fmtTList f lst)
-  where
-    t = nameOf "TVariation" ix
+instance Convert (Augmented (A.Rule Variation)) where
+    convert (Augmented db rule) =
+        convert (fmap (Symbol . refName "Variation" (dbVariation db)) rule)
+
+instance Convert (Augmented Item) where
+    convert (Augmented db item) = case item of
+        A.Spare o n -> TProduct "'TSpare"
+            [ convert (coerce o :: Int)
+            , convert (coerce n :: Int)
+            ]
+        A.Item iName title rule _doc -> TProduct "'TItem"
+            [ convert (coerce iName :: Text)
+            , convert (coerce title :: Text)
+            , convert (refRule rule)
+            ]
+      where
+        refRule = Symbol . refName "RuleVariation" (dbRuleVariation db)
+
+instance Convert (Augmented UapItem) where
+    convert (Augmented db uapItem) = case uapItem of
+        A.UapItem item -> TProduct "'UapItem"
+            [ convert $ refItem item
+            ]
+        A.UapItemSpare -> "'UapItemSpare"
+        A.UapItemRFS -> "'UapItemRFS"
+      where
+        refItem = Symbol . refName "Item" (dbItem db)
+
+instance Convert (Augmented Record) where
+    convert (Augmented db (Record lst)) = TProduct "'Record"
+        [ convert $ fmap (Augmented db) lst]
+
+instance Convert (Augmented Expansion) where
+    convert (Augmented db (Expansion n lst)) = TProduct "'Expansion"
+        [ convert (coerce n :: Int)
+        , convert $ fmap (fmap refItem) lst
+        ]
+      where
+        refItem = Symbol . refName "Item" (dbItem db)
+
+instance Convert A.UapName where
+    convert n = convert (coerce n :: Text)
+
+instance Convert a => Convert (A.Uap a) where
+    convert = \case
+        A.Uap t -> TProduct "'TUapSingle"
+            [ convert t
+            ]
+        A.Uaps lst _msel -> TProduct "'TUapMultiple"
+            [ convert lst
+            ]
+
+instance Convert (Augmented Uap) where
+    convert (Augmented db uap) =
+        convert (fmap (Symbol . refName "Record" (dbRecord db)) uap)
+
 
 {-
-mkItem :: AsterixDb EMap -> (Item, Int) -> BlockM Builder ()
-mkItem db (item, ix) = case item of
-    Spare (OctetOffset o) n -> do
-        fmt ("type " % stext % " = 'TSpare " % int % " " % int) t o n
-    Item name title rule -> do
-        fmt ("type " % stext % " = 'TItem \"" % stext % "\" \"" %
-            stext % "\" " % stext) t name title
-            (nameOf "TRuleVariation" $ indexOf (dbRuleVariation db) rule)
-  where
-    t = nameOf "TItem" ix
-
-mkRecord :: AsterixDb EMap -> (Record, Int) -> BlockM Builder ()
-mkRecord db (Record lst, ix) = do
-    fmt ("type " % stext % " = 'Record " % stext) t (fmtTList f lst)
-  where
-    t = nameOf "TRecord" ix
-    f = \case
-        CompoundSubitem item -> sformat
-            ("'CompoundSubitem " % stext)
-            (nameOf "TItem" $ indexOf (dbItem db) item)
-        CompoundSpare -> "'CompoundSpare"
-        CompoundRFS -> "'CompoundRFS"
-
-mkExpansion :: AsterixDb EMap -> (Expansion, Int) -> BlockM Builder ()
-mkExpansion db (Expansion n lst, ix) = do
-    fmt ("type " % stext % " = 'Expansion " % int % " " % stext)
-        t (div8 n) (fmtTList f lst)
-  where
-    t = nameOf "TExpansion" ix
-    f = \case
-        CompoundSubitem item -> sformat
-            ("'CompoundSubitem " % stext)
-            (nameOf "TItem" $ indexOf (dbItem db) item)
-        CompoundSpare -> "'CompoundSpare"
-        CompoundRFS -> "'CompoundRFS"
-
-mkUap :: AsterixDb EMap -> (Uap, Int) -> BlockM Builder ()
-mkUap db (uap, ix) = case uap of
-    Uap record -> do
-        fmt ("type " % stext % " = 'TUapSingle " % stext) t
-            (nameOf "TRecord" $ indexOf (dbRecord db) record)
-    Uaps lst _sel -> do
-        let f (a, record) = sformat ("'(\"" % stext % "\", " % stext % ")") a
-                (nameOf "TRecord" $ indexOf (dbRecord db) record)
-        fmt ("type " % stext % " = 'TUapMultiple " % stext) t
-            (fmtTList f lst)
-  where
-    t = nameOf "TUap" ix
-
 mkAstSpec :: AsterixDb EMap -> (AstSpec, Int) -> BlockM Builder ()
 mkAstSpec db (astSpec, ix) = do
     let (at, cat, ed, s) = case astSpec of
@@ -282,17 +266,13 @@ mkManifest lst = do
   where
     ps = ["["] <> repeat ","
 -}
--}
--}
 
--- | Render line in the form "type T{TEXT}_{INT} = {T}"
-mkLine :: Text -> Int -> T -> Builder
-mkLine x i t = bformat
-    ("type T" % stext % "_" % int % " = " % builder)
-    x i (pp False t)
-
-mkType :: Convert t => Text -> (t, Int) -> BlockM Builder ()
-mkType name (t, ix) = lineBlockM $ mkLine name ix (convert t)
+-- | Render lines in the form "type T{TEXT}_{INT} = {T}"
+mkTypes :: Convert (Augmented t) => AsterixDb EMap -> Text -> EMap t -> BlockM Builder ()
+mkTypes db name mp = mapM_ go (enumList mp) where
+    go (t, ix) = lineBlockM $ bformat
+        ("type T" % stext % "_" % int % " = " % builder)
+        name ix (pp False $ convert (Augmented db t))
 
 -- | Source code generator entry point.
 mkCode :: Bool -> Text -> Text -> [A.Asterix] -> Builder
@@ -320,34 +300,30 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     line $ "version = \"" <> BL.fromText ver <> "\""
     ""
     "-- | Content set"
-    mapM_ (mkType "Content") (enumList $ dbContent db)
+    mkTypes db "Content" (dbContent db)
     ""
     "-- | Rule Content set"
-    mapM_ (mkType "RuleContent") (augment "Content" (dbContent db) $ enumList $ dbRuleContent db)
-    {-
-    mapM_ (mkType "RuleContent") (mkRef "Content" (dbContent db) $ enumList $ dbRuleContent db)
+    mkTypes db "RuleContent" (dbRuleContent db)
     ""
     "-- | Variation set"
-    mapM_ (mkType "Variation") (enumList $ dbVariation db)
-    sequence_ (fmap (mkType "Variation") $ enumList $ dbVariation db)
-    sequence_ (fmap (mkVariation db) $ enumList $ dbVariation db)
+    mkTypes db "Variation" (dbVariation db)
     ""
     "-- | Rule Variation set"
-    sequence_ (fmap (mkRule "Variation" $ dbVariation db) $ enumList $
-        dbRuleVariation db)
+    mkTypes db "RuleVariation" (dbRuleVariation db)
     ""
     "-- | Item set"
-    sequence_ (fmap (mkItem db) $ enumList $ dbItem db)
+    mkTypes db "Item" (dbItem db)
     ""
     "-- | Record set"
-    sequence_ (fmap (mkRecord db) $ enumList $ dbRecord db)
+    mkTypes db "Record" (dbRecord db)
     ""
     "-- | Expansion set"
-    sequence_ (fmap (mkExpansion db) $ enumList $ dbExpansion db)
+    mkTypes db "Expansion" (dbExpansion db)
     ""
     "-- | Uap set"
-    sequence_ (fmap (mkUap db) $ enumList $ dbUap db)
+    mkTypes db "Uap" (dbUap db)
     ""
+    {-
     "-- | Asterix spec set"
     sequence_ (fmap (mkAstSpec db) $ enumList $ dbAstSpec db)
     ""
