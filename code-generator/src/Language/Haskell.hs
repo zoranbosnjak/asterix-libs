@@ -5,12 +5,13 @@
 
 module Language.Haskell where
 
-import           Data.Coerce
+import           Control.Monad
 import           Data.Bool
-import           Data.String
-import           Data.Text as T
-import qualified Data.List as L
+import           Data.Coerce
 import           Data.List              (nub, sort)
+import qualified Data.List              as L
+import           Data.String
+import           Data.Text              as T
 import           Data.Text.Lazy.Builder (Builder)
 import qualified Data.Text.Lazy.Builder as BL
 import           Formatting             as F
@@ -233,42 +234,55 @@ instance Convert (Augmented Uap) where
     convert (Augmented db uap) =
         convert (fmap (Symbol . refName "Record" (dbRecord db)) uap)
 
+instance Convert A.Edition where
+    convert (A.Edition a b) = TProduct "'Edition"
+        [ convert a
+        , convert b
+        ]
 
-{-
-mkAstSpec :: AsterixDb EMap -> (AstSpec, Int) -> BlockM Builder ()
-mkAstSpec db (astSpec, ix) = do
-    let (at, cat, ed, s) = case astSpec of
-            AstCat (Cat c) e uap ->
-                ("'TCat", c, e, nameOf "TUap" $ indexOf (dbUap db) uap)
-            AstRef (Cat c) e expansion ->
-                ("'TRef", c, e, nameOf "TExpansion" $ indexOf (dbExpansion db) expansion)
-    fmt ("type " % stext % " = " % stext % " " % int % " (" % stext % ") " % stext)
-        t at cat (mkEdition ed) s
+instance Convert (Augmented Asterix) where
+    convert (Augmented db asterix) = case asterix of
+        AsterixBasic catNum edition uap -> TProduct "'TBasic"
+            [ convert (coerce catNum :: Int)
+            , convert edition
+            , convert (Symbol $ refName "Uap" (dbUap db) uap)
+            ]
+        AsterixExpansion catNum edition expansion -> TProduct "'TExpansion"
+            [ convert (coerce catNum :: Int)
+            , convert edition
+            , convert (Symbol $ refName "Expansion" (dbExpansion db) expansion)
+            ]
+
+nameOfAst :: Asterix -> Text
+nameOfAst = \case
+    AsterixBasic cat ed _ -> f "Cat" cat ed
+    AsterixExpansion cat ed _ -> f "Ref" cat ed
   where
-    t = nameOf "TAstSpec" ix
-    mkEdition (A.Edition a b) = sformat
-        ("'Edition " % int % " " % int) a b
+    f astType (A.CatNum cat) (A.Edition a b) = sformat
+        (stext % "_" % left 3 '0' % "_" % int % "_" % int)
+        astType cat a b
 
-mkAlias :: (AstSpec, Int) -> BlockM Builder ()
-mkAlias (astSpec, ix) = do
-    fmt ("type " % stext % " = " % stext)
-        (nameOfAst astSpec)
-        (nameOf "TAstSpec" ix)
+mkAlias :: AsterixDb EMap -> (Asterix, Int) -> BlockM Builder ()
+mkAlias db (asterix, _ix) = lineBlockM $ bformat
+    ("type " % stext % " = " % stext)
+    (nameOfAst asterix)
+    (refName "Asterix" (dbAsterix db) asterix)
 
-mkManifest :: [AstSpec] -> BlockM Builder ()
+mkManifest :: [Asterix] -> BlockM Builder ()
 mkManifest lst = do
-    "manifest :: [Some VAstSpec]"
+    "manifest :: [Some VAsterix]"
     "manifest ="
     indent $ do
-        forM_ (zip ps lst) $ \(p, astSpec) -> do
+        forM_ (Prelude.zip ps lst) $ \(p, astSpec) -> do
             fmt (stext % " schema @" % stext) p (nameOfAst astSpec)
         "]"
   where
     ps = ["["] <> repeat ","
--}
+    fmt m = runFormat m line
 
 -- | Render lines in the form "type T{TEXT}_{INT} = {T}"
-mkTypes :: Convert (Augmented t) => AsterixDb EMap -> Text -> EMap t -> BlockM Builder ()
+mkTypes :: Convert (Augmented t) => AsterixDb EMap -> Text -> EMap t
+    -> BlockM Builder ()
 mkTypes db name mp = mapM_ go (enumList mp) where
     go (t, ix) = lineBlockM $ bformat
         ("type T" % stext % "_" % int % " = " % builder)
@@ -323,17 +337,15 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     "-- | Uap set"
     mkTypes db "Uap" (dbUap db)
     ""
-    {-
     "-- | Asterix spec set"
-    sequence_ (fmap (mkAstSpec db) $ enumList $ dbAstSpec db)
+    mkTypes db "Asterix" (dbAsterix db)
     ""
     "-- | Aliases"
-    sequence_ $ fmap mkAlias $ enumList $ dbAstSpec db
+    mapM_ (mkAlias db) $ enumList $ dbAsterix db
     ""
     "-- | Manifest"
     mkManifest specs
     ""
-    -}
   where
     specs :: [Asterix]
     specs = sort $ nub $ fmap deriveAsterix specs'

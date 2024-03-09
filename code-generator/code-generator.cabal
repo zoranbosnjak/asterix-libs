@@ -30,7 +30,6 @@ executable code-generator
     other-modules:
         Paths_generator
         Struct
-        Fmt
         Language.Python
         Language.Haskell
     -- other-extensions:

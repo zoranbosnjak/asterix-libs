@@ -33,12 +33,12 @@ type TContent_8 = 'ContentTable '[ '( 3, "Test3"), '( 4, "Test4")]
 type TContent_9 = 'ContentString 'StringAscii
 type TContent_10 = 'ContentString 'StringICAO
 type TContent_11 = 'ContentString 'StringOctal
-type TContent_12 = 'ContentInteger 'Signed '[ '( 'GreaterThanOrEqualTo, 'TNumInt 'Minus 10), '( 'LessThanOrEqualTo, 'TNumInt 'Plus 10)]
-type TContent_13 = 'ContentInteger 'Unsigned '[ '( 'GreaterThanOrEqualTo, 'TNumInt 'Plus 10), '( 'LessThanOrEqualTo, 'TNumInt 'Plus 15)]
-type TContent_14 = 'ContentQuantity 'Signed ('TNumDiv ('TNumInt 'Plus 180) ('TNumPow 2 23)) "°" '[ '( 'GreaterThanOrEqualTo, 'TNumInt 'Minus 180), '( 'LessThan, 'TNumInt 'Plus 180)]
-type TContent_15 = 'ContentQuantity 'Signed ('TNumDiv ('TNumInt 'Plus 180) ('TNumPow 2 23)) "°" '[ '( 'GreaterThanOrEqualTo, 'TNumInt 'Minus 90), '( 'LessThanOrEqualTo, 'TNumInt 'Plus 90)]
+type TContent_12 = 'ContentInteger 'Signed '[ 'GreaterThanOrEqualTo ('TNumInt 'Minus 10), 'LessThanOrEqualTo ('TNumInt 'Plus 10)]
+type TContent_13 = 'ContentInteger 'Unsigned '[ 'GreaterThanOrEqualTo ('TNumInt 'Plus 10), 'LessThanOrEqualTo ('TNumInt 'Plus 15)]
+type TContent_14 = 'ContentQuantity 'Signed ('TNumDiv ('TNumInt 'Plus 180) ('TNumPow 2 23)) "°" '[ 'GreaterThanOrEqualTo ('TNumInt 'Minus 180), 'LessThan ('TNumInt 'Plus 180)]
+type TContent_15 = 'ContentQuantity 'Signed ('TNumDiv ('TNumInt 'Plus 180) ('TNumPow 2 23)) "°" '[ 'GreaterThanOrEqualTo ('TNumInt 'Minus 90), 'LessThanOrEqualTo ('TNumInt 'Plus 90)]
 type TContent_16 = 'ContentQuantity 'Unsigned ('TNumInt 'Plus 1) "" '[ ]
-type TContent_17 = 'ContentQuantity 'Unsigned ('TNumInt 'Plus 1) "kt" '[ '( 'GreaterThanOrEqualTo, 'TNumInt 'Plus 0), '( 'LessThanOrEqualTo, 'TNumInt 'Plus 1100)]
+type TContent_17 = 'ContentQuantity 'Unsigned ('TNumInt 'Plus 1) "kt" '[ 'GreaterThanOrEqualTo ('TNumInt 'Plus 0), 'LessThanOrEqualTo ('TNumInt 'Plus 1100)]
 type TContent_18 = 'ContentQuantity 'Unsigned ('TNumDiv ('TNumInt 'Minus 1) ('TNumInt 'Plus 2)) "" '[ ]
 type TContent_19 = 'ContentQuantity 'Unsigned ('TNumDiv ('TNumInt 'Plus 1) ('TNumInt 'Plus 1000)) "Mach" '[ ]
 type TContent_20 = 'ContentQuantity 'Unsigned ('TNumDiv ('TNumInt 'Plus 1) ('TNumPow 2 14)) "NM/s" '[ ]
@@ -120,18 +120,8 @@ type TVariation_44 = 'TRepetitive 'Nothing TVariation_4
 type TVariation_45 = 'TExplicit 'Nothing
 type TVariation_46 = 'TExplicit ('Just 'ReservedExpansion)
 type TVariation_47 = 'TExplicit ('Just 'SpecialPurpose)
-type TVariation_48 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_7]
-type TVariation_49 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_7, 'CompoundSubitem TItem_28, 'CompoundSubitem TItem_29]
-type TVariation_50 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_7, 'CompoundSubitem TItem_30, 'CompoundSubitem TItem_31]
-type TVariation_51 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_7, 'CompoundSubitem TItem_32]
-type TVariation_52 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_8, 'CompoundSubitem TItem_6, 'CompoundSubitem TItem_9, 'CompoundSubitem TItem_11, 'CompoundSubitem TItem_13, 'CompoundSubitem TItem_15, 'CompoundSubitem TItem_16, 'CompoundSubitem TItem_17, 'CompoundSubitem TItem_18, 'CompoundSubitem TItem_19, 'CompoundSubitem TItem_20, 'CompoundSubitem TItem_21, 'CompoundSubitem TItem_22, 'CompoundSubitem TItem_23, 'CompoundSubitem TItem_24, 'CompoundSubitem TItem_25, 'CompoundRFS, 'CompoundSubitem TItem_26, 'CompoundSubitem TItem_27]
-type TVariation_53 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_8, 'CompoundSubitem TItem_10, 'CompoundSubitem TItem_12]
-type TVariation_54 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_8, 'CompoundSubitem TItem_10, 'CompoundSubitem TItem_14]
-type TVariation_55 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_41, 'CompoundSubitem TItem_36]
-type TVariation_56 = 'TCompound 'Nothing '[ 'CompoundSubitem TItem_41, 'CompoundSpare, 'CompoundSubitem TItem_46]
-type TVariation_57 = 'TCompound ('Just 1) '[ 'CompoundSubitem TItem_41, 'CompoundSubitem TItem_46]
-type TVariation_58 = 'TCompound ('Just 1) '[ 'CompoundSubitem TItem_41, 'CompoundSpare, 'CompoundSubitem TItem_46]
-type TVariation_59 = 'TCompound ('Just 2) '[ 'CompoundSubitem TItem_41, 'CompoundSpare, 'CompoundSpare, 'CompoundSubitem TItem_46, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSubitem TItem_51]
+type TVariation_48 = 'TCompound '[ 'Just TItem_41, 'Nothing, 'Just TItem_46]
+type TVariation_49 = 'TCompound '[ 'Just TItem_41, 'Just TItem_36]
 
 -- | Rule Variation set
 type TRuleVariation_0 = 'TContextFree TVariation_0
@@ -177,10 +167,9 @@ type TRuleVariation_39 = 'TContextFree TVariation_44
 type TRuleVariation_40 = 'TContextFree TVariation_45
 type TRuleVariation_41 = 'TContextFree TVariation_46
 type TRuleVariation_42 = 'TContextFree TVariation_47
-type TRuleVariation_43 = 'TContextFree TVariation_55
-type TRuleVariation_44 = 'TContextFree TVariation_56
-type TRuleVariation_45 = 'TContextFree TVariation_58
-type TRuleVariation_46 = 'TDependent '[ '[ "000"], '[ "031", "CC", "TID"]] TVariation_26 '[ '( '[ 1, 1], TVariation_27), '( '[ 1, 2], TVariation_28), '( '[ 2, 1], TVariation_34)]
+type TRuleVariation_43 = 'TContextFree TVariation_48
+type TRuleVariation_44 = 'TContextFree TVariation_49
+type TRuleVariation_45 = 'TDependent '[ '[ "000"], '[ "031", "CC", "TID"]] TVariation_26 '[ '( '[ 1, 1], TVariation_27), '( '[ 1, 2], TVariation_28), '( '[ 2, 1], TVariation_34)]
 
 -- | Item set
 type TItem_0 = 'TSpare 4 4
@@ -192,25 +181,25 @@ type TItem_5 = 'TSpare 7 9
 type TItem_6 = 'TItem "000" "Message Type" TRuleVariation_7
 type TItem_7 = 'TItem "010" "" TRuleVariation_5
 type TItem_8 = 'TItem "010" "Data Source Identifier" TRuleVariation_32
-type TItem_9 = 'TItem "020" "Different Contents" TRuleVariation_31
-type TItem_10 = 'TItem "020" "Target Report Descriptor" TRuleVariation_36
-type TItem_11 = 'TItem "030" "Dependent Item" TRuleVariation_30
-type TItem_12 = 'TItem "031" "For Plots Only" TRuleVariation_5
-type TItem_13 = 'TItem "031" "Nested Dependent Item" TRuleVariation_43
-type TItem_14 = 'TItem "032" "For Tracks Only" TRuleVariation_13
-type TItem_15 = 'TItem "040" "Spare Items" TRuleVariation_29
-type TItem_16 = 'TItem "051" "Element" TRuleVariation_5
-type TItem_17 = 'TItem "052" "Group" TRuleVariation_28
-type TItem_18 = 'TItem "053" "Extended With Trailing Fx" TRuleVariation_34
-type TItem_19 = 'TItem "054" "Extended Without Trailing Fx" TRuleVariation_35
-type TItem_20 = 'TItem "061" "Repetitive Regular" TRuleVariation_37
-type TItem_21 = 'TItem "062" "Repetitive With Group" TRuleVariation_38
-type TItem_22 = 'TItem "063" "Repetitive Fx" TRuleVariation_39
-type TItem_23 = 'TItem "071" "Explicit None" TRuleVariation_40
-type TItem_24 = 'TItem "072" "Explicit RE" TRuleVariation_41
-type TItem_25 = 'TItem "073" "Explicit SP" TRuleVariation_42
-type TItem_26 = 'TItem "091" "Compound Fspec With Fx" TRuleVariation_44
-type TItem_27 = 'TItem "092" "Compound Fixed Size Fspec" TRuleVariation_45
+type TItem_9 = 'TItem "010" "Data Source Identifier" TRuleVariation_32
+type TItem_10 = 'TItem "020" "Different Contents" TRuleVariation_31
+type TItem_11 = 'TItem "020" "Target Report Descriptor" TRuleVariation_36
+type TItem_12 = 'TItem "030" "Dependent Item" TRuleVariation_30
+type TItem_13 = 'TItem "031" "For Plots Only" TRuleVariation_5
+type TItem_14 = 'TItem "031" "Nested Dependent Item" TRuleVariation_44
+type TItem_15 = 'TItem "032" "For Tracks Only" TRuleVariation_13
+type TItem_16 = 'TItem "040" "Spare Items" TRuleVariation_29
+type TItem_17 = 'TItem "051" "Element" TRuleVariation_5
+type TItem_18 = 'TItem "052" "Group" TRuleVariation_28
+type TItem_19 = 'TItem "053" "Extended With Trailing Fx" TRuleVariation_34
+type TItem_20 = 'TItem "054" "Extended Without Trailing Fx" TRuleVariation_35
+type TItem_21 = 'TItem "061" "Repetitive Regular" TRuleVariation_37
+type TItem_22 = 'TItem "062" "Repetitive With Group" TRuleVariation_38
+type TItem_23 = 'TItem "063" "Repetitive Fx" TRuleVariation_39
+type TItem_24 = 'TItem "071" "Explicit None" TRuleVariation_40
+type TItem_25 = 'TItem "072" "Explicit RE" TRuleVariation_41
+type TItem_26 = 'TItem "073" "Explicit SP" TRuleVariation_42
+type TItem_27 = 'TItem "091" "Compound Fspec With Fx" TRuleVariation_43
 type TItem_28 = 'TItem "101" "" TRuleVariation_5
 type TItem_29 = 'TItem "102" "" TRuleVariation_5
 type TItem_30 = 'TItem "201" "" TRuleVariation_13
@@ -220,7 +209,7 @@ type TItem_33 = 'TItem "B1" "Bds With Address" TRuleVariation_22
 type TItem_34 = 'TItem "B2" "Bds At Unknown Address" TRuleVariation_20
 type TItem_35 = 'TItem "B3" "Bds At Known Address" TRuleVariation_21
 type TItem_36 = 'TItem "CC" "Conflict Classification" TRuleVariation_33
-type TItem_37 = 'TItem "CP" "Conflict Properties Class" TRuleVariation_46
+type TItem_37 = 'TItem "CP" "Conflict Properties Class" TRuleVariation_45
 type TItem_38 = 'TItem "CS" "Conflict Severity" TRuleVariation_27
 type TItem_39 = 'TItem "I1" "" TRuleVariation_3
 type TItem_40 = 'TItem "I1" "" TRuleVariation_4
@@ -254,39 +243,39 @@ type TItem_67 = 'TItem "TID" "Identification of Conflict Categories Definition T
 type TItem_68 = 'TItem "TYP" "" TRuleVariation_1
 
 -- | Record set
-type TRecord_0 = 'Record '[ 'CompoundSubitem TItem_7]
-type TRecord_1 = 'Record '[ 'CompoundSubitem TItem_7, 'CompoundSubitem TItem_28, 'CompoundSubitem TItem_29]
-type TRecord_2 = 'Record '[ 'CompoundSubitem TItem_7, 'CompoundSubitem TItem_30, 'CompoundSubitem TItem_31]
-type TRecord_3 = 'Record '[ 'CompoundSubitem TItem_7, 'CompoundSubitem TItem_32]
-type TRecord_4 = 'Record '[ 'CompoundSubitem TItem_8, 'CompoundSubitem TItem_6, 'CompoundSubitem TItem_9, 'CompoundSubitem TItem_11, 'CompoundSubitem TItem_13, 'CompoundSubitem TItem_15, 'CompoundSubitem TItem_16, 'CompoundSubitem TItem_17, 'CompoundSubitem TItem_18, 'CompoundSubitem TItem_19, 'CompoundSubitem TItem_20, 'CompoundSubitem TItem_21, 'CompoundSubitem TItem_22, 'CompoundSubitem TItem_23, 'CompoundSubitem TItem_24, 'CompoundSubitem TItem_25, 'CompoundRFS, 'CompoundSubitem TItem_26, 'CompoundSubitem TItem_27]
-type TRecord_5 = 'Record '[ 'CompoundSubitem TItem_8, 'CompoundSubitem TItem_10, 'CompoundSubitem TItem_12]
-type TRecord_6 = 'Record '[ 'CompoundSubitem TItem_8, 'CompoundSubitem TItem_10, 'CompoundSubitem TItem_14]
+type TRecord_0 = 'Record '[ 'UapItem TItem_7]
+type TRecord_1 = 'Record '[ 'UapItem TItem_7, 'UapItem TItem_28, 'UapItem TItem_29]
+type TRecord_2 = 'Record '[ 'UapItem TItem_7, 'UapItem TItem_30, 'UapItem TItem_31]
+type TRecord_3 = 'Record '[ 'UapItem TItem_7, 'UapItem TItem_32]
+type TRecord_4 = 'Record '[ 'UapItem TItem_8, 'UapItem TItem_11, 'UapItem TItem_13]
+type TRecord_5 = 'Record '[ 'UapItem TItem_8, 'UapItem TItem_11, 'UapItem TItem_15]
+type TRecord_6 = 'Record '[ 'UapItem TItem_9, 'UapItem TItem_6, 'UapItem TItem_10, 'UapItem TItem_12, 'UapItem TItem_14, 'UapItem TItem_16, 'UapItem TItem_17, 'UapItem TItem_18, 'UapItem TItem_19, 'UapItem TItem_20, 'UapItem TItem_21, 'UapItem TItem_22, 'UapItem TItem_23, 'UapItem TItem_24, 'UapItem TItem_25, 'UapItem TItem_26, 'UapItemRFS, 'UapItem TItem_27]
 
 -- | Expansion set
-type TExpansion_0 = 'Expansion 1 '[ 'CompoundSubitem TItem_41, 'CompoundSubitem TItem_46]
-type TExpansion_1 = 'Expansion 2 '[ 'CompoundSubitem TItem_41, 'CompoundSpare, 'CompoundSpare, 'CompoundSubitem TItem_46, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSpare, 'CompoundSubitem TItem_51]
+type TExpansion_0 = 'Expansion 1 '[ 'Just TItem_41, 'Just TItem_46]
+type TExpansion_1 = 'Expansion 16 '[ 'Just TItem_41, 'Nothing, 'Nothing, 'Just TItem_46, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Just TItem_51]
 
 -- | Uap set
-type TUap_0 = 'TUapSingle TRecord_4
-type TUap_1 = 'TUapMultiple '[ '("plot", TRecord_5), '("track", TRecord_6)]
-type TUap_2 = 'TUapMultiple '[ '("uap1", TRecord_1), '("uap2", TRecord_2), '("uap3", TRecord_3), '("uap4", TRecord_0)]
+type TUap_0 = 'TUapSingle TRecord_6
+type TUap_1 = 'TUapMultiple '[ '( "plot", TRecord_4), '( "track", TRecord_5)]
+type TUap_2 = 'TUapMultiple '[ '( "uap1", TRecord_1), '( "uap2", TRecord_2), '( "uap3", TRecord_3), '( "uap4", TRecord_0)]
 
 -- | Asterix spec set
-type TAstSpec_0 = 'TCat 0 ('Edition 1 0) TUap_0
-type TAstSpec_1 = 'TRef 0 ('Edition 1 0) TExpansion_0
-type TAstSpec_2 = 'TRef 0 ('Edition 1 1) TExpansion_1
-type TAstSpec_3 = 'TCat 1 ('Edition 1 0) TUap_1
-type TAstSpec_4 = 'TCat 2 ('Edition 1 0) TUap_2
+type TAsterix_0 = 'TBasic 0 ('Edition 1 0) TUap_0
+type TAsterix_1 = 'TExpansion 0 ('Edition 1 0) TExpansion_0
+type TAsterix_2 = 'TExpansion 0 ('Edition 1 1) TExpansion_1
+type TAsterix_3 = 'TBasic 1 ('Edition 1 0) TUap_1
+type TAsterix_4 = 'TBasic 2 ('Edition 1 0) TUap_2
 
 -- | Aliases
-type Cat_000_1_0 = TAstSpec_0
-type Ref_000_1_0 = TAstSpec_1
-type Ref_000_1_1 = TAstSpec_2
-type Cat_001_1_0 = TAstSpec_3
-type Cat_002_1_0 = TAstSpec_4
+type Cat_000_1_0 = TAsterix_0
+type Ref_000_1_0 = TAsterix_1
+type Ref_000_1_1 = TAsterix_2
+type Cat_001_1_0 = TAsterix_3
+type Cat_002_1_0 = TAsterix_4
 
 -- | Manifest
-manifest :: [Some VAstSpec]
+manifest :: [Some VAsterix]
 manifest =
     [ schema @Cat_000_1_0
     , schema @Ref_000_1_0

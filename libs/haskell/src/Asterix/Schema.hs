@@ -351,21 +351,27 @@ instance t ~ StringType => IsSchema 'StringOctal t where schema = StringOctal
 instance t ~ Signedness => IsSchema 'Signed t where schema = Signed
 instance t ~ Signedness => IsSchema 'Unsigned t where schema = Unsigned
 
-{-
-TODO...
 -- Constrain
 
-instance t ~ Constrain => IsSchema 'EqualTo t where schema = EqualTo
-instance t ~ Constrain => IsSchema 'NotEqualTo t where schema = NotEqualTo
-instance t ~ Constrain => IsSchema 'GreaterThan t where schema = GreaterThan
-instance t ~ Constrain => IsSchema 'GreaterThanOrEqualTo t where schema = GreaterThanOrEqualTo
-instance t ~ Constrain => IsSchema 'LessThan t where schema = LessThan
-instance t ~ Constrain => IsSchema 'LessThanOrEqualTo t where schema = LessThanOrEqualTo
--}
+instance IsSchema t n => IsSchema ('EqualTo t) (Constrain n) where
+    schema = EqualTo (schema @t @n)
+instance IsSchema t n => IsSchema ('NotEqualTo t) (Constrain n) where
+    schema = NotEqualTo (schema @t @n)
+instance IsSchema t n => IsSchema ('GreaterThan t) (Constrain n) where
+    schema = GreaterThan (schema @t @n)
+instance IsSchema t n => IsSchema ('GreaterThanOrEqualTo t) (Constrain n) where
+    schema = GreaterThanOrEqualTo  (schema @t @n)
+instance IsSchema t n => IsSchema ('LessThan t) (Constrain n) where
+    schema = LessThan (schema @t @n)
+instance IsSchema t n => IsSchema ('LessThanOrEqualTo t) (Constrain n) where
+    schema = LessThanOrEqualTo  (schema @t @n)
 
 -- Explicit type
-instance t ~ ExplicitType => IsSchema 'ReservedExpansion t where schema = ReservedExpansion
-instance t ~ ExplicitType => IsSchema 'SpecialPurpose t where schema = SpecialPurpose
+
+instance t ~ ExplicitType => IsSchema 'ReservedExpansion t where
+    schema = ReservedExpansion
+instance t ~ ExplicitType => IsSchema 'SpecialPurpose t where
+    schema = SpecialPurpose
 
 -- Bds type
 
@@ -508,7 +514,6 @@ instance
 
 instance
     ( t ~ 'VTCompound
-    , IsSchema mn (Maybe Int)
     , IsSchema lst [Maybe (Some VItem)]
     ) => IsSchema ('TCompound lst) (VVariation t) where
     schema = VCompound (schema @lst)

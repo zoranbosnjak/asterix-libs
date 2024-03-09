@@ -22,7 +22,6 @@ import           Numeric                (showHex)
 
 import           Asterix.Indent
 import qualified Asterix.Specs          as A
-import           Fmt
 import           Struct
 
 {-
