@@ -7,69 +7,76 @@
 --    'len' is 2 octet long
 --    'records' represents the actual bytes of data
 
-{-# LANGUAGE LambdaCase #-}
-
 module Asterix.RawDatablock where
 
 import           Control.Monad
+import           Data.ByteString         (ByteString)
+import qualified Data.ByteString         as BS
+import           Data.ByteString.Builder (Builder)
+import qualified Data.ByteString.Builder as BB
+import           Data.List               (groupBy, sortOn)
+import           Data.Monoid
+import           Data.String
 import           Data.Word
-import           Data.List (sortOn, groupBy)
 
-import           Asterix.Parsing
-import           Bits
-
-newtype Datablock bs = Datablock { unDatablock :: bs }
+newtype Datablock t = Datablock { unDatablock :: t }
     deriving (Show, Eq, Functor)
 
-dbCategory :: Num b => Datablock Bits -> b
-dbCategory = Bits.getNumberAligned . Bits.take 8 . unDatablock
+deriving instance IsString (Datablock ByteString)
+deriving instance Semigroup (Datablock (Builder, Sum Int))
+deriving instance Monoid (Datablock (Builder, Sum Int))
 
-dbLength :: Num b => Datablock Bits -> b
-dbLength = Bits.getNumberAligned . Bits.take 16 . Bits.drop 8 . unDatablock
+bsToNum :: Num b => ByteString -> b
+bsToNum = BS.foldl' (\x w -> x + fromIntegral w) 0
 
-dbData :: Datablock Bits -> Bits
-dbData = Bits.drop 24 . unDatablock
+dbCategory :: Num b => Datablock ByteString -> b
+dbCategory = bsToNum . BS.take 1 . unDatablock
 
-parseDatablock :: Parsing (Datablock Bits)
-parseDatablock = do
-    s <- get
-    _cat <- fetchWord8
-    n <- (* 8) . Bits.getNumberAligned <$> fetch 16
-    when (bitLength s < n) $ throw Overflow
-    let (a,b) = Bits.splitAt n s
-    put b
-    pure $ Datablock a
+dbLength :: Num b => Datablock ByteString -> b
+dbLength = bsToNum . BS.take 2 . BS.drop 1 . unDatablock
 
-parseDatablocks :: Parsing [Datablock Bits]
-parseDatablocks = eof >>= \case
-    True -> pure []
-    False -> (:) <$> parseDatablock <*> parseDatablocks
+dbData :: Datablock ByteString -> ByteString
+dbData = BS.drop 3 . unDatablock
 
+parseDatablock :: ByteString -> Maybe (Datablock ByteString, ByteString)
+parseDatablock s = do
+    guard $ BS.length s >= 3
+    let n = bsToNum $ BS.take 2 $ BS.drop 1 s
+    guard $ BS.length s >= n
+    let (a, b) = BS.splitAt n s
+    pure (Datablock a, b)
 
-mkDatablock :: Integral cat => cat -> Builder -> Datablock Builder
-mkDatablock cat records = Datablock
-    ( word8 (fromIntegral cat)
-   <> word8 (fromIntegral n1)
-   <> word8 (fromIntegral n2)
-   <> records)
+parseDatablocks :: ByteString -> Maybe [Datablock ByteString]
+parseDatablocks s
+    | BS.null s = pure []
+    | otherwise = do
+          (db, s') <- parseDatablock s
+          (db :) <$> parseDatablocks s'
+
+mkDatablock :: Integral cat => cat -> (Builder, Sum Int) -> Datablock (Builder, Sum Int)
+mkDatablock cat (records, n) = Datablock
+    ( (BB.word8 (fromIntegral cat), 1)
+   <> (BB.word8 (fromIntegral n1), 1)
+   <> (BB.word8 (fromIntegral n2), 1)
+   <> (records, n))
   where
-    n = div (bitLength records) 8
-    (n1, n2) = divMod (n + 3) 256
+    (n1, n2) = divMod (getSum n + 3) 256
 
 -- | Group records of the same category together, optionally reorder datablocks.
-groupRecords :: Bool -> [Datablock Bits] -> [Datablock Builder]
+groupRecords :: Bool -> [Datablock ByteString] -> [Datablock (Builder, Sum Int)]
 groupRecords allowReorder = fmap combine . groupBy compareCats . shuffle
   where
-    shuffle :: [Datablock Bits] -> [Datablock Bits]
-    shuffle = case allowReorder of
-        False -> id
-        True -> sortOn (\x -> dbCategory x :: Int)
+    shuffle :: [Datablock ByteString] -> [Datablock ByteString]
+    shuffle
+        | allowReorder = sortOn (\x -> dbCategory x :: Int)
+        | otherwise = id
 
-    compareCats :: Datablock Bits -> Datablock Bits -> Bool
+    compareCats :: Datablock ByteString -> Datablock ByteString -> Bool
     compareCats db1 db2 = (dbCategory db1 :: Int) == dbCategory db2
 
-    combine :: [Datablock Bits] -> Datablock Builder
-    combine lst = mkDatablock cat (mconcat $ fmap (fromBits . dbData) lst)
+    combine :: [Datablock ByteString] -> Datablock (Builder, Sum Int)
+    combine lst = mkDatablock cat (mconcat $ fmap (mkBuilder . dbData) lst)
       where
         cat :: Word8
         cat = dbCategory $ Prelude.head lst
+        mkBuilder s = (BB.byteString s, Sum $ BS.length s)

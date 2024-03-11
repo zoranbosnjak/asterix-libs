@@ -16,6 +16,7 @@ module BitString where
 import           GHC.TypeLits
 import qualified Data.Bits
 import           Data.ByteString (ByteString)
+import           Data.Coerce
 import qualified Data.ByteString as BS
 import           Data.String
 import           Data.Word
@@ -32,10 +33,9 @@ data BitString (a :: Nat) (b :: Nat)
     = BitString !ByteString !BitOffset !BitSize
     deriving (Show)
 
-{-
 -- | Create BitString from ByteString.
 fromByteString :: ByteString -> BitString 0 0
-fromByteString s = BitString s 0 (BS.length s * 8)
+fromByteString s = BitString s 0 (coerce (BS.length s * 8))
 
 instance IsString (BitString 0 0) where
     fromString = fromByteString . fromString
@@ -43,12 +43,15 @@ instance IsString (BitString 0 0) where
 instance HasBitLength (BitString a b) where
     bitLength (BitString _bytes _offset n) = n
 
+{-
 instance HasBitLength (SomeA BitString) where
     bitLength (SomeA b) = bitLength b
 
 null :: HasBitLength t => t -> Bool
 null = (<= 0) . bitLength
+-}
 
+{-
 {- -- Better with typeclass with 'a' and 'b' statically known
 -- | Create BitString from unsigned integer.
 uintegerToBits :: Int -> Int -> Int -> BitString
