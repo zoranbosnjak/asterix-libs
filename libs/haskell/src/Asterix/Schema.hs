@@ -1,4 +1,5 @@
 -- | Asterix specifications schema in T-type and V-value level version
+-- Some types are preffixed with 'G', to avoid name conflict.
 -- with the conversions from types to values.
 
 {-# LANGUAGE AllowAmbiguousTypes  #-}
@@ -9,6 +10,7 @@
 
 module Asterix.Schema
 ( module Asterix.Schema
+, module GHC.TypeLits
 , Text
 , Some
 ) where
@@ -129,15 +131,15 @@ data UapItem t
     | UapItemRFS
     deriving (Show, Eq, Ord)
 
-newtype Record t = Record [UapItem t]
+newtype GRecord t = GRecord [UapItem t]
     deriving (Show, Eq, Ord)
 
-data Expansion n t = Expansion n [Maybe t]
+data GExpansion n t = GExpansion n [Maybe t]
     deriving (Show, Eq, Ord)
 
 data TUap
-    = TUapSingle (Record TItem)
-    | TUapMultiple [(Symbol, Record TItem)]
+    = TUapSingle (GRecord TItem)
+    | TUapMultiple [(Symbol, GRecord TItem)]
 
 data Edition a b = Edition a b
     deriving (Show, Eq, Ord)
@@ -145,7 +147,7 @@ data Edition a b = Edition a b
 -- | Asterix specification at type level
 data TAsterix
     = TBasic Nat (Edition Nat Nat) TUap
-    | TExpansion Nat (Edition Nat Nat) (Expansion Nat TItem)
+    | TExpansion Nat (Edition Nat Nat) (GExpansion Nat TItem)
 
 -- Value level definitions
 
@@ -206,9 +208,9 @@ data UapType
     deriving (Show, Eq, Ord)
 
 data VUap (t :: UapType) where
-    VUapSingle :: Record (Some VItem)
+    VUapSingle :: GRecord (Some VItem)
         -> VUap 'UTSingle
-    VUapMultiple :: [(Text, Record (Some VItem))]
+    VUapMultiple :: [(Text, GRecord (Some VItem))]
         -> VUap 'UTMultiple
 
 deriving instance Show (VUap t)
@@ -225,7 +227,7 @@ data AsterixType
 
 data VAsterix (t :: AsterixType) where
     VBasic :: CatNum -> Edition Int Int -> Some VUap -> VAsterix 'AsterixBasic
-    VExpansion :: CatNum -> Edition Int Int -> Expansion Int (Some VItem) -> VAsterix 'AsterixExpansion
+    VExpansion :: CatNum -> Edition Int Int -> GExpansion Int (Some VItem) -> VAsterix 'AsterixExpansion
 
 deriving instance Show (VAsterix t)
 
@@ -538,29 +540,29 @@ instance
     schema = VItem (schema @name) (schema @title)
         (mkSome $ schema @rule @(VRule (Some VVariation) rt))
 
--- Record TItem -> Record (Some VItem)
+-- GRecord TItem -> GRecord (Some VItem)
 
 instance
     ( t ~ Some VItem
     , IsSchema k [UapItem (Some VItem)]
-    ) => IsSchema ('Record k) (Record t) where
-    schema = Record (schema @k)
+    ) => IsSchema ('GRecord k) (GRecord t) where
+    schema = GRecord (schema @k)
 
--- Expansion TItem -> Expansion (Some VItem)
+-- GExpansion TItem -> GExpansion (Some VItem)
 
 instance
     ( t ~ Some VItem
     , IsSchema n Int
     , IsSchema k [Maybe (Some VItem)]
     , Length k <= Times 8 n
-    ) => IsSchema ('Expansion n k) (Expansion Int t) where
-    schema = Expansion (schema @n) (schema @k)
+    ) => IsSchema ('GExpansion n k) (GExpansion Int t) where
+    schema = GExpansion (schema @n) (schema @k)
 
 -- TUap -> VUap (Single)
 
 instance
     ( t ~ 'UTSingle
-    , IsSchema record (Record (Some VItem))
+    , IsSchema record (GRecord (Some VItem))
     ) => IsSchema ('TUapSingle record) (VUap t) where
     schema = VUapSingle (schema @record)
 
@@ -568,7 +570,7 @@ instance
 
 instance
     ( t ~ 'UTMultiple
-    , IsSchema lst [(Text, Record (Some VItem))]
+    , IsSchema lst [(Text, GRecord (Some VItem))]
     ) => IsSchema ('TUapMultiple lst) (VUap t) where
     schema = VUapMultiple (schema @lst)
 
@@ -591,12 +593,12 @@ instance
     ) => IsSchema ('TBasic cat ed uap) (VAsterix t) where
     schema = VBasic (schema @cat) (schema @ed) (mkSome $ schema @uap @(VUap u))
 
--- TAsterix -> VAsterix (Expansion)
+-- TAsterix -> VAsterix (GExpansion)
 
 instance
     ( t ~ 'AsterixExpansion
     , IsSchema ed (Edition Int Int)
     , IsSchema cat CatNum
-    , IsSchema expansion (Expansion Int (Some VItem))
+    , IsSchema expansion (GExpansion Int (Some VItem))
     ) => IsSchema ('TExpansion cat ed expansion) (VAsterix t) where
     schema = VExpansion (schema @cat) (schema @ed) (schema @expansion)

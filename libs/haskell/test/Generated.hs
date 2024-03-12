@@ -243,17 +243,17 @@ type TItem_67 = 'TItem "TID" "Identification of Conflict Categories Definition T
 type TItem_68 = 'TItem "TYP" "" TRuleVariation_1
 
 -- | Record set
-type TRecord_0 = 'Record '[ 'UapItem TItem_7]
-type TRecord_1 = 'Record '[ 'UapItem TItem_7, 'UapItem TItem_28, 'UapItem TItem_29]
-type TRecord_2 = 'Record '[ 'UapItem TItem_7, 'UapItem TItem_30, 'UapItem TItem_31]
-type TRecord_3 = 'Record '[ 'UapItem TItem_7, 'UapItem TItem_32]
-type TRecord_4 = 'Record '[ 'UapItem TItem_8, 'UapItem TItem_11, 'UapItem TItem_13]
-type TRecord_5 = 'Record '[ 'UapItem TItem_8, 'UapItem TItem_11, 'UapItem TItem_15]
-type TRecord_6 = 'Record '[ 'UapItem TItem_9, 'UapItem TItem_6, 'UapItem TItem_10, 'UapItem TItem_12, 'UapItem TItem_14, 'UapItem TItem_16, 'UapItem TItem_17, 'UapItem TItem_18, 'UapItem TItem_19, 'UapItem TItem_20, 'UapItem TItem_21, 'UapItem TItem_22, 'UapItem TItem_23, 'UapItem TItem_24, 'UapItem TItem_25, 'UapItem TItem_26, 'UapItemRFS, 'UapItem TItem_27]
+type TRecord_0 = 'GRecord '[ 'UapItem TItem_7]
+type TRecord_1 = 'GRecord '[ 'UapItem TItem_7, 'UapItem TItem_28, 'UapItem TItem_29]
+type TRecord_2 = 'GRecord '[ 'UapItem TItem_7, 'UapItem TItem_30, 'UapItem TItem_31]
+type TRecord_3 = 'GRecord '[ 'UapItem TItem_7, 'UapItem TItem_32]
+type TRecord_4 = 'GRecord '[ 'UapItem TItem_8, 'UapItem TItem_11, 'UapItem TItem_13]
+type TRecord_5 = 'GRecord '[ 'UapItem TItem_8, 'UapItem TItem_11, 'UapItem TItem_15]
+type TRecord_6 = 'GRecord '[ 'UapItem TItem_9, 'UapItem TItem_6, 'UapItem TItem_10, 'UapItem TItem_12, 'UapItem TItem_14, 'UapItem TItem_16, 'UapItem TItem_17, 'UapItem TItem_18, 'UapItem TItem_19, 'UapItem TItem_20, 'UapItem TItem_21, 'UapItem TItem_22, 'UapItem TItem_23, 'UapItem TItem_24, 'UapItem TItem_25, 'UapItem TItem_26, 'UapItemRFS, 'UapItem TItem_27]
 
 -- | Expansion set
-type TExpansion_0 = 'Expansion 1 '[ 'Just TItem_41, 'Just TItem_46]
-type TExpansion_1 = 'Expansion 16 '[ 'Just TItem_41, 'Nothing, 'Nothing, 'Just TItem_46, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Just TItem_51]
+type TExpansion_0 = 'GExpansion 1 '[ 'Just TItem_41, 'Just TItem_46]
+type TExpansion_1 = 'GExpansion 16 '[ 'Just TItem_41, 'Nothing, 'Nothing, 'Just TItem_46, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Nothing, 'Just TItem_51]
 
 -- | Uap set
 type TUap_0 = 'TUapSingle TRecord_6

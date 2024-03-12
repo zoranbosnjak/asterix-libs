@@ -207,11 +207,11 @@ instance Convert (Augmented UapItem) where
         refItem = Symbol . refName "Item" (dbItem db)
 
 instance Convert (Augmented Record) where
-    convert (Augmented db (Record lst)) = TProduct "'Record"
+    convert (Augmented db (Record lst)) = TProduct "'GRecord"
         [ convert $ fmap (Augmented db) lst]
 
 instance Convert (Augmented Expansion) where
-    convert (Augmented db (Expansion n lst)) = TProduct "'Expansion"
+    convert (Augmented db (Expansion n lst)) = TProduct "'GExpansion"
         [ convert (coerce n :: Int)
         , convert $ fmap (fmap refItem) lst
         ]
