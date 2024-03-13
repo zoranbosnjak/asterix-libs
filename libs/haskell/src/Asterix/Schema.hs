@@ -10,6 +10,7 @@
 
 module Asterix.Schema
 ( module Asterix.Schema
+, module Alignment
 , module GHC.TypeLits
 , Text
 , Some
@@ -137,9 +138,11 @@ newtype GRecord t = GRecord [UapItem t]
 data GExpansion n t = GExpansion n [Maybe t]
     deriving (Show, Eq, Ord)
 
+type TRecord = GRecord TItem
+
 data TUap
-    = TUapSingle (GRecord TItem)
-    | TUapMultiple [(Symbol, GRecord TItem)]
+    = TUapSingle TRecord
+    | TUapMultiple [(Symbol, TRecord)]
 
 data Edition a b = Edition a b
     deriving (Show, Eq, Ord)
@@ -207,10 +210,12 @@ data UapType
     | UTMultiple
     deriving (Show, Eq, Ord)
 
+type VRecord = GRecord (Some VItem)
+
 data VUap (t :: UapType) where
-    VUapSingle :: GRecord (Some VItem)
+    VUapSingle :: VRecord
         -> VUap 'UTSingle
-    VUapMultiple :: [(Text, GRecord (Some VItem))]
+    VUapMultiple :: [(Text, VRecord)]
         -> VUap 'UTMultiple
 
 deriving instance Show (VUap t)
@@ -540,7 +545,7 @@ instance
     schema = VItem (schema @name) (schema @title)
         (mkSome $ schema @rule @(VRule (Some VVariation) rt))
 
--- GRecord TItem -> GRecord (Some VItem)
+-- TRecord -> VRecord
 
 instance
     ( t ~ Some VItem
