@@ -1,18 +1,22 @@
-
-{-# LANGUAGE AllowAmbiguousTypes #-}
-{-# LANGUAGE DataKinds           #-}
+{-# LANGUAGE DataKinds            #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 module Asterix.Schema
 ( module Asterix.Schema
 , module GHC.TypeLits
+, module Data.Proxy
+, module Data.Coerce
+, module Data.Reflection
+, module Data.Some
 ) where
 
+import           Data.Coerce
+import           Data.Proxy
+import           Data.Reflection
 import           Data.Some
-import           Data.Text    (Text)
+import           Data.String
+import           Data.Text       (Text)
 import           GHC.TypeLits
-
-class IsSchema k t where
-    schema :: t
 
 newtype BitOffset = BitOffset Int
     deriving (Show)
@@ -47,7 +51,7 @@ data TVariation
 
 data TItem
     = TSpare
-        Nat -- bit offsetMod
+        Nat -- bit offsetMod8
         Nat -- bit length
     | TItem
         Symbol -- name
@@ -79,3 +83,34 @@ data ItemType
 data VItem (t :: ItemType) where
     VSpare :: BitOffsetMod8 -> BitSize -> VItem 'ITSpare
     VItem  :: Text -> Text -> Some VVariation -> VItem 'ITItem
+
+instance
+    ( KnownNat o
+    , KnownNat n
+    ) => Reifies ('TElement o n) (VVariation 'VTElement) where
+    reflect _ = VElement
+        (BitOffsetMod8 $ fromIntegral $ reflect @o Proxy)
+        (BitSize $ fromIntegral $ reflect @n Proxy)
+
+instance
+    ( Reifies ts [Some VItem]
+    ) => Reifies ('TGroup ts) (VVariation 'VTGroup) where
+    reflect _ = VGroup (reflect @ts Proxy)
+
+instance
+    ( KnownNat o
+    , KnownNat n
+    ) => Reifies ('TSpare o n) (VItem 'ITSpare) where
+    reflect _ = VSpare
+        (BitOffsetMod8 $ fromIntegral $ reflect @o Proxy)
+        (BitSize $ fromIntegral $ reflect @n Proxy)
+
+instance
+    ( KnownSymbol name
+    , KnownSymbol title
+    , Reifies var (VVariation t)
+    ) => Reifies ('TItem name title var) (VItem 'ITItem) where
+    reflect _ = VItem
+        (fromString $ reflect @name Proxy)
+        (fromString $ reflect @title Proxy)
+        (mkSome $ reflect @var Proxy)

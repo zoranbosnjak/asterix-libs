@@ -30,6 +30,7 @@ common base
       , text
       , transformers
       , some
+      , reflection
 
 library
     import:           base
