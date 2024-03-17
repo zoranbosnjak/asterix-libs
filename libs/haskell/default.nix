@@ -20,6 +20,7 @@ let
   haskellPackages = pkgs.haskellPackages.override {
     overrides = haskellPackagesNew: haskellPackagesOld: rec {
       aspecs = haskellPackagesNew.callPackage "${aspecsDir}/tools" {packages=pkgs; inShell=false;};
+      reflection = haskellPackagesNew.callPackage ../../nix/reflection.nix { };
       # haskellPackage1 = haskellPackagesNew.callPackage ./nix/myPackage1.nix { };
       # haskellPackage2 = haskellPackagesNew.callPackage ./nix/myPackage2.nix { };
       # ...

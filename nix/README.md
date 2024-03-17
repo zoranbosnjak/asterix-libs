@@ -21,3 +21,12 @@ nix-prefetch-git https://github.com/zoranbosnjak/asterix-specs.git > nix/aspecs.
 # or
 nix-prefetch-git [--rev some-rev] https://github.com/zoranbosnjak/asterix-specs.git > nix/aspecs.json
 ```
+
+## haskell packages to nix
+
+`cabal2nix` can be used instead of `nix-prefetch-git`, to get a `.nix`
+file directly. For example.
+
+```bash
+cabal2nix --revision {gitrev} https://github.com/user/proj.git > nix/proj.nix
+```
