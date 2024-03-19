@@ -1,5 +1,4 @@
 
-{-# OPTIONS_GHC -fno-warn-orphans #-}
 {-# LANGUAGE DataKinds            #-}
 {-# LANGUAGE UndecidableInstances #-}
 
@@ -20,14 +19,19 @@ import           Data.String
 import           Data.Text       (Text)
 import           GHC.TypeLits
 
-newtype BitOffset = BitOffset Int
-    deriving (Show)
+internalError :: a
+internalError = error "internal error"
 
+-- | Bit offset within one octet [0..7], where the number
+-- represents actual number of bits of the left shift.
 newtype BitOffsetMod8 = BitOffsetMod8 Int
-    deriving (Show)
+    deriving (Show, Num)
+
+bitOffsetMod8 :: Int -> BitOffsetMod8
+bitOffsetMod8 = BitOffsetMod8 . flip mod 8
 
 newtype BitSize = BitSize Int
-    deriving (Show)
+    deriving (Show, Num)
 
 data TVariation
     = TElement
@@ -38,27 +42,39 @@ data TVariation
         [TItem]
     -- ... TODO
     | TCompound
-        [Maybe TItem] -- Nothing = Spare bit
+        [Maybe TNonSpare] -- Nothing = Spare bit
+
+data TNonSpare = TNonSpare
+    Symbol -- name
+    Symbol -- title
+    TVariation -- TODO (TRule TVariation)
 
 data TItem
     = TSpare
         Nat -- bit offsetMod8
         Nat -- bit length
     | TItem
-        Symbol -- name
-        Symbol -- title
-        TVariation -- TODO (TRule TVariation)
+        TNonSpare
+
+data HVariation
+    = HElement
+    | HGroup
+    -- ... TODO
+    | HCompound
 
 data VVariation
     = VElement BitOffsetMod8 BitSize
     | VGroup [VItem]
     -- ... TODO
-    | VCompound [Maybe VItem]
+    | VCompound [Maybe VNonSpare]
+    deriving (Show)
+
+data VNonSpare = VNonSpare Text Text VVariation
     deriving (Show)
 
 data VItem
     = VSpare BitOffsetMod8 BitSize
-    | VItem Text Text VVariation
+    | VItem VNonSpare
     deriving (Show)
 
 instance
@@ -69,43 +85,50 @@ instance
         (BitOffsetMod8 $ fromIntegral $ reflect @o Proxy)
         (BitSize $ fromIntegral $ reflect @n Proxy)
 
-instance Reifies '[] [VItem] where
+instance Reifies '( 'HGroup, '[]) [VItem] where
     reflect _ = []
 
 instance
     ( Reifies t VItem
-    , Reifies ts [VItem]
-    ) => Reifies (t ': ts) [VItem] where
-    reflect _ = reflect @t Proxy : reflect @ts Proxy
-
-instance Reifies 'Nothing (Maybe VItem) where
-    reflect _ = Nothing
+    , Reifies '( 'HGroup, ts) [VItem]
+    ) => Reifies '( 'HGroup, t ': ts) [VItem] where
+    reflect _ = reflect @t Proxy : reflect @'( 'HGroup, ts) Proxy
 
 instance
-    ( Reifies t VItem
-    ) => Reifies ('Just t) (Maybe VItem) where
-    reflect _ = Just (reflect @t Proxy)
-
-instance Reifies '(Maybe, '[]) [Maybe VItem] where
-    reflect _ = []
-
-instance
-    ( Reifies t (Maybe VItem)
-    , Reifies '(Maybe, ts) [Maybe VItem]
-    ) => Reifies '(Maybe, t ': ts) [Maybe VItem] where
-    reflect _ = reflect @t Proxy : reflect @'(Maybe, ts) Proxy
-
-instance
-    ( Reifies ts [VItem]
+    ( Reifies '( 'HGroup, ts) [VItem]
     ) => Reifies ('TGroup ts) VVariation where
-    reflect _ = VGroup (reflect @ts Proxy)
+    reflect _ = VGroup (reflect @'( 'HGroup, ts) Proxy)
 
--- ... TODO other T*...
+-- TODO: Other variations
+
+instance Reifies '( 'HCompound, '[]) [Maybe VNonSpare] where
+    reflect _ = []
 
 instance
-    ( Reifies '(Maybe, ts) [Maybe VItem]
+    ( Reifies '( 'HCompound, ts) [Maybe VNonSpare]
+    ) => Reifies '( 'HCompound, 'Nothing ': ts) [Maybe VNonSpare] where
+    reflect _ = Nothing : reflect @'( 'HCompound, ts) Proxy
+
+instance
+    ( Reifies t VNonSpare
+    , Reifies '( 'HCompound, ts) [Maybe VNonSpare]
+    ) => Reifies '( 'HCompound, 'Just t ': ts) [Maybe VNonSpare] where
+    reflect _ = Just (reflect @t Proxy) : reflect @'( 'HCompound, ts) Proxy
+
+instance
+    ( Reifies '( 'HCompound, ts) [Maybe VNonSpare]
     ) => Reifies ('TCompound ts) VVariation where
-    reflect _ = VCompound (reflect @'(Maybe, ts) Proxy)
+    reflect _ = VCompound (reflect @'(HCompound, ts) Proxy)
+
+instance
+    ( KnownSymbol name
+    , KnownSymbol title
+    , Reifies var VVariation
+    ) => Reifies ('TNonSpare name title var) VNonSpare where
+    reflect _ = VNonSpare
+        (fromString $ reflect @name Proxy)
+        (fromString $ reflect @title Proxy)
+        (reflect @var Proxy)
 
 instance
     ( KnownNat o
@@ -116,11 +139,6 @@ instance
         (BitSize $ fromIntegral $ reflect @n Proxy)
 
 instance
-    ( KnownSymbol name
-    , KnownSymbol title
-    , Reifies var VVariation
-    ) => Reifies ('TItem name title var) VItem where
-    reflect _ = VItem
-        (fromString $ reflect @name Proxy)
-        (fromString $ reflect @title Proxy)
-        (reflect @var Proxy)
+    ( Reifies nsp VNonSpare
+    ) => Reifies ('TItem nsp) VItem where
+    reflect _ = VItem (reflect @nsp Proxy)
