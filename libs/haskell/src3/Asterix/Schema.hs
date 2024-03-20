@@ -10,6 +10,7 @@ module Asterix.Schema
 , module Data.Coerce
 , module Data.Reflection
 , module Data.Some
+, module Data.Kind
 ) where
 
 import           Data.Coerce
@@ -18,6 +19,7 @@ import           Data.Reflection
 import           Data.Some
 import           Data.String
 import           Data.Text       (Text)
+import           Data.Kind
 import           GHC.TypeLits
 
 internalError :: a
