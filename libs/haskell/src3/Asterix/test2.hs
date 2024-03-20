@@ -33,13 +33,16 @@ mkItem p = case reflect p of
 main :: IO ()
 main = do
     print (mkItem (Proxy @TItem_0))
-    reify (head manifest) (print . mkItem)
+    reify (head items) (print . mkItem)
 
     print (mkItem (Proxy @TItem_1))
-    reify (manifest !! 1) (print . mkItem)
+    reify (items !! 1) (print . mkItem)
 
     print (mkItem (Proxy @TItem_2))
-    reify (manifest !! 2) (print . mkItem)
+    reify (items !! 2) (print . mkItem)
 
     print (mkItem (Proxy @TItem_3))
-    reify (manifest !! 3) (print . mkItem)
+    reify (items !! 3) (print . mkItem)
+
+    print (mkItem (Proxy @TItem_4))
+    reify (items !! 4) (print . mkItem)

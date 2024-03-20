@@ -1,6 +1,7 @@
 
 {-# LANGUAGE DataKinds            #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE TypeFamilies #-}
 
 module Asterix.Schema
 ( module Asterix.Schema
@@ -21,6 +22,12 @@ import           GHC.TypeLits
 
 internalError :: a
 internalError = error "internal error"
+
+class Alignment t where
+    type A t :: Nat
+    type B t :: Nat
+
+type Aligned t = (A t ~ 0, B t ~ 0)
 
 -- | Bit offset within one octet [0..7], where the number
 -- represents actual number of bits of the left shift.
@@ -77,6 +84,36 @@ data VItem
     | VItem VNonSpare
     deriving (Show)
 
+-- Alignment
+
+instance Alignment ('TElement o n) where
+    type A ('TElement o n) = o
+    type B ('TElement o n) = Mod (o+n) 8
+
+instance Alignment ('TGroup '[]) where
+    type A ('TGroup '[]) = 0
+    type B ('TGroup '[]) = 0
+
+instance
+    ( B t ~ A ('TGroup ts)
+    ) => Alignment ('TGroup (t ': ts)) where
+    type A ('TGroup (t ': ts)) = A t
+    type B ('TGroup (t ': ts)) = B ('TGroup ts)
+
+instance Alignment ('TNonSpare name title var) where
+    type A ('TNonSpare name title var) = A var
+    type B ('TNonSpare name title var) = B var
+
+instance Alignment ('TSpare o n) where
+    type A ('TSpare o n) = o
+    type B ('TSpare o n) = Mod (o+n) 8
+
+instance Alignment ('TItem nsp) where
+    type A ('TItem nsp) = A nsp
+    type B ('TItem nsp) = B nsp
+
+-- Type to term conversion
+
 instance
     ( KnownNat o
     , KnownNat n
@@ -111,6 +148,7 @@ instance
 
 instance
     ( Reifies t VNonSpare
+    , Aligned t
     , Reifies '( 'HCompound, ts) [Maybe VNonSpare]
     ) => Reifies '( 'HCompound, 'Just t ': ts) [Maybe VNonSpare] where
     reflect _ = Just (reflect @t Proxy) : reflect @'( 'HCompound, ts) Proxy
