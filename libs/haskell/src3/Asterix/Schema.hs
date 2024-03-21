@@ -1,7 +1,12 @@
-
 {-# LANGUAGE DataKinds            #-}
 {-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE TypeFamilies #-}
+
+-- |
+-- This module is using 'Data.Reflection' from 'reflection' package.
+-- At the time of writing, it requires a 'patched' version of the package,
+-- available here: https://github.com/zoranbosnjak/reflection/tree/T34
+-- See also: https://github.com/ekmett/reflection/issues/34
 
 module Asterix.Schema
 ( module Asterix.Schema
@@ -22,9 +27,12 @@ import           Data.Text       (Text)
 import           Data.Kind
 import           GHC.TypeLits
 
-internalError :: a
-internalError = error "internal error"
-
+-- | We don't statically know exact bit size for every type in Asterix,
+-- however we know the byte alignment for every type. For example: The following
+-- item when encoded is 12-bits long: .....ddd dddddddd d.......
+-- The alignment in this case is A=3, B=7 and 3 bytes are used for encoding.
+-- Another example item with the same alignment (4 bits long, 2 bytes required)
+-- is: .....ddd d.......
 class Alignment t where
     type A t :: Nat
     type B t :: Nat
@@ -42,22 +50,23 @@ bitOffsetMod8 = BitOffsetMod8 . flip mod 8
 newtype BitSize = BitSize Int
     deriving (Show, Num)
 
+-- | Used at type level
 data TVariation
     = TElement
         Nat -- bit offsetMod
         Nat -- bit length
-        -- TODO (TRule TContent)
     | TGroup
         [TItem]
-    -- ... TODO
     | TCompound
         [Maybe TNonSpare] -- Nothing = Spare bit
 
+-- | Used at type level
 data TNonSpare = TNonSpare
     Symbol -- name
     Symbol -- title
-    TVariation -- TODO (TRule TVariation)
+    TVariation
 
+-- | Used at type level
 data TItem
     = TSpare
         Nat -- bit offsetMod8
@@ -65,28 +74,30 @@ data TItem
     | TItem
         TNonSpare
 
+-- | Helper structure, used at type level to avoid instance conflicts
 data HVariation
     = HElement
     | HGroup
-    -- ... TODO
     | HCompound
 
+-- | Term level structure
 data VVariation
     = VElement BitOffsetMod8 BitSize
     | VGroup [VItem]
-    -- ... TODO
     | VCompound [Maybe VNonSpare]
     deriving (Show)
 
+-- | Term level structure
 data VNonSpare = VNonSpare Text Text VVariation
     deriving (Show)
 
+-- | Term level structure
 data VItem
     = VSpare BitOffsetMod8 BitSize
     | VItem VNonSpare
     deriving (Show)
 
--- Alignment
+-- Alignment instances
 
 instance Alignment ('TElement o n) where
     type A ('TElement o n) = o
@@ -97,7 +108,7 @@ instance Alignment ('TGroup '[]) where
     type B ('TGroup '[]) = 0
 
 instance
-    ( B t ~ A ('TGroup ts)
+    ( B t ~ A ('TGroup ts) -- Alignment within group must match
     ) => Alignment ('TGroup (t ': ts)) where
     type A ('TGroup (t ': ts)) = A t
     type B ('TGroup (t ': ts)) = B ('TGroup ts)
@@ -137,8 +148,6 @@ instance
     ( Reifies '( 'HGroup, ts) [VItem]
     ) => Reifies ('TGroup ts) VVariation where
     reflect _ = VGroup (reflect @'( 'HGroup, ts) Proxy)
-
--- TODO: Other variations
 
 instance Reifies '( 'HCompound, '[]) [Maybe VNonSpare] where
     reflect _ = []
