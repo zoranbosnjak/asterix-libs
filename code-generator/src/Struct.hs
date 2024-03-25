@@ -46,15 +46,16 @@ octetOffset n = OctetOffset (mod n 8)
 
 -- | Reuse structures from Asterix.Specs
 type Variation = A.Variation OctetOffset
+type NonSpare = A.NonSpare OctetOffset
 type Item = A.Item OctetOffset
-type UapItem = A.UapItem Item
+type UapItem = A.UapItem NonSpare
 
 newtype Record = Record [UapItem]
     deriving (Generic, Eq, Ord, Show)
 
 type Uap = A.Uap Record
 
-data Expansion = Expansion A.ByteSize [Maybe Item]
+data Expansion = Expansion A.ByteSize [Maybe NonSpare]
     deriving (Generic, Eq, Ord, Show)
 
 data Asterix
@@ -136,11 +137,23 @@ deriveVariationM = \case
             byteAligned "compound (pre subitem)"
             result <- case i of
                 Nothing   -> pure Nothing
-                Just item -> Just <$> deriveItemM item
+                Just item -> Just <$> deriveNonSpareM item
             byteAligned "compound (post subitem)"
             pure result
         byteAligned "compound (post)"
         pure $ A.Compound items
+
+-- A.Item name title rule doc -> do
+deriveNonSpareM  :: A.NonSpare o -> State OctetOffset NonSpare
+deriveNonSpareM (A.NonSpare name title rule doc) = do
+    -- We need to traverse the 'rule' and derive each variation inside
+    -- the rule. But we also need to reset the offset back to the
+    -- starting point on each step, such that the offset is eventually
+    -- moved forward only once.
+    o <- get -- this is starting offset
+    let f x = put o >> deriveVariationM x -- reset offset on each step
+    rule' <- traverse f rule
+    pure $ A.NonSpare name title rule' doc
 
 -- | Derive Item in State context.
 deriveItemM :: A.Item o -> State OctetOffset Item
@@ -149,18 +162,10 @@ deriveItemM = \case
         o <- get
         modify (<> octetOffset n)
         pure $ A.Spare o (A.BitSize n)
-    A.Item name title rule doc -> do
-        -- We need to traverse the 'rule' and derive each variation inside
-        -- the rule. But we also need to reset the offset back to the
-        -- starting point on each step, such that the offset is eventually
-        -- moved forward only once.
-        o <- get -- this is starting offset
-        let f x = put o >> deriveVariationM x -- reset offset on each step
-        rule' <- traverse f rule
-        pure $ A.Item name title rule' doc
+    A.Item nsp -> A.Item <$> deriveNonSpareM nsp
 
-deriveItem :: A.Item o -> Item
-deriveItem i = evalState (deriveItemM i) mempty
+deriveNonSpare :: A.NonSpare o -> NonSpare
+deriveNonSpare i = evalState (deriveNonSpareM i) mempty
 
 deriveAsterix :: A.Asterix -> Asterix
 deriveAsterix = \case
@@ -171,15 +176,14 @@ deriveAsterix = \case
   where
     deriveUap catalogue = fmap getRecord
       where
-        items :: [Item]
-        items = fmap deriveItem catalogue
-        getItem :: A.ItemName -> Item
+        items :: [NonSpare]
+        items = fmap deriveNonSpare catalogue
+        getItem :: A.ItemName -> NonSpare
         getItem name = head $ flip mapMaybe items $ \i -> case i of
-            A.Spare _ _        -> Nothing
-            A.Item iName _ _ _ -> bool Nothing (Just i) (iName == name)
+            A.NonSpare iName _ _ _ -> bool Nothing (Just i) (iName == name)
         getRecord :: [A.UapItem A.ItemName] -> Record
         getRecord lst = Record $ fmap (fmap getItem) lst
-    deriveExpansion n items = Expansion n (fmap (fmap deriveItem) items)
+    deriveExpansion n items = Expansion n (fmap (fmap deriveNonSpare) items)
 
 -- | Database of all distinct asterix components. It's parametrized over some
 -- container, to be used in different contexts.
@@ -188,6 +192,7 @@ data AsterixDb f = AsterixDb
     , dbRuleContent   :: f (A.Rule A.Content)
     , dbVariation     :: f Variation
     , dbRuleVariation :: f (A.Rule Variation)
+    , dbNonSpare      :: f NonSpare
     , dbItem          :: f Item
     , dbRecord        :: f Record
     , dbExpansion     :: f Expansion
@@ -215,6 +220,9 @@ lVariation = FocusDb dbVariation (\db x -> db {dbVariation = x})
 
 lRuleVariation :: FocusDb f (A.Rule Variation)
 lRuleVariation = FocusDb dbRuleVariation (\db x -> db {dbRuleVariation = x})
+
+lNonSpare :: FocusDb f NonSpare
+lNonSpare = FocusDb dbNonSpare (\db x -> db {dbNonSpare = x})
 
 lItem :: FocusDb f Item
 lItem = FocusDb dbItem (\db x -> db {dbItem = x})
@@ -255,24 +263,29 @@ saveVariation var = do
         A.Extended lst       -> mapM_ saveItem (catMaybes lst)
         A.Repetitive _t v    -> saveVariation v
         A.Explicit _t        -> pure ()
-        A.Compound lst       -> mapM_ saveItem (catMaybes lst)
+        A.Compound lst       -> mapM_ saveNonSpare (catMaybes lst)
+
+saveNonSpare :: NonSpare -> State (AsterixDb Set) ()
+saveNonSpare nsp@(A.NonSpare _name _title rule _doc) = do
+    dbInsert lNonSpare nsp
+    saveRule saveVariation lRuleVariation rule
 
 saveItem :: Item -> State (AsterixDb Set) ()
 saveItem item = do
     dbInsert lItem item
     case item of
         A.Spare _o _n           -> pure ()
-        A.Item _name _title rule _doc -> saveRule saveVariation lRuleVariation rule
+        A.Item nsp -> saveNonSpare nsp
 
 saveRecord :: Record -> State (AsterixDb Set) ()
 saveRecord x@(Record lst) = do
     dbInsert lRecord x
-    mapM_ (mapM_ saveItem) lst
+    mapM_ (mapM_ saveNonSpare) lst
 
 saveExpansion :: Expansion -> State (AsterixDb Set) ()
 saveExpansion x@(Expansion _n lst) = do
     dbInsert lExpansion x
-    mapM_ (mapM_ saveItem) lst
+    mapM_ (mapM_ saveNonSpare) lst
 
 saveUap :: Uap -> State (AsterixDb Set) ()
 saveUap uap = do
@@ -289,7 +302,7 @@ saveAsterix asterix = do
 -- | Create asterix specs database
 asterixDb :: Foldable t => t Asterix -> AsterixDb Set
 asterixDb lst = execState (mapM_ saveAsterix lst)
-    (AsterixDb mempty mempty mempty mempty mempty mempty mempty mempty mempty)
+    (AsterixDb mempty mempty mempty mempty mempty mempty mempty mempty mempty mempty)
 
 -- | Enumerated distinct values.
 newtype EMap a = EMap { unEMap :: Map a Int }
@@ -301,6 +314,7 @@ enumDb db = AsterixDb
     (f dbRuleContent)
     (f dbVariation)
     (f dbRuleVariation)
+    (f dbNonSpare)
     (f dbItem)
     (f dbRecord)
     (f dbExpansion)
@@ -319,19 +333,28 @@ enumList = Map.toList . unEMap
 
 -- | Variations and Items are defined by mutual recursion.
 -- Reorder variations and items, such that any var/item is defined before being referenced.
-flattenVariationsAndItems :: (Set Variation, Set Item) -> [Either Variation Item]
-flattenVariationsAndItems = snd . evalRWS go ()
+
+data VarNonItem
+    = EVariation Variation
+    | ENonSpare NonSpare
+    | EItem Item
+
+flattenVarNonItem :: (Set Variation, Set NonSpare, Set Item) -> [VarNonItem]
+flattenVarNonItem = snd . evalRWS go ()
   where
     go = do
-        (vars, items) <- get
+        (vars, nsps, items) <- get
         case Set.lookupMin vars of
             Just var -> goVar var >> go
-            Nothing -> case Set.lookupMin items of
-                Just item -> goItem item >> go
-                Nothing   -> pure ()
+            Nothing -> case Set.lookupMin nsps of
+                Just nsp -> goNsp nsp >> go
+                Nothing -> case Set.lookupMin items of
+                    Just item -> goItem item >> go
+                    Nothing   -> pure ()
+
     goVar var = do
-        (vars, items) <- get
-        put (Set.delete var vars, items)
+        (vars, nsps, items) <- get
+        put (Set.delete var vars, nsps, items)
         when (Set.member var vars) $ do
             case var of
                 A.Element {}        -> pure ()
@@ -339,16 +362,24 @@ flattenVariationsAndItems = snd . evalRWS go ()
                 A.Extended lst      -> mapM_ (maybe (pure ()) goItem) lst
                 A.Repetitive _ var2 -> goVar var2
                 A.Explicit _        -> pure ()
-                A.Compound lst      -> mapM_ (maybe (pure ()) goItem) lst
-            tell [Left var]
+                A.Compound lst      -> mapM_ (maybe (pure ()) goNsp ) lst
+            tell [EVariation var]
+
+    goNsp nsp@(A.NonSpare _ _ rule _) = do
+        (vars, nsps, items) <- get
+        put (vars, Set.delete nsp nsps, items)
+        when (Set.member nsp nsps) $ do
+            mapM_ goVar $ toList rule
+            tell [ENonSpare nsp]
+
     goItem item = do
-        (vars, items) <- get
-        put (vars, Set.delete item items)
+        (vars, nsps, items) <- get
+        put (vars, nsps, Set.delete item items)
         when (Set.member item items) $ do
             case item of
                 A.Spare _ _          -> pure ()
-                A.Item _ _ rule _doc -> mapM_ goVar $ toList rule
-            tell [Right item]
+                A.Item nsp -> goNsp nsp
+            tell [EItem item]
 
 -- | Split list of 'Maybe' values to the lists of equal size append 'Nothing'
 chunksOf :: Int -> [Maybe a] -> [[Maybe a]]

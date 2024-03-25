@@ -1,6 +1,6 @@
 -- | Generate asterix 'python' source code.
 
--- {-# LANGUAGE LambdaCase        #-}
+{-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 -- TODO: remove this
@@ -12,6 +12,7 @@ import           Control.Monad
 import           Data.List              (intersperse, nub, sort)
 import           Data.Maybe
 import           Data.Scientific
+import           Data.Coerce
 import           Data.Set               (Set)
 import           Data.Text              (Text)
 import qualified Data.Text              as T
@@ -24,198 +25,260 @@ import           Asterix.Indent
 import qualified Asterix.Specs          as A
 import           Struct
 
-{-
-mkContent :: (A.Content, Int) -> BlockM Builder ()
-mkContent (cont, ix) = case cont of
-    A.ContentRaw -> do
-        clsArg "Raw"
-        cls "ContentRaw"
-        indent $ do
-            "pass"
-    A.ContentTable lst -> do
-        let f :: (Int, Text) -> Text
-            f (a,b) = sformat (int % ": \"" % stext % "\"") a b
-        clsArg "Raw"
-        cls "ContentTable"
-        indent $ do
-            fmt ("tab = " % stext) (fmtList "{ " " }" f lst)
-    A.ContentString st -> do
-        clsArg "Union[Raw, str]"
-        cls "ContentString"
-        indent $ do
-            fmt ("t = " % stext) $ case st of
-                A.StringAscii -> "StringAscii"
-                A.StringICAO  -> "StringICAO"
-                A.StringOctal -> "StringOctal"
-    A.ContentInteger sig _cstr -> do
-        clsArg "Raw"
-        cls "ContentInteger"
-        indent $ do
-            fmt ("sig = " % stext) $ case sig of
-                A.Signed   -> "Signed"
-                A.Unsigned -> "Unsigned"
-    A.ContentQuantity sig lsb unit _cstr -> do
-        clsArg $ sformat ("Union[Raw, float, Tuple[float, Literal[\"" % stext % "\"]]]") unit
-        cls "ContentQuantity"
-        indent $ do
-            fmt ("sig = " % stext) $ case sig of
-                A.Signed   -> "Signed"
-                A.Unsigned -> "Unsigned"
-            fmt ("lsb = " % scifmt Generic Nothing)
-                (fromFloatDigits (evalNumber lsb :: Double))
-            fmt ("unit = \"" % stext % "\"") unit
-    A.ContentBds bt -> do
-        clsArg "Raw"
-        cls "ContentBds"
-        indent $ case bt of
-            A.BdsWithAddress -> do
-                "t = BdsWithAddress"
-            A.BdsAt mAddr -> do
-                "t = BdsAt"
-                fmt ("addr = " % stext) $ case mAddr of
-                    Nothing -> "None"
-                    Just (A.BdsAddr addr) -> sformat int addr
-  where
-    clsArg = fmt (stext % "_Arg : TypeAlias = " % stext)
-        (nameOf "Content" ix)
-    cls c = fmt ("class " % stext % "(" % stext % "):")
-        (nameOf "Content" ix) c
+fmt :: Format (BlockM Builder ()) a -> a
+fmt m = runFormat m line
 
-mkVariation :: AsterixDb EMap -> Variation -> BlockM Builder ()
-mkVariation db var = case var of
-    Element (OctetOffset o) n rule -> do
-        let cont = unRule rule
-            contName = nameOf "Content" $ indexOf (dbContent db) cont
-        fmt (stext % "_Arg : TypeAlias = " % stext % "_Arg") varName contName
-        cls "Element"
-        indent $ do
-            fmt ("bit_offset8 = " % int) o
-            fmt ("bit_size = " % int) n
-            fmt ("content = " % stext) contName
-            ""
-            fmt ("def __init__(self, arg : Union[Bits, " % stext % "_Arg]) -> None:") contName
+fmtList :: Text -> Text -> (a -> Text) -> [a] -> Text
+fmtList open close f lst
+    = open
+   <> mconcat (intersperse ", " (fmap f lst))
+   <> close
+
+-- | We need database object in convert instance.
+data Augmented t = Augmented (AsterixDb EMap) t
+
+class Convert t where
+    convert :: t -> BlockM Builder ()
+
+instance Convert (Augmented (A.Content, Int)) where
+    convert (Augmented _db (cont, ix)) = case cont of
+        A.ContentRaw -> do
+            clsArg "Raw"
+            cls "ContentRaw"
             indent $ do
-                "if isinstance(arg, Bits):"
-                indent $ do
-                    "super().__init__(arg)"
-                    "return"
-                "n = self.__class__.bit_size"
-                fmt ("val = self.__class__.from_raw(" %
-                     stext % ".from_arg(n, arg))") contName
-                "super().__init__(val)"
+                "pass"
+        A.ContentTable lst -> do
+            let f :: (Int, Text) -> Text
+                f (a,b) = sformat (int % ": \"" % stext % "\"") a b
+            clsArg "Raw"
+            cls "ContentTable"
+            indent $ do
+                fmt ("tab = " % stext) (fmtList "{" "}" f lst)
+        A.ContentString st -> do
+            clsArg "Union[Raw, str]"
+            cls "ContentString"
+            indent $ do
+                fmt ("t = " % stext) $ case st of
+                    A.StringAscii -> "StringAscii"
+                    A.StringICAO  -> "StringICAO"
+                    A.StringOctal -> "StringOctal"
+        A.ContentInteger sig _cstr -> do
+            clsArg "Raw"
+            cls "ContentInteger"
+            indent $ do
+                fmt ("sig = " % stext) $ case sig of
+                    A.Signed   -> "Signed"
+                    A.Unsigned -> "Unsigned"
+        A.ContentQuantity sig lsb unit _cstr -> do
+            clsArg $ sformat ("Union[Raw, float, Tuple[float, Literal[\"" % stext % "\"]]]")
+                (coerce unit)
+            cls "ContentQuantity"
+            indent $ do
+                fmt ("sig = " % stext) $ case sig of
+                    A.Signed   -> "Signed"
+                    A.Unsigned -> "Unsigned"
+                fmt ("lsb = " % scifmt Generic Nothing)
+                    (fromFloatDigits (evalNumber lsb :: Double))
+                fmt ("unit = \"" % stext % "\"") (coerce unit)
+        A.ContentBds bt -> do
+            clsArg "Raw"
+            cls "ContentBds"
+            indent $ case bt of
+                A.BdsWithAddress -> do
+                    "t = BdsWithAddress"
+                A.BdsAt mAddr -> do
+                    "t = BdsAt"
+                    fmt ("addr = " % stext) $ case mAddr of
+                        Nothing -> "None"
+                        Just (A.BdsAddr addr) -> sformat int addr
+      where
+        clsArg = fmt ("Content_" % int % "_Arg : TypeAlias = " % stext) ix
+        cls = fmt ("class Content_" % int % "(" % stext % "):") ix
 
-    Group lst -> do
-        let varName2 var2 = nameOf "Variation" $ indexOf (dbVariation db) var2
-            items = catMaybes $ flip fmap lst $ \case
-                Spare _ _ -> Nothing
-                Item name title var2 -> Just (name, title, var2)
-        fmt (stext % "_Arg_Group = TypedDict('" % stext % "_Arg_Group', {") varName varName
-        indent $ forM_ items $ \(name, _title, rule2) -> do
-            let var2 = unRule rule2
-            fmt ("\"" % stext % "\": Union[" % stext % ", " % stext % "_Arg],")
-                name (varName2 var2) (varName2 var2)
-        "})"
-        fmt (stext % "_Arg : TypeAlias = Union[Raw, "% stext % "_Arg_Group]")
-            varName varName
-        cls "Group"
-        indent $ do
-            case sizeOfVariation var of
-                Nothing -> error "unexpected non-fixed argument"
-                Just n  -> fmt ("bit_size = " % int) n
-            do -- items_list
-                let f :: Item -> Text
-                    f = nameOf "Item" . indexOf (dbItem db)
-                fmt ("items_list = " % stext)
-                    (fmtList "[" "]" f lst)
-            do -- items_dict
-                let f (name, title, var2) = sformat
-                        ("\"" % stext % "\": (" % stext % ")")
-                        name
-                        (nameOf "Item" $ indexOf (dbItem db) (Item name title var2))
-                fmt ("items_dict = " % stext)
-                    (fmtList "{" "}" f items)
-    Extended lst -> do
-        cls "Extended"
-        indent $ do
-            let f :: Maybe Item -> Text
-                f Nothing     = "None"
-                f (Just item) = nameOf "Item" $ indexOf (dbItem db) item
-            fmt ("items = " % stext)
-                (fmtList "[" "]" f lst)
-    Repetitive rt var2 -> do
-        cls "Repetitive"
-        indent $ do
-            case rt of
-                A.RepetitiveRegular n -> fmt ("rep = " % int) (div8 n)
-                A.RepetitiveFx        -> "rep = None"
-            fmt ("var = " % stext)
-                (nameOf "Variation" $ indexOf (dbVariation db) var2)
-    Explicit et -> do
-        cls "Explicit"
-        indent $ do
-            fmt ("t = " % stext) $ case et of
-                Nothing                  -> "None"
-                Just A.ReservedExpansion -> "ReservedExpansion"
-                Just A.SpecialPurpose    -> "SpecialPurpose"
-    Compound mn lst' -> do
-        let lst = fmap simplifyCompoundSubitem lst'
-        cls "Compound"
-        indent $ do
-            case mn of
-                Nothing -> "fspec_size = None"
-                Just n  -> fmt ("fspec_size = " % int) (div8 n)
-            do -- items_list
+instance Convert (Augmented (A.Rule A.Content, Int)) where
+    convert (Augmented db (rule, ix)) = case rule of
+        A.ContextFree cont -> do
+            cls "RuleContentContextFree"
+            indent $ do
+                fmt ("content = Content_" % int) (indexOf (dbContent db) cont)
+        A.Dependent items dv lst -> do
+            cls "RuleContentDependent"
+            indent $ do
+                let f1 (A.ItemPath path) = fmtList "[" "]" f2 path
+                    f2 (A.ItemName name) = "\"" <> name <> "\""
+                fmt ("depends_on = " % stext)
+                    (fmtList "[" "]" f1 items)
+                fmt ("default_content = Content_" % int) (indexOf (dbContent db) dv)
+                "cases = ["
+                indent $ forM_ lst $ \(a, b) -> do
+                    fmt ("(" % stext % ", Content_" % int % "),")
+                        (fmtList "[" "]" (T.pack . show) a)
+                        (indexOf (dbContent db) b)
+                "]"
+      where
+        cls = fmt ("class RuleContent_" % int % "(" % stext % "):") ix
+
+instance Convert (Augmented Variation) where
+    convert (Augmented db var) = case var of
+        A.Element o n rule -> do
+            let ruleName = sformat ("RuleContent_" % int) (indexOf (dbRuleContent db) rule)
+            -- fmt (stext % "_Arg : TypeAlias = " % stext % "_Arg") varName contName
+            cls "Element"
+            indent $ do
+                fmt ("bit_offset8 = " % int) (coerce o :: Int)
+                fmt ("bit_size = " % int) (coerce n :: Int)
+                fmt ("rule = " % stext) ruleName
+                {-
+                ""
+                fmt ("def __init__(self, arg : Union[Bits, " % stext % "_Arg]) -> None:") contName
+                indent $ do
+                    "if isinstance(arg, Bits):"
+                    indent $ do
+                        "super().__init__(arg)"
+                        "return"
+                    "n = self.__class__.bit_size"
+                    fmt ("val = self.__class__.from_raw(" %
+                        stext % ".from_arg(n, arg))") contName
+                    "super().__init__(val)"
+-}
+        _ -> "# TODO"
+      where
+        ix = indexOf (dbVariation db) var
+        cls = fmt ("class Variation_" % int % "(" % stext % "):") ix
+        {-
+        Group lst -> do
+            let varName2 var2 = nameOf "Variation" $ indexOf (dbVariation db) var2
+                items = catMaybes $ flip fmap lst $ \case
+                    Spare _ _ -> Nothing
+                    Item name title var2 -> Just (name, title, var2)
+            fmt (stext % "_Arg_Group = TypedDict('" % stext % "_Arg_Group', {") varName varName
+            indent $ forM_ items $ \(name, _title, rule2) -> do
+                let var2 = unRule rule2
+                fmt ("\"" % stext % "\": Union[" % stext % ", " % stext % "_Arg],")
+                    name (varName2 var2) (varName2 var2)
+            "})"
+            fmt (stext % "_Arg : TypeAlias = Union[Raw, "% stext % "_Arg_Group]")
+                varName varName
+            cls "Group"
+            indent $ do
+                case sizeOfVariation var of
+                    Nothing -> error "unexpected non-fixed argument"
+                    Just n  -> fmt ("bit_size = " % int) n
+                do -- items_list
+                    let f :: Item -> Text
+                        f = nameOf "Item" . indexOf (dbItem db)
+                    fmt ("items_list = " % stext)
+                        (fmtList "[" "]" f lst)
+                do -- items_dict
+                    let f (name, title, var2) = sformat
+                            ("\"" % stext % "\": (" % stext % ")")
+                            name
+                            (nameOf "Item" $ indexOf (dbItem db) (Item name title var2))
+                    fmt ("items_dict = " % stext)
+                        (fmtList "{" "}" f items)
+        Extended lst -> do
+            cls "Extended"
+            indent $ do
                 let f :: Maybe Item -> Text
                     f Nothing     = "None"
                     f (Just item) = nameOf "Item" $ indexOf (dbItem db) item
-                fmt ("items_list = " % stext)
+                fmt ("items = " % stext)
                     (fmtList "[" "]" f lst)
-            do -- items_dict
-                let showFspec :: Fspec -> Text
-                    showFspec fspecs =
-                        let f = T.pack . reverse . take 2 . (<> "00") . reverse . flip showHex ""
-                        in mconcat $ fmap f fspecs
-                let f2 = \case
-                        Just (Item name title var2) -> Just (name, title, var2)
-                        _ -> Nothing
-                    f1 (name, title, var2) = sformat
-                        ("\"" % stext % "\": (" % stext % ", 0x" % stext % ")")
-                        name
-                        (nameOf "Item" $ indexOf (dbItem db) (Item name title var2))
-                        (showFspec $ fspecOf mn lst name)
-                fmt ("items_dict = " % stext)
-                    (fmtList "{" "}" f1 $ mapMaybe f2 lst)
-            do -- spec
-                let relevant = flip mapMaybe lst $ \case
-                        Just (Item name _title rule2) -> Just (name, unRule rule2)
-                        _ -> Nothing
-                case relevant of
-                    [] -> pure ()
-                    [(name, var2)] -> do
-                        "@classmethod"
-                        fmt ("def spec(cls, key : Literal[\"" % stext % "\"]) -> " % stext % ":")
+        Repetitive rt var2 -> do
+            cls "Repetitive"
+            indent $ do
+                case rt of
+                    A.RepetitiveRegular n -> fmt ("rep = " % int) (div8 n)
+                    A.RepetitiveFx        -> "rep = None"
+                fmt ("var = " % stext)
+                    (nameOf "Variation" $ indexOf (dbVariation db) var2)
+        Explicit et -> do
+            cls "Explicit"
+            indent $ do
+                fmt ("t = " % stext) $ case et of
+                    Nothing                  -> "None"
+                    Just A.ReservedExpansion -> "ReservedExpansion"
+                    Just A.SpecialPurpose    -> "SpecialPurpose"
+        Compound mn lst' -> do
+            let lst = fmap simplifyCompoundSubitem lst'
+            cls "Compound"
+            indent $ do
+                case mn of
+                    Nothing -> "fspec_size = None"
+                    Just n  -> fmt ("fspec_size = " % int) (div8 n)
+                do -- items_list
+                    let f :: Maybe Item -> Text
+                        f Nothing     = "None"
+                        f (Just item) = nameOf "Item" $ indexOf (dbItem db) item
+                    fmt ("items_list = " % stext)
+                        (fmtList "[" "]" f lst)
+                do -- items_dict
+                    let showFspec :: Fspec -> Text
+                        showFspec fspecs =
+                            let f = T.pack . reverse . take 2 . (<> "00") . reverse . flip showHex ""
+                            in mconcat $ fmap f fspecs
+                    let f2 = \case
+                            Just (Item name title var2) -> Just (name, title, var2)
+                            _ -> Nothing
+                        f1 (name, title, var2) = sformat
+                            ("\"" % stext % "\": (" % stext % ", 0x" % stext % ")")
                             name
-                            (nameOf "Variation" $ indexOf (dbVariation db) var2)
-                        indent $ do
-                            "return cls.items_dict[key][1] # type: ignore"
-                    _ -> do
-                        forM_ relevant $ \(name, var2) -> do
-                            "@overload"
+                            (nameOf "Item" $ indexOf (dbItem db) (Item name title var2))
+                            (showFspec $ fspecOf mn lst name)
+                    fmt ("items_dict = " % stext)
+                        (fmtList "{" "}" f1 $ mapMaybe f2 lst)
+                do -- spec
+                    let relevant = flip mapMaybe lst $ \case
+                            Just (Item name _title rule2) -> Just (name, unRule rule2)
+                            _ -> Nothing
+                    case relevant of
+                        [] -> pure ()
+                        [(name, var2)] -> do
                             "@classmethod"
-                            fmt ("def spec(cls, key : Literal[\"" %
-                                 stext % "\"]) -> " % stext % ": ...")
+                            fmt ("def spec(cls, key : Literal[\"" % stext % "\"]) -> " % stext % ":")
                                 name
                                 (nameOf "Variation" $ indexOf (dbVariation db) var2)
-                        "@classmethod"
-                        "def spec(cls, key : Any) -> Any:"
-                        indent $ do
-                            "return cls.items_dict[key][1]"
+                            indent $ do
+                                "return cls.items_dict[key][1] # type: ignore"
+                        _ -> do
+                            forM_ relevant $ \(name, var2) -> do
+                                "@overload"
+                                "@classmethod"
+                                fmt ("def spec(cls, key : Literal[\"" %
+                                    stext % "\"]) -> " % stext % ": ...")
+                                    name
+                                    (nameOf "Variation" $ indexOf (dbVariation db) var2)
+                            "@classmethod"
+                            "def spec(cls, key : Any) -> Any:"
+                            indent $ do
+                                "return cls.items_dict[key][1]"
 
-  where
-    ix = indexOf (dbVariation db) var
-    varName = nameOf "Variation" ix
-    cls c = fmt ("class " % stext % "(" % stext % "):") varName c
+    where
+        ix = indexOf (dbVariation db) var
+        varName = nameOf "Variation" ix
+        cls c = fmt ("class " % stext % "(" % stext % "):") varName c
+-}
 
+instance Convert (Augmented NonSpare) where
+    convert (Augmented db nsp) = do
+        cls "NonSpare"
+        indent $ do
+            "pass # TODO"
+      where
+        ix = indexOf (dbNonSpare db) nsp
+        cls = fmt ("class NonSpare_" % int % "(" % stext % "):") ix
+
+instance Convert (Augmented Item) where
+    convert (Augmented db item) = do
+        cls ""
+        indent $ do
+            "pass # TODO"
+      where
+        ix = indexOf (dbItem db) item
+        cls = fmt ("class Item_" % int % "(" % stext % "):") ix
+
+
+{-
 mkItem :: AsterixDb EMap -> Item -> BlockM Builder ()
 mkItem db item = case item of
     Spare (OctetOffset o) n -> do
@@ -1145,9 +1208,15 @@ programManifest specs = enclose "manifest = {" "}" $ do
 -}
 -}
 
+prog :: Convert (Augmented (t, Int)) => AsterixDb EMap -> EMap t -> BlockM Builder ()
+prog db mp = do
+    let go = convert . Augmented db
+        blocks = fmap go (enumList mp)
+    sequence_ (intersperse "" blocks)
+
 -- | Source code generator entry point.
 mkCode :: Bool -> Text -> Text -> [A.Asterix] -> Builder
-mkCode _testSpecs ref ver _specs' = render "    " "\n" $ do
+mkCode _testSpecs ref ver specs' = render "    " "\n" $ do
     "# Asterix specifications" :: BlockM Builder ()
     ""
     "# This file is generated, DO NOT EDIT!"
@@ -1159,19 +1228,24 @@ mkCode _testSpecs ref ver _specs' = render "    " "\n" $ do
     line $ "reference = \"" <> BL.fromText ref <> "\""
     line $ "version = \"" <> BL.fromText ver <> "\""
     ""
-    {-
     "# Content set"
     ""
-    sequence_ (intersperse "" $ fmap mkContent $ enumList $ dbContent db)
+    prog db (dbContent db)
     ""
-    "# Variation and Item set"
+    "# Rule Content set"
+    ""
+    prog db (dbRuleContent db)
+    ""
+    "# Variation NonSpare and Item set"
     ""
     do
-        let lst = flattenVariationsAndItems (dbVariation dbSet, dbItem dbSet)
+        let lst = flattenVarNonItem (dbVariation dbSet, dbNonSpare dbSet, dbItem dbSet)
             f = \case
-                Left var -> mkVariation db var
-                Right item -> mkItem db item
+                EVariation var -> convert (Augmented db var)
+                ENonSpare nsp -> convert (Augmented db nsp)
+                EItem item -> convert (Augmented db item)
         sequence_ $ intersperse "" $ fmap f lst
+    {-
     ""
     "# Record set"
     ""
@@ -1197,7 +1271,6 @@ mkCode _testSpecs ref ver _specs' = render "    " "\n" $ do
     ""
     mkManifest specs
 -}
-{-
   where
     specs :: [Asterix]
     specs = sort $ nub $ fmap deriveAsterix specs'
@@ -1206,5 +1279,4 @@ mkCode _testSpecs ref ver _specs' = render "    " "\n" $ do
     dbSet = asterixDb specs
 
     db :: AsterixDb EMap
-    db = enumDb $ dbSet
--}
+    db = enumDb dbSet

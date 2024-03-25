@@ -171,16 +171,26 @@ instance Convert (Augmented Variation) where
             [ convert met
             ]
         A.Compound lst -> TProduct "'TCompound"
-            [ convert $ fmap (fmap refItem) lst
+            [ convert $ fmap (fmap refNonSpare) lst
             ]
       where
         refRule = Symbol . refName "RuleContent" (dbRuleContent db)
         refItem = Symbol . refName "Item" (dbItem db)
+        refNonSpare = Symbol . refName "NonSpare" (dbNonSpare db)
         refVariation = Symbol . refName "Variation" (dbVariation db)
 
 instance Convert (Augmented (A.Rule Variation)) where
     convert (Augmented db rule) =
         convert (fmap (Symbol . refName "Variation" (dbVariation db)) rule)
+
+instance Convert (Augmented NonSpare) where
+    convert (Augmented db (A.NonSpare iName title rule _doc)) = TProduct "'TNonSpare"
+        [ convert (coerce iName :: Text)
+        , convert (coerce title :: Text)
+        , convert (refRule rule)
+        ]
+      where
+        refRule = Symbol . refName "RuleVariation" (dbRuleVariation db)
 
 instance Convert (Augmented Item) where
     convert (Augmented db item) = case item of
@@ -188,23 +198,17 @@ instance Convert (Augmented Item) where
             [ convert (coerce o :: Int)
             , convert (coerce n :: Int)
             ]
-        A.Item iName title rule _doc -> TProduct "'TItem"
-            [ convert (coerce iName :: Text)
-            , convert (coerce title :: Text)
-            , convert (refRule rule)
-            ]
-      where
-        refRule = Symbol . refName "RuleVariation" (dbRuleVariation db)
+        A.Item nsp -> convert (Augmented db nsp)
 
 instance Convert (Augmented UapItem) where
     convert (Augmented db uapItem) = case uapItem of
         A.UapItem item -> TProduct "'UapItem"
-            [ convert $ refItem item
+            [ convert $ refNonSpare item
             ]
         A.UapItemSpare -> "'UapItemSpare"
         A.UapItemRFS -> "'UapItemRFS"
       where
-        refItem = Symbol . refName "Item" (dbItem db)
+        refNonSpare = Symbol . refName "NonSpare" (dbNonSpare db)
 
 instance Convert (Augmented Record) where
     convert (Augmented db (Record lst)) = TProduct "'GRecord"
@@ -213,10 +217,10 @@ instance Convert (Augmented Record) where
 instance Convert (Augmented Expansion) where
     convert (Augmented db (Expansion n lst)) = TProduct "'GExpansion"
         [ convert (coerce n :: Int)
-        , convert $ fmap (fmap refItem) lst
+        , convert $ fmap (fmap refNonSpare) lst
         ]
       where
-        refItem = Symbol . refName "Item" (dbItem db)
+        refNonSpare = Symbol . refName "NonSpare" (dbNonSpare db)
 
 instance Convert A.UapName where
     convert n = convert (coerce n :: Text)
@@ -316,6 +320,7 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     "-- | Content set"
     mkTypes db "Content" (dbContent db)
     ""
+    {-
     "-- | Rule Content set"
     mkTypes db "RuleContent" (dbRuleContent db)
     ""
@@ -346,6 +351,7 @@ mkCode test ref ver specs' = render "    " "\n" $ do
     "-- | Manifest"
     mkManifest specs
     ""
+-}
   where
     specs :: [Asterix]
     specs = sort $ nub $ fmap deriveAsterix specs'

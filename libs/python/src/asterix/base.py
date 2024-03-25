@@ -387,7 +387,18 @@ class ContentBds(Content):
     def from_arg(cls, n : int, arg : int) -> int:
         return arg
 
-# Variation, Item
+class RuleContent:
+    pass
+
+class RuleContentContextFree(RuleContent):
+    content : ClassVar[Type[Content]]
+
+class RuleContentDependent(RuleContent):
+    depends_on : List[List[str]]
+    default_content : ClassVar[Type[Content]]
+    cases : List[Tuple[List[int], ClassVar[Type[Content]]]]
+
+# Variation, NonSpare, Item
 
 class Variation:
     def __init__(self, val : Bits):
@@ -404,13 +415,18 @@ class Variation:
     def to_uinteger(self) -> int:
         return self._val.to_uinteger()
 
+class NonSpare:
+    name : ClassVar[str]
+    title : ClassVar[str]
+    var : ClassVar[Type[Variation]]
+
 class ItemBase:
     pass
 
 class Element(Variation):
     bit_offset8 : ClassVar[int]
     bit_size : ClassVar[int]
-    content : ClassVar[Type[Content]]
+    rule : ClassVar[Type[RuleContent]]
 
     @classmethod
     def parse_bits(cls, s : Bits) -> Tuple['Element', Bits]:
@@ -446,9 +462,7 @@ class Spare(ItemBase):
     bit_size : ClassVar[int]
 
 class Item(ItemBase):
-    name : ClassVar[str]
-    title : ClassVar[str]
-    var : ClassVar[Type[Variation]]
+    nsp : ClassVar[Type[NonSpare]]
 
 class Record:
     items : ClassVar[List[Optional[Type[ItemBase]]]]
