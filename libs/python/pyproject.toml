@@ -28,4 +28,3 @@ pythonpath = [
 
 [tool.setuptools.dynamic]
 version = {attr = "main.__version__"}
-
