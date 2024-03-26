@@ -3,13 +3,6 @@
 
 {-# LANGUAGE LambdaCase #-}
 
-{-
--- 'AsterixDb' - Asterix database is a collection of all components, without
--- duplications (the same definitions can be reused). For example,
--- items '010/SAC' and '010/SIC' normally share exactly the same structure,
--- so it is stored in a database only once.
--}
-
 module Struct where
 
 import           Control.Monad.RWS
@@ -185,8 +178,11 @@ deriveAsterix = \case
         getRecord lst = Record $ fmap (fmap getItem) lst
     deriveExpansion n items = Expansion n (fmap (fmap deriveNonSpare) items)
 
--- | Database of all distinct asterix components. It's parametrized over some
--- container, to be used in different contexts.
+-- | 'AsterixDb' - Asterix database is a collection of all components, without
+-- duplications (the same definitions can be reused). For example,
+-- items '010/SAC' and '010/SIC' normally share exactly the same structure,
+-- so it is stored in a database only once.
+-- Database is parametrized over some container, to be used in different contexts.
 data AsterixDb f = AsterixDb
     { dbContent       :: f A.Content
     , dbRuleContent   :: f (A.Rule A.Content)
@@ -200,14 +196,14 @@ data AsterixDb f = AsterixDb
     , dbAsterix       :: f Asterix
     }
 
+-- | Enumerated distinct values.
+newtype EMap a = EMap { unEMap :: Map a Int }
+
 -- | Simple version of 'lens' over AsterixDb
 data FocusDb f a = FocusDb
     { getDb :: AsterixDb f -> f a
     , setDb :: AsterixDb f -> f a -> AsterixDb f
     }
-
-modifyDb :: FocusDb f a -> (f a -> f a) -> AsterixDb f -> AsterixDb f
-modifyDb l f db = setDb l db $ f $ getDb l db
 
 lContent :: FocusDb f A.Content
 lContent = FocusDb dbContent (\db x -> db {dbContent = x})
@@ -239,8 +235,14 @@ lUap = FocusDb dbUap (\db x -> db {dbUap = x})
 lAsterix :: FocusDb f Asterix
 lAsterix = FocusDb dbAsterix (\db x -> db {dbAsterix = x})
 
+modifyDb :: FocusDb f a -> (f a -> f a) -> AsterixDb f -> AsterixDb f
+modifyDb l f db = setDb l db $ f $ getDb l db
+
 dbInsert :: Ord a => FocusDb Set a -> a -> State (AsterixDb Set) ()
 dbInsert l x = modify $ modifyDb l (Set.insert x)
+
+dbDelete :: Ord a => FocusDb Set a -> a -> State (AsterixDb Set) ()
+dbDelete l x = modify $ modifyDb l (Set.delete x)
 
 saveContent :: A.Content -> State (AsterixDb Set) ()
 saveContent = dbInsert lContent
@@ -251,8 +253,8 @@ saveRule :: Ord a
     -> A.Rule a
     -> State (AsterixDb Set) ()
 saveRule save focus rule = do
-    mapM_ save $ toList rule
     dbInsert focus rule
+    mapM_ save $ toList rule
 
 saveVariation :: Variation -> State (AsterixDb Set) ()
 saveVariation var = do
@@ -304,9 +306,6 @@ asterixDb :: Foldable t => t Asterix -> AsterixDb Set
 asterixDb lst = execState (mapM_ saveAsterix lst)
     (AsterixDb mempty mempty mempty mempty mempty mempty mempty mempty mempty mempty)
 
--- | Enumerated distinct values.
-newtype EMap a = EMap { unEMap :: Map a Int }
-
 -- | Enumerated database items. Each Set element gets its sequence number.
 enumDb :: AsterixDb Set -> AsterixDb EMap
 enumDb db = AsterixDb
@@ -330,56 +329,6 @@ indexOf (EMap m) = (Map.!) m
 
 enumList :: EMap k -> [(k, Int)]
 enumList = Map.toList . unEMap
-
--- | Variations and Items are defined by mutual recursion.
--- Reorder variations and items, such that any var/item is defined before being referenced.
-
-data VarNonItem
-    = EVariation Variation
-    | ENonSpare NonSpare
-    | EItem Item
-
-flattenVarNonItem :: (Set Variation, Set NonSpare, Set Item) -> [VarNonItem]
-flattenVarNonItem = snd . evalRWS go ()
-  where
-    go = do
-        (vars, nsps, items) <- get
-        case Set.lookupMin vars of
-            Just var -> goVar var >> go
-            Nothing -> case Set.lookupMin nsps of
-                Just nsp -> goNsp nsp >> go
-                Nothing -> case Set.lookupMin items of
-                    Just item -> goItem item >> go
-                    Nothing   -> pure ()
-
-    goVar var = do
-        (vars, nsps, items) <- get
-        put (Set.delete var vars, nsps, items)
-        when (Set.member var vars) $ do
-            case var of
-                A.Element {}        -> pure ()
-                A.Group lst         -> mapM_ goItem lst
-                A.Extended lst      -> mapM_ (maybe (pure ()) goItem) lst
-                A.Repetitive _ var2 -> goVar var2
-                A.Explicit _        -> pure ()
-                A.Compound lst      -> mapM_ (maybe (pure ()) goNsp ) lst
-            tell [EVariation var]
-
-    goNsp nsp@(A.NonSpare _ _ rule _) = do
-        (vars, nsps, items) <- get
-        put (vars, Set.delete nsp nsps, items)
-        when (Set.member nsp nsps) $ do
-            mapM_ goVar $ toList rule
-            tell [ENonSpare nsp]
-
-    goItem item = do
-        (vars, nsps, items) <- get
-        put (vars, nsps, Set.delete item items)
-        when (Set.member item items) $ do
-            case item of
-                A.Spare _ _          -> pure ()
-                A.Item nsp -> goNsp nsp
-            tell [EItem item]
 
 -- | Split list of 'Maybe' values to the lists of equal size append 'Nothing'
 chunksOf :: Int -> [Maybe a] -> [[Maybe a]]

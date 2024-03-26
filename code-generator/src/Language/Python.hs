@@ -9,11 +9,13 @@
 module Language.Python where
 
 import           Control.Monad
+import           Control.Monad.Trans.RWS
 import           Data.List              (intersperse, nub, sort)
 import           Data.Maybe
 import           Data.Scientific
 import           Data.Coerce
 import           Data.Set               (Set)
+import           Data.Set               as Set
 import           Data.Text              (Text)
 import qualified Data.Text              as T
 import           Data.Text.Lazy.Builder (Builder)
@@ -34,12 +36,7 @@ fmtList open close f lst
    <> mconcat (intersperse ", " (fmap f lst))
    <> close
 
--- | We need database object in convert instance.
-data Augmented t = Augmented (AsterixDb EMap) t
-
-class Convert t where
-    convert :: t -> BlockM Builder ()
-
+{-
 instance Convert (Augmented (A.Content, Int)) where
     convert (Augmented _db (cont, ix)) = case cont of
         A.ContentRaw -> do
@@ -260,43 +257,33 @@ instance Convert (Augmented Variation) where
 -}
 
 instance Convert (Augmented NonSpare) where
-    convert (Augmented db nsp) = do
+    convert (Augmented db nsp@(A.NonSpare name title _rule _doc)) = do
         cls "NonSpare"
         indent $ do
-            "pass # TODO"
+            fmt ("name = \"" % stext % "\"") (coerce name)
+            fmt ("title = \"" % stext % "\"") (coerce title)
+            -- TODO: Rule...
+            -- fmt ("var = Variation_" % int) (indexOf (dbVariation db) var)
       where
         ix = indexOf (dbNonSpare db) nsp
         cls = fmt ("class NonSpare_" % int % "(" % stext % "):") ix
 
 instance Convert (Augmented Item) where
-    convert (Augmented db item) = do
-        cls ""
-        indent $ do
-            "pass # TODO"
+    convert (Augmented db item) = case item of
+        A.Spare o n -> do
+            cls "Spare"
+            indent $ do
+                fmt ("bit_offset8 = " % int) (coerce o :: Int)
+                fmt ("bit_size = " % int) (coerce n :: Int)
+        A.Item nsp -> do
+            cls "Item"
+            indent $ do
+                fmt ("nsp = NonSpare_" % int) (indexOf (dbNonSpare db) nsp)
       where
         ix = indexOf (dbItem db) item
         cls = fmt ("class Item_" % int % "(" % stext % "):") ix
 
-
 {-
-mkItem :: AsterixDb EMap -> Item -> BlockM Builder ()
-mkItem db item = case item of
-    Spare (OctetOffset o) n -> do
-        cls "Spare"
-        indent $ do
-            fmt ("bit_offset8 = " % int) o
-            fmt ("bit_size = " % int) n
-    Item name title rule -> do
-        cls "Item"
-        indent $ do
-            fmt ("name = \"" % stext % "\"") name
-            fmt ("title = \"" % stext % "\"") title
-            fmt ("var = " % stext)
-                (nameOf "Variation" $ indexOf (dbVariation db) (unRule rule))
-    where
-        ix = indexOf (dbItem db) item
-        cls c = fmt ("class " % stext % "(" % stext % "):") (nameOf "Item" ix) c
-
 mkRecord :: AsterixDb EMap -> (Record, Int) -> BlockM Builder ()
 mkRecord db (Record lst', ix) = do
     let lst = fmap simplifyCompoundSubitem lst'
@@ -1208,11 +1195,51 @@ programManifest specs = enclose "manifest = {" "}" $ do
 -}
 -}
 
+{-
 prog :: Convert (Augmented (t, Int)) => AsterixDb EMap -> EMap t -> BlockM Builder ()
 prog db mp = do
     let go = convert . Augmented db
         blocks = fmap go (enumList mp)
     sequence_ (intersperse "" blocks)
+-}
+-}
+
+type BB = BlockM Builder ()
+type Act = RWS (AsterixDb EMap) [BB] (AsterixDb Set)
+
+class Node t where
+    focus :: FocusDb f t
+    node :: Int -> t -> Act ()
+
+walk :: forall t. (Ord t, Node t) => t -> Act Int
+walk t = do
+    db1 <- ask
+    db2 <- get
+    let ix = indexOf (getDb (focus @t) db1) t
+    when (Set.member t (getDb (focus @t) db2)) $ do
+        put $ setDb (focus @t) db2 (Set.delete t (getDb (focus @t) db2))
+        node ix t
+    pure ix
+
+instance Node Uap where
+    focus = lUap
+    node ix _ = do
+        tell $ pure $ fmt ("# Uap... " % int) ix
+
+instance Node Expansion where
+    focus = lExpansion
+    node ix (Expansion _ _) = do
+        tell $ pure $ fmt ("# Exp... " % int) ix
+
+instance Node Asterix where
+    focus = lAsterix
+    node ix = \case
+        AsterixBasic _cat _ed uap -> do
+            ref <- walk uap
+            tell $ pure $ fmt ("# Asterix " % int % ", " % int) ix ref
+        AsterixExpansion _cat _ed expan -> do
+            ref <- walk expan
+            tell $ pure $ fmt ("# Expansion " % int % ", " % int) ix ref
 
 -- | Source code generator entry point.
 mkCode :: Bool -> Text -> Text -> [A.Asterix] -> Builder
@@ -1228,8 +1255,10 @@ mkCode _testSpecs ref ver specs' = render "    " "\n" $ do
     line $ "reference = \"" <> BL.fromText ref <> "\""
     line $ "version = \"" <> BL.fromText ver <> "\""
     ""
-    "# Content set"
+    "# Asterix types"
     ""
+    sequence_ (intersperse "" blocks)
+    {-
     prog db (dbContent db)
     ""
     "# Rule Content set"
@@ -1245,7 +1274,6 @@ mkCode _testSpecs ref ver specs' = render "    " "\n" $ do
                 ENonSpare nsp -> convert (Augmented db nsp)
                 EItem item -> convert (Augmented db item)
         sequence_ $ intersperse "" $ fmap f lst
-    {-
     ""
     "# Record set"
     ""
@@ -1270,7 +1298,7 @@ mkCode _testSpecs ref ver specs' = render "    " "\n" $ do
     "# Manifest"
     ""
     mkManifest specs
--}
+    -}
   where
     specs :: [Asterix]
     specs = sort $ nub $ fmap deriveAsterix specs'
@@ -1280,3 +1308,5 @@ mkCode _testSpecs ref ver specs' = render "    " "\n" $ do
 
     db :: AsterixDb EMap
     db = enumDb dbSet
+
+    (_asterixRefs, _, blocks) = runRWS (mapM walk specs) db dbSet

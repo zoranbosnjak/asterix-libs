@@ -415,6 +415,9 @@ class Variation:
     def to_uinteger(self) -> int:
         return self._val.to_uinteger()
 
+class RuleVariation:
+    pass
+
 class NonSpare:
     name : ClassVar[str]
     title : ClassVar[str]
