@@ -9,1326 +9,1080 @@ from asterix.base import *
 reference = "unknown"
 version = "19700101.0"
 
-# Content set
+# Asterix types
 
-Content_0_Arg : TypeAlias = Raw
 class Content_0(ContentRaw):
     pass
 
-Content_1_Arg : TypeAlias = Raw
-class Content_1(ContentTable):
-    tab = { 0: "Air Speed = IAS, LSB (Bit-1) = 2^-14 NM/s", 1: "Air Speed = Mach, LSB (Bit-1) = 0.001" }
+class RuleContent_0(RuleContentContextFree):
+    variation = Content_0
 
-Content_2_Arg : TypeAlias = Raw
-class Content_2(ContentTable):
-    tab = { 0: "LOW", 1: "HIGH" }
-
-Content_3_Arg : TypeAlias = Raw
-class Content_3(ContentTable):
-    tab = { 0: "Plot", 1: "Track" }
-
-Content_4_Arg : TypeAlias = Raw
-class Content_4(ContentTable):
-    tab = { 0: "Test 0", 1: "Test 1", 2: "Test 2", 3: "Test 3" }
-
-Content_5_Arg : TypeAlias = Raw
-class Content_5(ContentTable):
-    tab = { 0: "Test0", 1: "Test1" }
-
-Content_6_Arg : TypeAlias = Raw
-class Content_6(ContentTable):
-    tab = { 0: "Test0", 1: "Test1", 2: "Test2" }
-
-Content_7_Arg : TypeAlias = Raw
-class Content_7(ContentTable):
-    tab = { 1: "Message 1", 2: "Message 2", 3: "Message 3" }
-
-Content_8_Arg : TypeAlias = Raw
-class Content_8(ContentTable):
-    tab = { 3: "Test3", 4: "Test4" }
-
-Content_9_Arg : TypeAlias = Union[Raw, str]
-class Content_9(ContentString):
-    t = StringAscii
-
-Content_10_Arg : TypeAlias = Union[Raw, str]
-class Content_10(ContentString):
-    t = StringICAO
-
-Content_11_Arg : TypeAlias = Union[Raw, str]
-class Content_11(ContentString):
-    t = StringOctal
-
-Content_12_Arg : TypeAlias = Raw
-class Content_12(ContentInteger):
-    sig = Signed
-
-Content_13_Arg : TypeAlias = Raw
-class Content_13(ContentInteger):
-    sig = Unsigned
-
-Content_14_Arg : TypeAlias = Union[Raw, float, Tuple[float, Literal["°"]]]
-class Content_14(ContentQuantity):
-    sig = Signed
-    lsb = 2.1457672119140625e-5
-    unit = "°"
-
-Content_15_Arg : TypeAlias = Union[Raw, float, Tuple[float, Literal["°"]]]
-class Content_15(ContentQuantity):
-    sig = Signed
-    lsb = 2.1457672119140625e-5
-    unit = "°"
-
-Content_16_Arg : TypeAlias = Union[Raw, float, Tuple[float, Literal[""]]]
-class Content_16(ContentQuantity):
-    sig = Unsigned
-    lsb = 1.0
-    unit = ""
-
-Content_17_Arg : TypeAlias = Union[Raw, float, Tuple[float, Literal["kt"]]]
-class Content_17(ContentQuantity):
-    sig = Unsigned
-    lsb = 1.0
-    unit = "kt"
-
-Content_18_Arg : TypeAlias = Union[Raw, float, Tuple[float, Literal[""]]]
-class Content_18(ContentQuantity):
-    sig = Unsigned
-    lsb = -0.5
-    unit = ""
-
-Content_19_Arg : TypeAlias = Union[Raw, float, Tuple[float, Literal["Mach"]]]
-class Content_19(ContentQuantity):
-    sig = Unsigned
-    lsb = 1.0e-3
-    unit = "Mach"
-
-Content_20_Arg : TypeAlias = Union[Raw, float, Tuple[float, Literal["NM/s"]]]
-class Content_20(ContentQuantity):
-    sig = Unsigned
-    lsb = 6.103515625e-5
-    unit = "NM/s"
-
-Content_21_Arg : TypeAlias = Raw
-class Content_21(ContentBds):
-    t = BdsWithAddress
-
-Content_22_Arg : TypeAlias = Raw
-class Content_22(ContentBds):
-    t = BdsAt
-    addr = None
-
-Content_23_Arg : TypeAlias = Raw
-class Content_23(ContentBds):
-    t = BdsAt
-    addr = 48
-
-# Variation and Item set
-
-Variation_0_Arg : TypeAlias = Content_1_Arg
-class Variation_0(Element):
-    bit_offset8 = 0
-    bit_size = 1
-    content = Content_1
-
-    def __init__(self, arg : Union[Bits, Content_1_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_1.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_1_Arg : TypeAlias = Content_3_Arg
-class Variation_1(Element):
-    bit_offset8 = 0
-    bit_size = 1
-    content = Content_3
-
-    def __init__(self, arg : Union[Bits, Content_3_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_3.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_2_Arg : TypeAlias = Content_0_Arg
-class Variation_2(Element):
-    bit_offset8 = 0
-    bit_size = 4
-    content = Content_0
-
-    def __init__(self, arg : Union[Bits, Content_0_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_0.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_3_Arg : TypeAlias = Content_0_Arg
-class Variation_3(Element):
-    bit_offset8 = 0
-    bit_size = 6
-    content = Content_0
-
-    def __init__(self, arg : Union[Bits, Content_0_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_0.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_4_Arg : TypeAlias = Content_0_Arg
-class Variation_4(Element):
-    bit_offset8 = 0
-    bit_size = 7
-    content = Content_0
-
-    def __init__(self, arg : Union[Bits, Content_0_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_0.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_5_Arg : TypeAlias = Content_0_Arg
 class Variation_5(Element):
     bit_offset8 = 0
     bit_size = 8
-    content = Content_0
+    rule = RuleContent_0
 
-    def __init__(self, arg : Union[Bits, Content_0_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_0.from_arg(n, arg))
-        super().__init__(val)
+class RuleVariation_5(RuleVariationContextFree):
+    variation = Variation_5
 
-Variation_6_Arg : TypeAlias = Content_4_Arg
-class Variation_6(Element):
-    bit_offset8 = 0
-    bit_size = 8
-    content = Content_4
+class NonSpare_58(NonSpare):
+    name = "SAC"
+    title = "System Area Code"
+    rule = RuleVariation_5
 
-    def __init__(self, arg : Union[Bits, Content_4_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_4.from_arg(n, arg))
-        super().__init__(val)
+class Item_36(Item):
+    non_spare = NonSpare_58
 
-Variation_7_Arg : TypeAlias = Content_7_Arg
+class NonSpare_59(NonSpare):
+    name = "SIC"
+    title = "System Identification Code"
+    rule = RuleVariation_5
+
+class Item_37(Item):
+    non_spare = NonSpare_59
+
+class Variation_37(Group):
+    bit_size = 16
+    items_list = [Item_36, Item_37]
+    items_dict = {"SAC": NonSpare_58, "SIC": NonSpare_59}
+
+class RuleVariation_32(RuleVariationContextFree):
+    variation = Variation_37
+
+class NonSpare_3(NonSpare):
+    name = "010"
+    title = "Data Source Identifier"
+    rule = RuleVariation_32
+
+class Content_7(ContentTable):
+    values = {1: "Message 1", 2: "Message 2", 3: "Message 3"}
+
+class RuleContent_7(RuleContentContextFree):
+    variation = Content_7
+
 class Variation_7(Element):
     bit_offset8 = 0
     bit_size = 8
-    content = Content_7
+    rule = RuleContent_7
 
-    def __init__(self, arg : Union[Bits, Content_7_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_7.from_arg(n, arg))
-        super().__init__(val)
+class RuleVariation_7(RuleVariationContextFree):
+    variation = Variation_7
 
-Variation_8_Arg : TypeAlias = Content_12_Arg
-class Variation_8(Element):
+class NonSpare_0(NonSpare):
+    name = "000"
+    title = "Message Type"
+    rule = RuleVariation_7
+
+class NonSpare_54(NonSpare):
+    name = "R"
+    title = "Raw"
+    rule = RuleVariation_5
+
+class Item_32(Item):
+    non_spare = NonSpare_54
+
+class Content_4(ContentTable):
+    values = {0: "Test 0", 1: "Test 1", 2: "Test 2", 3: "Test 3"}
+
+class RuleContent_4(RuleContentContextFree):
+    variation = Content_4
+
+class Variation_6(Element):
     bit_offset8 = 0
     bit_size = 8
-    content = Content_12
+    rule = RuleContent_4
 
-    def __init__(self, arg : Union[Bits, Content_12_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_12.from_arg(n, arg))
-        super().__init__(val)
+class RuleVariation_6(RuleVariationContextFree):
+    variation = Variation_6
 
-Variation_9_Arg : TypeAlias = Content_13_Arg
-class Variation_9(Element):
-    bit_offset8 = 0
-    bit_size = 8
-    content = Content_13
+class NonSpare_60(NonSpare):
+    name = "T"
+    title = "Table"
+    rule = RuleVariation_6
 
-    def __init__(self, arg : Union[Bits, Content_13_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_13.from_arg(n, arg))
-        super().__init__(val)
+class Item_38(Item):
+    non_spare = NonSpare_60
 
-Variation_10_Arg : TypeAlias = Content_16_Arg
-class Variation_10(Element):
-    bit_offset8 = 0
-    bit_size = 8
-    content = Content_16
+class Content_9(ContentString):
+    string_type = StringAscii
 
-    def __init__(self, arg : Union[Bits, Content_16_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_16.from_arg(n, arg))
-        super().__init__(val)
+class RuleContent_9(RuleContentContextFree):
+    variation = Content_9
 
-Variation_11_Arg : TypeAlias = Content_18_Arg
-class Variation_11(Element):
-    bit_offset8 = 0
-    bit_size = 8
-    content = Content_18
-
-    def __init__(self, arg : Union[Bits, Content_18_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_18.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_12_Arg : TypeAlias = Content_11_Arg
-class Variation_12(Element):
-    bit_offset8 = 0
-    bit_size = 12
-    content = Content_11
-
-    def __init__(self, arg : Union[Bits, Content_11_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_11.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_13_Arg : TypeAlias = Content_0_Arg
-class Variation_13(Element):
-    bit_offset8 = 0
-    bit_size = 16
-    content = Content_0
-
-    def __init__(self, arg : Union[Bits, Content_0_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_0.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_14_Arg : TypeAlias = Content_17_Arg
-class Variation_14(Element):
-    bit_offset8 = 0
-    bit_size = 16
-    content = Content_17
-
-    def __init__(self, arg : Union[Bits, Content_17_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_17.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_15_Arg : TypeAlias = Content_14_Arg
-class Variation_15(Element):
-    bit_offset8 = 0
-    bit_size = 24
-    content = Content_14
-
-    def __init__(self, arg : Union[Bits, Content_14_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_14.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_16_Arg : TypeAlias = Content_15_Arg
-class Variation_16(Element):
-    bit_offset8 = 0
-    bit_size = 24
-    content = Content_15
-
-    def __init__(self, arg : Union[Bits, Content_15_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_15.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_17_Arg : TypeAlias = Content_0_Arg
-class Variation_17(Element):
-    bit_offset8 = 0
-    bit_size = 32
-    content = Content_0
-
-    def __init__(self, arg : Union[Bits, Content_0_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_0.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_18_Arg : TypeAlias = Content_10_Arg
-class Variation_18(Element):
-    bit_offset8 = 0
-    bit_size = 48
-    content = Content_10
-
-    def __init__(self, arg : Union[Bits, Content_10_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_10.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_19_Arg : TypeAlias = Content_9_Arg
 class Variation_19(Element):
     bit_offset8 = 0
     bit_size = 56
-    content = Content_9
+    rule = RuleContent_9
 
-    def __init__(self, arg : Union[Bits, Content_9_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_9.from_arg(n, arg))
-        super().__init__(val)
+class RuleVariation_19(RuleVariationContextFree):
+    variation = Variation_19
 
-Variation_20_Arg : TypeAlias = Content_22_Arg
-class Variation_20(Element):
-    bit_offset8 = 0
-    bit_size = 56
-    content = Content_22
-
-    def __init__(self, arg : Union[Bits, Content_22_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_22.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_21_Arg : TypeAlias = Content_23_Arg
-class Variation_21(Element):
-    bit_offset8 = 0
-    bit_size = 56
-    content = Content_23
-
-    def __init__(self, arg : Union[Bits, Content_23_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_23.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_22_Arg : TypeAlias = Content_21_Arg
-class Variation_22(Element):
-    bit_offset8 = 0
-    bit_size = 64
-    content = Content_21
-
-    def __init__(self, arg : Union[Bits, Content_21_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_21.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_23_Arg : TypeAlias = Content_0_Arg
-class Variation_23(Element):
-    bit_offset8 = 1
-    bit_size = 6
-    content = Content_0
-
-    def __init__(self, arg : Union[Bits, Content_0_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_0.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_24_Arg : TypeAlias = Content_0_Arg
-class Variation_24(Element):
-    bit_offset8 = 1
-    bit_size = 15
-    content = Content_0
-
-    def __init__(self, arg : Union[Bits, Content_0_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_0.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_25_Arg : TypeAlias = Content_5_Arg
-class Variation_25(Element):
-    bit_offset8 = 4
-    bit_size = 1
-    content = Content_5
-
-    def __init__(self, arg : Union[Bits, Content_5_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_5.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_26_Arg : TypeAlias = Content_0_Arg
-class Variation_26(Element):
-    bit_offset8 = 4
-    bit_size = 3
-    content = Content_0
-
-    def __init__(self, arg : Union[Bits, Content_0_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_0.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_27_Arg : TypeAlias = Content_6_Arg
-class Variation_27(Element):
-    bit_offset8 = 4
-    bit_size = 3
-    content = Content_6
-
-    def __init__(self, arg : Union[Bits, Content_6_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_6.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_28_Arg : TypeAlias = Content_8_Arg
-class Variation_28(Element):
-    bit_offset8 = 4
-    bit_size = 3
-    content = Content_8
-
-    def __init__(self, arg : Union[Bits, Content_8_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_8.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_29_Arg : TypeAlias = Content_0_Arg
-class Variation_29(Element):
-    bit_offset8 = 4
-    bit_size = 4
-    content = Content_0
-
-    def __init__(self, arg : Union[Bits, Content_0_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_0.from_arg(n, arg))
-        super().__init__(val)
-
-Variation_30_Arg : TypeAlias = Content_2_Arg
-class Variation_30(Element):
-    bit_offset8 = 7
-    bit_size = 1
-    content = Content_2
-
-    def __init__(self, arg : Union[Bits, Content_2_Arg]) -> None:
-        if isinstance(arg, Bits):
-            super().__init__(arg)
-            return
-        n = self.__class__.bit_size
-        val = self.__class__.from_raw(Content_2.from_arg(n, arg))
-        super().__init__(val)
-
-class Item_39(Item):
-    name = "I1"
-    title = ""
-    var = Variation_3
-
-class Item_3(Spare):
-    bit_offset8 = 6
-    bit_size = 2
-
-class Item_46(Item):
-    name = "I2"
-    title = ""
-    var = Variation_5
-
-class Item_49(Item):
-    name = "I3"
-    title = ""
-    var = Variation_2
-
-class Item_1(Spare):
-    bit_offset8 = 4
-    bit_size = 8
-
-class Item_52(Item):
-    name = "I4"
-    title = ""
-    var = Variation_29
-
-Variation_31_Arg_Group = TypedDict('Variation_31_Arg_Group', {
-    "I1": Union[Variation_3, Variation_3_Arg],
-    "I2": Union[Variation_5, Variation_5_Arg],
-    "I3": Union[Variation_2, Variation_2_Arg],
-    "I4": Union[Variation_29, Variation_29_Arg],
-})
-Variation_31_Arg : TypeAlias = Union[Raw, Variation_31_Arg_Group]
-class Variation_31(Group):
-    bit_size = 32
-    items_list = [Item_39, Item_3, Item_46, Item_49, Item_1, Item_52]
-    items_dict = {"I1": (Item_39), "I2": (Item_46), "I3": (Item_49), "I4": (Item_52)}
-
-class Item_40(Item):
-    name = "I1"
-    title = ""
-    var = Variation_4
-
-class Item_4(Spare):
-    bit_offset8 = 7
-    bit_size = 2
-
-class Item_47(Item):
-    name = "I2"
-    title = ""
-    var = Variation_23
-
-class Item_5(Spare):
-    bit_offset8 = 7
-    bit_size = 9
-
-Variation_32_Arg_Group = TypedDict('Variation_32_Arg_Group', {
-    "I1": Union[Variation_4, Variation_4_Arg],
-    "I2": Union[Variation_23, Variation_23_Arg],
-})
-Variation_32_Arg : TypeAlias = Union[Raw, Variation_32_Arg_Group]
-class Variation_32(Group):
-    bit_size = 24
-    items_list = [Item_40, Item_4, Item_47, Item_5]
-    items_dict = {"I1": (Item_40), "I2": (Item_47)}
-
-class Item_41(Item):
-    name = "I1"
-    title = ""
-    var = Variation_5
-
-Variation_33_Arg_Group = TypedDict('Variation_33_Arg_Group', {
-    "I1": Union[Variation_5, Variation_5_Arg],
-    "I2": Union[Variation_5, Variation_5_Arg],
-})
-Variation_33_Arg : TypeAlias = Union[Raw, Variation_33_Arg_Group]
-class Variation_33(Group):
-    bit_size = 16
-    items_list = [Item_41, Item_46]
-    items_dict = {"I1": (Item_41), "I2": (Item_46)}
-
-class Item_43(Item):
-    name = "I1"
-    title = ""
-    var = Variation_25
-
-class Item_2(Spare):
-    bit_offset8 = 5
-    bit_size = 2
-
-Variation_34_Arg_Group = TypedDict('Variation_34_Arg_Group', {
-    "I1": Union[Variation_25, Variation_25_Arg],
-})
-Variation_34_Arg : TypeAlias = Union[Raw, Variation_34_Arg_Group]
-class Variation_34(Group):
-    bit_size = 3
-    items_list = [Item_43, Item_2]
-    items_dict = {"I1": (Item_43)}
-
-class Item_54(Item):
-    name = "IM"
-    title = ""
-    var = Variation_0
-
-class Item_53(Item):
-    name = "IAS"
-    title = ""
-    var = Variation_24
-
-Variation_35_Arg_Group = TypedDict('Variation_35_Arg_Group', {
-    "IM": Union[Variation_0, Variation_0_Arg],
-    "IAS": Union[Variation_24, Variation_24_Arg],
-})
-Variation_35_Arg : TypeAlias = Union[Raw, Variation_35_Arg_Group]
-class Variation_35(Group):
-    bit_size = 16
-    items_list = [Item_54, Item_53]
-    items_dict = {"IM": (Item_54), "IAS": (Item_53)}
-
-class Item_60(Item):
-    name = "R"
-    title = "Raw"
-    var = Variation_5
-
-class Item_66(Item):
-    name = "T"
-    title = "Table"
-    var = Variation_6
-
-class Item_61(Item):
+class NonSpare_55(NonSpare):
     name = "S1"
     title = "String Ascii"
-    var = Variation_19
+    rule = RuleVariation_19
 
-class Item_62(Item):
+class Item_33(Item):
+    non_spare = NonSpare_55
+
+class Content_10(ContentString):
+    string_type = StringICAO
+
+class RuleContent_10(RuleContentContextFree):
+    variation = Content_10
+
+class Variation_18(Element):
+    bit_offset8 = 0
+    bit_size = 48
+    rule = RuleContent_10
+
+class RuleVariation_18(RuleVariationContextFree):
+    variation = Variation_18
+
+class NonSpare_56(NonSpare):
     name = "S2"
     title = "String ICAO"
-    var = Variation_18
+    rule = RuleVariation_18
 
-class Item_63(Item):
+class Item_34(Item):
+    non_spare = NonSpare_56
+
+class Content_11(ContentString):
+    string_type = StringOctal
+
+class RuleContent_11(RuleContentContextFree):
+    variation = Content_11
+
+class Variation_12(Element):
+    bit_offset8 = 0
+    bit_size = 12
+    rule = RuleContent_11
+
+class RuleVariation_12(RuleVariationContextFree):
+    variation = Variation_12
+
+class NonSpare_57(NonSpare):
     name = "S3"
     title = "String Octal"
-    var = Variation_12
+    rule = RuleVariation_12
+
+class Item_35(Item):
+    non_spare = NonSpare_57
 
 class Item_0(Spare):
     bit_offset8 = 4
     bit_size = 4
 
-class Item_44(Item):
+class Content_13(ContentInteger):
+    signedness = Unsigned
+
+class RuleContent_13(RuleContentContextFree):
+    variation = Content_13
+
+class Variation_9(Element):
+    bit_offset8 = 0
+    bit_size = 8
+    rule = RuleContent_13
+
+class RuleVariation_9(RuleVariationContextFree):
+    variation = Variation_9
+
+class NonSpare_38(NonSpare):
     name = "I1"
     title = "Unsigned Integer"
-    var = Variation_9
-
-class Item_48(Item):
-    name = "I2"
-    title = "Signed Integer"
-    var = Variation_8
-
-class Item_55(Item):
-    name = "Q1LAT"
-    title = "Latitude in WGS.84 in Two's Complement Form"
-    var = Variation_16
-
-class Item_56(Item):
-    name = "Q2LON"
-    title = "Longitude in WGS.84 in Two's Complement Form"
-    var = Variation_15
-
-class Item_57(Item):
-    name = "Q3"
-    title = "Unsigned Quantity"
-    var = Variation_14
-
-class Item_58(Item):
-    name = "Q4"
-    title = "Quantity No Unit"
-    var = Variation_10
-
-class Item_59(Item):
-    name = "Q5"
-    title = "Negative Lsb"
-    var = Variation_11
-
-class Item_33(Item):
-    name = "B1"
-    title = "Bds With Address"
-    var = Variation_22
-
-class Item_34(Item):
-    name = "B2"
-    title = "Bds At Unknown Address"
-    var = Variation_20
-
-class Item_35(Item):
-    name = "B3"
-    title = "Bds At Known Address"
-    var = Variation_21
-
-Variation_36_Arg_Group = TypedDict('Variation_36_Arg_Group', {
-    "R": Union[Variation_5, Variation_5_Arg],
-    "T": Union[Variation_6, Variation_6_Arg],
-    "S1": Union[Variation_19, Variation_19_Arg],
-    "S2": Union[Variation_18, Variation_18_Arg],
-    "S3": Union[Variation_12, Variation_12_Arg],
-    "I1": Union[Variation_9, Variation_9_Arg],
-    "I2": Union[Variation_8, Variation_8_Arg],
-    "Q1LAT": Union[Variation_16, Variation_16_Arg],
-    "Q2LON": Union[Variation_15, Variation_15_Arg],
-    "Q3": Union[Variation_14, Variation_14_Arg],
-    "Q4": Union[Variation_10, Variation_10_Arg],
-    "Q5": Union[Variation_11, Variation_11_Arg],
-    "B1": Union[Variation_22, Variation_22_Arg],
-    "B2": Union[Variation_20, Variation_20_Arg],
-    "B3": Union[Variation_21, Variation_21_Arg],
-})
-Variation_36_Arg : TypeAlias = Union[Raw, Variation_36_Arg_Group]
-class Variation_36(Group):
-    bit_size = 408
-    items_list = [Item_60, Item_66, Item_61, Item_62, Item_63, Item_0, Item_44, Item_48, Item_55, Item_56, Item_57, Item_58, Item_59, Item_33, Item_34, Item_35]
-    items_dict = {"R": (Item_60), "T": (Item_66), "S1": (Item_61), "S2": (Item_62), "S3": (Item_63), "I1": (Item_44), "I2": (Item_48), "Q1LAT": (Item_55), "Q2LON": (Item_56), "Q3": (Item_57), "Q4": (Item_58), "Q5": (Item_59), "B1": (Item_33), "B2": (Item_34), "B3": (Item_35)}
-
-class Item_64(Item):
-    name = "SAC"
-    title = "System Area Code"
-    var = Variation_5
-
-class Item_65(Item):
-    name = "SIC"
-    title = "System Identification Code"
-    var = Variation_5
-
-Variation_37_Arg_Group = TypedDict('Variation_37_Arg_Group', {
-    "SAC": Union[Variation_5, Variation_5_Arg],
-    "SIC": Union[Variation_5, Variation_5_Arg],
-})
-Variation_37_Arg : TypeAlias = Union[Raw, Variation_37_Arg_Group]
-class Variation_37(Group):
-    bit_size = 16
-    items_list = [Item_64, Item_65]
-    items_dict = {"SAC": (Item_64), "SIC": (Item_65)}
-
-class Item_67(Item):
-    name = "TID"
-    title = "Identification of Conflict Categories Definition Table"
-    var = Variation_2
-
-class Item_37(Item):
-    name = "CP"
-    title = "Conflict Properties Class"
-    var = Variation_26
-
-class Item_38(Item):
-    name = "CS"
-    title = "Conflict Severity"
-    var = Variation_30
-
-Variation_38_Arg_Group = TypedDict('Variation_38_Arg_Group', {
-    "TID": Union[Variation_2, Variation_2_Arg],
-    "CP": Union[Variation_26, Variation_26_Arg],
-    "CS": Union[Variation_30, Variation_30_Arg],
-})
-Variation_38_Arg : TypeAlias = Union[Raw, Variation_38_Arg_Group]
-class Variation_38(Group):
-    bit_size = 8
-    items_list = [Item_67, Item_37, Item_38]
-    items_dict = {"TID": (Item_67), "CP": (Item_37), "CS": (Item_38)}
-
-class Item_45(Item):
-    name = "I2"
-    title = ""
-    var = Variation_4
-
-class Item_50(Item):
-    name = "I3"
-    title = ""
-    var = Variation_4
-
-class Variation_39(Extended):
-    items = [Item_40, None, Item_45, None, Item_50, None]
-
-class Item_51(Item):
-    name = "I3"
-    title = ""
-    var = Variation_5
-
-class Variation_40(Extended):
-    items = [Item_40, None, Item_45, None, Item_51]
-
-class Item_68(Item):
-    name = "TYP"
-    title = ""
-    var = Variation_1
-
-class Item_42(Item):
-    name = "I1"
-    title = ""
-    var = Variation_23
-
-class Variation_41(Extended):
-    items = [Item_68, Item_42, None, Item_45, None]
-
-class Variation_42(Repetitive):
-    rep = 1
-    var = Variation_5
-
-class Variation_43(Repetitive):
-    rep = 1
-    var = Variation_33
-
-class Variation_44(Repetitive):
-    rep = None
-    var = Variation_4
-
-class Variation_45(Explicit):
-    t = None
-
-class Variation_46(Explicit):
-    t = ReservedExpansion
-
-class Variation_47(Explicit):
-    t = SpecialPurpose
-
-class Item_7(Item):
-    name = "010"
-    title = ""
-    var = Variation_5
-
-class Variation_48(Compound):
-    fspec_size = None
-    items_list = [Item_7]
-    items_dict = {"010": (Item_7, 0x80)}
-    @classmethod
-    def spec(cls, key : Literal["010"]) -> Variation_5:
-        return cls.items_dict[key][1] # type: ignore
-
-class Item_28(Item):
-    name = "101"
-    title = ""
-    var = Variation_5
-
-class Item_29(Item):
-    name = "102"
-    title = ""
-    var = Variation_5
-
-class Variation_49(Compound):
-    fspec_size = None
-    items_list = [Item_7, Item_28, Item_29]
-    items_dict = {"010": (Item_7, 0x80), "101": (Item_28, 0x40), "102": (Item_29, 0x20)}
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["010"]) -> Variation_5: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["101"]) -> Variation_5: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["102"]) -> Variation_5: ...
-    @classmethod
-    def spec(cls, key : Any) -> Any:
-        return cls.items_dict[key][1]
-
-class Item_30(Item):
-    name = "201"
-    title = ""
-    var = Variation_13
-
-class Item_31(Item):
-    name = "202"
-    title = ""
-    var = Variation_13
-
-class Variation_50(Compound):
-    fspec_size = None
-    items_list = [Item_7, Item_30, Item_31]
-    items_dict = {"010": (Item_7, 0x80), "201": (Item_30, 0x40), "202": (Item_31, 0x20)}
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["010"]) -> Variation_5: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["201"]) -> Variation_13: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["202"]) -> Variation_13: ...
-    @classmethod
-    def spec(cls, key : Any) -> Any:
-        return cls.items_dict[key][1]
-
-class Item_32(Item):
-    name = "301"
-    title = ""
-    var = Variation_17
-
-class Variation_51(Compound):
-    fspec_size = None
-    items_list = [Item_7, Item_32]
-    items_dict = {"010": (Item_7, 0x80), "301": (Item_32, 0x40)}
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["010"]) -> Variation_5: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["301"]) -> Variation_17: ...
-    @classmethod
-    def spec(cls, key : Any) -> Any:
-        return cls.items_dict[key][1]
-
-class Item_8(Item):
-    name = "010"
-    title = "Data Source Identifier"
-    var = Variation_37
-
-class Item_6(Item):
-    name = "000"
-    title = "Message Type"
-    var = Variation_7
-
-class Item_9(Item):
-    name = "020"
-    title = "Different Contents"
-    var = Variation_36
-
-class Item_11(Item):
-    name = "030"
-    title = "Dependent Item"
-    var = Variation_35
-
-class Item_36(Item):
-    name = "CC"
-    title = "Conflict Classification"
-    var = Variation_38
-
-class Variation_55(Compound):
-    fspec_size = None
-    items_list = [Item_41, Item_36]
-    items_dict = {"I1": (Item_41, 0x80), "CC": (Item_36, 0x40)}
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["I1"]) -> Variation_5: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["CC"]) -> Variation_38: ...
-    @classmethod
-    def spec(cls, key : Any) -> Any:
-        return cls.items_dict[key][1]
-
-class Item_13(Item):
-    name = "031"
-    title = "Nested Dependent Item"
-    var = Variation_55
-
-class Item_15(Item):
-    name = "040"
-    title = "Spare Items"
-    var = Variation_32
+    rule = RuleVariation_9
 
 class Item_16(Item):
-    name = "051"
-    title = "Element"
-    var = Variation_5
+    non_spare = NonSpare_38
 
-class Item_17(Item):
-    name = "052"
-    title = "Group"
-    var = Variation_31
+class Content_12(ContentInteger):
+    signedness = Signed
 
-class Item_18(Item):
-    name = "053"
-    title = "Extended With Trailing Fx"
-    var = Variation_39
+class RuleContent_12(RuleContentContextFree):
+    variation = Content_12
 
-class Item_19(Item):
-    name = "054"
-    title = "Extended Without Trailing Fx"
-    var = Variation_40
+class Variation_8(Element):
+    bit_offset8 = 0
+    bit_size = 8
+    rule = RuleContent_12
+
+class RuleVariation_8(RuleVariationContextFree):
+    variation = Variation_8
+
+class NonSpare_42(NonSpare):
+    name = "I2"
+    title = "Signed Integer"
+    rule = RuleVariation_8
 
 class Item_20(Item):
-    name = "061"
-    title = "Repetitive Regular"
-    var = Variation_42
+    non_spare = NonSpare_42
 
-class Item_21(Item):
-    name = "062"
-    title = "Repetitive With Group"
-    var = Variation_43
+class Content_15(ContentQuantity):
+    signedness = Signed
+    lsb = 2.1457672119140625e-5
+    unit = "°"
 
-class Item_22(Item):
-    name = "063"
-    title = "Repetitive Fx"
-    var = Variation_44
+class RuleContent_15(RuleContentContextFree):
+    variation = Content_15
 
-class Item_23(Item):
-    name = "071"
-    title = "Explicit None"
-    var = Variation_45
+class Variation_16(Element):
+    bit_offset8 = 0
+    bit_size = 24
+    rule = RuleContent_15
 
-class Item_24(Item):
-    name = "072"
-    title = "Explicit RE"
-    var = Variation_46
+class RuleVariation_16(RuleVariationContextFree):
+    variation = Variation_16
 
-class Item_25(Item):
-    name = "073"
-    title = "Explicit SP"
-    var = Variation_47
-
-class Variation_56(Compound):
-    fspec_size = None
-    items_list = [Item_41, None, Item_46]
-    items_dict = {"I1": (Item_41, 0x80), "I2": (Item_46, 0x20)}
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["I1"]) -> Variation_5: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["I2"]) -> Variation_5: ...
-    @classmethod
-    def spec(cls, key : Any) -> Any:
-        return cls.items_dict[key][1]
-
-class Item_26(Item):
-    name = "091"
-    title = "Compound Fspec With Fx"
-    var = Variation_56
-
-class Variation_58(Compound):
-    fspec_size = 1
-    items_list = [Item_41, None, Item_46]
-    items_dict = {"I1": (Item_41, 0x80), "I2": (Item_46, 0x20)}
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["I1"]) -> Variation_5: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["I2"]) -> Variation_5: ...
-    @classmethod
-    def spec(cls, key : Any) -> Any:
-        return cls.items_dict[key][1]
+class NonSpare_49(NonSpare):
+    name = "Q1LAT"
+    title = "Latitude in WGS.84 in Two's Complement Form"
+    rule = RuleVariation_16
 
 class Item_27(Item):
-    name = "092"
-    title = "Compound Fixed Size Fspec"
-    var = Variation_58
+    non_spare = NonSpare_49
 
-class Variation_52(Compound):
-    fspec_size = None
-    items_list = [Item_8, Item_6, Item_9, Item_11, Item_13, Item_15, Item_16, Item_17, Item_18, Item_19, Item_20, Item_21, Item_22, Item_23, Item_24, Item_25, None, Item_26, Item_27]
-    items_dict = {"010": (Item_8, 0x800000), "000": (Item_6, 0x400000), "020": (Item_9, 0x200000), "030": (Item_11, 0x100000), "031": (Item_13, 0x080000), "040": (Item_15, 0x040000), "051": (Item_16, 0x020000), "052": (Item_17, 0x018000), "053": (Item_18, 0x014000), "054": (Item_19, 0x012000), "061": (Item_20, 0x011000), "062": (Item_21, 0x010800), "063": (Item_22, 0x010400), "071": (Item_23, 0x010200), "072": (Item_24, 0x010180), "073": (Item_25, 0x010140), "091": (Item_26, 0x010110), "092": (Item_27, 0x010108)}
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["010"]) -> Variation_37: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["000"]) -> Variation_7: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["020"]) -> Variation_36: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["030"]) -> Variation_35: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["031"]) -> Variation_55: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["040"]) -> Variation_32: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["051"]) -> Variation_5: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["052"]) -> Variation_31: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["053"]) -> Variation_39: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["054"]) -> Variation_40: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["061"]) -> Variation_42: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["062"]) -> Variation_43: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["063"]) -> Variation_44: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["071"]) -> Variation_45: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["072"]) -> Variation_46: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["073"]) -> Variation_47: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["091"]) -> Variation_56: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["092"]) -> Variation_58: ...
-    @classmethod
-    def spec(cls, key : Any) -> Any:
-        return cls.items_dict[key][1]
+class Content_14(ContentQuantity):
+    signedness = Signed
+    lsb = 2.1457672119140625e-5
+    unit = "°"
+
+class RuleContent_14(RuleContentContextFree):
+    variation = Content_14
+
+class Variation_15(Element):
+    bit_offset8 = 0
+    bit_size = 24
+    rule = RuleContent_14
+
+class RuleVariation_15(RuleVariationContextFree):
+    variation = Variation_15
+
+class NonSpare_50(NonSpare):
+    name = "Q2LON"
+    title = "Longitude in WGS.84 in Two's Complement Form"
+    rule = RuleVariation_15
+
+class Item_28(Item):
+    non_spare = NonSpare_50
+
+class Content_17(ContentQuantity):
+    signedness = Unsigned
+    lsb = 1.0
+    unit = "kt"
+
+class RuleContent_17(RuleContentContextFree):
+    variation = Content_17
+
+class Variation_14(Element):
+    bit_offset8 = 0
+    bit_size = 16
+    rule = RuleContent_17
+
+class RuleVariation_14(RuleVariationContextFree):
+    variation = Variation_14
+
+class NonSpare_51(NonSpare):
+    name = "Q3"
+    title = "Unsigned Quantity"
+    rule = RuleVariation_14
+
+class Item_29(Item):
+    non_spare = NonSpare_51
+
+class Content_16(ContentQuantity):
+    signedness = Unsigned
+    lsb = 1.0
+    unit = ""
+
+class RuleContent_16(RuleContentContextFree):
+    variation = Content_16
+
+class Variation_10(Element):
+    bit_offset8 = 0
+    bit_size = 8
+    rule = RuleContent_16
+
+class RuleVariation_10(RuleVariationContextFree):
+    variation = Variation_10
+
+class NonSpare_52(NonSpare):
+    name = "Q4"
+    title = "Quantity No Unit"
+    rule = RuleVariation_10
+
+class Item_30(Item):
+    non_spare = NonSpare_52
+
+class Content_18(ContentQuantity):
+    signedness = Unsigned
+    lsb = -0.5
+    unit = ""
+
+class RuleContent_18(RuleContentContextFree):
+    variation = Content_18
+
+class Variation_11(Element):
+    bit_offset8 = 0
+    bit_size = 8
+    rule = RuleContent_18
+
+class RuleVariation_11(RuleVariationContextFree):
+    variation = Variation_11
+
+class NonSpare_53(NonSpare):
+    name = "Q5"
+    title = "Negative Lsb"
+    rule = RuleVariation_11
+
+class Item_31(Item):
+    non_spare = NonSpare_53
+
+class Content_21(ContentBds):
+    bds_type = BdsWithAddress
+
+class RuleContent_19(RuleContentContextFree):
+    variation = Content_21
+
+class Variation_22(Element):
+    bit_offset8 = 0
+    bit_size = 64
+    rule = RuleContent_19
+
+class RuleVariation_22(RuleVariationContextFree):
+    variation = Variation_22
+
+class NonSpare_27(NonSpare):
+    name = "B1"
+    title = "Bds With Address"
+    rule = RuleVariation_22
+
+class Item_6(Item):
+    non_spare = NonSpare_27
+
+class Content_22(ContentBds):
+    bds_type = (BdsAt, None)
+
+class RuleContent_20(RuleContentContextFree):
+    variation = Content_22
+
+class Variation_20(Element):
+    bit_offset8 = 0
+    bit_size = 56
+    rule = RuleContent_20
+
+class RuleVariation_20(RuleVariationContextFree):
+    variation = Variation_20
+
+class NonSpare_28(NonSpare):
+    name = "B2"
+    title = "Bds At Unknown Address"
+    rule = RuleVariation_20
+
+class Item_7(Item):
+    non_spare = NonSpare_28
+
+class Content_23(ContentBds):
+    bds_type = (BdsAt, 48)
+
+class RuleContent_21(RuleContentContextFree):
+    variation = Content_23
+
+class Variation_21(Element):
+    bit_offset8 = 0
+    bit_size = 56
+    rule = RuleContent_21
+
+class RuleVariation_21(RuleVariationContextFree):
+    variation = Variation_21
+
+class NonSpare_29(NonSpare):
+    name = "B3"
+    title = "Bds At Known Address"
+    rule = RuleVariation_21
+
+class Item_8(Item):
+    non_spare = NonSpare_29
+
+class Variation_36(Group):
+    bit_size = 408
+    items_list = [Item_32, Item_38, Item_33, Item_34, Item_35, Item_0, Item_16, Item_20, Item_27, Item_28, Item_29, Item_30, Item_31, Item_6, Item_7, Item_8]
+    items_dict = {"R": NonSpare_54, "T": NonSpare_60, "S1": NonSpare_55, "S2": NonSpare_56, "S3": NonSpare_57, "I1": NonSpare_38, "I2": NonSpare_42, "Q1LAT": NonSpare_49, "Q2LON": NonSpare_50, "Q3": NonSpare_51, "Q4": NonSpare_52, "Q5": NonSpare_53, "B1": NonSpare_27, "B2": NonSpare_28, "B3": NonSpare_29}
+
+class RuleVariation_31(RuleVariationContextFree):
+    variation = Variation_36
+
+class NonSpare_4(NonSpare):
+    name = "020"
+    title = "Different Contents"
+    rule = RuleVariation_31
+
+class Content_1(ContentTable):
+    values = {0: "Air Speed = IAS, LSB (Bit-1) = 2^-14 NM/s", 1: "Air Speed = Mach, LSB (Bit-1) = 0.001"}
+
+class RuleContent_1(RuleContentContextFree):
+    variation = Content_1
+
+class Variation_0(Element):
+    bit_offset8 = 0
+    bit_size = 1
+    rule = RuleContent_1
+
+class RuleVariation_0(RuleVariationContextFree):
+    variation = Variation_0
+
+class NonSpare_48(NonSpare):
+    name = "IM"
+    title = ""
+    rule = RuleVariation_0
+
+class Item_26(Item):
+    non_spare = NonSpare_48
+
+class Content_20(ContentQuantity):
+    signedness = Unsigned
+    lsb = 6.103515625e-5
+    unit = "NM/s"
+
+class Content_19(ContentQuantity):
+    signedness = Unsigned
+    lsb = 1.0e-3
+    unit = "Mach"
+
+class RuleContent_22(RuleContentDependent):
+    depends_on = [["030", "IM"]]
+    default_variation = Content_0
+    cases = [
+        ([0], Content_20),
+        ([1], Content_19),
+    ]
+
+class Variation_24(Element):
+    bit_offset8 = 1
+    bit_size = 15
+    rule = RuleContent_22
+
+class RuleVariation_24(RuleVariationContextFree):
+    variation = Variation_24
+
+class NonSpare_47(NonSpare):
+    name = "IAS"
+    title = ""
+    rule = RuleVariation_24
+
+class Item_25(Item):
+    non_spare = NonSpare_47
+
+class Variation_35(Group):
+    bit_size = 16
+    items_list = [Item_26, Item_25]
+    items_dict = {"IM": NonSpare_48, "IAS": NonSpare_47}
+
+class RuleVariation_30(RuleVariationContextFree):
+    variation = Variation_35
+
+class NonSpare_6(NonSpare):
+    name = "030"
+    title = "Dependent Item"
+    rule = RuleVariation_30
+
+class NonSpare_35(NonSpare):
+    name = "I1"
+    title = ""
+    rule = RuleVariation_5
+
+class Variation_2(Element):
+    bit_offset8 = 0
+    bit_size = 4
+    rule = RuleContent_0
+
+class RuleVariation_2(RuleVariationContextFree):
+    variation = Variation_2
+
+class NonSpare_61(NonSpare):
+    name = "TID"
+    title = "Identification of Conflict Categories Definition Table"
+    rule = RuleVariation_2
+
+class Item_39(Item):
+    non_spare = NonSpare_61
+
+class Variation_26(Element):
+    bit_offset8 = 4
+    bit_size = 3
+    rule = RuleContent_0
+
+class Content_6(ContentTable):
+    values = {0: "Test0", 1: "Test1", 2: "Test2"}
+
+class RuleContent_6(RuleContentContextFree):
+    variation = Content_6
+
+class Variation_27(Element):
+    bit_offset8 = 4
+    bit_size = 3
+    rule = RuleContent_6
+
+class Content_8(ContentTable):
+    values = {3: "Test3", 4: "Test4"}
+
+class RuleContent_8(RuleContentContextFree):
+    variation = Content_8
+
+class Variation_28(Element):
+    bit_offset8 = 4
+    bit_size = 3
+    rule = RuleContent_8
+
+class Content_5(ContentTable):
+    values = {0: "Test0", 1: "Test1"}
+
+class RuleContent_5(RuleContentContextFree):
+    variation = Content_5
+
+class Variation_25(Element):
+    bit_offset8 = 4
+    bit_size = 1
+    rule = RuleContent_5
+
+class RuleVariation_25(RuleVariationContextFree):
+    variation = Variation_25
+
+class NonSpare_37(NonSpare):
+    name = "I1"
+    title = ""
+    rule = RuleVariation_25
+
+class Item_15(Item):
+    non_spare = NonSpare_37
+
+class Item_2(Spare):
+    bit_offset8 = 5
+    bit_size = 2
+
+class Variation_34(Group):
+    bit_size = 3
+    items_list = [Item_15, Item_2]
+    items_dict = {"I1": NonSpare_37}
+
+class RuleVariation_45(RuleVariationDependent):
+    depends_on = [["000"], ["031", "CC", "TID"]]
+    default_variation = Variation_26
+    cases = [
+        ([1, 1], Variation_27),
+        ([1, 2], Variation_28),
+        ([2, 1], Variation_34),
+    ]
+
+class NonSpare_31(NonSpare):
+    name = "CP"
+    title = "Conflict Properties Class"
+    rule = RuleVariation_45
+
+class Item_9(Item):
+    non_spare = NonSpare_31
+
+class Content_2(ContentTable):
+    values = {0: "LOW", 1: "HIGH"}
+
+class RuleContent_2(RuleContentContextFree):
+    variation = Content_2
+
+class Variation_30(Element):
+    bit_offset8 = 7
+    bit_size = 1
+    rule = RuleContent_2
+
+class RuleVariation_27(RuleVariationContextFree):
+    variation = Variation_30
+
+class NonSpare_32(NonSpare):
+    name = "CS"
+    title = "Conflict Severity"
+    rule = RuleVariation_27
 
 class Item_10(Item):
-    name = "020"
-    title = "Target Report Descriptor"
-    var = Variation_41
+    non_spare = NonSpare_32
+
+class Variation_38(Group):
+    bit_size = 8
+    items_list = [Item_39, Item_9, Item_10]
+    items_dict = {"TID": NonSpare_61, "CP": NonSpare_31, "CS": NonSpare_32}
+
+class RuleVariation_33(RuleVariationContextFree):
+    variation = Variation_38
+
+class NonSpare_30(NonSpare):
+    name = "CC"
+    title = "Conflict Classification"
+    rule = RuleVariation_33
+
+class Variation_49(Compound):
+    items_list = [NonSpare_35, NonSpare_30]
+    items_dict = {"I1": NonSpare_35, "CC": NonSpare_30}
+
+class RuleVariation_44(RuleVariationContextFree):
+    variation = Variation_49
+
+class NonSpare_8(NonSpare):
+    name = "031"
+    title = "Nested Dependent Item"
+    rule = RuleVariation_44
+
+class Variation_4(Element):
+    bit_offset8 = 0
+    bit_size = 7
+    rule = RuleContent_0
+
+class RuleVariation_4(RuleVariationContextFree):
+    variation = Variation_4
+
+class NonSpare_34(NonSpare):
+    name = "I1"
+    title = ""
+    rule = RuleVariation_4
 
 class Item_12(Item):
-    name = "031"
-    title = "For Plots Only"
-    var = Variation_5
+    non_spare = NonSpare_34
 
-class Variation_53(Compound):
-    fspec_size = None
-    items_list = [Item_8, Item_10, Item_12]
-    items_dict = {"010": (Item_8, 0x80), "020": (Item_10, 0x40), "031": (Item_12, 0x20)}
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["010"]) -> Variation_37: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["020"]) -> Variation_41: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["031"]) -> Variation_5: ...
-    @classmethod
-    def spec(cls, key : Any) -> Any:
-        return cls.items_dict[key][1]
+class Item_4(Spare):
+    bit_offset8 = 7
+    bit_size = 2
 
-class Item_14(Item):
-    name = "032"
-    title = "For Tracks Only"
-    var = Variation_13
+class Variation_23(Element):
+    bit_offset8 = 1
+    bit_size = 6
+    rule = RuleContent_0
 
-class Variation_54(Compound):
-    fspec_size = None
-    items_list = [Item_8, Item_10, Item_14]
-    items_dict = {"010": (Item_8, 0x80), "020": (Item_10, 0x40), "032": (Item_14, 0x20)}
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["010"]) -> Variation_37: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["020"]) -> Variation_41: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["032"]) -> Variation_13: ...
-    @classmethod
-    def spec(cls, key : Any) -> Any:
-        return cls.items_dict[key][1]
+class RuleVariation_23(RuleVariationContextFree):
+    variation = Variation_23
 
-class Variation_57(Compound):
-    fspec_size = 1
-    items_list = [Item_41, Item_46]
-    items_dict = {"I1": (Item_41, 0x80), "I2": (Item_46, 0x40)}
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["I1"]) -> Variation_5: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["I2"]) -> Variation_5: ...
-    @classmethod
-    def spec(cls, key : Any) -> Any:
-        return cls.items_dict[key][1]
+class NonSpare_41(NonSpare):
+    name = "I2"
+    title = ""
+    rule = RuleVariation_23
 
-class Variation_59(Compound):
-    fspec_size = 2
-    items_list = [Item_41, None, None, Item_46, None, None, None, None, None, None, Item_51]
-    items_dict = {"I1": (Item_41, 0x8000), "I2": (Item_46, 0x1000), "I3": (Item_51, 0x0020)}
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["I1"]) -> Variation_5: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["I2"]) -> Variation_5: ...
-    @overload
-    @classmethod
-    def spec(cls, key : Literal["I3"]) -> Variation_5: ...
-    @classmethod
-    def spec(cls, key : Any) -> Any:
-        return cls.items_dict[key][1]
+class Item_19(Item):
+    non_spare = NonSpare_41
 
-# Record set
+class Item_5(Spare):
+    bit_offset8 = 7
+    bit_size = 9
 
-class Record_0(Record):
-    items = [Item_7]
+class Variation_32(Group):
+    bit_size = 24
+    items_list = [Item_12, Item_4, Item_19, Item_5]
+    items_dict = {"I1": NonSpare_34, "I2": NonSpare_41}
 
-class Record_1(Record):
-    items = [Item_7, Item_28, Item_29]
+class RuleVariation_29(RuleVariationContextFree):
+    variation = Variation_32
 
-class Record_2(Record):
-    items = [Item_7, Item_30, Item_31]
+class NonSpare_10(NonSpare):
+    name = "040"
+    title = "Spare Items"
+    rule = RuleVariation_29
 
-class Record_3(Record):
-    items = [Item_7, Item_32]
+class NonSpare_11(NonSpare):
+    name = "051"
+    title = "Element"
+    rule = RuleVariation_5
 
-class Record_4(Record):
-    items = [Item_8, Item_6, Item_9, Item_11, Item_13, Item_15, Item_16, Item_17, Item_18, Item_19, Item_20, Item_21, Item_22, Item_23, Item_24, Item_25, None, Item_26, Item_27]
+class Variation_3(Element):
+    bit_offset8 = 0
+    bit_size = 6
+    rule = RuleContent_0
 
-class Record_5(Record):
-    items = [Item_8, Item_10, Item_12]
+class RuleVariation_3(RuleVariationContextFree):
+    variation = Variation_3
+
+class NonSpare_33(NonSpare):
+    name = "I1"
+    title = ""
+    rule = RuleVariation_3
+
+class Item_11(Item):
+    non_spare = NonSpare_33
+
+class Item_3(Spare):
+    bit_offset8 = 6
+    bit_size = 2
+
+class NonSpare_40(NonSpare):
+    name = "I2"
+    title = ""
+    rule = RuleVariation_5
+
+class Item_18(Item):
+    non_spare = NonSpare_40
+
+class NonSpare_43(NonSpare):
+    name = "I3"
+    title = ""
+    rule = RuleVariation_2
+
+class Item_21(Item):
+    non_spare = NonSpare_43
+
+class Item_1(Spare):
+    bit_offset8 = 4
+    bit_size = 8
+
+class Variation_29(Element):
+    bit_offset8 = 4
+    bit_size = 4
+    rule = RuleContent_0
+
+class RuleVariation_26(RuleVariationContextFree):
+    variation = Variation_29
+
+class NonSpare_46(NonSpare):
+    name = "I4"
+    title = ""
+    rule = RuleVariation_26
+
+class Item_24(Item):
+    non_spare = NonSpare_46
+
+class Variation_31(Group):
+    bit_size = 32
+    items_list = [Item_11, Item_3, Item_18, Item_21, Item_1, Item_24]
+    items_dict = {"I1": NonSpare_33, "I2": NonSpare_40, "I3": NonSpare_43, "I4": NonSpare_46}
+
+class RuleVariation_28(RuleVariationContextFree):
+    variation = Variation_31
+
+class NonSpare_12(NonSpare):
+    name = "052"
+    title = "Group"
+    rule = RuleVariation_28
+
+class NonSpare_39(NonSpare):
+    name = "I2"
+    title = ""
+    rule = RuleVariation_4
+
+class Item_17(Item):
+    non_spare = NonSpare_39
+
+class NonSpare_44(NonSpare):
+    name = "I3"
+    title = ""
+    rule = RuleVariation_4
+
+class Item_22(Item):
+    non_spare = NonSpare_44
+
+class Variation_39(Extended):
+    items = [Item_12, None, Item_17, None, Item_22, None]
+
+class RuleVariation_34(RuleVariationContextFree):
+    variation = Variation_39
+
+class NonSpare_13(NonSpare):
+    name = "053"
+    title = "Extended With Trailing Fx"
+    rule = RuleVariation_34
+
+class NonSpare_45(NonSpare):
+    name = "I3"
+    title = ""
+    rule = RuleVariation_5
+
+class Item_23(Item):
+    non_spare = NonSpare_45
+
+class Variation_40(Extended):
+    items = [Item_12, None, Item_17, None, Item_23]
+
+class RuleVariation_35(RuleVariationContextFree):
+    variation = Variation_40
+
+class NonSpare_14(NonSpare):
+    name = "054"
+    title = "Extended Without Trailing Fx"
+    rule = RuleVariation_35
+
+class Variation_42(Repetitive):
+    rep_bytes = 1
+    variation = Variation_5
+
+class RuleVariation_37(RuleVariationContextFree):
+    variation = Variation_42
+
+class NonSpare_15(NonSpare):
+    name = "061"
+    title = "Repetitive Regular"
+    rule = RuleVariation_37
+
+class Item_13(Item):
+    non_spare = NonSpare_35
+
+class Variation_33(Group):
+    bit_size = 16
+    items_list = [Item_13, Item_18]
+    items_dict = {"I1": NonSpare_35, "I2": NonSpare_40}
+
+class Variation_43(Repetitive):
+    rep_bytes = 1
+    variation = Variation_33
+
+class RuleVariation_38(RuleVariationContextFree):
+    variation = Variation_43
+
+class NonSpare_16(NonSpare):
+    name = "062"
+    title = "Repetitive With Group"
+    rule = RuleVariation_38
+
+class Variation_44(Repetitive):
+    rep_bytes = None
+    variation = Variation_4
+
+class RuleVariation_39(RuleVariationContextFree):
+    variation = Variation_44
+
+class NonSpare_17(NonSpare):
+    name = "063"
+    title = "Repetitive Fx"
+    rule = RuleVariation_39
+
+class Variation_45(Explicit):
+    explicit_type = None
+
+class RuleVariation_40(RuleVariationContextFree):
+    variation = Variation_45
+
+class NonSpare_18(NonSpare):
+    name = "071"
+    title = "Explicit None"
+    rule = RuleVariation_40
+
+class Variation_46(Explicit):
+    explicit_type = ReservedExpansion
+
+class RuleVariation_41(RuleVariationContextFree):
+    variation = Variation_46
+
+class NonSpare_19(NonSpare):
+    name = "072"
+    title = "Explicit RE"
+    rule = RuleVariation_41
+
+class Variation_47(Explicit):
+    explicit_type = SpecialPurpose
+
+class RuleVariation_42(RuleVariationContextFree):
+    variation = Variation_47
+
+class NonSpare_20(NonSpare):
+    name = "073"
+    title = "Explicit SP"
+    rule = RuleVariation_42
+
+class Variation_48(Compound):
+    items_list = [NonSpare_35, None, NonSpare_40]
+    items_dict = {"I1": NonSpare_35, "I2": NonSpare_40}
+
+class RuleVariation_43(RuleVariationContextFree):
+    variation = Variation_48
+
+class NonSpare_21(NonSpare):
+    name = "091"
+    title = "Compound Fspec With Fx"
+    rule = RuleVariation_43
 
 class Record_6(Record):
-    items = [Item_8, Item_10, Item_14]
+    items = [NonSpare_3, NonSpare_0, NonSpare_4, NonSpare_6, NonSpare_8, NonSpare_10, NonSpare_11, NonSpare_12, NonSpare_13, NonSpare_14, NonSpare_15, NonSpare_16, NonSpare_17, NonSpare_18, NonSpare_19, NonSpare_20, UapItemRFS, NonSpare_21]
 
-# Expansion set
+class Uap_0(UapSingle):
+    record = Record_6
+
+class Asterix_0(AstCat):
+    category = 0
+    edition = (1, 0)
+    uap = Uap_0
 
 class Expansion_0(Expansion):
     fspec_bytes = 1
-    items = [Item_41, Item_46]
+    items = [NonSpare_35, NonSpare_40]
+
+class Asterix_1(AstRef):
+    category = 0
+    edition = (1, 0)
+    expansion = Expansion_0
 
 class Expansion_1(Expansion):
     fspec_bytes = 2
-    items = [Item_41, None, None, Item_46, None, None, None, None, None, None, Item_51]
+    items = [NonSpare_35, None, None, NonSpare_40, None, None, None, None, None, None, NonSpare_45]
 
-# Uap set
+class Asterix_2(AstRef):
+    category = 0
+    edition = (1, 1)
+    expansion = Expansion_1
 
-class Uap_0(UapSingle):
-    record = Record_4
+class NonSpare_2(NonSpare):
+    name = "010"
+    title = "Data Source Identifier"
+    rule = RuleVariation_32
+
+class Content_3(ContentTable):
+    values = {0: "Plot", 1: "Track"}
+
+class RuleContent_3(RuleContentContextFree):
+    variation = Content_3
+
+class Variation_1(Element):
+    bit_offset8 = 0
+    bit_size = 1
+    rule = RuleContent_3
+
+class RuleVariation_1(RuleVariationContextFree):
+    variation = Variation_1
+
+class NonSpare_62(NonSpare):
+    name = "TYP"
+    title = ""
+    rule = RuleVariation_1
+
+class Item_40(Item):
+    non_spare = NonSpare_62
+
+class NonSpare_36(NonSpare):
+    name = "I1"
+    title = ""
+    rule = RuleVariation_23
+
+class Item_14(Item):
+    non_spare = NonSpare_36
+
+class Variation_41(Extended):
+    items = [Item_40, Item_14, None, Item_17, None]
+
+class RuleVariation_36(RuleVariationContextFree):
+    variation = Variation_41
+
+class NonSpare_5(NonSpare):
+    name = "020"
+    title = "Target Report Descriptor"
+    rule = RuleVariation_36
+
+class NonSpare_7(NonSpare):
+    name = "031"
+    title = "For Plots Only"
+    rule = RuleVariation_5
+
+class Record_4(Record):
+    items = [NonSpare_2, NonSpare_5, NonSpare_7]
+
+class Variation_13(Element):
+    bit_offset8 = 0
+    bit_size = 16
+    rule = RuleContent_0
+
+class RuleVariation_13(RuleVariationContextFree):
+    variation = Variation_13
+
+class NonSpare_9(NonSpare):
+    name = "032"
+    title = "For Tracks Only"
+    rule = RuleVariation_13
+
+class Record_5(Record):
+    items = [NonSpare_2, NonSpare_5, NonSpare_9]
 
 class Uap_1(UapMultiple):
-    uaps = {"plot": Record_5, "track": Record_6}
+    uaps = {"plot": Record_4, "track": Record_5}
     selector = (["020", "TYP"], {0: "plot", 1: "track"})
+
+class Asterix_3(AstCat):
+    category = 1
+    edition = (1, 0)
+    uap = Uap_1
+
+class NonSpare_1(NonSpare):
+    name = "010"
+    title = ""
+    rule = RuleVariation_5
+
+class NonSpare_22(NonSpare):
+    name = "101"
+    title = ""
+    rule = RuleVariation_5
+
+class NonSpare_23(NonSpare):
+    name = "102"
+    title = ""
+    rule = RuleVariation_5
+
+class Record_1(Record):
+    items = [NonSpare_1, NonSpare_22, NonSpare_23]
+
+class NonSpare_24(NonSpare):
+    name = "201"
+    title = ""
+    rule = RuleVariation_13
+
+class NonSpare_25(NonSpare):
+    name = "202"
+    title = ""
+    rule = RuleVariation_13
+
+class Record_2(Record):
+    items = [NonSpare_1, NonSpare_24, NonSpare_25]
+
+class Variation_17(Element):
+    bit_offset8 = 0
+    bit_size = 32
+    rule = RuleContent_0
+
+class RuleVariation_17(RuleVariationContextFree):
+    variation = Variation_17
+
+class NonSpare_26(NonSpare):
+    name = "301"
+    title = ""
+    rule = RuleVariation_17
+
+class Record_3(Record):
+    items = [NonSpare_1, NonSpare_26]
+
+class Record_0(Record):
+    items = [NonSpare_1]
 
 class Uap_2(UapMultiple):
     uaps = {"uap1": Record_1, "uap2": Record_2, "uap3": Record_3, "uap4": Record_0}
     selector = None
 
-# Asterix spec set
-
-class AstSpec_0(AstCat):
-    cat = 0
-    edition = (1, 0)
-    uap = Uap_0
-
-class AstSpec_1(AstRef):
-    cat = 0
-    edition = (1, 0)
-    expansion = Expansion_0
-
-class AstSpec_2(AstRef):
-    cat = 0
-    edition = (1, 1)
-    expansion = Expansion_1
-
-class AstSpec_3(AstCat):
-    cat = 1
-    edition = (1, 0)
-    uap = Uap_1
-
-class AstSpec_4(AstCat):
-    cat = 2
+class Asterix_4(AstCat):
+    category = 2
     edition = (1, 0)
     uap = Uap_2
 
 # Aliases
 
-Cat_000_1_0: TypeAlias = AstSpec_0
-Ref_000_1_0: TypeAlias = AstSpec_1
-Ref_000_1_1: TypeAlias = AstSpec_2
-Cat_001_1_0: TypeAlias = AstSpec_3
-Cat_002_1_0: TypeAlias = AstSpec_4
+Cat_000_1_0 : TypeAlias = Asterix_0
+Ref_000_1_0 : TypeAlias = Asterix_1
+Ref_000_1_1 : TypeAlias = Asterix_2
+Cat_001_1_0 : TypeAlias = Asterix_3
+Cat_002_1_0 : TypeAlias = Asterix_4
 
 # Manifest
 
-manifest = [Cat_000_1_0, Ref_000_1_0, Ref_000_1_1, Cat_001_1_0, Cat_002_1_0]
+manifest = {
+    'CATS': {
+        0: {
+            '1.0': Cat_000_1_0,
+        },
+        1: {
+            '1.0': Cat_001_1_0,
+        },
+        2: {
+            '1.0': Cat_002_1_0,
+        },
+    },
+    'REFS': {
+        0: {
+            '1.0': Ref_000_1_0,
+            '1.1': Ref_000_1_1,
+        },
+    },
+}

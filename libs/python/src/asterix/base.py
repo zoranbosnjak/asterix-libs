@@ -205,7 +205,7 @@ def mk_instance(cls : Any, val : Any) -> Any:
 
 class StringType:
     """Baseclass for 'String' types"""
-    n : ClassVar[int]
+    bits_per_char : ClassVar[int]
 
     @classmethod
     @abstractmethod
@@ -217,7 +217,7 @@ class StringType:
 
     @classmethod
     def from_string(cls, s : str) -> Raw:
-        p = pow(2, cls.n)
+        p = pow(2, cls.bits_per_char)
         acc = 0
         for (ix, ch) in enumerate(reversed(s)):
             acc += cls.from_char(ch) * pow(p, ix)
@@ -225,8 +225,8 @@ class StringType:
 
     @classmethod
     def to_string(cls, x : Raw, bit_size : int) -> str:
-        p = pow(2, cls.n)
-        n = bit_size // cls.n
+        p = pow(2, cls.bits_per_char)
+        n = bit_size // cls.bits_per_char
         acc = ''
         for i in range(n):
             (x, i) = divmod(x, p)
@@ -236,7 +236,7 @@ class StringType:
 class StringAscii(StringType):
     """Ascii string."""
 
-    n = 8
+    bits_per_char = 8
 
     @classmethod
     def from_char(cls, ch : str) -> Raw:
@@ -254,7 +254,7 @@ class StringICAO(StringType):
         - '0'..'9'  -> [0x30..]
     """
 
-    n = 6
+    bits_per_char = 6
 
     @classmethod
     def from_char(cls, ch : str) -> Raw:
@@ -278,7 +278,7 @@ class StringICAO(StringType):
 
 class StringOctal(StringType):
     """Valid character range: ['0'..'7']"""
-    n = 3
+    bits_per_char = 3
 
     @classmethod
     def from_char(cls, ch : str) -> Raw:
@@ -342,30 +342,30 @@ class ContentRaw(Content):
         return arg
 
 class ContentTable(Content):
-    tab : ClassVar[dict[int, str]]
+    values : ClassVar[dict[int, str]]
 
     @classmethod
     def from_arg(cls, n : int, arg : int) -> int:
         return arg
 
 class ContentString(Content):
-    t : ClassVar[Type[StringType]]
+    string_type : ClassVar[Type[StringType]]
 
     @classmethod
     def from_arg(cls, n : int, arg : Union[Raw, str]) -> int:
         if isinstance(arg, Raw):
             return arg
-        return cls.t.from_string(arg)
+        return cls.string_type.from_string(arg)
 
 class ContentInteger(Content):
-    sig : ClassVar[Type[Signedness]]
+    signedness : ClassVar[Type[Signedness]]
 
     @classmethod
     def from_arg(cls, n : int, arg : int) -> int:
-        return cls.sig.convert(n, arg)
+        return cls.signedness.convert(n, arg)
 
 class ContentQuantity(Content):
-    sig : ClassVar[Type[Signedness]]
+    signedness : ClassVar[Type[Signedness]]
     lsb : ClassVar[float]
     unit : ClassVar[str]
 
@@ -377,11 +377,11 @@ class ContentQuantity(Content):
             x = arg
         elif isinstance(arg, tuple):
             x = arg[0]
-        return cls.sig.convert(n, round(x/cls.lsb))
+        return cls.signedness.convert(n, round(x/cls.lsb))
 
 class ContentBds(Content):
-    t : ClassVar[Type[BdsType]]
-    addr : ClassVar[Optional[int]]
+    bds_type : ClassVar[
+        Union[Type[BdsWithAddress], Tuple[Type[BdsAt], Optional[int]]]]
 
     @classmethod
     def from_arg(cls, n : int, arg : int) -> int:
@@ -396,7 +396,7 @@ class RuleContentContextFree(RuleContent):
 class RuleContentDependent(RuleContent):
     depends_on : List[List[str]]
     default_content : ClassVar[Type[Content]]
-    cases : List[Tuple[List[int], ClassVar[Type[Content]]]]
+    cases : List[Tuple[List[int], Type[Content]]]
 
 # Variation, NonSpare, Item
 
@@ -414,14 +414,6 @@ class Variation:
 
     def to_uinteger(self) -> int:
         return self._val.to_uinteger()
-
-class RuleVariation:
-    pass
-
-class NonSpare:
-    name : ClassVar[str]
-    title : ClassVar[str]
-    var : ClassVar[Type[Variation]]
 
 class ItemBase:
     pass
@@ -443,36 +435,57 @@ class Element(Variation):
 class Group(Variation):
     bit_size : ClassVar[int]
     items_list : ClassVar[List[Type[ItemBase]]]
-    items_dict : ClassVar[Dict[str, Type[ItemBase]]]
+    items_dict : ClassVar[Dict[str, Type['NonSpare']]]
 
 class Extended(Variation):
     items : ClassVar[List[Optional[Type[ItemBase]]]]
 
 class Repetitive(Variation):
-    rep : ClassVar[Optional[int]]
-    var : ClassVar[Type[Variation]]
+    rep_bytes : ClassVar[Optional[int]]
+    variation : ClassVar[Type[Variation]]
 
 class Explicit(Variation):
-    t : ClassVar[Optional[Type[ExplicitType]]]
+    explicit_type : ClassVar[Optional[Type[ExplicitType]]]
 
 class Compound(Variation):
-    fspec_size : ClassVar[Optional[int]]
-    items_list : ClassVar[List[Optional[Type[ItemBase]]]]
-    items_dict : ClassVar[Dict[str, Tuple[Type[ItemBase], int]]]
+    items_list : ClassVar[List[Optional[Type['NonSpare']]]]
+    items_dict : ClassVar[Dict[str, Type['NonSpare']]]
+
+class RuleVariation:
+    pass
+
+class RuleVariationContextFree(RuleVariation):
+    variation : ClassVar[Type[Variation]]
+
+class RuleVariationDependent(RuleVariation):
+    depends_on : List[List[str]]
+    default_variation : ClassVar[Type[Variation]]
+    cases : List[Tuple[List[int], Type[Variation]]]
+
+class NonSpare:
+    name : ClassVar[str]
+    title : ClassVar[str]
+    rule : ClassVar[Type[RuleVariation]]
 
 class Spare(ItemBase):
     bit_offset8 : ClassVar[int]
     bit_size : ClassVar[int]
 
 class Item(ItemBase):
-    nsp : ClassVar[Type[NonSpare]]
+    non_spare : ClassVar[Type[NonSpare]]
+
+class UapItemSpare:
+    pass
+
+class UapItemRFS:
+    pass
 
 class Record:
-    items : ClassVar[List[Optional[Type[ItemBase]]]]
+    items : ClassVar[List[Union[Type[UapItemSpare], Type[UapItemRFS], Type[NonSpare]]]]
 
 class Expansion:
     fspec_bytes : ClassVar[int]
-    items : ClassVar[List[Optional[Type[ItemBase]]]]
+    items : ClassVar[List[Optional[Type[NonSpare]]]]
 
 # Uap
 
@@ -492,11 +505,11 @@ class AstSpec:
     pass
 
 class AstCat(AstSpec):
-    cat : ClassVar[int]
+    category : ClassVar[int]
     edition : ClassVar[Tuple[int, int]]
     uap : ClassVar[Type[Uap]]
 
 class AstRef(AstSpec):
-    cat : ClassVar[int]
+    category : ClassVar[int]
     edition : ClassVar[Tuple[int, int]]
     expansion : ClassVar[Type[Expansion]]

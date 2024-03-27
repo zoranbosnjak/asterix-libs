@@ -8,6 +8,7 @@ module Struct where
 import           Control.Monad.RWS
 import           Control.Monad.State
 import           Data.Bool
+import           Data.Coerce
 import           Data.Foldable       (toList)
 import           Data.List           (elemIndex, unfoldr)
 import           Data.Map            (Map)
@@ -338,3 +339,22 @@ chunksOf n = unfoldr f
     f lst =
         let (a,b) = splitAt n lst
         in Just (take n (a <> repeat Nothing), b)
+
+bitSizeOfVariation :: A.Variation OctetOffset -> Int
+bitSizeOfVariation = \case
+    A.Element _ n _ -> coerce n
+    A.Group lst -> sum $ fmap bitSizeOfItem lst
+    _ -> error "unexpected non-fixed argument"
+
+bitSizeOfRule :: A.Rule (A.Variation OctetOffset) -> Int
+bitSizeOfRule = \case
+    A.ContextFree var -> bitSizeOfVariation var
+    A.Dependent _ var _ -> bitSizeOfVariation var
+
+bitSizeOfNonSpare :: A.NonSpare OctetOffset -> Int
+bitSizeOfNonSpare (A.NonSpare _ _ rule _) = bitSizeOfRule rule
+
+bitSizeOfItem :: Item -> Int
+bitSizeOfItem = \case
+    A.Spare _o n -> coerce n
+    A.Item nsp -> bitSizeOfNonSpare nsp
