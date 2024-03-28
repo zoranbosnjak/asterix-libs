@@ -435,7 +435,7 @@ class Element(Variation):
 class Group(Variation):
     bit_size : ClassVar[int]
     items_list : ClassVar[List[Type[ItemBase]]]
-    items_dict : ClassVar[Dict[str, Type['NonSpare']]]
+    items_dict : ClassVar[Dict[str, Type['RuleVariation']]]
 
 class Extended(Variation):
     items : ClassVar[List[Optional[Type[ItemBase]]]]
@@ -449,7 +449,7 @@ class Explicit(Variation):
 
 class Compound(Variation):
     items_list : ClassVar[List[Optional[Type['NonSpare']]]]
-    items_dict : ClassVar[Dict[str, Type['NonSpare']]]
+    items_dict : ClassVar[Dict[str, Type['RuleVariation']]]
 
 class RuleVariation:
     pass
@@ -482,7 +482,7 @@ class UapItemRFS:
 
 class Record:
     items_list : ClassVar[List[Union[Type[UapItemSpare], Type[UapItemRFS], Type[NonSpare]]]]
-    items_dict : ClassVar[Dict[str, Type['NonSpare']]]
+    items_dict : ClassVar[Dict[str, Type['RuleVariation']]]
 
 class Expansion:
     fspec_bytes : ClassVar[int]

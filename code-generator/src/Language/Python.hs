@@ -140,15 +140,15 @@ instance Node Variation where
             refList <- mapM walk lst
             refDict <- fmap catMaybes $ forM lst $ \case
                 A.Spare _ _ -> pure Nothing
-                A.Item nsp@(A.NonSpare name _ _ _) -> do
-                    ref <- walk nsp
+                A.Item (A.NonSpare name _ var _) -> do
+                    ref <- walk var
                     pure $ Just (name, ref)
             let n = sum $ fmap bitSizeOfItem lst
             out $ pyClass "Variation" ix "Group" $ do
                 fmt ("bit_size = " % int) n
                 fmt ("items_list = " % stext)
                     (fmtList "[" "]" (sformat ("Item_" % int)) refList)
-                let f (name, ref) = sformat (stext % ": NonSpare_" % int)
+                let f (name, ref) = sformat (stext % ": RuleVariation_" % int)
                         (quote $ coerce name) ref
                 fmt ("items_dict = " % stext) (fmtList "{" "}" f refDict)
         A.Extended lst -> do
@@ -175,12 +175,12 @@ instance Node Variation where
             refList <- forM lst $ \case
                 Nothing -> pure "None"
                 Just i -> sformat ("NonSpare_" % int) <$> walk i
-            refDict <- forM (catMaybes lst) $ \nsp -> case nsp of
-                (A.NonSpare name _ _ _) -> (name,) <$> walk nsp
+            refDict <- forM (catMaybes lst) $ \case
+                (A.NonSpare name _ rule _) -> (name,) <$> walk rule
             out $ pyClass "Variation" ix "Compound" $ do
                 fmt ("items_list = " % stext) (fmtList "[" "]" id refList)
                 let f (A.ItemName name, i) = sformat
-                        (stext % ": NonSpare_" % int)
+                        (stext % ": RuleVariation_" % int)
                         (quote name) i
                 fmt ("items_dict = " % stext) (fmtList "{" "}" f refDict)
 
@@ -236,12 +236,11 @@ instance Node Record where
                 A.UapItemSpare -> pure "UapItemSpare"
                 A.UapItemRFS -> pure "UapItemRFS"
         refDict <- catMaybes <$> forM items (\case
-            A.UapItem nsp -> case nsp of
-                (A.NonSpare name _ _ _) -> do
-                    ref <- walk nsp
-                    pure $ Just $ sformat (stext % ": NonSpare_" % int)
-                        (quote $ coerce name)
-                        ref
+            A.UapItem (A.NonSpare name _ rule _) -> do
+                ref <- walk rule
+                pure $ Just $ sformat (stext % ": RuleVariation_" % int)
+                    (quote $ coerce name)
+                    ref
             A.UapItemSpare -> pure Nothing
             A.UapItemRFS -> pure Nothing)
         out $ pyClass "Record" ix "Record" $ do

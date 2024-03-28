@@ -44,7 +44,7 @@ class Item_37(Item):
 class Variation_37(Group):
     bit_size = 16
     items_list = [Item_36, Item_37]
-    items_dict = {"SAC": NonSpare_58, "SIC": NonSpare_59}
+    items_dict = {"SAC": RuleVariation_5, "SIC": RuleVariation_5}
 
 class RuleVariation_32(RuleVariationContextFree):
     variation = Variation_37
@@ -406,7 +406,7 @@ class Item_8(Item):
 class Variation_36(Group):
     bit_size = 408
     items_list = [Item_32, Item_38, Item_33, Item_34, Item_35, Item_0, Item_16, Item_20, Item_27, Item_28, Item_29, Item_30, Item_31, Item_6, Item_7, Item_8]
-    items_dict = {"R": NonSpare_54, "T": NonSpare_60, "S1": NonSpare_55, "S2": NonSpare_56, "S3": NonSpare_57, "I1": NonSpare_38, "I2": NonSpare_42, "Q1LAT": NonSpare_49, "Q2LON": NonSpare_50, "Q3": NonSpare_51, "Q4": NonSpare_52, "Q5": NonSpare_53, "B1": NonSpare_27, "B2": NonSpare_28, "B3": NonSpare_29}
+    items_dict = {"R": RuleVariation_5, "T": RuleVariation_6, "S1": RuleVariation_19, "S2": RuleVariation_18, "S3": RuleVariation_12, "I1": RuleVariation_9, "I2": RuleVariation_8, "Q1LAT": RuleVariation_16, "Q2LON": RuleVariation_15, "Q3": RuleVariation_14, "Q4": RuleVariation_10, "Q5": RuleVariation_11, "B1": RuleVariation_22, "B2": RuleVariation_20, "B3": RuleVariation_21}
 
 class RuleVariation_31(RuleVariationContextFree):
     variation = Variation_36
@@ -475,7 +475,7 @@ class Item_25(Item):
 class Variation_35(Group):
     bit_size = 16
     items_list = [Item_26, Item_25]
-    items_dict = {"IM": NonSpare_48, "IAS": NonSpare_47}
+    items_dict = {"IM": RuleVariation_0, "IAS": RuleVariation_24}
 
 class RuleVariation_30(RuleVariationContextFree):
     variation = Variation_35
@@ -562,7 +562,7 @@ class Item_2(Spare):
 class Variation_34(Group):
     bit_size = 3
     items_list = [Item_15, Item_2]
-    items_dict = {"I1": NonSpare_37}
+    items_dict = {"I1": RuleVariation_25}
 
 class RuleVariation_45(RuleVariationDependent):
     depends_on = [["000"], ["031", "CC", "TID"]]
@@ -606,7 +606,7 @@ class Item_10(Item):
 class Variation_38(Group):
     bit_size = 8
     items_list = [Item_39, Item_9, Item_10]
-    items_dict = {"TID": NonSpare_61, "CP": NonSpare_31, "CS": NonSpare_32}
+    items_dict = {"TID": RuleVariation_2, "CP": RuleVariation_45, "CS": RuleVariation_27}
 
 class RuleVariation_33(RuleVariationContextFree):
     variation = Variation_38
@@ -618,7 +618,7 @@ class NonSpare_30(NonSpare):
 
 class Variation_49(Compound):
     items_list = [NonSpare_35, NonSpare_30]
-    items_dict = {"I1": NonSpare_35, "CC": NonSpare_30}
+    items_dict = {"I1": RuleVariation_5, "CC": RuleVariation_33}
 
 class RuleVariation_44(RuleVariationContextFree):
     variation = Variation_49
@@ -671,7 +671,7 @@ class Item_5(Spare):
 class Variation_32(Group):
     bit_size = 24
     items_list = [Item_12, Item_4, Item_19, Item_5]
-    items_dict = {"I1": NonSpare_34, "I2": NonSpare_41}
+    items_dict = {"I1": RuleVariation_4, "I2": RuleVariation_23}
 
 class RuleVariation_29(RuleVariationContextFree):
     variation = Variation_32
@@ -745,7 +745,7 @@ class Item_24(Item):
 class Variation_31(Group):
     bit_size = 32
     items_list = [Item_11, Item_3, Item_18, Item_21, Item_1, Item_24]
-    items_dict = {"I1": NonSpare_33, "I2": NonSpare_40, "I3": NonSpare_43, "I4": NonSpare_46}
+    items_dict = {"I1": RuleVariation_3, "I2": RuleVariation_5, "I3": RuleVariation_2, "I4": RuleVariation_26}
 
 class RuleVariation_28(RuleVariationContextFree):
     variation = Variation_31
@@ -819,7 +819,7 @@ class Item_13(Item):
 class Variation_33(Group):
     bit_size = 16
     items_list = [Item_13, Item_18]
-    items_dict = {"I1": NonSpare_35, "I2": NonSpare_40}
+    items_dict = {"I1": RuleVariation_5, "I2": RuleVariation_5}
 
 class Variation_43(Repetitive):
     rep_bytes = 1
@@ -880,7 +880,7 @@ class NonSpare_20(NonSpare):
 
 class Variation_48(Compound):
     items_list = [NonSpare_35, None, NonSpare_40]
-    items_dict = {"I1": NonSpare_35, "I2": NonSpare_40}
+    items_dict = {"I1": RuleVariation_5, "I2": RuleVariation_5}
 
 class RuleVariation_43(RuleVariationContextFree):
     variation = Variation_48
@@ -892,7 +892,7 @@ class NonSpare_21(NonSpare):
 
 class Record_6(Record):
     items_list = [NonSpare_3, NonSpare_0, NonSpare_4, NonSpare_6, NonSpare_8, NonSpare_10, NonSpare_11, NonSpare_12, NonSpare_13, NonSpare_14, NonSpare_15, NonSpare_16, NonSpare_17, NonSpare_18, NonSpare_19, NonSpare_20, UapItemRFS, NonSpare_21]
-    items_dict = {"010": NonSpare_3, "000": NonSpare_0, "020": NonSpare_4, "030": NonSpare_6, "031": NonSpare_8, "040": NonSpare_10, "051": NonSpare_11, "052": NonSpare_12, "053": NonSpare_13, "054": NonSpare_14, "061": NonSpare_15, "062": NonSpare_16, "063": NonSpare_17, "071": NonSpare_18, "072": NonSpare_19, "073": NonSpare_20, "091": NonSpare_21}
+    items_dict = {"010": RuleVariation_32, "000": RuleVariation_7, "020": RuleVariation_31, "030": RuleVariation_30, "031": RuleVariation_44, "040": RuleVariation_29, "051": RuleVariation_5, "052": RuleVariation_28, "053": RuleVariation_34, "054": RuleVariation_35, "061": RuleVariation_37, "062": RuleVariation_38, "063": RuleVariation_39, "071": RuleVariation_40, "072": RuleVariation_41, "073": RuleVariation_42, "091": RuleVariation_43}
 
 class Uap_0(UapSingle):
     record = Record_6
@@ -973,7 +973,7 @@ class NonSpare_7(NonSpare):
 
 class Record_4(Record):
     items_list = [NonSpare_2, NonSpare_5, NonSpare_7]
-    items_dict = {"010": NonSpare_2, "020": NonSpare_5, "031": NonSpare_7}
+    items_dict = {"010": RuleVariation_32, "020": RuleVariation_36, "031": RuleVariation_5}
 
 class Variation_13(Element):
     bit_offset8 = 0
@@ -990,7 +990,7 @@ class NonSpare_9(NonSpare):
 
 class Record_5(Record):
     items_list = [NonSpare_2, NonSpare_5, NonSpare_9]
-    items_dict = {"010": NonSpare_2, "020": NonSpare_5, "032": NonSpare_9}
+    items_dict = {"010": RuleVariation_32, "020": RuleVariation_36, "032": RuleVariation_13}
 
 class Uap_1(UapMultiple):
     uaps = {"plot": Record_4, "track": Record_5}
@@ -1018,7 +1018,7 @@ class NonSpare_23(NonSpare):
 
 class Record_1(Record):
     items_list = [NonSpare_1, NonSpare_22, NonSpare_23]
-    items_dict = {"010": NonSpare_1, "101": NonSpare_22, "102": NonSpare_23}
+    items_dict = {"010": RuleVariation_5, "101": RuleVariation_5, "102": RuleVariation_5}
 
 class NonSpare_24(NonSpare):
     name = "201"
@@ -1032,7 +1032,7 @@ class NonSpare_25(NonSpare):
 
 class Record_2(Record):
     items_list = [NonSpare_1, NonSpare_24, NonSpare_25]
-    items_dict = {"010": NonSpare_1, "201": NonSpare_24, "202": NonSpare_25}
+    items_dict = {"010": RuleVariation_5, "201": RuleVariation_13, "202": RuleVariation_13}
 
 class Variation_17(Element):
     bit_offset8 = 0
@@ -1049,11 +1049,11 @@ class NonSpare_26(NonSpare):
 
 class Record_3(Record):
     items_list = [NonSpare_1, NonSpare_26]
-    items_dict = {"010": NonSpare_1, "301": NonSpare_26}
+    items_dict = {"010": RuleVariation_5, "301": RuleVariation_17}
 
 class Record_0(Record):
     items_list = [NonSpare_1]
-    items_dict = {"010": NonSpare_1}
+    items_dict = {"010": RuleVariation_5}
 
 class Uap_2(UapMultiple):
     uaps = {"uap1": Record_1, "uap2": Record_2, "uap3": Record_3, "uap4": Record_0}
