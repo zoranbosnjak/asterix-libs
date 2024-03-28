@@ -481,7 +481,8 @@ class UapItemRFS:
     pass
 
 class Record:
-    items : ClassVar[List[Union[Type[UapItemSpare], Type[UapItemRFS], Type[NonSpare]]]]
+    items_list : ClassVar[List[Union[Type[UapItemSpare], Type[UapItemRFS], Type[NonSpare]]]]
+    items_dict : ClassVar[Dict[str, Type['NonSpare']]]
 
 class Expansion:
     fspec_bytes : ClassVar[int]

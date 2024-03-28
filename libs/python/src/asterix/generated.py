@@ -1236,7 +1236,8 @@ class NonSpare_1641(NonSpare):
     rule = RuleVariation_1313
 
 class Record_17(Record):
-    items = [NonSpare_35, NonSpare_84, NonSpare_131, NonSpare_199, NonSpare_235, NonSpare_289, NonSpare_313, NonSpare_163, NonSpare_278, NonSpare_293, NonSpare_217, NonSpare_256, NonSpare_178, NonSpare_111, NonSpare_322, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1641, UapItemRFS]
+    items_list = [NonSpare_35, NonSpare_84, NonSpare_131, NonSpare_199, NonSpare_235, NonSpare_289, NonSpare_313, NonSpare_163, NonSpare_278, NonSpare_293, NonSpare_217, NonSpare_256, NonSpare_178, NonSpare_111, NonSpare_322, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1641, UapItemRFS]
+    items_dict = {"010": NonSpare_35, "020": NonSpare_84, "040": NonSpare_131, "070": NonSpare_199, "090": NonSpare_235, "130": NonSpare_289, "141": NonSpare_313, "050": NonSpare_163, "120": NonSpare_278, "131": NonSpare_293, "080": NonSpare_217, "100": NonSpare_256, "060": NonSpare_178, "030": NonSpare_111, "150": NonSpare_322, "SP": NonSpare_1641}
 
 class Variation_246(Element):
     bit_offset8 = 0
@@ -1520,7 +1521,8 @@ class NonSpare_384(NonSpare):
     rule = RuleVariation_1305
 
 class Record_18(Record):
-    items = [NonSpare_35, NonSpare_84, NonSpare_339, NonSpare_131, NonSpare_151, NonSpare_358, NonSpare_199, NonSpare_235, NonSpare_313, NonSpare_289, NonSpare_293, NonSpare_278, NonSpare_350, NonSpare_384, NonSpare_163, NonSpare_217, NonSpare_256, NonSpare_178, NonSpare_111, NonSpare_1641, UapItemRFS, NonSpare_322]
+    items_list = [NonSpare_35, NonSpare_84, NonSpare_339, NonSpare_131, NonSpare_151, NonSpare_358, NonSpare_199, NonSpare_235, NonSpare_313, NonSpare_289, NonSpare_293, NonSpare_278, NonSpare_350, NonSpare_384, NonSpare_163, NonSpare_217, NonSpare_256, NonSpare_178, NonSpare_111, NonSpare_1641, UapItemRFS, NonSpare_322]
+    items_dict = {"010": NonSpare_35, "020": NonSpare_84, "161": NonSpare_339, "040": NonSpare_131, "042": NonSpare_151, "200": NonSpare_358, "070": NonSpare_199, "090": NonSpare_235, "141": NonSpare_313, "130": NonSpare_289, "131": NonSpare_293, "120": NonSpare_278, "170": NonSpare_350, "210": NonSpare_384, "050": NonSpare_163, "080": NonSpare_217, "100": NonSpare_256, "060": NonSpare_178, "030": NonSpare_111, "SP": NonSpare_1641, "150": NonSpare_322}
 
 class Uap_45(UapMultiple):
     uaps = {"plot": Record_17, "track": Record_18}
@@ -1537,10 +1539,12 @@ class NonSpare_36(NonSpare):
     rule = RuleVariation_1104
 
 class Record_24(Record):
-    items = [NonSpare_36, NonSpare_84, NonSpare_131, NonSpare_199, NonSpare_235, NonSpare_289, NonSpare_313, NonSpare_163, NonSpare_278, NonSpare_293, NonSpare_217, NonSpare_256, NonSpare_178, NonSpare_111, NonSpare_322, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1641, UapItemRFS]
+    items_list = [NonSpare_36, NonSpare_84, NonSpare_131, NonSpare_199, NonSpare_235, NonSpare_289, NonSpare_313, NonSpare_163, NonSpare_278, NonSpare_293, NonSpare_217, NonSpare_256, NonSpare_178, NonSpare_111, NonSpare_322, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1641, UapItemRFS]
+    items_dict = {"010": NonSpare_36, "020": NonSpare_84, "040": NonSpare_131, "070": NonSpare_199, "090": NonSpare_235, "130": NonSpare_289, "141": NonSpare_313, "050": NonSpare_163, "120": NonSpare_278, "131": NonSpare_293, "080": NonSpare_217, "100": NonSpare_256, "060": NonSpare_178, "030": NonSpare_111, "150": NonSpare_322, "SP": NonSpare_1641}
 
 class Record_25(Record):
-    items = [NonSpare_36, NonSpare_84, NonSpare_339, NonSpare_131, NonSpare_151, NonSpare_358, NonSpare_199, NonSpare_235, NonSpare_313, NonSpare_289, NonSpare_293, NonSpare_278, NonSpare_350, NonSpare_384, NonSpare_163, NonSpare_217, NonSpare_256, NonSpare_178, NonSpare_111, NonSpare_1641, UapItemRFS, NonSpare_322]
+    items_list = [NonSpare_36, NonSpare_84, NonSpare_339, NonSpare_131, NonSpare_151, NonSpare_358, NonSpare_199, NonSpare_235, NonSpare_313, NonSpare_289, NonSpare_293, NonSpare_278, NonSpare_350, NonSpare_384, NonSpare_163, NonSpare_217, NonSpare_256, NonSpare_178, NonSpare_111, NonSpare_1641, UapItemRFS, NonSpare_322]
+    items_dict = {"010": NonSpare_36, "020": NonSpare_84, "161": NonSpare_339, "040": NonSpare_131, "042": NonSpare_151, "200": NonSpare_358, "070": NonSpare_199, "090": NonSpare_235, "141": NonSpare_313, "130": NonSpare_289, "131": NonSpare_293, "120": NonSpare_278, "170": NonSpare_350, "210": NonSpare_384, "050": NonSpare_163, "080": NonSpare_217, "100": NonSpare_256, "060": NonSpare_178, "030": NonSpare_111, "SP": NonSpare_1641, "150": NonSpare_322}
 
 class Uap_46(UapMultiple):
     uaps = {"plot": Record_24, "track": Record_25}
@@ -1840,7 +1844,8 @@ class NonSpare_226(NonSpare):
     rule = RuleVariation_1305
 
 class Record_44(Record):
-    items = [NonSpare_46, NonSpare_6, NonSpare_79, NonSpare_103, NonSpare_144, NonSpare_169, NonSpare_185, NonSpare_201, NonSpare_251, NonSpare_228, NonSpare_226, UapItemSpare, NonSpare_1641, UapItemRFS]
+    items_list = [NonSpare_46, NonSpare_6, NonSpare_79, NonSpare_103, NonSpare_144, NonSpare_169, NonSpare_185, NonSpare_201, NonSpare_251, NonSpare_228, NonSpare_226, UapItemSpare, NonSpare_1641, UapItemRFS]
+    items_dict = {"010": NonSpare_46, "000": NonSpare_6, "020": NonSpare_79, "030": NonSpare_103, "041": NonSpare_144, "050": NonSpare_169, "060": NonSpare_185, "070": NonSpare_201, "100": NonSpare_251, "090": NonSpare_228, "080": NonSpare_226, "SP": NonSpare_1641}
 
 class Uap_40(UapSingle):
     record = Record_44
@@ -1856,7 +1861,8 @@ class NonSpare_37(NonSpare):
     rule = RuleVariation_1104
 
 class Record_26(Record):
-    items = [NonSpare_37, NonSpare_6, NonSpare_79, NonSpare_103, NonSpare_144, NonSpare_169, NonSpare_185, NonSpare_201, NonSpare_251, NonSpare_228, NonSpare_226, UapItemSpare, NonSpare_1641, UapItemRFS]
+    items_list = [NonSpare_37, NonSpare_6, NonSpare_79, NonSpare_103, NonSpare_144, NonSpare_169, NonSpare_185, NonSpare_201, NonSpare_251, NonSpare_228, NonSpare_226, UapItemSpare, NonSpare_1641, UapItemRFS]
+    items_dict = {"010": NonSpare_37, "000": NonSpare_6, "020": NonSpare_79, "030": NonSpare_103, "041": NonSpare_144, "050": NonSpare_169, "060": NonSpare_185, "070": NonSpare_201, "100": NonSpare_251, "090": NonSpare_228, "080": NonSpare_226, "SP": NonSpare_1641}
 
 class Uap_22(UapSingle):
     record = Record_26
@@ -4678,7 +4684,8 @@ class NonSpare_1481(NonSpare):
     rule = RuleVariation_1312
 
 class Record_13(Record):
-    items = [NonSpare_33, NonSpare_2, NonSpare_56, NonSpare_89, NonSpare_129, NonSpare_155, NonSpare_183, NonSpare_108, NonSpare_343, NonSpare_276, NonSpare_191, NonSpare_215, NonSpare_210, NonSpare_213, NonSpare_249, NonSpare_123, NonSpare_354, NonSpare_267, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_33, NonSpare_2, NonSpare_56, NonSpare_89, NonSpare_129, NonSpare_155, NonSpare_183, NonSpare_108, NonSpare_343, NonSpare_276, NonSpare_191, NonSpare_215, NonSpare_210, NonSpare_213, NonSpare_249, NonSpare_123, NonSpare_354, NonSpare_267, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_33, "000": NonSpare_2, "015": NonSpare_56, "020": NonSpare_89, "040": NonSpare_129, "045": NonSpare_155, "060": NonSpare_183, "030": NonSpare_108, "170": NonSpare_343, "120": NonSpare_276, "070": NonSpare_191, "076": NonSpare_215, "074": NonSpare_210, "075": NonSpare_213, "100": NonSpare_249, "035": NonSpare_123, "171": NonSpare_354, "110": NonSpare_267, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_13(UapSingle):
     record = Record_13
@@ -5186,7 +5193,8 @@ class NonSpare_128(NonSpare):
     rule = RuleVariation_1304
 
 class Record_19(Record):
-    items = [NonSpare_36, NonSpare_7, NonSpare_91, NonSpare_126, NonSpare_121, NonSpare_130, NonSpare_167, NonSpare_241, NonSpare_257, NonSpare_272, NonSpare_282, NonSpare_128, NonSpare_1641, UapItemRFS]
+    items_list = [NonSpare_36, NonSpare_7, NonSpare_91, NonSpare_126, NonSpare_121, NonSpare_130, NonSpare_167, NonSpare_241, NonSpare_257, NonSpare_272, NonSpare_282, NonSpare_128, NonSpare_1641, UapItemRFS]
+    items_dict = {"010": NonSpare_36, "000": NonSpare_7, "020": NonSpare_91, "036": NonSpare_126, "034": NonSpare_121, "040": NonSpare_130, "050": NonSpare_167, "090": NonSpare_241, "100": NonSpare_257, "110": NonSpare_272, "120": NonSpare_282, "038": NonSpare_128, "SP": NonSpare_1641}
 
 class Uap_17(UapSingle):
     record = Record_19
@@ -5408,7 +5416,8 @@ class NonSpare_260(NonSpare):
     rule = RuleVariation_241
 
 class Record_20(Record):
-    items = [NonSpare_36, NonSpare_15, NonSpare_90, NonSpare_101, NonSpare_186, NonSpare_206, NonSpare_218, NonSpare_239, NonSpare_260]
+    items_list = [NonSpare_36, NonSpare_15, NonSpare_90, NonSpare_101, NonSpare_186, NonSpare_206, NonSpare_218, NonSpare_239, NonSpare_260]
+    items_dict = {"010": NonSpare_36, "000": NonSpare_15, "020": NonSpare_90, "030": NonSpare_101, "060": NonSpare_186, "070": NonSpare_206, "080": NonSpare_218, "090": NonSpare_239, "100": NonSpare_260}
 
 class Uap_18(UapSingle):
     record = Record_20
@@ -6842,7 +6851,8 @@ class NonSpare_377(NonSpare):
     rule = RuleVariation_990
 
 class Record_36(Record):
-    items = [NonSpare_42, NonSpare_12, NonSpare_87, NonSpare_307, NonSpare_147, NonSpare_133, NonSpare_153, NonSpare_360, NonSpare_372, NonSpare_335, NonSpare_346, NonSpare_181, NonSpare_392, NonSpare_405, NonSpare_412, NonSpare_439, NonSpare_232, NonSpare_242, NonSpare_423, NonSpare_485, NonSpare_441, NonSpare_480, NonSpare_429, NonSpare_291, NonSpare_377, UapItemSpare, NonSpare_1641, NonSpare_1481]
+    items_list = [NonSpare_42, NonSpare_12, NonSpare_87, NonSpare_307, NonSpare_147, NonSpare_133, NonSpare_153, NonSpare_360, NonSpare_372, NonSpare_335, NonSpare_346, NonSpare_181, NonSpare_392, NonSpare_405, NonSpare_412, NonSpare_439, NonSpare_232, NonSpare_242, NonSpare_423, NonSpare_485, NonSpare_441, NonSpare_480, NonSpare_429, NonSpare_291, NonSpare_377, UapItemSpare, NonSpare_1641, NonSpare_1481]
+    items_dict = {"010": NonSpare_42, "000": NonSpare_12, "020": NonSpare_87, "140": NonSpare_307, "041": NonSpare_147, "040": NonSpare_133, "042": NonSpare_153, "200": NonSpare_360, "202": NonSpare_372, "161": NonSpare_335, "170": NonSpare_346, "060": NonSpare_181, "220": NonSpare_392, "245": NonSpare_405, "250": NonSpare_412, "300": NonSpare_439, "090": NonSpare_232, "091": NonSpare_242, "270": NonSpare_423, "550": NonSpare_485, "310": NonSpare_441, "500": NonSpare_480, "280": NonSpare_429, "131": NonSpare_291, "210": NonSpare_377, "SP": NonSpare_1641, "RE": NonSpare_1481}
 
 class Uap_32(UapSingle):
     record = Record_36
@@ -9046,7 +9056,8 @@ class NonSpare_502(NonSpare):
     rule = RuleVariation_1270
 
 class Record_46(Record):
-    items = [NonSpare_47, NonSpare_13, NonSpare_60, NonSpare_312, NonSpare_148, NonSpare_150, NonSpare_374, NonSpare_376, NonSpare_180, NonSpare_406, NonSpare_451, NonSpare_334, NonSpare_351, NonSpare_430, NonSpare_468, NonSpare_234, NonSpare_247, NonSpare_244, NonSpare_385, NonSpare_426, NonSpare_454, NonSpare_438, NonSpare_442, NonSpare_478, NonSpare_490, NonSpare_498, NonSpare_502, NonSpare_1641, NonSpare_1481]
+    items_list = [NonSpare_47, NonSpare_13, NonSpare_60, NonSpare_312, NonSpare_148, NonSpare_150, NonSpare_374, NonSpare_376, NonSpare_180, NonSpare_406, NonSpare_451, NonSpare_334, NonSpare_351, NonSpare_430, NonSpare_468, NonSpare_234, NonSpare_247, NonSpare_244, NonSpare_385, NonSpare_426, NonSpare_454, NonSpare_438, NonSpare_442, NonSpare_478, NonSpare_490, NonSpare_498, NonSpare_502, NonSpare_1641, NonSpare_1481]
+    items_dict = {"010": NonSpare_47, "000": NonSpare_13, "015": NonSpare_60, "140": NonSpare_312, "041": NonSpare_148, "042": NonSpare_150, "202": NonSpare_374, "210": NonSpare_376, "060": NonSpare_180, "245": NonSpare_406, "380": NonSpare_451, "161": NonSpare_334, "170": NonSpare_351, "290": NonSpare_430, "430": NonSpare_468, "090": NonSpare_234, "093": NonSpare_247, "092": NonSpare_244, "215": NonSpare_385, "270": NonSpare_426, "390": NonSpare_454, "300": NonSpare_438, "310": NonSpare_442, "500": NonSpare_478, "600": NonSpare_490, "605": NonSpare_498, "610": NonSpare_502, "SP": NonSpare_1641, "RE": NonSpare_1481}
 
 class Uap_42(UapSingle):
     record = Record_46
@@ -9386,7 +9397,8 @@ class NonSpare_453(NonSpare):
     rule = RuleVariation_1334
 
 class Record_45(Record):
-    items = [NonSpare_47, NonSpare_13, NonSpare_60, NonSpare_311, NonSpare_148, NonSpare_150, NonSpare_374, NonSpare_376, NonSpare_179, NonSpare_406, NonSpare_452, NonSpare_334, NonSpare_352, NonSpare_431, NonSpare_468, NonSpare_234, NonSpare_246, NonSpare_244, NonSpare_385, NonSpare_425, NonSpare_453, NonSpare_438, NonSpare_442, NonSpare_478, NonSpare_490, NonSpare_498, NonSpare_502, NonSpare_1641, NonSpare_1481]
+    items_list = [NonSpare_47, NonSpare_13, NonSpare_60, NonSpare_311, NonSpare_148, NonSpare_150, NonSpare_374, NonSpare_376, NonSpare_179, NonSpare_406, NonSpare_452, NonSpare_334, NonSpare_352, NonSpare_431, NonSpare_468, NonSpare_234, NonSpare_246, NonSpare_244, NonSpare_385, NonSpare_425, NonSpare_453, NonSpare_438, NonSpare_442, NonSpare_478, NonSpare_490, NonSpare_498, NonSpare_502, NonSpare_1641, NonSpare_1481]
+    items_dict = {"010": NonSpare_47, "000": NonSpare_13, "015": NonSpare_60, "140": NonSpare_311, "041": NonSpare_148, "042": NonSpare_150, "202": NonSpare_374, "210": NonSpare_376, "060": NonSpare_179, "245": NonSpare_406, "380": NonSpare_452, "161": NonSpare_334, "170": NonSpare_352, "290": NonSpare_431, "430": NonSpare_468, "090": NonSpare_234, "093": NonSpare_246, "092": NonSpare_244, "215": NonSpare_385, "270": NonSpare_425, "390": NonSpare_453, "300": NonSpare_438, "310": NonSpare_442, "500": NonSpare_478, "600": NonSpare_490, "605": NonSpare_498, "610": NonSpare_502, "SP": NonSpare_1641, "RE": NonSpare_1481}
 
 class Uap_41(UapSingle):
     record = Record_45
@@ -11824,7 +11836,8 @@ class NonSpare_509(NonSpare):
     rule = RuleVariation_1268
 
 class Record_32(Record):
-    items = [NonSpare_39, NonSpare_16, NonSpare_58, NonSpare_82, NonSpare_110, NonSpare_315, NonSpare_340, NonSpare_353, NonSpare_171, NonSpare_422, NonSpare_436, NonSpare_460, NonSpare_491, NonSpare_494, NonSpare_495, NonSpare_496, NonSpare_497, NonSpare_499, NonSpare_474, NonSpare_504, NonSpare_505, NonSpare_506, NonSpare_507, NonSpare_508, NonSpare_509, NonSpare_1641]
+    items_list = [NonSpare_39, NonSpare_16, NonSpare_58, NonSpare_82, NonSpare_110, NonSpare_315, NonSpare_340, NonSpare_353, NonSpare_171, NonSpare_422, NonSpare_436, NonSpare_460, NonSpare_491, NonSpare_494, NonSpare_495, NonSpare_496, NonSpare_497, NonSpare_499, NonSpare_474, NonSpare_504, NonSpare_505, NonSpare_506, NonSpare_507, NonSpare_508, NonSpare_509, NonSpare_1641]
+    items_dict = {"010": NonSpare_39, "000": NonSpare_16, "015": NonSpare_58, "020": NonSpare_82, "030": NonSpare_110, "145": NonSpare_315, "161": NonSpare_340, "170": NonSpare_353, "050": NonSpare_171, "270": NonSpare_422, "300": NonSpare_436, "400": NonSpare_460, "600": NonSpare_491, "601": NonSpare_494, "602": NonSpare_495, "603": NonSpare_496, "604": NonSpare_497, "605": NonSpare_499, "480": NonSpare_474, "625": NonSpare_504, "626": NonSpare_505, "627": NonSpare_506, "628": NonSpare_507, "630": NonSpare_508, "631": NonSpare_509, "SP": NonSpare_1641}
 
 class Uap_28(UapSingle):
     record = Record_32
@@ -12076,7 +12089,8 @@ class NonSpare_467(NonSpare):
     rule = RuleVariation_1281
 
 class Record_10(Record):
-    items = [NonSpare_30, NonSpare_65, NonSpare_10, NonSpare_303, NonSpare_365, NonSpare_437, NonSpare_461, NonSpare_463, NonSpare_465, NonSpare_467, NonSpare_1641]
+    items_list = [NonSpare_30, NonSpare_65, NonSpare_10, NonSpare_303, NonSpare_365, NonSpare_437, NonSpare_461, NonSpare_463, NonSpare_465, NonSpare_467, NonSpare_1641]
+    items_dict = {"010": NonSpare_30, "015": NonSpare_65, "000": NonSpare_10, "140": NonSpare_303, "200": NonSpare_365, "300": NonSpare_437, "400": NonSpare_461, "405": NonSpare_463, "410": NonSpare_465, "420": NonSpare_467, "SP": NonSpare_1641}
 
 class Uap_10(UapSingle):
     record = Record_10
@@ -12411,7 +12425,8 @@ class NonSpare_446(NonSpare):
     rule = RuleVariation_154
 
 class Record_33(Record):
-    items = [NonSpare_40, NonSpare_52, NonSpare_1, NonSpare_445, NonSpare_386, NonSpare_394, NonSpare_310, NonSpare_156, NonSpare_197, NonSpare_160, NonSpare_371, NonSpare_400, NonSpare_403, NonSpare_382, NonSpare_446, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1641]
+    items_list = [NonSpare_40, NonSpare_52, NonSpare_1, NonSpare_445, NonSpare_386, NonSpare_394, NonSpare_310, NonSpare_156, NonSpare_197, NonSpare_160, NonSpare_371, NonSpare_400, NonSpare_403, NonSpare_382, NonSpare_446, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1641]
+    items_dict = {"010": NonSpare_40, "012": NonSpare_52, "000": NonSpare_1, "350": NonSpare_445, "220": NonSpare_386, "221": NonSpare_394, "140": NonSpare_310, "045": NonSpare_156, "070": NonSpare_197, "050": NonSpare_160, "200": NonSpare_371, "230": NonSpare_400, "240": NonSpare_403, "210": NonSpare_382, "360": NonSpare_446, "SP": NonSpare_1641}
 
 class Uap_29(UapSingle):
     record = Record_33
@@ -13666,7 +13681,8 @@ class NonSpare_53(NonSpare):
     rule = RuleVariation_154
 
 class Record_48(Record):
-    items = [NonSpare_125, NonSpare_127, NonSpare_0, NonSpare_19, NonSpare_22, NonSpare_69, NonSpare_71, NonSpare_73, NonSpare_74, NonSpare_98, NonSpare_100, NonSpare_96, NonSpare_97, NonSpare_99, NonSpare_20, NonSpare_23, NonSpare_24, NonSpare_25, NonSpare_27, NonSpare_49, NonSpare_50, NonSpare_54, NonSpare_55, NonSpare_76, NonSpare_93, NonSpare_94, NonSpare_95, NonSpare_21, NonSpare_116, NonSpare_117, NonSpare_119, NonSpare_120, NonSpare_122, NonSpare_51, NonSpare_53]
+    items_list = [NonSpare_125, NonSpare_127, NonSpare_0, NonSpare_19, NonSpare_22, NonSpare_69, NonSpare_71, NonSpare_73, NonSpare_74, NonSpare_98, NonSpare_100, NonSpare_96, NonSpare_97, NonSpare_99, NonSpare_20, NonSpare_23, NonSpare_24, NonSpare_25, NonSpare_27, NonSpare_49, NonSpare_50, NonSpare_54, NonSpare_55, NonSpare_76, NonSpare_93, NonSpare_94, NonSpare_95, NonSpare_21, NonSpare_116, NonSpare_117, NonSpare_119, NonSpare_120, NonSpare_122, NonSpare_51, NonSpare_53]
+    items_dict = {"036": NonSpare_125, "037": NonSpare_127, "000": NonSpare_0, "001": NonSpare_19, "005": NonSpare_22, "016": NonSpare_69, "017": NonSpare_71, "018": NonSpare_73, "019": NonSpare_74, "028": NonSpare_98, "030": NonSpare_100, "025": NonSpare_96, "027": NonSpare_97, "029": NonSpare_99, "002": NonSpare_20, "006": NonSpare_23, "007": NonSpare_24, "008": NonSpare_25, "009": NonSpare_27, "010": NonSpare_49, "011": NonSpare_50, "014": NonSpare_54, "015": NonSpare_55, "020": NonSpare_76, "021": NonSpare_93, "022": NonSpare_94, "023": NonSpare_95, "004": NonSpare_21, "031": NonSpare_116, "032": NonSpare_117, "033": NonSpare_119, "034": NonSpare_120, "035": NonSpare_122, "012": NonSpare_51, "013": NonSpare_53}
 
 class Uap_44(UapSingle):
     record = Record_48
@@ -14195,7 +14211,8 @@ class NonSpare_503(NonSpare):
     rule = RuleVariation_193
 
 class Record_38(Record):
-    items = [NonSpare_44, NonSpare_9, NonSpare_305, NonSpare_486, NonSpare_487, NonSpare_488, NonSpare_489, NonSpare_492, NonSpare_500, NonSpare_503, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_44, NonSpare_9, NonSpare_305, NonSpare_486, NonSpare_487, NonSpare_488, NonSpare_489, NonSpare_492, NonSpare_500, NonSpare_503, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_44, "000": NonSpare_9, "140": NonSpare_305, "550": NonSpare_486, "551": NonSpare_487, "552": NonSpare_488, "553": NonSpare_489, "600": NonSpare_492, "610": NonSpare_500, "620": NonSpare_503, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_34(UapSingle):
     record = Record_38
@@ -15491,7 +15508,8 @@ class NonSpare_164(NonSpare):
     rule = RuleVariation_1162
 
 class Record_35(Record):
-    items = [NonSpare_41, NonSpare_83, NonSpare_304, NonSpare_146, NonSpare_154, NonSpare_336, NonSpare_348, NonSpare_200, NonSpare_373, NonSpare_233, NonSpare_254, NonSpare_393, NonSpare_407, NonSpare_269, NonSpare_263, NonSpare_375, NonSpare_439, NonSpare_440, NonSpare_479, NonSpare_459, NonSpare_413, NonSpare_397, NonSpare_415, NonSpare_112, NonSpare_176, NonSpare_164, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_41, NonSpare_83, NonSpare_304, NonSpare_146, NonSpare_154, NonSpare_336, NonSpare_348, NonSpare_200, NonSpare_373, NonSpare_233, NonSpare_254, NonSpare_393, NonSpare_407, NonSpare_269, NonSpare_263, NonSpare_375, NonSpare_439, NonSpare_440, NonSpare_479, NonSpare_459, NonSpare_413, NonSpare_397, NonSpare_415, NonSpare_112, NonSpare_176, NonSpare_164, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_41, "020": NonSpare_83, "140": NonSpare_304, "041": NonSpare_146, "042": NonSpare_154, "161": NonSpare_336, "170": NonSpare_348, "070": NonSpare_200, "202": NonSpare_373, "090": NonSpare_233, "100": NonSpare_254, "220": NonSpare_393, "245": NonSpare_407, "110": NonSpare_269, "105": NonSpare_263, "210": NonSpare_375, "300": NonSpare_439, "310": NonSpare_440, "500": NonSpare_479, "400": NonSpare_459, "250": NonSpare_413, "230": NonSpare_397, "260": NonSpare_415, "030": NonSpare_112, "055": NonSpare_176, "050": NonSpare_164, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_31(UapSingle):
     record = Record_35
@@ -15545,7 +15563,8 @@ class NonSpare_408(NonSpare):
     rule = RuleVariation_1278
 
 class Record_34(Record):
-    items = [NonSpare_41, NonSpare_83, NonSpare_304, NonSpare_146, NonSpare_154, NonSpare_336, NonSpare_347, NonSpare_200, NonSpare_373, NonSpare_233, NonSpare_254, NonSpare_391, NonSpare_407, NonSpare_269, NonSpare_263, NonSpare_375, NonSpare_439, NonSpare_440, NonSpare_479, NonSpare_459, NonSpare_408, NonSpare_397, NonSpare_415, NonSpare_112, NonSpare_176, NonSpare_164, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_41, NonSpare_83, NonSpare_304, NonSpare_146, NonSpare_154, NonSpare_336, NonSpare_347, NonSpare_200, NonSpare_373, NonSpare_233, NonSpare_254, NonSpare_391, NonSpare_407, NonSpare_269, NonSpare_263, NonSpare_375, NonSpare_439, NonSpare_440, NonSpare_479, NonSpare_459, NonSpare_408, NonSpare_397, NonSpare_415, NonSpare_112, NonSpare_176, NonSpare_164, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_41, "020": NonSpare_83, "140": NonSpare_304, "041": NonSpare_146, "042": NonSpare_154, "161": NonSpare_336, "170": NonSpare_347, "070": NonSpare_200, "202": NonSpare_373, "090": NonSpare_233, "100": NonSpare_254, "220": NonSpare_391, "245": NonSpare_407, "110": NonSpare_269, "105": NonSpare_263, "210": NonSpare_375, "300": NonSpare_439, "310": NonSpare_440, "500": NonSpare_479, "400": NonSpare_459, "250": NonSpare_408, "230": NonSpare_397, "260": NonSpare_415, "030": NonSpare_112, "055": NonSpare_176, "050": NonSpare_164, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_30(UapSingle):
     record = Record_34
@@ -16933,7 +16952,8 @@ class NonSpare_273(NonSpare):
     rule = RuleVariation_1361
 
 class Record_0(Record):
-    items = [NonSpare_28, NonSpare_136, NonSpare_104, NonSpare_286, NonSpare_221, NonSpare_299, NonSpare_230, NonSpare_379, NonSpare_399, NonSpare_314, NonSpare_320, NonSpare_323, NonSpare_325, NonSpare_327, NonSpare_329, NonSpare_332, NonSpare_341, NonSpare_345, NonSpare_248, NonSpare_118, NonSpare_366, NonSpare_78, NonSpare_390, NonSpare_316, NonSpare_318, NonSpare_273, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_28, NonSpare_136, NonSpare_104, NonSpare_286, NonSpare_221, NonSpare_299, NonSpare_230, NonSpare_379, NonSpare_399, NonSpare_314, NonSpare_320, NonSpare_323, NonSpare_325, NonSpare_327, NonSpare_329, NonSpare_332, NonSpare_341, NonSpare_345, NonSpare_248, NonSpare_118, NonSpare_366, NonSpare_78, NonSpare_390, NonSpare_316, NonSpare_318, NonSpare_273, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_28, "040": NonSpare_136, "030": NonSpare_104, "130": NonSpare_286, "080": NonSpare_221, "140": NonSpare_299, "090": NonSpare_230, "210": NonSpare_379, "230": NonSpare_399, "145": NonSpare_314, "150": NonSpare_320, "151": NonSpare_323, "152": NonSpare_325, "155": NonSpare_327, "157": NonSpare_329, "160": NonSpare_332, "165": NonSpare_341, "170": NonSpare_345, "095": NonSpare_248, "032": NonSpare_118, "200": NonSpare_366, "020": NonSpare_78, "220": NonSpare_390, "146": NonSpare_316, "148": NonSpare_318, "110": NonSpare_273, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_0(UapSingle):
     record = Record_0
@@ -16949,7 +16969,8 @@ class NonSpare_288(NonSpare):
     rule = RuleVariation_1051
 
 class Record_1(Record):
-    items = [NonSpare_28, NonSpare_136, NonSpare_104, NonSpare_288, NonSpare_221, NonSpare_299, NonSpare_230, NonSpare_379, NonSpare_399, NonSpare_314, NonSpare_320, NonSpare_323, NonSpare_325, NonSpare_327, NonSpare_329, NonSpare_332, NonSpare_341, NonSpare_345, NonSpare_248, NonSpare_118, NonSpare_366, NonSpare_78, NonSpare_390, NonSpare_316, NonSpare_318, NonSpare_273, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_28, NonSpare_136, NonSpare_104, NonSpare_288, NonSpare_221, NonSpare_299, NonSpare_230, NonSpare_379, NonSpare_399, NonSpare_314, NonSpare_320, NonSpare_323, NonSpare_325, NonSpare_327, NonSpare_329, NonSpare_332, NonSpare_341, NonSpare_345, NonSpare_248, NonSpare_118, NonSpare_366, NonSpare_78, NonSpare_390, NonSpare_316, NonSpare_318, NonSpare_273, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_28, "040": NonSpare_136, "030": NonSpare_104, "130": NonSpare_288, "080": NonSpare_221, "140": NonSpare_299, "090": NonSpare_230, "210": NonSpare_379, "230": NonSpare_399, "145": NonSpare_314, "150": NonSpare_320, "151": NonSpare_323, "152": NonSpare_325, "155": NonSpare_327, "157": NonSpare_329, "160": NonSpare_332, "165": NonSpare_341, "170": NonSpare_345, "095": NonSpare_248, "032": NonSpare_118, "200": NonSpare_366, "020": NonSpare_78, "220": NonSpare_390, "146": NonSpare_316, "148": NonSpare_318, "110": NonSpare_273, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_1(UapSingle):
     record = Record_1
@@ -16965,7 +16986,8 @@ class NonSpare_300(NonSpare):
     rule = RuleVariation_276
 
 class Record_3(Record):
-    items = [NonSpare_28, NonSpare_136, NonSpare_104, NonSpare_288, NonSpare_221, NonSpare_300, NonSpare_230, NonSpare_379, NonSpare_399, NonSpare_314, NonSpare_320, NonSpare_323, NonSpare_325, NonSpare_327, NonSpare_329, NonSpare_332, NonSpare_341, NonSpare_345, NonSpare_248, NonSpare_118, NonSpare_366, NonSpare_78, NonSpare_390, NonSpare_316, NonSpare_318, NonSpare_273, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_28, NonSpare_136, NonSpare_104, NonSpare_288, NonSpare_221, NonSpare_300, NonSpare_230, NonSpare_379, NonSpare_399, NonSpare_314, NonSpare_320, NonSpare_323, NonSpare_325, NonSpare_327, NonSpare_329, NonSpare_332, NonSpare_341, NonSpare_345, NonSpare_248, NonSpare_118, NonSpare_366, NonSpare_78, NonSpare_390, NonSpare_316, NonSpare_318, NonSpare_273, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_28, "040": NonSpare_136, "030": NonSpare_104, "130": NonSpare_288, "080": NonSpare_221, "140": NonSpare_300, "090": NonSpare_230, "210": NonSpare_379, "230": NonSpare_399, "145": NonSpare_314, "150": NonSpare_320, "151": NonSpare_323, "152": NonSpare_325, "155": NonSpare_327, "157": NonSpare_329, "160": NonSpare_332, "165": NonSpare_341, "170": NonSpare_345, "095": NonSpare_248, "032": NonSpare_118, "200": NonSpare_366, "020": NonSpare_78, "220": NonSpare_390, "146": NonSpare_316, "148": NonSpare_318, "110": NonSpare_273, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_3(UapSingle):
     record = Record_3
@@ -17016,7 +17038,8 @@ class NonSpare_294(NonSpare):
     rule = RuleVariation_154
 
 class Record_2(Record):
-    items = [NonSpare_28, NonSpare_136, NonSpare_104, NonSpare_288, NonSpare_221, NonSpare_300, NonSpare_230, NonSpare_379, NonSpare_399, NonSpare_314, NonSpare_320, NonSpare_323, NonSpare_325, NonSpare_327, NonSpare_329, NonSpare_332, NonSpare_341, NonSpare_345, NonSpare_248, NonSpare_118, NonSpare_366, NonSpare_78, NonSpare_390, NonSpare_316, NonSpare_318, NonSpare_273, NonSpare_196, NonSpare_294, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_28, NonSpare_136, NonSpare_104, NonSpare_288, NonSpare_221, NonSpare_300, NonSpare_230, NonSpare_379, NonSpare_399, NonSpare_314, NonSpare_320, NonSpare_323, NonSpare_325, NonSpare_327, NonSpare_329, NonSpare_332, NonSpare_341, NonSpare_345, NonSpare_248, NonSpare_118, NonSpare_366, NonSpare_78, NonSpare_390, NonSpare_316, NonSpare_318, NonSpare_273, NonSpare_196, NonSpare_294, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_28, "040": NonSpare_136, "030": NonSpare_104, "130": NonSpare_288, "080": NonSpare_221, "140": NonSpare_300, "090": NonSpare_230, "210": NonSpare_379, "230": NonSpare_399, "145": NonSpare_314, "150": NonSpare_320, "151": NonSpare_323, "152": NonSpare_325, "155": NonSpare_327, "157": NonSpare_329, "160": NonSpare_332, "165": NonSpare_341, "170": NonSpare_345, "095": NonSpare_248, "032": NonSpare_118, "200": NonSpare_366, "020": NonSpare_78, "220": NonSpare_390, "146": NonSpare_316, "148": NonSpare_318, "110": NonSpare_273, "070": NonSpare_196, "131": NonSpare_294, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_2(UapSingle):
     record = Record_2
@@ -20228,7 +20251,8 @@ class NonSpare_433(NonSpare):
     rule = RuleVariation_1321
 
 class Record_7(Record):
-    items = [NonSpare_28, NonSpare_140, NonSpare_338, NonSpare_62, NonSpare_207, NonSpare_287, NonSpare_292, NonSpare_208, NonSpare_320, NonSpare_324, NonSpare_221, NonSpare_209, NonSpare_211, NonSpare_212, NonSpare_214, NonSpare_301, NonSpare_237, NonSpare_381, NonSpare_195, NonSpare_398, NonSpare_314, NonSpare_326, NonSpare_367, NonSpare_328, NonSpare_330, NonSpare_331, NonSpare_342, NonSpare_216, NonSpare_345, NonSpare_77, NonSpare_390, NonSpare_317, NonSpare_319, NonSpare_273, NonSpare_70, NonSpare_26, NonSpare_427, NonSpare_295, NonSpare_411, NonSpare_421, NonSpare_462, NonSpare_433, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_28, NonSpare_140, NonSpare_338, NonSpare_62, NonSpare_207, NonSpare_287, NonSpare_292, NonSpare_208, NonSpare_320, NonSpare_324, NonSpare_221, NonSpare_209, NonSpare_211, NonSpare_212, NonSpare_214, NonSpare_301, NonSpare_237, NonSpare_381, NonSpare_195, NonSpare_398, NonSpare_314, NonSpare_326, NonSpare_367, NonSpare_328, NonSpare_330, NonSpare_331, NonSpare_342, NonSpare_216, NonSpare_345, NonSpare_77, NonSpare_390, NonSpare_317, NonSpare_319, NonSpare_273, NonSpare_70, NonSpare_26, NonSpare_427, NonSpare_295, NonSpare_411, NonSpare_421, NonSpare_462, NonSpare_433, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_28, "040": NonSpare_140, "161": NonSpare_338, "015": NonSpare_62, "071": NonSpare_207, "130": NonSpare_287, "131": NonSpare_292, "072": NonSpare_208, "150": NonSpare_320, "151": NonSpare_324, "080": NonSpare_221, "073": NonSpare_209, "074": NonSpare_211, "075": NonSpare_212, "076": NonSpare_214, "140": NonSpare_301, "090": NonSpare_237, "210": NonSpare_381, "070": NonSpare_195, "230": NonSpare_398, "145": NonSpare_314, "152": NonSpare_326, "200": NonSpare_367, "155": NonSpare_328, "157": NonSpare_330, "160": NonSpare_331, "165": NonSpare_342, "077": NonSpare_216, "170": NonSpare_345, "020": NonSpare_77, "220": NonSpare_390, "146": NonSpare_317, "148": NonSpare_319, "110": NonSpare_273, "016": NonSpare_70, "008": NonSpare_26, "271": NonSpare_427, "132": NonSpare_295, "250": NonSpare_411, "260": NonSpare_421, "400": NonSpare_462, "295": NonSpare_433, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_7(UapSingle):
     record = Record_7
@@ -20303,7 +20327,8 @@ class NonSpare_418(NonSpare):
     rule = RuleVariation_1137
 
 class Record_8(Record):
-    items = [NonSpare_28, NonSpare_140, NonSpare_338, NonSpare_62, NonSpare_207, NonSpare_287, NonSpare_292, NonSpare_208, NonSpare_320, NonSpare_324, NonSpare_221, NonSpare_209, NonSpare_211, NonSpare_212, NonSpare_214, NonSpare_301, NonSpare_238, NonSpare_381, NonSpare_195, NonSpare_398, NonSpare_314, NonSpare_326, NonSpare_368, NonSpare_328, NonSpare_330, NonSpare_331, NonSpare_342, NonSpare_216, NonSpare_345, NonSpare_77, NonSpare_390, NonSpare_317, NonSpare_319, NonSpare_273, NonSpare_70, NonSpare_26, NonSpare_428, NonSpare_295, NonSpare_411, NonSpare_418, NonSpare_462, NonSpare_433, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_28, NonSpare_140, NonSpare_338, NonSpare_62, NonSpare_207, NonSpare_287, NonSpare_292, NonSpare_208, NonSpare_320, NonSpare_324, NonSpare_221, NonSpare_209, NonSpare_211, NonSpare_212, NonSpare_214, NonSpare_301, NonSpare_238, NonSpare_381, NonSpare_195, NonSpare_398, NonSpare_314, NonSpare_326, NonSpare_368, NonSpare_328, NonSpare_330, NonSpare_331, NonSpare_342, NonSpare_216, NonSpare_345, NonSpare_77, NonSpare_390, NonSpare_317, NonSpare_319, NonSpare_273, NonSpare_70, NonSpare_26, NonSpare_428, NonSpare_295, NonSpare_411, NonSpare_418, NonSpare_462, NonSpare_433, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_28, "040": NonSpare_140, "161": NonSpare_338, "015": NonSpare_62, "071": NonSpare_207, "130": NonSpare_287, "131": NonSpare_292, "072": NonSpare_208, "150": NonSpare_320, "151": NonSpare_324, "080": NonSpare_221, "073": NonSpare_209, "074": NonSpare_211, "075": NonSpare_212, "076": NonSpare_214, "140": NonSpare_301, "090": NonSpare_238, "210": NonSpare_381, "070": NonSpare_195, "230": NonSpare_398, "145": NonSpare_314, "152": NonSpare_326, "200": NonSpare_368, "155": NonSpare_328, "157": NonSpare_330, "160": NonSpare_331, "165": NonSpare_342, "077": NonSpare_216, "170": NonSpare_345, "020": NonSpare_77, "220": NonSpare_390, "146": NonSpare_317, "148": NonSpare_319, "110": NonSpare_273, "016": NonSpare_70, "008": NonSpare_26, "271": NonSpare_428, "132": NonSpare_295, "250": NonSpare_411, "260": NonSpare_418, "400": NonSpare_462, "295": NonSpare_433, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_8(UapSingle):
     record = Record_8
@@ -20347,7 +20372,8 @@ class NonSpare_138(NonSpare):
     rule = RuleVariation_1209
 
 class Record_5(Record):
-    items = [NonSpare_28, NonSpare_138, NonSpare_338, NonSpare_62, NonSpare_207, NonSpare_287, NonSpare_292, NonSpare_208, NonSpare_320, NonSpare_324, NonSpare_221, NonSpare_209, NonSpare_211, NonSpare_212, NonSpare_214, NonSpare_301, NonSpare_238, NonSpare_381, NonSpare_195, NonSpare_398, NonSpare_314, NonSpare_326, NonSpare_368, NonSpare_328, NonSpare_330, NonSpare_331, NonSpare_342, NonSpare_216, NonSpare_345, NonSpare_77, NonSpare_390, NonSpare_317, NonSpare_319, NonSpare_273, NonSpare_70, NonSpare_26, NonSpare_428, NonSpare_295, NonSpare_411, NonSpare_418, NonSpare_462, NonSpare_433, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_28, NonSpare_138, NonSpare_338, NonSpare_62, NonSpare_207, NonSpare_287, NonSpare_292, NonSpare_208, NonSpare_320, NonSpare_324, NonSpare_221, NonSpare_209, NonSpare_211, NonSpare_212, NonSpare_214, NonSpare_301, NonSpare_238, NonSpare_381, NonSpare_195, NonSpare_398, NonSpare_314, NonSpare_326, NonSpare_368, NonSpare_328, NonSpare_330, NonSpare_331, NonSpare_342, NonSpare_216, NonSpare_345, NonSpare_77, NonSpare_390, NonSpare_317, NonSpare_319, NonSpare_273, NonSpare_70, NonSpare_26, NonSpare_428, NonSpare_295, NonSpare_411, NonSpare_418, NonSpare_462, NonSpare_433, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_28, "040": NonSpare_138, "161": NonSpare_338, "015": NonSpare_62, "071": NonSpare_207, "130": NonSpare_287, "131": NonSpare_292, "072": NonSpare_208, "150": NonSpare_320, "151": NonSpare_324, "080": NonSpare_221, "073": NonSpare_209, "074": NonSpare_211, "075": NonSpare_212, "076": NonSpare_214, "140": NonSpare_301, "090": NonSpare_238, "210": NonSpare_381, "070": NonSpare_195, "230": NonSpare_398, "145": NonSpare_314, "152": NonSpare_326, "200": NonSpare_368, "155": NonSpare_328, "157": NonSpare_330, "160": NonSpare_331, "165": NonSpare_342, "077": NonSpare_216, "170": NonSpare_345, "020": NonSpare_77, "220": NonSpare_390, "146": NonSpare_317, "148": NonSpare_319, "110": NonSpare_273, "016": NonSpare_70, "008": NonSpare_26, "271": NonSpare_428, "132": NonSpare_295, "250": NonSpare_411, "260": NonSpare_418, "400": NonSpare_462, "295": NonSpare_433, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_5(UapSingle):
     record = Record_5
@@ -20418,7 +20444,8 @@ class NonSpare_419(NonSpare):
     rule = RuleVariation_1137
 
 class Record_4(Record):
-    items = [NonSpare_28, NonSpare_137, NonSpare_338, NonSpare_62, NonSpare_207, NonSpare_287, NonSpare_292, NonSpare_208, NonSpare_320, NonSpare_324, NonSpare_222, NonSpare_209, NonSpare_211, NonSpare_212, NonSpare_214, NonSpare_301, NonSpare_238, NonSpare_380, NonSpare_195, NonSpare_398, NonSpare_314, NonSpare_326, NonSpare_369, NonSpare_328, NonSpare_330, NonSpare_331, NonSpare_342, NonSpare_216, NonSpare_345, NonSpare_77, NonSpare_390, NonSpare_317, NonSpare_319, NonSpare_273, NonSpare_70, NonSpare_26, NonSpare_428, NonSpare_295, NonSpare_411, NonSpare_419, NonSpare_462, NonSpare_433, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_28, NonSpare_137, NonSpare_338, NonSpare_62, NonSpare_207, NonSpare_287, NonSpare_292, NonSpare_208, NonSpare_320, NonSpare_324, NonSpare_222, NonSpare_209, NonSpare_211, NonSpare_212, NonSpare_214, NonSpare_301, NonSpare_238, NonSpare_380, NonSpare_195, NonSpare_398, NonSpare_314, NonSpare_326, NonSpare_369, NonSpare_328, NonSpare_330, NonSpare_331, NonSpare_342, NonSpare_216, NonSpare_345, NonSpare_77, NonSpare_390, NonSpare_317, NonSpare_319, NonSpare_273, NonSpare_70, NonSpare_26, NonSpare_428, NonSpare_295, NonSpare_411, NonSpare_419, NonSpare_462, NonSpare_433, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_28, "040": NonSpare_137, "161": NonSpare_338, "015": NonSpare_62, "071": NonSpare_207, "130": NonSpare_287, "131": NonSpare_292, "072": NonSpare_208, "150": NonSpare_320, "151": NonSpare_324, "080": NonSpare_222, "073": NonSpare_209, "074": NonSpare_211, "075": NonSpare_212, "076": NonSpare_214, "140": NonSpare_301, "090": NonSpare_238, "210": NonSpare_380, "070": NonSpare_195, "230": NonSpare_398, "145": NonSpare_314, "152": NonSpare_326, "200": NonSpare_369, "155": NonSpare_328, "157": NonSpare_330, "160": NonSpare_331, "165": NonSpare_342, "077": NonSpare_216, "170": NonSpare_345, "020": NonSpare_77, "220": NonSpare_390, "146": NonSpare_317, "148": NonSpare_319, "110": NonSpare_273, "016": NonSpare_70, "008": NonSpare_26, "271": NonSpare_428, "132": NonSpare_295, "250": NonSpare_411, "260": NonSpare_419, "400": NonSpare_462, "295": NonSpare_433, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_4(UapSingle):
     record = Record_4
@@ -20523,7 +20550,8 @@ class NonSpare_434(NonSpare):
     rule = RuleVariation_1322
 
 class Record_6(Record):
-    items = [NonSpare_28, NonSpare_139, NonSpare_338, NonSpare_62, NonSpare_207, NonSpare_287, NonSpare_292, NonSpare_208, NonSpare_320, NonSpare_324, NonSpare_222, NonSpare_209, NonSpare_211, NonSpare_212, NonSpare_214, NonSpare_301, NonSpare_238, NonSpare_380, NonSpare_195, NonSpare_398, NonSpare_314, NonSpare_326, NonSpare_370, NonSpare_328, NonSpare_330, NonSpare_331, NonSpare_342, NonSpare_216, NonSpare_345, NonSpare_77, NonSpare_390, NonSpare_317, NonSpare_319, NonSpare_273, NonSpare_70, NonSpare_26, NonSpare_428, NonSpare_295, NonSpare_411, NonSpare_420, NonSpare_462, NonSpare_434, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_28, NonSpare_139, NonSpare_338, NonSpare_62, NonSpare_207, NonSpare_287, NonSpare_292, NonSpare_208, NonSpare_320, NonSpare_324, NonSpare_222, NonSpare_209, NonSpare_211, NonSpare_212, NonSpare_214, NonSpare_301, NonSpare_238, NonSpare_380, NonSpare_195, NonSpare_398, NonSpare_314, NonSpare_326, NonSpare_370, NonSpare_328, NonSpare_330, NonSpare_331, NonSpare_342, NonSpare_216, NonSpare_345, NonSpare_77, NonSpare_390, NonSpare_317, NonSpare_319, NonSpare_273, NonSpare_70, NonSpare_26, NonSpare_428, NonSpare_295, NonSpare_411, NonSpare_420, NonSpare_462, NonSpare_434, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_28, "040": NonSpare_139, "161": NonSpare_338, "015": NonSpare_62, "071": NonSpare_207, "130": NonSpare_287, "131": NonSpare_292, "072": NonSpare_208, "150": NonSpare_320, "151": NonSpare_324, "080": NonSpare_222, "073": NonSpare_209, "074": NonSpare_211, "075": NonSpare_212, "076": NonSpare_214, "140": NonSpare_301, "090": NonSpare_238, "210": NonSpare_380, "070": NonSpare_195, "230": NonSpare_398, "145": NonSpare_314, "152": NonSpare_326, "200": NonSpare_370, "155": NonSpare_328, "157": NonSpare_330, "160": NonSpare_331, "165": NonSpare_342, "077": NonSpare_216, "170": NonSpare_345, "020": NonSpare_77, "220": NonSpare_390, "146": NonSpare_317, "148": NonSpare_319, "110": NonSpare_273, "016": NonSpare_70, "008": NonSpare_26, "271": NonSpare_428, "132": NonSpare_295, "250": NonSpare_411, "260": NonSpare_420, "400": NonSpare_462, "295": NonSpare_434, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_6(UapSingle):
     record = Record_6
@@ -20969,7 +20997,8 @@ class NonSpare_281(NonSpare):
     rule = RuleVariation_1299
 
 class Record_9(Record):
-    items = [NonSpare_29, NonSpare_17, NonSpare_67, NonSpare_205, NonSpare_253, NonSpare_261, NonSpare_363, NonSpare_271, NonSpare_281, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_29, NonSpare_17, NonSpare_67, NonSpare_205, NonSpare_253, NonSpare_261, NonSpare_363, NonSpare_271, NonSpare_281, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_29, "000": NonSpare_17, "015": NonSpare_67, "070": NonSpare_205, "100": NonSpare_253, "101": NonSpare_261, "200": NonSpare_363, "110": NonSpare_271, "120": NonSpare_281, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_9(UapSingle):
     record = Record_9
@@ -21384,7 +21413,8 @@ class NonSpare_501(NonSpare):
     rule = RuleVariation_263
 
 class Record_11(Record):
-    items = [NonSpare_31, NonSpare_18, NonSpare_361, NonSpare_66, NonSpare_81, NonSpare_204, NonSpare_259, NonSpare_264, NonSpare_275, NonSpare_302, NonSpare_1641, NonSpare_493, NonSpare_501]
+    items_list = [NonSpare_31, NonSpare_18, NonSpare_361, NonSpare_66, NonSpare_81, NonSpare_204, NonSpare_259, NonSpare_264, NonSpare_275, NonSpare_302, NonSpare_1641, NonSpare_493, NonSpare_501]
+    items_dict = {"010": NonSpare_31, "000": NonSpare_18, "200": NonSpare_361, "015": NonSpare_66, "020": NonSpare_81, "070": NonSpare_204, "100": NonSpare_259, "105": NonSpare_264, "120": NonSpare_275, "140": NonSpare_302, "SP": NonSpare_1641, "600": NonSpare_493, "610": NonSpare_501}
 
 class Uap_11(UapSingle):
     record = Record_11
@@ -22080,7 +22110,8 @@ class NonSpare_481(NonSpare):
     rule = RuleVariation_1339
 
 class Record_47(Record):
-    items = [NonSpare_48, NonSpare_68, NonSpare_72, NonSpare_124, NonSpare_88, NonSpare_142, NonSpare_159, NonSpare_188, NonSpare_458, NonSpare_464, NonSpare_466, NonSpare_471, NonSpare_472, NonSpare_475, NonSpare_476, NonSpare_469, NonSpare_470, NonSpare_473, NonSpare_481, UapItemSpare, NonSpare_1481]
+    items_list = [NonSpare_48, NonSpare_68, NonSpare_72, NonSpare_124, NonSpare_88, NonSpare_142, NonSpare_159, NonSpare_188, NonSpare_458, NonSpare_464, NonSpare_466, NonSpare_471, NonSpare_472, NonSpare_475, NonSpare_476, NonSpare_469, NonSpare_470, NonSpare_473, NonSpare_481, UapItemSpare, NonSpare_1481]
+    items_dict = {"010": NonSpare_48, "015": NonSpare_68, "018": NonSpare_72, "035": NonSpare_124, "020": NonSpare_88, "040": NonSpare_142, "050": NonSpare_159, "060": NonSpare_188, "400": NonSpare_458, "410": NonSpare_464, "420": NonSpare_466, "440": NonSpare_471, "450": NonSpare_472, "480": NonSpare_475, "490": NonSpare_476, "430": NonSpare_469, "435": NonSpare_470, "460": NonSpare_473, "500": NonSpare_481, "RE": NonSpare_1481}
 
 class Uap_43(UapSingle):
     record = Record_47
@@ -22959,7 +22990,8 @@ class NonSpare_229(NonSpare):
     rule = RuleVariation_1098
 
 class Record_14(Record):
-    items = [NonSpare_34, NonSpare_3, NonSpare_102, NonSpare_80, NonSpare_145, NonSpare_170, NonSpare_187, NonSpare_193, NonSpare_252, NonSpare_265, NonSpare_274, NonSpare_229, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_34, NonSpare_3, NonSpare_102, NonSpare_80, NonSpare_145, NonSpare_170, NonSpare_187, NonSpare_193, NonSpare_252, NonSpare_265, NonSpare_274, NonSpare_229, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_34, "000": NonSpare_3, "030": NonSpare_102, "020": NonSpare_80, "041": NonSpare_145, "050": NonSpare_170, "060": NonSpare_187, "070": NonSpare_193, "100": NonSpare_252, "110": NonSpare_265, "120": NonSpare_274, "090": NonSpare_229, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_14(UapSingle):
     record = Record_14
@@ -23028,7 +23060,8 @@ class NonSpare_194(NonSpare):
     rule = RuleVariation_1296
 
 class Record_15(Record):
-    items = [NonSpare_34, NonSpare_4, NonSpare_102, NonSpare_80, NonSpare_145, NonSpare_170, NonSpare_187, NonSpare_194, NonSpare_252, NonSpare_265, NonSpare_274, NonSpare_229, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_34, NonSpare_4, NonSpare_102, NonSpare_80, NonSpare_145, NonSpare_170, NonSpare_187, NonSpare_194, NonSpare_252, NonSpare_265, NonSpare_274, NonSpare_229, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_34, "000": NonSpare_4, "030": NonSpare_102, "020": NonSpare_80, "041": NonSpare_145, "050": NonSpare_170, "060": NonSpare_187, "070": NonSpare_194, "100": NonSpare_252, "110": NonSpare_265, "120": NonSpare_274, "090": NonSpare_229, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_15(UapSingle):
     record = Record_15
@@ -23058,7 +23091,8 @@ class NonSpare_5(NonSpare):
     rule = RuleVariation_175
 
 class Record_16(Record):
-    items = [NonSpare_34, NonSpare_5, NonSpare_102, NonSpare_80, NonSpare_145, NonSpare_170, NonSpare_187, NonSpare_194, NonSpare_252, NonSpare_265, NonSpare_274, NonSpare_229, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_34, NonSpare_5, NonSpare_102, NonSpare_80, NonSpare_145, NonSpare_170, NonSpare_187, NonSpare_194, NonSpare_252, NonSpare_265, NonSpare_274, NonSpare_229, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_34, "000": NonSpare_5, "030": NonSpare_102, "020": NonSpare_80, "041": NonSpare_145, "050": NonSpare_170, "060": NonSpare_187, "070": NonSpare_194, "100": NonSpare_252, "110": NonSpare_265, "120": NonSpare_274, "090": NonSpare_229, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_16(UapSingle):
     record = Record_16
@@ -25702,7 +25736,8 @@ class NonSpare_177(NonSpare):
     rule = RuleVariation_966
 
 class Record_28(Record):
-    items = [NonSpare_38, NonSpare_309, NonSpare_85, NonSpare_132, NonSpare_198, NonSpare_231, NonSpare_290, NonSpare_387, NonSpare_401, NonSpare_414, NonSpare_337, NonSpare_152, NonSpare_359, NonSpare_349, NonSpare_383, NonSpare_113, NonSpare_217, NonSpare_255, NonSpare_268, NonSpare_279, NonSpare_395, NonSpare_416, NonSpare_175, NonSpare_162, NonSpare_190, NonSpare_177, NonSpare_1641, NonSpare_1481]
+    items_list = [NonSpare_38, NonSpare_309, NonSpare_85, NonSpare_132, NonSpare_198, NonSpare_231, NonSpare_290, NonSpare_387, NonSpare_401, NonSpare_414, NonSpare_337, NonSpare_152, NonSpare_359, NonSpare_349, NonSpare_383, NonSpare_113, NonSpare_217, NonSpare_255, NonSpare_268, NonSpare_279, NonSpare_395, NonSpare_416, NonSpare_175, NonSpare_162, NonSpare_190, NonSpare_177, NonSpare_1641, NonSpare_1481]
+    items_dict = {"010": NonSpare_38, "140": NonSpare_309, "020": NonSpare_85, "040": NonSpare_132, "070": NonSpare_198, "090": NonSpare_231, "130": NonSpare_290, "220": NonSpare_387, "240": NonSpare_401, "250": NonSpare_414, "161": NonSpare_337, "042": NonSpare_152, "200": NonSpare_359, "170": NonSpare_349, "210": NonSpare_383, "030": NonSpare_113, "080": NonSpare_217, "100": NonSpare_255, "110": NonSpare_268, "120": NonSpare_279, "230": NonSpare_395, "260": NonSpare_416, "055": NonSpare_175, "050": NonSpare_162, "065": NonSpare_190, "060": NonSpare_177, "SP": NonSpare_1641, "RE": NonSpare_1481}
 
 class Uap_24(UapSingle):
     record = Record_28
@@ -25736,7 +25771,8 @@ class NonSpare_114(NonSpare):
     rule = RuleVariation_1308
 
 class Record_29(Record):
-    items = [NonSpare_38, NonSpare_309, NonSpare_85, NonSpare_132, NonSpare_198, NonSpare_231, NonSpare_290, NonSpare_387, NonSpare_401, NonSpare_414, NonSpare_337, NonSpare_152, NonSpare_359, NonSpare_349, NonSpare_383, NonSpare_114, NonSpare_217, NonSpare_255, NonSpare_268, NonSpare_279, NonSpare_395, NonSpare_416, NonSpare_175, NonSpare_162, NonSpare_190, NonSpare_177, NonSpare_1641, NonSpare_1481]
+    items_list = [NonSpare_38, NonSpare_309, NonSpare_85, NonSpare_132, NonSpare_198, NonSpare_231, NonSpare_290, NonSpare_387, NonSpare_401, NonSpare_414, NonSpare_337, NonSpare_152, NonSpare_359, NonSpare_349, NonSpare_383, NonSpare_114, NonSpare_217, NonSpare_255, NonSpare_268, NonSpare_279, NonSpare_395, NonSpare_416, NonSpare_175, NonSpare_162, NonSpare_190, NonSpare_177, NonSpare_1641, NonSpare_1481]
+    items_dict = {"010": NonSpare_38, "140": NonSpare_309, "020": NonSpare_85, "040": NonSpare_132, "070": NonSpare_198, "090": NonSpare_231, "130": NonSpare_290, "220": NonSpare_387, "240": NonSpare_401, "250": NonSpare_414, "161": NonSpare_337, "042": NonSpare_152, "200": NonSpare_359, "170": NonSpare_349, "210": NonSpare_383, "030": NonSpare_114, "080": NonSpare_217, "100": NonSpare_255, "110": NonSpare_268, "120": NonSpare_279, "230": NonSpare_395, "260": NonSpare_416, "055": NonSpare_175, "050": NonSpare_162, "065": NonSpare_190, "060": NonSpare_177, "SP": NonSpare_1641, "RE": NonSpare_1481}
 
 class Uap_25(UapSingle):
     record = Record_29
@@ -25757,7 +25793,8 @@ class NonSpare_417(NonSpare):
     rule = RuleVariation_377
 
 class Record_27(Record):
-    items = [NonSpare_38, NonSpare_309, NonSpare_85, NonSpare_132, NonSpare_198, NonSpare_231, NonSpare_290, NonSpare_387, NonSpare_401, NonSpare_410, NonSpare_337, NonSpare_152, NonSpare_359, NonSpare_349, NonSpare_383, NonSpare_114, NonSpare_217, NonSpare_255, NonSpare_268, NonSpare_279, NonSpare_395, NonSpare_417, NonSpare_175, NonSpare_162, NonSpare_190, NonSpare_177, NonSpare_1641, NonSpare_1481]
+    items_list = [NonSpare_38, NonSpare_309, NonSpare_85, NonSpare_132, NonSpare_198, NonSpare_231, NonSpare_290, NonSpare_387, NonSpare_401, NonSpare_410, NonSpare_337, NonSpare_152, NonSpare_359, NonSpare_349, NonSpare_383, NonSpare_114, NonSpare_217, NonSpare_255, NonSpare_268, NonSpare_279, NonSpare_395, NonSpare_417, NonSpare_175, NonSpare_162, NonSpare_190, NonSpare_177, NonSpare_1641, NonSpare_1481]
+    items_dict = {"010": NonSpare_38, "140": NonSpare_309, "020": NonSpare_85, "040": NonSpare_132, "070": NonSpare_198, "090": NonSpare_231, "130": NonSpare_290, "220": NonSpare_387, "240": NonSpare_401, "250": NonSpare_410, "161": NonSpare_337, "042": NonSpare_152, "200": NonSpare_359, "170": NonSpare_349, "210": NonSpare_383, "030": NonSpare_114, "080": NonSpare_217, "100": NonSpare_255, "110": NonSpare_268, "120": NonSpare_279, "230": NonSpare_395, "260": NonSpare_417, "055": NonSpare_175, "050": NonSpare_162, "065": NonSpare_190, "060": NonSpare_177, "SP": NonSpare_1641, "RE": NonSpare_1481}
 
 class Uap_23(UapSingle):
     record = Record_27
@@ -25793,7 +25830,8 @@ class NonSpare_161(NonSpare):
     rule = RuleVariation_1150
 
 class Record_30(Record):
-    items = [NonSpare_38, NonSpare_309, NonSpare_85, NonSpare_132, NonSpare_198, NonSpare_231, NonSpare_290, NonSpare_388, NonSpare_402, NonSpare_409, NonSpare_337, NonSpare_152, NonSpare_359, NonSpare_349, NonSpare_383, NonSpare_114, NonSpare_217, NonSpare_255, NonSpare_268, NonSpare_279, NonSpare_396, NonSpare_417, NonSpare_175, NonSpare_161, NonSpare_190, NonSpare_177, NonSpare_1641, NonSpare_1481]
+    items_list = [NonSpare_38, NonSpare_309, NonSpare_85, NonSpare_132, NonSpare_198, NonSpare_231, NonSpare_290, NonSpare_388, NonSpare_402, NonSpare_409, NonSpare_337, NonSpare_152, NonSpare_359, NonSpare_349, NonSpare_383, NonSpare_114, NonSpare_217, NonSpare_255, NonSpare_268, NonSpare_279, NonSpare_396, NonSpare_417, NonSpare_175, NonSpare_161, NonSpare_190, NonSpare_177, NonSpare_1641, NonSpare_1481]
+    items_dict = {"010": NonSpare_38, "140": NonSpare_309, "020": NonSpare_85, "040": NonSpare_132, "070": NonSpare_198, "090": NonSpare_231, "130": NonSpare_290, "220": NonSpare_388, "240": NonSpare_402, "250": NonSpare_409, "161": NonSpare_337, "042": NonSpare_152, "200": NonSpare_359, "170": NonSpare_349, "210": NonSpare_383, "030": NonSpare_114, "080": NonSpare_217, "100": NonSpare_255, "110": NonSpare_268, "120": NonSpare_279, "230": NonSpare_396, "260": NonSpare_417, "055": NonSpare_175, "050": NonSpare_161, "065": NonSpare_190, "060": NonSpare_177, "SP": NonSpare_1641, "RE": NonSpare_1481}
 
 class Uap_26(UapSingle):
     record = Record_30
@@ -26011,7 +26049,8 @@ class NonSpare_280(NonSpare):
     rule = RuleVariation_1326
 
 class Record_31(Record):
-    items = [NonSpare_38, NonSpare_309, NonSpare_86, NonSpare_132, NonSpare_198, NonSpare_231, NonSpare_290, NonSpare_388, NonSpare_402, NonSpare_409, NonSpare_337, NonSpare_152, NonSpare_359, NonSpare_349, NonSpare_383, NonSpare_115, NonSpare_217, NonSpare_255, NonSpare_268, NonSpare_280, NonSpare_396, NonSpare_417, NonSpare_175, NonSpare_161, NonSpare_190, NonSpare_177, NonSpare_1641, NonSpare_1481]
+    items_list = [NonSpare_38, NonSpare_309, NonSpare_86, NonSpare_132, NonSpare_198, NonSpare_231, NonSpare_290, NonSpare_388, NonSpare_402, NonSpare_409, NonSpare_337, NonSpare_152, NonSpare_359, NonSpare_349, NonSpare_383, NonSpare_115, NonSpare_217, NonSpare_255, NonSpare_268, NonSpare_280, NonSpare_396, NonSpare_417, NonSpare_175, NonSpare_161, NonSpare_190, NonSpare_177, NonSpare_1641, NonSpare_1481]
+    items_dict = {"010": NonSpare_38, "140": NonSpare_309, "020": NonSpare_86, "040": NonSpare_132, "070": NonSpare_198, "090": NonSpare_231, "130": NonSpare_290, "220": NonSpare_388, "240": NonSpare_402, "250": NonSpare_409, "161": NonSpare_337, "042": NonSpare_152, "200": NonSpare_359, "170": NonSpare_349, "210": NonSpare_383, "030": NonSpare_115, "080": NonSpare_217, "100": NonSpare_255, "110": NonSpare_268, "120": NonSpare_280, "230": NonSpare_396, "260": NonSpare_417, "055": NonSpare_175, "050": NonSpare_161, "065": NonSpare_190, "060": NonSpare_177, "SP": NonSpare_1641, "RE": NonSpare_1481}
 
 class Uap_27(UapSingle):
     record = Record_31
@@ -29120,7 +29159,8 @@ class NonSpare_444(NonSpare):
     rule = RuleVariation_1352
 
 class Record_40(Record):
-    items = [NonSpare_45, UapItemSpare, NonSpare_57, NonSpare_202, NonSpare_262, NonSpare_250, NonSpare_356, NonSpare_378, NonSpare_189, NonSpare_404, NonSpare_447, NonSpare_141, NonSpare_223, NonSpare_432, NonSpare_362, NonSpare_435, NonSpare_297, NonSpare_284, NonSpare_296, NonSpare_389, NonSpare_455, NonSpare_424, NonSpare_439, NonSpare_270, NonSpare_283, NonSpare_482, NonSpare_477, NonSpare_444, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_45, UapItemSpare, NonSpare_57, NonSpare_202, NonSpare_262, NonSpare_250, NonSpare_356, NonSpare_378, NonSpare_189, NonSpare_404, NonSpare_447, NonSpare_141, NonSpare_223, NonSpare_432, NonSpare_362, NonSpare_435, NonSpare_297, NonSpare_284, NonSpare_296, NonSpare_389, NonSpare_455, NonSpare_424, NonSpare_439, NonSpare_270, NonSpare_283, NonSpare_482, NonSpare_477, NonSpare_444, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_45, "015": NonSpare_57, "070": NonSpare_202, "105": NonSpare_262, "100": NonSpare_250, "185": NonSpare_356, "210": NonSpare_378, "060": NonSpare_189, "245": NonSpare_404, "380": NonSpare_447, "040": NonSpare_141, "080": NonSpare_223, "290": NonSpare_432, "200": NonSpare_362, "295": NonSpare_435, "136": NonSpare_297, "130": NonSpare_284, "135": NonSpare_296, "220": NonSpare_389, "390": NonSpare_455, "270": NonSpare_424, "300": NonSpare_439, "110": NonSpare_270, "120": NonSpare_283, "510": NonSpare_482, "500": NonSpare_477, "340": NonSpare_444, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_36(UapSingle):
     record = Record_40
@@ -29255,7 +29295,8 @@ class NonSpare_224(NonSpare):
     rule = RuleVariation_1231
 
 class Record_43(Record):
-    items = [NonSpare_45, UapItemSpare, NonSpare_57, NonSpare_202, NonSpare_262, NonSpare_250, NonSpare_356, NonSpare_378, NonSpare_189, NonSpare_404, NonSpare_450, NonSpare_141, NonSpare_224, NonSpare_432, NonSpare_362, NonSpare_435, NonSpare_297, NonSpare_284, NonSpare_296, NonSpare_389, NonSpare_455, NonSpare_424, NonSpare_439, NonSpare_270, NonSpare_283, NonSpare_482, NonSpare_477, NonSpare_444, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_45, UapItemSpare, NonSpare_57, NonSpare_202, NonSpare_262, NonSpare_250, NonSpare_356, NonSpare_378, NonSpare_189, NonSpare_404, NonSpare_450, NonSpare_141, NonSpare_224, NonSpare_432, NonSpare_362, NonSpare_435, NonSpare_297, NonSpare_284, NonSpare_296, NonSpare_389, NonSpare_455, NonSpare_424, NonSpare_439, NonSpare_270, NonSpare_283, NonSpare_482, NonSpare_477, NonSpare_444, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_45, "015": NonSpare_57, "070": NonSpare_202, "105": NonSpare_262, "100": NonSpare_250, "185": NonSpare_356, "210": NonSpare_378, "060": NonSpare_189, "245": NonSpare_404, "380": NonSpare_450, "040": NonSpare_141, "080": NonSpare_224, "290": NonSpare_432, "200": NonSpare_362, "295": NonSpare_435, "136": NonSpare_297, "130": NonSpare_284, "135": NonSpare_296, "220": NonSpare_389, "390": NonSpare_455, "270": NonSpare_424, "300": NonSpare_439, "110": NonSpare_270, "120": NonSpare_283, "510": NonSpare_482, "500": NonSpare_477, "340": NonSpare_444, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_39(UapSingle):
     record = Record_43
@@ -29333,7 +29374,8 @@ class NonSpare_443(NonSpare):
     rule = RuleVariation_1351
 
 class Record_42(Record):
-    items = [NonSpare_45, UapItemSpare, NonSpare_57, NonSpare_202, NonSpare_262, NonSpare_250, NonSpare_356, NonSpare_378, NonSpare_189, NonSpare_404, NonSpare_449, NonSpare_141, NonSpare_224, NonSpare_432, NonSpare_362, NonSpare_435, NonSpare_297, NonSpare_284, NonSpare_296, NonSpare_389, NonSpare_456, NonSpare_424, NonSpare_439, NonSpare_270, NonSpare_283, NonSpare_482, NonSpare_477, NonSpare_443, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_45, UapItemSpare, NonSpare_57, NonSpare_202, NonSpare_262, NonSpare_250, NonSpare_356, NonSpare_378, NonSpare_189, NonSpare_404, NonSpare_449, NonSpare_141, NonSpare_224, NonSpare_432, NonSpare_362, NonSpare_435, NonSpare_297, NonSpare_284, NonSpare_296, NonSpare_389, NonSpare_456, NonSpare_424, NonSpare_439, NonSpare_270, NonSpare_283, NonSpare_482, NonSpare_477, NonSpare_443, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_45, "015": NonSpare_57, "070": NonSpare_202, "105": NonSpare_262, "100": NonSpare_250, "185": NonSpare_356, "210": NonSpare_378, "060": NonSpare_189, "245": NonSpare_404, "380": NonSpare_449, "040": NonSpare_141, "080": NonSpare_224, "290": NonSpare_432, "200": NonSpare_362, "295": NonSpare_435, "136": NonSpare_297, "130": NonSpare_284, "135": NonSpare_296, "220": NonSpare_389, "390": NonSpare_456, "270": NonSpare_424, "300": NonSpare_439, "110": NonSpare_270, "120": NonSpare_283, "510": NonSpare_482, "500": NonSpare_477, "340": NonSpare_443, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_38(UapSingle):
     record = Record_42
@@ -29394,7 +29436,8 @@ class NonSpare_225(NonSpare):
     rule = RuleVariation_1232
 
 class Record_41(Record):
-    items = [NonSpare_45, UapItemSpare, NonSpare_57, NonSpare_202, NonSpare_262, NonSpare_250, NonSpare_356, NonSpare_378, NonSpare_189, NonSpare_404, NonSpare_448, NonSpare_141, NonSpare_225, NonSpare_432, NonSpare_362, NonSpare_435, NonSpare_297, NonSpare_284, NonSpare_296, NonSpare_389, NonSpare_456, NonSpare_424, NonSpare_439, NonSpare_270, NonSpare_283, NonSpare_482, NonSpare_477, NonSpare_443, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_45, UapItemSpare, NonSpare_57, NonSpare_202, NonSpare_262, NonSpare_250, NonSpare_356, NonSpare_378, NonSpare_189, NonSpare_404, NonSpare_448, NonSpare_141, NonSpare_225, NonSpare_432, NonSpare_362, NonSpare_435, NonSpare_297, NonSpare_284, NonSpare_296, NonSpare_389, NonSpare_456, NonSpare_424, NonSpare_439, NonSpare_270, NonSpare_283, NonSpare_482, NonSpare_477, NonSpare_443, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_45, "015": NonSpare_57, "070": NonSpare_202, "105": NonSpare_262, "100": NonSpare_250, "185": NonSpare_356, "210": NonSpare_378, "060": NonSpare_189, "245": NonSpare_404, "380": NonSpare_448, "040": NonSpare_141, "080": NonSpare_225, "290": NonSpare_432, "200": NonSpare_362, "295": NonSpare_435, "136": NonSpare_297, "130": NonSpare_284, "135": NonSpare_296, "220": NonSpare_389, "390": NonSpare_456, "270": NonSpare_424, "300": NonSpare_439, "110": NonSpare_270, "120": NonSpare_283, "510": NonSpare_482, "500": NonSpare_477, "340": NonSpare_443, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_37(UapSingle):
     record = Record_41
@@ -29765,7 +29808,8 @@ class NonSpare_245(NonSpare):
     rule = RuleVariation_284
 
 class Record_21(Record):
-    items = [NonSpare_36, NonSpare_63, NonSpare_107, NonSpare_166, NonSpare_184, NonSpare_203, NonSpare_219, NonSpare_227, NonSpare_236, NonSpare_243, NonSpare_245, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_36, NonSpare_63, NonSpare_107, NonSpare_166, NonSpare_184, NonSpare_203, NonSpare_219, NonSpare_227, NonSpare_236, NonSpare_243, NonSpare_245, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_36, "015": NonSpare_63, "030": NonSpare_107, "050": NonSpare_166, "060": NonSpare_184, "070": NonSpare_203, "080": NonSpare_219, "081": NonSpare_227, "090": NonSpare_236, "091": NonSpare_243, "092": NonSpare_245, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_19(UapSingle):
     record = Record_21
@@ -29938,7 +29982,8 @@ class NonSpare_168(NonSpare):
     rule = RuleVariation_179
 
 class Record_39(Record):
-    items = [NonSpare_45, NonSpare_8, NonSpare_59, NonSpare_106, NonSpare_75, NonSpare_135, NonSpare_168, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_45, NonSpare_8, NonSpare_59, NonSpare_106, NonSpare_75, NonSpare_135, NonSpare_168, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, UapItemSpare, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_45, "000": NonSpare_8, "015": NonSpare_59, "030": NonSpare_106, "020": NonSpare_75, "040": NonSpare_135, "050": NonSpare_168, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_35(UapSingle):
     record = Record_39
@@ -30173,7 +30218,8 @@ class NonSpare_364(NonSpare):
     rule = RuleVariation_255
 
 class Record_12(Record):
-    items = [NonSpare_32, NonSpare_61, NonSpare_11, NonSpare_105, NonSpare_134, NonSpare_240, NonSpare_165, NonSpare_182, NonSpare_192, NonSpare_220, NonSpare_258, NonSpare_266, NonSpare_277, NonSpare_285, NonSpare_298, NonSpare_321, NonSpare_333, NonSpare_344, NonSpare_355, NonSpare_357, NonSpare_364, NonSpare_1641]
+    items_list = [NonSpare_32, NonSpare_61, NonSpare_11, NonSpare_105, NonSpare_134, NonSpare_240, NonSpare_165, NonSpare_182, NonSpare_192, NonSpare_220, NonSpare_258, NonSpare_266, NonSpare_277, NonSpare_285, NonSpare_298, NonSpare_321, NonSpare_333, NonSpare_344, NonSpare_355, NonSpare_357, NonSpare_364, NonSpare_1641]
+    items_dict = {"010": NonSpare_32, "015": NonSpare_61, "000": NonSpare_11, "030": NonSpare_105, "040": NonSpare_134, "090": NonSpare_240, "050": NonSpare_165, "060": NonSpare_182, "070": NonSpare_192, "080": NonSpare_220, "100": NonSpare_258, "110": NonSpare_266, "120": NonSpare_277, "130": NonSpare_285, "140": NonSpare_298, "150": NonSpare_321, "160": NonSpare_333, "170": NonSpare_344, "180": NonSpare_355, "190": NonSpare_357, "200": NonSpare_364, "SP": NonSpare_1641}
 
 class Uap_12(UapSingle):
     record = Record_12
@@ -30468,7 +30514,8 @@ class NonSpare_306(NonSpare):
     rule = RuleVariation_356
 
 class Record_37(Record):
-    items = [NonSpare_43, NonSpare_14, NonSpare_92, NonSpare_109, NonSpare_143, NonSpare_149, NonSpare_157, NonSpare_158, NonSpare_172, NonSpare_173, NonSpare_174, NonSpare_306, NonSpare_1481, NonSpare_1641]
+    items_list = [NonSpare_43, NonSpare_14, NonSpare_92, NonSpare_109, NonSpare_143, NonSpare_149, NonSpare_157, NonSpare_158, NonSpare_172, NonSpare_173, NonSpare_174, NonSpare_306, NonSpare_1481, NonSpare_1641]
+    items_dict = {"010": NonSpare_43, "000": NonSpare_14, "020": NonSpare_92, "030": NonSpare_109, "040": NonSpare_143, "041": NonSpare_149, "048": NonSpare_157, "049": NonSpare_158, "050": NonSpare_172, "051": NonSpare_173, "052": NonSpare_174, "140": NonSpare_306, "RE": NonSpare_1481, "SP": NonSpare_1641}
 
 class Uap_33(UapSingle):
     record = Record_37
@@ -30530,7 +30577,8 @@ class NonSpare_483(NonSpare):
     rule = RuleVariation_1271
 
 class Record_22(Record):
-    items = [NonSpare_36, NonSpare_64, NonSpare_308, NonSpare_483, UapItemSpare, NonSpare_1641, NonSpare_1481]
+    items_list = [NonSpare_36, NonSpare_64, NonSpare_308, NonSpare_483, UapItemSpare, NonSpare_1641, NonSpare_1481]
+    items_dict = {"010": NonSpare_36, "015": NonSpare_64, "140": NonSpare_308, "550": NonSpare_483, "SP": NonSpare_1641, "RE": NonSpare_1481}
 
 class Uap_20(UapSingle):
     record = Record_22
@@ -30546,7 +30594,8 @@ class NonSpare_484(NonSpare):
     rule = RuleVariation_1271
 
 class Record_23(Record):
-    items = [NonSpare_36, NonSpare_64, NonSpare_308, NonSpare_484, UapItemSpare, NonSpare_1641, NonSpare_1481]
+    items_list = [NonSpare_36, NonSpare_64, NonSpare_308, NonSpare_484, UapItemSpare, NonSpare_1641, NonSpare_1481]
+    items_dict = {"010": NonSpare_36, "015": NonSpare_64, "140": NonSpare_308, "550": NonSpare_484, "SP": NonSpare_1641, "RE": NonSpare_1481}
 
 class Uap_21(UapSingle):
     record = Record_23

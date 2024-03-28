@@ -891,7 +891,8 @@ class NonSpare_21(NonSpare):
     rule = RuleVariation_43
 
 class Record_6(Record):
-    items = [NonSpare_3, NonSpare_0, NonSpare_4, NonSpare_6, NonSpare_8, NonSpare_10, NonSpare_11, NonSpare_12, NonSpare_13, NonSpare_14, NonSpare_15, NonSpare_16, NonSpare_17, NonSpare_18, NonSpare_19, NonSpare_20, UapItemRFS, NonSpare_21]
+    items_list = [NonSpare_3, NonSpare_0, NonSpare_4, NonSpare_6, NonSpare_8, NonSpare_10, NonSpare_11, NonSpare_12, NonSpare_13, NonSpare_14, NonSpare_15, NonSpare_16, NonSpare_17, NonSpare_18, NonSpare_19, NonSpare_20, UapItemRFS, NonSpare_21]
+    items_dict = {"010": NonSpare_3, "000": NonSpare_0, "020": NonSpare_4, "030": NonSpare_6, "031": NonSpare_8, "040": NonSpare_10, "051": NonSpare_11, "052": NonSpare_12, "053": NonSpare_13, "054": NonSpare_14, "061": NonSpare_15, "062": NonSpare_16, "063": NonSpare_17, "071": NonSpare_18, "072": NonSpare_19, "073": NonSpare_20, "091": NonSpare_21}
 
 class Uap_0(UapSingle):
     record = Record_6
@@ -971,7 +972,8 @@ class NonSpare_7(NonSpare):
     rule = RuleVariation_5
 
 class Record_4(Record):
-    items = [NonSpare_2, NonSpare_5, NonSpare_7]
+    items_list = [NonSpare_2, NonSpare_5, NonSpare_7]
+    items_dict = {"010": NonSpare_2, "020": NonSpare_5, "031": NonSpare_7}
 
 class Variation_13(Element):
     bit_offset8 = 0
@@ -987,7 +989,8 @@ class NonSpare_9(NonSpare):
     rule = RuleVariation_13
 
 class Record_5(Record):
-    items = [NonSpare_2, NonSpare_5, NonSpare_9]
+    items_list = [NonSpare_2, NonSpare_5, NonSpare_9]
+    items_dict = {"010": NonSpare_2, "020": NonSpare_5, "032": NonSpare_9}
 
 class Uap_1(UapMultiple):
     uaps = {"plot": Record_4, "track": Record_5}
@@ -1014,7 +1017,8 @@ class NonSpare_23(NonSpare):
     rule = RuleVariation_5
 
 class Record_1(Record):
-    items = [NonSpare_1, NonSpare_22, NonSpare_23]
+    items_list = [NonSpare_1, NonSpare_22, NonSpare_23]
+    items_dict = {"010": NonSpare_1, "101": NonSpare_22, "102": NonSpare_23}
 
 class NonSpare_24(NonSpare):
     name = "201"
@@ -1027,7 +1031,8 @@ class NonSpare_25(NonSpare):
     rule = RuleVariation_13
 
 class Record_2(Record):
-    items = [NonSpare_1, NonSpare_24, NonSpare_25]
+    items_list = [NonSpare_1, NonSpare_24, NonSpare_25]
+    items_dict = {"010": NonSpare_1, "201": NonSpare_24, "202": NonSpare_25}
 
 class Variation_17(Element):
     bit_offset8 = 0
@@ -1043,10 +1048,12 @@ class NonSpare_26(NonSpare):
     rule = RuleVariation_17
 
 class Record_3(Record):
-    items = [NonSpare_1, NonSpare_26]
+    items_list = [NonSpare_1, NonSpare_26]
+    items_dict = {"010": NonSpare_1, "301": NonSpare_26}
 
 class Record_0(Record):
-    items = [NonSpare_1]
+    items_list = [NonSpare_1]
+    items_dict = {"010": NonSpare_1}
 
 class Uap_2(UapMultiple):
     uaps = {"uap1": Record_1, "uap2": Record_2, "uap3": Record_3, "uap4": Record_0}

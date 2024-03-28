@@ -8,6 +8,9 @@ nix-shell
 # prettify python source code
 autopep8 --in-place --aggressive --aggressive <filename> <filename>...
 
+# run test from command line (as a module), for example
+python -m tests.test_asterix
+
 # run static code check and tests once
 mypy
 pytest
@@ -15,4 +18,3 @@ pytest
 # monitor changes in .py files, check automatically on any change
 find . | grep "\.py" | entr sh -c 'clear && date && mypy && pytest'
 ```
-

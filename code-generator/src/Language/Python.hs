@@ -231,12 +231,22 @@ instance Node Item where
 instance Node Record where
     focus = lRecord
     node ix (Record items) = do
-        refs <- forM items $ \case
+        refList <- forM items $ \case
                 A.UapItem x -> sformat ("NonSpare_" % int) <$> walk x
                 A.UapItemSpare -> pure "UapItemSpare"
                 A.UapItemRFS -> pure "UapItemRFS"
+        refDict <- catMaybes <$> forM items (\case
+            A.UapItem nsp -> case nsp of
+                (A.NonSpare name _ _ _) -> do
+                    ref <- walk nsp
+                    pure $ Just $ sformat (stext % ": NonSpare_" % int)
+                        (quote $ coerce name)
+                        ref
+            A.UapItemSpare -> pure Nothing
+            A.UapItemRFS -> pure Nothing)
         out $ pyClass "Record" ix "Record" $ do
-            fmt ("items = " % stext) (fmtList "[" "]" id refs)
+            fmt ("items_list = " % stext) (fmtList "[" "]" id refList)
+            fmt ("items_dict = " % stext) (fmtList "{" "}" id refDict)
 
 instance Node Uap where
     focus = lUap
