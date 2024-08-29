@@ -1,0 +1,48 @@
+cabal-version:      3.0
+name:               generator
+version:            0.1.0
+synopsis:           Asterix lib source code generator
+-- description:
+homepage:           https://github.com/zoranbosnjak/asterix-libs
+bug-reports:        https://github.com/zoranbosnjak/asterix-libs/issues
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Zoran Bošnjak
+maintainer:         zoran.bosnjak@via.si
+-- copyright:
+category:           Data
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+-- extra-source-files:
+
+executable code-generator
+    default-language: GHC2021
+    hs-source-dirs:   src
+    main-is:          Main.hs
+    ghc-options:
+        -O2 -rtsopts -funbox-strict-fields -with-rtsopts=-T -threaded
+        -Wall
+        -Wincomplete-uni-patterns
+        -Wincomplete-record-updates
+        -Wcompat
+        -Widentities
+        -Wredundant-constraints
+        -Wunused-packages
+        -Wpartial-fields
+    other-modules:
+        Paths_generator
+        Types
+        Struct
+        Language.Python
+    -- other-extensions:
+    build-depends:
+        base < 5
+        , aspecs
+        , with-utf8
+        , optparse-applicative
+        , transformers
+        , mtl
+        , containers
+        , text
+        , formatting
+        , scientific
