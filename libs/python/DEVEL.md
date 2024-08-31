@@ -17,3 +17,14 @@ pytest
 # monitor changes in .py files, check automatically on any change
 find . | grep "\.py" | entr sh -c 'clear && date && mypy && pytest'
 ```
+
+## publish/update project to pypi
+
+``` bash
+nix-shell
+# from clean repository
+git status
+python3 -m build
+ls -l dist/*
+twine upload dist/*
+```

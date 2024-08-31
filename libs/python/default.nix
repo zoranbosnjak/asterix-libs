@@ -12,6 +12,7 @@ let
     pkgs.python3Packages.autopep8
     pkgs.python3Packages.build
     pkgs.python3Packages.setuptools
+    pkgs.python3Packages.twine
   ];
 
   customPython = pkgs.python3.buildEnv.override {

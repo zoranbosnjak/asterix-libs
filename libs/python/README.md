@@ -145,12 +145,29 @@ assert rx_message == tx_message
 
 Use any of the following methods:
 
-### Method 1 - copy library files
+### Method 1
 
-The following files are required:
+Install/update from python package index <https://pypi.org/project/libasterix/>:
 
-- [base.py](src/asterix/base.py)
-- [generated.py](src/asterix/generated.py)
+``` bash
+pip install libasterix
+```
+
+### Method 2
+
+Install/update from github:
+
+``` bash
+# (default branch)
+pip install -e "git+https://github.com/zoranbosnjak/asterix-libs.git#egg=libasterix&subdirectory=libs/python"
+
+# ('devel' branch)
+pip install -e "git+https://github.com/zoranbosnjak/asterix-libs.git@devel#egg=libasterix&subdirectory=libs/python"
+```
+
+### Method 3
+
+Manually copy library files from [repository](https://github.com/zoranbosnjak/asterix-libs/tree/main/libs/python/src/asterix).
 
 Download and copy files either alongside your project sources or
 to some location where `python` can find it.
@@ -158,26 +175,6 @@ to some location where `python` can find it.
 ```bash
 # check default python path
 python3 -c "import sys; print('\n'.join(sys.path))"
-```
-
-### Method 2 - install/update package with `pip`
-
-Use `pip` to install or update:
-
-``` bash
-# prepare and activate virtual environment (optional)
-sudo apt install python3-venv
-python3 -m venv env
-source env/bin/activate
-
-# install or upgrade (from default branch)
-pip install -e "git+https://github.com/zoranbosnjak/asterix-libs.git#egg=libasterix&subdirectory=libs/python"
-
-# install or upgrade (from 'devel' branch)
-pip install -e "git+https://github.com/zoranbosnjak/asterix-libs.git@devel#egg=libasterix&subdirectory=libs/python"
-
-# deactivate virtual environment when done (if activated)
-deactivate
 ```
 
 ## Tutorial
