@@ -147,7 +147,7 @@ Use any of the following methods:
 
 ### Method 1
 
-Install/update from python package index <https://pypi.org/project/libasterix/>:
+Install from python package index <https://pypi.org/project/libasterix/>:
 
 ``` bash
 pip install libasterix
@@ -155,7 +155,7 @@ pip install libasterix
 
 ### Method 2
 
-Install/update from github:
+Install from github:
 
 ``` bash
 # (default branch)
