@@ -863,7 +863,7 @@ instance Node Expansion where
                 do
                     let f (A.ItemName name, i) = sformat
                             (stext % ": NonSpare_" % int) (quote name) i
-                    fmt ("items_dict = " % stext) (fmtList "{" "}" f refDict)
+                    fmt ("cv_items_dict = " % stext) (fmtList "{" "}" f refDict)
                 ""
                 case refDict of
                     [] -> pure ()

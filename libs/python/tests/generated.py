@@ -4716,7 +4716,7 @@ Expansion_0_Arg = TypedDict('Expansion_0_Arg', {
 class Expansion_0(Expansion):
     cv_fspec_bytes = 1
     cv_items_list = [NonSpare_44, NonSpare_49]
-    items_dict = {"I1": NonSpare_44, "I2": NonSpare_49}
+    cv_items_dict = {"I1": NonSpare_44, "I2": NonSpare_49}
 
     @overload
     @classmethod
@@ -4778,7 +4778,7 @@ Expansion_1_Arg = TypedDict('Expansion_1_Arg', {
 class Expansion_1(Expansion):
     cv_fspec_bytes = 2
     cv_items_list = [NonSpare_44, None, None, NonSpare_49, None, None, None, None, None, None, NonSpare_55]
-    items_dict = {"I1": NonSpare_44, "I2": NonSpare_49, "I3": NonSpare_55}
+    cv_items_dict = {"I1": NonSpare_44, "I2": NonSpare_49, "I3": NonSpare_55}
 
     @overload
     @classmethod

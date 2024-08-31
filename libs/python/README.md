@@ -248,6 +248,17 @@ rec0 = rec0.set_item('000', 1)
 assert rec0.get_item('000') is not None
 ```
 
+### Miscellaneous project and source code remarks
+
+- `cv_{name}` stands for *class variable*, to avoid name clash with
+  *instance variable* with the same name (which are without prefix).
+- `RuleContent` and `RuleVariation` are necessary to cope with some
+  small number of irregular cases with asterix definitions
+  (that is: context dependent definitions).
+- `NonSpare` is (as name suggests) an item with some defined content.
+  It is a separate class from `Item` and `Spare`, to reuse definition
+  in different contexts, for example `Compound` subitems are `NonSpare`.
+
 ### Datagram
 
 Datagram is a raw binary data as received for example from UDP socket.
