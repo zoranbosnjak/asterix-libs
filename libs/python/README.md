@@ -281,17 +281,18 @@ to fully parse asterix records.
 from binascii import hexlify, unhexlify
 from asterix.base import *
 
-def receive_from_udp():         # UDP rx text function
+def receive_from_udp() -> bytes: # UDP rx text function
     return unhexlify(''.join([
         '01000401', # cat1 datablock
         '02000402', # cat2 datablock
         ]))
 
-def send_to_udp(s):             # UDP tx test function
+def send_to_udp(s: bytes) -> None: # UDP tx test function
     print(hexlify(s))
 
 input_data = Bits.from_bytes(receive_from_udp())
 raw_datablocks = RawDatablock.parse(input_data) # can fail on wrong input
+assert not isinstance(raw_datablocks, ValueError)
 valid_datablocks = [db.unparse().to_bytes() \
                     for db in raw_datablocks if db.get_category() != 1]
 output_data = b''.join(valid_datablocks)
@@ -309,6 +310,7 @@ Datablock/Record is required to work with asterix items and subitems.
 **Example**: Create 2 records and combine them to a single datablock
 
 ```python
+from binascii import hexlify
 from asterix.generated import *
 
 Spec = Cat_002_1_1 # use cat002, edition 1.1
@@ -332,6 +334,7 @@ print(hexlify(s))
 from each record
 
 ```python
+from binascii import unhexlify
 from asterix.base import *
 from asterix.generated import *
 
@@ -339,10 +342,13 @@ Spec = Cat_002_1_1 # use cat002, edition 1.1
 
 s = unhexlify(b'02000bc0010201c0010202') # ... use data from the example above
 raw_datablocks = RawDatablock.parse(Bits.from_bytes(s)) # can fail on wrong input
+assert not isinstance(raw_datablocks, ValueError)
 for db in raw_datablocks:
     records = Spec.cv_uap.parse(db.get_raw_records()) # can fail on wrong input
+    assert not isinstance(records, ValueError)
     for record in records:
         i000 = record.get_item('000') # returns None if the item is not present
+        assert i000 is not None
         raw_value = i000.as_uint()
         description = i000.variation.content.table_value()
         print('{}: {}'.format(raw_value, description))
@@ -524,6 +530,7 @@ explicit about subitems, for example ["010", "SAC"].
 **Example**: Show raw content of all toplevel items of each record
 
 ```python
+from binascii import unhexlify
 from asterix.generated import *
 
 Specs = {
@@ -560,6 +567,7 @@ for db in RawDatablock.parse(Bits.from_bytes(s)):
 **Example**: Generate dummy single record datablock with all fixed items set to zero
 
 ```python
+from binascii import hexlify
 from asterix.generated import *
 
 # we could even randomly select a category/edition from the 'manifest',
@@ -594,7 +602,7 @@ print(hexlify(s))
 
 ## Using `mypy` static code checker
 
-**Note**: `mypy` version `0.991` or above is required for this library.
+**Note**: Tested with `mypy` version `1.9.0`.
 
 [mypy](https://www.mypy-lang.org/) is a static type checker for Python.
 It is recommended to use the tool on asterix application code, to identify
