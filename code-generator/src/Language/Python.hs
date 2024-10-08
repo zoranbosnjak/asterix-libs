@@ -998,15 +998,13 @@ mkManifest specs = do
     go t = do
         let candidates = [b | (a, b) <- lst, a == t]
         cat <- sort $ nub $ fmap fst candidates
-        let hdr = fmt (int % ": {") (coerce cat :: Int)
+        let hdr = fmt (int % ": [") (coerce cat :: Int)
         pure $ do
             hdr
             indent $ mconcat $ do
-                (A.Edition eMaj eMin, cls) <- sortOn fst
-                    [b | (a, b) <- candidates, a == cat]
-                let edition = sformat ("'" % int % "." % int % "'") eMaj eMin
-                pure $ fmt stext ( edition <> ": " <> cls <> ",")
-            "},"
+                cls <- snd <$> sortOn fst [b | (a, b) <- candidates, a == cat]
+                pure $ fmt stext (cls <> ",")
+            "],"
 
 mkCode :: IsTestSpecs -> AstSpecsRef -> AstSpecsDate
         -> CodeGeneratorVersion -> [A.Asterix] -> Builder

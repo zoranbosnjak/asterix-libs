@@ -466,15 +466,16 @@ This library defines a `manifest` structure in the form:
 ```python
 manifest = {
     'CATS': {
-        1: {
-            '1.2': CAT_001_1_2,
-            '1.3': CAT_001_1_3,
-            '1.4': CAT_001_1_4,
-        },
-        2: {
-            '1.0': CAT_002_1_0,
-            '1.1': CAT_002_1_1,
-        #...
+        1: [
+            Cat_001_1_2,
+            Cat_001_1_3,
+            Cat_001_1_4,
+        ],
+        2: [
+            Cat_002_1_0,
+            Cat_002_1_1,
+        ],
+...
 ```
 
 This structure can be used to extract *latest* editions for each defined
@@ -483,25 +484,10 @@ category, for example:
 ```python
 from asterix.generated import *
 
-def to_edition(ed):
-    """Convert edition string to a tuple, for example "1.2" -> (1,2)"""
-    a,b = ed.split('.')
-    return (int(a), int(b))
+Specs = {cat: manifest['CATS'][cat][-1] for cat in manifest['CATS']}
 
-def get_latest_edition(lst):
-    return sorted(lst, key=lambda pair: to_edition(pair[0]), reverse=True)[0]
-
-Specs = {}  # will be populated with latest editions
-
-for cat in range(1,256):
-    editions = manifest['CATS'].get(cat)
-    if editions is None:
-        continue
-    latest = get_latest_edition(editions.items())
-    ed, cls = latest
-    Specs[cat] = cls
-
-print(Specs)
+for spec in Specs.values():
+    print(spec.cv_category, spec.cv_edition)
 ```
 
 Alternatively, a prefered way is to be explicit about each edition,
