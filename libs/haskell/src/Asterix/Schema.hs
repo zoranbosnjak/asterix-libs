@@ -4,14 +4,12 @@ module Asterix.Schema where
 
 import GHC.TypeLits
 
-err :: a
-err = error "Internal error"
-
 data GRule s n t
     = GContextFree t
     | GDependent [[s]] t [([n], t)]
 
 type TRule t = GRule Symbol Nat t
+type VRule t = GRule String Int t
 
 data GStringType
     = GStringAscii
@@ -64,16 +62,19 @@ data GVariation s n
     | GCompound [Maybe (GNonSpare s n)]
 
 type TVariation = GVariation Symbol Nat
+type VVariation = GVariation String Int
 
 data GItem s n
     = GSpare n n
     | GItem (GNonSpare s n)
 
 type TItem = GItem Symbol Nat
+type VItem = GItem String Int
 
 data GNonSpare s n = GNonSpare s s (GRule s n (GVariation s n))
 
 type TNonSpare = GNonSpare Symbol Nat
+type VNonSpare = GNonSpare String Int
 
 data GUapItem s n
     = GUapItem (GNonSpare s n)
@@ -81,8 +82,9 @@ data GUapItem s n
     | GUapItemRFS
 
 type TUapItem = GUapItem Symbol Nat
+type VUapItem = GUapItem String Int
 
-data GCat n = GCat n
+newtype GCat n = GCat n
 
 type TCat = GCat Nat
 
