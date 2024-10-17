@@ -2,14 +2,14 @@
 
 module Asterix.Schema where
 
-import GHC.TypeLits
+import           GHC.TypeLits
 
 data GRule s n t
     = GContextFree t
     | GDependent [[s]] t [([n], t)]
 
-type TRule t = GRule Symbol Nat t
-type VRule t = GRule String Int t
+type TRule = GRule Symbol Nat
+type VRule = GRule String Int
 
 data GStringType
     = GStringAscii
@@ -87,7 +87,19 @@ type VUapItem = GUapItem String Int
 newtype GCat n = GCat n
 
 type TCat = GCat Nat
+type VCat = GCat Int
 
 data GEdition n = GEdition n n
 
 type TEdition = GEdition Nat
+type VEdition = GEdition Int
+
+data GRecord s n = GRecord (GCat n) (GEdition n) [GUapItem s n]
+
+type TRecord = GRecord Symbol Nat
+type VRecord = GRecord String Int
+
+data GExpansion s n = GExpansion (GCat n) (GEdition n) n [Maybe (GNonSpare s n)]
+
+type TExpansion = GExpansion Symbol Nat
+type VExpansion = GExpansion String Int

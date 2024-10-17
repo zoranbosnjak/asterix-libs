@@ -1,101 +1,123 @@
-{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DataKinds  #-}
 {-# LANGUAGE LambdaCase #-}
 
 module Asterix.Rx where
 
-import GHC.TypeLits
-import Data.Kind
-import Data.Word
-import Data.Bits
-import Data.ByteString as BS
-import Data.Proxy
-import Data.Maybe
-import Unsafe.Coerce
-import Control.Monad
-import Control.Monad.Fix
+import           Control.Monad
+import           Control.Monad.Fix
+import           Data.Bits
+import           Data.ByteString   as BS
+import           Data.Coerce
+import           Data.Kind
+import           Data.Proxy
+import           Data.Word
+import           Unsafe.Coerce
 
-import Asterix.Schema
+import           Asterix.Schema
 
 data Some (t :: k -> Type) = forall s. Some (t s)
 
 unSome :: Proxy s -> Some t -> t s
 unSome _proxy (Some val) = unsafeCoerce val
 
-type ByteOffset = Int
-type BitOffset8 = Int
-type BitSize = Int
-type ByteSize = Int
-data Offset = Offset !ByteOffset !BitOffset8
+newtype ByteOffset = ByteOffset Int
+    deriving (Show, Eq, Ord, Enum, Num)
+newtype BitOffset8 = BitOffset8 Int
+    deriving (Show, Eq, Ord, Enum, Num)
+newtype BitSize = BitSize Int
+    deriving (Show, Eq, Ord, Enum, Num)
+newtype ByteSize = ByteSize Int
+    deriving (Show, Eq, Ord, Enum, Num)
+data Offset = Offset !ByteOffset !BitOffset8 deriving (Eq)
 
 instance Semigroup Offset where
-    Offset a1 b1 <> Offset a2 b2 = Offset c1 c2 where
+    Offset (ByteOffset a1) (BitOffset8 b1) <>
+        Offset (ByteOffset a2) (BitOffset8 b2) =
+            Offset (coerce c1) (coerce c2)
+      where
         (n, c2) = divMod (b1 + b2) 8
         c1 = a1 + a2 + n
 
 instance Monoid Offset where
     mempty = Offset 0 0
 
-instance Eq Offset where
-    Offset a1 b1 == Offset a2 b2 = a1 == a2 && b1 == b2
-
 instance Ord Offset where
     compare (Offset a1 b1) (Offset a2 b2) =
         compare a1 a2 <> compare b1 b2
 
 bitOffset :: Int -> Offset
-bitOffset n = Offset a b where (a, b) = divMod n 8
+bitOffset n = Offset (coerce a) (coerce b)
+    where (a, b) = divMod n 8
 
 bitDelta :: Offset -> Offset -> BitSize
-bitDelta (Offset a2 b2) (Offset a1 b1) = o2 - o1 where
+bitDelta
+    (Offset (ByteOffset a2) (BitOffset8 b2))
+    (Offset (ByteOffset a1) (BitOffset8 b1)) = coerce (o2 - o1)
+  where
     o2 = a2*8+b2
     o1 = a1*8+b1
+
+byteDelta :: ByteOffset -> ByteOffset -> ByteSize
+byteDelta b a = coerce (b - a)
 
 -- | Asterix RX errors
 data Error
     = Overflow
+    | InvalidFrn
 
-newtype Datablock = Datablock { unDatablock :: ByteString }
+-- | Size validated raw datablock
+newtype RawDatablock = RawDatablock { unRawDatablock :: ByteString }
 
-dbCategory :: Datablock -> Word8
-dbCategory = BS.head . unDatablock
+rawDbCategory :: RawDatablock -> Word8
+rawDbCategory = BS.head . unRawDatablock
 
-dbRecords :: Datablock -> ByteString
-dbRecords = BS.drop 3 . unDatablock
+rawDbRecords :: RawDatablock -> ByteString
+rawDbRecords = BS.drop 3 . unRawDatablock
 
-parseDatablock :: ByteString -> Either Error (Datablock, ByteString)
-parseDatablock s = do
+parseRawDatablock :: ByteString -> Either Error (RawDatablock, ByteString)
+parseRawDatablock s = do
     (n1, n2) <- case BS.length s < 3 of
-        True -> Left Overflow
+        True  -> Left Overflow
         False -> Right (BS.index s 1, BS.index s 2)
     let n = fromIntegral n1 * 256 + fromIntegral n2
     case BS.length s < n of
-        True -> Left Overflow
-        False -> Right (Datablock $ BS.take n s, BS.drop n s)
+        True  -> Left Overflow
+        False -> Right (RawDatablock $ BS.take n s, BS.drop n s)
 
-parseDatablocks :: ByteString -> Either Error [Datablock]
-parseDatablocks s
+parseRawDatablocks :: ByteString -> Either Error [RawDatablock]
+parseRawDatablocks s
     | BS.null s = Right []
     | otherwise = do
-          (a, b) <- parseDatablock s
-          (:) <$> pure a <*> parseDatablocks b
+          (a, b) <- parseRawDatablock s
+          (:) <$> pure a <*> parseRawDatablocks b
 
 -- | Rx monad (reader + state + either) with additional phantom type 't'
 newtype Rx t a = Rx (ByteString -> Offset -> Either Error (a, Offset))
 
-instance Functor (Rx t) where
-    fmap = undefined
-
-instance Applicative (Rx t) where
-    pure = undefined
-    (<*>) = undefined
-
-instance Monad (Rx t) where
-    (>>=) = undefined
-
 runRx :: (forall t. Rx t a) -> ByteString -> Offset -> Either Error (a, Offset)
 runRx (Rx f) = f
 
-err :: Error -> Rx t ()
+instance Functor (Rx t) where
+    fmap f (Rx act) = Rx (\r s -> do
+        (a, o) <- act r s
+        pure (f a, o))
+
+instance Applicative (Rx t) where
+    pure a = Rx (\_ o -> pure (a, o))
+    (Rx mf) <*> (Rx mx) = Rx act where
+        act r s = do
+            (f, o1) <- mf r s
+            (x, o2) <- mx r o1
+            pure (f x, o2)
+
+instance Monad (Rx t) where
+    Rx mx >>= f = Rx act where
+        act r s = do
+            (x, o1) <- mx r s
+            let Rx act2 = f x
+            act2 r o1
+
+err :: Error -> Rx t a
 err e = Rx (\_ _ -> Left e)
 
 assertBitOffset8 :: BitOffset8 -> Rx t ()
@@ -119,7 +141,7 @@ endOffset :: Rx t Offset
 endOffset = bitOffset . (* 8) . BS.length <$> ask
 
 fetchBits :: Maybe BitOffset8 -> BitSize -> Rx t Offset
-fetchBits mOExpected n = do
+fetchBits mOExpected (BitSize n) = do
     maybe (pure ()) assertBitOffset8 mOExpected
     oCurrent <- get
     oEnd <- endOffset
@@ -130,7 +152,7 @@ fetchBits mOExpected n = do
 
 fetchBit :: Maybe BitOffset8 -> Rx t Bool
 fetchBit mOExpected = do
-    Offset o1 o2 <- fetchBits mOExpected 1
+    Offset (ByteOffset o1) (BitOffset8 o2) <- fetchBits mOExpected 1
     w <- flip BS.index o1 <$> ask
     pure $ testBit w (7 - o2)
 
@@ -139,7 +161,7 @@ fetchByte = do
     assertBitOffset8 0
     Offset o1 _ <- get
     put (Offset (succ o1) 0)
-    flip BS.index o1 <$> ask
+    flip BS.index (coerce o1) <$> ask
 
 data Rule b (t :: TRule a) where
     ContextFree :: b -> Rule b ('GContextFree c)
@@ -148,7 +170,7 @@ data Rule b (t :: TRule a) where
 data Variation (t :: TVariation) where
     Element :: !Offset -> !BitSize -> Variation ('GElement o n rule)
     Group :: !Offset -> !BitSize -> [Some Item] -> Variation ('GGroup o lst)
-    Extended :: !ByteOffset -> !ByteSize -> [[Some Item]] -> Variation ('GExtended lst)
+    Extended :: !ByteOffset -> !ByteSize -> [Maybe (Some Item)] -> Variation ('GExtended lst)
     Repetitive :: !ByteOffset -> !ByteSize -> [Some Variation] -> Variation ('GRepetitive rt var)
     Explicit :: !ByteOffset -> !ByteSize -> Variation ('GExplicit met)
     Compound :: !ByteOffset -> !ByteSize -> [Some NonSpare] -> Variation ('GCompound lst)
@@ -160,27 +182,20 @@ data Item (t :: TItem) where
 data NonSpare (t :: TNonSpare) where
     NonSpare :: Some (Rule (Some Variation)) -> NonSpare ('GNonSpare name title vt)
 
-data Record (t :: (TCat, TEdition, [TUapItem])) = Record
+data Record (t :: TRecord) = Record
     { recOffset :: !ByteOffset
     , recSize   :: !ByteSize
     , recItems  :: [Some NonSpare]
     , recRFS    :: [Some NonSpare]
     }
 
-data Expansion (cat :: TCat) (ed :: TEdition) (fs :: Nat) (t :: [Maybe TNonSpare]) = Expansion
+data Expansion (t :: TExpansion) = Expansion
     { expOffset :: !ByteOffset
     , expSize   :: !ByteSize
     , expItems  :: [Some NonSpare]
     }
 
-splitByNothing :: [Maybe a] -> [[a]]
-splitByNothing = \case
-    [] -> []
-    lst ->
-        let (a, b) = Prelude.span isJust lst
-        in catMaybes a : splitByNothing (Prelude.drop 1 b)
-
-parseFspec :: [Maybe VNonSpare] -> Rx t [VNonSpare]
+parseFspec :: [Maybe a] -> Rx t [a]
 parseFspec = \case
     [] -> do
         assertBitOffset8 0
@@ -189,41 +204,35 @@ parseFspec = \case
         fx <- fetchBit (Just 7)
         case fx of
             False -> pure []
-            True -> parseFspec xs
+            True  -> parseFspec xs
     Just nsp : xs -> do
         present <- fetchBit Nothing
         case present of
             False -> parseFspec xs
-            True -> (:) <$> pure nsp <*> parseFspec xs
+            True  -> (:) <$> pure nsp <*> parseFspec xs
 
 parseVariation :: VVariation -> Rx t (Some Variation)
 parseVariation = \case
     GElement oExpected n _rule -> do
-        oStart <- fetchBits (Just oExpected) n
-        pure $ Some $ Element oStart n
+        oStart <- fetchBits (Just $ BitOffset8 oExpected) (BitSize n)
+        pure $ Some $ Element oStart (BitSize n)
     GGroup _oExpected lst -> do
         oStart <- get
         items <- sequence [parseItem i | i <- lst]
         oEnd <- get
-        pure $ Some $ Group oStart (bitDelta oEnd oStart) items
+        pure $ Some $ Group oStart (oEnd `bitDelta` oStart) items
     GExtended lst -> do
         assertBitOffset8 0
         Offset oStart _ <- get
-        let lst' :: [[VItem]]
-            lst' = splitByNothing lst
-            go :: [[VItem]] -> Rx t [[Some Item]]
+        let go :: [Maybe (GItem String Int)] -> Rx t [Maybe (Some Item)]
             go = \case
                 [] -> pure []
-                (grp : grps) -> do
-                    result <- mapM parseItem grp
-                    fx <- fetchBit (Just 7)
-                    case fx of
-                        False -> pure [result]
-                        True -> (:) <$> pure result <*> go grps
-        items <- go lst'
+                (Nothing : xs) -> (:) <$> pure Nothing <*> go xs
+                (Just x : xs) -> (:) <$> (Just <$> parseItem x) <*> go xs
+        items <- go lst
         assertBitOffset8 0
         Offset oEnd _ <- get
-        pure $ Some $ Extended oStart (oEnd - oStart) items
+        pure $ Some $ Extended oStart (oEnd `byteDelta` oStart) items
     GRepetitive t vVar -> do
         assertBitOffset8 0
         Offset oStart _ <- get
@@ -236,17 +245,17 @@ parseVariation = \case
                         | otherwise = do
                               x <- fromIntegral <$> fetchByte
                               go (acc * 256 + x) (pred m)
-                cnt <- go 0 n
+                cnt <- go 0 (ByteSize n)
                 replicateM cnt (parseVariation vVar)
             GRepetitiveFx -> fix $ \loop -> do
                 x <- parseVariation vVar
                 fx <- fetchBit (Just 7)
                 case fx of
                     False -> pure [x]
-                    True -> (:) <$> pure x <*> loop
+                    True  -> (:) <$> pure x <*> loop
         assertBitOffset8 0
         Offset oEnd _ <- get
-        pure $ Some $ Repetitive oStart (oEnd - oStart) result
+        pure $ Some $ Repetitive oStart (oEnd `byteDelta` oStart) result
     GExplicit _ -> do
         assertBitOffset8 0
         Offset oStart _ <- get
@@ -255,20 +264,20 @@ parseVariation = \case
         let oFinal = Offset (oStart + cnt) 0
         when (oFinal > oEnd) $ err Overflow
         put oFinal
-        pure $ Some $ Explicit oStart cnt
+        pure $ Some $ Explicit oStart (coerce cnt)
     GCompound lst -> do
         assertBitOffset8 0
         Offset oStart _ <- get
         itemsPresent <- parseFspec lst
         items <- mapM parseNonSpare itemsPresent
         Offset oEnd _ <- get
-        pure $ Some $ Compound oStart (oEnd - oStart) items
+        pure $ Some $ Compound oStart (oEnd `byteDelta` oStart) items
 
 parseItem :: VItem -> Rx t (Some Item)
 parseItem = \case
     GSpare oExpected n -> do
-        oStart <- fetchBits (Just oExpected) n
-        pure $ Some $ Spare oStart n
+        oStart <- fetchBits (Just $ BitOffset8 oExpected) (BitSize n)
+        pure $ Some $ Spare oStart (BitSize n)
     GItem nsp -> Some . Item <$> parseNonSpare nsp
 
 parseRule :: (x -> Rx t y) -> VRule x -> Rx t (Some (Rule y))
@@ -286,9 +295,44 @@ parseNonSpare :: VNonSpare -> Rx t (Some NonSpare)
 parseNonSpare (GNonSpare _name _title vRule) =
     Some . NonSpare <$> parseRule parseVariation vRule
 
-parseRecord :: [VUapItem] -> Rx t (Some Record)
-parseRecord _lst = do
+parseRecord :: forall t. VRecord -> Rx t (Some Record)
+parseRecord (GRecord _cat _ed lst) = do
+    assertBitOffset8 0
     Offset oStart _ <- get
+    itemsPresent <- parseFspec (insertFx 0 lst)
+    (lst1, lst2) <- go itemsPresent
     Offset oEnd _ <- get
-    (lst1, lst2) <- undefined
-    pure $ Some $ Record oStart (oEnd - oStart) lst1 lst2
+    pure $ Some $ Record oStart (oEnd `byteDelta` oStart) lst1 lst2
+  where
+    insertFx :: Int -> [VUapItem] -> [Maybe VUapItem]
+    insertFx 7 []       = [Nothing]
+    insertFx 7 l        = Nothing : insertFx 0 l
+    insertFx n []       = Just GUapItemSpare : insertFx (succ n) []
+    insertFx n (x : xs) = Just x : insertFx (succ n) xs
+
+    go :: [VUapItem] -> Rx t ([Some NonSpare], [Some NonSpare])
+    go = \case
+        [] -> pure ([], [])
+        (GUapItem x : xs) -> do
+            nsp <- parseNonSpare x
+            (lst1, lst2) <- go xs
+            pure (nsp : lst1, lst2)
+        (GUapItemSpare : xs) -> go xs
+        (GUapItemRFS : xs) -> do
+            lstRfs <- do
+                assertBitOffset8 0
+                cnt <- fromIntegral <$> fetchByte
+                replicateM cnt parseRfs
+            (lst1, lst2) <- go xs
+            pure (lst1, lstRfs <> lst2)
+
+    parseRfs :: Rx t (Some NonSpare)
+    parseRfs = do
+        assertBitOffset8 0
+        frn <- fromIntegral <$> fetchByte
+        -- first valid 'frn' is 1
+        when (frn <= 0 || frn > Prelude.length lst) $ err InvalidFrn
+        case lst !! pred frn of
+            GUapItem nsp  -> parseNonSpare nsp
+            GUapItemSpare -> err InvalidFrn
+            GUapItemRFS   -> err InvalidFrn
