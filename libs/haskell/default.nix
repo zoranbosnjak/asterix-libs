@@ -8,6 +8,8 @@ let
 
   deps = with pkgs; [
     which
+    stylish-haskell
+    hlint
     # ...
   ];
 

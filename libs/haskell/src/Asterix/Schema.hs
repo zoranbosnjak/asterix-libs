@@ -99,6 +99,11 @@ data GRecord s n = GRecord (GCat n) (GEdition n) [GUapItem s n]
 type TRecord = GRecord Symbol Nat
 type VRecord = GRecord String Int
 
+data GDatablock n = GDatablock (GCat n) (GEdition n)
+
+type TDatablock = GDatablock Nat
+type VDatablock = GDatablock Int
+
 data GExpansion s n = GExpansion (GCat n) (GEdition n) n [Maybe (GNonSpare s n)]
 
 type TExpansion = GExpansion Symbol Nat
