@@ -9,6 +9,7 @@ import           Data.Bits
 import           Data.ByteString   as BS
 import           Data.Coerce
 import           Data.Word
+import           Data.Text
 
 import           Asterix.Base
 import           Asterix.Schema
@@ -177,7 +178,7 @@ parseVariation = \case
     GExtended lst -> do
         assertBitOffset8 0
         Offset oStart _ <- get
-        let go :: [Maybe (GItem String Int)] -> Rx t [Maybe (Some Item)]
+        let go :: [Maybe (GItem Text Int)] -> Rx t [Maybe (Some Item)]
             go = \case
                 [] -> pure []
                 (Nothing : xs) -> (:) <$> pure Nothing <*> go xs
