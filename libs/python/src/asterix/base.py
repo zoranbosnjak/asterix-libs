@@ -1341,7 +1341,7 @@ class Expansion:
     def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Expansion', Bits]]:
         if len(bs) < (cls.cv_fspec_bytes * 8):
             return ValueError('overflow')
-        flags, remaining = bs.split_at(8)
+        flags, remaining = bs.split_at(cls.cv_fspec_bytes * 8)
         items = {}
         for (flag, nsp) in zip(flags, cls.cv_items_list):
             if not flag:

@@ -370,9 +370,11 @@ def test_explicit2() -> None:
 
 def test_explicit3() -> None:
     Cat = Cat_000_1_0
-    Ref = Ref_000_1_0
+    Ref = Ref_000_1_1
     re = Ref.cv_expansion.create({
         'I1': 1,
+        'I2': 2,
+        'I3': 3,
     })
     r = Cat.cv_record.create({
         '010': 0x0102,
@@ -390,8 +392,14 @@ def test_explicit3() -> None:
     (obj3, bs3) = result3
     assert bs3.null()
     i1 = obj3.get_item('I1')
+    i2 = obj3.get_item('I2')
+    i3 = obj3.get_item('I3')
     assert i1 is not None
     assert i1.as_uint() == 1
+    assert i2 is not None
+    assert i2.as_uint() == 2
+    assert i3 is not None
+    assert i3.as_uint() == 3
 
 
 def test_compound3() -> None:
