@@ -50,7 +50,7 @@ newtype Record = Record [UapItem]
 
 type Uap = A.Uap Record
 
-data Expansion = Expansion A.ByteSize [Maybe NonSpare]
+data Expansion = Expansion (Maybe A.ByteSize) [Maybe NonSpare]
     deriving (Generic, Eq, Ord, Show)
 
 data Asterix
@@ -174,8 +174,8 @@ deriveAsterix = \case
             A.NonSpare iName _ _ _ -> bool Nothing (Just i) (iName == name)
         getRecord :: [A.UapItem A.ItemName] -> Record
         getRecord lst = Record $ fmap (fmap getItem) lst
-    deriveExpansion :: A.ByteSize -> [Maybe (A.NonSpare ())] -> Expansion
-    deriveExpansion n items = Expansion n (fmap (fmap deriveNonSpare) items)
+    deriveExpansion :: Maybe A.ByteSize -> [Maybe (A.NonSpare ())] -> Expansion
+    deriveExpansion mn items = Expansion mn (fmap (fmap deriveNonSpare) items)
 
 -- | 'AsterixDb' - Asterix database is a collection of all components, without
 -- duplications (the same definitions can be reused). For example,

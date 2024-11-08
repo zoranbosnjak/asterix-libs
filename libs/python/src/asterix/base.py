@@ -923,6 +923,34 @@ def parse_fspec(
             break
     return (flags, remaining)
 
+def unparse_fspec(items_list: List[Optional[Type[NonSpare]]],
+                  args: Dict[str, Any]) -> Tuple[Bits, List[Any]]:
+    bs = Bits.from_bytes(b'')
+    items: List[Tuple[str, NonSpare]] = []
+    cnt = 0
+    for i in items_list:
+        if not args:
+            break
+        if cnt % 8 == 7:
+            cnt += 1
+            bs = bs.append_bit(True)  # FX
+        cnt += 1
+        if i is None:
+            bs = bs.append_bit(False)
+        else:
+            name = i.cv_name
+            try:
+                obj = i.create(args.pop(name))  # type: ignore
+                bs = bs.append_bit(True)
+                items.append((name, obj))
+            except KeyError:
+                bs = bs.append_bit(False)
+    if args:
+        raise ValueError('items error', args)
+    while (cnt % 8):
+        cnt += 1
+        bs = bs.append_bit(False)
+    return (bs, items)
 
 class Compound(Variation):
     cv_fspec_max_bytes: ClassVar[int]
@@ -962,31 +990,7 @@ class Compound(Variation):
     def _create(cls, args: Dict[str, Any]) -> Any:
         if isinstance(args, cls):
             return args
-        bs = Bits.from_bytes(b'')
-        items: List[Tuple[str, NonSpare]] = []
-        cnt = 0
-        for i in cls.cv_items_list:
-            if not args:
-                break
-            if cnt % 8 == 7:
-                cnt += 1
-                bs = bs.append_bit(True)  # FX
-            cnt += 1
-            if i is None:
-                bs = bs.append_bit(False)
-            else:
-                name = i.cv_name
-                try:
-                    obj = i.create(args.pop(name))  # type: ignore
-                    bs = bs.append_bit(True)
-                    items.append((name, obj))
-                except KeyError:
-                    bs = bs.append_bit(False)
-        if args:
-            raise ValueError('items error', args)
-        while (cnt % 8):
-            cnt += 1
-            bs = bs.append_bit(False)
+        bs, items = unparse_fspec(cls.cv_items_list, args)
         for obj in items:
             bs += obj[1].unparse()
         return cls(bs, {name: obj for name, obj in items})
@@ -1324,8 +1328,22 @@ class UapMultiple(Uap):
         return go(bs)
 
 
+class FspecType:
+    pass
+
+
+class FspecFixed(FspecType):
+    pass
+
+
+class FspecFx(FspecType):
+    pass
+
+
 class Expansion:
-    cv_fspec_bytes: ClassVar[int]
+    # in case of Fixed fspec, 'int' is the actual byte size,
+    # in case of Fx fspec, 'int' represents max_bytes
+    cv_type: ClassVar[Tuple[Union[Type[FspecFixed], Type[FspecFx]], int]]
     cv_items_list: ClassVar[List[Optional[Type[NonSpare]]]]
     cv_items_dict: ClassVar[Dict[str, Type[NonSpare]]]
 
@@ -1339,19 +1357,30 @@ class Expansion:
 
     @classmethod
     def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Expansion', Bits]]:
-        if len(bs) < (cls.cv_fspec_bytes * 8):
-            return ValueError('overflow')
-        flags, remaining = bs.split_at(cls.cv_fspec_bytes * 8)
+        a, b = cls.cv_type
+        if a == FspecFixed:
+            n = b*8
+            if len(bs) < n:
+                return ValueError('overflow')
+            flags_bits, remaining = bs.split_at(n)
+            flags = list(flags_bits)
+        elif a == FspecFx:
+            result1 = parse_fspec(b, bs)
+            if isinstance(result1, ValueError):
+                return result1
+            flags, remaining = result1
+        else:
+            raise Exception('Unexpected cv_type', a)
         items = {}
         for (flag, nsp) in zip(flags, cls.cv_items_list):
             if not flag:
                 continue
             if nsp is None:
                 return ValueError('fx bit set for non-defined item')
-            result = nsp.parse(remaining)
-            if isinstance(result, ValueError):
-                return result
-            obj, remaining = result
+            result2 = nsp.parse(remaining)
+            if isinstance(result2, ValueError):
+                return result2
+            obj, remaining = result2
             items[nsp.cv_name] = obj
         n = len(bs)
         m = len(remaining)
@@ -1361,30 +1390,37 @@ class Expansion:
     def _create(cls, args: Dict[str, Any]) -> Any:
         if isinstance(args, cls):
             return args
-        bs = Bits.from_bytes(b'')
-        items: List[Tuple[str, NonSpare]] = []
-        cnt = 0
-        for i in cls.cv_items_list:
-            if not args:
-                break
-            cnt += 1
-            if i is None:
-                bs = bs.append_bit(False)
-            else:
-                name = i.cv_name
-                try:
-                    obj = i.create(args.pop(name))  # type: ignore
-                    bs = bs.append_bit(True)
-                    items.append((name, obj))
-                except KeyError:
+        a, b = cls.cv_type
+        if a == FspecFixed:
+            n = b*8
+            bs = Bits.from_bytes(b'')
+            items: List[Tuple[str, NonSpare]] = []
+            cnt = 0
+            for i in cls.cv_items_list:
+                if not args:
+                    break
+                cnt += 1
+                if i is None:
                     bs = bs.append_bit(False)
-        if args:
-            raise ValueError('items error', args)
-        if cnt > (cls.cv_fspec_bytes * 8):
-            raise ValueError('fspec length too short')
-        while cnt < (cls.cv_fspec_bytes * 8):
-            cnt += 1
-            bs = bs.append_bit(False)
+                else:
+                    name = i.cv_name
+                    try:
+                        obj = i.create(args.pop(name))  # type: ignore
+                        bs = bs.append_bit(True)
+                        items.append((name, obj))
+                    except KeyError:
+                        bs = bs.append_bit(False)
+            if args:
+                raise ValueError('items error', args)
+            if cnt > n:
+                raise ValueError('fspec length too short')
+            while cnt < n:
+                cnt += 1
+                bs = bs.append_bit(False)
+        elif a == FspecFx:
+            bs, items = unparse_fspec(cls.cv_items_list, args)
+        else:
+            raise Exception('Unexpected cv_type', a)
         for obj in items:
             bs += obj[1].unparse()
         return cls(bs, {name: obj for name, obj in items})

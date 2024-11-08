@@ -828,7 +828,7 @@ instance Node Uap where
 
 instance Node Expansion where
     focus = lExpansion
-    node ix (Expansion n lst) = do
+    node ix (Expansion mn lst) = do
         refList <- forM lst $ \case
             Nothing -> pure "None"
             Just nsp -> sformat ("NonSpare_" % int) <$> walk nsp
@@ -840,7 +840,11 @@ instance Node Expansion where
                 fmt (stext % ": NonSpare_" % int % ".cv_arg,")
                     (quote $ coerce name) ref
             "}, total=False)"
-            fmt ("cv_fspec_bytes = " % int) (coerce n :: Int)
+            fmt ("cv_type = " % stext) $ case mn of
+                Nothing -> sformat ("(FspecFx, " % int % ")")
+                    (fspecMaxBytes lst)
+                Just n -> sformat ("(FspecFixed, " % int % ")")
+                    (coerce n :: Int)
             fmt ("cv_items_list = " % stext) (fmtList "[" "]" id refList)
             do
                 let f (A.ItemName name, i) = sformat

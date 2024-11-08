@@ -4706,12 +4706,12 @@ class Asterix_0(AstCat):
     def create(cls, records : List[Uap_0.cv_arg]) -> "Asterix_0":
         return cls._create(records) # type: ignore
 
-class Expansion_0(Expansion):
+class Expansion_1(Expansion):
     cv_arg = TypedDict('cv_arg', {
         "I1": NonSpare_44.cv_arg,
         "I2": NonSpare_49.cv_arg,
     }, total=False)
-    cv_fspec_bytes = 1
+    cv_type = (FspecFixed, 1)
     cv_items_list = [NonSpare_44, NonSpare_49]
     cv_items_dict = {"I1": NonSpare_44, "I2": NonSpare_49}
 
@@ -4737,43 +4737,43 @@ class Expansion_0(Expansion):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["I1"], val : NonSpare_44.cv_arg) -> "Expansion_0":
+    def set_item(self, key : Literal["I1"], val : NonSpare_44.cv_arg) -> "Expansion_1":
         ...
     @overload
-    def set_item(self, key : Literal["I2"], val : NonSpare_49.cv_arg) -> "Expansion_0":
+    def set_item(self, key : Literal["I2"], val : NonSpare_49.cv_arg) -> "Expansion_1":
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
 
     @overload
-    def del_item(self, key : Literal["I1"]) -> "Expansion_0":
+    def del_item(self, key : Literal["I1"]) -> "Expansion_1":
         ...
     @overload
-    def del_item(self, key : Literal["I2"]) -> "Expansion_0":
+    def del_item(self, key : Literal["I2"]) -> "Expansion_1":
         ...
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
     @classmethod
-    def create(cls, arg: "Expansion_0.cv_arg") -> 'Expansion_0':
+    def create(cls, arg: "Expansion_1.cv_arg") -> 'Expansion_1':
         return cls._create(arg) # type: ignore
 
     @classmethod
-    def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Expansion_0", Bits]]:
+    def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Expansion_1", Bits]]:
         return cls._parse(bs) # type: ignore
 
 class Asterix_1(AstRef):
     cv_category = 0
     cv_edition = (1, 0)
-    cv_expansion: TypeAlias = Expansion_0
+    cv_expansion: TypeAlias = Expansion_1
 
-class Expansion_1(Expansion):
+class Expansion_2(Expansion):
     cv_arg = TypedDict('cv_arg', {
         "I1": NonSpare_44.cv_arg,
         "I2": NonSpare_49.cv_arg,
         "I3": NonSpare_55.cv_arg,
     }, total=False)
-    cv_fspec_bytes = 2
+    cv_type = (FspecFixed, 2)
     cv_items_list = [NonSpare_44, None, None, NonSpare_49, None, None, None, None, None, None, NonSpare_55]
     cv_items_dict = {"I1": NonSpare_44, "I2": NonSpare_49, "I3": NonSpare_55}
 
@@ -4806,41 +4806,116 @@ class Expansion_1(Expansion):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["I1"], val : NonSpare_44.cv_arg) -> "Expansion_1":
+    def set_item(self, key : Literal["I1"], val : NonSpare_44.cv_arg) -> "Expansion_2":
         ...
     @overload
-    def set_item(self, key : Literal["I2"], val : NonSpare_49.cv_arg) -> "Expansion_1":
+    def set_item(self, key : Literal["I2"], val : NonSpare_49.cv_arg) -> "Expansion_2":
         ...
     @overload
-    def set_item(self, key : Literal["I3"], val : NonSpare_55.cv_arg) -> "Expansion_1":
+    def set_item(self, key : Literal["I3"], val : NonSpare_55.cv_arg) -> "Expansion_2":
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
 
     @overload
-    def del_item(self, key : Literal["I1"]) -> "Expansion_1":
+    def del_item(self, key : Literal["I1"]) -> "Expansion_2":
         ...
     @overload
-    def del_item(self, key : Literal["I2"]) -> "Expansion_1":
+    def del_item(self, key : Literal["I2"]) -> "Expansion_2":
         ...
     @overload
-    def del_item(self, key : Literal["I3"]) -> "Expansion_1":
+    def del_item(self, key : Literal["I3"]) -> "Expansion_2":
         ...
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
     @classmethod
-    def create(cls, arg: "Expansion_1.cv_arg") -> 'Expansion_1':
+    def create(cls, arg: "Expansion_2.cv_arg") -> 'Expansion_2':
         return cls._create(arg) # type: ignore
 
     @classmethod
-    def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Expansion_1", Bits]]:
+    def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Expansion_2", Bits]]:
         return cls._parse(bs) # type: ignore
 
 class Asterix_2(AstRef):
     cv_category = 0
     cv_edition = (1, 1)
-    cv_expansion: TypeAlias = Expansion_1
+    cv_expansion: TypeAlias = Expansion_2
+
+class Expansion_0(Expansion):
+    cv_arg = TypedDict('cv_arg', {
+        "I1": NonSpare_44.cv_arg,
+        "I2": NonSpare_49.cv_arg,
+        "I3": NonSpare_55.cv_arg,
+    }, total=False)
+    cv_type = (FspecFx, 2)
+    cv_items_list = [NonSpare_44, None, None, NonSpare_49, None, None, None, None, None, None, NonSpare_55]
+    cv_items_dict = {"I1": NonSpare_44, "I2": NonSpare_49, "I3": NonSpare_55}
+
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I1"]) -> NonSpare_44:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I2"]) -> NonSpare_49:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I3"]) -> NonSpare_55:
+        ...
+    @classmethod
+    def spec(cls, key : Union[Literal["I1"], Literal["I2"], Literal["I3"]]) -> Any:
+        return cls._spec(key)
+
+    @overload
+    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_44]:
+        ...
+    @overload
+    def get_item(self, key : Literal["I2"]) -> Optional[NonSpare_49]:
+        ...
+    @overload
+    def get_item(self, key : Literal["I3"]) -> Optional[NonSpare_55]:
+        ...
+    def get_item(self, key : Any) -> Any:
+        return self._get_item(key)
+
+    @overload
+    def set_item(self, key : Literal["I1"], val : NonSpare_44.cv_arg) -> "Expansion_0":
+        ...
+    @overload
+    def set_item(self, key : Literal["I2"], val : NonSpare_49.cv_arg) -> "Expansion_0":
+        ...
+    @overload
+    def set_item(self, key : Literal["I3"], val : NonSpare_55.cv_arg) -> "Expansion_0":
+        ...
+    def set_item(self, key : Any, val : Any) -> Any:
+        return self._set_item(key, val)
+
+    @overload
+    def del_item(self, key : Literal["I1"]) -> "Expansion_0":
+        ...
+    @overload
+    def del_item(self, key : Literal["I2"]) -> "Expansion_0":
+        ...
+    @overload
+    def del_item(self, key : Literal["I3"]) -> "Expansion_0":
+        ...
+    def del_item(self, key : Any) -> Any:
+        return self._del_item(key)
+
+    @classmethod
+    def create(cls, arg: "Expansion_0.cv_arg") -> 'Expansion_0':
+        return cls._create(arg) # type: ignore
+
+    @classmethod
+    def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Expansion_0", Bits]]:
+        return cls._parse(bs) # type: ignore
+
+class Asterix_3(AstRef):
+    cv_category = 0
+    cv_edition = (1, 2)
+    cv_expansion: TypeAlias = Expansion_0
 
 class NonSpare_2(NonSpare):
     cv_arg: TypeAlias = RuleVariation_39.cv_arg
@@ -5345,13 +5420,13 @@ class Uap_1(UapMultiple):
     def parse_any_uap(cls, bs : Bits) -> "List[List[Uap_1.cv_arg]]":
         return cls._parse_any_uap(bs)
 
-class Asterix_3(AstCat):
+class Asterix_4(AstCat):
     cv_category = 1
     cv_edition = (1, 0)
     cv_uap: TypeAlias = Uap_1
 
     @classmethod
-    def create(cls, records : List[Uap_1.cv_arg]) -> "Asterix_3":
+    def create(cls, records : List[Uap_1.cv_arg]) -> "Asterix_4":
         return cls._create(records) # type: ignore
 
 class NonSpare_1(NonSpare):
@@ -5791,13 +5866,13 @@ class Uap_2(UapMultiple):
     def parse_any_uap(cls, bs : Bits) -> "List[List[Uap_2.cv_arg]]":
         return cls._parse_any_uap(bs)
 
-class Asterix_4(AstCat):
+class Asterix_5(AstCat):
     cv_category = 2
     cv_edition = (1, 0)
     cv_uap: TypeAlias = Uap_2
 
     @classmethod
-    def create(cls, records : List[Uap_2.cv_arg]) -> "Asterix_4":
+    def create(cls, records : List[Uap_2.cv_arg]) -> "Asterix_5":
         return cls._create(records) # type: ignore
 
 # Aliases
@@ -5805,8 +5880,9 @@ class Asterix_4(AstCat):
 Cat_000_1_0: TypeAlias = Asterix_0
 Ref_000_1_0: TypeAlias = Asterix_1
 Ref_000_1_1: TypeAlias = Asterix_2
-Cat_001_1_0: TypeAlias = Asterix_3
-Cat_002_1_0: TypeAlias = Asterix_4
+Ref_000_1_2: TypeAlias = Asterix_3
+Cat_001_1_0: TypeAlias = Asterix_4
+Cat_002_1_0: TypeAlias = Asterix_5
 
 # Manifest
 
@@ -5826,6 +5902,7 @@ manifest = {
         0: [
             Ref_000_1_0,
             Ref_000_1_1,
+            Ref_000_1_2,
         ],
     },
 }

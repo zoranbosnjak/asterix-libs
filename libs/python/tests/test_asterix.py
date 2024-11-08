@@ -368,9 +368,9 @@ def test_explicit2() -> None:
     assert i2.as_uint() == 2
 
 
-def test_explicit3() -> None:
+def test_explicit3a() -> None:
     Cat = Cat_000_1_0
-    Ref = Ref_000_1_1
+    Ref = Ref_000_1_1 # without FX
     re = Ref.cv_expansion.create({
         'I1': 1,
         'I2': 2,
@@ -387,6 +387,7 @@ def test_explicit3() -> None:
     i072 = r2.get_item('072')
     assert i072 is not None
     s = i072.variation.get_bytes()
+    assert hexlify(s) == b'9020010203'
     result3 = Ref.cv_expansion.parse(Bits.from_bytes(s))
     assert not isinstance(result3, ValueError)
     (obj3, bs3) = result3
@@ -400,6 +401,74 @@ def test_explicit3() -> None:
     assert i2.as_uint() == 2
     assert i3 is not None
     assert i3.as_uint() == 3
+
+
+def test_explicit3b() -> None:
+    Cat = Cat_000_1_0
+    Ref = Ref_000_1_2 # with FX
+    re = Ref.cv_expansion.create({
+        'I1': 1,
+        'I2': 2,
+        'I3': 3,
+    })
+    r = Cat.cv_record.create({
+        '010': 0x0102,
+        '072': re.unparse().to_bytes(),
+    })
+    result = Cat.cv_record.parse(r.unparse())
+    assert not isinstance(result, ValueError)
+    (r2, bs2) = result
+    assert bs2.null()
+    i072 = r2.get_item('072')
+    assert i072 is not None
+    s = i072.variation.get_bytes()
+    assert hexlify(s) == b'9110010203'
+    result3 = Ref.cv_expansion.parse(Bits.from_bytes(s))
+    assert not isinstance(result3, ValueError)
+    (obj3, bs3) = result3
+    assert bs3.null()
+    i1 = obj3.get_item('I1')
+    i2 = obj3.get_item('I2')
+    i3 = obj3.get_item('I3')
+    assert i1 is not None
+    assert i1.as_uint() == 1
+    assert i2 is not None
+    assert i2.as_uint() == 2
+    assert i3 is not None
+    assert i3.as_uint() == 3
+
+
+def test_explicit3c() -> None:
+    Cat = Cat_000_1_0
+    Ref = Ref_000_1_2 # with FX
+    re = Ref.cv_expansion.create({
+        'I1': 1,
+        'I2': 2,
+    })
+    r = Cat.cv_record.create({
+        '010': 0x0102,
+        '072': re.unparse().to_bytes(),
+    })
+    result = Cat.cv_record.parse(r.unparse())
+    assert not isinstance(result, ValueError)
+    (r2, bs2) = result
+    assert bs2.null()
+    i072 = r2.get_item('072')
+    assert i072 is not None
+    s = i072.variation.get_bytes()
+    assert hexlify(s) == b'900102'
+    result3 = Ref.cv_expansion.parse(Bits.from_bytes(s))
+    assert not isinstance(result3, ValueError)
+    (obj3, bs3) = result3
+    assert bs3.null()
+    i1 = obj3.get_item('I1')
+    i2 = obj3.get_item('I2')
+    i3 = obj3.get_item('I3')
+    assert i1 is not None
+    assert i1.as_uint() == 1
+    assert i2 is not None
+    assert i2.as_uint() == 2
+    assert i3 is None
 
 
 def test_compound3() -> None:
