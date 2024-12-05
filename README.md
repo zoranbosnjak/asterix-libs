@@ -18,7 +18,7 @@ datablocks).
 [Test asterix specifications](test-specs) are included for test purposes.
 
 For more information, questions or comments, feel free to
-contact project maintainer [Zoran Bošnjak](mailto:zoran.bosnjak@sloveniacontrol.si).
+contact project maintainer [Zoran Bošnjak](mailto:zoran.bosnjak@via.si).
 
 ## About ASTERIX data format
 
