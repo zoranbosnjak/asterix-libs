@@ -421,6 +421,7 @@ class ContentQuantity(Content):
         if isinstance(arg, float):
             return cls.cv_signedness.convert(bit_size, round(arg / cls.cv_lsb))
         if isinstance(arg, tuple):
+            assert arg[1] == cls.cv_unit
             return cls.cv_signedness.convert(
                 bit_size, round(arg[0] / cls.cv_lsb))
         assert_never(arg)
@@ -690,6 +691,7 @@ class Group(Variation):
         bs = Bits.from_uinteger(0, cls.cv_bit_offset8, 0)
         for ((a, size), b) in zip(cls.cv_items_list, arg):
             if isinstance(b, tuple):
+                assert b[0] == a.cv_non_spare.cv_name  # type: ignore
                 b = b[1]
             i = a.create(b)  # type: ignore
             items.append(i)
@@ -779,6 +781,7 @@ class Extended(Variation):
                 else:
                     a, size = a  # type: ignore
                     if isinstance(b, tuple):
+                        assert b[0] == a.cv_non_spare.cv_name  # type: ignore
                         b = b[1]
                     i = a.create(b)  # type: ignore
                     items.append(i)  # type: ignore
