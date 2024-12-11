@@ -15,8 +15,8 @@ In python terms, a *ray* could be represented as a list of values and
 a complete weather picture is a list of such rays. So we have:
 
 ```python
-type Ray = List[float]
-type WxPicture = List[Ray]
+Ray = List[float]
+WxPicture = List[Ray]
 ```
 
 A task is to encode `WxPicture` to asterix `cat008` format (`bytes`).
@@ -35,13 +35,29 @@ def encode(t: datetime, wx: WxPicture) -> [bytes]:
 
 while True:
     wx = get_new_wx_picture_from_the_radar()
-    t = now(timezone.utc)
+    t = datetime.now(timezone.utc)
     datagrams = encode(t, wx)
     for datagram in datagrams:
         send_over_the_network(datagram)
 ```
 
 ## Implementation
+
+Required imports and type definitions...
+
+``` {.python file=test.py}
+from typing import *
+from dataclasses import dataclass
+from datetime import datetime, timezone
+
+from asterix.base import *
+import asterix.generated as gen
+
+Cat008 = gen.Cat_008_1_3
+
+Ray = List[float]
+WxPicture = List[Ray]
+```
 
 There are several conversion steps required before encoding to asterix:
 
@@ -75,19 +91,28 @@ is converted to the following list of vectors:
 The vector *start* and *end* range values get encoded in asterix
 item `I008/034`.
 
-Constants:
+`STR` and `ENDR` are both 8-bits wide, so for maximum range of
+60km, we can get down to 234m (0.1266NM) per cell. A scaling factor
+- 4 gives 0.125 NM per cell which is just below required value
+- 5 gives 0.25 NM per cell
 
-```python
-scaling_factor = ... # TODO
+We need to to choose scaling factor 5 or more (bigger range, worse
+resolution).
+
+For example simplification, hardcode constants:
+
+``` {.python file=test.py}
+sac, sic = 0x00, 0x00 # radar source address
+scaling_factor = 5
 reflection_range = (-30.0, 75.0) # min dBZ for (level0, level7)
 ray_angle = 1.0
-max_records_per_datablock = ... # TODO, this will define datagram size
+max_records_per_datablock = 8 # This will define datagram size
 ```
 
 A threshold reflection values can be calculated from `reflection_range`
 as a linear range between min and max values.
 
-```python
+``` {.python file=test.py}
 reflection_step = (reflection_range[1] - reflection_range[0]) / 7
 reflection_thresholds = [reflection_range[0] + n * reflection_step for n in range(8)]
 ```
@@ -95,7 +120,7 @@ reflection_thresholds = [reflection_range[0] + n * reflection_step for n in rang
 This conversion is performed *per ray* and it is convenient to perform
 all steps in one go.
 
-```python
+``` {.python file=test.py}
 @dataclass
 class Vector:
     intensity: int # 0..7
@@ -109,23 +134,49 @@ def resample_and_vectorize(ray: Ray) -> List[Vector]:
 With `resample_and_vectorize` function implemented, the `encode`
 function can be implemented as follows:
 
-```python
+``` {.python file=test.py}
 def encode(t: datetime, wx: WxPicture) -> [bytes]:
-    sop_record = ... # TODO
+    output = []
+
+    # encode SOP as one datagram
+    seconds_since_midnight = 0.0 # TODO: calculate from 't'
+    sop_record = Cat008.cv_record.create({
+        '000': 254, # SOP message
+        '010': (('SAC', sac), ('SIC', sic)),
+        '090': (seconds_since_midnight, 's'),
+        '100': ((('F', scaling_factor), 0, 0, None),),
+    })
+    output.append(Cat008.create([sop_record]).unparse().to_bytes())
+    
+    # encode vector_records to as many datagrams as needed
     vector_records = []
     for ix, ray in enumerate(wx):
         azimuth = float(ix) * ray_angle
         vectors = resample_and_vectorize(ray)
 
         # now we have azimuth and vectors and we are ready
-        # to encode vector records 
+        # to encode vector records
         r = ... # TODO
         vector_records.append(r)
-    eop_record = ... # TODO
 
-    # TODO
-    # - encode SOP as one datagram
-    # - encode vector_records to as many datagrams as needed
-    #   (group if possible)
-    # - encode EOP as one datagram
+    # encode EOP as one datagram
+    eop_record = Cat008.cv_record.create({
+        '000': 255, # EOP message
+        '010': (('SAC', sac), ('SIC', sic)),
+        '090': (seconds_since_midnight, 's'),
+        # '120': TODO...
+    })
+    output.append(Cat008.create([eop_record]).unparse().to_bytes())
+
+    return output
+```
+
+Run example:
+
+``` {.python file=test.py}
+wx = [] # TODO
+t = datetime.now(timezone.utc)
+datagrams = encode(t, wx)
+for datagram in datagrams:
+    print(hexlify(datagram))
 ```
