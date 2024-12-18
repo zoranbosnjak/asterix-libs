@@ -57,6 +57,7 @@ Cat008 = gen.Cat_008_1_3
 
 Ray = List[float]
 WxPicture = List[Ray]
+Intensity = int # 0..7
 ```
 
 There are several conversion steps required before encoding to asterix:
@@ -76,17 +77,22 @@ a continuous region of samples, where the intensity level is at least
 as specified (or more). For example:
 
 If the intensity samples (resampled) are
-`ray = [None, None, 0, 1, 3, 2, 1, None,...]`,
-we can derive the following vectors (range starts at index '0'):
-- `Vector(intensity=0, start_range=2, end_range=7)`
-- `Vector(intensity=1, start_range=3, end_range=7)`
-- `Vector(intensity=2, start_range=4, end_range=6)`
-- `Vector(intensity=3, start_range=4, end_range=5)`
+`ray = [.,.,0,1,3,2,1,.,3,...]`, we can look at this as a
+composition of the following overlapping samples (there are more options,
+go with the on that results in smaller number of vectors):
 
-Another simple example `ray = [None, None, 3, None, 1, None, ...],`
-is converted to the following list of vectors:
-- `Vector(intensity=1, start_range=4, end_range=5)`
-- `Vector(intensity=3, start_range=2, end_range=3)`
+```
+[.,.,0,0,0,0,0,.,.,...]
+[.,.,.,1,1,1,1,.,.,...]
+[.,.,.,.,.,2,.,.,.,...]
+[.,.,.,.,3,.,.,.,3,...]
+```
+
+and we can derive the following vectors (range starts at index '0'):
+- intensity 0: `Vector(start_range=2, end_range=7)`
+- intensity 1: `Vector(3, 7)`
+- intensity 2: `Vector(5, 6)` or `Vector(4, 6)` (both are OK)
+- intensity 3: `[Vector(4, 5), Vector(8, 9)]`
 
 The vector *start* and *end* range values get encoded in asterix
 item `I008/034`.
@@ -123,11 +129,10 @@ all steps in one go.
 ``` {.python file=test.py}
 @dataclass
 class Vector:
-    intensity: int # 0..7
     start_range: int
     end_range: int
 
-def resample_and_vectorize(ray: Ray) -> List[Vector]:
+def resample_and_vectorize(ray: Ray) -> Map[Intensity, List[Vector]]:
     ...
 ```
 
@@ -136,6 +141,7 @@ function can be implemented as follows:
 
 ``` {.python file=test.py}
 def encode(t: datetime, wx: WxPicture) -> [bytes]:
+    number_of_vectors = 0
     output = []
 
     # encode SOP as one datagram
@@ -147,24 +153,40 @@ def encode(t: datetime, wx: WxPicture) -> [bytes]:
         '100': ((('F', scaling_factor), 0, 0, None),),
     })
     output.append(Cat008.create([sop_record]).unparse().to_bytes())
-    
+
     # encode vector_records to as many datagrams as needed
     vector_records = []
     for ix, ray in enumerate(wx):
         azimuth = float(ix) * ray_angle
-        vectors = resample_and_vectorize(ray)
+        result = resample_and_vectorize(ray)
 
         # now we have azimuth and vectors and we are ready
         # to encode vector records
-        r = ... # TODO
-        vector_records.append(r)
+        for intensity, vectors in result.items():
+            # NOTE: this example assumes length of 'vectors' <= 255
+            #       In production code, this needs to be checked and created
+            #       multiple records if necessary
+            assert(len(vectors) <= 255)
+            r = Cat008.cv_record.create({
+                '000': 1, # Polar vector
+                '010': (('SAC', sac), ('SIC', sic)),
+                '020': ((0, ('I', intensity), 0, None),),
+                '034': [(('STR', v.start_range), ('ENDR', v.end_range), ('AZ', (azimuth, "°"))) for v in vectors]
+            })
+            vector_records.append(r)
+            number_of_vectors += len(vectors)
+
+    # NOTE: In this example, we ignore the maximum datagram size, with is limited
+    # and we send all vector records as one datagram. This could result in huge datagrams.
+    # In production code, we should check the size and split to multiple datagrams instead.
+    output.append(Cat008.create(vector_records).unparse().to_bytes())
 
     # encode EOP as one datagram
     eop_record = Cat008.cv_record.create({
         '000': 255, # EOP message
         '010': (('SAC', sac), ('SIC', sic)),
         '090': (seconds_since_midnight, 's'),
-        # '120': TODO...
+        '120': number_of_vectors
     })
     output.append(Cat008.create([eop_record]).unparse().to_bytes())
 
