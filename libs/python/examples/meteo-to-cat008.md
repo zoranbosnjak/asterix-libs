@@ -15,8 +15,8 @@ In python terms, a *ray* could be represented as a list of values and
 a complete weather picture is a list of such rays. So we have:
 
 ```python
-Ray = List[float]
-WxPicture = List[Ray]
+Ray: TypeAlias = List[float]
+WxPicture: TypeAlias = List[Ray]
 ```
 
 A task is to encode `WxPicture` to asterix `cat008` format (`bytes`).
@@ -49,15 +49,16 @@ Required imports and type definitions...
 from typing import *
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from binascii import hexlify
 
 from asterix.base import *
 import asterix.generated as gen
 
 Cat008 = gen.Cat_008_1_3
 
-Ray = List[float]
-WxPicture = List[Ray]
-Intensity = int # 0..7
+Ray: TypeAlias = List[float]
+WxPicture: TypeAlias = List[Ray]
+Intensity: TypeAlias = int # 0..7
 ```
 
 There are several conversion steps required before encoding to asterix:
@@ -79,7 +80,7 @@ as specified (or more). For example:
 If the intensity samples (resampled) are
 `ray = [.,.,0,1,3,2,1,.,3,...]`, we can look at this as a
 composition of the following overlapping samples (there are more options,
-go with the on that results in smaller number of vectors):
+go with the one that results in smaller number of vectors):
 
 ```
 [.,.,0,0,0,0,0,.,.,...]
@@ -132,15 +133,15 @@ class Vector:
     start_range: int
     end_range: int
 
-def resample_and_vectorize(ray: Ray) -> Map[Intensity, List[Vector]]:
-    ...
+def resample_and_vectorize(ray: Ray) -> Dict[Intensity, List[Vector]]:
+    raise NotImplementedError
 ```
 
 With `resample_and_vectorize` function implemented, the `encode`
 function can be implemented as follows:
 
 ``` {.python file=test.py}
-def encode(t: datetime, wx: WxPicture) -> [bytes]:
+def encode(t: datetime, wx: WxPicture) -> List[bytes]:
     number_of_vectors = 0
     output = []
 
@@ -171,7 +172,11 @@ def encode(t: datetime, wx: WxPicture) -> [bytes]:
                 '000': 1, # Polar vector
                 '010': (('SAC', sac), ('SIC', sic)),
                 '020': ((0, ('I', intensity), 0, None),),
-                '034': [(('STR', v.start_range), ('ENDR', v.end_range), ('AZ', (azimuth, "°"))) for v in vectors]
+                '034': [ (
+                    ('STR', v.start_range),
+                    ('ENDR', v.end_range),
+                    ('AZ', (azimuth, "°"))
+                    ) for v in vectors]
             })
             vector_records.append(r)
             number_of_vectors += len(vectors)
@@ -196,7 +201,7 @@ def encode(t: datetime, wx: WxPicture) -> [bytes]:
 Run example:
 
 ``` {.python file=test.py}
-wx = [] # TODO
+wx: WxPicture = [] # TODO
 t = datetime.now(timezone.utc)
 datagrams = encode(t, wx)
 for datagram in datagrams:
