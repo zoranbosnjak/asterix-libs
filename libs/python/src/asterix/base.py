@@ -577,6 +577,12 @@ class NonSpare:
     def _create(cls, arg: Any) -> Any:
         if isinstance(arg, cls):
             return arg
+        # first field of a tuple is maybe item name
+        if isinstance(arg, tuple):
+            if len(arg) == 2:
+                if isinstance(arg[0], str):
+                    name, arg = arg
+                    assert name == cls.cv_name
         val = cls.cv_rule.create(arg)  # type: ignore
         return cls(val)
 
@@ -690,9 +696,6 @@ class Group(Variation):
         items = []
         bs = Bits.from_uinteger(0, cls.cv_bit_offset8, 0)
         for ((a, size), b) in zip(cls.cv_items_list, arg):
-            if isinstance(b, tuple):
-                assert b[0] == a.cv_non_spare.cv_name  # type: ignore
-                b = b[1]
             i = a.create(b)  # type: ignore
             items.append(i)
             bs += i.unparse()
@@ -780,9 +783,6 @@ class Extended(Variation):
                     bs += Bits.fx(fx)
                 else:
                     a, size = a  # type: ignore
-                    if isinstance(b, tuple):
-                        assert b[0] == a.cv_non_spare.cv_name  # type: ignore
-                        b = b[1]
                     i = a.create(b)  # type: ignore
                     items.append(i)  # type: ignore
                     bs += i.unparse()  # type: ignore

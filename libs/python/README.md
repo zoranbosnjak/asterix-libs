@@ -601,7 +601,9 @@ from asterix.generated import *
 
 Spec = Cat_008_1_3
 rec = Spec.cv_record.create({'010': (('SA',1), ('SIC',2))})
-print(rec.get_item('010').variation.get_item('SA').as_uint())
+i010 = rec.get_item('010')
+if i010 is not None:
+    print(i010.variation.get_item('SA').as_uint())
 ```
 
 The program contains the following bugs:
