@@ -306,6 +306,12 @@ def test_extended3() -> None:
     T = Cat_000_1_0.cv_record.spec('102')
     obj = T.create((1, 2))
     assert obj.unparse() == Bits.from_bytes(unhexlify('0304'))
+    obj = T.create(((1, None), (2, None)))
+    assert obj.unparse() == Bits.from_bytes(unhexlify('0304'))
+    obj = T.create(((1, None), ((0, 0, 2), None)))
+    assert obj.unparse() == Bits.from_bytes(unhexlify('0304'))
+    obj = T.create(((1, None), ((('SG1', 0), 0, 2), None)))
+    assert obj.unparse() == Bits.from_bytes(unhexlify('0304'))
 
 
 def test_repetitive1() -> None:
