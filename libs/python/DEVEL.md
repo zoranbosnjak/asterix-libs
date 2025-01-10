@@ -20,6 +20,10 @@ find . | grep "\.py" | entr sh -c 'clear && date && mypy && pytest'
 
 ## Manually publish/update project to pypi
 
+**Note**:
+Normally this is not necessary.
+The process is already running from github action.
+
 ``` bash
 nix-shell
 # from clean repository
