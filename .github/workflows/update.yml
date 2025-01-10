@@ -1,8 +1,10 @@
 name: Update from upstream
+
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
   schedule:
     - cron: '0 1 * * 0'
+
 jobs:
   update:
     env:
