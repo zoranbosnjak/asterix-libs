@@ -838,3 +838,19 @@ def test_parse4() -> None:
         result2 = Cat1.cv_uap.parse('track', bs2)
         assert not isinstance(result2, ValueError)
         assert len(result2) == 3
+
+def test_parse5() -> None:
+    """Non-compatible items in multiple uaps."""
+    Cat1 = Cat_001_1_0
+    rec_plot = Cat1.cv_uap.spec('plot').create({'041': 0xff})
+    rec_track = Cat1.cv_uap.spec('track').create({'042': 0xffff})
+
+    bs_plot = rec_plot.unparse()
+    bs_track = rec_track.unparse()
+
+    results_plot = Cat1.cv_uap.parse_any_uap(bs_plot)
+    assert len(results_plot) == 1
+
+    results_track = Cat1.cv_uap.parse_any_uap(bs_track)
+    assert len(results_track) == 1
+

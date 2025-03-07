@@ -1312,23 +1312,18 @@ class UapMultiple(Uap):
         """
         lst = cls.cv_uaps.values()
 
-        def go(s: Bits) -> List[List[Any]]:
+        def go(acc: List[Any], s: Bits) -> Any:
             if not len(s):
-                return []
-            rv = []
+                yield acc
             for cls in lst:
                 result = cls._parse(s)
                 if isinstance(result, ValueError):
                     continue
                 x, remaining = result
-                xs = go(remaining)
-                if xs == []:
-                    rv.append([x])
-                else:
-                    for i in xs:
-                        rv.append([x] + i)
-            return rv
-        return go(bs)
+                for i in go(acc + [x], remaining):
+                    yield i
+
+        return list(go([], bs))
 
 
 class FspecType:
