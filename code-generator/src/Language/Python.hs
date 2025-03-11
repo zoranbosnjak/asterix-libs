@@ -757,8 +757,8 @@ instance Node Record where
                     rv = sformat ("Union[ValueError, Tuple[" % stext % ", Bits]]")
                         (quote r)
                 "@classmethod"
-                pyFunc "parse" ["cls", "bs : Bits"] rv $ do
-                    "return cls._parse(bs) # type: ignore"
+                pyFunc "parse" ["cls", "pm: ParsingMode", "bs : Bits"] rv $ do
+                    "return cls._parse(pm, bs) # type: ignore"
 
 instance Node Uap where
     focus = lUap

@@ -386,7 +386,7 @@ def test_explicit3a() -> None:
         '010': 0x0102,
         '072': re.unparse().to_bytes(),
     })
-    result = Cat.cv_record.parse(r.unparse())
+    result = Cat.cv_record.parse(ParsingMode.StrictParsing, r.unparse())
     assert not isinstance(result, ValueError)
     (r2, bs2) = result
     assert bs2.null()
@@ -421,7 +421,7 @@ def test_explicit3b() -> None:
         '010': 0x0102,
         '072': re.unparse().to_bytes(),
     })
-    result = Cat.cv_record.parse(r.unparse())
+    result = Cat.cv_record.parse(ParsingMode.StrictParsing, r.unparse())
     assert not isinstance(result, ValueError)
     (r2, bs2) = result
     assert bs2.null()
@@ -455,7 +455,7 @@ def test_explicit3c() -> None:
         '010': 0x0102,
         '072': re.unparse().to_bytes(),
     })
-    result = Cat.cv_record.parse(r.unparse())
+    result = Cat.cv_record.parse(ParsingMode.StrictParsing, r.unparse())
     assert not isinstance(result, ValueError)
     (r2, bs2) = result
     assert bs2.null()
@@ -656,7 +656,7 @@ def test_parse1() -> None:
         '410108030602AA02550112340A03040B03040C01FF'
     ]:
         bs = Bits.from_bytes(unhexlify(sample))
-        result = T.parse(bs)
+        result = T.parse(ParsingMode.StrictParsing, bs)
         assert not isinstance(result, ValueError)
         (r, bs2) = result
         assert bs2.null()
@@ -854,3 +854,49 @@ def test_parse5() -> None:
     results_track = Cat1.cv_uap.parse_any_uap(bs_track)
     assert len(results_track) == 1
 
+def test_parse_nonblocking() -> None:
+    """We encode a single record with a new edition, where some items
+    are added to the spec. We try to parse it as an old edition.
+    """
+
+    Ed0 = Cat_000_1_0
+    Ed1 = Cat_000_1_1
+
+    # old edition record
+    record0 = Ed0.cv_record.create({
+        '000': 0x00,
+        '010': 0x0102,
+    })
+
+    # new edition record (added item '200')
+    record1 = Ed1.cv_record.create({
+        '000': 0x00,
+        '010': 0x0102,
+        '200': 0xff,
+    })
+
+    # encode new record
+    s: Bits = record1.unparse()
+
+    # try to parse as a list with both editions
+    assert isinstance(Ed0.cv_uap.parse(s), ValueError)
+    assert not isinstance(Ed1.cv_uap.parse(s), ValueError)
+
+    # single record parsing combinations
+
+    # parsing with new edition shall not fail, regardless of parsing mode
+    for mode in ParsingMode:
+        result1 = Ed1.cv_record.parse(mode, s)
+        assert not isinstance(result1, ValueError)
+        r1, remaining = result1
+        assert remaining.null()
+        assert hexlify(record1.unparse().to_bytes()) == \
+                hexlify(r1.unparse().to_bytes())
+
+    # old edition, partial parsing shall not fail
+    result2 = Ed0.cv_record.parse(ParsingMode.PartialParsing, s)
+    assert not isinstance(result2, ValueError)
+    r2, remaining = result2
+    assert hexlify(record0.unparse().to_bytes()) == \
+            hexlify(r2.unparse().to_bytes())
+    assert remaining == Bits.from_uinteger(0xff, 0, 8)

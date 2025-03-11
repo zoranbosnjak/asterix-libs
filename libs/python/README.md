@@ -9,6 +9,9 @@ Features:
 - support for Reserved Expansion Fields (REF)
 - support for categories with multiple UAPs, eg. cat001
 - support for context dependent items, eg. I062/380/IAS
+- support for strict or partial record parsing, to be used
+  with so called blocking or non-blocking asterix categories
+- support to encode zero, one or more records in a datablock
 - pure python implementation
 - type annotations for static type checking,
   including subitem access by name
@@ -457,6 +460,82 @@ rec01_invalid = Cat1.cv_uap.spec('plot').create({
 print(Cat1.create([rec01_plot]).unparse().to_bytes().hex())
 print(Cat1.create([rec01_track]).unparse().to_bytes().hex())
 print(Cat1.create([rec01_invalid]).unparse().to_bytes().hex())
+```
+
+### Strict and partial record parsing modes
+
+This library supports parsing records strictly or partially.
+
+In a strict mode, we want to make sure that all data is parsed exactly
+as specified in the particular category/edition schema. The record parsing
+fails if the FSPEC parsing fails or if any subsequent item parsing fails.
+
+I a partial mode, we don't require exact parsing match. If we know where
+in a bytestring a record starts, we can try to parse *some* information out of
+the data stream, even in the case if the editions of the transmitter and the
+receiver do not match exactly. In particular: if the transmitter sends some
+additional items, unknown to the receiver. In that case, the receiver can still
+parse up to some point in a datablock.
+
+Partial record parsing means to parse the FSPEC (which might fail) followed
+by parsing subitems up to the point until items parsing is successful. The
+record parsing only fails if the FSPEC parsing itself fails.
+
+This is useful in situations where a datablock contains only one record
+(known as *non-blocking* in Asterix Maintenance Group vocabulary) or if
+we are interested only in the first record (even if there are more). The idea
+is to regain some forward compatibility on the receiver side, such that the
+receiver does not need to upgrade edition immediately as the transmitter
+upgrades or even before that. Whether this is safe or not, depends on the
+application and the exact differences between transmitter and receiver
+asterix editions.
+
+The following parsing methods exist:
+
+- `UapClass.parse(s: Bits) -> ValueError or List[Record]`
+- `RecordClass.parse(pm: ParsingMode, s: Bits) -> ValueError or Record + remaining`
+
+`ParsingMode` is an `Enum` with the following options:
+
+- `StrictParsing`
+- `PartialParsing`
+
+Calling `parse` on some `Uap` class returns **list of records** on success.
+This method always uses *strict* parsing and it makes sure it consumes all
+input data.
+
+Calling `parse` on some `Record` class returns that record instance and
+the remaining bytes. A method also requires parsing mode to be specified.
+
+Both methods can fail on invalid input data (return `ValueError`).
+
+This example demonstrates various parsing modes:
+
+```python
+Spec = Cat_NNN_E_E # some category/edition spec
+
+s: Bits = db.get_raw_records() # some input bits to be parsed
+
+# strictly parse records
+# 'parse' is called on 'Uap' class
+# successful result is a List of Records
+result1 = Spec.cv_uap.parse(s)
+if not isinstance(result1, ValueError):
+    for r1 in result1:
+        print(r1)
+
+# strictly parse a single record
+# 'parse' is called on 'Record' class
+# successful result is (Record + remaining bytes)
+result2 = Spec.cv_record.parse(ParsingMode.StrictParsing, s)
+if not isinstance(result2, ValueError):
+    r2, remaining = result2
+
+# partially parse a single record
+# successful result is (Record + remaining bytes),
+result3 = Spec.cv_record.parse(ParsingMode.PartialParsing, s)
+if not isinstance(result3, ValueError):
+    r3, remaining = result3
 ```
 
 ### Library manifest

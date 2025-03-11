@@ -50,14 +50,14 @@ class RuleVariation_7(RuleVariationContextFree):
     def variation(self) -> Variation_7:
         return self.arg # type: ignore
 
-class NonSpare_73(NonSpare):
+class NonSpare_74(NonSpare):
     cv_arg: TypeAlias = RuleVariation_7.cv_arg
     cv_name = "SAC"
     cv_title = "System Area Code"
     cv_rule: TypeAlias = RuleVariation_7
 
     @classmethod
-    def create(cls, arg : "NonSpare_73.cv_arg") -> "NonSpare_73":
+    def create(cls, arg : "NonSpare_74.cv_arg") -> "NonSpare_74":
         return cls._create(arg) # type: ignore
 
     @property
@@ -70,21 +70,21 @@ class NonSpare_73(NonSpare):
         return self.rule.variation
 
 class Item_30(Item):
-    cv_arg: TypeAlias = NonSpare_73.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_73
+    cv_arg: TypeAlias = NonSpare_74.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_74
 
     @classmethod
     def create(cls, arg : "Item_30.cv_arg") -> "Item_30":
         return cls._create(arg) # type: ignore
 
-class NonSpare_76(NonSpare):
+class NonSpare_77(NonSpare):
     cv_arg: TypeAlias = RuleVariation_7.cv_arg
     cv_name = "SIC"
     cv_title = "System Identification Code"
     cv_rule: TypeAlias = RuleVariation_7
 
     @classmethod
-    def create(cls, arg : "NonSpare_76.cv_arg") -> "NonSpare_76":
+    def create(cls, arg : "NonSpare_77.cv_arg") -> "NonSpare_77":
         return cls._create(arg) # type: ignore
 
     @property
@@ -97,8 +97,8 @@ class NonSpare_76(NonSpare):
         return self.rule.variation
 
 class Item_33(Item):
-    cv_arg: TypeAlias = NonSpare_76.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_76
+    cv_arg: TypeAlias = NonSpare_77.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_77
 
     @classmethod
     def create(cls, arg : "Item_33.cv_arg") -> "Item_33":
@@ -236,14 +236,14 @@ class NonSpare_0(NonSpare):
 class UapItem_0(UapItem):
     cv_non_spare: TypeAlias = NonSpare_0
 
-class NonSpare_69(NonSpare):
+class NonSpare_70(NonSpare):
     cv_arg: TypeAlias = RuleVariation_7.cv_arg
     cv_name = "R"
     cv_title = "Raw"
     cv_rule: TypeAlias = RuleVariation_7
 
     @classmethod
-    def create(cls, arg : "NonSpare_69.cv_arg") -> "NonSpare_69":
+    def create(cls, arg : "NonSpare_70.cv_arg") -> "NonSpare_70":
         return cls._create(arg) # type: ignore
 
     @property
@@ -298,14 +298,14 @@ class RuleVariation_8(RuleVariationContextFree):
     def variation(self) -> Variation_8:
         return self.arg # type: ignore
 
-class NonSpare_77(NonSpare):
+class NonSpare_78(NonSpare):
     cv_arg: TypeAlias = RuleVariation_8.cv_arg
     cv_name = "T"
     cv_title = "Table"
     cv_rule: TypeAlias = RuleVariation_8
 
     @classmethod
-    def create(cls, arg : "NonSpare_77.cv_arg") -> "NonSpare_77":
+    def create(cls, arg : "NonSpare_78.cv_arg") -> "NonSpare_78":
         return cls._create(arg) # type: ignore
 
     @property
@@ -360,14 +360,14 @@ class RuleVariation_22(RuleVariationContextFree):
     def variation(self) -> Variation_22:
         return self.arg # type: ignore
 
-class NonSpare_70(NonSpare):
+class NonSpare_71(NonSpare):
     cv_arg: TypeAlias = RuleVariation_22.cv_arg
     cv_name = "S1"
     cv_title = "String Ascii"
     cv_rule: TypeAlias = RuleVariation_22
 
     @classmethod
-    def create(cls, arg : "NonSpare_70.cv_arg") -> "NonSpare_70":
+    def create(cls, arg : "NonSpare_71.cv_arg") -> "NonSpare_71":
         return cls._create(arg) # type: ignore
 
     @property
@@ -422,14 +422,14 @@ class RuleVariation_21(RuleVariationContextFree):
     def variation(self) -> Variation_21:
         return self.arg # type: ignore
 
-class NonSpare_71(NonSpare):
+class NonSpare_72(NonSpare):
     cv_arg: TypeAlias = RuleVariation_21.cv_arg
     cv_name = "S2"
     cv_title = "String ICAO"
     cv_rule: TypeAlias = RuleVariation_21
 
     @classmethod
-    def create(cls, arg : "NonSpare_71.cv_arg") -> "NonSpare_71":
+    def create(cls, arg : "NonSpare_72.cv_arg") -> "NonSpare_72":
         return cls._create(arg) # type: ignore
 
     @property
@@ -484,14 +484,14 @@ class RuleVariation_17(RuleVariationContextFree):
     def variation(self) -> Variation_17:
         return self.arg # type: ignore
 
-class NonSpare_72(NonSpare):
+class NonSpare_73(NonSpare):
     cv_arg: TypeAlias = RuleVariation_17.cv_arg
     cv_name = "S3"
     cv_title = "String Octal"
     cv_rule: TypeAlias = RuleVariation_17
 
     @classmethod
-    def create(cls, arg : "NonSpare_72.cv_arg") -> "NonSpare_72":
+    def create(cls, arg : "NonSpare_73.cv_arg") -> "NonSpare_73":
         return cls._create(arg) # type: ignore
 
     @property
@@ -546,14 +546,14 @@ class RuleVariation_11(RuleVariationContextFree):
     def variation(self) -> Variation_11:
         return self.arg # type: ignore
 
-class NonSpare_49(NonSpare):
+class NonSpare_50(NonSpare):
     cv_arg: TypeAlias = RuleVariation_11.cv_arg
     cv_name = "I1"
     cv_title = "Unsigned Integer"
     cv_rule: TypeAlias = RuleVariation_11
 
     @classmethod
-    def create(cls, arg : "NonSpare_49.cv_arg") -> "NonSpare_49":
+    def create(cls, arg : "NonSpare_50.cv_arg") -> "NonSpare_50":
         return cls._create(arg) # type: ignore
 
     @property
@@ -608,14 +608,14 @@ class RuleVariation_10(RuleVariationContextFree):
     def variation(self) -> Variation_10:
         return self.arg # type: ignore
 
-class NonSpare_54(NonSpare):
+class NonSpare_55(NonSpare):
     cv_arg: TypeAlias = RuleVariation_10.cv_arg
     cv_name = "I2"
     cv_title = "Signed Integer"
     cv_rule: TypeAlias = RuleVariation_10
 
     @classmethod
-    def create(cls, arg : "NonSpare_54.cv_arg") -> "NonSpare_54":
+    def create(cls, arg : "NonSpare_55.cv_arg") -> "NonSpare_55":
         return cls._create(arg) # type: ignore
 
     @property
@@ -675,14 +675,14 @@ class RuleVariation_19(RuleVariationContextFree):
     def variation(self) -> Variation_19:
         return self.arg # type: ignore
 
-class NonSpare_64(NonSpare):
+class NonSpare_65(NonSpare):
     cv_arg: TypeAlias = RuleVariation_19.cv_arg
     cv_name = "Q1LAT"
     cv_title = "Latitude in WGS.84 in Two's Complement Form"
     cv_rule: TypeAlias = RuleVariation_19
 
     @classmethod
-    def create(cls, arg : "NonSpare_64.cv_arg") -> "NonSpare_64":
+    def create(cls, arg : "NonSpare_65.cv_arg") -> "NonSpare_65":
         return cls._create(arg) # type: ignore
 
     @property
@@ -742,14 +742,14 @@ class RuleVariation_18(RuleVariationContextFree):
     def variation(self) -> Variation_18:
         return self.arg # type: ignore
 
-class NonSpare_65(NonSpare):
+class NonSpare_66(NonSpare):
     cv_arg: TypeAlias = RuleVariation_18.cv_arg
     cv_name = "Q2LON"
     cv_title = "Longitude in WGS.84 in Two's Complement Form"
     cv_rule: TypeAlias = RuleVariation_18
 
     @classmethod
-    def create(cls, arg : "NonSpare_65.cv_arg") -> "NonSpare_65":
+    def create(cls, arg : "NonSpare_66.cv_arg") -> "NonSpare_66":
         return cls._create(arg) # type: ignore
 
     @property
@@ -809,14 +809,14 @@ class RuleVariation_16(RuleVariationContextFree):
     def variation(self) -> Variation_16:
         return self.arg # type: ignore
 
-class NonSpare_66(NonSpare):
+class NonSpare_67(NonSpare):
     cv_arg: TypeAlias = RuleVariation_16.cv_arg
     cv_name = "Q3"
     cv_title = "Unsigned Quantity"
     cv_rule: TypeAlias = RuleVariation_16
 
     @classmethod
-    def create(cls, arg : "NonSpare_66.cv_arg") -> "NonSpare_66":
+    def create(cls, arg : "NonSpare_67.cv_arg") -> "NonSpare_67":
         return cls._create(arg) # type: ignore
 
     @property
@@ -876,14 +876,14 @@ class RuleVariation_12(RuleVariationContextFree):
     def variation(self) -> Variation_12:
         return self.arg # type: ignore
 
-class NonSpare_67(NonSpare):
+class NonSpare_68(NonSpare):
     cv_arg: TypeAlias = RuleVariation_12.cv_arg
     cv_name = "Q4"
     cv_title = "Quantity No Unit"
     cv_rule: TypeAlias = RuleVariation_12
 
     @classmethod
-    def create(cls, arg : "NonSpare_67.cv_arg") -> "NonSpare_67":
+    def create(cls, arg : "NonSpare_68.cv_arg") -> "NonSpare_68":
         return cls._create(arg) # type: ignore
 
     @property
@@ -943,14 +943,14 @@ class RuleVariation_13(RuleVariationContextFree):
     def variation(self) -> Variation_13:
         return self.arg # type: ignore
 
-class NonSpare_68(NonSpare):
+class NonSpare_69(NonSpare):
     cv_arg: TypeAlias = RuleVariation_13.cv_arg
     cv_name = "Q5"
     cv_title = "Negative Lsb"
     cv_rule: TypeAlias = RuleVariation_13
 
     @classmethod
-    def create(cls, arg : "NonSpare_68.cv_arg") -> "NonSpare_68":
+    def create(cls, arg : "NonSpare_69.cv_arg") -> "NonSpare_69":
         return cls._create(arg) # type: ignore
 
     @property
@@ -1005,14 +1005,14 @@ class RuleVariation_25(RuleVariationContextFree):
     def variation(self) -> Variation_25:
         return self.arg # type: ignore
 
-class NonSpare_35(NonSpare):
+class NonSpare_36(NonSpare):
     cv_arg: TypeAlias = RuleVariation_25.cv_arg
     cv_name = "B1"
     cv_title = "Bds With Address"
     cv_rule: TypeAlias = RuleVariation_25
 
     @classmethod
-    def create(cls, arg : "NonSpare_35.cv_arg") -> "NonSpare_35":
+    def create(cls, arg : "NonSpare_36.cv_arg") -> "NonSpare_36":
         return cls._create(arg) # type: ignore
 
     @property
@@ -1067,14 +1067,14 @@ class RuleVariation_23(RuleVariationContextFree):
     def variation(self) -> Variation_23:
         return self.arg # type: ignore
 
-class NonSpare_36(NonSpare):
+class NonSpare_37(NonSpare):
     cv_arg: TypeAlias = RuleVariation_23.cv_arg
     cv_name = "B2"
     cv_title = "Bds At Unknown Address"
     cv_rule: TypeAlias = RuleVariation_23
 
     @classmethod
-    def create(cls, arg : "NonSpare_36.cv_arg") -> "NonSpare_36":
+    def create(cls, arg : "NonSpare_37.cv_arg") -> "NonSpare_37":
         return cls._create(arg) # type: ignore
 
     @property
@@ -1129,14 +1129,14 @@ class RuleVariation_24(RuleVariationContextFree):
     def variation(self) -> Variation_24:
         return self.arg # type: ignore
 
-class NonSpare_37(NonSpare):
+class NonSpare_38(NonSpare):
     cv_arg: TypeAlias = RuleVariation_24.cv_arg
     cv_name = "B3"
     cv_title = "Bds At Known Address"
     cv_rule: TypeAlias = RuleVariation_24
 
     @classmethod
-    def create(cls, arg : "NonSpare_37.cv_arg") -> "NonSpare_37":
+    def create(cls, arg : "NonSpare_38.cv_arg") -> "NonSpare_38":
         return cls._create(arg) # type: ignore
 
     @property
@@ -1150,182 +1150,182 @@ class NonSpare_37(NonSpare):
 
 class Variation_63(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "R": NonSpare_69.cv_arg,
-        "T": NonSpare_77.cv_arg,
-        "S1": NonSpare_70.cv_arg,
-        "S2": NonSpare_71.cv_arg,
-        "S3": NonSpare_72.cv_arg,
-        "I1": NonSpare_49.cv_arg,
-        "I2": NonSpare_54.cv_arg,
-        "Q1LAT": NonSpare_64.cv_arg,
-        "Q2LON": NonSpare_65.cv_arg,
-        "Q3": NonSpare_66.cv_arg,
-        "Q4": NonSpare_67.cv_arg,
-        "Q5": NonSpare_68.cv_arg,
-        "B1": NonSpare_35.cv_arg,
-        "B2": NonSpare_36.cv_arg,
-        "B3": NonSpare_37.cv_arg,
+        "R": NonSpare_70.cv_arg,
+        "T": NonSpare_78.cv_arg,
+        "S1": NonSpare_71.cv_arg,
+        "S2": NonSpare_72.cv_arg,
+        "S3": NonSpare_73.cv_arg,
+        "I1": NonSpare_50.cv_arg,
+        "I2": NonSpare_55.cv_arg,
+        "Q1LAT": NonSpare_65.cv_arg,
+        "Q2LON": NonSpare_66.cv_arg,
+        "Q3": NonSpare_67.cv_arg,
+        "Q4": NonSpare_68.cv_arg,
+        "Q5": NonSpare_69.cv_arg,
+        "B1": NonSpare_36.cv_arg,
+        "B2": NonSpare_37.cv_arg,
+        "B3": NonSpare_38.cv_arg,
     }, total=False)
     cv_fspec_max_bytes = 3
-    cv_items_list = [NonSpare_69, NonSpare_77, NonSpare_70, NonSpare_71, NonSpare_72, NonSpare_49, NonSpare_54, NonSpare_64, NonSpare_65, NonSpare_66, NonSpare_67, NonSpare_68, NonSpare_35, NonSpare_36, NonSpare_37]
-    cv_items_dict = {"R": NonSpare_69, "T": NonSpare_77, "S1": NonSpare_70, "S2": NonSpare_71, "S3": NonSpare_72, "I1": NonSpare_49, "I2": NonSpare_54, "Q1LAT": NonSpare_64, "Q2LON": NonSpare_65, "Q3": NonSpare_66, "Q4": NonSpare_67, "Q5": NonSpare_68, "B1": NonSpare_35, "B2": NonSpare_36, "B3": NonSpare_37}
+    cv_items_list = [NonSpare_70, NonSpare_78, NonSpare_71, NonSpare_72, NonSpare_73, NonSpare_50, NonSpare_55, NonSpare_65, NonSpare_66, NonSpare_67, NonSpare_68, NonSpare_69, NonSpare_36, NonSpare_37, NonSpare_38]
+    cv_items_dict = {"R": NonSpare_70, "T": NonSpare_78, "S1": NonSpare_71, "S2": NonSpare_72, "S3": NonSpare_73, "I1": NonSpare_50, "I2": NonSpare_55, "Q1LAT": NonSpare_65, "Q2LON": NonSpare_66, "Q3": NonSpare_67, "Q4": NonSpare_68, "Q5": NonSpare_69, "B1": NonSpare_36, "B2": NonSpare_37, "B3": NonSpare_38}
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["R"]) -> NonSpare_69:
+    def spec(cls, key : Literal["R"]) -> NonSpare_70:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["T"]) -> NonSpare_77:
+    def spec(cls, key : Literal["T"]) -> NonSpare_78:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["S1"]) -> NonSpare_70:
+    def spec(cls, key : Literal["S1"]) -> NonSpare_71:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["S2"]) -> NonSpare_71:
+    def spec(cls, key : Literal["S2"]) -> NonSpare_72:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["S3"]) -> NonSpare_72:
+    def spec(cls, key : Literal["S3"]) -> NonSpare_73:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_49:
+    def spec(cls, key : Literal["I1"]) -> NonSpare_50:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I2"]) -> NonSpare_54:
+    def spec(cls, key : Literal["I2"]) -> NonSpare_55:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["Q1LAT"]) -> NonSpare_64:
+    def spec(cls, key : Literal["Q1LAT"]) -> NonSpare_65:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["Q2LON"]) -> NonSpare_65:
+    def spec(cls, key : Literal["Q2LON"]) -> NonSpare_66:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["Q3"]) -> NonSpare_66:
+    def spec(cls, key : Literal["Q3"]) -> NonSpare_67:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["Q4"]) -> NonSpare_67:
+    def spec(cls, key : Literal["Q4"]) -> NonSpare_68:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["Q5"]) -> NonSpare_68:
+    def spec(cls, key : Literal["Q5"]) -> NonSpare_69:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["B1"]) -> NonSpare_35:
+    def spec(cls, key : Literal["B1"]) -> NonSpare_36:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["B2"]) -> NonSpare_36:
+    def spec(cls, key : Literal["B2"]) -> NonSpare_37:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["B3"]) -> NonSpare_37:
+    def spec(cls, key : Literal["B3"]) -> NonSpare_38:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["R"], Literal["T"], Literal["S1"], Literal["S2"], Literal["S3"], Literal["I1"], Literal["I2"], Literal["Q1LAT"], Literal["Q2LON"], Literal["Q3"], Literal["Q4"], Literal["Q5"], Literal["B1"], Literal["B2"], Literal["B3"]]) -> Any:
         return cls._spec(key)
 
     @overload
-    def get_item(self, key : Literal["R"]) -> Optional[NonSpare_69]:
+    def get_item(self, key : Literal["R"]) -> Optional[NonSpare_70]:
         ...
     @overload
-    def get_item(self, key : Literal["T"]) -> Optional[NonSpare_77]:
+    def get_item(self, key : Literal["T"]) -> Optional[NonSpare_78]:
         ...
     @overload
-    def get_item(self, key : Literal["S1"]) -> Optional[NonSpare_70]:
+    def get_item(self, key : Literal["S1"]) -> Optional[NonSpare_71]:
         ...
     @overload
-    def get_item(self, key : Literal["S2"]) -> Optional[NonSpare_71]:
+    def get_item(self, key : Literal["S2"]) -> Optional[NonSpare_72]:
         ...
     @overload
-    def get_item(self, key : Literal["S3"]) -> Optional[NonSpare_72]:
+    def get_item(self, key : Literal["S3"]) -> Optional[NonSpare_73]:
         ...
     @overload
-    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_49]:
+    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_50]:
         ...
     @overload
-    def get_item(self, key : Literal["I2"]) -> Optional[NonSpare_54]:
+    def get_item(self, key : Literal["I2"]) -> Optional[NonSpare_55]:
         ...
     @overload
-    def get_item(self, key : Literal["Q1LAT"]) -> Optional[NonSpare_64]:
+    def get_item(self, key : Literal["Q1LAT"]) -> Optional[NonSpare_65]:
         ...
     @overload
-    def get_item(self, key : Literal["Q2LON"]) -> Optional[NonSpare_65]:
+    def get_item(self, key : Literal["Q2LON"]) -> Optional[NonSpare_66]:
         ...
     @overload
-    def get_item(self, key : Literal["Q3"]) -> Optional[NonSpare_66]:
+    def get_item(self, key : Literal["Q3"]) -> Optional[NonSpare_67]:
         ...
     @overload
-    def get_item(self, key : Literal["Q4"]) -> Optional[NonSpare_67]:
+    def get_item(self, key : Literal["Q4"]) -> Optional[NonSpare_68]:
         ...
     @overload
-    def get_item(self, key : Literal["Q5"]) -> Optional[NonSpare_68]:
+    def get_item(self, key : Literal["Q5"]) -> Optional[NonSpare_69]:
         ...
     @overload
-    def get_item(self, key : Literal["B1"]) -> Optional[NonSpare_35]:
+    def get_item(self, key : Literal["B1"]) -> Optional[NonSpare_36]:
         ...
     @overload
-    def get_item(self, key : Literal["B2"]) -> Optional[NonSpare_36]:
+    def get_item(self, key : Literal["B2"]) -> Optional[NonSpare_37]:
         ...
     @overload
-    def get_item(self, key : Literal["B3"]) -> Optional[NonSpare_37]:
+    def get_item(self, key : Literal["B3"]) -> Optional[NonSpare_38]:
         ...
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["R"], val : NonSpare_69.cv_arg) -> "Variation_63":
+    def set_item(self, key : Literal["R"], val : NonSpare_70.cv_arg) -> "Variation_63":
         ...
     @overload
-    def set_item(self, key : Literal["T"], val : NonSpare_77.cv_arg) -> "Variation_63":
+    def set_item(self, key : Literal["T"], val : NonSpare_78.cv_arg) -> "Variation_63":
         ...
     @overload
-    def set_item(self, key : Literal["S1"], val : NonSpare_70.cv_arg) -> "Variation_63":
+    def set_item(self, key : Literal["S1"], val : NonSpare_71.cv_arg) -> "Variation_63":
         ...
     @overload
-    def set_item(self, key : Literal["S2"], val : NonSpare_71.cv_arg) -> "Variation_63":
+    def set_item(self, key : Literal["S2"], val : NonSpare_72.cv_arg) -> "Variation_63":
         ...
     @overload
-    def set_item(self, key : Literal["S3"], val : NonSpare_72.cv_arg) -> "Variation_63":
+    def set_item(self, key : Literal["S3"], val : NonSpare_73.cv_arg) -> "Variation_63":
         ...
     @overload
-    def set_item(self, key : Literal["I1"], val : NonSpare_49.cv_arg) -> "Variation_63":
+    def set_item(self, key : Literal["I1"], val : NonSpare_50.cv_arg) -> "Variation_63":
         ...
     @overload
-    def set_item(self, key : Literal["I2"], val : NonSpare_54.cv_arg) -> "Variation_63":
+    def set_item(self, key : Literal["I2"], val : NonSpare_55.cv_arg) -> "Variation_63":
         ...
     @overload
-    def set_item(self, key : Literal["Q1LAT"], val : NonSpare_64.cv_arg) -> "Variation_63":
+    def set_item(self, key : Literal["Q1LAT"], val : NonSpare_65.cv_arg) -> "Variation_63":
         ...
     @overload
-    def set_item(self, key : Literal["Q2LON"], val : NonSpare_65.cv_arg) -> "Variation_63":
+    def set_item(self, key : Literal["Q2LON"], val : NonSpare_66.cv_arg) -> "Variation_63":
         ...
     @overload
-    def set_item(self, key : Literal["Q3"], val : NonSpare_66.cv_arg) -> "Variation_63":
+    def set_item(self, key : Literal["Q3"], val : NonSpare_67.cv_arg) -> "Variation_63":
         ...
     @overload
-    def set_item(self, key : Literal["Q4"], val : NonSpare_67.cv_arg) -> "Variation_63":
+    def set_item(self, key : Literal["Q4"], val : NonSpare_68.cv_arg) -> "Variation_63":
         ...
     @overload
-    def set_item(self, key : Literal["Q5"], val : NonSpare_68.cv_arg) -> "Variation_63":
+    def set_item(self, key : Literal["Q5"], val : NonSpare_69.cv_arg) -> "Variation_63":
         ...
     @overload
-    def set_item(self, key : Literal["B1"], val : NonSpare_35.cv_arg) -> "Variation_63":
+    def set_item(self, key : Literal["B1"], val : NonSpare_36.cv_arg) -> "Variation_63":
         ...
     @overload
-    def set_item(self, key : Literal["B2"], val : NonSpare_36.cv_arg) -> "Variation_63":
+    def set_item(self, key : Literal["B2"], val : NonSpare_37.cv_arg) -> "Variation_63":
         ...
     @overload
-    def set_item(self, key : Literal["B3"], val : NonSpare_37.cv_arg) -> "Variation_63":
+    def set_item(self, key : Literal["B3"], val : NonSpare_38.cv_arg) -> "Variation_63":
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -1459,14 +1459,14 @@ class RuleVariation_1(RuleVariationContextFree):
     def variation(self) -> Variation_1:
         return self.arg # type: ignore
 
-class NonSpare_63(NonSpare):
+class NonSpare_64(NonSpare):
     cv_arg: TypeAlias = RuleVariation_1.cv_arg
     cv_name = "IM"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_1
 
     @classmethod
-    def create(cls, arg : "NonSpare_63.cv_arg") -> "NonSpare_63":
+    def create(cls, arg : "NonSpare_64.cv_arg") -> "NonSpare_64":
         return cls._create(arg) # type: ignore
 
     @property
@@ -1479,8 +1479,8 @@ class NonSpare_63(NonSpare):
         return self.rule.variation
 
 class Item_29(Item):
-    cv_arg: TypeAlias = NonSpare_63.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_63
+    cv_arg: TypeAlias = NonSpare_64.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_64
 
     @classmethod
     def create(cls, arg : "Item_29.cv_arg") -> "Item_29":
@@ -1555,14 +1555,14 @@ class RuleVariation_28(RuleVariationContextFree):
     def variation(self) -> Variation_28:
         return self.arg # type: ignore
 
-class NonSpare_62(NonSpare):
+class NonSpare_63(NonSpare):
     cv_arg: TypeAlias = RuleVariation_28.cv_arg
     cv_name = "IAS"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_28
 
     @classmethod
-    def create(cls, arg : "NonSpare_62.cv_arg") -> "NonSpare_62":
+    def create(cls, arg : "NonSpare_63.cv_arg") -> "NonSpare_63":
         return cls._create(arg) # type: ignore
 
     @property
@@ -1575,8 +1575,8 @@ class NonSpare_62(NonSpare):
         return self.rule.variation
 
 class Item_28(Item):
-    cv_arg: TypeAlias = NonSpare_62.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_62
+    cv_arg: TypeAlias = NonSpare_63.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_63
 
     @classmethod
     def create(cls, arg : "Item_28.cv_arg") -> "Item_28":
@@ -1754,14 +1754,14 @@ class NonSpare_7(NonSpare):
 class UapItem_7(UapItem):
     cv_non_spare: TypeAlias = NonSpare_7
 
-class NonSpare_46(NonSpare):
+class NonSpare_47(NonSpare):
     cv_arg: TypeAlias = RuleVariation_7.cv_arg
     cv_name = "I1"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_7
 
     @classmethod
-    def create(cls, arg : "NonSpare_46.cv_arg") -> "NonSpare_46":
+    def create(cls, arg : "NonSpare_47.cv_arg") -> "NonSpare_47":
         return cls._create(arg) # type: ignore
 
     @property
@@ -1804,14 +1804,14 @@ class RuleVariation_4(RuleVariationContextFree):
     def variation(self) -> Variation_4:
         return self.arg # type: ignore
 
-class NonSpare_78(NonSpare):
+class NonSpare_79(NonSpare):
     cv_arg: TypeAlias = RuleVariation_4.cv_arg
     cv_name = "TID"
     cv_title = "Identification of Conflict Categories Definition Table"
     cv_rule: TypeAlias = RuleVariation_4
 
     @classmethod
-    def create(cls, arg : "NonSpare_78.cv_arg") -> "NonSpare_78":
+    def create(cls, arg : "NonSpare_79.cv_arg") -> "NonSpare_79":
         return cls._create(arg) # type: ignore
 
     @property
@@ -1824,8 +1824,8 @@ class NonSpare_78(NonSpare):
         return self.rule.variation
 
 class Item_34(Item):
-    cv_arg: TypeAlias = NonSpare_78.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_78
+    cv_arg: TypeAlias = NonSpare_79.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_79
 
     @classmethod
     def create(cls, arg : "Item_34.cv_arg") -> "Item_34":
@@ -1955,14 +1955,14 @@ class RuleVariation_32(RuleVariationContextFree):
     def variation(self) -> Variation_32:
         return self.arg # type: ignore
 
-class NonSpare_48(NonSpare):
+class NonSpare_49(NonSpare):
     cv_arg: TypeAlias = RuleVariation_32.cv_arg
     cv_name = "I1"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_32
 
     @classmethod
-    def create(cls, arg : "NonSpare_48.cv_arg") -> "NonSpare_48":
+    def create(cls, arg : "NonSpare_49.cv_arg") -> "NonSpare_49":
         return cls._create(arg) # type: ignore
 
     @property
@@ -1975,8 +1975,8 @@ class NonSpare_48(NonSpare):
         return self.rule.variation
 
 class Item_17(Item):
-    cv_arg: TypeAlias = NonSpare_48.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_48
+    cv_arg: TypeAlias = NonSpare_49.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_49
 
     @classmethod
     def create(cls, arg : "Item_17.cv_arg") -> "Item_17":
@@ -2042,14 +2042,14 @@ class RuleVariation_59(RuleVariationDependent):
     def create(cls, arg : "RuleVariation_59.cv_arg") -> "RuleVariation_59":
         return cls._create(arg) # type: ignore
 
-class NonSpare_39(NonSpare):
+class NonSpare_40(NonSpare):
     cv_arg: TypeAlias = RuleVariation_59.cv_arg
     cv_name = "CP"
     cv_title = "Conflict Properties Class"
     cv_rule: TypeAlias = RuleVariation_59
 
     @classmethod
-    def create(cls, arg : "NonSpare_39.cv_arg") -> "NonSpare_39":
+    def create(cls, arg : "NonSpare_40.cv_arg") -> "NonSpare_40":
         return cls._create(arg) # type: ignore
 
     @property
@@ -2057,8 +2057,8 @@ class NonSpare_39(NonSpare):
         return self.arg # type: ignore
 
 class Item_8(Item):
-    cv_arg: TypeAlias = NonSpare_39.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_39
+    cv_arg: TypeAlias = NonSpare_40.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_40
 
     @classmethod
     def create(cls, arg : "Item_8.cv_arg") -> "Item_8":
@@ -2107,14 +2107,14 @@ class RuleVariation_34(RuleVariationContextFree):
     def variation(self) -> Variation_37:
         return self.arg # type: ignore
 
-class NonSpare_40(NonSpare):
+class NonSpare_41(NonSpare):
     cv_arg: TypeAlias = RuleVariation_34.cv_arg
     cv_name = "CS"
     cv_title = "Conflict Severity"
     cv_rule: TypeAlias = RuleVariation_34
 
     @classmethod
-    def create(cls, arg : "NonSpare_40.cv_arg") -> "NonSpare_40":
+    def create(cls, arg : "NonSpare_41.cv_arg") -> "NonSpare_41":
         return cls._create(arg) # type: ignore
 
     @property
@@ -2127,8 +2127,8 @@ class NonSpare_40(NonSpare):
         return self.rule.variation
 
 class Item_9(Item):
-    cv_arg: TypeAlias = NonSpare_40.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_40
+    cv_arg: TypeAlias = NonSpare_41.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_41
 
     @classmethod
     def create(cls, arg : "Item_9.cv_arg") -> "Item_9":
@@ -2186,14 +2186,14 @@ class RuleVariation_42(RuleVariationContextFree):
     def variation(self) -> Variation_46:
         return self.arg # type: ignore
 
-class NonSpare_38(NonSpare):
+class NonSpare_39(NonSpare):
     cv_arg: TypeAlias = RuleVariation_42.cv_arg
     cv_name = "CC"
     cv_title = "Conflict Classification"
     cv_rule: TypeAlias = RuleVariation_42
 
     @classmethod
-    def create(cls, arg : "NonSpare_38.cv_arg") -> "NonSpare_38":
+    def create(cls, arg : "NonSpare_39.cv_arg") -> "NonSpare_39":
         return cls._create(arg) # type: ignore
 
     @property
@@ -2207,39 +2207,39 @@ class NonSpare_38(NonSpare):
 
 class Variation_62(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "I1": NonSpare_46.cv_arg,
-        "CC": NonSpare_38.cv_arg,
+        "I1": NonSpare_47.cv_arg,
+        "CC": NonSpare_39.cv_arg,
     }, total=False)
     cv_fspec_max_bytes = 1
-    cv_items_list = [NonSpare_46, NonSpare_38]
-    cv_items_dict = {"I1": NonSpare_46, "CC": NonSpare_38}
+    cv_items_list = [NonSpare_47, NonSpare_39]
+    cv_items_dict = {"I1": NonSpare_47, "CC": NonSpare_39}
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_46:
+    def spec(cls, key : Literal["I1"]) -> NonSpare_47:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["CC"]) -> NonSpare_38:
+    def spec(cls, key : Literal["CC"]) -> NonSpare_39:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["I1"], Literal["CC"]]) -> Any:
         return cls._spec(key)
 
     @overload
-    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_46]:
+    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_47]:
         ...
     @overload
-    def get_item(self, key : Literal["CC"]) -> Optional[NonSpare_38]:
+    def get_item(self, key : Literal["CC"]) -> Optional[NonSpare_39]:
         ...
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["I1"], val : NonSpare_46.cv_arg) -> "Variation_62":
+    def set_item(self, key : Literal["I1"], val : NonSpare_47.cv_arg) -> "Variation_62":
         ...
     @overload
-    def set_item(self, key : Literal["CC"], val : NonSpare_38.cv_arg) -> "Variation_62":
+    def set_item(self, key : Literal["CC"], val : NonSpare_39.cv_arg) -> "Variation_62":
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -2322,14 +2322,14 @@ class RuleVariation_6(RuleVariationContextFree):
     def variation(self) -> Variation_6:
         return self.arg # type: ignore
 
-class NonSpare_45(NonSpare):
+class NonSpare_46(NonSpare):
     cv_arg: TypeAlias = RuleVariation_6.cv_arg
     cv_name = "I1"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_6
 
     @classmethod
-    def create(cls, arg : "NonSpare_45.cv_arg") -> "NonSpare_45":
+    def create(cls, arg : "NonSpare_46.cv_arg") -> "NonSpare_46":
         return cls._create(arg) # type: ignore
 
     @property
@@ -2342,8 +2342,8 @@ class NonSpare_45(NonSpare):
         return self.rule.variation
 
 class Item_14(Item):
-    cv_arg: TypeAlias = NonSpare_45.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_45
+    cv_arg: TypeAlias = NonSpare_46.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_46
 
     @classmethod
     def create(cls, arg : "Item_14.cv_arg") -> "Item_14":
@@ -2385,14 +2385,14 @@ class RuleVariation_27(RuleVariationContextFree):
     def variation(self) -> Variation_27:
         return self.arg # type: ignore
 
-class NonSpare_52(NonSpare):
+class NonSpare_53(NonSpare):
     cv_arg: TypeAlias = RuleVariation_27.cv_arg
     cv_name = "I2"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_27
 
     @classmethod
-    def create(cls, arg : "NonSpare_52.cv_arg") -> "NonSpare_52":
+    def create(cls, arg : "NonSpare_53.cv_arg") -> "NonSpare_53":
         return cls._create(arg) # type: ignore
 
     @property
@@ -2405,8 +2405,8 @@ class NonSpare_52(NonSpare):
         return self.rule.variation
 
 class Item_20(Item):
-    cv_arg: TypeAlias = NonSpare_52.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_52
+    cv_arg: TypeAlias = NonSpare_53.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_53
 
     @classmethod
     def create(cls, arg : "Item_20.cv_arg") -> "Item_20":
@@ -2537,14 +2537,14 @@ class RuleVariation_5(RuleVariationContextFree):
     def variation(self) -> Variation_5:
         return self.arg # type: ignore
 
-class NonSpare_44(NonSpare):
+class NonSpare_45(NonSpare):
     cv_arg: TypeAlias = RuleVariation_5.cv_arg
     cv_name = "I1"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_5
 
     @classmethod
-    def create(cls, arg : "NonSpare_44.cv_arg") -> "NonSpare_44":
+    def create(cls, arg : "NonSpare_45.cv_arg") -> "NonSpare_45":
         return cls._create(arg) # type: ignore
 
     @property
@@ -2557,8 +2557,8 @@ class NonSpare_44(NonSpare):
         return self.rule.variation
 
 class Item_13(Item):
-    cv_arg: TypeAlias = NonSpare_44.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_44
+    cv_arg: TypeAlias = NonSpare_45.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_45
 
     @classmethod
     def create(cls, arg : "Item_13.cv_arg") -> "Item_13":
@@ -2569,14 +2569,14 @@ class Item_5(Spare):
     cv_bit_offset8 = 6
     cv_bit_size = 2
 
-class NonSpare_51(NonSpare):
+class NonSpare_52(NonSpare):
     cv_arg: TypeAlias = RuleVariation_7.cv_arg
     cv_name = "I2"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_7
 
     @classmethod
-    def create(cls, arg : "NonSpare_51.cv_arg") -> "NonSpare_51":
+    def create(cls, arg : "NonSpare_52.cv_arg") -> "NonSpare_52":
         return cls._create(arg) # type: ignore
 
     @property
@@ -2589,21 +2589,21 @@ class NonSpare_51(NonSpare):
         return self.rule.variation
 
 class Item_19(Item):
-    cv_arg: TypeAlias = NonSpare_51.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_51
+    cv_arg: TypeAlias = NonSpare_52.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_52
 
     @classmethod
     def create(cls, arg : "Item_19.cv_arg") -> "Item_19":
         return cls._create(arg) # type: ignore
 
-class NonSpare_56(NonSpare):
+class NonSpare_57(NonSpare):
     cv_arg: TypeAlias = RuleVariation_4.cv_arg
     cv_name = "I3"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_4
 
     @classmethod
-    def create(cls, arg : "NonSpare_56.cv_arg") -> "NonSpare_56":
+    def create(cls, arg : "NonSpare_57.cv_arg") -> "NonSpare_57":
         return cls._create(arg) # type: ignore
 
     @property
@@ -2616,8 +2616,8 @@ class NonSpare_56(NonSpare):
         return self.rule.variation
 
 class Item_23(Item):
-    cv_arg: TypeAlias = NonSpare_56.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_56
+    cv_arg: TypeAlias = NonSpare_57.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_57
 
     @classmethod
     def create(cls, arg : "Item_23.cv_arg") -> "Item_23":
@@ -2659,14 +2659,14 @@ class RuleVariation_33(RuleVariationContextFree):
     def variation(self) -> Variation_36:
         return self.arg # type: ignore
 
-class NonSpare_59(NonSpare):
+class NonSpare_60(NonSpare):
     cv_arg: TypeAlias = RuleVariation_33.cv_arg
     cv_name = "I4"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_33
 
     @classmethod
-    def create(cls, arg : "NonSpare_59.cv_arg") -> "NonSpare_59":
+    def create(cls, arg : "NonSpare_60.cv_arg") -> "NonSpare_60":
         return cls._create(arg) # type: ignore
 
     @property
@@ -2679,8 +2679,8 @@ class NonSpare_59(NonSpare):
         return self.rule.variation
 
 class Item_25(Item):
-    cv_arg: TypeAlias = NonSpare_59.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_59
+    cv_arg: TypeAlias = NonSpare_60.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_60
 
     @classmethod
     def create(cls, arg : "Item_25.cv_arg") -> "Item_25":
@@ -2860,14 +2860,14 @@ class RuleVariation_31(RuleVariationContextFree):
     def variation(self) -> Variation_31:
         return self.arg # type: ignore
 
-class NonSpare_43(NonSpare):
+class NonSpare_44(NonSpare):
     cv_arg: TypeAlias = RuleVariation_0.cv_arg
     cv_name = "I1"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_0
 
     @classmethod
-    def create(cls, arg : "NonSpare_43.cv_arg") -> "NonSpare_43":
+    def create(cls, arg : "NonSpare_44.cv_arg") -> "NonSpare_44":
         return cls._create(arg) # type: ignore
 
     @property
@@ -2880,21 +2880,21 @@ class NonSpare_43(NonSpare):
         return self.rule.variation
 
 class Item_12(Item):
-    cv_arg: TypeAlias = NonSpare_43.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_43
+    cv_arg: TypeAlias = NonSpare_44.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_44
 
     @classmethod
     def create(cls, arg : "Item_12.cv_arg") -> "Item_12":
         return cls._create(arg) # type: ignore
 
-class NonSpare_55(NonSpare):
+class NonSpare_56(NonSpare):
     cv_arg: TypeAlias = RuleVariation_3.cv_arg
     cv_name = "I3"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_3
 
     @classmethod
-    def create(cls, arg : "NonSpare_55.cv_arg") -> "NonSpare_55":
+    def create(cls, arg : "NonSpare_56.cv_arg") -> "NonSpare_56":
         return cls._create(arg) # type: ignore
 
     @property
@@ -2907,8 +2907,8 @@ class NonSpare_55(NonSpare):
         return self.rule.variation
 
 class Item_22(Item):
-    cv_arg: TypeAlias = NonSpare_55.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_55
+    cv_arg: TypeAlias = NonSpare_56.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_56
 
     @classmethod
     def create(cls, arg : "Item_22.cv_arg") -> "Item_22":
@@ -2919,14 +2919,14 @@ class Item_0(Spare):
     cv_bit_offset8 = 2
     cv_bit_size = 1
 
-class NonSpare_58(NonSpare):
+class NonSpare_59(NonSpare):
     cv_arg: TypeAlias = RuleVariation_31.cv_arg
     cv_name = "I4"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_31
 
     @classmethod
-    def create(cls, arg : "NonSpare_58.cv_arg") -> "NonSpare_58":
+    def create(cls, arg : "NonSpare_59.cv_arg") -> "NonSpare_59":
         return cls._create(arg) # type: ignore
 
     @property
@@ -2939,21 +2939,21 @@ class NonSpare_58(NonSpare):
         return self.rule.variation
 
 class Item_24(Item):
-    cv_arg: TypeAlias = NonSpare_58.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_58
+    cv_arg: TypeAlias = NonSpare_59.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_59
 
     @classmethod
     def create(cls, arg : "Item_24.cv_arg") -> "Item_24":
         return cls._create(arg) # type: ignore
 
-class NonSpare_60(NonSpare):
+class NonSpare_61(NonSpare):
     cv_arg: TypeAlias = RuleVariation_6.cv_arg
     cv_name = "I5"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_6
 
     @classmethod
-    def create(cls, arg : "NonSpare_60.cv_arg") -> "NonSpare_60":
+    def create(cls, arg : "NonSpare_61.cv_arg") -> "NonSpare_61":
         return cls._create(arg) # type: ignore
 
     @property
@@ -2966,8 +2966,8 @@ class NonSpare_60(NonSpare):
         return self.rule.variation
 
 class Item_26(Item):
-    cv_arg: TypeAlias = NonSpare_60.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_60
+    cv_arg: TypeAlias = NonSpare_61.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_61
 
     @classmethod
     def create(cls, arg : "Item_26.cv_arg") -> "Item_26":
@@ -3040,14 +3040,14 @@ class NonSpare_17(NonSpare):
 class UapItem_17(UapItem):
     cv_non_spare: TypeAlias = NonSpare_17
 
-class NonSpare_61(NonSpare):
+class NonSpare_62(NonSpare):
     cv_arg: TypeAlias = RuleVariation_7.cv_arg
     cv_name = "I5"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_7
 
     @classmethod
-    def create(cls, arg : "NonSpare_61.cv_arg") -> "NonSpare_61":
+    def create(cls, arg : "NonSpare_62.cv_arg") -> "NonSpare_62":
         return cls._create(arg) # type: ignore
 
     @property
@@ -3060,8 +3060,8 @@ class NonSpare_61(NonSpare):
         return self.rule.variation
 
 class Item_27(Item):
-    cv_arg: TypeAlias = NonSpare_61.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_61
+    cv_arg: TypeAlias = NonSpare_62.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_62
 
     @classmethod
     def create(cls, arg : "Item_27.cv_arg") -> "Item_27":
@@ -3181,8 +3181,8 @@ class UapItem_19(UapItem):
     cv_non_spare: TypeAlias = NonSpare_19
 
 class Item_15(Item):
-    cv_arg: TypeAlias = NonSpare_46.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_46
+    cv_arg: TypeAlias = NonSpare_47.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_47
 
     @classmethod
     def create(cls, arg : "Item_15.cv_arg") -> "Item_15":
@@ -3439,28 +3439,28 @@ class NonSpare_24(NonSpare):
 class UapItem_24(UapItem):
     cv_non_spare: TypeAlias = NonSpare_24
 
-class UapItem_35(UapItemSpare):
+class UapItem_36(UapItemSpare):
     pass
 
-class UapItem_36(UapItemRFS):
+class UapItem_37(UapItemRFS):
     pass
 
 class Variation_59(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "I1": NonSpare_46.cv_arg,
+        "I1": NonSpare_47.cv_arg,
     }, total=False)
     cv_fspec_max_bytes = 1
-    cv_items_list = [NonSpare_46]
-    cv_items_dict = {"I1": NonSpare_46}
+    cv_items_list = [NonSpare_47]
+    cv_items_dict = {"I1": NonSpare_47}
 
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_46:
+    def spec(cls, key : Literal["I1"]) -> NonSpare_47:
         return cls._spec(arg) # type: ignore
 
-    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_46]:
+    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_47]:
         return self._get_item(key) # type: ignore
 
-    def set_item(self, key : Literal["I1"], val : NonSpare_46.cv_arg) -> 'Variation_59':
+    def set_item(self, key : Literal["I1"], val : NonSpare_47.cv_arg) -> 'Variation_59':
         return self._set_item(key, val) # type: ignore
 
     def del_item(self, key : Literal["I1"]) -> 'Variation_59':
@@ -3506,39 +3506,39 @@ class UapItem_25(UapItem):
 
 class Variation_60(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "I1": NonSpare_46.cv_arg,
-        "I2": NonSpare_51.cv_arg,
+        "I1": NonSpare_47.cv_arg,
+        "I2": NonSpare_52.cv_arg,
     }, total=False)
     cv_fspec_max_bytes = 1
-    cv_items_list = [NonSpare_46, None, NonSpare_51]
-    cv_items_dict = {"I1": NonSpare_46, "I2": NonSpare_51}
+    cv_items_list = [NonSpare_47, None, NonSpare_52]
+    cv_items_dict = {"I1": NonSpare_47, "I2": NonSpare_52}
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_46:
+    def spec(cls, key : Literal["I1"]) -> NonSpare_47:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I2"]) -> NonSpare_51:
+    def spec(cls, key : Literal["I2"]) -> NonSpare_52:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["I1"], Literal["I2"]]) -> Any:
         return cls._spec(key)
 
     @overload
-    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_46]:
+    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_47]:
         ...
     @overload
-    def get_item(self, key : Literal["I2"]) -> Optional[NonSpare_51]:
+    def get_item(self, key : Literal["I2"]) -> Optional[NonSpare_52]:
         ...
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["I1"], val : NonSpare_46.cv_arg) -> "Variation_60":
+    def set_item(self, key : Literal["I1"], val : NonSpare_47.cv_arg) -> "Variation_60":
         ...
     @overload
-    def set_item(self, key : Literal["I2"], val : NonSpare_51.cv_arg) -> "Variation_60":
+    def set_item(self, key : Literal["I2"], val : NonSpare_52.cv_arg) -> "Variation_60":
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -3590,14 +3590,14 @@ class NonSpare_26(NonSpare):
 class UapItem_26(UapItem):
     cv_non_spare: TypeAlias = NonSpare_26
 
-class NonSpare_57(NonSpare):
+class NonSpare_58(NonSpare):
     cv_arg: TypeAlias = RuleVariation_7.cv_arg
     cv_name = "I3"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_7
 
     @classmethod
-    def create(cls, arg : "NonSpare_57.cv_arg") -> "NonSpare_57":
+    def create(cls, arg : "NonSpare_58.cv_arg") -> "NonSpare_58":
         return cls._create(arg) # type: ignore
 
     @property
@@ -3611,50 +3611,50 @@ class NonSpare_57(NonSpare):
 
 class Variation_61(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "I1": NonSpare_46.cv_arg,
-        "I2": NonSpare_51.cv_arg,
-        "I3": NonSpare_57.cv_arg,
+        "I1": NonSpare_47.cv_arg,
+        "I2": NonSpare_52.cv_arg,
+        "I3": NonSpare_58.cv_arg,
     }, total=False)
     cv_fspec_max_bytes = 2
-    cv_items_list = [NonSpare_46, None, NonSpare_51, None, None, None, None, NonSpare_57]
-    cv_items_dict = {"I1": NonSpare_46, "I2": NonSpare_51, "I3": NonSpare_57}
+    cv_items_list = [NonSpare_47, None, NonSpare_52, None, None, None, None, NonSpare_58]
+    cv_items_dict = {"I1": NonSpare_47, "I2": NonSpare_52, "I3": NonSpare_58}
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_46:
+    def spec(cls, key : Literal["I1"]) -> NonSpare_47:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I2"]) -> NonSpare_51:
+    def spec(cls, key : Literal["I2"]) -> NonSpare_52:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I3"]) -> NonSpare_57:
+    def spec(cls, key : Literal["I3"]) -> NonSpare_58:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["I1"], Literal["I2"], Literal["I3"]]) -> Any:
         return cls._spec(key)
 
     @overload
-    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_46]:
+    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_47]:
         ...
     @overload
-    def get_item(self, key : Literal["I2"]) -> Optional[NonSpare_51]:
+    def get_item(self, key : Literal["I2"]) -> Optional[NonSpare_52]:
         ...
     @overload
-    def get_item(self, key : Literal["I3"]) -> Optional[NonSpare_57]:
+    def get_item(self, key : Literal["I3"]) -> Optional[NonSpare_58]:
         ...
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["I1"], val : NonSpare_46.cv_arg) -> "Variation_61":
+    def set_item(self, key : Literal["I1"], val : NonSpare_47.cv_arg) -> "Variation_61":
         ...
     @overload
-    def set_item(self, key : Literal["I2"], val : NonSpare_51.cv_arg) -> "Variation_61":
+    def set_item(self, key : Literal["I2"], val : NonSpare_52.cv_arg) -> "Variation_61":
         ...
     @overload
-    def set_item(self, key : Literal["I3"], val : NonSpare_57.cv_arg) -> "Variation_61":
+    def set_item(self, key : Literal["I3"], val : NonSpare_58.cv_arg) -> "Variation_61":
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -3709,14 +3709,14 @@ class NonSpare_27(NonSpare):
 class UapItem_27(UapItem):
     cv_non_spare: TypeAlias = NonSpare_27
 
-class NonSpare_41(NonSpare):
+class NonSpare_42(NonSpare):
     cv_arg: TypeAlias = RuleVariation_0.cv_arg
     cv_name = "EP"
     cv_title = "Element Populated Bit"
     cv_rule: TypeAlias = RuleVariation_0
 
     @classmethod
-    def create(cls, arg : "NonSpare_41.cv_arg") -> "NonSpare_41":
+    def create(cls, arg : "NonSpare_42.cv_arg") -> "NonSpare_42":
         return cls._create(arg) # type: ignore
 
     @property
@@ -3729,8 +3729,8 @@ class NonSpare_41(NonSpare):
         return self.rule.variation
 
 class Item_10(Item):
-    cv_arg: TypeAlias = NonSpare_41.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_41
+    cv_arg: TypeAlias = NonSpare_42.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_42
 
     @classmethod
     def create(cls, arg : "Item_10.cv_arg") -> "Item_10":
@@ -3767,14 +3767,14 @@ class RuleVariation_26(RuleVariationContextFree):
     def variation(self) -> Variation_26:
         return self.arg # type: ignore
 
-class NonSpare_80(NonSpare):
+class NonSpare_81(NonSpare):
     cv_arg: TypeAlias = RuleVariation_26.cv_arg
     cv_name = "VAL"
     cv_title = "Value"
     cv_rule: TypeAlias = RuleVariation_26
 
     @classmethod
-    def create(cls, arg : "NonSpare_80.cv_arg") -> "NonSpare_80":
+    def create(cls, arg : "NonSpare_81.cv_arg") -> "NonSpare_81":
         return cls._create(arg) # type: ignore
 
     @property
@@ -3787,8 +3787,8 @@ class NonSpare_80(NonSpare):
         return self.rule.variation
 
 class Item_36(Item):
-    cv_arg: TypeAlias = NonSpare_80.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_80
+    cv_arg: TypeAlias = NonSpare_81.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_81
 
     @classmethod
     def create(cls, arg : "Item_36.cv_arg") -> "Item_36":
@@ -3839,14 +3839,14 @@ class RuleVariation_35(RuleVariationContextFree):
     def variation(self) -> Variation_38:
         return self.arg # type: ignore
 
-class NonSpare_74(NonSpare):
+class NonSpare_75(NonSpare):
     cv_arg: TypeAlias = RuleVariation_35.cv_arg
     cv_name = "SG1"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_35
 
     @classmethod
-    def create(cls, arg : "NonSpare_74.cv_arg") -> "NonSpare_74":
+    def create(cls, arg : "NonSpare_75.cv_arg") -> "NonSpare_75":
         return cls._create(arg) # type: ignore
 
     @property
@@ -3859,8 +3859,8 @@ class NonSpare_74(NonSpare):
         return self.rule.variation
 
 class Item_31(Item):
-    cv_arg: TypeAlias = NonSpare_74.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_74
+    cv_arg: TypeAlias = NonSpare_75.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_75
 
     @classmethod
     def create(cls, arg : "Item_31.cv_arg") -> "Item_31":
@@ -3897,14 +3897,14 @@ class RuleVariation_29(RuleVariationContextFree):
     def variation(self) -> Variation_29:
         return self.arg # type: ignore
 
-class NonSpare_42(NonSpare):
+class NonSpare_43(NonSpare):
     cv_arg: TypeAlias = RuleVariation_29.cv_arg
     cv_name = "EP"
     cv_title = "Element Populated Bit"
     cv_rule: TypeAlias = RuleVariation_29
 
     @classmethod
-    def create(cls, arg : "NonSpare_42.cv_arg") -> "NonSpare_42":
+    def create(cls, arg : "NonSpare_43.cv_arg") -> "NonSpare_43":
         return cls._create(arg) # type: ignore
 
     @property
@@ -3917,8 +3917,8 @@ class NonSpare_42(NonSpare):
         return self.rule.variation
 
 class Item_11(Item):
-    cv_arg: TypeAlias = NonSpare_42.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_42
+    cv_arg: TypeAlias = NonSpare_43.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_43
 
     @classmethod
     def create(cls, arg : "Item_11.cv_arg") -> "Item_11":
@@ -3955,14 +3955,14 @@ class RuleVariation_30(RuleVariationContextFree):
     def variation(self) -> Variation_30:
         return self.arg # type: ignore
 
-class NonSpare_81(NonSpare):
+class NonSpare_82(NonSpare):
     cv_arg: TypeAlias = RuleVariation_30.cv_arg
     cv_name = "VAL"
     cv_title = "Value"
     cv_rule: TypeAlias = RuleVariation_30
 
     @classmethod
-    def create(cls, arg : "NonSpare_81.cv_arg") -> "NonSpare_81":
+    def create(cls, arg : "NonSpare_82.cv_arg") -> "NonSpare_82":
         return cls._create(arg) # type: ignore
 
     @property
@@ -3975,8 +3975,8 @@ class NonSpare_81(NonSpare):
         return self.rule.variation
 
 class Item_37(Item):
-    cv_arg: TypeAlias = NonSpare_81.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_81
+    cv_arg: TypeAlias = NonSpare_82.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_82
 
     @classmethod
     def create(cls, arg : "Item_37.cv_arg") -> "Item_37":
@@ -4027,14 +4027,14 @@ class RuleVariation_43(RuleVariationContextFree):
     def variation(self) -> Variation_47:
         return self.arg # type: ignore
 
-class NonSpare_75(NonSpare):
+class NonSpare_76(NonSpare):
     cv_arg: TypeAlias = RuleVariation_43.cv_arg
     cv_name = "SG2"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_43
 
     @classmethod
-    def create(cls, arg : "NonSpare_75.cv_arg") -> "NonSpare_75":
+    def create(cls, arg : "NonSpare_76.cv_arg") -> "NonSpare_76":
         return cls._create(arg) # type: ignore
 
     @property
@@ -4047,8 +4047,8 @@ class NonSpare_75(NonSpare):
         return self.rule.variation
 
 class Item_32(Item):
-    cv_arg: TypeAlias = NonSpare_75.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_75
+    cv_arg: TypeAlias = NonSpare_76.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_76
 
     @classmethod
     def create(cls, arg : "Item_32.cv_arg") -> "Item_32":
@@ -4176,14 +4176,14 @@ class RuleVariation_40(RuleVariationContextFree):
     def variation(self) -> Variation_44:
         return self.arg # type: ignore
 
-class NonSpare_53(NonSpare):
+class NonSpare_54(NonSpare):
     cv_arg: TypeAlias = RuleVariation_40.cv_arg
     cv_name = "I2"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_40
 
     @classmethod
-    def create(cls, arg : "NonSpare_53.cv_arg") -> "NonSpare_53":
+    def create(cls, arg : "NonSpare_54.cv_arg") -> "NonSpare_54":
         return cls._create(arg) # type: ignore
 
     @property
@@ -4196,8 +4196,8 @@ class NonSpare_53(NonSpare):
         return self.rule.variation
 
 class Item_21(Item):
-    cv_arg: TypeAlias = NonSpare_53.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_53
+    cv_arg: TypeAlias = NonSpare_54.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_54
 
     @classmethod
     def create(cls, arg : "Item_21.cv_arg") -> "Item_21":
@@ -4309,7 +4309,7 @@ class Record_6(Record):
         Tuple[Literal["102"], NonSpare_31.cv_arg],
     ]
     cv_fspec_max_bytes = 4
-    cv_items_list = [UapItem_3, UapItem_0, UapItem_4, UapItem_6, UapItem_7, UapItem_10, UapItem_12, UapItem_15, UapItem_16, UapItem_17, UapItem_18, UapItem_19, UapItem_20, UapItem_21, UapItem_22, UapItem_23, UapItem_24, UapItem_35, UapItem_36, UapItem_25, UapItem_26, UapItem_27, UapItem_29, UapItem_31]
+    cv_items_list = [UapItem_3, UapItem_0, UapItem_4, UapItem_6, UapItem_7, UapItem_10, UapItem_12, UapItem_15, UapItem_16, UapItem_17, UapItem_18, UapItem_19, UapItem_20, UapItem_21, UapItem_22, UapItem_23, UapItem_24, UapItem_36, UapItem_37, UapItem_25, UapItem_26, UapItem_27, UapItem_29, UapItem_31]
     cv_items_dict = {"010": NonSpare_3, "000": NonSpare_0, "020": NonSpare_4, "030": NonSpare_6, "031": NonSpare_7, "032": NonSpare_10, "040": NonSpare_12, "051": NonSpare_15, "052": NonSpare_16, "053": NonSpare_17, "054": NonSpare_18, "061": NonSpare_19, "062": NonSpare_20, "063": NonSpare_21, "071": NonSpare_22, "072": NonSpare_23, "073": NonSpare_24, "091": NonSpare_25, "092": NonSpare_26, "093": NonSpare_27, "101": NonSpare_29, "102": NonSpare_31}
 
     @overload
@@ -4685,8 +4685,8 @@ class Record_6(Record):
         return cls._create(arg, rfs) # type: ignore
 
     @classmethod
-    def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Record_6", Bits]]:
-        return cls._parse(bs) # type: ignore
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_6", Bits]]:
+        return cls._parse(pm, bs) # type: ignore
 
 class Uap_0(UapSingle):
     cv_arg: TypeAlias = Record_6
@@ -4708,39 +4708,39 @@ class Asterix_0(AstCat):
 
 class Expansion_1(Expansion):
     cv_arg = TypedDict('cv_arg', {
-        "I1": NonSpare_46.cv_arg,
-        "I2": NonSpare_51.cv_arg,
+        "I1": NonSpare_47.cv_arg,
+        "I2": NonSpare_52.cv_arg,
     }, total=False)
     cv_type = (FspecFixed, 1)
-    cv_items_list = [NonSpare_46, NonSpare_51]
-    cv_items_dict = {"I1": NonSpare_46, "I2": NonSpare_51}
+    cv_items_list = [NonSpare_47, NonSpare_52]
+    cv_items_dict = {"I1": NonSpare_47, "I2": NonSpare_52}
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_46:
+    def spec(cls, key : Literal["I1"]) -> NonSpare_47:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I2"]) -> NonSpare_51:
+    def spec(cls, key : Literal["I2"]) -> NonSpare_52:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["I1"], Literal["I2"]]) -> Any:
         return cls._spec(key)
 
     @overload
-    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_46]:
+    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_47]:
         ...
     @overload
-    def get_item(self, key : Literal["I2"]) -> Optional[NonSpare_51]:
+    def get_item(self, key : Literal["I2"]) -> Optional[NonSpare_52]:
         ...
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["I1"], val : NonSpare_46.cv_arg) -> "Expansion_1":
+    def set_item(self, key : Literal["I1"], val : NonSpare_47.cv_arg) -> "Expansion_1":
         ...
     @overload
-    def set_item(self, key : Literal["I2"], val : NonSpare_51.cv_arg) -> "Expansion_1":
+    def set_item(self, key : Literal["I2"], val : NonSpare_52.cv_arg) -> "Expansion_1":
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -4767,52 +4767,539 @@ class Asterix_1(AstRef):
     cv_edition = (1, 0)
     cv_expansion: TypeAlias = Expansion_1
 
-class Expansion_2(Expansion):
+class NonSpare_32(NonSpare):
+    cv_arg: TypeAlias = RuleVariation_7.cv_arg
+    cv_name = "200"
+    cv_title = "Test"
+    cv_rule: TypeAlias = RuleVariation_7
+
+    @classmethod
+    def create(cls, arg : "NonSpare_32.cv_arg") -> "NonSpare_32":
+        return cls._create(arg) # type: ignore
+
+    @property
+    def rule(self) -> RuleVariation_7:
+        return self.arg # type: ignore
+
+    # shortcut to variation
+    @property
+    def variation(self) -> Variation_7:
+        return self.rule.variation
+
+class UapItem_32(UapItem):
+    cv_non_spare: TypeAlias = NonSpare_32
+
+class Record_7(Record):
     cv_arg = TypedDict('cv_arg', {
-        "I1": NonSpare_46.cv_arg,
-        "I2": NonSpare_51.cv_arg,
-        "I3": NonSpare_57.cv_arg,
+        "010": NonSpare_3.cv_arg,
+        "000": NonSpare_0.cv_arg,
+        "020": NonSpare_4.cv_arg,
+        "030": NonSpare_6.cv_arg,
+        "031": NonSpare_7.cv_arg,
+        "032": NonSpare_10.cv_arg,
+        "040": NonSpare_12.cv_arg,
+        "051": NonSpare_15.cv_arg,
+        "052": NonSpare_16.cv_arg,
+        "053": NonSpare_17.cv_arg,
+        "054": NonSpare_18.cv_arg,
+        "061": NonSpare_19.cv_arg,
+        "062": NonSpare_20.cv_arg,
+        "063": NonSpare_21.cv_arg,
+        "071": NonSpare_22.cv_arg,
+        "072": NonSpare_23.cv_arg,
+        "073": NonSpare_24.cv_arg,
+        "091": NonSpare_25.cv_arg,
+        "092": NonSpare_26.cv_arg,
+        "093": NonSpare_27.cv_arg,
+        "101": NonSpare_29.cv_arg,
+        "102": NonSpare_31.cv_arg,
+        "200": NonSpare_32.cv_arg,
     }, total=False)
-    cv_type = (FspecFixed, 2)
-    cv_items_list = [NonSpare_46, None, None, NonSpare_51, None, None, None, None, None, None, NonSpare_57]
-    cv_items_dict = {"I1": NonSpare_46, "I2": NonSpare_51, "I3": NonSpare_57}
+    cv_union: TypeAlias = Union[
+        Tuple[Literal["010"], NonSpare_3.cv_arg],
+        Tuple[Literal["000"], NonSpare_0.cv_arg],
+        Tuple[Literal["020"], NonSpare_4.cv_arg],
+        Tuple[Literal["030"], NonSpare_6.cv_arg],
+        Tuple[Literal["031"], NonSpare_7.cv_arg],
+        Tuple[Literal["032"], NonSpare_10.cv_arg],
+        Tuple[Literal["040"], NonSpare_12.cv_arg],
+        Tuple[Literal["051"], NonSpare_15.cv_arg],
+        Tuple[Literal["052"], NonSpare_16.cv_arg],
+        Tuple[Literal["053"], NonSpare_17.cv_arg],
+        Tuple[Literal["054"], NonSpare_18.cv_arg],
+        Tuple[Literal["061"], NonSpare_19.cv_arg],
+        Tuple[Literal["062"], NonSpare_20.cv_arg],
+        Tuple[Literal["063"], NonSpare_21.cv_arg],
+        Tuple[Literal["071"], NonSpare_22.cv_arg],
+        Tuple[Literal["072"], NonSpare_23.cv_arg],
+        Tuple[Literal["073"], NonSpare_24.cv_arg],
+        Tuple[Literal["091"], NonSpare_25.cv_arg],
+        Tuple[Literal["092"], NonSpare_26.cv_arg],
+        Tuple[Literal["093"], NonSpare_27.cv_arg],
+        Tuple[Literal["101"], NonSpare_29.cv_arg],
+        Tuple[Literal["102"], NonSpare_31.cv_arg],
+        Tuple[Literal["200"], NonSpare_32.cv_arg],
+    ]
+    cv_fspec_max_bytes = 4
+    cv_items_list = [UapItem_3, UapItem_0, UapItem_4, UapItem_6, UapItem_7, UapItem_10, UapItem_12, UapItem_15, UapItem_16, UapItem_17, UapItem_18, UapItem_19, UapItem_20, UapItem_21, UapItem_22, UapItem_23, UapItem_24, UapItem_36, UapItem_37, UapItem_25, UapItem_26, UapItem_27, UapItem_29, UapItem_31, UapItem_32]
+    cv_items_dict = {"010": NonSpare_3, "000": NonSpare_0, "020": NonSpare_4, "030": NonSpare_6, "031": NonSpare_7, "032": NonSpare_10, "040": NonSpare_12, "051": NonSpare_15, "052": NonSpare_16, "053": NonSpare_17, "054": NonSpare_18, "061": NonSpare_19, "062": NonSpare_20, "063": NonSpare_21, "071": NonSpare_22, "072": NonSpare_23, "073": NonSpare_24, "091": NonSpare_25, "092": NonSpare_26, "093": NonSpare_27, "101": NonSpare_29, "102": NonSpare_31, "200": NonSpare_32}
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_46:
+    def spec(cls, key : Literal["010"]) -> NonSpare_3:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I2"]) -> NonSpare_51:
+    def spec(cls, key : Literal["000"]) -> NonSpare_0:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I3"]) -> NonSpare_57:
+    def spec(cls, key : Literal["020"]) -> NonSpare_4:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["030"]) -> NonSpare_6:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["031"]) -> NonSpare_7:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["032"]) -> NonSpare_10:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["040"]) -> NonSpare_12:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["051"]) -> NonSpare_15:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["052"]) -> NonSpare_16:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["053"]) -> NonSpare_17:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["054"]) -> NonSpare_18:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["061"]) -> NonSpare_19:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["062"]) -> NonSpare_20:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["063"]) -> NonSpare_21:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["071"]) -> NonSpare_22:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["072"]) -> NonSpare_23:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["073"]) -> NonSpare_24:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["091"]) -> NonSpare_25:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["092"]) -> NonSpare_26:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["093"]) -> NonSpare_27:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["101"]) -> NonSpare_29:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["102"]) -> NonSpare_31:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["200"]) -> NonSpare_32:
+        ...
+    @classmethod
+    def spec(cls, key : Union[Literal["010"], Literal["000"], Literal["020"], Literal["030"], Literal["031"], Literal["032"], Literal["040"], Literal["051"], Literal["052"], Literal["053"], Literal["054"], Literal["061"], Literal["062"], Literal["063"], Literal["071"], Literal["072"], Literal["073"], Literal["091"], Literal["092"], Literal["093"], Literal["101"], Literal["102"], Literal["200"]]) -> Any:
+        return cls._spec(key)
+
+    @overload
+    def get_item(self, key : Literal["010"]) -> Optional[NonSpare_3]:
+        ...
+    @overload
+    def get_item(self, key : Literal["000"]) -> Optional[NonSpare_0]:
+        ...
+    @overload
+    def get_item(self, key : Literal["020"]) -> Optional[NonSpare_4]:
+        ...
+    @overload
+    def get_item(self, key : Literal["030"]) -> Optional[NonSpare_6]:
+        ...
+    @overload
+    def get_item(self, key : Literal["031"]) -> Optional[NonSpare_7]:
+        ...
+    @overload
+    def get_item(self, key : Literal["032"]) -> Optional[NonSpare_10]:
+        ...
+    @overload
+    def get_item(self, key : Literal["040"]) -> Optional[NonSpare_12]:
+        ...
+    @overload
+    def get_item(self, key : Literal["051"]) -> Optional[NonSpare_15]:
+        ...
+    @overload
+    def get_item(self, key : Literal["052"]) -> Optional[NonSpare_16]:
+        ...
+    @overload
+    def get_item(self, key : Literal["053"]) -> Optional[NonSpare_17]:
+        ...
+    @overload
+    def get_item(self, key : Literal["054"]) -> Optional[NonSpare_18]:
+        ...
+    @overload
+    def get_item(self, key : Literal["061"]) -> Optional[NonSpare_19]:
+        ...
+    @overload
+    def get_item(self, key : Literal["062"]) -> Optional[NonSpare_20]:
+        ...
+    @overload
+    def get_item(self, key : Literal["063"]) -> Optional[NonSpare_21]:
+        ...
+    @overload
+    def get_item(self, key : Literal["071"]) -> Optional[NonSpare_22]:
+        ...
+    @overload
+    def get_item(self, key : Literal["072"]) -> Optional[NonSpare_23]:
+        ...
+    @overload
+    def get_item(self, key : Literal["073"]) -> Optional[NonSpare_24]:
+        ...
+    @overload
+    def get_item(self, key : Literal["091"]) -> Optional[NonSpare_25]:
+        ...
+    @overload
+    def get_item(self, key : Literal["092"]) -> Optional[NonSpare_26]:
+        ...
+    @overload
+    def get_item(self, key : Literal["093"]) -> Optional[NonSpare_27]:
+        ...
+    @overload
+    def get_item(self, key : Literal["101"]) -> Optional[NonSpare_29]:
+        ...
+    @overload
+    def get_item(self, key : Literal["102"]) -> Optional[NonSpare_31]:
+        ...
+    @overload
+    def get_item(self, key : Literal["200"]) -> Optional[NonSpare_32]:
+        ...
+    def get_item(self, key : Any) -> Any:
+        return self._get_item(key)
+
+    @overload
+    def set_item(self, key : Literal["010"], val : NonSpare_3.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["000"], val : NonSpare_0.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["020"], val : NonSpare_4.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["030"], val : NonSpare_6.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["031"], val : NonSpare_7.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["032"], val : NonSpare_10.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["040"], val : NonSpare_12.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["051"], val : NonSpare_15.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["052"], val : NonSpare_16.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["053"], val : NonSpare_17.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["054"], val : NonSpare_18.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["061"], val : NonSpare_19.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["062"], val : NonSpare_20.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["063"], val : NonSpare_21.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["071"], val : NonSpare_22.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["072"], val : NonSpare_23.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["073"], val : NonSpare_24.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["091"], val : NonSpare_25.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["092"], val : NonSpare_26.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["093"], val : NonSpare_27.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["101"], val : NonSpare_29.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["102"], val : NonSpare_31.cv_arg) -> 'Record_7':
+        ...
+    @overload
+    def set_item(self, key : Literal["200"], val : NonSpare_32.cv_arg) -> 'Record_7':
+        ...
+    def set_item(self, key : Any, val : Any) -> Any:
+        return self._set_item(key, val)
+
+    @overload
+    def del_item(self, key : Literal["010"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["000"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["020"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["030"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["031"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["032"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["040"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["051"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["052"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["053"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["054"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["061"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["062"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["063"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["071"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["072"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["073"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["091"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["092"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["093"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["101"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["102"]) -> 'Record_7':
+        ...
+    @overload
+    def del_item(self, key : Literal["200"]) -> 'Record_7':
+        ...
+    def del_item(self, key : Any) -> Any:
+        return self._del_item(key)
+
+    @overload
+    def get_rfs_item(self, arg : Literal["010"]) -> List[NonSpare_3]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["000"]) -> List[NonSpare_0]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["020"]) -> List[NonSpare_4]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["030"]) -> List[NonSpare_6]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["031"]) -> List[NonSpare_7]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["032"]) -> List[NonSpare_10]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["040"]) -> List[NonSpare_12]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["051"]) -> List[NonSpare_15]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["052"]) -> List[NonSpare_16]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["053"]) -> List[NonSpare_17]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["054"]) -> List[NonSpare_18]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["061"]) -> List[NonSpare_19]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["062"]) -> List[NonSpare_20]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["063"]) -> List[NonSpare_21]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["071"]) -> List[NonSpare_22]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["072"]) -> List[NonSpare_23]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["073"]) -> List[NonSpare_24]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["091"]) -> List[NonSpare_25]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["092"]) -> List[NonSpare_26]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["093"]) -> List[NonSpare_27]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["101"]) -> List[NonSpare_29]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["102"]) -> List[NonSpare_31]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["200"]) -> List[NonSpare_32]:
+        ...
+    def get_rfs_item(self, arg : Any) -> Any:
+        return self._get_rfs_item(arg)
+
+    @classmethod
+    def create(cls, arg: "Record_7.cv_arg", rfs : Optional[List["Record_7.cv_union"]] = None) -> 'Record_7':
+        return cls._create(arg, rfs) # type: ignore
+
+    @classmethod
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_7", Bits]]:
+        return cls._parse(pm, bs) # type: ignore
+
+class Uap_1(UapSingle):
+    cv_arg: TypeAlias = Record_7
+    cv_record: TypeAlias = Record_7
+
+    @classmethod
+    def parse(cls, bs : Bits) -> Union[ValueError, List[Record_7]]:
+        return cls._parse(bs)
+
+class Asterix_2(AstCat):
+    cv_category = 0
+    cv_edition = (1, 1)
+    cv_uap: TypeAlias = Uap_1
+    cv_record: TypeAlias = cv_uap.cv_record # shortcut
+
+    @classmethod
+    def create(cls, records : List[Uap_1.cv_arg]) -> "Asterix_2":
+        return cls._create(records) # type: ignore
+
+class Expansion_2(Expansion):
+    cv_arg = TypedDict('cv_arg', {
+        "I1": NonSpare_47.cv_arg,
+        "I2": NonSpare_52.cv_arg,
+        "I3": NonSpare_58.cv_arg,
+    }, total=False)
+    cv_type = (FspecFixed, 2)
+    cv_items_list = [NonSpare_47, None, None, NonSpare_52, None, None, None, None, None, None, NonSpare_58]
+    cv_items_dict = {"I1": NonSpare_47, "I2": NonSpare_52, "I3": NonSpare_58}
+
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I1"]) -> NonSpare_47:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I2"]) -> NonSpare_52:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I3"]) -> NonSpare_58:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["I1"], Literal["I2"], Literal["I3"]]) -> Any:
         return cls._spec(key)
 
     @overload
-    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_46]:
+    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_47]:
         ...
     @overload
-    def get_item(self, key : Literal["I2"]) -> Optional[NonSpare_51]:
+    def get_item(self, key : Literal["I2"]) -> Optional[NonSpare_52]:
         ...
     @overload
-    def get_item(self, key : Literal["I3"]) -> Optional[NonSpare_57]:
+    def get_item(self, key : Literal["I3"]) -> Optional[NonSpare_58]:
         ...
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["I1"], val : NonSpare_46.cv_arg) -> "Expansion_2":
+    def set_item(self, key : Literal["I1"], val : NonSpare_47.cv_arg) -> "Expansion_2":
         ...
     @overload
-    def set_item(self, key : Literal["I2"], val : NonSpare_51.cv_arg) -> "Expansion_2":
+    def set_item(self, key : Literal["I2"], val : NonSpare_52.cv_arg) -> "Expansion_2":
         ...
     @overload
-    def set_item(self, key : Literal["I3"], val : NonSpare_57.cv_arg) -> "Expansion_2":
+    def set_item(self, key : Literal["I3"], val : NonSpare_58.cv_arg) -> "Expansion_2":
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -4837,57 +5324,57 @@ class Expansion_2(Expansion):
     def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Expansion_2", Bits]]:
         return cls._parse(bs) # type: ignore
 
-class Asterix_2(AstRef):
+class Asterix_3(AstRef):
     cv_category = 0
     cv_edition = (1, 1)
     cv_expansion: TypeAlias = Expansion_2
 
 class Expansion_0(Expansion):
     cv_arg = TypedDict('cv_arg', {
-        "I1": NonSpare_46.cv_arg,
-        "I2": NonSpare_51.cv_arg,
-        "I3": NonSpare_57.cv_arg,
+        "I1": NonSpare_47.cv_arg,
+        "I2": NonSpare_52.cv_arg,
+        "I3": NonSpare_58.cv_arg,
     }, total=False)
     cv_type = (FspecFx, 2)
-    cv_items_list = [NonSpare_46, None, None, NonSpare_51, None, None, None, None, None, None, NonSpare_57]
-    cv_items_dict = {"I1": NonSpare_46, "I2": NonSpare_51, "I3": NonSpare_57}
+    cv_items_list = [NonSpare_47, None, None, NonSpare_52, None, None, None, None, None, None, NonSpare_58]
+    cv_items_dict = {"I1": NonSpare_47, "I2": NonSpare_52, "I3": NonSpare_58}
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_46:
+    def spec(cls, key : Literal["I1"]) -> NonSpare_47:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I2"]) -> NonSpare_51:
+    def spec(cls, key : Literal["I2"]) -> NonSpare_52:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I3"]) -> NonSpare_57:
+    def spec(cls, key : Literal["I3"]) -> NonSpare_58:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["I1"], Literal["I2"], Literal["I3"]]) -> Any:
         return cls._spec(key)
 
     @overload
-    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_46]:
+    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_47]:
         ...
     @overload
-    def get_item(self, key : Literal["I2"]) -> Optional[NonSpare_51]:
+    def get_item(self, key : Literal["I2"]) -> Optional[NonSpare_52]:
         ...
     @overload
-    def get_item(self, key : Literal["I3"]) -> Optional[NonSpare_57]:
+    def get_item(self, key : Literal["I3"]) -> Optional[NonSpare_58]:
         ...
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["I1"], val : NonSpare_46.cv_arg) -> "Expansion_0":
+    def set_item(self, key : Literal["I1"], val : NonSpare_47.cv_arg) -> "Expansion_0":
         ...
     @overload
-    def set_item(self, key : Literal["I2"], val : NonSpare_51.cv_arg) -> "Expansion_0":
+    def set_item(self, key : Literal["I2"], val : NonSpare_52.cv_arg) -> "Expansion_0":
         ...
     @overload
-    def set_item(self, key : Literal["I3"], val : NonSpare_57.cv_arg) -> "Expansion_0":
+    def set_item(self, key : Literal["I3"], val : NonSpare_58.cv_arg) -> "Expansion_0":
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -4912,7 +5399,7 @@ class Expansion_0(Expansion):
     def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Expansion_0", Bits]]:
         return cls._parse(bs) # type: ignore
 
-class Asterix_3(AstRef):
+class Asterix_4(AstRef):
     cv_category = 0
     cv_edition = (1, 2)
     cv_expansion: TypeAlias = Expansion_0
@@ -4982,14 +5469,14 @@ class RuleVariation_2(RuleVariationContextFree):
     def variation(self) -> Variation_2:
         return self.arg # type: ignore
 
-class NonSpare_79(NonSpare):
+class NonSpare_80(NonSpare):
     cv_arg: TypeAlias = RuleVariation_2.cv_arg
     cv_name = "TYP"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_2
 
     @classmethod
-    def create(cls, arg : "NonSpare_79.cv_arg") -> "NonSpare_79":
+    def create(cls, arg : "NonSpare_80.cv_arg") -> "NonSpare_80":
         return cls._create(arg) # type: ignore
 
     @property
@@ -5002,21 +5489,21 @@ class NonSpare_79(NonSpare):
         return self.rule.variation
 
 class Item_35(Item):
-    cv_arg: TypeAlias = NonSpare_79.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_79
+    cv_arg: TypeAlias = NonSpare_80.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_80
 
     @classmethod
     def create(cls, arg : "Item_35.cv_arg") -> "Item_35":
         return cls._create(arg) # type: ignore
 
-class NonSpare_47(NonSpare):
+class NonSpare_48(NonSpare):
     cv_arg: TypeAlias = RuleVariation_27.cv_arg
     cv_name = "I1"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_27
 
     @classmethod
-    def create(cls, arg : "NonSpare_47.cv_arg") -> "NonSpare_47":
+    def create(cls, arg : "NonSpare_48.cv_arg") -> "NonSpare_48":
         return cls._create(arg) # type: ignore
 
     @property
@@ -5029,21 +5516,21 @@ class NonSpare_47(NonSpare):
         return self.rule.variation
 
 class Item_16(Item):
-    cv_arg: TypeAlias = NonSpare_47.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_47
+    cv_arg: TypeAlias = NonSpare_48.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_48
 
     @classmethod
     def create(cls, arg : "Item_16.cv_arg") -> "Item_16":
         return cls._create(arg) # type: ignore
 
-class NonSpare_50(NonSpare):
+class NonSpare_51(NonSpare):
     cv_arg: TypeAlias = RuleVariation_6.cv_arg
     cv_name = "I2"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_6
 
     @classmethod
-    def create(cls, arg : "NonSpare_50.cv_arg") -> "NonSpare_50":
+    def create(cls, arg : "NonSpare_51.cv_arg") -> "NonSpare_51":
         return cls._create(arg) # type: ignore
 
     @property
@@ -5056,8 +5543,8 @@ class NonSpare_50(NonSpare):
         return self.rule.variation
 
 class Item_18(Item):
-    cv_arg: TypeAlias = NonSpare_50.cv_arg
-    cv_non_spare: TypeAlias = NonSpare_50
+    cv_arg: TypeAlias = NonSpare_51.cv_arg
+    cv_non_spare: TypeAlias = NonSpare_51
 
     @classmethod
     def create(cls, arg : "Item_18.cv_arg") -> "Item_18":
@@ -5197,7 +5684,7 @@ class Record_4(Record):
         "041": NonSpare_13.cv_arg,
     }, total=False)
     cv_fspec_max_bytes = 1
-    cv_items_list = [UapItem_2, UapItem_5, UapItem_8, UapItem_35, UapItem_11, UapItem_13]
+    cv_items_list = [UapItem_2, UapItem_5, UapItem_8, UapItem_36, UapItem_11, UapItem_13]
     cv_items_dict = {"010": NonSpare_2, "020": NonSpare_5, "031": NonSpare_8, "040": NonSpare_11, "041": NonSpare_13}
 
     @overload
@@ -5283,8 +5770,8 @@ class Record_4(Record):
         return cls._create(arg) # type: ignore
 
     @classmethod
-    def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Record_4", Bits]]:
-        return cls._parse(bs) # type: ignore
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_4", Bits]]:
+        return cls._parse(pm, bs) # type: ignore
 
 class Variation_15(Element):
     cv_arg: TypeAlias = RuleContent_0.cv_arg
@@ -5370,7 +5857,7 @@ class Record_5(Record):
         "042": NonSpare_14.cv_arg,
     }, total=False)
     cv_fspec_max_bytes = 1
-    cv_items_list = [UapItem_2, UapItem_5, UapItem_35, UapItem_9, UapItem_11, UapItem_14]
+    cv_items_list = [UapItem_2, UapItem_5, UapItem_36, UapItem_9, UapItem_11, UapItem_14]
     cv_items_dict = {"010": NonSpare_2, "020": NonSpare_5, "032": NonSpare_9, "040": NonSpare_11, "042": NonSpare_14}
 
     @overload
@@ -5456,10 +5943,10 @@ class Record_5(Record):
         return cls._create(arg) # type: ignore
 
     @classmethod
-    def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Record_5", Bits]]:
-        return cls._parse(bs) # type: ignore
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_5", Bits]]:
+        return cls._parse(pm, bs) # type: ignore
 
-class Uap_1(UapMultiple):
+class Uap_2(UapMultiple):
     cv_arg: TypeAlias = Union[Record_4, Record_5]
     cv_uaps = {"plot": Record_4, "track": Record_5}
     cv_selector = (["020", "TYP"], {0: "plot", 1: "track"})
@@ -5489,16 +5976,16 @@ class Uap_1(UapMultiple):
         return cls._parse(uap, bs)
 
     @classmethod
-    def parse_any_uap(cls, bs : Bits) -> "List[List[Uap_1.cv_arg]]":
+    def parse_any_uap(cls, bs : Bits) -> "List[List[Uap_2.cv_arg]]":
         return cls._parse_any_uap(bs)
 
-class Asterix_4(AstCat):
+class Asterix_5(AstCat):
     cv_category = 1
     cv_edition = (1, 0)
-    cv_uap: TypeAlias = Uap_1
+    cv_uap: TypeAlias = Uap_2
 
     @classmethod
-    def create(cls, records : List[Uap_1.cv_arg]) -> "Asterix_4":
+    def create(cls, records : List[Uap_2.cv_arg]) -> "Asterix_5":
         return cls._create(records) # type: ignore
 
 class NonSpare_1(NonSpare):
@@ -5634,34 +6121,12 @@ class Record_1(Record):
         return cls._create(arg) # type: ignore
 
     @classmethod
-    def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Record_1", Bits]]:
-        return cls._parse(bs) # type: ignore
-
-class NonSpare_32(NonSpare):
-    cv_arg: TypeAlias = RuleVariation_15.cv_arg
-    cv_name = "201"
-    cv_title = ""
-    cv_rule: TypeAlias = RuleVariation_15
-
-    @classmethod
-    def create(cls, arg : "NonSpare_32.cv_arg") -> "NonSpare_32":
-        return cls._create(arg) # type: ignore
-
-    @property
-    def rule(self) -> RuleVariation_15:
-        return self.arg # type: ignore
-
-    # shortcut to variation
-    @property
-    def variation(self) -> Variation_15:
-        return self.rule.variation
-
-class UapItem_32(UapItem):
-    cv_non_spare: TypeAlias = NonSpare_32
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_1", Bits]]:
+        return cls._parse(pm, bs) # type: ignore
 
 class NonSpare_33(NonSpare):
     cv_arg: TypeAlias = RuleVariation_15.cv_arg
-    cv_name = "202"
+    cv_name = "201"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_15
 
@@ -5681,15 +6146,37 @@ class NonSpare_33(NonSpare):
 class UapItem_33(UapItem):
     cv_non_spare: TypeAlias = NonSpare_33
 
+class NonSpare_34(NonSpare):
+    cv_arg: TypeAlias = RuleVariation_15.cv_arg
+    cv_name = "202"
+    cv_title = ""
+    cv_rule: TypeAlias = RuleVariation_15
+
+    @classmethod
+    def create(cls, arg : "NonSpare_34.cv_arg") -> "NonSpare_34":
+        return cls._create(arg) # type: ignore
+
+    @property
+    def rule(self) -> RuleVariation_15:
+        return self.arg # type: ignore
+
+    # shortcut to variation
+    @property
+    def variation(self) -> Variation_15:
+        return self.rule.variation
+
+class UapItem_34(UapItem):
+    cv_non_spare: TypeAlias = NonSpare_34
+
 class Record_2(Record):
     cv_arg = TypedDict('cv_arg', {
         "010": NonSpare_1.cv_arg,
-        "201": NonSpare_32.cv_arg,
-        "202": NonSpare_33.cv_arg,
+        "201": NonSpare_33.cv_arg,
+        "202": NonSpare_34.cv_arg,
     }, total=False)
     cv_fspec_max_bytes = 1
-    cv_items_list = [UapItem_1, UapItem_32, UapItem_33]
-    cv_items_dict = {"010": NonSpare_1, "201": NonSpare_32, "202": NonSpare_33}
+    cv_items_list = [UapItem_1, UapItem_33, UapItem_34]
+    cv_items_dict = {"010": NonSpare_1, "201": NonSpare_33, "202": NonSpare_34}
 
     @overload
     @classmethod
@@ -5697,11 +6184,11 @@ class Record_2(Record):
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["201"]) -> NonSpare_32:
+    def spec(cls, key : Literal["201"]) -> NonSpare_33:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["202"]) -> NonSpare_33:
+    def spec(cls, key : Literal["202"]) -> NonSpare_34:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["010"], Literal["201"], Literal["202"]]) -> Any:
@@ -5711,10 +6198,10 @@ class Record_2(Record):
     def get_item(self, key : Literal["010"]) -> Optional[NonSpare_1]:
         ...
     @overload
-    def get_item(self, key : Literal["201"]) -> Optional[NonSpare_32]:
+    def get_item(self, key : Literal["201"]) -> Optional[NonSpare_33]:
         ...
     @overload
-    def get_item(self, key : Literal["202"]) -> Optional[NonSpare_33]:
+    def get_item(self, key : Literal["202"]) -> Optional[NonSpare_34]:
         ...
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
@@ -5723,10 +6210,10 @@ class Record_2(Record):
     def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_2':
         ...
     @overload
-    def set_item(self, key : Literal["201"], val : NonSpare_32.cv_arg) -> 'Record_2':
+    def set_item(self, key : Literal["201"], val : NonSpare_33.cv_arg) -> 'Record_2':
         ...
     @overload
-    def set_item(self, key : Literal["202"], val : NonSpare_33.cv_arg) -> 'Record_2':
+    def set_item(self, key : Literal["202"], val : NonSpare_34.cv_arg) -> 'Record_2':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -5748,8 +6235,8 @@ class Record_2(Record):
         return cls._create(arg) # type: ignore
 
     @classmethod
-    def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Record_2", Bits]]:
-        return cls._parse(bs) # type: ignore
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_2", Bits]]:
+        return cls._parse(pm, bs) # type: ignore
 
 class Variation_20(Element):
     cv_arg: TypeAlias = RuleContent_0.cv_arg
@@ -5782,14 +6269,14 @@ class RuleVariation_20(RuleVariationContextFree):
     def variation(self) -> Variation_20:
         return self.arg # type: ignore
 
-class NonSpare_34(NonSpare):
+class NonSpare_35(NonSpare):
     cv_arg: TypeAlias = RuleVariation_20.cv_arg
     cv_name = "301"
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_20
 
     @classmethod
-    def create(cls, arg : "NonSpare_34.cv_arg") -> "NonSpare_34":
+    def create(cls, arg : "NonSpare_35.cv_arg") -> "NonSpare_35":
         return cls._create(arg) # type: ignore
 
     @property
@@ -5801,17 +6288,17 @@ class NonSpare_34(NonSpare):
     def variation(self) -> Variation_20:
         return self.rule.variation
 
-class UapItem_34(UapItem):
-    cv_non_spare: TypeAlias = NonSpare_34
+class UapItem_35(UapItem):
+    cv_non_spare: TypeAlias = NonSpare_35
 
 class Record_3(Record):
     cv_arg = TypedDict('cv_arg', {
         "010": NonSpare_1.cv_arg,
-        "301": NonSpare_34.cv_arg,
+        "301": NonSpare_35.cv_arg,
     }, total=False)
     cv_fspec_max_bytes = 1
-    cv_items_list = [UapItem_1, UapItem_34]
-    cv_items_dict = {"010": NonSpare_1, "301": NonSpare_34}
+    cv_items_list = [UapItem_1, UapItem_35]
+    cv_items_dict = {"010": NonSpare_1, "301": NonSpare_35}
 
     @overload
     @classmethod
@@ -5819,7 +6306,7 @@ class Record_3(Record):
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["301"]) -> NonSpare_34:
+    def spec(cls, key : Literal["301"]) -> NonSpare_35:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["010"], Literal["301"]]) -> Any:
@@ -5829,7 +6316,7 @@ class Record_3(Record):
     def get_item(self, key : Literal["010"]) -> Optional[NonSpare_1]:
         ...
     @overload
-    def get_item(self, key : Literal["301"]) -> Optional[NonSpare_34]:
+    def get_item(self, key : Literal["301"]) -> Optional[NonSpare_35]:
         ...
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
@@ -5838,7 +6325,7 @@ class Record_3(Record):
     def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_3':
         ...
     @overload
-    def set_item(self, key : Literal["301"], val : NonSpare_34.cv_arg) -> 'Record_3':
+    def set_item(self, key : Literal["301"], val : NonSpare_35.cv_arg) -> 'Record_3':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -5857,8 +6344,8 @@ class Record_3(Record):
         return cls._create(arg) # type: ignore
 
     @classmethod
-    def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Record_3", Bits]]:
-        return cls._parse(bs) # type: ignore
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_3", Bits]]:
+        return cls._parse(pm, bs) # type: ignore
 
 class Record_0(Record):
     cv_arg = TypedDict('cv_arg', {
@@ -5886,10 +6373,10 @@ class Record_0(Record):
         return cls._create(arg) # type: ignore
 
     @classmethod
-    def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Record_0", Bits]]:
-        return cls._parse(bs) # type: ignore
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_0", Bits]]:
+        return cls._parse(pm, bs) # type: ignore
 
-class Uap_2(UapMultiple):
+class Uap_3(UapMultiple):
     cv_arg: TypeAlias = Union[Record_1, Record_2, Record_3, Record_0]
     cv_uaps = {"uap1": Record_1, "uap2": Record_2, "uap3": Record_3, "uap4": Record_0}
     cv_selector = None
@@ -5935,26 +6422,27 @@ class Uap_2(UapMultiple):
         return cls._parse(uap, bs)
 
     @classmethod
-    def parse_any_uap(cls, bs : Bits) -> "List[List[Uap_2.cv_arg]]":
+    def parse_any_uap(cls, bs : Bits) -> "List[List[Uap_3.cv_arg]]":
         return cls._parse_any_uap(bs)
 
-class Asterix_5(AstCat):
+class Asterix_6(AstCat):
     cv_category = 2
     cv_edition = (1, 0)
-    cv_uap: TypeAlias = Uap_2
+    cv_uap: TypeAlias = Uap_3
 
     @classmethod
-    def create(cls, records : List[Uap_2.cv_arg]) -> "Asterix_5":
+    def create(cls, records : List[Uap_3.cv_arg]) -> "Asterix_6":
         return cls._create(records) # type: ignore
 
 # Aliases
 
 Cat_000_1_0: TypeAlias = Asterix_0
 Ref_000_1_0: TypeAlias = Asterix_1
-Ref_000_1_1: TypeAlias = Asterix_2
-Ref_000_1_2: TypeAlias = Asterix_3
-Cat_001_1_0: TypeAlias = Asterix_4
-Cat_002_1_0: TypeAlias = Asterix_5
+Cat_000_1_1: TypeAlias = Asterix_2
+Ref_000_1_1: TypeAlias = Asterix_3
+Ref_000_1_2: TypeAlias = Asterix_4
+Cat_001_1_0: TypeAlias = Asterix_5
+Cat_002_1_0: TypeAlias = Asterix_6
 
 # Manifest
 
@@ -5962,6 +6450,7 @@ manifest = {
     'CATS': {
         0: [
             Cat_000_1_0,
+            Cat_000_1_1,
         ],
         1: [
             Cat_001_1_0,

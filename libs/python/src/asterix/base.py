@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from binascii import hexlify, unhexlify
 from typing import *
 import sys
+import enum
 if sys.version_info < (3, 10):
     from typing_extensions import TypeAlias
 from abc import abstractmethod
@@ -908,23 +909,33 @@ class Explicit(Variation):
         return self.bs.drop(8).to_bytes()
 
 
-def parse_fspec(
-        max_bytes: int, bs: Bits) -> Union[ValueError, Tuple[List[bool], Bits]]:
-    cnt = 0
-    flags: List[bool] = []
-    remaining = bs
-    while True:
-        if cnt >= max_bytes:
-            return ValueError('fspec max bytes exceeded')
-        cnt += 1
-        if len(remaining) < 8:
+class Fspec:
+    def __init__(self, bs: Bits):
+        self.bs = bs
+
+    @classmethod
+    def parse(cls, s: Bits) -> Union[ValueError, Tuple['Fspec', Bits]]:
+        n = 0
+        for i in s.to_bytes():
+            n += 8
+            if not (i & 0x01):
+                break
+        # empty input is not valid
+        if not n:
             return ValueError('overflow')
-        a, remaining = remaining.split_at(7)
-        flags.extend(list(a))
-        fx, remaining = remaining.head_tail()
-        if not fx:
-            break
-    return (flags, remaining)
+        # 'i' contains the last byte, which must have FX=0
+        if (i & 0x01):
+            return ValueError('overflow')
+        (a, b) = s.split_at(n)
+        return (cls(a), b)
+
+    def __iter__(self) -> Iterator[bool]:
+        n = 0
+        for flag in self.bs:
+            if n < 7:
+                yield flag
+            n += 1
+            n %= 8
 
 def unparse_fspec(items_list: List[Optional[Type[NonSpare]]],
                   args: Dict[str, Any]) -> Tuple[Bits, List[Any]]:
@@ -970,12 +981,12 @@ class Compound(Variation):
 
     @classmethod
     def parse(cls, bs: Bits) -> Union[ValueError, Tuple['Compound', Bits]]:
-        result = parse_fspec(cls.cv_fspec_max_bytes, bs)
+        result = Fspec.parse(bs)
         if isinstance(result, ValueError):
             return result
-        flags, remaining = result
+        fspec, remaining = result
         items = {}
-        for (flag, nsp) in zip(flags, cls.cv_items_list):
+        for (flag, nsp) in zip(fspec, cls.cv_items_list):
             if not flag:
                 continue
             if nsp is None:
@@ -1108,6 +1119,9 @@ def get_frn(items_list: List[Type[UapItemBase]], name: str) -> int:
         frn += 1
     raise ValueError(name, 'not found')
 
+class ParsingMode(enum.Enum):
+    StrictParsing = enum.auto()
+    PartialParsing = enum.auto()
 
 class Record:
     cv_fspec_max_bytes: ClassVar[int]
@@ -1125,26 +1139,48 @@ class Record:
         self.items_rfs = items2
 
     @classmethod
-    def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Record', Bits]]:
-        result = parse_fspec(cls.cv_fspec_max_bytes, bs)
+    def _parse(cls, pm: ParsingMode, bs: Bits) -> \
+        Union[ValueError, Tuple['Record', Bits]]:
+        """Remark:
+        This function is using a less known python feature,
+        where the 'else' keyword is included at the end of 'for' loop.
+        This pattern allows nesteed for loops to break the outer loop,
+        when the inner loop breaks.
+        """
+
+        # make sure that we can use a simple 'if StrictParsing... else...'
+        # in the rest of this function (that is: there are only 2 modes).
+        if TYPE_CHECKING:
+            match pm:
+                case ParsingMode.StrictParsing: pass
+                case ParsingMode.PartialParsing: pass
+                case _: assert_never(pm)
+
+        result = Fspec.parse(bs)
         if isinstance(result, ValueError):
             return result
-        flags, remaining = result
+        fspec, remaining = result
         items_regular: Dict[str, NonSpare] = {}
         items_rfs: List[Tuple[str, NonSpare]] = []
-        for (flag, i) in zip(flags, cls.cv_items_list):
+        for (flag, i) in zip(fspec, cls.cv_items_list):
             if not flag:
                 continue
             if issubclass(i, UapItemSpare):
-                return ValueError('fx bit set for spare item')
+                if pm == ParsingMode.StrictParsing:
+                    return ValueError('fx bit set for spare item')
+                else: break
             elif issubclass(i, UapItemRFS):
                 if len(remaining) < 8:
-                    return ValueError('overflow')
+                    if pm == ParsingMode.StrictParsing:
+                        return ValueError('overflow')
+                    else: break
                 a, remaining = remaining.split_at(8)
                 n = a.to_uinteger()
                 for j in range(n):
                     if len(remaining) < 8:
-                        return ValueError('overflow')
+                        if pm == ParsingMode.StrictParsing:
+                            return ValueError('overflow')
+                        else: break
                     b, remaining = remaining.split_at(8)
                     frn = b.to_uinteger()
                     try:
@@ -1153,24 +1189,42 @@ class Record:
                         nsp = T.cv_non_spare  # type: ignore
                         name = nsp.cv_name
                     except (IndexError, AttributeError, AssertionError):
-                        return ValueError('invalid FRN')
+                        if pm == ParsingMode.StrictParsing:
+                            return ValueError('invalid FRN')
+                        else: break
                     result2 = nsp.parse(remaining)
                     if isinstance(result2, ValueError):
-                        return result2
+                        if pm == ParsingMode.StrictParsing:
+                            return result2
+                        else: break
                     obj, remaining = result2
                     items_rfs.append((name, obj))
+                else:
+                    continue
+                break
             elif issubclass(i, UapItem):
                 nsp = i.cv_non_spare
                 result2 = nsp.parse(remaining)
                 if isinstance(result2, ValueError):
-                    return result2
+                    if pm == ParsingMode.StrictParsing:
+                        return result2
+                    else: break
                 obj, remaining = result2
                 items_regular[nsp.cv_name] = obj
             else:
                 raise Exception('Unexpected', i)
         n = len(bs)
         m = len(remaining)
-        return (cls(bs.take(n - m), items_regular, items_rfs), remaining)
+
+        # In case of StrictParsing, we can grab the original bits,
+        # but for the PartialParsing, we need to recreate the record
+        # from parsed items, since the fspec might be different and
+        # the original bits are not exactly the same.
+        if pm == ParsingMode.StrictParsing:
+            r = cls(bs.take(n - m), items_regular, items_rfs)
+        else:
+            r = cls._create(items_regular, items_rfs if items_rfs else None)
+        return (r, remaining)
 
     @classmethod
     def _create(cls, args: Dict[str, Any],
@@ -1270,7 +1324,7 @@ class Uap:
         remaining = bs
         rv = []
         while len(remaining):
-            result = r.parse(remaining)
+            result = r.parse(ParsingMode.StrictParsing, remaining)
             if isinstance(result, ValueError):
                 return result
             r, remaining = result
@@ -1316,7 +1370,7 @@ class UapMultiple(Uap):
             if not len(s):
                 yield acc
             for cls in lst:
-                result = cls._parse(s)
+                result = cls._parse(ParsingMode.StrictParsing, s)
                 if isinstance(result, ValueError):
                     continue
                 x, remaining = result
@@ -1363,10 +1417,11 @@ class Expansion:
             flags_bits, remaining = bs.split_at(n)
             flags = list(flags_bits)
         elif a == FspecFx:
-            result1 = parse_fspec(b, bs)
+            result1 = Fspec.parse(bs)
             if isinstance(result1, ValueError):
                 return result1
-            flags, remaining = result1
+            fspec, remaining = result1
+            flags = list(fspec)
         else:
             raise Exception('Unexpected cv_type', a)
         items = {}

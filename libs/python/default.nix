@@ -57,8 +57,9 @@ let
       customPython
       code-generator
     ];
-
+    LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     shellHook = ''
+      export LC_ALL=C.UTF-8
       export PYTHONPATH=$(pwd)/src:$PYTHONPATH
       export PATH=${code-generator}/bin:$PATH
       export ASTERIX_SPECS_REF="git:${aspecsRef.rev}"
