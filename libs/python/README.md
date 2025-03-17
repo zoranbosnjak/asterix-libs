@@ -423,7 +423,78 @@ while True:
 
 #### Reserved expansion fields
 
-TODO: Add parsing/constructing expansion field example
+This library supports working with expansion fields. From the `Record`
+prespective, the `RE` item contains raw bytes, without any structure,
+similar to how a datablock contains raw bytes without a structure. Parsing
+raw datablocks and parsing records are 2 separate steps. In the same
+vain, parsing `RE` out of the record would be a third step. Once parsed,
+the `RE` item  gets it's structure, and it's possible to access it's subitems,
+similar to a regular record/subitem situation.
+
+When constructing a record with the `RE` item, a user must first
+construct the `RE` item itself, unparse it to bytes and insert bytes
+as a value of the `RE` item of a record.
+
+A reason for this separate stage approach is that a category and expansion
+specification can remain separate to one another. In addition, a user has
+a possiblity to explicitly select both editions individually.
+
+This example demonstrates required steps for constructing and parsing:
+
+```python
+from asterix.generated import *
+
+Spec = Cat_062_1_20
+Ref  = Ref_062_1_3
+
+# create 'RE' subitem
+ref = Ref.cv_expansion.create({
+    'CST': [0],
+    'CSN': [1,2],
+    'V3': {
+        'PS3': 0,
+        },
+    })
+
+# create record, insert 'RE' subitem as bytes
+rec = Spec.cv_record.create({
+    '010': (('SAC', 1), ('SIC', 2)),
+    'RE': ref.unparse().to_bytes(),
+    })
+
+db = Spec.create([rec])
+s = db.unparse()
+assert s.to_bytes().hex() == \
+    '3e001b8101010104010211c8010000000000020000010000028000'
+
+# first stage, parse to the record
+raw_datablocks = RawDatablock.parse(s)
+assert not isinstance(raw_datablocks, ValueError)
+assert len(raw_datablocks) == 1 # expecting 1 datablock
+result1 = Spec.cv_uap.parse(raw_datablocks[0].get_raw_records())
+assert not isinstance(result1, ValueError)
+assert len(result1) == 1 # expecting one record
+
+# get 'RE' subitem,
+re_subitem = result1[0].get_item('RE')
+assert re_subitem is not None
+re_bytes = re_subitem.variation.get_bytes()
+
+# second stage: parse 'RE' structure
+result2 = Ref.cv_expansion.parse(Bits.from_bytes(re_bytes))
+assert not isinstance(result2, ValueError)
+ref_readback, remaining = result2
+assert remaining.null()
+# expecting the same 'ref' as the original
+assert ref.unparse() == ref_readback.unparse()
+# we have a structure back and we can extract the values
+result3 = ref_readback.get_item('CSN')
+assert result3 is not None
+lst = result3.variation.get_list()
+assert len(lst) == 2
+assert lst[0].as_uint() == 1
+assert lst[1].as_uint() == 2
+```
 
 #### Multiple UAP-s
 
