@@ -253,7 +253,7 @@ instance Node Variation where
                     [(name', ref)] -> do
                         let name2 = quote $ coerce name'
                             arg2 = sformat ("key : Literal[" % stext % "]") name2
-                            rv2 = sformat ("RuleVariation_" % int) ref
+                            rv2 = sformat ("Type[RuleVariation_" % int % "]") ref
                         "@classmethod"
                         pyFunc "spec" ["cls", arg2] rv2 $ do
                             "return cls._spec(arg) # type: ignore"
@@ -275,7 +275,7 @@ instance Node Variation where
                         forM_ refDict' $ \(name', ref) -> do
                             let name = quote $ coerce name'
                                 arg = sformat ("key : Literal[" % stext % "]") name
-                                rv = sformat ("RuleVariation_" % int) ref
+                                rv = sformat ("Type[RuleVariation_" % int % "]") ref
                             "@overload"
                             "@classmethod"
                             pyFunc "spec" ["cls", arg] rv $ do
@@ -434,7 +434,7 @@ instance Node Variation where
                     [(name', ref)] -> do
                         let name = quote $ coerce name'
                             arg = sformat ("key : Literal[" % stext % "]") name
-                            rv = sformat ("NonSpare_" % int) ref
+                            rv = sformat ("Type[NonSpare_" % int % "]") ref
                             rv2 = sformat ("'Variation_" % int % "'") ix
                         "@classmethod"
                         pyFunc "spec" ["cls", arg] rv $ do
@@ -454,7 +454,7 @@ instance Node Variation where
                         forM_ refDict $ \(name', ref) -> do
                             let name = quote $ coerce name'
                                 arg = sformat ("key : Literal[" % stext % "]") name
-                                rv = sformat ("NonSpare_" % int) ref
+                                rv = sformat ("Type[NonSpare_" % int % "]") ref
                             "@overload"
                             "@classmethod"
                             pyFunc "spec" ["cls", arg] rv $ do
@@ -665,7 +665,7 @@ instance Node Record where
                 [] -> pure ()
                 [(name, ref)] -> do
                     let arg = sformat ("key : Literal[" % stext % "]") name
-                        rv = sformat ("NonSpare_" % int) ref
+                        rv = sformat ("Type[NonSpare_" % int % "]") ref
                         rv2 = sformat ("'Record_" % int % "'") ix
                     "@classmethod"
                     pyFunc "spec" ["cls", arg] rv $ do
@@ -688,7 +688,7 @@ instance Node Record where
                 _ -> do
                     forM_ refDict $ \(name, ref) -> do
                         let arg = sformat ("key : Literal[" % stext % "]") name
-                            rv = sformat ("NonSpare_" % int) ref
+                            rv = sformat ("Type[NonSpare_" % int % "]") ref
                         "@overload"
                         "@classmethod"
                         pyFunc "spec" ["cls", arg] rv $ do
@@ -800,7 +800,7 @@ instance Node Uap where
                         "@overload"
                         "@classmethod"
                         let arg = sformat ("Literal[" % stext % "]") name
-                            rv = sformat ("Record_" % int) ref
+                            rv = sformat ("Type[Record_" % int % "]") ref
                         pyFunc "spec" ["cls", "key : " <> arg] rv $ do
                             "..."
                     "@classmethod"
@@ -856,7 +856,7 @@ instance Node Expansion where
                 [(name', ref)] -> do
                     let name = quote $ coerce name'
                         arg = sformat ("key : Literal[" % stext % "]") name
-                        rv = sformat ("NonSpare_" % int) ref
+                        rv = sformat ("Type[NonSpare_" % int % "]") ref
                         rv2 = sformat ("'Expansion_" % int % "'") ix
                     "@classmethod"
                     pyFunc "spec" ["cls", arg] rv $ do
@@ -876,7 +876,7 @@ instance Node Expansion where
                     forM_ refDict $ \(name', ref) -> do
                         let name = quote $ coerce name'
                             arg = sformat ("key : Literal[" % stext % "]") name
-                            rv = sformat ("NonSpare_" % int) ref
+                            rv = sformat ("Type[NonSpare_" % int % "]") ref
                         "@overload"
                         "@classmethod"
                         pyFunc "spec" ["cls", arg] rv $ do

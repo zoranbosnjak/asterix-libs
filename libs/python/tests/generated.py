@@ -114,11 +114,11 @@ class Variation_43(Group):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["SAC"]) -> RuleVariation_7:
+    def spec(cls, key : Literal["SAC"]) -> Type[RuleVariation_7]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["SIC"]) -> RuleVariation_7:
+    def spec(cls, key : Literal["SIC"]) -> Type[RuleVariation_7]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["SAC"], Literal["SIC"]]) -> Any:
@@ -1172,63 +1172,63 @@ class Variation_63(Compound):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["R"]) -> NonSpare_70:
+    def spec(cls, key : Literal["R"]) -> Type[NonSpare_70]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["T"]) -> NonSpare_78:
+    def spec(cls, key : Literal["T"]) -> Type[NonSpare_78]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["S1"]) -> NonSpare_71:
+    def spec(cls, key : Literal["S1"]) -> Type[NonSpare_71]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["S2"]) -> NonSpare_72:
+    def spec(cls, key : Literal["S2"]) -> Type[NonSpare_72]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["S3"]) -> NonSpare_73:
+    def spec(cls, key : Literal["S3"]) -> Type[NonSpare_73]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_50:
+    def spec(cls, key : Literal["I1"]) -> Type[NonSpare_50]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I2"]) -> NonSpare_55:
+    def spec(cls, key : Literal["I2"]) -> Type[NonSpare_55]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["Q1LAT"]) -> NonSpare_65:
+    def spec(cls, key : Literal["Q1LAT"]) -> Type[NonSpare_65]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["Q2LON"]) -> NonSpare_66:
+    def spec(cls, key : Literal["Q2LON"]) -> Type[NonSpare_66]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["Q3"]) -> NonSpare_67:
+    def spec(cls, key : Literal["Q3"]) -> Type[NonSpare_67]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["Q4"]) -> NonSpare_68:
+    def spec(cls, key : Literal["Q4"]) -> Type[NonSpare_68]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["Q5"]) -> NonSpare_69:
+    def spec(cls, key : Literal["Q5"]) -> Type[NonSpare_69]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["B1"]) -> NonSpare_36:
+    def spec(cls, key : Literal["B1"]) -> Type[NonSpare_36]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["B2"]) -> NonSpare_37:
+    def spec(cls, key : Literal["B2"]) -> Type[NonSpare_37]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["B3"]) -> NonSpare_38:
+    def spec(cls, key : Literal["B3"]) -> Type[NonSpare_38]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["R"], Literal["T"], Literal["S1"], Literal["S2"], Literal["S3"], Literal["I1"], Literal["I2"], Literal["Q1LAT"], Literal["Q2LON"], Literal["Q3"], Literal["Q4"], Literal["Q5"], Literal["B1"], Literal["B2"], Literal["B3"]]) -> Any:
@@ -1592,11 +1592,11 @@ class Variation_42(Group):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["IM"]) -> RuleVariation_1:
+    def spec(cls, key : Literal["IM"]) -> Type[RuleVariation_1]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["IAS"]) -> RuleVariation_28:
+    def spec(cls, key : Literal["IAS"]) -> Type[RuleVariation_28]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["IM"], Literal["IAS"]]) -> Any:
@@ -1996,7 +1996,7 @@ class Variation_48(Group):
     cv_items_dict = {"I1": RuleVariation_32}
 
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> RuleVariation_32:
+    def spec(cls, key : Literal["I1"]) -> Type[RuleVariation_32]:
         return cls._spec(arg) # type: ignore
 
     def get_item(self, key : Literal["I1"]) -> RuleVariation_32:
@@ -2144,15 +2144,15 @@ class Variation_46(Group):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["TID"]) -> RuleVariation_4:
+    def spec(cls, key : Literal["TID"]) -> Type[RuleVariation_4]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["CP"]) -> RuleVariation_59:
+    def spec(cls, key : Literal["CP"]) -> Type[RuleVariation_59]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["CS"]) -> RuleVariation_34:
+    def spec(cls, key : Literal["CS"]) -> Type[RuleVariation_34]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["TID"], Literal["CP"], Literal["CS"]]) -> Any:
@@ -2216,11 +2216,11 @@ class Variation_62(Compound):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_47:
+    def spec(cls, key : Literal["I1"]) -> Type[NonSpare_47]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["CC"]) -> NonSpare_39:
+    def spec(cls, key : Literal["CC"]) -> Type[NonSpare_39]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["I1"], Literal["CC"]]) -> Any:
@@ -2427,11 +2427,11 @@ class Variation_40(Group):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> RuleVariation_6:
+    def spec(cls, key : Literal["I1"]) -> Type[RuleVariation_6]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I2"]) -> RuleVariation_27:
+    def spec(cls, key : Literal["I2"]) -> Type[RuleVariation_27]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["I1"], Literal["I2"]]) -> Any:
@@ -2696,19 +2696,19 @@ class Variation_39(Group):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> RuleVariation_5:
+    def spec(cls, key : Literal["I1"]) -> Type[RuleVariation_5]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I2"]) -> RuleVariation_7:
+    def spec(cls, key : Literal["I2"]) -> Type[RuleVariation_7]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I3"]) -> RuleVariation_4:
+    def spec(cls, key : Literal["I3"]) -> Type[RuleVariation_4]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I4"]) -> RuleVariation_33:
+    def spec(cls, key : Literal["I4"]) -> Type[RuleVariation_33]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["I1"], Literal["I2"], Literal["I3"], Literal["I4"]]) -> Any:
@@ -3198,11 +3198,11 @@ class Variation_41(Group):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> RuleVariation_7:
+    def spec(cls, key : Literal["I1"]) -> Type[RuleVariation_7]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I2"]) -> RuleVariation_7:
+    def spec(cls, key : Literal["I2"]) -> Type[RuleVariation_7]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["I1"], Literal["I2"]]) -> Any:
@@ -3454,10 +3454,10 @@ class Variation_59(Compound):
     cv_items_dict = {"I1": NonSpare_47}
 
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_47:
+    def spec(cls, key : Literal["I1"]) -> Type[NonSpare_47]:
         return cls._spec(arg) # type: ignore
 
-    def get_item(self, key : Literal["I1"]) -> Optional[NonSpare_47]:
+    def get_item(self, key : Literal["I1"]) -> Optional[Type[NonSpare_47]]:
         return self._get_item(key) # type: ignore
 
     def set_item(self, key : Literal["I1"], val : NonSpare_47.cv_arg) -> 'Variation_59':
@@ -3515,11 +3515,11 @@ class Variation_60(Compound):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_47:
+    def spec(cls, key : Literal["I1"]) -> Type[NonSpare_47]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I2"]) -> NonSpare_52:
+    def spec(cls, key : Literal["I2"]) -> Type[NonSpare_52]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["I1"], Literal["I2"]]) -> Any:
@@ -3621,15 +3621,15 @@ class Variation_61(Compound):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_47:
+    def spec(cls, key : Literal["I1"]) -> Type[NonSpare_47]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I2"]) -> NonSpare_52:
+    def spec(cls, key : Literal["I2"]) -> Type[NonSpare_52]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I3"]) -> NonSpare_58:
+    def spec(cls, key : Literal["I3"]) -> Type[NonSpare_58]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["I1"], Literal["I2"], Literal["I3"]]) -> Any:
@@ -3804,11 +3804,11 @@ class Variation_38(Group):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["EP"]) -> RuleVariation_0:
+    def spec(cls, key : Literal["EP"]) -> Type[RuleVariation_0]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["VAL"]) -> RuleVariation_26:
+    def spec(cls, key : Literal["VAL"]) -> Type[RuleVariation_26]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["EP"], Literal["VAL"]]) -> Any:
@@ -3992,11 +3992,11 @@ class Variation_47(Group):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["EP"]) -> RuleVariation_29:
+    def spec(cls, key : Literal["EP"]) -> Type[RuleVariation_29]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["VAL"]) -> RuleVariation_30:
+    def spec(cls, key : Literal["VAL"]) -> Type[RuleVariation_30]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["EP"], Literal["VAL"]]) -> Any:
@@ -4069,11 +4069,11 @@ class Variation_45(Group):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["SG1"]) -> RuleVariation_35:
+    def spec(cls, key : Literal["SG1"]) -> Type[RuleVariation_35]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["SG2"]) -> RuleVariation_43:
+    def spec(cls, key : Literal["SG2"]) -> Type[RuleVariation_43]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["SG1"], Literal["SG2"]]) -> Any:
@@ -4141,11 +4141,11 @@ class Variation_44(Group):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["SG1"]) -> RuleVariation_35:
+    def spec(cls, key : Literal["SG1"]) -> Type[RuleVariation_35]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["SG2"]) -> RuleVariation_43:
+    def spec(cls, key : Literal["SG2"]) -> Type[RuleVariation_43]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["SG1"], Literal["SG2"]]) -> Any:
@@ -4314,91 +4314,91 @@ class Record_6(Record):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["010"]) -> NonSpare_3:
+    def spec(cls, key : Literal["010"]) -> Type[NonSpare_3]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["000"]) -> NonSpare_0:
+    def spec(cls, key : Literal["000"]) -> Type[NonSpare_0]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["020"]) -> NonSpare_4:
+    def spec(cls, key : Literal["020"]) -> Type[NonSpare_4]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["030"]) -> NonSpare_6:
+    def spec(cls, key : Literal["030"]) -> Type[NonSpare_6]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["031"]) -> NonSpare_7:
+    def spec(cls, key : Literal["031"]) -> Type[NonSpare_7]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["032"]) -> NonSpare_10:
+    def spec(cls, key : Literal["032"]) -> Type[NonSpare_10]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["040"]) -> NonSpare_12:
+    def spec(cls, key : Literal["040"]) -> Type[NonSpare_12]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["051"]) -> NonSpare_15:
+    def spec(cls, key : Literal["051"]) -> Type[NonSpare_15]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["052"]) -> NonSpare_16:
+    def spec(cls, key : Literal["052"]) -> Type[NonSpare_16]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["053"]) -> NonSpare_17:
+    def spec(cls, key : Literal["053"]) -> Type[NonSpare_17]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["054"]) -> NonSpare_18:
+    def spec(cls, key : Literal["054"]) -> Type[NonSpare_18]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["061"]) -> NonSpare_19:
+    def spec(cls, key : Literal["061"]) -> Type[NonSpare_19]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["062"]) -> NonSpare_20:
+    def spec(cls, key : Literal["062"]) -> Type[NonSpare_20]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["063"]) -> NonSpare_21:
+    def spec(cls, key : Literal["063"]) -> Type[NonSpare_21]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["071"]) -> NonSpare_22:
+    def spec(cls, key : Literal["071"]) -> Type[NonSpare_22]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["072"]) -> NonSpare_23:
+    def spec(cls, key : Literal["072"]) -> Type[NonSpare_23]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["073"]) -> NonSpare_24:
+    def spec(cls, key : Literal["073"]) -> Type[NonSpare_24]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["091"]) -> NonSpare_25:
+    def spec(cls, key : Literal["091"]) -> Type[NonSpare_25]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["092"]) -> NonSpare_26:
+    def spec(cls, key : Literal["092"]) -> Type[NonSpare_26]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["093"]) -> NonSpare_27:
+    def spec(cls, key : Literal["093"]) -> Type[NonSpare_27]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["101"]) -> NonSpare_29:
+    def spec(cls, key : Literal["101"]) -> Type[NonSpare_29]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["102"]) -> NonSpare_31:
+    def spec(cls, key : Literal["102"]) -> Type[NonSpare_31]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["010"], Literal["000"], Literal["020"], Literal["030"], Literal["031"], Literal["032"], Literal["040"], Literal["051"], Literal["052"], Literal["053"], Literal["054"], Literal["061"], Literal["062"], Literal["063"], Literal["071"], Literal["072"], Literal["073"], Literal["091"], Literal["092"], Literal["093"], Literal["101"], Literal["102"]]) -> Any:
@@ -4717,11 +4717,11 @@ class Expansion_1(Expansion):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_47:
+    def spec(cls, key : Literal["I1"]) -> Type[NonSpare_47]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I2"]) -> NonSpare_52:
+    def spec(cls, key : Literal["I2"]) -> Type[NonSpare_52]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["I1"], Literal["I2"]]) -> Any:
@@ -4846,95 +4846,95 @@ class Record_7(Record):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["010"]) -> NonSpare_3:
+    def spec(cls, key : Literal["010"]) -> Type[NonSpare_3]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["000"]) -> NonSpare_0:
+    def spec(cls, key : Literal["000"]) -> Type[NonSpare_0]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["020"]) -> NonSpare_4:
+    def spec(cls, key : Literal["020"]) -> Type[NonSpare_4]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["030"]) -> NonSpare_6:
+    def spec(cls, key : Literal["030"]) -> Type[NonSpare_6]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["031"]) -> NonSpare_7:
+    def spec(cls, key : Literal["031"]) -> Type[NonSpare_7]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["032"]) -> NonSpare_10:
+    def spec(cls, key : Literal["032"]) -> Type[NonSpare_10]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["040"]) -> NonSpare_12:
+    def spec(cls, key : Literal["040"]) -> Type[NonSpare_12]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["051"]) -> NonSpare_15:
+    def spec(cls, key : Literal["051"]) -> Type[NonSpare_15]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["052"]) -> NonSpare_16:
+    def spec(cls, key : Literal["052"]) -> Type[NonSpare_16]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["053"]) -> NonSpare_17:
+    def spec(cls, key : Literal["053"]) -> Type[NonSpare_17]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["054"]) -> NonSpare_18:
+    def spec(cls, key : Literal["054"]) -> Type[NonSpare_18]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["061"]) -> NonSpare_19:
+    def spec(cls, key : Literal["061"]) -> Type[NonSpare_19]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["062"]) -> NonSpare_20:
+    def spec(cls, key : Literal["062"]) -> Type[NonSpare_20]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["063"]) -> NonSpare_21:
+    def spec(cls, key : Literal["063"]) -> Type[NonSpare_21]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["071"]) -> NonSpare_22:
+    def spec(cls, key : Literal["071"]) -> Type[NonSpare_22]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["072"]) -> NonSpare_23:
+    def spec(cls, key : Literal["072"]) -> Type[NonSpare_23]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["073"]) -> NonSpare_24:
+    def spec(cls, key : Literal["073"]) -> Type[NonSpare_24]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["091"]) -> NonSpare_25:
+    def spec(cls, key : Literal["091"]) -> Type[NonSpare_25]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["092"]) -> NonSpare_26:
+    def spec(cls, key : Literal["092"]) -> Type[NonSpare_26]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["093"]) -> NonSpare_27:
+    def spec(cls, key : Literal["093"]) -> Type[NonSpare_27]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["101"]) -> NonSpare_29:
+    def spec(cls, key : Literal["101"]) -> Type[NonSpare_29]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["102"]) -> NonSpare_31:
+    def spec(cls, key : Literal["102"]) -> Type[NonSpare_31]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["200"]) -> NonSpare_32:
+    def spec(cls, key : Literal["200"]) -> Type[NonSpare_32]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["010"], Literal["000"], Literal["020"], Literal["030"], Literal["031"], Literal["032"], Literal["040"], Literal["051"], Literal["052"], Literal["053"], Literal["054"], Literal["061"], Literal["062"], Literal["063"], Literal["071"], Literal["072"], Literal["073"], Literal["091"], Literal["092"], Literal["093"], Literal["101"], Literal["102"], Literal["200"]]) -> Any:
@@ -5266,15 +5266,15 @@ class Expansion_2(Expansion):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_47:
+    def spec(cls, key : Literal["I1"]) -> Type[NonSpare_47]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I2"]) -> NonSpare_52:
+    def spec(cls, key : Literal["I2"]) -> Type[NonSpare_52]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I3"]) -> NonSpare_58:
+    def spec(cls, key : Literal["I3"]) -> Type[NonSpare_58]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["I1"], Literal["I2"], Literal["I3"]]) -> Any:
@@ -5341,15 +5341,15 @@ class Expansion_0(Expansion):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["I1"]) -> NonSpare_47:
+    def spec(cls, key : Literal["I1"]) -> Type[NonSpare_47]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I2"]) -> NonSpare_52:
+    def spec(cls, key : Literal["I2"]) -> Type[NonSpare_52]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["I3"]) -> NonSpare_58:
+    def spec(cls, key : Literal["I3"]) -> Type[NonSpare_58]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["I1"], Literal["I2"], Literal["I3"]]) -> Any:
@@ -5689,23 +5689,23 @@ class Record_4(Record):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["010"]) -> NonSpare_2:
+    def spec(cls, key : Literal["010"]) -> Type[NonSpare_2]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["020"]) -> NonSpare_5:
+    def spec(cls, key : Literal["020"]) -> Type[NonSpare_5]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["031"]) -> NonSpare_8:
+    def spec(cls, key : Literal["031"]) -> Type[NonSpare_8]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["040"]) -> NonSpare_11:
+    def spec(cls, key : Literal["040"]) -> Type[NonSpare_11]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["041"]) -> NonSpare_13:
+    def spec(cls, key : Literal["041"]) -> Type[NonSpare_13]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["010"], Literal["020"], Literal["031"], Literal["040"], Literal["041"]]) -> Any:
@@ -5862,23 +5862,23 @@ class Record_5(Record):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["010"]) -> NonSpare_2:
+    def spec(cls, key : Literal["010"]) -> Type[NonSpare_2]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["020"]) -> NonSpare_5:
+    def spec(cls, key : Literal["020"]) -> Type[NonSpare_5]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["032"]) -> NonSpare_9:
+    def spec(cls, key : Literal["032"]) -> Type[NonSpare_9]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["040"]) -> NonSpare_11:
+    def spec(cls, key : Literal["040"]) -> Type[NonSpare_11]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["042"]) -> NonSpare_14:
+    def spec(cls, key : Literal["042"]) -> Type[NonSpare_14]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["010"], Literal["020"], Literal["032"], Literal["040"], Literal["042"]]) -> Any:
@@ -5953,11 +5953,11 @@ class Uap_2(UapMultiple):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["plot"]) -> Record_4:
+    def spec(cls, key : Literal["plot"]) -> Type[Record_4]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["track"]) -> Record_5:
+    def spec(cls, key : Literal["track"]) -> Type[Record_5]:
         ...
     @classmethod
     def spec(cls, key : Any) -> Any:
@@ -6066,15 +6066,15 @@ class Record_1(Record):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["010"]) -> NonSpare_1:
+    def spec(cls, key : Literal["010"]) -> Type[NonSpare_1]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["101"]) -> NonSpare_28:
+    def spec(cls, key : Literal["101"]) -> Type[NonSpare_28]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["102"]) -> NonSpare_30:
+    def spec(cls, key : Literal["102"]) -> Type[NonSpare_30]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["010"], Literal["101"], Literal["102"]]) -> Any:
@@ -6180,15 +6180,15 @@ class Record_2(Record):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["010"]) -> NonSpare_1:
+    def spec(cls, key : Literal["010"]) -> Type[NonSpare_1]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["201"]) -> NonSpare_33:
+    def spec(cls, key : Literal["201"]) -> Type[NonSpare_33]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["202"]) -> NonSpare_34:
+    def spec(cls, key : Literal["202"]) -> Type[NonSpare_34]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["010"], Literal["201"], Literal["202"]]) -> Any:
@@ -6302,11 +6302,11 @@ class Record_3(Record):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["010"]) -> NonSpare_1:
+    def spec(cls, key : Literal["010"]) -> Type[NonSpare_1]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["301"]) -> NonSpare_35:
+    def spec(cls, key : Literal["301"]) -> Type[NonSpare_35]:
         ...
     @classmethod
     def spec(cls, key : Union[Literal["010"], Literal["301"]]) -> Any:
@@ -6356,10 +6356,10 @@ class Record_0(Record):
     cv_items_dict = {"010": NonSpare_1}
 
     @classmethod
-    def spec(cls, key : Literal["010"]) -> NonSpare_1:
+    def spec(cls, key : Literal["010"]) -> Type[NonSpare_1]:
         return cls._spec(arg) # type: ignore
 
-    def get_item(self, key : Literal["010"]) -> Optional[NonSpare_1]:
+    def get_item(self, key : Literal["010"]) -> Optional[Type[NonSpare_1]]:
         return self._get_item(key) # type: ignore
 
     def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_0':
@@ -6383,19 +6383,19 @@ class Uap_3(UapMultiple):
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["uap1"]) -> Record_1:
+    def spec(cls, key : Literal["uap1"]) -> Type[Record_1]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["uap2"]) -> Record_2:
+    def spec(cls, key : Literal["uap2"]) -> Type[Record_2]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["uap3"]) -> Record_3:
+    def spec(cls, key : Literal["uap3"]) -> Type[Record_3]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["uap4"]) -> Record_0:
+    def spec(cls, key : Literal["uap4"]) -> Type[Record_0]:
         ...
     @classmethod
     def spec(cls, key : Any) -> Any:
