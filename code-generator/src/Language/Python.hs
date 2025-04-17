@@ -633,7 +633,7 @@ instance Node UapItem where
 instance Node Record where
     focus = lRecord
     node ix (Record items) = do
-        let rfs = hasRFS (Record items)
+        let rfs = rfsCount (Record items)
         refList <- mapM walk items
         refDict <- catMaybes <$> forM items (\case
             A.UapItem nsp@(A.NonSpare name _ _ _) -> do
@@ -646,10 +646,11 @@ instance Node Record where
             indent $ forM_ refDict $ \(name, ref) -> do
                 fmt (stext % ": NonSpare_" % int % ".cv_arg,") name ref
             "}, total=False)"
-            when rfs $ do
+            when (rfs > 0) $ do
                 "cv_union: TypeAlias = Union["
                 indent $ forM_ refDict $ \(name, ref) -> do
-                    fmt ("Tuple[Literal[" % stext % "], NonSpare_" % int % ".cv_arg],")
+                    fmt ("Tuple[Literal[" % stext % "], NonSpare_" % int
+                        % ".cv_arg],")
                         name ref
                 "]"
             fmt ("cv_fspec_max_bytes = " % int) (fspecMaxBytes items)
@@ -681,10 +682,11 @@ instance Node Record where
                     ""
                     pyFunc "del_item" ["self", arg] rv2 $ do
                         "return self._del_item(key) # type: ignore"
-                    when rfs $ do
+                    when (rfs > 0) $ do
                         ""
-                        pyFunc "get_rfs_item" ["self", arg] ("List[" <> rv <> "]") $ do
-                            "return self._get_rfs_item(key) # type: ignore"
+                        pyFunc "get_rfs_item" ["self", arg]
+                            ("List[" <> rv <> "]") $ do
+                                "return self._get_rfs_item(key) # type: ignore"
                 _ -> do
                     forM_ refDict $ \(name, ref) -> do
                         let arg = sformat ("key : Literal[" % stext % "]") name
@@ -695,7 +697,8 @@ instance Node Record where
                             "..."
                     "@classmethod"
                     let f (a, _) = sformat ("Literal[" % stext % "]") a
-                        arg2 = sformat("key : Union" % stext) (fmtList "[" "]" f refDict)
+                        arg2 = sformat("key : Union" % stext) (fmtList "[" "]"
+                            f refDict)
                     pyFunc "spec" ["cls", arg2] "Any" $ do
                         "return cls._spec(key)"
                     ""
@@ -727,7 +730,7 @@ instance Node Record where
                             "..."
                     pyFunc "del_item" ["self", "key : Any"] "Any" $ do
                         "return self._del_item(key)"
-                    when rfs $ do
+                    when (rfs > 0) $ do
                         ""
                         forM_ refDict $ \(name, ref) -> do
                             "@overload"
@@ -740,17 +743,41 @@ instance Node Record where
             do
                 ""
                 let self = sformat ("Record_" % int) ix
-                    arg_dict = "arg: " <> quote (self <> ".cv_arg")
-                    arg_rfs = "rfs : Optional[List["
-                        <> quote (self <> ".cv_union") <> "]] = None"
-                    args
-                        | rfs = ["cls", arg_dict, arg_rfs]
-                        | otherwise = ["cls", arg_dict]
+                    argDict = "arg: " <> quote (self <> ".cv_arg")
+                    argRfs = "List[" <> quote (self <> ".cv_union") <> "]"
                     rv = sformat ("'Record_" % int % "'") ix
-                "@classmethod"
-                pyFunc "create" args rv $ case rfs of
-                    True  -> "return cls._create(arg, rfs) # type: ignore"
-                    False -> "return cls._create(arg) # type: ignore"
+                case rfs of
+                    0 -> do
+                        let args = ["cls", argDict]
+                        "@classmethod"
+                        pyFunc "create" args rv $ do
+                            "return cls._create(arg) # type: ignore"
+                    1 -> do
+                        let argsRfs = sformat ("rfs: Optional[" % stext % "] = None")
+                                argRfs
+                        "@classmethod"
+                        pyFunc "create" ["cls", argDict, argsRfs] rv $ do
+                            "return cls._create(arg, rfs) # type: ignore"
+                    _ -> do
+                        "@overload"
+                        "@classmethod"
+                        pyFunc "create" ["cls", argDict] rv $ do
+                            "..."
+                        forM_ [1..rfs] $ \cnt -> do
+                            let args1 = [sformat ("rfs" % int % ": Optional[" %
+                                    stext % "]") i argRfs | i <- [1..pred cnt]]
+                                args2 = sformat ("rfs" % int
+                                    % " : Optional[" % stext % "] = None")
+                                    cnt argRfs
+                                argsRfs = fmtList "" "" id (args1 <> [args2])
+                            "@overload"
+                            "@classmethod"
+                            pyFunc "create" ["cls", argDict, argsRfs] rv $ do
+                                "..."
+                        "@no_type_check"
+                        "@classmethod"
+                        pyFunc "create" ["cls", argDict, "*rfs: Any"] rv $ do
+                            "return cls._create(arg, *rfs)"
             do
                 ""
                 let r = sformat ("Record_" % int) ix

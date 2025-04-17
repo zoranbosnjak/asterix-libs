@@ -7,6 +7,7 @@ Features:
 - precise conversion functions for physical quantities
 - support for many asterix categories and editions
 - support for Reserved Expansion Fields (REF)
+- support for Random Field Sequencing (RFS)
 - support for categories with multiple UAPs, eg. cat001
 - support for context dependent items, eg. I062/380/IAS
 - support for strict or partial record parsing, to be used
@@ -589,6 +590,49 @@ rec01_invalid = Cat1.cv_uap.spec('plot').create({
 print(Cat1.create([rec01_plot]).unparse().to_bytes().hex())
 print(Cat1.create([rec01_track]).unparse().to_bytes().hex())
 print(Cat1.create([rec01_invalid]).unparse().to_bytes().hex())
+```
+
+### RFS handling
+
+This library supports RFS mechanism for categories that include RFS
+indicator(s). For such cases, it is possible to sequence subitems in
+any order. Once such record is created or parsed, a user can extract
+subitems using `get_rfs_item` method. The result in this case is
+a list, since the item can be present in the record multiple times.
+An empty list indicates that no such item is present in the RFS.
+
+**Example**
+
+```python
+#| file: example-rfs.py
+from binascii import hexlify
+from asterix.generated import *
+
+# cat008 contains RFS indicator, so we are able to add RFS items
+Spec = Cat_008_1_3
+
+rec1 = Spec.cv_record.create({
+    '000': 1,                                   # add item '000' (regular)
+    '010': (('SAC', 1), ('SIC', 2)),            # add item '010' (regular)
+    },
+    [
+        ('010', (('SAC', 3), ('SIC', 4))),      # add item '010' as RFS
+        ('010', (('SAC', 4), ('SIC', 5))),      # add another item '010' as RFS
+    ]
+    )
+
+# extract regular item 010
+i010_regular = rec1.get_item('010')
+print(i010_regular)
+
+# extract RFS items 010, expecting 2 such items
+i010_rfs = rec1.get_rfs_item('010')
+assert len(i010_rfs) == 2
+for i in i010_rfs:
+    print(i)
+
+# but item '000' is not present in RFS
+assert len(rec1.get_rfs_item('000')) == 0
 ```
 
 ### Strict and partial record parsing modes

@@ -376,8 +376,11 @@ fspecMaxBytes lst = case divMod (length lst) 7 of    -- 1 bit for FX
     (n, 0) -> n
     (n, _) -> succ n
 
-hasRFS :: Record -> Bool
-hasRFS (Record items) = any isRFS items where
+-- | Number of RFS indicators in a record.
+rfsCount :: Record -> Int
+rfsCount (Record items) = length $ filter isRFS items
+  where
     isRFS = \case
         A.UapItemRFS -> True
         _ -> False
+

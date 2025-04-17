@@ -575,7 +575,8 @@ def test_record() -> None:
         ('054', (1, 2)),
         ('061', [0xFF]),
     ])
-    assert with_rfs.unparse() == Bits.from_bytes(unhexlify(
+    bs = with_rfs.unparse()
+    assert bs == Bits.from_bytes(unhexlify(
         '410108030602AA02550112340A03040B03040C01FF'))
 
     assert with_rfs.get_item('000') is not None
@@ -586,6 +587,74 @@ def test_record() -> None:
     assert len(with_rfs.get_rfs_item('020')) == 0
     assert len(with_rfs.get_rfs_item('053')) == 1
 
+    # Check parsing (with RFS)
+    result = T.parse(ParsingMode.StrictParsing, bs)
+    assert not isinstance(result, ValueError)
+    (with_rfs2, bs2) = result
+    assert bs2.null()
+    assert with_rfs2.unparse() == bs
+
+def test_record_multiple_rfs() -> None:
+    T = Cat_003_1_0.cv_record
+
+    def check(r: Any, expected: str) -> None:
+        bs = r.unparse()
+        assert hexlify(bs.to_bytes()) == \
+            hexlify(Bits.from_bytes(unhexlify(expected)).to_bytes())
+        result = T.parse(ParsingMode.StrictParsing, bs)
+        assert not isinstance(result, ValueError)
+        (r2, bs2) = result
+        assert bs2.null()
+        assert r2.unparse() == bs
+
+    r0 = T.create({
+        '010': 0x01,
+    })
+    check(r0, '8001')
+
+    r1 = T.create({
+        '010': 0x01,
+    }, [
+        ('101', 0xAA),
+        ('102', 0x55),
+       ],
+    )
+    check(r1, '90010202aa0355')
+
+    r2 = T.create({
+        '010': 0x01,
+    }, [
+        ('101', 0xAA),
+        ('102', 0x55),
+       ],
+       [
+        ('201', 0xF1),
+        ('202', 0xF2),
+       ],
+    )
+    check(r2, '94010202aa0355020500f10700f2')
+
+    r3 = T.create({
+        '010': 0x01,
+    }, None,
+       [
+        ('201', 0xF1),
+        ('202', 0xF2),
+       ],
+    )
+    check(r3, '8401020500f10700f2')
+
+    r4 = T.create({
+        '010': 0x01,
+    }, [
+       ],
+       [
+        ('201', 0xF1),
+        ('202', 0xF2),
+       ],
+    )
+    check(r4, '940100020500f10700f2')
+
 
 def test_record_set_item() -> None:
     T = Cat_000_1_0.cv_record
@@ -595,7 +664,7 @@ def test_record_set_item() -> None:
     r1 = T.create({
         '000': 0x03,
     })
-    assert r1.unparse() == r0.unparse()
+    assert hexlify(r1.unparse().to_bytes()) == hexlify(r0.unparse().to_bytes())
 
 
 def test_record_del_item() -> None:
@@ -609,7 +678,7 @@ def test_record_del_item() -> None:
     r1 = T.create({
         '000': 0x03,
     })
-    assert r1.unparse() == r0.unparse()
+    assert hexlify(r1.unparse().to_bytes()) == hexlify(r0.unparse().to_bytes())
 
 
 def test_multiple_uaps() -> None:

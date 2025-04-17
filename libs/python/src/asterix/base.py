@@ -1,7 +1,7 @@
 """Asterix data processing module (generic code)
 """
 
-from itertools import chain
+from itertools import chain, dropwhile
 from dataclasses import dataclass
 from binascii import hexlify, unhexlify
 from typing import *
@@ -1166,7 +1166,7 @@ class Record:
         return cls.cv_items_dict[key]
 
     def __init__(self, bs: Bits, items1: Dict[str, NonSpare],
-                 items2: List[Tuple[str, NonSpare]]):
+                 items2: List[Optional[List[Tuple[str, NonSpare]]]]):
         self.bs = bs
         self.items_regular = items1
         self.items_rfs = items2
@@ -1193,8 +1193,8 @@ class Record:
         if isinstance(result, ValueError):
             return result
         fspec, remaining = result
-        items_regular: Dict[str, NonSpare] = {}
-        items_rfs: List[Tuple[str, NonSpare]] = []
+        items1: Dict[str, NonSpare] = {}
+        items2: List[Optional[List[Tuple[str, NonSpare]]]] = []
         for (flag, i) in zip(fspec, cls.cv_items_list):
             if not flag:
                 continue
@@ -1203,6 +1203,7 @@ class Record:
                     return ValueError('fx bit set for spare item')
                 else: break
             elif issubclass(i, UapItemRFS):
+                items3: List[Tuple[str, NonSpare]] = []
                 if len(remaining) < 8:
                     if pm == ParsingMode.StrictParsing:
                         return ValueError('overflow')
@@ -1231,8 +1232,9 @@ class Record:
                             return result2
                         else: break
                     obj, remaining = result2
-                    items_rfs.append((name, obj))
+                    items3.append((name, obj))
                 else:
+                    items2.append(items3)
                     continue
                 break
             elif issubclass(i, UapItem):
@@ -1243,7 +1245,7 @@ class Record:
                         return result2
                     else: break
                 obj, remaining = result2
-                items_regular[nsp.cv_name] = obj
+                items1[nsp.cv_name] = obj
             else:
                 raise Exception('Unexpected', i)
         n = len(bs)
@@ -1254,72 +1256,79 @@ class Record:
         # from parsed items, since the fspec might be different and
         # the original bits are not exactly the same.
         if pm == ParsingMode.StrictParsing:
-            r = cls(bs.take(n - m), items_regular, items_rfs)
+            r = cls(bs.take(n - m), items1, items2)
         else:
-            r = cls._create(items_regular, items_rfs if items_rfs else None)
+            r = cls._create(items1, items2)
         return (r, remaining)
 
     @classmethod
-    def _create(cls, args: Dict[str, Any],
-                rfs: Optional[List[Any]] = None) -> Any:
-        bs = Bits.from_bytes(b'')
-        bs_rfs = Bits.from_uinteger(len(rfs or []), 0, 8)
-        items: List[Optional[Tuple[str, NonSpare]]] = []
-        items_regular: Dict[str, NonSpare] = {}
-        items_rfs: List[Tuple[str, NonSpare]] = []
+    def _create(cls, args: Dict[str, Any], *rfs_args: Any) -> Any:
+        # remove empty rfs elements from the tail of the rfss list
+        rfss = list(dropwhile(lambda x: not x, reversed(rfs_args)))
 
-        # process rfs items first
-        for (name, val) in (rfs or []):
-            frn = get_frn(cls.cv_items_list, name)
-            T = cls.cv_items_dict[name]
-            obj = T.create(val)  # type: ignore
-            items_rfs.append((name, obj))
-            bs_rfs += Bits.from_uinteger(frn, 0, 8)
-            bs_rfs += obj.unparse()
+        bs1 = Bits.from_bytes(b'')  # fspec
+        bs2 = Bits.from_bytes(b'')  # items
+        items1: Dict[str, NonSpare] = {}
+        items2: List[Optional[List[Tuple[str, NonSpare]]]] = []
 
-        # process regular items
+        def handle_rfs(rfs: List[Tuple[str, NonSpare]]) -> Any:
+            items = []
+            bs = Bits.from_uinteger(len(rfs), 0, 8)
+            for (name, val) in rfs:
+                frn = get_frn(cls.cv_items_list, name)
+                T = cls.cv_items_dict[name]
+                obj = T.create(val)  # type: ignore
+                items.append((name, obj))
+                bs += Bits.from_uinteger(frn, 0, 8)
+                bs += obj.unparse()
+            return (items, bs)
+
         cnt = 0
-        rfs_handled = rfs is None
         for i in cls.cv_items_list:
-            if (not args) and rfs_handled:
+            if (not args) and (not rfss):
                 break
             if cnt % 8 == 7:
                 cnt += 1
-                bs = bs.append_bit(True)  # FX
+                bs1 = bs1.append_bit(True)  # FX
             cnt += 1
             if issubclass(i, UapItem):
                 nsp = i.cv_non_spare
                 name = nsp.cv_name
                 try:
                     obj = nsp.create(args.pop(name))  # type: ignore
-                    bs = bs.append_bit(True)
-                    items.append((name, obj))
+                    bs1 = bs1.append_bit(True)
+                    bs2 += obj.unparse()
+                    items1[name] = obj
                 except KeyError:
-                    bs = bs.append_bit(False)
+                    bs1 = bs1.append_bit(False)
             elif issubclass(i, UapItemSpare):
-                bs = bs.append_bit(False)
+                bs1 = bs1.append_bit(False)
             elif issubclass(i, UapItemRFS):
-                rfs_handled = True
-                if rfs is None:
-                    bs = bs.append_bit(False)
+                if not rfss:
+                    bs1 = bs1.append_bit(False)
+                    items2.append(None)
                 else:
-                    bs = bs.append_bit(True)
-                    items.append(None)  # indicator for RFS fields
+                    rfs = rfss.pop(-1) # the list is reversed, pop from the tail
+                    if rfs is None:
+                        bs1 = bs1.append_bit(False)
+                    else:
+                        bs1 = bs1.append_bit(True)
+                        rfs_objs, bs = handle_rfs(rfs)
+                        items2.append(rfs_objs)
+                        bs2 += bs
             else:
                 raise ValueError('unexpected type', i)
-        if args:
+
+        # at this point, there should be no more items to process
+        if args or rfss:
             raise ValueError('items error', args)
+
+        # pad fspec
         while (cnt % 8):
             cnt += 1
-            bs = bs.append_bit(False)
-        for x in items:
-            if x is None:
-                bs += bs_rfs
-            else:
-                name, obj = x
-                bs += obj.unparse()
-                items_regular[name] = obj
-        return cls(bs, items_regular, items_rfs)
+            bs1 = bs1.append_bit(False)
+
+        return cls(bs1+bs2, items1, items2)
 
     def unparse(self) -> Bits:
         return self.bs
@@ -1329,9 +1338,12 @@ class Record:
 
     def _get_rfs_item(self, key: Any) -> Any:
         result = []
-        for (name, obj) in self.items_rfs:
-            if name == key:
-                result.append(obj)
+        for lst in self.items_rfs:
+            if lst is None:
+                continue
+            for (name, obj) in lst:
+                if name == key:
+                    result.append(obj)
         return result
 
     def _set_item(self, key: Any, val: Any) -> Any:

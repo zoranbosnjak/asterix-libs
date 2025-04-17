@@ -6,9 +6,10 @@ nix-shell
 # prettify python source code
 autopep8 --in-place --aggressive --aggressive <filename> <filename>...
 
-# run test from command line (as a module), for example
+# run test from command line (as a module or via pytest), for example
 python -m tests.test_asterix
 python -c 'import tests.test_asterix; tests.test_asterix.test_parse()'
+pytest -v tests/test_asterix.py::test_raises
 
 # run static code check and tests once
 mypy

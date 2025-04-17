@@ -4259,7 +4259,7 @@ class NonSpare_31(NonSpare):
 class UapItem_31(UapItem):
     cv_non_spare: TypeAlias = NonSpare_31
 
-class Record_6(Record):
+class Record_8(Record):
     cv_arg = TypedDict('cv_arg', {
         "010": NonSpare_3.cv_arg,
         "000": NonSpare_0.cv_arg,
@@ -4474,139 +4474,139 @@ class Record_6(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["010"], val : NonSpare_3.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["010"], val : NonSpare_3.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["000"], val : NonSpare_0.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["000"], val : NonSpare_0.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["020"], val : NonSpare_4.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["020"], val : NonSpare_4.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["030"], val : NonSpare_6.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["030"], val : NonSpare_6.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["031"], val : NonSpare_7.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["031"], val : NonSpare_7.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["032"], val : NonSpare_10.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["032"], val : NonSpare_10.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["040"], val : NonSpare_12.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["040"], val : NonSpare_12.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["051"], val : NonSpare_15.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["051"], val : NonSpare_15.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["052"], val : NonSpare_16.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["052"], val : NonSpare_16.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["053"], val : NonSpare_17.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["053"], val : NonSpare_17.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["054"], val : NonSpare_18.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["054"], val : NonSpare_18.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["061"], val : NonSpare_19.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["061"], val : NonSpare_19.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["062"], val : NonSpare_20.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["062"], val : NonSpare_20.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["063"], val : NonSpare_21.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["063"], val : NonSpare_21.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["071"], val : NonSpare_22.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["071"], val : NonSpare_22.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["072"], val : NonSpare_23.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["072"], val : NonSpare_23.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["073"], val : NonSpare_24.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["073"], val : NonSpare_24.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["091"], val : NonSpare_25.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["091"], val : NonSpare_25.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["092"], val : NonSpare_26.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["092"], val : NonSpare_26.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["093"], val : NonSpare_27.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["093"], val : NonSpare_27.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["101"], val : NonSpare_29.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["101"], val : NonSpare_29.cv_arg) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["102"], val : NonSpare_31.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["102"], val : NonSpare_31.cv_arg) -> 'Record_8':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
 
     @overload
-    def del_item(self, key : Literal["010"]) -> 'Record_6':
+    def del_item(self, key : Literal["010"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["000"]) -> 'Record_6':
+    def del_item(self, key : Literal["000"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["020"]) -> 'Record_6':
+    def del_item(self, key : Literal["020"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["030"]) -> 'Record_6':
+    def del_item(self, key : Literal["030"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["031"]) -> 'Record_6':
+    def del_item(self, key : Literal["031"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["032"]) -> 'Record_6':
+    def del_item(self, key : Literal["032"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["040"]) -> 'Record_6':
+    def del_item(self, key : Literal["040"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["051"]) -> 'Record_6':
+    def del_item(self, key : Literal["051"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["052"]) -> 'Record_6':
+    def del_item(self, key : Literal["052"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["053"]) -> 'Record_6':
+    def del_item(self, key : Literal["053"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["054"]) -> 'Record_6':
+    def del_item(self, key : Literal["054"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["061"]) -> 'Record_6':
+    def del_item(self, key : Literal["061"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["062"]) -> 'Record_6':
+    def del_item(self, key : Literal["062"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["063"]) -> 'Record_6':
+    def del_item(self, key : Literal["063"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["071"]) -> 'Record_6':
+    def del_item(self, key : Literal["071"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["072"]) -> 'Record_6':
+    def del_item(self, key : Literal["072"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["073"]) -> 'Record_6':
+    def del_item(self, key : Literal["073"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["091"]) -> 'Record_6':
+    def del_item(self, key : Literal["091"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["092"]) -> 'Record_6':
+    def del_item(self, key : Literal["092"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["093"]) -> 'Record_6':
+    def del_item(self, key : Literal["093"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["101"]) -> 'Record_6':
+    def del_item(self, key : Literal["101"]) -> 'Record_8':
         ...
     @overload
-    def del_item(self, key : Literal["102"]) -> 'Record_6':
+    def del_item(self, key : Literal["102"]) -> 'Record_8':
         ...
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
@@ -4681,29 +4681,29 @@ class Record_6(Record):
         return self._get_rfs_item(arg)
 
     @classmethod
-    def create(cls, arg: "Record_6.cv_arg", rfs : Optional[List["Record_6.cv_union"]] = None) -> 'Record_6':
+    def create(cls, arg: "Record_8.cv_arg", rfs: Optional[List["Record_8.cv_union"]] = None) -> 'Record_8':
         return cls._create(arg, rfs) # type: ignore
 
     @classmethod
-    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_6", Bits]]:
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_8", Bits]]:
         return cls._parse(pm, bs) # type: ignore
 
-class Uap_0(UapSingle):
-    cv_arg: TypeAlias = Record_6
-    cv_record: TypeAlias = Record_6
+class Uap_2(UapSingle):
+    cv_arg: TypeAlias = Record_8
+    cv_record: TypeAlias = Record_8
 
     @classmethod
-    def parse(cls, bs : Bits) -> Union[ValueError, List[Record_6]]:
+    def parse(cls, bs : Bits) -> Union[ValueError, List[Record_8]]:
         return cls._parse(bs)
 
 class Asterix_0(AstCat):
     cv_category = 0
     cv_edition = (1, 0)
-    cv_uap: TypeAlias = Uap_0
+    cv_uap: TypeAlias = Uap_2
     cv_record: TypeAlias = cv_uap.cv_record # shortcut
 
     @classmethod
-    def create(cls, records : List[Uap_0.cv_arg]) -> "Asterix_0":
+    def create(cls, records : List[Uap_2.cv_arg]) -> "Asterix_0":
         return cls._create(records) # type: ignore
 
 class Expansion_1(Expansion):
@@ -4789,7 +4789,7 @@ class NonSpare_32(NonSpare):
 class UapItem_32(UapItem):
     cv_non_spare: TypeAlias = NonSpare_32
 
-class Record_7(Record):
+class Record_9(Record):
     cv_arg = TypedDict('cv_arg', {
         "010": NonSpare_3.cv_arg,
         "000": NonSpare_0.cv_arg,
@@ -5013,145 +5013,145 @@ class Record_7(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["010"], val : NonSpare_3.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["010"], val : NonSpare_3.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["000"], val : NonSpare_0.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["000"], val : NonSpare_0.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["020"], val : NonSpare_4.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["020"], val : NonSpare_4.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["030"], val : NonSpare_6.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["030"], val : NonSpare_6.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["031"], val : NonSpare_7.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["031"], val : NonSpare_7.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["032"], val : NonSpare_10.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["032"], val : NonSpare_10.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["040"], val : NonSpare_12.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["040"], val : NonSpare_12.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["051"], val : NonSpare_15.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["051"], val : NonSpare_15.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["052"], val : NonSpare_16.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["052"], val : NonSpare_16.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["053"], val : NonSpare_17.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["053"], val : NonSpare_17.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["054"], val : NonSpare_18.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["054"], val : NonSpare_18.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["061"], val : NonSpare_19.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["061"], val : NonSpare_19.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["062"], val : NonSpare_20.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["062"], val : NonSpare_20.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["063"], val : NonSpare_21.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["063"], val : NonSpare_21.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["071"], val : NonSpare_22.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["071"], val : NonSpare_22.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["072"], val : NonSpare_23.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["072"], val : NonSpare_23.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["073"], val : NonSpare_24.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["073"], val : NonSpare_24.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["091"], val : NonSpare_25.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["091"], val : NonSpare_25.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["092"], val : NonSpare_26.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["092"], val : NonSpare_26.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["093"], val : NonSpare_27.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["093"], val : NonSpare_27.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["101"], val : NonSpare_29.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["101"], val : NonSpare_29.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["102"], val : NonSpare_31.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["102"], val : NonSpare_31.cv_arg) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["200"], val : NonSpare_32.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["200"], val : NonSpare_32.cv_arg) -> 'Record_9':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
 
     @overload
-    def del_item(self, key : Literal["010"]) -> 'Record_7':
+    def del_item(self, key : Literal["010"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["000"]) -> 'Record_7':
+    def del_item(self, key : Literal["000"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["020"]) -> 'Record_7':
+    def del_item(self, key : Literal["020"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["030"]) -> 'Record_7':
+    def del_item(self, key : Literal["030"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["031"]) -> 'Record_7':
+    def del_item(self, key : Literal["031"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["032"]) -> 'Record_7':
+    def del_item(self, key : Literal["032"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["040"]) -> 'Record_7':
+    def del_item(self, key : Literal["040"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["051"]) -> 'Record_7':
+    def del_item(self, key : Literal["051"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["052"]) -> 'Record_7':
+    def del_item(self, key : Literal["052"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["053"]) -> 'Record_7':
+    def del_item(self, key : Literal["053"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["054"]) -> 'Record_7':
+    def del_item(self, key : Literal["054"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["061"]) -> 'Record_7':
+    def del_item(self, key : Literal["061"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["062"]) -> 'Record_7':
+    def del_item(self, key : Literal["062"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["063"]) -> 'Record_7':
+    def del_item(self, key : Literal["063"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["071"]) -> 'Record_7':
+    def del_item(self, key : Literal["071"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["072"]) -> 'Record_7':
+    def del_item(self, key : Literal["072"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["073"]) -> 'Record_7':
+    def del_item(self, key : Literal["073"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["091"]) -> 'Record_7':
+    def del_item(self, key : Literal["091"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["092"]) -> 'Record_7':
+    def del_item(self, key : Literal["092"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["093"]) -> 'Record_7':
+    def del_item(self, key : Literal["093"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["101"]) -> 'Record_7':
+    def del_item(self, key : Literal["101"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["102"]) -> 'Record_7':
+    def del_item(self, key : Literal["102"]) -> 'Record_9':
         ...
     @overload
-    def del_item(self, key : Literal["200"]) -> 'Record_7':
+    def del_item(self, key : Literal["200"]) -> 'Record_9':
         ...
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
@@ -5229,29 +5229,29 @@ class Record_7(Record):
         return self._get_rfs_item(arg)
 
     @classmethod
-    def create(cls, arg: "Record_7.cv_arg", rfs : Optional[List["Record_7.cv_union"]] = None) -> 'Record_7':
+    def create(cls, arg: "Record_9.cv_arg", rfs: Optional[List["Record_9.cv_union"]] = None) -> 'Record_9':
         return cls._create(arg, rfs) # type: ignore
 
     @classmethod
-    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_7", Bits]]:
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_9", Bits]]:
         return cls._parse(pm, bs) # type: ignore
 
-class Uap_1(UapSingle):
-    cv_arg: TypeAlias = Record_7
-    cv_record: TypeAlias = Record_7
+class Uap_3(UapSingle):
+    cv_arg: TypeAlias = Record_9
+    cv_record: TypeAlias = Record_9
 
     @classmethod
-    def parse(cls, bs : Bits) -> Union[ValueError, List[Record_7]]:
+    def parse(cls, bs : Bits) -> Union[ValueError, List[Record_9]]:
         return cls._parse(bs)
 
 class Asterix_2(AstCat):
     cv_category = 0
     cv_edition = (1, 1)
-    cv_uap: TypeAlias = Uap_1
+    cv_uap: TypeAlias = Uap_3
     cv_record: TypeAlias = cv_uap.cv_record # shortcut
 
     @classmethod
-    def create(cls, records : List[Uap_1.cv_arg]) -> "Asterix_2":
+    def create(cls, records : List[Uap_3.cv_arg]) -> "Asterix_2":
         return cls._create(records) # type: ignore
 
 class Expansion_2(Expansion):
@@ -5675,7 +5675,7 @@ class NonSpare_13(NonSpare):
 class UapItem_13(UapItem):
     cv_non_spare: TypeAlias = NonSpare_13
 
-class Record_4(Record):
+class Record_6(Record):
     cv_arg = TypedDict('cv_arg', {
         "010": NonSpare_2.cv_arg,
         "020": NonSpare_5.cv_arg,
@@ -5730,47 +5730,47 @@ class Record_4(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["010"], val : NonSpare_2.cv_arg) -> 'Record_4':
+    def set_item(self, key : Literal["010"], val : NonSpare_2.cv_arg) -> 'Record_6':
         ...
     @overload
-    def set_item(self, key : Literal["020"], val : NonSpare_5.cv_arg) -> 'Record_4':
+    def set_item(self, key : Literal["020"], val : NonSpare_5.cv_arg) -> 'Record_6':
         ...
     @overload
-    def set_item(self, key : Literal["031"], val : NonSpare_8.cv_arg) -> 'Record_4':
+    def set_item(self, key : Literal["031"], val : NonSpare_8.cv_arg) -> 'Record_6':
         ...
     @overload
-    def set_item(self, key : Literal["040"], val : NonSpare_11.cv_arg) -> 'Record_4':
+    def set_item(self, key : Literal["040"], val : NonSpare_11.cv_arg) -> 'Record_6':
         ...
     @overload
-    def set_item(self, key : Literal["041"], val : NonSpare_13.cv_arg) -> 'Record_4':
+    def set_item(self, key : Literal["041"], val : NonSpare_13.cv_arg) -> 'Record_6':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
 
     @overload
-    def del_item(self, key : Literal["010"]) -> 'Record_4':
+    def del_item(self, key : Literal["010"]) -> 'Record_6':
         ...
     @overload
-    def del_item(self, key : Literal["020"]) -> 'Record_4':
+    def del_item(self, key : Literal["020"]) -> 'Record_6':
         ...
     @overload
-    def del_item(self, key : Literal["031"]) -> 'Record_4':
+    def del_item(self, key : Literal["031"]) -> 'Record_6':
         ...
     @overload
-    def del_item(self, key : Literal["040"]) -> 'Record_4':
+    def del_item(self, key : Literal["040"]) -> 'Record_6':
         ...
     @overload
-    def del_item(self, key : Literal["041"]) -> 'Record_4':
+    def del_item(self, key : Literal["041"]) -> 'Record_6':
         ...
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
     @classmethod
-    def create(cls, arg: "Record_4.cv_arg") -> 'Record_4':
+    def create(cls, arg: "Record_6.cv_arg") -> 'Record_6':
         return cls._create(arg) # type: ignore
 
     @classmethod
-    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_4", Bits]]:
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_6", Bits]]:
         return cls._parse(pm, bs) # type: ignore
 
 class Variation_15(Element):
@@ -5848,7 +5848,7 @@ class NonSpare_14(NonSpare):
 class UapItem_14(UapItem):
     cv_non_spare: TypeAlias = NonSpare_14
 
-class Record_5(Record):
+class Record_7(Record):
     cv_arg = TypedDict('cv_arg', {
         "010": NonSpare_2.cv_arg,
         "020": NonSpare_5.cv_arg,
@@ -5903,61 +5903,61 @@ class Record_5(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["010"], val : NonSpare_2.cv_arg) -> 'Record_5':
+    def set_item(self, key : Literal["010"], val : NonSpare_2.cv_arg) -> 'Record_7':
         ...
     @overload
-    def set_item(self, key : Literal["020"], val : NonSpare_5.cv_arg) -> 'Record_5':
+    def set_item(self, key : Literal["020"], val : NonSpare_5.cv_arg) -> 'Record_7':
         ...
     @overload
-    def set_item(self, key : Literal["032"], val : NonSpare_9.cv_arg) -> 'Record_5':
+    def set_item(self, key : Literal["032"], val : NonSpare_9.cv_arg) -> 'Record_7':
         ...
     @overload
-    def set_item(self, key : Literal["040"], val : NonSpare_11.cv_arg) -> 'Record_5':
+    def set_item(self, key : Literal["040"], val : NonSpare_11.cv_arg) -> 'Record_7':
         ...
     @overload
-    def set_item(self, key : Literal["042"], val : NonSpare_14.cv_arg) -> 'Record_5':
+    def set_item(self, key : Literal["042"], val : NonSpare_14.cv_arg) -> 'Record_7':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
 
     @overload
-    def del_item(self, key : Literal["010"]) -> 'Record_5':
+    def del_item(self, key : Literal["010"]) -> 'Record_7':
         ...
     @overload
-    def del_item(self, key : Literal["020"]) -> 'Record_5':
+    def del_item(self, key : Literal["020"]) -> 'Record_7':
         ...
     @overload
-    def del_item(self, key : Literal["032"]) -> 'Record_5':
+    def del_item(self, key : Literal["032"]) -> 'Record_7':
         ...
     @overload
-    def del_item(self, key : Literal["040"]) -> 'Record_5':
+    def del_item(self, key : Literal["040"]) -> 'Record_7':
         ...
     @overload
-    def del_item(self, key : Literal["042"]) -> 'Record_5':
+    def del_item(self, key : Literal["042"]) -> 'Record_7':
         ...
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
     @classmethod
-    def create(cls, arg: "Record_5.cv_arg") -> 'Record_5':
+    def create(cls, arg: "Record_7.cv_arg") -> 'Record_7':
         return cls._create(arg) # type: ignore
 
     @classmethod
-    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_5", Bits]]:
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_7", Bits]]:
         return cls._parse(pm, bs) # type: ignore
 
-class Uap_2(UapMultiple):
-    cv_arg: TypeAlias = Union[Record_4, Record_5]
-    cv_uaps = {"plot": Record_4, "track": Record_5}
+class Uap_4(UapMultiple):
+    cv_arg: TypeAlias = Union[Record_6, Record_7]
+    cv_uaps = {"plot": Record_6, "track": Record_7}
     cv_selector = (["020", "TYP"], {0: "plot", 1: "track"})
 
     @overload
     @classmethod
-    def spec(cls, key : Literal["plot"]) -> Type[Record_4]:
+    def spec(cls, key : Literal["plot"]) -> Type[Record_6]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["track"]) -> Type[Record_5]:
+    def spec(cls, key : Literal["track"]) -> Type[Record_7]:
         ...
     @classmethod
     def spec(cls, key : Any) -> Any:
@@ -5965,27 +5965,27 @@ class Uap_2(UapMultiple):
 
     @overload
     @classmethod
-    def parse(cls, uap : Literal["plot"], bs : Bits) -> Union[ValueError, List[Record_4]]:
+    def parse(cls, uap : Literal["plot"], bs : Bits) -> Union[ValueError, List[Record_6]]:
         ...
     @overload
     @classmethod
-    def parse(cls, uap : Literal["track"], bs : Bits) -> Union[ValueError, List[Record_5]]:
+    def parse(cls, uap : Literal["track"], bs : Bits) -> Union[ValueError, List[Record_7]]:
         ...
     @classmethod
     def parse(cls, uap : str, bs : Bits) -> Any:
         return cls._parse(uap, bs)
 
     @classmethod
-    def parse_any_uap(cls, bs : Bits) -> "List[List[Uap_2.cv_arg]]":
+    def parse_any_uap(cls, bs : Bits) -> "List[List[Uap_4.cv_arg]]":
         return cls._parse_any_uap(bs)
 
 class Asterix_5(AstCat):
     cv_category = 1
     cv_edition = (1, 0)
-    cv_uap: TypeAlias = Uap_2
+    cv_uap: TypeAlias = Uap_4
 
     @classmethod
-    def create(cls, records : List[Uap_2.cv_arg]) -> "Asterix_5":
+    def create(cls, records : List[Uap_4.cv_arg]) -> "Asterix_5":
         return cls._create(records) # type: ignore
 
 class NonSpare_1(NonSpare):
@@ -6168,7 +6168,7 @@ class NonSpare_34(NonSpare):
 class UapItem_34(UapItem):
     cv_non_spare: TypeAlias = NonSpare_34
 
-class Record_2(Record):
+class Record_4(Record):
     cv_arg = TypedDict('cv_arg', {
         "010": NonSpare_1.cv_arg,
         "201": NonSpare_33.cv_arg,
@@ -6207,35 +6207,35 @@ class Record_2(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_2':
+    def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_4':
         ...
     @overload
-    def set_item(self, key : Literal["201"], val : NonSpare_33.cv_arg) -> 'Record_2':
+    def set_item(self, key : Literal["201"], val : NonSpare_33.cv_arg) -> 'Record_4':
         ...
     @overload
-    def set_item(self, key : Literal["202"], val : NonSpare_34.cv_arg) -> 'Record_2':
+    def set_item(self, key : Literal["202"], val : NonSpare_34.cv_arg) -> 'Record_4':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
 
     @overload
-    def del_item(self, key : Literal["010"]) -> 'Record_2':
+    def del_item(self, key : Literal["010"]) -> 'Record_4':
         ...
     @overload
-    def del_item(self, key : Literal["201"]) -> 'Record_2':
+    def del_item(self, key : Literal["201"]) -> 'Record_4':
         ...
     @overload
-    def del_item(self, key : Literal["202"]) -> 'Record_2':
+    def del_item(self, key : Literal["202"]) -> 'Record_4':
         ...
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
     @classmethod
-    def create(cls, arg: "Record_2.cv_arg") -> 'Record_2':
+    def create(cls, arg: "Record_4.cv_arg") -> 'Record_4':
         return cls._create(arg) # type: ignore
 
     @classmethod
-    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_2", Bits]]:
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_4", Bits]]:
         return cls._parse(pm, bs) # type: ignore
 
 class Variation_20(Element):
@@ -6291,7 +6291,7 @@ class NonSpare_35(NonSpare):
 class UapItem_35(UapItem):
     cv_non_spare: TypeAlias = NonSpare_35
 
-class Record_3(Record):
+class Record_5(Record):
     cv_arg = TypedDict('cv_arg', {
         "010": NonSpare_1.cv_arg,
         "301": NonSpare_35.cv_arg,
@@ -6322,29 +6322,29 @@ class Record_3(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_3':
+    def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_5':
         ...
     @overload
-    def set_item(self, key : Literal["301"], val : NonSpare_35.cv_arg) -> 'Record_3':
+    def set_item(self, key : Literal["301"], val : NonSpare_35.cv_arg) -> 'Record_5':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
 
     @overload
-    def del_item(self, key : Literal["010"]) -> 'Record_3':
+    def del_item(self, key : Literal["010"]) -> 'Record_5':
         ...
     @overload
-    def del_item(self, key : Literal["301"]) -> 'Record_3':
+    def del_item(self, key : Literal["301"]) -> 'Record_5':
         ...
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
     @classmethod
-    def create(cls, arg: "Record_3.cv_arg") -> 'Record_3':
+    def create(cls, arg: "Record_5.cv_arg") -> 'Record_5':
         return cls._create(arg) # type: ignore
 
     @classmethod
-    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_3", Bits]]:
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_5", Bits]]:
         return cls._parse(pm, bs) # type: ignore
 
 class Record_0(Record):
@@ -6376,9 +6376,9 @@ class Record_0(Record):
     def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_0", Bits]]:
         return cls._parse(pm, bs) # type: ignore
 
-class Uap_3(UapMultiple):
-    cv_arg: TypeAlias = Union[Record_1, Record_2, Record_3, Record_0]
-    cv_uaps = {"uap1": Record_1, "uap2": Record_2, "uap3": Record_3, "uap4": Record_0}
+class Uap_5(UapMultiple):
+    cv_arg: TypeAlias = Union[Record_1, Record_4, Record_5, Record_0]
+    cv_uaps = {"uap1": Record_1, "uap2": Record_4, "uap3": Record_5, "uap4": Record_0}
     cv_selector = None
 
     @overload
@@ -6387,11 +6387,11 @@ class Uap_3(UapMultiple):
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["uap2"]) -> Type[Record_2]:
+    def spec(cls, key : Literal["uap2"]) -> Type[Record_4]:
         ...
     @overload
     @classmethod
-    def spec(cls, key : Literal["uap3"]) -> Type[Record_3]:
+    def spec(cls, key : Literal["uap3"]) -> Type[Record_5]:
         ...
     @overload
     @classmethod
@@ -6407,11 +6407,11 @@ class Uap_3(UapMultiple):
         ...
     @overload
     @classmethod
-    def parse(cls, uap : Literal["uap2"], bs : Bits) -> Union[ValueError, List[Record_2]]:
+    def parse(cls, uap : Literal["uap2"], bs : Bits) -> Union[ValueError, List[Record_4]]:
         ...
     @overload
     @classmethod
-    def parse(cls, uap : Literal["uap3"], bs : Bits) -> Union[ValueError, List[Record_3]]:
+    def parse(cls, uap : Literal["uap3"], bs : Bits) -> Union[ValueError, List[Record_5]]:
         ...
     @overload
     @classmethod
@@ -6422,16 +6422,322 @@ class Uap_3(UapMultiple):
         return cls._parse(uap, bs)
 
     @classmethod
-    def parse_any_uap(cls, bs : Bits) -> "List[List[Uap_3.cv_arg]]":
+    def parse_any_uap(cls, bs : Bits) -> "List[List[Uap_5.cv_arg]]":
         return cls._parse_any_uap(bs)
 
 class Asterix_6(AstCat):
     cv_category = 2
     cv_edition = (1, 0)
-    cv_uap: TypeAlias = Uap_3
+    cv_uap: TypeAlias = Uap_5
 
     @classmethod
-    def create(cls, records : List[Uap_3.cv_arg]) -> "Asterix_6":
+    def create(cls, records : List[Uap_5.cv_arg]) -> "Asterix_6":
+        return cls._create(records) # type: ignore
+
+class Record_3(Record):
+    cv_arg = TypedDict('cv_arg', {
+        "010": NonSpare_1.cv_arg,
+        "101": NonSpare_28.cv_arg,
+        "102": NonSpare_30.cv_arg,
+        "201": NonSpare_33.cv_arg,
+        "202": NonSpare_34.cv_arg,
+        "301": NonSpare_35.cv_arg,
+    }, total=False)
+    cv_union: TypeAlias = Union[
+        Tuple[Literal["010"], NonSpare_1.cv_arg],
+        Tuple[Literal["101"], NonSpare_28.cv_arg],
+        Tuple[Literal["102"], NonSpare_30.cv_arg],
+        Tuple[Literal["201"], NonSpare_33.cv_arg],
+        Tuple[Literal["202"], NonSpare_34.cv_arg],
+        Tuple[Literal["301"], NonSpare_35.cv_arg],
+    ]
+    cv_fspec_max_bytes = 2
+    cv_items_list = [UapItem_1, UapItem_28, UapItem_30, UapItem_37, UapItem_33, UapItem_37, UapItem_34, UapItem_35, UapItem_37]
+    cv_items_dict = {"010": NonSpare_1, "101": NonSpare_28, "102": NonSpare_30, "201": NonSpare_33, "202": NonSpare_34, "301": NonSpare_35}
+
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Type[NonSpare_1]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["101"]) -> Type[NonSpare_28]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["102"]) -> Type[NonSpare_30]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["201"]) -> Type[NonSpare_33]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["202"]) -> Type[NonSpare_34]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["301"]) -> Type[NonSpare_35]:
+        ...
+    @classmethod
+    def spec(cls, key : Union[Literal["010"], Literal["101"], Literal["102"], Literal["201"], Literal["202"], Literal["301"]]) -> Any:
+        return cls._spec(key)
+
+    @overload
+    def get_item(self, key : Literal["010"]) -> Optional[NonSpare_1]:
+        ...
+    @overload
+    def get_item(self, key : Literal["101"]) -> Optional[NonSpare_28]:
+        ...
+    @overload
+    def get_item(self, key : Literal["102"]) -> Optional[NonSpare_30]:
+        ...
+    @overload
+    def get_item(self, key : Literal["201"]) -> Optional[NonSpare_33]:
+        ...
+    @overload
+    def get_item(self, key : Literal["202"]) -> Optional[NonSpare_34]:
+        ...
+    @overload
+    def get_item(self, key : Literal["301"]) -> Optional[NonSpare_35]:
+        ...
+    def get_item(self, key : Any) -> Any:
+        return self._get_item(key)
+
+    @overload
+    def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_3':
+        ...
+    @overload
+    def set_item(self, key : Literal["101"], val : NonSpare_28.cv_arg) -> 'Record_3':
+        ...
+    @overload
+    def set_item(self, key : Literal["102"], val : NonSpare_30.cv_arg) -> 'Record_3':
+        ...
+    @overload
+    def set_item(self, key : Literal["201"], val : NonSpare_33.cv_arg) -> 'Record_3':
+        ...
+    @overload
+    def set_item(self, key : Literal["202"], val : NonSpare_34.cv_arg) -> 'Record_3':
+        ...
+    @overload
+    def set_item(self, key : Literal["301"], val : NonSpare_35.cv_arg) -> 'Record_3':
+        ...
+    def set_item(self, key : Any, val : Any) -> Any:
+        return self._set_item(key, val)
+
+    @overload
+    def del_item(self, key : Literal["010"]) -> 'Record_3':
+        ...
+    @overload
+    def del_item(self, key : Literal["101"]) -> 'Record_3':
+        ...
+    @overload
+    def del_item(self, key : Literal["102"]) -> 'Record_3':
+        ...
+    @overload
+    def del_item(self, key : Literal["201"]) -> 'Record_3':
+        ...
+    @overload
+    def del_item(self, key : Literal["202"]) -> 'Record_3':
+        ...
+    @overload
+    def del_item(self, key : Literal["301"]) -> 'Record_3':
+        ...
+    def del_item(self, key : Any) -> Any:
+        return self._del_item(key)
+
+    @overload
+    def get_rfs_item(self, arg : Literal["010"]) -> List[NonSpare_1]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["101"]) -> List[NonSpare_28]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["102"]) -> List[NonSpare_30]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["201"]) -> List[NonSpare_33]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["202"]) -> List[NonSpare_34]:
+        ...
+    @overload
+    def get_rfs_item(self, arg : Literal["301"]) -> List[NonSpare_35]:
+        ...
+    def get_rfs_item(self, arg : Any) -> Any:
+        return self._get_rfs_item(arg)
+
+    @overload
+    @classmethod
+    def create(cls, arg: "Record_3.cv_arg") -> 'Record_3':
+        ...
+    @overload
+    @classmethod
+    def create(cls, arg: "Record_3.cv_arg", rfs1 : Optional[List["Record_3.cv_union"]] = None) -> 'Record_3':
+        ...
+    @overload
+    @classmethod
+    def create(cls, arg: "Record_3.cv_arg", rfs1: Optional[List["Record_3.cv_union"]], rfs2 : Optional[List["Record_3.cv_union"]] = None) -> 'Record_3':
+        ...
+    @overload
+    @classmethod
+    def create(cls, arg: "Record_3.cv_arg", rfs1: Optional[List["Record_3.cv_union"]], rfs2: Optional[List["Record_3.cv_union"]], rfs3 : Optional[List["Record_3.cv_union"]] = None) -> 'Record_3':
+        ...
+    @no_type_check
+    @classmethod
+    def create(cls, arg: "Record_3.cv_arg", *rfs: Any) -> 'Record_3':
+        return cls._create(arg, *rfs)
+
+    @classmethod
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_3", Bits]]:
+        return cls._parse(pm, bs) # type: ignore
+
+class Uap_1(UapSingle):
+    cv_arg: TypeAlias = Record_3
+    cv_record: TypeAlias = Record_3
+
+    @classmethod
+    def parse(cls, bs : Bits) -> Union[ValueError, List[Record_3]]:
+        return cls._parse(bs)
+
+class Asterix_7(AstCat):
+    cv_category = 3
+    cv_edition = (1, 0)
+    cv_uap: TypeAlias = Uap_1
+    cv_record: TypeAlias = cv_uap.cv_record # shortcut
+
+    @classmethod
+    def create(cls, records : List[Uap_1.cv_arg]) -> "Asterix_7":
+        return cls._create(records) # type: ignore
+
+class Record_2(Record):
+    cv_arg = TypedDict('cv_arg', {
+        "010": NonSpare_1.cv_arg,
+        "101": NonSpare_28.cv_arg,
+        "102": NonSpare_30.cv_arg,
+        "201": NonSpare_33.cv_arg,
+        "202": NonSpare_34.cv_arg,
+        "301": NonSpare_35.cv_arg,
+    }, total=False)
+    cv_fspec_max_bytes = 1
+    cv_items_list = [UapItem_1, UapItem_28, UapItem_30, UapItem_33, UapItem_34, UapItem_35]
+    cv_items_dict = {"010": NonSpare_1, "101": NonSpare_28, "102": NonSpare_30, "201": NonSpare_33, "202": NonSpare_34, "301": NonSpare_35}
+
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["010"]) -> Type[NonSpare_1]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["101"]) -> Type[NonSpare_28]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["102"]) -> Type[NonSpare_30]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["201"]) -> Type[NonSpare_33]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["202"]) -> Type[NonSpare_34]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["301"]) -> Type[NonSpare_35]:
+        ...
+    @classmethod
+    def spec(cls, key : Union[Literal["010"], Literal["101"], Literal["102"], Literal["201"], Literal["202"], Literal["301"]]) -> Any:
+        return cls._spec(key)
+
+    @overload
+    def get_item(self, key : Literal["010"]) -> Optional[NonSpare_1]:
+        ...
+    @overload
+    def get_item(self, key : Literal["101"]) -> Optional[NonSpare_28]:
+        ...
+    @overload
+    def get_item(self, key : Literal["102"]) -> Optional[NonSpare_30]:
+        ...
+    @overload
+    def get_item(self, key : Literal["201"]) -> Optional[NonSpare_33]:
+        ...
+    @overload
+    def get_item(self, key : Literal["202"]) -> Optional[NonSpare_34]:
+        ...
+    @overload
+    def get_item(self, key : Literal["301"]) -> Optional[NonSpare_35]:
+        ...
+    def get_item(self, key : Any) -> Any:
+        return self._get_item(key)
+
+    @overload
+    def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_2':
+        ...
+    @overload
+    def set_item(self, key : Literal["101"], val : NonSpare_28.cv_arg) -> 'Record_2':
+        ...
+    @overload
+    def set_item(self, key : Literal["102"], val : NonSpare_30.cv_arg) -> 'Record_2':
+        ...
+    @overload
+    def set_item(self, key : Literal["201"], val : NonSpare_33.cv_arg) -> 'Record_2':
+        ...
+    @overload
+    def set_item(self, key : Literal["202"], val : NonSpare_34.cv_arg) -> 'Record_2':
+        ...
+    @overload
+    def set_item(self, key : Literal["301"], val : NonSpare_35.cv_arg) -> 'Record_2':
+        ...
+    def set_item(self, key : Any, val : Any) -> Any:
+        return self._set_item(key, val)
+
+    @overload
+    def del_item(self, key : Literal["010"]) -> 'Record_2':
+        ...
+    @overload
+    def del_item(self, key : Literal["101"]) -> 'Record_2':
+        ...
+    @overload
+    def del_item(self, key : Literal["102"]) -> 'Record_2':
+        ...
+    @overload
+    def del_item(self, key : Literal["201"]) -> 'Record_2':
+        ...
+    @overload
+    def del_item(self, key : Literal["202"]) -> 'Record_2':
+        ...
+    @overload
+    def del_item(self, key : Literal["301"]) -> 'Record_2':
+        ...
+    def del_item(self, key : Any) -> Any:
+        return self._del_item(key)
+
+    @classmethod
+    def create(cls, arg: "Record_2.cv_arg") -> 'Record_2':
+        return cls._create(arg) # type: ignore
+
+    @classmethod
+    def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_2", Bits]]:
+        return cls._parse(pm, bs) # type: ignore
+
+class Uap_0(UapSingle):
+    cv_arg: TypeAlias = Record_2
+    cv_record: TypeAlias = Record_2
+
+    @classmethod
+    def parse(cls, bs : Bits) -> Union[ValueError, List[Record_2]]:
+        return cls._parse(bs)
+
+class Asterix_8(AstCat):
+    cv_category = 4
+    cv_edition = (1, 0)
+    cv_uap: TypeAlias = Uap_0
+    cv_record: TypeAlias = cv_uap.cv_record # shortcut
+
+    @classmethod
+    def create(cls, records : List[Uap_0.cv_arg]) -> "Asterix_8":
         return cls._create(records) # type: ignore
 
 # Aliases
@@ -6443,6 +6749,8 @@ Ref_000_1_1: TypeAlias = Asterix_3
 Ref_000_1_2: TypeAlias = Asterix_4
 Cat_001_1_0: TypeAlias = Asterix_5
 Cat_002_1_0: TypeAlias = Asterix_6
+Cat_003_1_0: TypeAlias = Asterix_7
+Cat_004_1_0: TypeAlias = Asterix_8
 
 # Manifest
 
@@ -6457,6 +6765,12 @@ manifest = {
         ],
         2: [
             Cat_002_1_0,
+        ],
+        3: [
+            Cat_003_1_0,
+        ],
+        4: [
+            Cat_004_1_0,
         ],
     },
     'REFS': {

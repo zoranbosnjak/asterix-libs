@@ -1,0 +1,42 @@
+asterix 003 "Imaginary category for test purposes"
+edition 1.0
+date 2000-12-13
+preamble
+    Multiple RFS indicators
+
+items
+
+    010 ""
+        element 8
+            raw
+
+    101 ""
+        element 8
+            raw
+
+    102 ""
+        element 8
+            raw
+
+    201 ""
+        element 16
+            raw
+
+    202 ""
+        element 16
+            raw
+
+    301 ""
+        element 32
+            raw
+
+uap
+    010
+    101
+    102
+    rfs
+    201
+    rfs
+    202
+    301
+    rfs
