@@ -38,3 +38,32 @@ twine upload --repository testpypi dist/*
 twine upload dist/*
 ```
 
+## Running examples from README.md file
+
+The `README.md` file contain python examples, which can be extracted to
+regular python scripts.
+Unfortunately the `entangled` tool is not yet part of `nix` (see:
+<https://github.com/entangled/entangled.py/issues/64>), so the process to
+install the tool and check the examples is currently manual:
+
+```bash
+sudo apt install python3-venv           # install virtual env under ubuntu
+python3 -m venv env                     # create new virtual environment
+source env/bin/activate                 # and activate it
+pip install entangled_cli               # install entangled to that environment
+entangled --version
+entangled tangle                        # convert README.md to readme.py
+# run all examples
+for i in $(ls *py); do
+    echo "---"
+    echo "running: $i"
+    nix-shell --command "python $i"
+    if [ $? -ne 0 ]; then
+        echo ""
+        echo "Failure in $i!"
+        echo ""
+        break
+    fi
+done
+```
+

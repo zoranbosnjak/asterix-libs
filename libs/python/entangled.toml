@@ -1,0 +1,9 @@
+version = "2.0"
+watch_list = ["README.md"]
+ignore_list = []
+hooks = ["quarto_attributes", "brei"]
+
+[markers]
+open="^(?P<indent>\\s*)```(?P<properties>.*)$"
+close="^(?P<indent>\\s*)```\\s*$"
+

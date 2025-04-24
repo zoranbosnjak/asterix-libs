@@ -24,6 +24,7 @@ type checking with `mypy`. In a simple untyped environment,
 the type annotations and assertions could be skipped.
 
 ```python
+#| file: example0.py
 from typing import *
 from binascii import hexlify, unhexlify
 from dataclasses import dataclass
@@ -225,6 +226,7 @@ All operation on asterix objects are *immutable*.
 For example:
 
 ```python
+#| file: example-immutable.py
 from asterix.generated import *
 
 Spec = Cat_002_1_1
@@ -281,6 +283,7 @@ to fully parse asterix records.
 **Example**: Category filter, drop datablocks if category == 1
 
 ```python
+#| file: example1.py
 from binascii import hexlify, unhexlify
 from asterix.base import *
 
@@ -313,6 +316,7 @@ Datablock/Record is required to work with asterix items and subitems.
 **Example**: Create 2 records and combine them to a single datablock
 
 ```python
+#| file: example2.py
 from binascii import hexlify
 from asterix.generated import *
 
@@ -337,6 +341,7 @@ print(hexlify(s))
 from each record
 
 ```python
+#| file: example3.py
 from binascii import unhexlify
 from asterix.base import *
 from asterix.generated import *
@@ -360,6 +365,7 @@ for db in raw_datablocks:
 **Example**: Asterix filter, rewrite SAC/SIC code with random values.
 
 ```python
+#| file: example4.py
 import time
 import random
 from asterix.base import *
@@ -410,6 +416,7 @@ def tx_bytes_to_the_network(s_output):
     print(hexlify(s_output))
 
 # main processing loop
+cnt = 0
 while True:
     s_input = rx_bytes_from_the_network()
     new_sac = random.randint(0,127)
@@ -419,6 +426,10 @@ while True:
         tx_bytes_to_the_network(s_output)
     except Exception as e:
         print('Asterix exception: ', e)
+    # only run a few iterations for test
+    cnt += 1
+    if cnt > 3:
+        break
 ```
 
 #### Reserved expansion fields
@@ -442,6 +453,7 @@ a possiblity to explicitly select both editions individually.
 This example demonstrates required steps for constructing and parsing:
 
 ```python
+#| file: example5.py
 from asterix.generated import *
 
 Spec = Cat_062_1_20
@@ -505,6 +517,7 @@ value, for example for CAT001:
 - `['020', 'TYP'] = 1` for `track`
 
 ```python
+#| file: example6.py
 from asterix.base import *
 from asterix.generated import *
 
@@ -632,6 +645,7 @@ This structure can be used to extract *latest* editions for each defined
 category, for example:
 
 ```python
+#| file: example7.py
 from asterix.generated import *
 
 Specs = {cat: manifest['CATS'][cat][-1] for cat in manifest['CATS']}
@@ -644,6 +658,7 @@ Alternatively, a prefered way is to be explicit about each edition,
 for example:
 
 ```python
+#| file: example8.py
 from asterix.generated import *
 
 Specs = {
@@ -666,6 +681,7 @@ explicit about subitems, for example ["010", "SAC"].
 **Example**: Show raw content of all toplevel items of each record
 
 ```python
+#| file: example9.py
 from binascii import unhexlify
 from asterix.generated import *
 
@@ -703,6 +719,7 @@ for db in RawDatablock.parse(Bits.from_bytes(s)):
 **Example**: Generate dummy single record datablock with all fixed items set to zero
 
 ```python
+#| file: example10.py
 from binascii import hexlify
 from asterix.generated import *
 
@@ -772,6 +789,7 @@ Found 3 errors in 1 file (checked 1 source file)
 Correct version of this program is:
 
 ```python
+#| file: example11.py
 from asterix.generated import *
 
 Spec = Cat_008_1_3
