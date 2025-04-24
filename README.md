@@ -5,7 +5,7 @@ This project builds on top of
 definition files.
 
 The main part of this project is a [source code generator](code-generator)
-for various target programmig languages. It uses asterix specification files
+for various target programming languages. It uses asterix specification files
 and generates data structures and support functions for a selected target
 language. Other languages can be added, while sharing the same generic
 asterix structure.

@@ -242,6 +242,10 @@ assert rec0.get_item('000') is None
 rec1 = rec0.set_item('000', 1)
 assert rec1.get_item('000') is not None
 
+# del_item, store result to 'rec1a'
+rec1a = rec1.del_item('000')
+assert rec1a.get_item('000') is None
+
 # use multiple updates in sequence
 rec2a = rec0.set_item('000', 1).set_item('010', (('SAC', 1), ('SIC', 2)))
 rec2b = Spec.cv_record.create({'000': 1, '010': (('SAC', 1), ('SIC', 2))})
@@ -430,6 +434,47 @@ while True:
     cnt += 1
     if cnt > 3:
         break
+```
+
+#### Spare items
+
+Some bits are defined as *Spare*, which are normally set to `0`.
+With this library:
+
+- A user is able set spare bits to any value, including abusing spare bits
+  to contain non-zero value.
+- When parsing data, tolerate spare bits to contain any value. It is up
+  to the application to check the spare bits if desired.
+
+Multiple spare bit groups can be defined on a single item.
+`get_spares` method returns the actual values of all spare bit groups.
+
+**Example**
+
+```python
+#| file: example-spare.py
+from asterix.generated import *
+
+# I062/120 contain single group of spare bits
+Spec = Cat_062_1_20
+
+# create regular record with spare bits set to '0'
+rec1 = Spec.cv_record.create({
+    '120': (0, ('MODE2', 0x1234)),
+})
+i120a = rec1.get_item('120')
+assert i120a is not None
+spares1 = i120a.variation.get_spares()
+assert spares1 == [0]
+
+# create record, abuse spare bits, set to '0xf'
+rec2 = Spec.cv_record.create({
+    '120': (0xf, ('MODE2', 0x1234)),
+})
+i120b = rec2.get_item('120')
+assert i120b is not None
+spares2 = i120b.variation.get_spares()
+assert spares2 == [0xf]
 ```
 
 #### Reserved expansion fields

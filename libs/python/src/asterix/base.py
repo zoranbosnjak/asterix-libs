@@ -312,6 +312,7 @@ class Signedness:
 class Signed(Signedness):
     @classmethod
     def convert(cls, bit_size: int, x: int) -> int:
+        assert bit_size > 0
         half = pow(2, bit_size - 1)
         if x < half:
             return x
@@ -443,6 +444,9 @@ class ContentBds(Content):
 
 
 class RuleContent:
+    """
+    Base class for different RuleContent possibilities.
+    """
 
     def __init__(self, bs: Bits) -> None:
         self.bs = bs
@@ -457,6 +461,10 @@ class RuleContent:
 
 
 class RuleContentContextFree(RuleContent):
+    """
+    A content structure that is fully defined in the specification
+    and is statically known.
+    """
     cv_content: ClassVar[Type[Content]]
 
     @classmethod
@@ -468,6 +476,11 @@ class RuleContentContextFree(RuleContent):
 
 
 class RuleContentDependent(RuleContent):
+    """
+    A content structure where all possible structures are defined
+    in the specification, but where the actual concrete structure depends
+    on a value of some other item, which is only known at run-time.
+    """
     cv_depends_on: ClassVar[List[List[str]]]
     cv_default_content: ClassVar[Type[Content]]
     cv_cases: ClassVar[List[Tuple[List[int], Type[Content]]]]
@@ -497,6 +510,11 @@ class RuleContentDependent(RuleContent):
 
 
 class Variation:
+    """
+    Base class (see subclasses below).
+    Subclasses follow asterix structure as defined here:
+    <https://zoranbosnjak.github.io/asterix-specs/struct.html>
+    """
     @classmethod
     @abstractmethod
     def parse(cls, bs: Bits) -> Union[ValueError, Tuple['Variation', Bits]]:
@@ -508,6 +526,9 @@ class Variation:
 
 
 class ItemBase:
+    """
+    Base class for Spare or NonSpare item (see subclasses below).
+    """
     @classmethod
     @abstractmethod
     def parse(cls, bs: Bits) -> Union[ValueError, Tuple['ItemBase', Bits]]:
@@ -519,6 +540,9 @@ class ItemBase:
 
 
 class RuleVariation:
+    """
+    Base class for different RuleVariation possibilities.
+    """
 
     @classmethod
     @abstractmethod
@@ -1030,6 +1054,10 @@ class Compound(Variation):
 
 
 class RuleVariationContextFree(RuleVariation):
+    """
+    Wrapper around Variation which is fully defined in the specification
+    and is statically known.
+    """
     cv_variation: ClassVar[Type[Variation]]
 
     def __init__(self, arg: Variation) -> None:
@@ -1059,6 +1087,11 @@ class RuleVariationContextFree(RuleVariation):
 
 
 class RuleVariationDependent(RuleVariation):
+    """
+    Wrapper around Variation, where all possible structures are defined
+    in the specification, but where the actual concrete structure depends
+    on a value of some other item, which is only known at run-time.
+    """
     cv_depends_on: ClassVar[List[List[str]]]
     cv_default_variation: ClassVar[Type[Variation]]
     cv_cases: ClassVar[List[Tuple[List[int], Type[Variation]]]]

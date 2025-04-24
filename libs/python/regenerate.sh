@@ -1,20 +1,24 @@
 #! /usr/bin/env nix-shell
 #! nix-shell -i bash
 
+# This script regenerates 'generated' files from the specs.
+# It is normally called automatically as part of periodic updates.
+
 set -e
 export LC_ALL=C.UTF-8
 
+# check local changes
 changes1=$(git status --short .)
 if [ -n "$changes1" ]; then
     echo "Error: local changes"
     exit 1
 fi
 
-# test specs
+# generated test specs
 code-generator --language python \
     --test $TEST_ASTERIX_SPECS_FILES > tests/generated.py
 
-# actual specs
+# generate actual specs
 code-generator --language python \
     --ast-specs-ref $ASTERIX_SPECS_REF \
     --ast-specs-date $ASTERIX_SPECS_DATE \

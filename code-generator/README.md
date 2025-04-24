@@ -4,7 +4,7 @@
 
 ```bash
 nix-build
-./result/bin/ast-code-generator -h
+./result/bin/code-generator -h
 ```
 
 ## Development environment
