@@ -269,6 +269,65 @@ assert rec0.get_item('000') is not None
   It is a separate class from `Item` and `Spare`, to reuse definition
   in different contexts, for example `Compound` subitems are `NonSpare`.
 
+### Asterix specifications as python classes
+
+Asterix specifications hierarchy is reflected in python classes.
+For example: Category `062` contains item `010`, which in turn contains
+subitems `SAC` and `SIC`.
+
+There is a `spec` class method which follows this structure deeper to the
+hierarchy. For example:
+
+```python
+#| file: example-spec.py
+from binascii import unhexlify
+from asterix.generated import *
+
+# Use cat062, edition 1.20
+Spec = Cat_062_1_20
+
+print(Spec)
+print('category number', Spec.cv_category)
+print('edition', Spec.cv_edition)
+
+# Extract deeper specs
+Uap = Spec.cv_uap
+Record = Uap.cv_record
+I010 = Record.spec('010')
+SAC = I010.cv_rule.cv_variation.spec('SAC')
+print(SAC)
+
+# Use more direct way to extract subspec
+SIC = Spec.cv_uap.cv_record.spec('010').cv_rule.cv_variation.spec('SIC')
+print(SIC)
+
+# SAC and SIC subitems are both 8-bits long raw values (same structure),
+# so thay both map to the same class.
+assert (SAC==SIC)
+
+# With this specification it is possible to perform low level
+# asterix operations, for example to parse a single subitem
+sample_bits = Bits.from_bytes(unhexlify(b'ff0102fe'))
+print(sample_bits)
+result = SIC.parse(sample_bits)
+assert not isinstance(result, ValueError)
+sic_object, remaining_bits = result
+print(remaining_bits)
+print(sic_object)
+print(sic_object.unparse())
+print(sic_object.as_uint())
+
+# Similarly, it is possible to extract other parts, for example
+# extended subitems
+print(Record.spec('080').cv_rule.cv_variation.spec('MON').cv_rule)
+# compound subitems
+print(Record.spec('110').cv_rule.cv_variation.spec('SUM').cv_rule)
+```
+
+See [base.py](https://github.com/zoranbosnjak/asterix-libs/tree/main/libs/python/src/asterix/base.py)
+and [generated.py](https://github.com/zoranbosnjak/asterix-libs/tree/main/libs/python/src/asterix/generated.py)
+for details.
+
 ### Datagram
 
 Datagram is a raw binary data as received for example from UDP socket.
