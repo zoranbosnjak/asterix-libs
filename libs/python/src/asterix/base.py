@@ -788,6 +788,10 @@ class Extended(Variation):
                 items2.append(obj)
         n = len(bs)
         m = len(remaining)
+        # Item might not end with 'fx', so there might be some
+        # leftover in 'items2'. If so, append it too.
+        if items2:
+            items1.append(items2.copy())
         return (cls(bs.take(n - m), items1), remaining)
 
     @classmethod

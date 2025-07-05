@@ -300,7 +300,23 @@ def test_extended2() -> None:
     assert obj5.unparse() == Bits.from_bytes(unhexlify('0304'))
     obj6 = T.create((1, 2, 3))
     assert obj6.unparse() == Bits.from_bytes(unhexlify('030503'))
-
+    obj7 = T.create(((1, 2, None), (3, 0, 4, None), (5,)))
+    s7 = obj7.unparse()
+    res8 = T.parse(s7)
+    assert not isinstance(res8, ValueError)
+    (obj8, bs8) = res8
+    assert bs8.null()
+    var8 = obj8.variation
+    var8_1 = var8.get_item('I1')
+    var8_2 = var8.get_item('I2')
+    var8_3 = var8.get_item('I3')
+    var8_4 = var8.get_item('I4')
+    var8_5 = var8.get_item('I5')
+    assert var8_1 is not None and var8_1.as_uint() == 1
+    assert var8_2 is not None and var8_2.as_uint() == 2
+    assert var8_3 is not None and var8_3.as_uint() == 3
+    assert var8_4 is not None and var8_4.as_uint() == 4
+    assert var8_5 is not None and var8_5.as_uint() == 5
 
 def test_extended3() -> None:
     T = Cat_000_1_0.cv_record.spec('102')
