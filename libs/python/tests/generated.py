@@ -3902,6 +3902,31 @@ class Variation_51(Extended):
         Tuple["Variation_51.cv_arg_group_1", "Variation_51.cv_arg_group_2", "Variation_51.cv_arg_group_3"],
     ]
     cv_items_list = [[(Item_13, 1), (Item_24, 6), None], [(Item_26, 2), (Item_1, 1), (Item_28, 4), None], [(Item_30, 7), None]]
+    cv_items_dict = {"I1": NonSpare_48, "I2": NonSpare_61, "I3": NonSpare_64, "I4": NonSpare_67, "I5": NonSpare_69}
+
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I1"]) -> Type[NonSpare_48]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I2"]) -> Type[NonSpare_61]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I3"]) -> Type[NonSpare_64]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I4"]) -> Type[NonSpare_67]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I5"]) -> Type[NonSpare_69]:
+        ...
+    @classmethod
+    def spec(cls, key : Union[Literal["I1"], Literal["I2"], Literal["I3"], Literal["I4"], Literal["I5"]]) -> Any:
+        return cls._spec(key)
 
     @no_type_check
     @classmethod
@@ -4026,6 +4051,31 @@ class Variation_52(Extended):
         Tuple["Variation_52.cv_arg_group_1", "Variation_52.cv_arg_group_2", "Variation_52.cv_arg_group_3"],
     ]
     cv_items_list = [[(Item_13, 1), (Item_24, 6), None], [(Item_26, 2), (Item_1, 1), (Item_28, 4), None], [(Item_31, 8)]]
+    cv_items_dict = {"I1": NonSpare_48, "I2": NonSpare_61, "I3": NonSpare_64, "I4": NonSpare_67, "I5": NonSpare_70}
+
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I1"]) -> Type[NonSpare_48]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I2"]) -> Type[NonSpare_61]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I3"]) -> Type[NonSpare_64]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I4"]) -> Type[NonSpare_67]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I5"]) -> Type[NonSpare_70]:
+        ...
+    @classmethod
+    def spec(cls, key : Union[Literal["I1"], Literal["I2"], Literal["I3"], Literal["I4"], Literal["I5"]]) -> Any:
+        return cls._spec(key)
 
     @no_type_check
     @classmethod
@@ -5545,6 +5595,19 @@ class Variation_53(Extended):
         Tuple["Variation_53.cv_arg_group_1", "Variation_53.cv_arg_group_2"],
     ]
     cv_items_list = [[(Item_15, 7), None], [(Item_25, 7), None]]
+    cv_items_dict = {"I1": NonSpare_50, "I2": NonSpare_62}
+
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I1"]) -> Type[NonSpare_50]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I2"]) -> Type[NonSpare_62]:
+        ...
+    @classmethod
+    def spec(cls, key : Union[Literal["I1"], Literal["I2"]]) -> Any:
+        return cls._spec(key)
 
     @no_type_check
     @classmethod
@@ -6985,6 +7048,23 @@ class Variation_55(Extended):
         Tuple["Variation_55.cv_arg_group_1", "Variation_55.cv_arg_group_2"],
     ]
     cv_items_list = [[(Item_39, 1), (Item_17, 6), None], [(Item_22, 7), None]]
+    cv_items_dict = {"TYP": NonSpare_88, "I1": NonSpare_52, "I2": NonSpare_59}
+
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["TYP"]) -> Type[NonSpare_88]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I1"]) -> Type[NonSpare_52]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Literal["I2"]) -> Type[NonSpare_59]:
+        ...
+    @classmethod
+    def spec(cls, key : Union[Literal["TYP"], Literal["I1"], Literal["I2"]]) -> Any:
+        return cls._spec(key)
 
     @no_type_check
     @classmethod
@@ -8347,6 +8427,12 @@ class Variation_54(Extended):
         Tuple["Variation_54.cv_arg_group_1"],
     ]
     cv_items_list = [[(Item_19, 7), None]]
+    cv_items_dict = {"I1": NonSpare_54}
+
+    @no_type_check
+    @classmethod
+    def spec(cls, key : Literal["I1"]) -> Type[NonSpare_54]:
+        return cls._spec(key)
 
     @no_type_check
     @classmethod
@@ -8478,6 +8564,12 @@ class Variation_49(Extended):
         Tuple["Variation_49.cv_arg_group_1"],
     ]
     cv_items_list = [[(Item_0, 4), (Item_20, 3), None]]
+    cv_items_dict = {"I1": NonSpare_56}
+
+    @no_type_check
+    @classmethod
+    def spec(cls, key : Literal["I1"]) -> Type[NonSpare_56]:
+        return cls._spec(key)
 
     @no_type_check
     @classmethod
@@ -8586,6 +8678,12 @@ class Variation_50(Extended):
         Tuple["Variation_50.cv_arg_group_1"],
     ]
     cv_items_list = [[(Item_0, 4), (Item_21, 4)]]
+    cv_items_dict = {"I1": NonSpare_57}
+
+    @no_type_check
+    @classmethod
+    def spec(cls, key : Literal["I1"]) -> Type[NonSpare_57]:
+        return cls._spec(key)
 
     @no_type_check
     @classmethod

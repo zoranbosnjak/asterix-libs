@@ -754,10 +754,15 @@ class Group(Variation):
 
 class Extended(Variation):
     cv_items_list: ClassVar[List[List[Optional[Tuple[Type[ItemBase], int]]]]]
+    cv_items_dict: ClassVar[Dict[str, Type[NonSpare]]]
 
     def __init__(self, bs: Bits, arg: List[List[Optional[ItemBase]]]) -> None:
         self.bs = bs
         self.arg = arg
+
+    @classmethod
+    def _spec(cls, key: str) -> Type[NonSpare]:
+        return cls.cv_items_dict[key]
 
     @classmethod
     def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Extended', Bits]]:

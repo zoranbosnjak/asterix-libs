@@ -342,6 +342,12 @@ instance Node Variation where
                     Just i -> do
                         ref <- walk i
                         pure $ Just (ref, bitSizeOfItem i)
+            refDict <- fmap catMaybes <$> forM (catMaybes lst) $ \case
+                A.Spare _ _ -> pure Nothing
+                A.Item nsp -> do
+                    let (A.NonSpare name _ _ _) = nsp
+                    ref <- walk nsp
+                    pure $ Just (name, ref)
             let num_of_items = length $ concat $ flip fmap groups $ \group -> do
                     i <- group
                     case i of
@@ -372,8 +378,39 @@ instance Node Variation where
                         Nothing -> "None"
                         Just (ref, bitSize) -> sformat ("(Item_" % int % ", " %
                             int % ")") ref  bitSize
+                    f2 (A.ItemName name, i) = sformat
+                        (stext % ": NonSpare_" % int)
+                        (quote name) i
                 fmt ("cv_items_list = " % stext)
                     (fmtList "[" "]" (fmtList "[" "]" f1) refList)
+                fmt ("cv_items_dict = " % stext) (fmtList "{" "}" f2 refDict)
+                ""
+                case refDict of
+                    [] -> pure ()
+                    [(name', ref)] -> do
+                        let name = quote $ coerce name'
+                            arg = sformat ("key : Literal[" % stext % "]") name
+                            rv = sformat ("Type[NonSpare_" % int % "]") ref
+                        "@no_type_check"
+                        "@classmethod"
+                        pyFunc "spec" ["cls", arg] rv $ do
+                            "return cls._spec(key)"
+                    _ -> do
+                        forM_ refDict $ \(name', ref) -> do
+                            let name = quote $ coerce name'
+                                arg = sformat ("key : Literal[" % stext % "]") name
+                                rv = sformat ("Type[NonSpare_" % int % "]") ref
+                            "@overload"
+                            "@classmethod"
+                            pyFunc "spec" ["cls", arg] rv $ do
+                                "..."
+                        "@classmethod"
+                        let f3 (a, _) = sformat ("Literal[" % stext % "]")
+                                (quote $ coerce a)
+                            arg = sformat("key : Union" % stext)
+                                (fmtList "[" "]" f3 refDict)
+                        pyFunc "spec" ["cls", arg] "Any" $ do
+                            "return cls._spec(key)"
                 ""
                 let arg2 = sformat ("Variation_" % int % ".cv_arg") ix
                     rv = sformat ("'Variation_" % int % "'") ix
