@@ -547,7 +547,7 @@ class RuleVariation:
     @classmethod
     @abstractmethod
     def _parse(cls, bs: Bits) -> Union[ValueError,
-                                      Tuple['RuleVariation', Bits]]:
+                                       Tuple['RuleVariation', Bits]]:
         ...
 
     @abstractmethod
@@ -974,6 +974,7 @@ class Fspec:
             n += 1
             n %= 8
 
+
 def unparse_fspec(items_list: List[Optional[Type[NonSpare]]],
                   args: Dict[str, Any]) -> Tuple[Bits, List[Any]]:
     bs = Bits.from_bytes(b'')
@@ -1002,6 +1003,7 @@ def unparse_fspec(items_list: List[Optional[Type[NonSpare]]],
         cnt += 1
         bs = bs.append_bit(False)
     return (bs, items)
+
 
 class Compound(Variation):
     cv_fspec_max_bytes: ClassVar[int]
@@ -1165,9 +1167,11 @@ def get_frn(items_list: List[Type[UapItemBase]], name: str) -> int:
         frn += 1
     raise ValueError(name, 'not found')
 
+
 class ParsingMode(enum.Enum):
     StrictParsing = enum.auto()
     PartialParsing = enum.auto()
+
 
 class Record:
     cv_fspec_max_bytes: ClassVar[int]
@@ -1186,7 +1190,7 @@ class Record:
 
     @classmethod
     def _parse(cls, pm: ParsingMode, bs: Bits) -> \
-        Union[ValueError, Tuple['Record', Bits]]:
+            Union[ValueError, Tuple['Record', Bits]]:
         """Remark:
         This function is using a less known python feature,
         where the 'else' keyword is included at the end of 'for' loop.
@@ -1214,20 +1218,23 @@ class Record:
             if issubclass(i, UapItemSpare):
                 if pm == ParsingMode.StrictParsing:
                     return ValueError('fx bit set for spare item')
-                else: break
+                else:
+                    break
             elif issubclass(i, UapItemRFS):
                 items3: List[Tuple[str, NonSpare]] = []
                 if len(remaining) < 8:
                     if pm == ParsingMode.StrictParsing:
                         return ValueError('overflow')
-                    else: break
+                    else:
+                        break
                 a, remaining = remaining.split_at(8)
                 n = a.to_uinteger()
                 for j in range(n):
                     if len(remaining) < 8:
                         if pm == ParsingMode.StrictParsing:
                             return ValueError('overflow')
-                        else: break
+                        else:
+                            break
                     b, remaining = remaining.split_at(8)
                     frn = b.to_uinteger()
                     try:
@@ -1238,12 +1245,14 @@ class Record:
                     except (IndexError, AttributeError, AssertionError):
                         if pm == ParsingMode.StrictParsing:
                             return ValueError('invalid FRN')
-                        else: break
+                        else:
+                            break
                     result2 = nsp.parse(remaining)
                     if isinstance(result2, ValueError):
                         if pm == ParsingMode.StrictParsing:
                             return result2
-                        else: break
+                        else:
+                            break
                     obj, remaining = result2
                     items3.append((name, obj))
                 else:
@@ -1256,7 +1265,8 @@ class Record:
                 if isinstance(result2, ValueError):
                     if pm == ParsingMode.StrictParsing:
                         return result2
-                    else: break
+                    else:
+                        break
                 obj, remaining = result2
                 items1[nsp.cv_name] = obj
             else:
@@ -1321,7 +1331,8 @@ class Record:
                     bs1 = bs1.append_bit(False)
                     items2.append(None)
                 else:
-                    rfs = rfss.pop(-1) # the list is reversed, pop from the tail
+                    # the list is reversed, pop from the tail
+                    rfs = rfss.pop(-1)
                     if rfs is None:
                         bs1 = bs1.append_bit(False)
                     else:
@@ -1341,7 +1352,7 @@ class Record:
             cnt += 1
             bs1 = bs1.append_bit(False)
 
-        return cls(bs1+bs2, items1, items2)
+        return cls(bs1 + bs2, items1, items2)
 
     def unparse(self) -> Bits:
         return self.bs
@@ -1469,7 +1480,7 @@ class Expansion:
     def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Expansion', Bits]]:
         a, b = cls.cv_type
         if a == FspecFixed:
-            n = b*8
+            n = b * 8
             if len(bs) < n:
                 return ValueError('overflow')
             flags_bits, remaining = bs.split_at(n)
@@ -1503,7 +1514,7 @@ class Expansion:
             return args
         a, b = cls.cv_type
         if a == FspecFixed:
-            n = b*8
+            n = b * 8
             bs = Bits.from_bytes(b'')
             items: List[Tuple[str, NonSpare]] = []
             cnt = 0

@@ -318,6 +318,7 @@ def test_extended2() -> None:
     assert var8_4 is not None and var8_4.as_uint() == 4
     assert var8_5 is not None and var8_5.as_uint() == 5
 
+
 def test_extended3() -> None:
     T = Cat_000_1_0.cv_record.spec('102')
     obj = T.create((1, 2))
@@ -392,7 +393,7 @@ def test_explicit2() -> None:
 
 def test_explicit3a() -> None:
     Cat = Cat_000_1_0
-    Ref = Ref_000_1_1 # without FX
+    Ref = Ref_000_1_1  # without FX
     re = Ref.cv_expansion.create({
         'I1': 1,
         'I2': 2,
@@ -427,7 +428,7 @@ def test_explicit3a() -> None:
 
 def test_explicit3b() -> None:
     Cat = Cat_000_1_0
-    Ref = Ref_000_1_2 # with FX
+    Ref = Ref_000_1_2  # with FX
     re = Ref.cv_expansion.create({
         'I1': 1,
         'I2': 2,
@@ -462,7 +463,7 @@ def test_explicit3b() -> None:
 
 def test_explicit3c() -> None:
     Cat = Cat_000_1_0
-    Ref = Ref_000_1_2 # with FX
+    Ref = Ref_000_1_2  # with FX
     re = Ref.cv_expansion.create({
         'I1': 1,
         'I2': 2,
@@ -610,6 +611,7 @@ def test_record() -> None:
     assert bs2.null()
     assert with_rfs2.unparse() == bs
 
+
 def test_record_multiple_rfs() -> None:
     T = Cat_003_1_0.cv_record
 
@@ -633,7 +635,7 @@ def test_record_multiple_rfs() -> None:
     }, [
         ('101', 0xAA),
         ('102', 0x55),
-       ],
+    ],
     )
     check(r1, '90010202aa0355')
 
@@ -642,32 +644,32 @@ def test_record_multiple_rfs() -> None:
     }, [
         ('101', 0xAA),
         ('102', 0x55),
-       ],
-       [
+    ],
+        [
         ('201', 0xF1),
         ('202', 0xF2),
-       ],
+    ],
     )
     check(r2, '94010202aa0355020500f10700f2')
 
     r3 = T.create({
         '010': 0x01,
     }, None,
-       [
+        [
         ('201', 0xF1),
         ('202', 0xF2),
-       ],
+    ],
     )
     check(r3, '8401020500f10700f2')
 
     r4 = T.create({
         '010': 0x01,
     }, [
-       ],
-       [
+    ],
+        [
         ('201', 0xF1),
         ('202', 0xF2),
-       ],
+    ],
     )
     check(r4, '940100020500f10700f2')
 
@@ -924,6 +926,7 @@ def test_parse4() -> None:
         assert not isinstance(result2, ValueError)
         assert len(result2) == 3
 
+
 def test_parse5() -> None:
     """Non-compatible items in multiple uaps."""
     Cat1 = Cat_001_1_0
@@ -938,6 +941,7 @@ def test_parse5() -> None:
 
     results_track = Cat1.cv_uap.parse_any_uap(bs_track)
     assert len(results_track) == 1
+
 
 def test_parse_nonblocking() -> None:
     """We encode a single record with a new edition, where some items
@@ -976,12 +980,12 @@ def test_parse_nonblocking() -> None:
         r1, remaining = result1
         assert remaining.null()
         assert hexlify(record1.unparse().to_bytes()) == \
-                hexlify(r1.unparse().to_bytes())
+            hexlify(r1.unparse().to_bytes())
 
     # old edition, partial parsing shall not fail
     result2 = Ed0.cv_record.parse(ParsingMode.PartialParsing, s)
     assert not isinstance(result2, ValueError)
     r2, remaining = result2
     assert hexlify(record0.unparse().to_bytes()) == \
-            hexlify(r2.unparse().to_bytes())
+        hexlify(r2.unparse().to_bytes())
     assert remaining == Bits.from_uinteger(0xff, 0, 8)
