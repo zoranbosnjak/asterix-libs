@@ -137,8 +137,9 @@ instance Node (A.Rule A.Content) where
                 fmt ("cv_content: TypeAlias = Content_" % int) ref
                 ""
                 "@property"
+                "@no_type_check"
                 pyFunc "content" ["self"] (sformat ("Content_" % int) ref) $ do
-                    "return self._get_content() # type: ignore"
+                    "return self._get_content()"
         A.Dependent items dv cases -> do
             refDv <- walk dv
             refs <- forM cases $ \(a, b) -> do
@@ -192,22 +193,30 @@ instance Node Variation where
                 fmt ("cv_bit_size = " % int) (coerce n :: Int)
                 fmt ("cv_rule = RuleContent_" % int) ref
                 ""
+                "@no_type_check"
                 "@classmethod"
                 let arg = sformat ("Variation_" % int % ".cv_arg") ix
                     rv = sformat("Variation_" % int) ix
                 pyFunc "create" ["cls", "arg: " <> quote arg] (quote rv) $ do
-                    "return cls._create(arg) # type: ignore"
+                    "return cls._create(arg)"
+                ""
+                "@no_type_check"
+                "@classmethod"
+                pyFunc "parse" ["cls", "bs: Bits"] (quote rv) $ do
+                    "return cls._parse(bs)"
                 ""
                 "@property"
+                "@no_type_check"
                 pyFunc "rule" ["self"]
                     (sformat ("RuleContent_" % int) ref) $ do
-                        "return self._get_rule() # type: ignore"
+                        "return self._get_rule()"
                 case mRef2 of
                     Nothing -> pure ()
                     Just ref2 -> do
                         ""
                         "# shortcut"
                         "@property"
+                        "@no_type_check"
                         pyFunc "content" ["self"]
                             (sformat ("Content_" % int) ref2) $ do
                                 "return self.rule.content"
@@ -255,22 +264,30 @@ instance Node Variation where
                             arg2 = sformat ("key : Literal[" % stext % "]") name2
                             rv2 = sformat ("Type[RuleVariation_" % int % "]") ref
                         "@classmethod"
+                        "@no_type_check"
                         pyFunc "spec" ["cls", arg2] rv2 $ do
-                            "return cls._spec(arg) # type: ignore"
+                            "return cls._spec(key)"
                         ""
                         do
                             let name = quote $ coerce name'
                                 arg = sformat ("key : Literal[" % stext % "]") name
                                 rv = sformat ("RuleVariation_" % int) ref
+                            "@no_type_check"
                             pyFunc "get_item" ["self", arg] rv $ do
-                                "return self._get_item(key) # type: ignore"
+                                "return self._get_item(key)"
                         ""
                         do
                             let arg3 = sformat ("Variation_" % int % ".cv_arg") ix
                                 rv = sformat ("'Variation_" % int % "'") ix
                             "@classmethod"
+                            "@no_type_check"
                             pyFunc "create" ["cls", "arg:" <> quote arg3] rv $ do
-                                "return cls._create(arg) # type: ignore"
+                                "return cls._create(arg)"
+                            ""
+                            "@no_type_check"
+                            "@classmethod"
+                            pyFunc "parse" ["cls", "bs: Bits"] (quote rv) $ do
+                                "return cls._parse(bs)"
                     refDict' -> do
                         forM_ refDict' $ \(name', ref) -> do
                             let name = quote $ coerce name'
@@ -301,8 +318,14 @@ instance Node Variation where
                         "@classmethod"
                         let arg2 = sformat ("Variation_" % int % ".cv_arg") ix
                             rv = sformat ("'Variation_" % int % "'") ix
+                        "@no_type_check"
                         pyFunc "create" ["cls", "arg: " <> quote arg2] rv $ do
-                            "return cls._create(arg) # type: ignore"
+                            "return cls._create(arg)"
+                        ""
+                        "@no_type_check"
+                        "@classmethod"
+                        pyFunc "parse" ["cls", "bs: Bits"] (quote rv) $ do
+                            "return cls._parse(bs)"
 
         A.Extended lst -> do
             groups <- forM (unconcatMaybe lst) $ \group -> do
@@ -354,9 +377,15 @@ instance Node Variation where
                 ""
                 let arg2 = sformat ("Variation_" % int % ".cv_arg") ix
                     rv = sformat ("'Variation_" % int % "'") ix
+                "@no_type_check"
                 "@classmethod"
                 pyFunc "create" ["cls", "arg: " <> quote arg2] rv $ do
-                    "return cls._create(arg) # type: ignore"
+                    "return cls._create(arg)"
+                ""
+                "@no_type_check"
+                "@classmethod"
+                pyFunc "parse" ["cls", "bs: Bits"] (quote rv) $ do
+                    "return cls._parse(bs)"
                 ""
                 forM_ (zip [1::Int ..] groups) $ \(gi, group) -> do
                     forM_ group $ \case
@@ -389,12 +418,19 @@ instance Node Variation where
                 let arg2 = sformat ("Variation_" % int % ".cv_arg") ix
                     rv = sformat ("'Variation_" % int % "'") ix
                 "@classmethod"
+                "@no_type_check"
                 pyFunc "create" ["cls", "arg: " <> quote arg2] rv $ do
-                    "return cls._create(arg) # type: ignore"
+                    "return cls._create(arg)"
                 ""
+                "@no_type_check"
+                "@classmethod"
+                pyFunc "parse" ["cls", "bs: Bits"] (quote rv) $ do
+                    "return cls._parse(bs)"
+                ""
+                "@no_type_check"
                 pyFunc "get_list" ["self"]
                     (sformat ("List[Variation_" % int % "]") ref) $ do
-                        "return self._get_list() # type: ignore"
+                        "return self._get_list()"
 
         A.Explicit met -> do
             out $ pyClass "Variation" ix "Explicit" $ do
@@ -407,8 +443,14 @@ instance Node Variation where
                 let arg2 = sformat ("Variation_" % int % ".cv_arg") ix
                     rv = sformat ("'Variation_" % int % "'") ix
                 "@classmethod"
+                "@no_type_check"
                 pyFunc "create" ["cls", "arg: " <> quote arg2] rv $ do
-                    "return cls._create(arg) # type: ignore"
+                    "return cls._create(arg)"
+                ""
+                "@no_type_check"
+                "@classmethod"
+                pyFunc "parse" ["cls", "bs: Bits"] (quote rv) $ do
+                    "return cls._parse(bs)"
 
         A.Compound lst -> do
             refList <- forM lst $ \case
@@ -436,20 +478,24 @@ instance Node Variation where
                             arg = sformat ("key : Literal[" % stext % "]") name
                             rv = sformat ("Type[NonSpare_" % int % "]") ref
                             rv2 = sformat ("'Variation_" % int % "'") ix
+                        "@no_type_check"
                         "@classmethod"
                         pyFunc "spec" ["cls", arg] rv $ do
-                            "return cls._spec(arg) # type: ignore"
+                            "return cls._spec(key)"
                         ""
+                        "@no_type_check"
                         pyFunc "get_item" ["self", arg] ("Optional[" <> rv <> "]") $ do
-                            "return self._get_item(key) # type: ignore"
+                            "return self._get_item(key)"
                         ""
                         let arg2 = sformat ("val : NonSpare_" % int % ".cv_arg")
                                 ref
+                        "@no_type_check"
                         pyFunc "set_item" ["self", arg, arg2] rv2 $ do
-                            "return self._set_item(key, val) # type: ignore"
+                            "return self._set_item(key, val)"
                         ""
+                        "@no_type_check"
                         pyFunc "del_item" ["self", arg] rv2 $ do
-                            "return self._del_item(key) # type: ignore"
+                            "return self._del_item(key)"
                     _ -> do
                         forM_ refDict $ \(name', ref) -> do
                             let name = quote $ coerce name'
@@ -504,9 +550,15 @@ instance Node Variation where
                 ""
                 let arg2 = sformat ("Variation_" % int % ".cv_arg") ix
                     rv = sformat ("'Variation_" % int % "'") ix
+                "@no_type_check"
                 "@classmethod"
                 pyFunc "create" ["cls", "arg: " <> quote arg2] rv $ do
-                    "return cls._create(arg) # type: ignore"
+                    "return cls._create(arg)"
+                ""
+                "@no_type_check"
+                "@classmethod"
+                pyFunc "parse" ["cls", "bs: Bits"] (quote rv) $ do
+                    "return cls._parse(bs)"
 
 instance Node (A.Rule Variation) where
     focus = lRuleVariation
@@ -518,10 +570,16 @@ instance Node (A.Rule Variation) where
                 fmt ("cv_arg: TypeAlias = Variation_" % int % ".cv_arg") ref
                 fmt ("cv_variation: TypeAlias = Variation_" % int) ref
                 ""
+                "@no_type_check"
                 "@classmethod"
                 pyFunc "create" ["cls", "arg : " <> quote (rv <> ".cv_arg")]
                     (quote rv) $ do
-                        "return cls._create(arg) # type: ignore"
+                        "return cls._create(arg)"
+                ""
+                "@no_type_check"
+                "@classmethod"
+                pyFunc "parse" ["cls", "bs: Bits"] (quote rv) $ do
+                    "return cls._parse(bs)"
                 ""
                 "@property"
                 pyFunc "variation" ["self"] (sformat ("Variation_" % int) ref) $ do
@@ -561,10 +619,16 @@ instance Node (A.Rule Variation) where
                 pyFunc "variation" ["cls", "key : Any"] "Any" $ do
                     "return cls._variation(key)"
                 ""
+                "@no_type_check"
                 "@classmethod"
                 pyFunc "create" ["cls", "arg : " <> quote (rv <> ".cv_arg")]
                     (quote rv) $ do
-                        "return cls._create(arg) # type: ignore"
+                        "return cls._create(arg)"
+                ""
+                "@no_type_check"
+                "@classmethod"
+                pyFunc "parse" ["cls", "bs: Bits"] (quote rv) $ do
+                    "return cls._parse(bs)"
 
 instance Node NonSpare where
     focus = lNonSpare
@@ -580,10 +644,16 @@ instance Node NonSpare where
             fmt ("cv_title = " % stext) (quote $ coerce title)
             fmt ("cv_rule: TypeAlias = RuleVariation_" % int) ref
             ""
+            "@no_type_check"
             "@classmethod"
             pyFunc "create" ["cls", "arg : " <> quote(clsName <> ".cv_arg")]
                 (quote clsName) $ do
-                    "return cls._create(arg) # type: ignore"
+                    "return cls._create(arg)"
+            ""
+            "@no_type_check"
+            "@classmethod"
+            pyFunc "parse" ["cls", "bs: Bits"] (quote clsName) $ do
+                "return cls._parse(bs)"
             ""
             "@property"
             pyFunc "rule" ["self"] (sformat ("RuleVariation_" % int) ref) $ do
@@ -613,10 +683,16 @@ instance Node Item where
                 fmt ("cv_arg: TypeAlias = NonSpare_" % int % ".cv_arg") ref
                 fmt ("cv_non_spare: TypeAlias = NonSpare_" % int) ref
                 ""
+                "@no_type_check"
                 "@classmethod"
                 pyFunc "create" ["cls", "arg : " <> quote (clsName <> ".cv_arg")]
                     (quote clsName) $ do
-                        "return cls._create(arg) # type: ignore"
+                        "return cls._create(arg)"
+                ""
+                "@no_type_check"
+                "@classmethod"
+                pyFunc "parse" ["cls", "bs: Bits"] (quote clsName) $ do
+                    "return cls._parse(bs)"
 
 instance Node UapItem where
     focus = lUapItem
@@ -668,25 +744,30 @@ instance Node Record where
                     let arg = sformat ("key : Literal[" % stext % "]") name
                         rv = sformat ("Type[NonSpare_" % int % "]") ref
                         rv2 = sformat ("'Record_" % int % "'") ix
+                    "@no_type_check"
                     "@classmethod"
                     pyFunc "spec" ["cls", arg] rv $ do
-                        "return cls._spec(arg) # type: ignore"
+                        "return cls._spec(key)"
                     ""
+                    "@no_type_check"
                     pyFunc "get_item" ["self", arg] ("Optional[" <> rv <> "]") $ do
-                        "return self._get_item(key) # type: ignore"
+                        "return self._get_item(key)"
                     ""
                     let arg2 = sformat ("val : NonSpare_" % int % ".cv_arg")
                             ref
+                    "@no_type_check"
                     pyFunc "set_item" ["self", arg, arg2] rv2 $ do
-                        "return self._set_item(key, val) # type: ignore"
+                        "return self._set_item(key, val)"
                     ""
+                    "@no_type_check"
                     pyFunc "del_item" ["self", arg] rv2 $ do
-                        "return self._del_item(key) # type: ignore"
+                        "return self._del_item(key)"
                     when (rfs > 0) $ do
                         ""
+                        "@no_type_check"
                         pyFunc "get_rfs_item" ["self", arg]
                             ("List[" <> rv <> "]") $ do
-                                "return self._get_rfs_item(key) # type: ignore"
+                                "return self._get_rfs_item(key)"
                 _ -> do
                     forM_ refDict $ \(name, ref) -> do
                         let arg = sformat ("key : Literal[" % stext % "]") name
@@ -749,15 +830,17 @@ instance Node Record where
                 case rfs of
                     0 -> do
                         let args = ["cls", argDict]
+                        "@no_type_check"
                         "@classmethod"
                         pyFunc "create" args rv $ do
-                            "return cls._create(arg) # type: ignore"
+                            "return cls._create(arg)"
                     1 -> do
                         let argsRfs = sformat ("rfs: Optional[" % stext % "] = None")
                                 argRfs
+                        "@no_type_check"
                         "@classmethod"
                         pyFunc "create" ["cls", argDict, argsRfs] rv $ do
-                            "return cls._create(arg, rfs) # type: ignore"
+                            "return cls._create(arg, rfs)"
                     _ -> do
                         "@overload"
                         "@classmethod"
@@ -783,9 +866,10 @@ instance Node Record where
                 let r = sformat ("Record_" % int) ix
                     rv = sformat ("Union[ValueError, Tuple[" % stext % ", Bits]]")
                         (quote r)
+                "@no_type_check"
                 "@classmethod"
                 pyFunc "parse" ["cls", "pm: ParsingMode", "bs : Bits"] rv $ do
-                    "return cls._parse(pm, bs) # type: ignore"
+                    "return cls._parse(pm, bs)"
 
 instance Node Uap where
     focus = lUap
@@ -887,18 +971,18 @@ instance Node Expansion where
                         rv2 = sformat ("'Expansion_" % int % "'") ix
                     "@classmethod"
                     pyFunc "spec" ["cls", arg] rv $ do
-                        "return cls._spec(arg) # type: ignore"
+                        "return cls._spec(key)"
                     ""
                     pyFunc "get_item" ["self", arg] ("Optional[" <> rv <> "]") $ do
-                        "return self._get_item(key) # type: ignore"
+                        "return self._get_item(key)"
                     ""
                     let arg2 = sformat ("val : NonSpare_" % int % ".cv_arg")
                             ref
                     pyFunc "set_item" ["self", arg, arg2] rv2 $ do
-                        "return self._set_item(key, val) # type: ignore"
+                        "return self._set_item(key, val)"
                     ""
                     pyFunc "del_item" ["self", arg] rv2 $ do
-                        "return self._del_item(key) # type: ignore"
+                        "return self._del_item(key)"
                 _ -> do
                     forM_ refDict $ \(name', ref) -> do
                         let name = quote $ coerce name'
@@ -954,17 +1038,19 @@ instance Node Expansion where
             do
                 let arg2 = sformat ("Expansion_" % int % ".cv_arg") ix
                     rv = sformat ("'Expansion_" % int % "'") ix
+                "@no_type_check"
                 "@classmethod"
                 pyFunc "create" ["cls", "arg: " <> quote arg2] rv $ do
-                    "return cls._create(arg) # type: ignore"
+                    "return cls._create(arg)"
             do
                 ""
                 let r = sformat ("Expansion_" % int) ix
                     rv = sformat ("Union[ValueError, Tuple[" % stext % ", Bits]]")
                         (quote r)
+                "@no_type_check"
                 "@classmethod"
                 pyFunc "parse" ["cls", "bs : Bits"] rv $ do
-                    "return cls._parse(bs) # type: ignore"
+                    "return cls._parse(bs)"
 
 instance Node Asterix where
     focus = lAsterix
@@ -982,11 +1068,12 @@ instance Node Asterix where
                     "cv_record: TypeAlias = cv_uap.cv_record # shortcut"
 
                 ""
+                "@no_type_check"
                 "@classmethod"
                 let arg = sformat ("records : List[Uap_" % int % ".cv_arg]") ref
                     rv = quote $ sformat ("Asterix_" % int) ix
                 pyFunc "create" ["cls", arg] rv $ do
-                    "return cls._create(records) # type: ignore"
+                    "return cls._create(records)"
         AsterixExpansion cat (A.Edition a b) expan -> do
             ref <- walk expan
             out $ pyClass "Asterix" ix "AstRef" $ do

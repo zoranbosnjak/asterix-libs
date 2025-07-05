@@ -517,7 +517,7 @@ class Variation:
     """
     @classmethod
     @abstractmethod
-    def parse(cls, bs: Bits) -> Union[ValueError, Tuple['Variation', Bits]]:
+    def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Variation', Bits]]:
         ...
 
     @abstractmethod
@@ -531,7 +531,7 @@ class ItemBase:
     """
     @classmethod
     @abstractmethod
-    def parse(cls, bs: Bits) -> Union[ValueError, Tuple['ItemBase', Bits]]:
+    def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['ItemBase', Bits]]:
         ...
 
     @abstractmethod
@@ -546,7 +546,7 @@ class RuleVariation:
 
     @classmethod
     @abstractmethod
-    def parse(cls, bs: Bits) -> Union[ValueError,
+    def _parse(cls, bs: Bits) -> Union[ValueError,
                                       Tuple['RuleVariation', Bits]]:
         ...
 
@@ -563,12 +563,16 @@ class Spare(ItemBase):
         self.bs = bs
 
     @classmethod
-    def parse(cls, bs: Bits) -> Union[ValueError, Tuple['Spare', Bits]]:
+    def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Spare', Bits]]:
         n = cls.cv_bit_size
         if len(bs) < n:
             return ValueError('overflow')
         a, b = bs.split_at(n)
         return (cls(a), b)
+
+    @classmethod
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple['Spare', Bits]]:
+        return cls._parse(bs)
 
     @classmethod
     def create(cls, arg: int) -> 'Spare':
@@ -591,8 +595,8 @@ class NonSpare:
         self.arg = arg
 
     @classmethod
-    def parse(cls, bs: Bits) -> Union[ValueError, Tuple['NonSpare', Bits]]:
-        result = cls.cv_rule.parse(bs)
+    def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['NonSpare', Bits]]:
+        result = cls.cv_rule._parse(bs)
         if isinstance(result, ValueError):
             return result
         obj, remaining = result
@@ -625,8 +629,8 @@ class Item(ItemBase):
         self.arg = arg
 
     @classmethod
-    def parse(cls, bs: Bits) -> Union[ValueError, Tuple['Item', Bits]]:
-        result = cls.cv_non_spare.parse(bs)
+    def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Item', Bits]]:
+        result = cls.cv_non_spare._parse(bs)
         if isinstance(result, ValueError):
             return result
         obj, remaining = result
@@ -652,7 +656,7 @@ class Element(Variation):
         self.bs = bs
 
     @classmethod
-    def parse(cls, bs: Bits) -> Union[ValueError, Tuple['Element', Bits]]:
+    def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Element', Bits]]:
         n = cls.cv_bit_size
         if len(bs) < n:
             return ValueError('overflow')
@@ -692,11 +696,11 @@ class Group(Variation):
         self.arg = arg
 
     @classmethod
-    def parse(cls, bs: Bits) -> Union[ValueError, Tuple['Group', Bits]]:
+    def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Group', Bits]]:
         remaining = bs
         items: List[ItemBase] = []
         for (i, size) in cls.cv_items_list:
-            result = i.parse(remaining)
+            result = i._parse(remaining)
             if isinstance(result, ValueError):
                 return result
             obj, remaining = result
@@ -756,7 +760,7 @@ class Extended(Variation):
         self.arg = arg
 
     @classmethod
-    def parse(cls, bs: Bits) -> Union[ValueError, Tuple['Extended', Bits]]:
+    def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Extended', Bits]]:
         remaining = bs
         items1: List[List[Optional[ItemBase]]] = []
         items2: List[Optional[ItemBase]] = []
@@ -772,7 +776,7 @@ class Extended(Variation):
                     break
             else:
                 spec, size = i
-                result = spec.parse(remaining)
+                result = spec._parse(remaining)
                 if isinstance(result, ValueError):
                     return result
                 obj, remaining = result
@@ -844,14 +848,14 @@ class Repetitive(Variation):
         self.arg = arg
 
     @classmethod
-    def parse(cls, bs: Bits) -> Union[ValueError, Tuple['Repetitive', Bits]]:
+    def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Repetitive', Bits]]:
         rbs = cls.cv_rep_bytes
         items: List[Variation] = []
         remaining = bs
         # parsing with FX
         if rbs is None:
             while True:
-                result = cls.cv_variation.parse(remaining)
+                result = cls.cv_variation._parse(remaining)
                 if isinstance(result, ValueError):
                     return result
                 obj, remaining = result
@@ -868,7 +872,7 @@ class Repetitive(Variation):
                 return ValueError('overflow')
             (cnt, remaining) = remaining.split_at(rbs)
             for i in range(cnt.to_uinteger()):
-                result = cls.cv_variation.parse(remaining)
+                result = cls.cv_variation._parse(remaining)
                 if isinstance(result, ValueError):
                     return result
                 obj, remaining = result
@@ -909,7 +913,7 @@ class Explicit(Variation):
         self.bs = bs
 
     @classmethod
-    def parse(cls, bs: Bits) -> Union[ValueError, Tuple['Explicit', Bits]]:
+    def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Explicit', Bits]]:
         if len(bs) < 8:
             return ValueError('overflow')
         cnt = bs.take(8).to_uinteger() * 8
@@ -1004,7 +1008,7 @@ class Compound(Variation):
         return cls.cv_items_dict[key]
 
     @classmethod
-    def parse(cls, bs: Bits) -> Union[ValueError, Tuple['Compound', Bits]]:
+    def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Compound', Bits]]:
         result = Fspec.parse(bs)
         if isinstance(result, ValueError):
             return result
@@ -1015,7 +1019,7 @@ class Compound(Variation):
                 continue
             if nsp is None:
                 return ValueError('fx bit set for non-defined item')
-            result2 = nsp.parse(remaining)
+            result2 = nsp._parse(remaining)
             if isinstance(result2, ValueError):
                 return result2
             obj, remaining = result2
@@ -1064,9 +1068,9 @@ class RuleVariationContextFree(RuleVariation):
         self.arg = arg
 
     @classmethod
-    def parse(cls, bs: Bits) -> \
+    def _parse(cls, bs: Bits) -> \
             Union[ValueError, Tuple['RuleVariationContextFree', Bits]]:
-        result = cls.cv_variation.parse(bs)
+        result = cls.cv_variation._parse(bs)
         if isinstance(result, ValueError):
             return result
         obj, remaining = result
@@ -1108,9 +1112,9 @@ class RuleVariationDependent(RuleVariation):
         self.bs = bs
 
     @classmethod
-    def parse(cls, bs: Bits) -> \
+    def _parse(cls, bs: Bits) -> \
             Union[ValueError, Tuple['RuleVariationDependent', Bits]]:
-        result = cls.cv_default_variation.parse(bs)
+        result = cls.cv_default_variation._parse(bs)
         if isinstance(result, ValueError):
             return result
         obj, remaining = result
@@ -1475,7 +1479,7 @@ class Expansion:
                 continue
             if nsp is None:
                 return ValueError('fx bit set for non-defined item')
-            result2 = nsp.parse(remaining)
+            result2 = nsp._parse(remaining)
             if isinstance(result2, ValueError):
                 return result2
             obj, remaining = result2

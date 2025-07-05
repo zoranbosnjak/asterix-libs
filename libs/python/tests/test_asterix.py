@@ -12,7 +12,7 @@ def test_raises() -> None:
     Cat0.cv_record.create({})
     Cat0.cv_record.create({'010': 1}),
     with pytest.raises(ValueError):
-        Cat0.cv_record.create({'nonexistingitem': 1})  # type: ignore
+        Cat0.cv_record.create({'nonexistingitem': 1})
 
 
 def approximately(err: float, a: float, b: float) -> bool:
@@ -480,7 +480,7 @@ def test_explicit3c() -> None:
 def test_compound3() -> None:
     T = Cat_000_1_0.cv_record.spec('093')
     with pytest.raises(ValueError):
-        obj = T.create({'nonexistingitem': 1})  # type: ignore
+        obj = T.create({'nonexistingitem': 1})
     obj = T.create({})
     assert obj.unparse() == Bits.from_bytes(unhexlify(''))
     obj1 = T.create({'I1': 1})
@@ -821,7 +821,7 @@ def test_parse3() -> None:
             rec_plot, rec_plot,
             rec_track, rec_track, rec_track,
         ]
-        bs1 = Cat1.create(records).unparse()  # type: ignore
+        bs1 = Cat1.create(records).unparse()
 
         dbs = RawDatablock.parse(bs1)
         assert not isinstance(dbs, ValueError)

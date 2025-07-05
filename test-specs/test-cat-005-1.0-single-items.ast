@@ -1,0 +1,49 @@
+asterix 005 "Imaginary category for test purposes"
+edition 1.0
+date 2000-12-14
+preamble
+    Test
+
+items
+
+    000 "Message Type"
+        element 8
+            table
+                1: Message 1
+                2: Message 2
+                3: Message 3
+
+    101 "Single1"
+        extended
+            I1 "Test"
+                element 7
+                    raw
+            -
+
+    102 "Single2"
+        extended
+            spare 4
+            I1 "Test"
+                element 3
+                    raw
+            -
+
+    103 "Single3"
+        extended
+            spare 4
+            I1 "Test"
+                element 4
+                    raw
+
+    104 "Single4"
+        compound
+            I1 "Test"
+                element 8
+                    raw
+
+uap
+    000
+    101
+    102
+    103
+    104
