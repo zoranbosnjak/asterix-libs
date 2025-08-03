@@ -1002,6 +1002,9 @@ def unparse_fspec(items_list: List[Optional[Type[NonSpare]]],
     while (cnt % 8):
         cnt += 1
         bs = bs.append_bit(False)
+    # fspec must be non-empty
+    if bs.null():
+        bs = Bits.from_uinteger(0, 0, 8)
     return (bs, items)
 
 
@@ -1351,6 +1354,9 @@ class Record:
         while (cnt % 8):
             cnt += 1
             bs1 = bs1.append_bit(False)
+        # fspec must be non-empty
+        if bs1.null():
+            bs1 = Bits.from_uinteger(0, 0, 8)
 
         return cls(bs1 + bs2, items1, items2)
 

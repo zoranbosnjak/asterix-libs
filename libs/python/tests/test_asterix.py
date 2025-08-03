@@ -499,7 +499,7 @@ def test_compound3() -> None:
     with pytest.raises(ValueError):
         obj = T.create({'nonexistingitem': 1})
     obj = T.create({})
-    assert obj.unparse() == Bits.from_bytes(unhexlify(''))
+    assert obj.unparse() == Bits.from_bytes(unhexlify('00'))
     obj1 = T.create({'I1': 1})
     assert obj1.variation.get_item('I1') is not None
     assert obj1.variation.get_item('I2') is None
@@ -542,7 +542,7 @@ def test_record() -> None:
     T = Cat_000_1_0.cv_record
     r0 = T.create({
     })
-    assert r0.unparse().to_bytes() == b''
+    assert r0.unparse() == Bits.from_bytes(unhexlify('00'))
     assert r0.get_item('000') is None
 
     r1 = T.create({
