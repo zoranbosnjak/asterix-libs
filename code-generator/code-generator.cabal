@@ -34,6 +34,7 @@ executable code-generator
         Types
         Struct
         Language.Python
+        Language.Haskell
     -- other-extensions:
     build-depends:
         base < 5
