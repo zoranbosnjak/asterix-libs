@@ -273,6 +273,16 @@ items
             element 7
                 raw
 
+    064 "Repetitive Fx With Group"
+        repetitive fx
+            group
+                I1 ""
+                    element 8
+                        raw
+                I2 ""
+                    element 7
+                        raw
+
     071 "Explicit None"
         explicit
 
@@ -377,6 +387,7 @@ uap
     061
     062
     063
+    064
     071
     072
     073

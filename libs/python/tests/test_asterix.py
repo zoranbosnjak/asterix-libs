@@ -1,5 +1,7 @@
 # asterix item manipulation unit tests
 
+# Remark: Keep asterix test scenarios synchronized between implementations.
+
 from binascii import hexlify, unhexlify
 from typing import *
 import pytest
@@ -7,7 +9,7 @@ import pytest
 from . generated import *
 
 
-def test_raises() -> None:
+def test_create() -> None:
     Cat0 = Cat_000_1_0
     Cat0.cv_record.create({})
     Cat0.cv_record.create({'010': 1}),
@@ -24,10 +26,6 @@ def test_rule_variation_context_free() -> None:
     obj = Var.create(0x01)
     assert obj.unparse() == Bits.from_bytes(unhexlify('01'))
     assert obj.as_uint() == 0x01
-    Rv = Cat_000_1_0.cv_record.spec('000')
-    obj2 = Rv.create(0x01)
-    assert obj2.unparse() == Bits.from_bytes(unhexlify('01'))
-    assert obj2.as_uint() == 0x01
 
 
 def test_rule_variation_dependent() -> None:
@@ -594,7 +592,7 @@ def test_record() -> None:
     ])
     bs = with_rfs.unparse()
     assert bs == Bits.from_bytes(unhexlify(
-        '410108030602AA02550112340A03040B03040C01FF'))
+        '410104030602AA02550112340A03040B03040C01FF'))
 
     assert with_rfs.get_item('000') is not None
     assert with_rfs.get_item('010') is None
@@ -705,16 +703,16 @@ def test_multiple_uaps() -> None:
     TTrack = T.spec('track')
     rec_plot = TPlot.create({
         '010': 1,
-        '020': ((1,)),
+        '020': ((('TYP', 0), ('I1', 1), None),),
         '031': 0x03,
     })
     assert rec_plot.unparse() == Bits.from_bytes(unhexlify('E000010203'))
     rec_track = TTrack.create({
         '010': 1,
-        '020': ((2,)),
+        '020': ((('TYP', 1), ('I1', 2), None),),
         '032': 0x04,
     })
-    assert rec_track.unparse() == Bits.from_bytes(unhexlify('D00001040004'))
+    assert rec_track.unparse() == Bits.from_bytes(unhexlify('D00001840004'))
 
 
 def test_create_datagram() -> None:
@@ -739,8 +737,8 @@ def test_parse1() -> None:
         '4003',
         'C0010203',
         '04C01157',
-        '410108030502000112340A03040B03040C01FF',
-        '410108030602AA02550112340A03040B03040C01FF'
+        '410104030502000112340A03040B03040C01FF',
+        '410104030602AA02550112340A03040B03040C01FF'
     ]:
         bs = Bits.from_bytes(unhexlify(sample))
         result = T.parse(ParsingMode.StrictParsing, bs)
@@ -760,6 +758,7 @@ def test_parse2() -> None:
     db = dbs[0]
     result = Cat0.cv_uap.parse(db.get_raw_records())
     assert not isinstance(result, ValueError)
+    assert len(result) == 3
     for i in result:
         assert i.unparse() == r.unparse()
 
@@ -803,6 +802,7 @@ def test_parse3() -> None:
         # try to parse as any defined UAP
         result3 = Cat1.cv_uap.parse_any_uap(bs2)
         assert len(result3) == 1
+        assert len(result3[0]) == 2
         for r2 in result3[0]:
             assert r2.unparse() == rec_plot.unparse()
 
@@ -831,6 +831,7 @@ def test_parse3() -> None:
         # try to parse as any defined UAP
         result3 = Cat1.cv_uap.parse_any_uap(bs2)
         assert len(result3) == 1
+        assert len(result3[0]) == 3
         for r2 in result3[0]:
             assert r2.unparse() == rec_track.unparse()
 
@@ -858,6 +859,7 @@ def test_parse3() -> None:
         # try to parse as any defined UAP
         result3 = Cat1.cv_uap.parse_any_uap(bs2)
         assert len(result3) == 1
+        assert len(result3[0]) == len(records)
         for (r1, r2) in zip(records, result3[0]):
             assert r1.unparse() == r2.unparse()
 
@@ -938,9 +940,11 @@ def test_parse5() -> None:
 
     results_plot = Cat1.cv_uap.parse_any_uap(bs_plot)
     assert len(results_plot) == 1
+    assert len(results_plot[0]) == 1
 
     results_track = Cat1.cv_uap.parse_any_uap(bs_track)
     assert len(results_track) == 1
+    assert len(results_track[0]) == 1
 
 
 def test_parse_nonblocking() -> None:
