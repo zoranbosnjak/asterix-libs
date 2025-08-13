@@ -31,9 +31,49 @@ def test_rule_variation_context_free() -> None:
 def test_rule_variation_dependent() -> None:
     Var = Cat_000_1_0.cv_record.spec('032').cv_rule.\
         cv_variation.spec('CC').cv_rule.cv_variation.\
-        spec('CP').variation((1, 2))
-    obj = Var.create(1)
-    assert obj.as_uint() == 1
+        spec('CP').spec((1, 2))
+    obj = Var.create(4)
+    assert obj.as_uint() == 4
+    # create complete record with that object
+    rec1 = Cat_000_1_0.cv_record.create({
+        '032': {
+            'CC': (
+                ('TID', 0),
+                ('CP', obj.as_uint()),
+                ('CS', 0))
+            }
+    })
+    bs = rec1.unparse()
+    # try to unparse and parse the record
+    result = Cat_000_1_0.cv_record.parse(ParsingMode.StrictParsing, bs)
+    assert not isinstance(result, ValueError)
+    (rec2, bs2) = result
+    assert bs2.null()
+    i032 = rec2.get_item('032')
+    assert i032 is not None
+    item_cc = i032.variation.get_item('CC')
+    assert item_cc is not None
+    item_cp = item_cc.variation.get_item('CP')
+    assert item_cp is not None
+    # try to cast to all variation cases
+    var0a = item_cp.variation()
+    var0b = item_cp.variation(None)
+    var1 = item_cp.variation((1,1))
+    var2 = item_cp.variation((1,2))
+    var3 = item_cp.variation((2,1))
+    assert not isinstance(var0a, ValueError)
+    assert not isinstance(var0b, ValueError)
+    assert not isinstance(var1, ValueError)
+    assert not isinstance(var2, ValueError)
+    assert not isinstance(var3, ValueError)
+    assert var0a.as_uint() == 4
+    assert var0b.as_uint() == 4
+    assert var1.as_uint() == 4
+    assert var2.as_uint() == 4
+    assert var3.as_uint() == 4
+    item_i1 = var3.get_item('I1')
+    assert item_i1.as_uint() == 1
+    assert var3.get_spares() == [0]
 
 
 def test_rule_content_context_free() -> None:

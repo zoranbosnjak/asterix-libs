@@ -2363,20 +2363,47 @@ class RuleVariation_65(RuleVariationDependent):
 
     @overload
     @classmethod
-    def variation(cls, key : Tuple[Literal[1], Literal[1]]) -> Variation_34:
+    def spec(cls) -> Type[Variation_33]:
         ...
     @overload
     @classmethod
-    def variation(cls, key : Tuple[Literal[1], Literal[2]]) -> Variation_35:
+    def spec(cls, key : None) -> Type[Variation_33]:
         ...
     @overload
     @classmethod
-    def variation(cls, key : Tuple[Literal[2], Literal[1]]) -> Variation_49:
+    def spec(cls, key : Tuple[Literal[1], Literal[1]]) -> Type[Variation_34]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Tuple[Literal[1], Literal[2]]) -> Type[Variation_35]:
+        ...
+    @overload
+    @classmethod
+    def spec(cls, key : Tuple[Literal[2], Literal[1]]) -> Type[Variation_49]:
         ...
 
     @classmethod
-    def variation(cls, key : Any) -> Any:
-        return cls._variation(key)
+    def spec(cls, key : Optional[Any]=None) -> Any:
+        return cls._spec(key)
+
+    @overload
+    def variation(self) -> Union[ValueError, Variation_33]:
+        ...
+    @overload
+    def variation(self, key : None) -> Union[ValueError, Variation_33]:
+        ...
+    @overload
+    def variation(self, key : Tuple[Literal[1], Literal[1]]) -> Union[ValueError, Variation_34]:
+        ...
+    @overload
+    def variation(self, key : Tuple[Literal[1], Literal[2]]) -> Union[ValueError, Variation_35]:
+        ...
+    @overload
+    def variation(self, key : Tuple[Literal[2], Literal[1]]) -> Union[ValueError, Variation_49]:
+        ...
+
+    def variation(self, key : Optional[Any]=None) -> Any:
+        return self._variation(key)
 
     @classmethod
     def create(cls, arg : "RuleVariation_65.cv_arg") -> "RuleVariation_65":

@@ -600,6 +600,8 @@ instance Node (A.Rule Variation) where
                     "return self.arg # type: ignore"
         A.Dependent items dv cases -> do
             let rv = sformat ("RuleVariation_" % int) ix
+                varType = sformat("Type[Variation_" % int % "]")
+                varValue = sformat("Union[ValueError, Variation_" % int % "]")
             refDv <- walk dv
             refs <- forM cases $ \(a, b) -> do
                 ref <- walk b
@@ -619,19 +621,49 @@ instance Node (A.Rule Variation) where
                     let val = fmtList "[" "]" (sformat int) a
                     fmt ("(" % stext % ", Variation_" % int % "),") val ref
                 "]"
+
+                -- spec(cls)
                 ""
+                do
+                    "@overload"
+                    "@classmethod"
+                    pyFunc "spec" ["cls"] (varType refDv) $ do
+                        "..."
+                    "@overload"
+                    "@classmethod"
+                    pyFunc "spec" ["cls", "key : None"] (varType refDv) $ do
+                        "..."
                 forM_ refs $ \(a, ref) -> do
                     let val = sformat ("Literal[" % int % "]")
                         key = "key : " <> fmtList "Tuple[" "]" val a
-                        var = sformat("Variation_" % int) ref
                     "@overload"
                     "@classmethod"
-                    pyFunc "variation" ["cls", key] var $ do
+                    pyFunc "spec" ["cls", key] (varType ref) $ do
                         "..."
                 ""
                 "@classmethod"
-                pyFunc "variation" ["cls", "key : Any"] "Any" $ do
-                    "return cls._variation(key)"
+                pyFunc "spec" ["cls", "key : Optional[Any]=None"] "Any" $ do
+                    "return cls._spec(key)"
+
+                -- variation(self)
+                ""
+                do
+                    "@overload"
+                    pyFunc "variation" ["self"] (varValue refDv) $ do
+                        "..."
+                    "@overload"
+                    pyFunc "variation" ["self", "key : None"] (varValue refDv) $ do
+                        "..."
+                forM_ refs $ \(a, ref) -> do
+                    let val = sformat ("Literal[" % int % "]")
+                        key = "key : " <> fmtList "Tuple[" "]" val a
+                    "@overload"
+                    pyFunc "variation" ["self", key] (varValue ref) $ do
+                        "..."
+                ""
+                pyFunc "variation" ["self", "key : Optional[Any]=None"] "Any" $ do
+                    "return self._variation(key)"
+
                 ""
                 "@classmethod"
                 pyFunc "create" ["cls", "arg : " <> quote (rv <> ".cv_arg")]

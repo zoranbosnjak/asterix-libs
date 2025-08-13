@@ -1115,7 +1115,9 @@ class RuleVariationDependent(RuleVariation):
     cv_cases: ClassVar[List[Tuple[List[int], Type[Variation]]]]
 
     @classmethod
-    def _variation(cls, key: Any) -> Type[Variation]:
+    def _spec(cls, key: Any) -> Type['Variation']:
+        if key is None:
+            return cls.cv_default_variation
         key = list(key)
         for a, b in cls.cv_cases:
             if a == key:
@@ -1140,6 +1142,17 @@ class RuleVariationDependent(RuleVariation):
             return arg
         var = cls.cv_default_variation.create(arg)  # type: ignore
         return cls(var.unparse())
+
+    def _variation(self, key: Any) -> Union[ValueError, 'Variation']:
+        """Try to recast to required concrete variation."""
+        var_cls = self.__class__._spec(key)
+        result = var_cls._parse(self.bs)
+        if isinstance(result, ValueError):
+            return result
+        obj, remaining = result
+        if len(remaining) != 0:
+            return ValueError('parsing error')
+        return obj
 
     def unparse(self) -> Bits:
         return self.bs

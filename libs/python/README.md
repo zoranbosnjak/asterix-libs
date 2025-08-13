@@ -613,6 +613,225 @@ assert lst[0].as_uint() == 1
 assert lst[1].as_uint() == 2
 ```
 
+#### Dependent specifications
+
+In some rare cases, asterix definitions depend on a value of some other
+item(s). In such cases, the asterix processing is more involved. This
+dependency manifests itself in two ways:
+
+- **content dependency**, where a content (interpretation of bits) of some
+  item depends on the value of some other item(s). For example:
+  `I062/380/IAS/IAS`, the structure is always 15 bits long,
+  but the interpretation of bits could be either speed in `NM/s` or `Mach`,
+  with different scaling factors, depending on the values of a sibling item.
+- **variation dependency**, where not only the content, but also a complete
+  item stucture depends on some other item(s). For example, the structure
+  of item `I004/120/CC/CPC` depends on 2 other item values.
+
+This library can handle all structure cases, however it does not automatically
+correlate to the values of items that a structure depends on. When creating
+records, it is a user responsibility to properly set "other item values" for
+a record to be valid.
+Similarly, after a record is parsed, a user shall cast a default structure to a
+target structure, depending on the other items values. Whenever there is a
+dependency, there is also a statically known *default* structure, which is
+used during automatic record parsing.
+
+##### Handling **content dependency**
+
+This example demonstrates how to work with **content dependency**,
+such as `I062/380/IAS`.
+
+```python
+#| file: dep-content.py
+from asterix.base import *
+from asterix.generated import *
+
+Spec = Cat_062_1_20 # Cat 062, edition 1.20
+
+# create records by different methods
+
+# set raw value
+rec0 = Spec.cv_record.create({
+    '380': {
+        'IAS': (
+            ('IM', 0),  # set IM to 0
+            ('IAS', 1)  # set IAS to raw value 1 (no unit conversion)
+        ) },
+    })
+
+# set raw value using default case
+rec1 = Spec.cv_record.create({
+    '380': {
+        'IAS': (
+            ('IM', 0),  # set IM to 0
+            ('IAS',
+                (None,  # use default raw case
+                 1))    # set IAS to raw value 1 (same as above)
+        ) },
+    })
+
+# set IAS speed (NM/s)
+rec2 = Spec.cv_record.create({
+    '380': {
+        'IAS': (
+            ('IM', 0), # airspeed = IAS
+            ('IAS',
+                ((0,), # use case with index 0 (IAS)
+                 (1.2, 'NM/s'))), # set IAS to 1.2 NM/s
+        ) },
+    })
+
+# set Mach speed
+rec3 = Spec.cv_record.create({
+    '380': {
+        'IAS': (
+            ('IM', 1), # airspeed = Mach
+            ('IAS',
+                ((1,), # use case with index 1 (Mach)
+                 (0.8, 'Mach'))), # set speed to 0.8 Mach
+        ) },
+    })
+
+db = Spec.create([rec0, rec1, rec2, rec3])
+expected_output = b'3e0017011010000101101000010110104ccd0110108320'
+assert hexlify(db.unparse().to_bytes()) == expected_output
+
+# parse and interpret data from the example above
+input_bytes = unhexlify(expected_output)
+raw_datablocks = RawDatablock.parse(Bits.from_bytes(input_bytes))
+assert not isinstance(raw_datablocks, ValueError)
+for db in raw_datablocks:
+    assert db.get_category() == 62
+    result = Spec.cv_uap.parse(db.get_raw_records())
+    assert not isinstance(result, ValueError)
+    for (cnt, rec) in enumerate(result):
+        i380 = rec.get_item('380')
+        assert i380 is not None
+        item_IAS1 = i380.variation.get_item('IAS')
+        assert item_IAS1 is not None
+        item_IM = item_IAS1.variation.get_item('IM')
+        item_IAS2 = item_IAS1.variation.get_item('IAS')
+        assert item_IM is not None
+        assert item_IAS2 is not None
+        match item_IM.as_uint(): # check value of I062/380/IAS/IM and convert
+            case 0: # this is IAS, convert to 'NM/s', use case with index (0,)
+                value = ('NM/s', item_IAS2.variation.rule.content((0,)).as_quantity('NM/s'))
+            case 1: # this is Mach, convert to 'Mach', use case with index (1,)
+                value = ('Mach', item_IAS2.variation.rule.content((1,)).as_quantity('Mach'))
+            case _:
+                raise Exception('unexpected value')
+        print('--- record', cnt, '---')
+        print('I062/380/IAS/IM raw value:', item_IM.as_uint())
+        print('I062/380/IAS/IAS raw value:', item_IAS2.as_uint())
+        print('converted value', value)
+```
+
+##### Handling **variation dependency**
+
+This example demonstrates how to work with **variation dependency**,
+such as `I004/120/CC/CPC`.
+
+```python
+#| file: dep-variation.py
+from asterix.base import *
+from asterix.generated import *
+
+Spec = Cat_004_1_13 # Cat 004, edition 1.13
+
+# Item 'I004/120/CC/CPC' depends on I004/000 and I004/120/CC/TID values
+# Default case is: element3, raw, but there are many other cases.
+# See asterix specification for details.
+# This example handles the following cases:
+# case (5, 1): element 3, table
+# case (9, 2): group (('RAS', element1, table), spare 2)
+
+# case (0, 0) - invalid combination
+rec0 = Spec.cv_record.create({
+    '000': 0, # invalid value
+    '120': {
+        'CC': (
+            ('TID', 0),
+            ('CPC', 0), # set to raw value 0
+            ('CS', 0)
+            )
+        }
+    })
+
+# case (5, 1)
+rec1 = Spec.cv_record.create({
+    '000': 5, # Area Proximity Warning (APW)
+    '120': {
+        'CC': (
+            ('TID', 1),
+            ('CPC', 0), # structure is 'raw', set to 0
+            ('CS', 0)
+            )
+        }
+    })
+
+# case (9, 2)
+# get variation structure of case (9, 2)
+Var = Spec.cv_record.spec('120').cv_rule.cv_variation.spec('CC').\
+    cv_rule.cv_variation.spec('CPC').spec((9,2))
+# and create object of that structure ('RAS' + spare item)
+obj = Var.create(( ('RAS', 1), 0))  # RAS = Stage Two Alert
+
+# insert object into the record (as uint)
+rec2 = Spec.cv_record.create({
+    '000': 9, # RIMCAS Arrival / Landing Monitor (ALM)
+    '120': {
+        'CC': (
+            ('TID', 2),
+            ('CPC', obj.as_uint()),
+            ('CS', 0)
+            )
+        }
+    })
+
+db = Spec.create([rec0, rec1, rec2])
+expected_output = b'040012412000400041200540104120094028'
+assert hexlify(db.unparse().to_bytes()) == expected_output
+
+# parse and interpret data from the example above
+input_bytes = unhexlify(expected_output)
+raw_datablocks = RawDatablock.parse(Bits.from_bytes(input_bytes))
+assert not isinstance(raw_datablocks, ValueError)
+for db in raw_datablocks:
+    assert db.get_category() == 4
+    result = Spec.cv_uap.parse(db.get_raw_records())
+    assert not isinstance(result, ValueError)
+    for (cnt, rec) in enumerate(result):
+        print('--- record', cnt, '---')
+        i000 = rec.get_item('000')
+        i120 = rec.get_item('120')
+        assert i000 is not None and i120 is not None
+        item_CC = i120.variation.get_item('CC')
+        assert item_CC is not None
+        item_TID = item_CC.variation.get_item('TID').as_uint()
+        item_CPC = item_CC.variation.get_item('CPC')
+        item_CS  = item_CC.variation.get_item('CS').as_uint()
+        index = (i000.as_uint(), item_TID)
+
+        try:
+            var_CPC = item_CPC.variation(index)
+        except Exception:
+            var_CPC = None
+        assert not isinstance(var_CPC, ValueError)
+
+        match index:
+            case (5, 1):
+                x = var_CPC.as_uint()
+                value = ('case 5,1', 'raw', x)
+            case (9, 2):
+                item_ras = var_CPC.get_item('RAS')
+                spares = var_CPC.get_spares()
+                value = ('case 9,2', 'RAS', item_ras.as_uint(), spares)
+            case _:
+                value = None
+        print(value)
+```
+
 #### Multiple UAP-s
 
 Make sure to use appropriate UAP name, together with a correct UAP selector
