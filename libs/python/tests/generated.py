@@ -16,9 +16,8 @@ class RuleContent_0(RuleContentContextFree):
     cv_content: TypeAlias = Content_0
 
     @property
-    @no_type_check
     def content(self) -> Content_0:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_7(Element):
     cv_arg: TypeAlias = RuleContent_0.cv_arg
@@ -26,24 +25,20 @@ class Variation_7(Element):
     cv_bit_size = 8
     cv_rule = RuleContent_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_7.cv_arg") -> "Variation_7":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_7":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_7", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_0:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_0:
         return self.rule.content
 
@@ -51,15 +46,13 @@ class RuleVariation_7(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_7.cv_arg
     cv_variation: TypeAlias = Variation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_7.cv_arg") -> "RuleVariation_7":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_7":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_7", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_7:
@@ -71,15 +64,13 @@ class NonSpare_83(NonSpare):
     cv_title = "System Area Code"
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_83.cv_arg") -> "NonSpare_83":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_83":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_83", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -94,15 +85,13 @@ class Item_34(Item):
     cv_arg: TypeAlias = NonSpare_83.cv_arg
     cv_non_spare: TypeAlias = NonSpare_83
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_34.cv_arg") -> "Item_34":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_34":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_34", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class NonSpare_86(NonSpare):
     cv_arg: TypeAlias = RuleVariation_7.cv_arg
@@ -110,15 +99,13 @@ class NonSpare_86(NonSpare):
     cv_title = "System Identification Code"
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_86.cv_arg") -> "NonSpare_86":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_86":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_86", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -133,15 +120,13 @@ class Item_37(Item):
     cv_arg: TypeAlias = NonSpare_86.cv_arg
     cv_non_spare: TypeAlias = NonSpare_86
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_37.cv_arg") -> "Item_37":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_37":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_37", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_44(Group):
     cv_arg_group: TypeAlias = Tuple[Union[RuleVariation_7.cv_arg, Tuple[Literal["SAC"], RuleVariation_7.cv_arg]], Union[RuleVariation_7.cv_arg, Tuple[Literal["SIC"], RuleVariation_7.cv_arg]]]
@@ -173,28 +158,24 @@ class Variation_44(Group):
         return self._get_item(key)
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_44.cv_arg") -> 'Variation_44':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_44.cv_arg") -> "Variation_44":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_44'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_44", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_40(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_44.cv_arg
     cv_variation: TypeAlias = Variation_44
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_40.cv_arg") -> "RuleVariation_40":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_40":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_40", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_44:
@@ -206,15 +187,13 @@ class NonSpare_3(NonSpare):
     cv_title = "Data Source Identifier"
     cv_rule: TypeAlias = RuleVariation_40
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_3.cv_arg") -> "NonSpare_3":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_3":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_3", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_40:
@@ -237,9 +216,8 @@ class RuleContent_7(RuleContentContextFree):
     cv_content: TypeAlias = Content_7
 
     @property
-    @no_type_check
     def content(self) -> Content_7:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_9(Element):
     cv_arg: TypeAlias = RuleContent_7.cv_arg
@@ -247,24 +225,20 @@ class Variation_9(Element):
     cv_bit_size = 8
     cv_rule = RuleContent_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_9.cv_arg") -> "Variation_9":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_9":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_9", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_7:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_7:
         return self.rule.content
 
@@ -272,15 +246,13 @@ class RuleVariation_9(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_9.cv_arg
     cv_variation: TypeAlias = Variation_9
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_9.cv_arg") -> "RuleVariation_9":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_9":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_9", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_9:
@@ -292,15 +264,13 @@ class NonSpare_0(NonSpare):
     cv_title = "Message Type"
     cv_rule: TypeAlias = RuleVariation_9
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_0.cv_arg") -> "NonSpare_0":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_0":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_0", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_9:
@@ -320,15 +290,13 @@ class NonSpare_79(NonSpare):
     cv_title = "Raw"
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_79.cv_arg") -> "NonSpare_79":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_79":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_79", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -348,9 +316,8 @@ class RuleContent_4(RuleContentContextFree):
     cv_content: TypeAlias = Content_4
 
     @property
-    @no_type_check
     def content(self) -> Content_4:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_8(Element):
     cv_arg: TypeAlias = RuleContent_4.cv_arg
@@ -358,24 +325,20 @@ class Variation_8(Element):
     cv_bit_size = 8
     cv_rule = RuleContent_4
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_8.cv_arg") -> "Variation_8":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_8":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_8", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_4:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_4:
         return self.rule.content
 
@@ -383,15 +346,13 @@ class RuleVariation_8(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_8.cv_arg
     cv_variation: TypeAlias = Variation_8
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_8.cv_arg") -> "RuleVariation_8":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_8":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_8", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_8:
@@ -403,15 +364,13 @@ class NonSpare_87(NonSpare):
     cv_title = "Table"
     cv_rule: TypeAlias = RuleVariation_8
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_87.cv_arg") -> "NonSpare_87":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_87":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_87", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_8:
@@ -431,9 +390,8 @@ class RuleContent_9(RuleContentContextFree):
     cv_content: TypeAlias = Content_9
 
     @property
-    @no_type_check
     def content(self) -> Content_9:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_22(Element):
     cv_arg: TypeAlias = RuleContent_9.cv_arg
@@ -441,24 +399,20 @@ class Variation_22(Element):
     cv_bit_size = 56
     cv_rule = RuleContent_9
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_22.cv_arg") -> "Variation_22":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_22":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_22", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_9:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_9:
         return self.rule.content
 
@@ -466,15 +420,13 @@ class RuleVariation_22(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_22.cv_arg
     cv_variation: TypeAlias = Variation_22
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_22.cv_arg") -> "RuleVariation_22":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_22":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_22", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_22:
@@ -486,15 +438,13 @@ class NonSpare_80(NonSpare):
     cv_title = "String Ascii"
     cv_rule: TypeAlias = RuleVariation_22
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_80.cv_arg") -> "NonSpare_80":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_80":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_80", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_22:
@@ -514,9 +464,8 @@ class RuleContent_10(RuleContentContextFree):
     cv_content: TypeAlias = Content_10
 
     @property
-    @no_type_check
     def content(self) -> Content_10:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_21(Element):
     cv_arg: TypeAlias = RuleContent_10.cv_arg
@@ -524,24 +473,20 @@ class Variation_21(Element):
     cv_bit_size = 48
     cv_rule = RuleContent_10
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_21.cv_arg") -> "Variation_21":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_21":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_21", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_10:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_10:
         return self.rule.content
 
@@ -549,15 +494,13 @@ class RuleVariation_21(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_21.cv_arg
     cv_variation: TypeAlias = Variation_21
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_21.cv_arg") -> "RuleVariation_21":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_21":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_21", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_21:
@@ -569,15 +512,13 @@ class NonSpare_81(NonSpare):
     cv_title = "String ICAO"
     cv_rule: TypeAlias = RuleVariation_21
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_81.cv_arg") -> "NonSpare_81":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_81":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_81", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_21:
@@ -597,9 +538,8 @@ class RuleContent_11(RuleContentContextFree):
     cv_content: TypeAlias = Content_11
 
     @property
-    @no_type_check
     def content(self) -> Content_11:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_17(Element):
     cv_arg: TypeAlias = RuleContent_11.cv_arg
@@ -607,24 +547,20 @@ class Variation_17(Element):
     cv_bit_size = 24
     cv_rule = RuleContent_11
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_17.cv_arg") -> "Variation_17":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_17":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_17", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_11:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_11:
         return self.rule.content
 
@@ -632,15 +568,13 @@ class RuleVariation_17(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_17.cv_arg
     cv_variation: TypeAlias = Variation_17
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_17.cv_arg") -> "RuleVariation_17":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_17":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_17", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_17:
@@ -652,15 +586,13 @@ class NonSpare_82(NonSpare):
     cv_title = "String Octal"
     cv_rule: TypeAlias = RuleVariation_17
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_82.cv_arg") -> "NonSpare_82":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_82":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_82", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_17:
@@ -680,9 +612,8 @@ class RuleContent_13(RuleContentContextFree):
     cv_content: TypeAlias = Content_13
 
     @property
-    @no_type_check
     def content(self) -> Content_13:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_11(Element):
     cv_arg: TypeAlias = RuleContent_13.cv_arg
@@ -690,24 +621,20 @@ class Variation_11(Element):
     cv_bit_size = 8
     cv_rule = RuleContent_13
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_11.cv_arg") -> "Variation_11":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_11":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_11", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_13:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_13:
         return self.rule.content
 
@@ -715,15 +642,13 @@ class RuleVariation_11(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_11.cv_arg
     cv_variation: TypeAlias = Variation_11
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_11.cv_arg") -> "RuleVariation_11":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_11":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_11", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_11:
@@ -735,15 +660,13 @@ class NonSpare_59(NonSpare):
     cv_title = "Unsigned Integer"
     cv_rule: TypeAlias = RuleVariation_11
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_59.cv_arg") -> "NonSpare_59":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_59":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_59", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_11:
@@ -763,9 +686,8 @@ class RuleContent_12(RuleContentContextFree):
     cv_content: TypeAlias = Content_12
 
     @property
-    @no_type_check
     def content(self) -> Content_12:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_10(Element):
     cv_arg: TypeAlias = RuleContent_12.cv_arg
@@ -773,24 +695,20 @@ class Variation_10(Element):
     cv_bit_size = 8
     cv_rule = RuleContent_12
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_10.cv_arg") -> "Variation_10":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_10":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_10", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_12:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_12:
         return self.rule.content
 
@@ -798,15 +716,13 @@ class RuleVariation_10(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_10.cv_arg
     cv_variation: TypeAlias = Variation_10
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_10.cv_arg") -> "RuleVariation_10":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_10":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_10", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_10:
@@ -818,15 +734,13 @@ class NonSpare_64(NonSpare):
     cv_title = "Signed Integer"
     cv_rule: TypeAlias = RuleVariation_10
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_64.cv_arg") -> "NonSpare_64":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_64":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_64", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_10:
@@ -851,9 +765,8 @@ class RuleContent_15(RuleContentContextFree):
     cv_content: TypeAlias = Content_15
 
     @property
-    @no_type_check
     def content(self) -> Content_15:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_19(Element):
     cv_arg: TypeAlias = RuleContent_15.cv_arg
@@ -861,24 +774,20 @@ class Variation_19(Element):
     cv_bit_size = 24
     cv_rule = RuleContent_15
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_19.cv_arg") -> "Variation_19":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_19":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_19", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_15:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_15:
         return self.rule.content
 
@@ -886,15 +795,13 @@ class RuleVariation_19(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_19.cv_arg
     cv_variation: TypeAlias = Variation_19
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_19.cv_arg") -> "RuleVariation_19":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_19":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_19", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_19:
@@ -906,15 +813,13 @@ class NonSpare_74(NonSpare):
     cv_title = "Latitude in WGS.84 in Two's Complement Form"
     cv_rule: TypeAlias = RuleVariation_19
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_74.cv_arg") -> "NonSpare_74":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_74":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_74", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_19:
@@ -939,9 +844,8 @@ class RuleContent_14(RuleContentContextFree):
     cv_content: TypeAlias = Content_14
 
     @property
-    @no_type_check
     def content(self) -> Content_14:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_18(Element):
     cv_arg: TypeAlias = RuleContent_14.cv_arg
@@ -949,24 +853,20 @@ class Variation_18(Element):
     cv_bit_size = 24
     cv_rule = RuleContent_14
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_18.cv_arg") -> "Variation_18":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_18":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_18", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_14:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_14:
         return self.rule.content
 
@@ -974,15 +874,13 @@ class RuleVariation_18(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_18.cv_arg
     cv_variation: TypeAlias = Variation_18
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_18.cv_arg") -> "RuleVariation_18":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_18":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_18", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_18:
@@ -994,15 +892,13 @@ class NonSpare_75(NonSpare):
     cv_title = "Longitude in WGS.84 in Two's Complement Form"
     cv_rule: TypeAlias = RuleVariation_18
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_75.cv_arg") -> "NonSpare_75":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_75":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_75", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_18:
@@ -1027,9 +923,8 @@ class RuleContent_17(RuleContentContextFree):
     cv_content: TypeAlias = Content_17
 
     @property
-    @no_type_check
     def content(self) -> Content_17:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_16(Element):
     cv_arg: TypeAlias = RuleContent_17.cv_arg
@@ -1037,24 +932,20 @@ class Variation_16(Element):
     cv_bit_size = 16
     cv_rule = RuleContent_17
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_16.cv_arg") -> "Variation_16":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_16":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_16", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_17:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_17:
         return self.rule.content
 
@@ -1062,15 +953,13 @@ class RuleVariation_16(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_16.cv_arg
     cv_variation: TypeAlias = Variation_16
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_16.cv_arg") -> "RuleVariation_16":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_16":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_16", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_16:
@@ -1082,15 +971,13 @@ class NonSpare_76(NonSpare):
     cv_title = "Unsigned Quantity"
     cv_rule: TypeAlias = RuleVariation_16
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_76.cv_arg") -> "NonSpare_76":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_76":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_76", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_16:
@@ -1115,9 +1002,8 @@ class RuleContent_16(RuleContentContextFree):
     cv_content: TypeAlias = Content_16
 
     @property
-    @no_type_check
     def content(self) -> Content_16:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_12(Element):
     cv_arg: TypeAlias = RuleContent_16.cv_arg
@@ -1125,24 +1011,20 @@ class Variation_12(Element):
     cv_bit_size = 8
     cv_rule = RuleContent_16
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_12.cv_arg") -> "Variation_12":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_12":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_12", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_16:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_16:
         return self.rule.content
 
@@ -1150,15 +1032,13 @@ class RuleVariation_12(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_12.cv_arg
     cv_variation: TypeAlias = Variation_12
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_12.cv_arg") -> "RuleVariation_12":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_12":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_12", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_12:
@@ -1170,15 +1050,13 @@ class NonSpare_77(NonSpare):
     cv_title = "Quantity No Unit"
     cv_rule: TypeAlias = RuleVariation_12
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_77.cv_arg") -> "NonSpare_77":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_77":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_77", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_12:
@@ -1203,9 +1081,8 @@ class RuleContent_18(RuleContentContextFree):
     cv_content: TypeAlias = Content_18
 
     @property
-    @no_type_check
     def content(self) -> Content_18:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_13(Element):
     cv_arg: TypeAlias = RuleContent_18.cv_arg
@@ -1213,24 +1090,20 @@ class Variation_13(Element):
     cv_bit_size = 8
     cv_rule = RuleContent_18
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_13.cv_arg") -> "Variation_13":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_13":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_13", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_18:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_18:
         return self.rule.content
 
@@ -1238,15 +1111,13 @@ class RuleVariation_13(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_13.cv_arg
     cv_variation: TypeAlias = Variation_13
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_13.cv_arg") -> "RuleVariation_13":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_13":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_13", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_13:
@@ -1258,15 +1129,13 @@ class NonSpare_78(NonSpare):
     cv_title = "Negative Lsb"
     cv_rule: TypeAlias = RuleVariation_13
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_78.cv_arg") -> "NonSpare_78":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_78":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_78", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_13:
@@ -1286,9 +1155,8 @@ class RuleContent_19(RuleContentContextFree):
     cv_content: TypeAlias = Content_24
 
     @property
-    @no_type_check
     def content(self) -> Content_24:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_25(Element):
     cv_arg: TypeAlias = RuleContent_19.cv_arg
@@ -1296,24 +1164,20 @@ class Variation_25(Element):
     cv_bit_size = 64
     cv_rule = RuleContent_19
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_25.cv_arg") -> "Variation_25":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_25":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_25", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_19:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_24:
         return self.rule.content
 
@@ -1321,15 +1185,13 @@ class RuleVariation_25(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_25.cv_arg
     cv_variation: TypeAlias = Variation_25
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_25.cv_arg") -> "RuleVariation_25":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_25":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_25", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_25:
@@ -1341,15 +1203,13 @@ class NonSpare_41(NonSpare):
     cv_title = "Bds With Address"
     cv_rule: TypeAlias = RuleVariation_25
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_41.cv_arg") -> "NonSpare_41":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_41":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_41", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_25:
@@ -1369,9 +1229,8 @@ class RuleContent_20(RuleContentContextFree):
     cv_content: TypeAlias = Content_25
 
     @property
-    @no_type_check
     def content(self) -> Content_25:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_23(Element):
     cv_arg: TypeAlias = RuleContent_20.cv_arg
@@ -1379,24 +1238,20 @@ class Variation_23(Element):
     cv_bit_size = 56
     cv_rule = RuleContent_20
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_23.cv_arg") -> "Variation_23":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_23":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_23", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_20:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_25:
         return self.rule.content
 
@@ -1404,15 +1259,13 @@ class RuleVariation_23(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_23.cv_arg
     cv_variation: TypeAlias = Variation_23
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_23.cv_arg") -> "RuleVariation_23":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_23":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_23", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_23:
@@ -1424,15 +1277,13 @@ class NonSpare_42(NonSpare):
     cv_title = "Bds At Unknown Address"
     cv_rule: TypeAlias = RuleVariation_23
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_42.cv_arg") -> "NonSpare_42":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_42":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_42", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_23:
@@ -1452,9 +1303,8 @@ class RuleContent_21(RuleContentContextFree):
     cv_content: TypeAlias = Content_26
 
     @property
-    @no_type_check
     def content(self) -> Content_26:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_24(Element):
     cv_arg: TypeAlias = RuleContent_21.cv_arg
@@ -1462,24 +1312,20 @@ class Variation_24(Element):
     cv_bit_size = 56
     cv_rule = RuleContent_21
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_24.cv_arg") -> "Variation_24":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_24":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_24", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_21:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_26:
         return self.rule.content
 
@@ -1487,15 +1333,13 @@ class RuleVariation_24(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_24.cv_arg
     cv_variation: TypeAlias = Variation_24
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_24.cv_arg") -> "RuleVariation_24":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_24":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_24", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_24:
@@ -1507,15 +1351,13 @@ class NonSpare_43(NonSpare):
     cv_title = "Bds At Known Address"
     cv_rule: TypeAlias = RuleVariation_24
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_43.cv_arg") -> "NonSpare_43":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_43":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_43", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_24:
@@ -1756,29 +1598,25 @@ class Variation_69(Compound):
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Variation_69.cv_arg") -> 'Variation_69':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_69.cv_arg") -> "Variation_69":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_69'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_69", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_64(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_69.cv_arg
     cv_variation: TypeAlias = Variation_69
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_64.cv_arg") -> "RuleVariation_64":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_64":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_64", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_69:
@@ -1790,15 +1628,13 @@ class NonSpare_4(NonSpare):
     cv_title = "Different Contents"
     cv_rule: TypeAlias = RuleVariation_64
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_4.cv_arg") -> "NonSpare_4":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_4":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_4", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_64:
@@ -1821,9 +1657,8 @@ class RuleContent_1(RuleContentContextFree):
     cv_content: TypeAlias = Content_1
 
     @property
-    @no_type_check
     def content(self) -> Content_1:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_1(Element):
     cv_arg: TypeAlias = RuleContent_1.cv_arg
@@ -1831,24 +1666,20 @@ class Variation_1(Element):
     cv_bit_size = 1
     cv_rule = RuleContent_1
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_1.cv_arg") -> "Variation_1":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_1":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_1", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_1:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_1:
         return self.rule.content
 
@@ -1856,15 +1687,13 @@ class RuleVariation_1(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_1.cv_arg
     cv_variation: TypeAlias = Variation_1
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_1.cv_arg") -> "RuleVariation_1":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_1":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_1", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_1:
@@ -1876,15 +1705,13 @@ class NonSpare_73(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_1
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_73.cv_arg") -> "NonSpare_73":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_73":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_73", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_1:
@@ -1899,15 +1726,13 @@ class Item_33(Item):
     cv_arg: TypeAlias = NonSpare_73.cv_arg
     cv_non_spare: TypeAlias = NonSpare_73
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_33.cv_arg") -> "Item_33":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_33":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_33", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Content_23(ContentQuantity):
     cv_arg: TypeAlias = Union[int, float, Tuple[float, Literal["NM/s"]]]
@@ -1958,34 +1783,29 @@ class Variation_28(Element):
     cv_bit_size = 15
     cv_rule = RuleContent_23
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_28.cv_arg") -> "Variation_28":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_28":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_28", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_23:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
 class RuleVariation_28(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_28.cv_arg
     cv_variation: TypeAlias = Variation_28
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_28.cv_arg") -> "RuleVariation_28":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_28":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_28", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_28:
@@ -1997,15 +1817,13 @@ class NonSpare_72(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_28
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_72.cv_arg") -> "NonSpare_72":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_72":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_72", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_28:
@@ -2020,15 +1838,13 @@ class Item_32(Item):
     cv_arg: TypeAlias = NonSpare_72.cv_arg
     cv_non_spare: TypeAlias = NonSpare_72
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_32.cv_arg") -> "Item_32":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_32":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_32", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_43(Group):
     cv_arg_group: TypeAlias = Tuple[Union[RuleVariation_1.cv_arg, Tuple[Literal["IM"], RuleVariation_1.cv_arg]], Union[RuleVariation_28.cv_arg, Tuple[Literal["IAS"], RuleVariation_28.cv_arg]]]
@@ -2060,28 +1876,24 @@ class Variation_43(Group):
         return self._get_item(key)
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_43.cv_arg") -> 'Variation_43':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_43.cv_arg") -> "Variation_43":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_43'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_43", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_39(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_43.cv_arg
     cv_variation: TypeAlias = Variation_43
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_39.cv_arg") -> "RuleVariation_39":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_39":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_39", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_43:
@@ -2093,15 +1905,13 @@ class NonSpare_6(NonSpare):
     cv_title = "Simple Dependent Item"
     cv_rule: TypeAlias = RuleVariation_39
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_6.cv_arg") -> "NonSpare_6":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_6":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_6", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_39:
@@ -2178,34 +1988,29 @@ class Variation_14(Element):
     cv_bit_size = 8
     cv_rule = RuleContent_22
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_14.cv_arg") -> "Variation_14":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_14":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_14", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_22:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
 class RuleVariation_14(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_14.cv_arg
     cv_variation: TypeAlias = Variation_14
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_14.cv_arg") -> "RuleVariation_14":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_14":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_14", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_14:
@@ -2217,15 +2022,13 @@ class NonSpare_7(NonSpare):
     cv_title = "Double Dependent Item"
     cv_rule: TypeAlias = RuleVariation_14
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_7.cv_arg") -> "NonSpare_7":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_7":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_7", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_14:
@@ -2245,15 +2048,13 @@ class NonSpare_52(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_52.cv_arg") -> "NonSpare_52":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_52":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_52", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -2270,24 +2071,20 @@ class Variation_4(Element):
     cv_bit_size = 4
     cv_rule = RuleContent_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_4.cv_arg") -> "Variation_4":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_4":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_4", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_0:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_0:
         return self.rule.content
 
@@ -2295,15 +2092,13 @@ class RuleVariation_4(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_4.cv_arg
     cv_variation: TypeAlias = Variation_4
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_4.cv_arg") -> "RuleVariation_4":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_4":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_4", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_4:
@@ -2315,15 +2110,13 @@ class NonSpare_88(NonSpare):
     cv_title = "Identification of Conflict Categories Definition Table"
     cv_rule: TypeAlias = RuleVariation_4
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_88.cv_arg") -> "NonSpare_88":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_88":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_88", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_4:
@@ -2338,15 +2131,13 @@ class Item_38(Item):
     cv_arg: TypeAlias = NonSpare_88.cv_arg
     cv_non_spare: TypeAlias = NonSpare_88
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_38.cv_arg") -> "Item_38":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_38":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_38", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_33(Element):
     cv_arg: TypeAlias = RuleContent_0.cv_arg
@@ -2354,24 +2145,20 @@ class Variation_33(Element):
     cv_bit_size = 3
     cv_rule = RuleContent_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_33.cv_arg") -> "Variation_33":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_33":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_33", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_0:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_0:
         return self.rule.content
 
@@ -2384,9 +2171,8 @@ class RuleContent_6(RuleContentContextFree):
     cv_content: TypeAlias = Content_6
 
     @property
-    @no_type_check
     def content(self) -> Content_6:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_34(Element):
     cv_arg: TypeAlias = RuleContent_6.cv_arg
@@ -2394,24 +2180,20 @@ class Variation_34(Element):
     cv_bit_size = 3
     cv_rule = RuleContent_6
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_34.cv_arg") -> "Variation_34":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_34":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_34", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_6:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_6:
         return self.rule.content
 
@@ -2424,9 +2206,8 @@ class RuleContent_8(RuleContentContextFree):
     cv_content: TypeAlias = Content_8
 
     @property
-    @no_type_check
     def content(self) -> Content_8:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_35(Element):
     cv_arg: TypeAlias = RuleContent_8.cv_arg
@@ -2434,24 +2215,20 @@ class Variation_35(Element):
     cv_bit_size = 3
     cv_rule = RuleContent_8
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_35.cv_arg") -> "Variation_35":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_35":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_35", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_8:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_8:
         return self.rule.content
 
@@ -2464,9 +2241,8 @@ class RuleContent_5(RuleContentContextFree):
     cv_content: TypeAlias = Content_5
 
     @property
-    @no_type_check
     def content(self) -> Content_5:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_32(Element):
     cv_arg: TypeAlias = RuleContent_5.cv_arg
@@ -2474,24 +2250,20 @@ class Variation_32(Element):
     cv_bit_size = 1
     cv_rule = RuleContent_5
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_32.cv_arg") -> "Variation_32":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_32":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_32", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_5:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_5:
         return self.rule.content
 
@@ -2499,15 +2271,13 @@ class RuleVariation_32(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_32.cv_arg
     cv_variation: TypeAlias = Variation_32
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_32.cv_arg") -> "RuleVariation_32":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_32":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_32", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_32:
@@ -2519,15 +2289,13 @@ class NonSpare_54(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_32
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_54.cv_arg") -> "NonSpare_54":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_54":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_54", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_32:
@@ -2542,15 +2310,13 @@ class Item_18(Item):
     cv_arg: TypeAlias = NonSpare_54.cv_arg
     cv_non_spare: TypeAlias = NonSpare_54
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_18.cv_arg") -> "Item_18":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_18":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_18", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Item_5(Spare):
     cv_arg: TypeAlias = int
@@ -2566,23 +2332,19 @@ class Variation_49(Group):
     cv_items_dict = {"I1": RuleVariation_32}
 
     @classmethod
-    @no_type_check
     def spec(cls, key : Literal["I1"]) -> Type[RuleVariation_32]:
-        return cls._spec(key)
+        return cls._spec(key) # type: ignore
 
-    @no_type_check
     def get_item(self, key : Literal["I1"]) -> RuleVariation_32:
-        return self._get_item(key)
+        return self._get_item(key) # type: ignore
 
     @classmethod
-    @no_type_check
-    def create(cls, arg:"Variation_49.cv_arg") -> 'Variation_49':
-        return cls._create(arg)
+    def create(cls, arg:"Variation_49.cv_arg") -> "Variation_49":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_49'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_49", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_65(RuleVariationDependent):
     cv_arg: TypeAlias = Union[
@@ -2616,15 +2378,13 @@ class RuleVariation_65(RuleVariationDependent):
     def variation(cls, key : Any) -> Any:
         return cls._variation(key)
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_65.cv_arg") -> "RuleVariation_65":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_65":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_65", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class NonSpare_45(NonSpare):
     cv_arg: TypeAlias = RuleVariation_65.cv_arg
@@ -2632,15 +2392,13 @@ class NonSpare_45(NonSpare):
     cv_title = "Conflict Properties Class"
     cv_rule: TypeAlias = RuleVariation_65
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_45.cv_arg") -> "NonSpare_45":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_45":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_45", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_65:
@@ -2650,15 +2408,13 @@ class Item_9(Item):
     cv_arg: TypeAlias = NonSpare_45.cv_arg
     cv_non_spare: TypeAlias = NonSpare_45
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_9.cv_arg") -> "Item_9":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_9":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_9", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Content_2(ContentTable):
     cv_arg: TypeAlias = int
@@ -2669,9 +2425,8 @@ class RuleContent_2(RuleContentContextFree):
     cv_content: TypeAlias = Content_2
 
     @property
-    @no_type_check
     def content(self) -> Content_2:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_37(Element):
     cv_arg: TypeAlias = RuleContent_2.cv_arg
@@ -2679,24 +2434,20 @@ class Variation_37(Element):
     cv_bit_size = 1
     cv_rule = RuleContent_2
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_37.cv_arg") -> "Variation_37":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_37":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_37", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_2:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_2:
         return self.rule.content
 
@@ -2704,15 +2455,13 @@ class RuleVariation_35(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_37.cv_arg
     cv_variation: TypeAlias = Variation_37
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_35.cv_arg") -> "RuleVariation_35":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_35":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_35", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_37:
@@ -2724,15 +2473,13 @@ class NonSpare_46(NonSpare):
     cv_title = "Conflict Severity"
     cv_rule: TypeAlias = RuleVariation_35
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_46.cv_arg") -> "NonSpare_46":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_46":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_46", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_35:
@@ -2747,15 +2494,13 @@ class Item_10(Item):
     cv_arg: TypeAlias = NonSpare_46.cv_arg
     cv_non_spare: TypeAlias = NonSpare_46
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_10.cv_arg") -> "Item_10":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_10":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_10", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_47(Group):
     cv_arg_group: TypeAlias = Tuple[Union[RuleVariation_4.cv_arg, Tuple[Literal["TID"], RuleVariation_4.cv_arg]], Union[RuleVariation_65.cv_arg, Tuple[Literal["CP"], RuleVariation_65.cv_arg]], Union[RuleVariation_35.cv_arg, Tuple[Literal["CS"], RuleVariation_35.cv_arg]]]
@@ -2794,28 +2539,24 @@ class Variation_47(Group):
         return self._get_item(key)
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_47.cv_arg") -> 'Variation_47':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_47.cv_arg") -> "Variation_47":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_47'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_47", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_43(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_47.cv_arg
     cv_variation: TypeAlias = Variation_47
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_43.cv_arg") -> "RuleVariation_43":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_43":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_43", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_47:
@@ -2827,15 +2568,13 @@ class NonSpare_44(NonSpare):
     cv_title = "Conflict Classification"
     cv_rule: TypeAlias = RuleVariation_43
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_44.cv_arg") -> "NonSpare_44":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_44":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_44", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_43:
@@ -2894,29 +2633,25 @@ class Variation_67(Compound):
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Variation_67.cv_arg") -> 'Variation_67':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_67.cv_arg") -> "Variation_67":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_67'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_67", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_62(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_67.cv_arg
     cv_variation: TypeAlias = Variation_67
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_62.cv_arg") -> "RuleVariation_62":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_62":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_62", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_67:
@@ -2928,15 +2663,13 @@ class NonSpare_10(NonSpare):
     cv_title = "Nested Dependent Item"
     cv_rule: TypeAlias = RuleVariation_62
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_10.cv_arg") -> "NonSpare_10":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_10":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_10", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_62:
@@ -2956,24 +2689,20 @@ class Variation_6(Element):
     cv_bit_size = 7
     cv_rule = RuleContent_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_6.cv_arg") -> "Variation_6":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_6":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_6", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_0:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_0:
         return self.rule.content
 
@@ -2981,15 +2710,13 @@ class RuleVariation_6(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_6.cv_arg
     cv_variation: TypeAlias = Variation_6
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_6.cv_arg") -> "RuleVariation_6":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_6":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_6", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_6:
@@ -3001,15 +2728,13 @@ class NonSpare_51(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_6
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_51.cv_arg") -> "NonSpare_51":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_51":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_51", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_6:
@@ -3024,15 +2749,13 @@ class Item_15(Item):
     cv_arg: TypeAlias = NonSpare_51.cv_arg
     cv_non_spare: TypeAlias = NonSpare_51
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_15.cv_arg") -> "Item_15":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_15":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_15", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Item_7(Spare):
     cv_arg: TypeAlias = int
@@ -3045,24 +2768,20 @@ class Variation_27(Element):
     cv_bit_size = 6
     cv_rule = RuleContent_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_27.cv_arg") -> "Variation_27":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_27":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_27", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_0:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_0:
         return self.rule.content
 
@@ -3070,15 +2789,13 @@ class RuleVariation_27(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_27.cv_arg
     cv_variation: TypeAlias = Variation_27
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_27.cv_arg") -> "RuleVariation_27":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_27":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_27", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_27:
@@ -3090,15 +2807,13 @@ class NonSpare_62(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_27
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_62.cv_arg") -> "NonSpare_62":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_62":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_62", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_27:
@@ -3113,15 +2828,13 @@ class Item_24(Item):
     cv_arg: TypeAlias = NonSpare_62.cv_arg
     cv_non_spare: TypeAlias = NonSpare_62
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_24.cv_arg") -> "Item_24":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_24":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_24", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Item_8(Spare):
     cv_arg: TypeAlias = int
@@ -3158,28 +2871,24 @@ class Variation_40(Group):
         return self._get_item(key)
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_40.cv_arg") -> 'Variation_40':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_40.cv_arg") -> "Variation_40":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_40'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_40", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_38(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_40.cv_arg
     cv_variation: TypeAlias = Variation_40
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_38.cv_arg") -> "RuleVariation_38":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_38":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_38", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_40:
@@ -3191,15 +2900,13 @@ class NonSpare_12(NonSpare):
     cv_title = "Spare Items"
     cv_rule: TypeAlias = RuleVariation_38
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_12.cv_arg") -> "NonSpare_12":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_12":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_12", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_38:
@@ -3219,15 +2926,13 @@ class NonSpare_15(NonSpare):
     cv_title = "Element"
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_15.cv_arg") -> "NonSpare_15":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_15":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_15", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -3247,24 +2952,20 @@ class Variation_5(Element):
     cv_bit_size = 6
     cv_rule = RuleContent_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_5.cv_arg") -> "Variation_5":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_5":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_5", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_0:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_0:
         return self.rule.content
 
@@ -3272,15 +2973,13 @@ class RuleVariation_5(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_5.cv_arg
     cv_variation: TypeAlias = Variation_5
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_5.cv_arg") -> "RuleVariation_5":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_5":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_5", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_5:
@@ -3292,15 +2991,13 @@ class NonSpare_50(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_5
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_50.cv_arg") -> "NonSpare_50":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_50":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_50", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_5:
@@ -3315,15 +3012,13 @@ class Item_14(Item):
     cv_arg: TypeAlias = NonSpare_50.cv_arg
     cv_non_spare: TypeAlias = NonSpare_50
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_14.cv_arg") -> "Item_14":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_14":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_14", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Item_6(Spare):
     cv_arg: TypeAlias = int
@@ -3336,15 +3031,13 @@ class NonSpare_61(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_61.cv_arg") -> "NonSpare_61":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_61":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_61", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -3359,15 +3052,13 @@ class Item_23(Item):
     cv_arg: TypeAlias = NonSpare_61.cv_arg
     cv_non_spare: TypeAlias = NonSpare_61
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_23.cv_arg") -> "Item_23":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_23":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_23", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class NonSpare_66(NonSpare):
     cv_arg: TypeAlias = RuleVariation_4.cv_arg
@@ -3375,15 +3066,13 @@ class NonSpare_66(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_4
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_66.cv_arg") -> "NonSpare_66":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_66":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_66", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_4:
@@ -3398,15 +3087,13 @@ class Item_27(Item):
     cv_arg: TypeAlias = NonSpare_66.cv_arg
     cv_non_spare: TypeAlias = NonSpare_66
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_27.cv_arg") -> "Item_27":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_27":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_27", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Item_4(Spare):
     cv_arg: TypeAlias = int
@@ -3419,24 +3106,20 @@ class Variation_36(Element):
     cv_bit_size = 4
     cv_rule = RuleContent_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_36.cv_arg") -> "Variation_36":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_36":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_36", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_0:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_0:
         return self.rule.content
 
@@ -3444,15 +3127,13 @@ class RuleVariation_34(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_36.cv_arg
     cv_variation: TypeAlias = Variation_36
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_34.cv_arg") -> "RuleVariation_34":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_34":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_34", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_36:
@@ -3464,15 +3145,13 @@ class NonSpare_69(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_34
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_69.cv_arg") -> "NonSpare_69":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_69":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_69", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_34:
@@ -3487,15 +3166,13 @@ class Item_29(Item):
     cv_arg: TypeAlias = NonSpare_69.cv_arg
     cv_non_spare: TypeAlias = NonSpare_69
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_29.cv_arg") -> "Item_29":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_29":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_29", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_39(Group):
     cv_arg_group: TypeAlias = Tuple[Union[RuleVariation_5.cv_arg, Tuple[Literal["I1"], RuleVariation_5.cv_arg]], int, Union[RuleVariation_7.cv_arg, Tuple[Literal["I2"], RuleVariation_7.cv_arg]], Union[RuleVariation_4.cv_arg, Tuple[Literal["I3"], RuleVariation_4.cv_arg]], int, Union[RuleVariation_34.cv_arg, Tuple[Literal["I4"], RuleVariation_34.cv_arg]]]
@@ -3541,28 +3218,24 @@ class Variation_39(Group):
         return self._get_item(key)
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_39.cv_arg") -> 'Variation_39':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_39.cv_arg") -> "Variation_39":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_39'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_39", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_37(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_39.cv_arg
     cv_variation: TypeAlias = Variation_39
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_37.cv_arg") -> "RuleVariation_37":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_37":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_37", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_39:
@@ -3574,15 +3247,13 @@ class NonSpare_16(NonSpare):
     cv_title = "Group"
     cv_rule: TypeAlias = RuleVariation_37
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_16.cv_arg") -> "NonSpare_16":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_16":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_16", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_37:
@@ -3602,24 +3273,20 @@ class Variation_0(Element):
     cv_bit_size = 1
     cv_rule = RuleContent_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_0.cv_arg") -> "Variation_0":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_0":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_0", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_0:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_0:
         return self.rule.content
 
@@ -3627,15 +3294,13 @@ class RuleVariation_0(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_0.cv_arg
     cv_variation: TypeAlias = Variation_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_0.cv_arg") -> "RuleVariation_0":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_0":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_0", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_0:
@@ -3647,24 +3312,20 @@ class Variation_3(Element):
     cv_bit_size = 2
     cv_rule = RuleContent_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_3.cv_arg") -> "Variation_3":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_3":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_3", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_0:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_0:
         return self.rule.content
 
@@ -3672,15 +3333,13 @@ class RuleVariation_3(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_3.cv_arg
     cv_variation: TypeAlias = Variation_3
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_3.cv_arg") -> "RuleVariation_3":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_3":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_3", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_3:
@@ -3692,24 +3351,20 @@ class Variation_31(Element):
     cv_bit_size = 4
     cv_rule = RuleContent_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_31.cv_arg") -> "Variation_31":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_31":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_31", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_0:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_0:
         return self.rule.content
 
@@ -3717,15 +3372,13 @@ class RuleVariation_31(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_31.cv_arg
     cv_variation: TypeAlias = Variation_31
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_31.cv_arg") -> "RuleVariation_31":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_31":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_31", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_31:
@@ -3737,15 +3390,13 @@ class NonSpare_49(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_49.cv_arg") -> "NonSpare_49":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_49":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_49", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_0:
@@ -3760,15 +3411,13 @@ class Item_13(Item):
     cv_arg: TypeAlias = NonSpare_49.cv_arg
     cv_non_spare: TypeAlias = NonSpare_49
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_13.cv_arg") -> "Item_13":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_13":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_13", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class NonSpare_65(NonSpare):
     cv_arg: TypeAlias = RuleVariation_3.cv_arg
@@ -3776,15 +3425,13 @@ class NonSpare_65(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_3
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_65.cv_arg") -> "NonSpare_65":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_65":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_65", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_3:
@@ -3799,15 +3446,13 @@ class Item_26(Item):
     cv_arg: TypeAlias = NonSpare_65.cv_arg
     cv_non_spare: TypeAlias = NonSpare_65
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_26.cv_arg") -> "Item_26":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_26":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_26", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Item_1(Spare):
     cv_arg: TypeAlias = int
@@ -3820,15 +3465,13 @@ class NonSpare_68(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_31
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_68.cv_arg") -> "NonSpare_68":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_68":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_68", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_31:
@@ -3843,15 +3486,13 @@ class Item_28(Item):
     cv_arg: TypeAlias = NonSpare_68.cv_arg
     cv_non_spare: TypeAlias = NonSpare_68
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_28.cv_arg") -> "Item_28":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_28":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_28", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class NonSpare_70(NonSpare):
     cv_arg: TypeAlias = RuleVariation_6.cv_arg
@@ -3859,15 +3500,13 @@ class NonSpare_70(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_6
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_70.cv_arg") -> "NonSpare_70":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_70":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_70", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_6:
@@ -3882,15 +3521,13 @@ class Item_30(Item):
     cv_arg: TypeAlias = NonSpare_70.cv_arg
     cv_non_spare: TypeAlias = NonSpare_70
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_30.cv_arg") -> "Item_30":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_30":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_30", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_52(Extended):
     cv_arg_group_1: TypeAlias = Union[int, Tuple[Union[RuleVariation_0.cv_arg, Tuple[Literal["I1"], RuleVariation_0.cv_arg]], Union[RuleVariation_27.cv_arg, Tuple[Literal["I2"], RuleVariation_27.cv_arg]], None]]
@@ -3928,15 +3565,13 @@ class Variation_52(Extended):
     def spec(cls, key : Union[Literal["I1"], Literal["I2"], Literal["I3"], Literal["I4"], Literal["I5"]]) -> Any:
         return cls._spec(key)
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Variation_52.cv_arg") -> 'Variation_52':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_52.cv_arg") -> "Variation_52":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_52'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_52", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @overload
     def get_item(self, key : Literal["I1"]) -> RuleVariation_0:
@@ -3960,15 +3595,13 @@ class RuleVariation_47(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_52.cv_arg
     cv_variation: TypeAlias = Variation_52
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_47.cv_arg") -> "RuleVariation_47":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_47":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_47", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_52:
@@ -3980,15 +3613,13 @@ class NonSpare_17(NonSpare):
     cv_title = "Extended With Trailing Fx"
     cv_rule: TypeAlias = RuleVariation_47
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_17.cv_arg") -> "NonSpare_17":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_17":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_17", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_47:
@@ -4008,15 +3639,13 @@ class NonSpare_71(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_71.cv_arg") -> "NonSpare_71":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_71":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_71", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -4031,15 +3660,13 @@ class Item_31(Item):
     cv_arg: TypeAlias = NonSpare_71.cv_arg
     cv_non_spare: TypeAlias = NonSpare_71
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_31.cv_arg") -> "Item_31":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_31":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_31", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_53(Extended):
     cv_arg_group_1: TypeAlias = Union[int, Tuple[Union[RuleVariation_0.cv_arg, Tuple[Literal["I1"], RuleVariation_0.cv_arg]], Union[RuleVariation_27.cv_arg, Tuple[Literal["I2"], RuleVariation_27.cv_arg]], None]]
@@ -4077,15 +3704,13 @@ class Variation_53(Extended):
     def spec(cls, key : Union[Literal["I1"], Literal["I2"], Literal["I3"], Literal["I4"], Literal["I5"]]) -> Any:
         return cls._spec(key)
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Variation_53.cv_arg") -> 'Variation_53':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_53.cv_arg") -> "Variation_53":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_53'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_53", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @overload
     def get_item(self, key : Literal["I1"]) -> RuleVariation_0:
@@ -4109,15 +3734,13 @@ class RuleVariation_48(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_53.cv_arg
     cv_variation: TypeAlias = Variation_53
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_48.cv_arg") -> "RuleVariation_48":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_48":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_48", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_53:
@@ -4129,15 +3752,13 @@ class NonSpare_18(NonSpare):
     cv_title = "Extended Without Trailing Fx"
     cv_rule: TypeAlias = RuleVariation_48
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_18.cv_arg") -> "NonSpare_18":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_18":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_18", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_48:
@@ -4157,32 +3778,27 @@ class Variation_57(Repetitive):
     cv_variation: TypeAlias = Variation_7
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_57.cv_arg") -> 'Variation_57':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_57.cv_arg") -> "Variation_57":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_57'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_57", Bits]]:
+        return cls._parse(bs) # type: ignore
 
-    @no_type_check
     def get_list(self) -> List[Variation_7]:
-        return self._get_list()
+        return self._get_list() # type: ignore
 
 class RuleVariation_52(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_57.cv_arg
     cv_variation: TypeAlias = Variation_57
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_52.cv_arg") -> "RuleVariation_52":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_52":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_52", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_57:
@@ -4194,15 +3810,13 @@ class NonSpare_19(NonSpare):
     cv_title = "Repetitive Regular"
     cv_rule: TypeAlias = RuleVariation_52
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_19.cv_arg") -> "NonSpare_19":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_19":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_19", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_52:
@@ -4220,15 +3834,13 @@ class Item_16(Item):
     cv_arg: TypeAlias = NonSpare_52.cv_arg
     cv_non_spare: TypeAlias = NonSpare_52
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_16.cv_arg") -> "Item_16":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_16":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_16", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_42(Group):
     cv_arg_group: TypeAlias = Tuple[Union[RuleVariation_7.cv_arg, Tuple[Literal["I1"], RuleVariation_7.cv_arg]], Union[RuleVariation_7.cv_arg, Tuple[Literal["I2"], RuleVariation_7.cv_arg]]]
@@ -4260,14 +3872,12 @@ class Variation_42(Group):
         return self._get_item(key)
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_42.cv_arg") -> 'Variation_42':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_42.cv_arg") -> "Variation_42":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_42'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_42", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_58(Repetitive):
     cv_arg: TypeAlias = List[Variation_42.cv_arg]
@@ -4275,32 +3885,27 @@ class Variation_58(Repetitive):
     cv_variation: TypeAlias = Variation_42
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_58.cv_arg") -> 'Variation_58':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_58.cv_arg") -> "Variation_58":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_58'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_58", Bits]]:
+        return cls._parse(bs) # type: ignore
 
-    @no_type_check
     def get_list(self) -> List[Variation_42]:
-        return self._get_list()
+        return self._get_list() # type: ignore
 
 class RuleVariation_53(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_58.cv_arg
     cv_variation: TypeAlias = Variation_58
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_53.cv_arg") -> "RuleVariation_53":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_53":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_53", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_58:
@@ -4312,15 +3917,13 @@ class NonSpare_20(NonSpare):
     cv_title = "Repetitive With Group"
     cv_rule: TypeAlias = RuleVariation_53
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_20.cv_arg") -> "NonSpare_20":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_20":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_20", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_53:
@@ -4340,32 +3943,27 @@ class Variation_59(Repetitive):
     cv_variation: TypeAlias = Variation_6
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_59.cv_arg") -> 'Variation_59':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_59.cv_arg") -> "Variation_59":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_59'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_59", Bits]]:
+        return cls._parse(bs) # type: ignore
 
-    @no_type_check
     def get_list(self) -> List[Variation_6]:
-        return self._get_list()
+        return self._get_list() # type: ignore
 
 class RuleVariation_54(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_59.cv_arg
     cv_variation: TypeAlias = Variation_59
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_54.cv_arg") -> "RuleVariation_54":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_54":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_54", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_59:
@@ -4377,15 +3975,13 @@ class NonSpare_21(NonSpare):
     cv_title = "Repetitive Fx"
     cv_rule: TypeAlias = RuleVariation_54
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_21.cv_arg") -> "NonSpare_21":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_21":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_21", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_54:
@@ -4405,15 +4001,13 @@ class NonSpare_60(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_6
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_60.cv_arg") -> "NonSpare_60":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_60":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_60", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_6:
@@ -4428,15 +4022,13 @@ class Item_22(Item):
     cv_arg: TypeAlias = NonSpare_60.cv_arg
     cv_non_spare: TypeAlias = NonSpare_60
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_22.cv_arg") -> "Item_22":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_22":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_22", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_41(Group):
     cv_arg_group: TypeAlias = Tuple[Union[RuleVariation_7.cv_arg, Tuple[Literal["I1"], RuleVariation_7.cv_arg]], Union[RuleVariation_6.cv_arg, Tuple[Literal["I2"], RuleVariation_6.cv_arg]]]
@@ -4468,14 +4060,12 @@ class Variation_41(Group):
         return self._get_item(key)
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_41.cv_arg") -> 'Variation_41':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_41.cv_arg") -> "Variation_41":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_41'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_41", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_60(Repetitive):
     cv_arg: TypeAlias = List[Variation_41.cv_arg]
@@ -4483,32 +4073,27 @@ class Variation_60(Repetitive):
     cv_variation: TypeAlias = Variation_41
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_60.cv_arg") -> 'Variation_60':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_60.cv_arg") -> "Variation_60":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_60'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_60", Bits]]:
+        return cls._parse(bs) # type: ignore
 
-    @no_type_check
     def get_list(self) -> List[Variation_41]:
-        return self._get_list()
+        return self._get_list() # type: ignore
 
 class RuleVariation_55(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_60.cv_arg
     cv_variation: TypeAlias = Variation_60
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_55.cv_arg") -> "RuleVariation_55":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_55":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_55", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_60:
@@ -4520,15 +4105,13 @@ class NonSpare_22(NonSpare):
     cv_title = "Repetitive Fx With Group"
     cv_rule: TypeAlias = RuleVariation_55
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_22.cv_arg") -> "NonSpare_22":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_22":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_22", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_55:
@@ -4547,28 +4130,24 @@ class Variation_61(Explicit):
     cv_explicit_type: TypeAlias = None
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_61.cv_arg") -> 'Variation_61':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_61.cv_arg") -> "Variation_61":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_61'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_61", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_56(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_61.cv_arg
     cv_variation: TypeAlias = Variation_61
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_56.cv_arg") -> "RuleVariation_56":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_56":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_56", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_61:
@@ -4580,15 +4159,13 @@ class NonSpare_23(NonSpare):
     cv_title = "Explicit None"
     cv_rule: TypeAlias = RuleVariation_56
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_23.cv_arg") -> "NonSpare_23":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_23":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_23", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_56:
@@ -4607,28 +4184,24 @@ class Variation_62(Explicit):
     cv_explicit_type: TypeAlias = ReservedExpansion
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_62.cv_arg") -> 'Variation_62':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_62.cv_arg") -> "Variation_62":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_62'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_62", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_57(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_62.cv_arg
     cv_variation: TypeAlias = Variation_62
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_57.cv_arg") -> "RuleVariation_57":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_57":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_57", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_62:
@@ -4640,15 +4213,13 @@ class NonSpare_24(NonSpare):
     cv_title = "Explicit RE"
     cv_rule: TypeAlias = RuleVariation_57
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_24.cv_arg") -> "NonSpare_24":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_24":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_24", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_57:
@@ -4667,28 +4238,24 @@ class Variation_63(Explicit):
     cv_explicit_type: TypeAlias = SpecialPurpose
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_63.cv_arg") -> 'Variation_63':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_63.cv_arg") -> "Variation_63":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_63'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_63", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_58(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_63.cv_arg
     cv_variation: TypeAlias = Variation_63
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_58.cv_arg") -> "RuleVariation_58":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_58":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_58", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_63:
@@ -4700,15 +4267,13 @@ class NonSpare_25(NonSpare):
     cv_title = "Explicit SP"
     cv_rule: TypeAlias = RuleVariation_58
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_25.cv_arg") -> "NonSpare_25":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_25":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_25", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_58:
@@ -4736,46 +4301,38 @@ class Variation_64(Compound):
     cv_items_list = [NonSpare_52]
     cv_items_dict = {"I1": NonSpare_52}
 
-    @no_type_check
     @classmethod
     def spec(cls, key : Literal["I1"]) -> Type[NonSpare_52]:
-        return cls._spec(key)
+        return cls._spec(key) # type: ignore
 
-    @no_type_check
     def get_item(self, key : Literal["I1"]) -> Optional[Type[NonSpare_52]]:
-        return self._get_item(key)
+        return self._get_item(key) # type: ignore
 
-    @no_type_check
-    def set_item(self, key : Literal["I1"], val : NonSpare_52.cv_arg) -> 'Variation_64':
-        return self._set_item(key, val)
+    def set_item(self, key : Literal["I1"], val : NonSpare_52.cv_arg) -> "Variation_64":
+        return self._set_item(key, val) # type: ignore
 
-    @no_type_check
-    def del_item(self, key : Literal["I1"]) -> 'Variation_64':
-        return self._del_item(key)
+    def del_item(self, key : Literal["I1"]) -> "Variation_64":
+        return self._del_item(key) # type: ignore
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Variation_64.cv_arg") -> 'Variation_64':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_64.cv_arg") -> "Variation_64":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_64'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_64", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_59(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_64.cv_arg
     cv_variation: TypeAlias = Variation_64
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_59.cv_arg") -> "RuleVariation_59":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_59":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_59", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_64:
@@ -4787,15 +4344,13 @@ class NonSpare_26(NonSpare):
     cv_title = "Compound With One Element"
     cv_rule: TypeAlias = RuleVariation_59
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_26.cv_arg") -> "NonSpare_26":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_26":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_26", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_59:
@@ -4857,29 +4412,25 @@ class Variation_65(Compound):
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Variation_65.cv_arg") -> 'Variation_65':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_65.cv_arg") -> "Variation_65":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_65'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_65", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_60(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_65.cv_arg
     cv_variation: TypeAlias = Variation_65
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_60.cv_arg") -> "RuleVariation_60":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_60":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_60", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_65:
@@ -4891,15 +4442,13 @@ class NonSpare_27(NonSpare):
     cv_title = "Compound With Two Elements"
     cv_rule: TypeAlias = RuleVariation_60
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_27.cv_arg") -> "NonSpare_27":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_27":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_27", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_60:
@@ -4919,15 +4468,13 @@ class NonSpare_67(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_67.cv_arg") -> "NonSpare_67":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_67":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_67", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -5000,29 +4547,25 @@ class Variation_66(Compound):
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Variation_66.cv_arg") -> 'Variation_66':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_66.cv_arg") -> "Variation_66":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_66'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_66", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_61(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_66.cv_arg
     cv_variation: TypeAlias = Variation_66
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_61.cv_arg") -> "RuleVariation_61":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_61":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_61", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_66:
@@ -5034,15 +4577,13 @@ class NonSpare_28(NonSpare):
     cv_title = "Compound With Three Elements"
     cv_rule: TypeAlias = RuleVariation_61
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_28.cv_arg") -> "NonSpare_28":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_28":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_28", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_61:
@@ -5062,15 +4603,13 @@ class NonSpare_47(NonSpare):
     cv_title = "Element Populated Bit"
     cv_rule: TypeAlias = RuleVariation_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_47.cv_arg") -> "NonSpare_47":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_47":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_47", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_0:
@@ -5085,15 +4624,13 @@ class Item_11(Item):
     cv_arg: TypeAlias = NonSpare_47.cv_arg
     cv_non_spare: TypeAlias = NonSpare_47
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_11.cv_arg") -> "Item_11":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_11":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_11", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_26(Element):
     cv_arg: TypeAlias = RuleContent_0.cv_arg
@@ -5101,24 +4638,20 @@ class Variation_26(Element):
     cv_bit_size = 1
     cv_rule = RuleContent_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_26.cv_arg") -> "Variation_26":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_26":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_26", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_0:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_0:
         return self.rule.content
 
@@ -5126,15 +4659,13 @@ class RuleVariation_26(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_26.cv_arg
     cv_variation: TypeAlias = Variation_26
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_26.cv_arg") -> "RuleVariation_26":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_26":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_26", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_26:
@@ -5146,15 +4677,13 @@ class NonSpare_90(NonSpare):
     cv_title = "Value"
     cv_rule: TypeAlias = RuleVariation_26
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_90.cv_arg") -> "NonSpare_90":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_90":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_90", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_26:
@@ -5169,15 +4698,13 @@ class Item_40(Item):
     cv_arg: TypeAlias = NonSpare_90.cv_arg
     cv_non_spare: TypeAlias = NonSpare_90
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_40.cv_arg") -> "Item_40":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_40":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_40", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_38(Group):
     cv_arg_group: TypeAlias = Tuple[Union[RuleVariation_0.cv_arg, Tuple[Literal["EP"], RuleVariation_0.cv_arg]], Union[RuleVariation_26.cv_arg, Tuple[Literal["VAL"], RuleVariation_26.cv_arg]]]
@@ -5209,28 +4736,24 @@ class Variation_38(Group):
         return self._get_item(key)
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_38.cv_arg") -> 'Variation_38':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_38.cv_arg") -> "Variation_38":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_38'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_38", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_36(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_38.cv_arg
     cv_variation: TypeAlias = Variation_38
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_36.cv_arg") -> "RuleVariation_36":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_36":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_36", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_38:
@@ -5242,15 +4765,13 @@ class NonSpare_84(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_36
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_84.cv_arg") -> "NonSpare_84":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_84":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_84", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_36:
@@ -5265,15 +4786,13 @@ class Item_35(Item):
     cv_arg: TypeAlias = NonSpare_84.cv_arg
     cv_non_spare: TypeAlias = NonSpare_84
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_35.cv_arg") -> "Item_35":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_35":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_35", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_29(Element):
     cv_arg: TypeAlias = RuleContent_0.cv_arg
@@ -5281,24 +4800,20 @@ class Variation_29(Element):
     cv_bit_size = 1
     cv_rule = RuleContent_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_29.cv_arg") -> "Variation_29":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_29":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_29", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_0:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_0:
         return self.rule.content
 
@@ -5306,15 +4821,13 @@ class RuleVariation_29(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_29.cv_arg
     cv_variation: TypeAlias = Variation_29
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_29.cv_arg") -> "RuleVariation_29":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_29":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_29", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_29:
@@ -5326,15 +4839,13 @@ class NonSpare_48(NonSpare):
     cv_title = "Element Populated Bit"
     cv_rule: TypeAlias = RuleVariation_29
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_48.cv_arg") -> "NonSpare_48":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_48":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_48", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_29:
@@ -5349,15 +4860,13 @@ class Item_12(Item):
     cv_arg: TypeAlias = NonSpare_48.cv_arg
     cv_non_spare: TypeAlias = NonSpare_48
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_12.cv_arg") -> "Item_12":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_12":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_12", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_30(Element):
     cv_arg: TypeAlias = RuleContent_0.cv_arg
@@ -5365,24 +4874,20 @@ class Variation_30(Element):
     cv_bit_size = 1
     cv_rule = RuleContent_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_30.cv_arg") -> "Variation_30":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_30":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_30", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_0:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_0:
         return self.rule.content
 
@@ -5390,15 +4895,13 @@ class RuleVariation_30(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_30.cv_arg
     cv_variation: TypeAlias = Variation_30
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_30.cv_arg") -> "RuleVariation_30":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_30":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_30", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_30:
@@ -5410,15 +4913,13 @@ class NonSpare_91(NonSpare):
     cv_title = "Value"
     cv_rule: TypeAlias = RuleVariation_30
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_91.cv_arg") -> "NonSpare_91":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_91":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_91", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_30:
@@ -5433,15 +4934,13 @@ class Item_41(Item):
     cv_arg: TypeAlias = NonSpare_91.cv_arg
     cv_non_spare: TypeAlias = NonSpare_91
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_41.cv_arg") -> "Item_41":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_41":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_41", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_48(Group):
     cv_arg_group: TypeAlias = Tuple[Union[RuleVariation_29.cv_arg, Tuple[Literal["EP"], RuleVariation_29.cv_arg]], Union[RuleVariation_30.cv_arg, Tuple[Literal["VAL"], RuleVariation_30.cv_arg]]]
@@ -5473,28 +4972,24 @@ class Variation_48(Group):
         return self._get_item(key)
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_48.cv_arg") -> 'Variation_48':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_48.cv_arg") -> "Variation_48":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_48'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_48", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_44(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_48.cv_arg
     cv_variation: TypeAlias = Variation_48
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_44.cv_arg") -> "RuleVariation_44":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_44":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_44", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_48:
@@ -5506,15 +5001,13 @@ class NonSpare_85(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_44
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_85.cv_arg") -> "NonSpare_85":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_85":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_85", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_44:
@@ -5529,15 +5022,13 @@ class Item_36(Item):
     cv_arg: TypeAlias = NonSpare_85.cv_arg
     cv_non_spare: TypeAlias = NonSpare_85
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_36.cv_arg") -> "Item_36":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_36":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_36", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Item_3(Spare):
     cv_arg: TypeAlias = int
@@ -5574,28 +5065,24 @@ class Variation_46(Group):
         return self._get_item(key)
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_46.cv_arg") -> 'Variation_46':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_46.cv_arg") -> "Variation_46":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_46'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_46", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_42(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_46.cv_arg
     cv_variation: TypeAlias = Variation_46
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_42.cv_arg") -> "RuleVariation_42":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_42":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_42", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_46:
@@ -5607,15 +5094,13 @@ class NonSpare_30(NonSpare):
     cv_title = "Nested Groups"
     cv_rule: TypeAlias = RuleVariation_42
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_30.cv_arg") -> "NonSpare_30":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_30":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_30", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_42:
@@ -5664,28 +5149,24 @@ class Variation_45(Group):
         return self._get_item(key)
 
     @classmethod
-    @no_type_check
-    def create(cls, arg: "Variation_45.cv_arg") -> 'Variation_45':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_45.cv_arg") -> "Variation_45":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_45'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_45", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_41(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_45.cv_arg
     cv_variation: TypeAlias = Variation_45
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_41.cv_arg") -> "RuleVariation_41":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_41":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_41", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_45:
@@ -5697,15 +5178,13 @@ class NonSpare_63(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_41
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_63.cv_arg") -> "NonSpare_63":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_63":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_63", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_41:
@@ -5720,15 +5199,13 @@ class Item_25(Item):
     cv_arg: TypeAlias = NonSpare_63.cv_arg
     cv_non_spare: TypeAlias = NonSpare_63
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_25.cv_arg") -> "Item_25":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_25":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_25", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_54(Extended):
     cv_arg_group_1: TypeAlias = Union[int, Tuple[Union[RuleVariation_6.cv_arg, Tuple[Literal["I1"], RuleVariation_6.cv_arg]], None]]
@@ -5752,15 +5229,13 @@ class Variation_54(Extended):
     def spec(cls, key : Union[Literal["I1"], Literal["I2"]]) -> Any:
         return cls._spec(key)
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Variation_54.cv_arg") -> 'Variation_54':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_54.cv_arg") -> "Variation_54":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_54'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_54", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @overload
     def get_item(self, key : Literal["I1"]) -> RuleVariation_6:
@@ -5775,15 +5250,13 @@ class RuleVariation_49(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_54.cv_arg
     cv_variation: TypeAlias = Variation_54
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_49.cv_arg") -> "RuleVariation_49":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_49":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_49", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_54:
@@ -5795,15 +5268,13 @@ class NonSpare_33(NonSpare):
     cv_title = "Nested Groups Extended"
     cv_rule: TypeAlias = RuleVariation_49
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_33.cv_arg") -> "NonSpare_33":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_33":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_33", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_49:
@@ -6256,15 +5727,13 @@ class Record_9(Record):
     def get_rfs_item(self, arg : Any) -> Any:
         return self._get_rfs_item(arg)
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Record_9.cv_arg", rfs: Optional[List["Record_9.cv_union"]] = None) -> 'Record_9':
-        return cls._create(arg, rfs)
+        return cls._create(arg, rfs) # type: ignore
 
-    @no_type_check
     @classmethod
     def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_9", Bits]]:
-        return cls._parse(pm, bs)
+        return cls._parse(pm, bs) # type: ignore
 
 class Uap_3(UapSingle):
     cv_arg: TypeAlias = Record_9
@@ -6280,10 +5749,9 @@ class Asterix_0(AstCat):
     cv_uap: TypeAlias = Uap_3
     cv_record: TypeAlias = cv_uap.cv_record # shortcut
 
-    @no_type_check
     @classmethod
     def create(cls, records : List[Uap_3.cv_arg]) -> "Asterix_0":
-        return cls._create(records)
+        return cls._create(records) # type: ignore
 
 class Expansion_1(Expansion):
     cv_arg = TypedDict('cv_arg', {
@@ -6333,15 +5801,13 @@ class Expansion_1(Expansion):
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Expansion_1.cv_arg") -> 'Expansion_1':
-        return cls._create(arg)
+    def create(cls, arg: "Expansion_1.cv_arg") -> "Expansion_1":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
     def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Expansion_1", Bits]]:
-        return cls._parse(bs)
+        return cls._parse(bs) # type: ignore
 
 class Asterix_1(AstRef):
     cv_category = 0
@@ -6354,15 +5820,13 @@ class NonSpare_37(NonSpare):
     cv_title = "Test"
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_37.cv_arg") -> "NonSpare_37":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_37":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_37", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -6815,15 +6279,13 @@ class Record_10(Record):
     def get_rfs_item(self, arg : Any) -> Any:
         return self._get_rfs_item(arg)
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Record_10.cv_arg", rfs: Optional[List["Record_10.cv_union"]] = None) -> 'Record_10':
-        return cls._create(arg, rfs)
+        return cls._create(arg, rfs) # type: ignore
 
-    @no_type_check
     @classmethod
     def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_10", Bits]]:
-        return cls._parse(pm, bs)
+        return cls._parse(pm, bs) # type: ignore
 
 class Uap_4(UapSingle):
     cv_arg: TypeAlias = Record_10
@@ -6839,10 +6301,9 @@ class Asterix_2(AstCat):
     cv_uap: TypeAlias = Uap_4
     cv_record: TypeAlias = cv_uap.cv_record # shortcut
 
-    @no_type_check
     @classmethod
     def create(cls, records : List[Uap_4.cv_arg]) -> "Asterix_2":
-        return cls._create(records)
+        return cls._create(records) # type: ignore
 
 class Expansion_2(Expansion):
     cv_arg = TypedDict('cv_arg', {
@@ -6906,15 +6367,13 @@ class Expansion_2(Expansion):
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Expansion_2.cv_arg") -> 'Expansion_2':
-        return cls._create(arg)
+    def create(cls, arg: "Expansion_2.cv_arg") -> "Expansion_2":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
     def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Expansion_2", Bits]]:
-        return cls._parse(bs)
+        return cls._parse(bs) # type: ignore
 
 class Asterix_3(AstRef):
     cv_category = 0
@@ -6983,15 +6442,13 @@ class Expansion_0(Expansion):
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Expansion_0.cv_arg") -> 'Expansion_0':
-        return cls._create(arg)
+    def create(cls, arg: "Expansion_0.cv_arg") -> "Expansion_0":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
     def parse(cls, bs : Bits) -> Union[ValueError, Tuple["Expansion_0", Bits]]:
-        return cls._parse(bs)
+        return cls._parse(bs) # type: ignore
 
 class Asterix_4(AstRef):
     cv_category = 0
@@ -7004,15 +6461,13 @@ class NonSpare_2(NonSpare):
     cv_title = "Data Source Identifier"
     cv_rule: TypeAlias = RuleVariation_40
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_2.cv_arg") -> "NonSpare_2":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_2":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_2", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_40:
@@ -7035,9 +6490,8 @@ class RuleContent_3(RuleContentContextFree):
     cv_content: TypeAlias = Content_3
 
     @property
-    @no_type_check
     def content(self) -> Content_3:
-        return self._get_content()
+        return self._get_content() # type: ignore
 
 class Variation_2(Element):
     cv_arg: TypeAlias = RuleContent_3.cv_arg
@@ -7045,24 +6499,20 @@ class Variation_2(Element):
     cv_bit_size = 1
     cv_rule = RuleContent_3
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_2.cv_arg") -> "Variation_2":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_2":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_2", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_3:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_3:
         return self.rule.content
 
@@ -7070,15 +6520,13 @@ class RuleVariation_2(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_2.cv_arg
     cv_variation: TypeAlias = Variation_2
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_2.cv_arg") -> "RuleVariation_2":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_2":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_2", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_2:
@@ -7090,15 +6538,13 @@ class NonSpare_89(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_2
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_89.cv_arg") -> "NonSpare_89":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_89":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_89", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_2:
@@ -7113,15 +6559,13 @@ class Item_39(Item):
     cv_arg: TypeAlias = NonSpare_89.cv_arg
     cv_non_spare: TypeAlias = NonSpare_89
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_39.cv_arg") -> "Item_39":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_39":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_39", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class NonSpare_53(NonSpare):
     cv_arg: TypeAlias = RuleVariation_27.cv_arg
@@ -7129,15 +6573,13 @@ class NonSpare_53(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_27
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_53.cv_arg") -> "NonSpare_53":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_53":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_53", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_27:
@@ -7152,15 +6594,13 @@ class Item_17(Item):
     cv_arg: TypeAlias = NonSpare_53.cv_arg
     cv_non_spare: TypeAlias = NonSpare_53
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_17.cv_arg") -> "Item_17":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_17":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_17", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_56(Extended):
     cv_arg_group_1: TypeAlias = Union[int, Tuple[Union[RuleVariation_2.cv_arg, Tuple[Literal["TYP"], RuleVariation_2.cv_arg]], Union[RuleVariation_27.cv_arg, Tuple[Literal["I1"], RuleVariation_27.cv_arg]], None]]
@@ -7188,15 +6628,13 @@ class Variation_56(Extended):
     def spec(cls, key : Union[Literal["TYP"], Literal["I1"], Literal["I2"]]) -> Any:
         return cls._spec(key)
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Variation_56.cv_arg") -> 'Variation_56':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_56.cv_arg") -> "Variation_56":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_56'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_56", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @overload
     def get_item(self, key : Literal["TYP"]) -> RuleVariation_2:
@@ -7214,15 +6652,13 @@ class RuleVariation_51(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_56.cv_arg
     cv_variation: TypeAlias = Variation_56
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_51.cv_arg") -> "RuleVariation_51":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_51":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_51", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_56:
@@ -7234,15 +6670,13 @@ class NonSpare_5(NonSpare):
     cv_title = "Target Report Descriptor"
     cv_rule: TypeAlias = RuleVariation_51
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_5.cv_arg") -> "NonSpare_5":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_5":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_5", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_51:
@@ -7262,15 +6696,13 @@ class NonSpare_8(NonSpare):
     cv_title = "For Plots Only"
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_8.cv_arg") -> "NonSpare_8":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_8":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_8", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -7290,15 +6722,13 @@ class NonSpare_11(NonSpare):
     cv_title = "Common"
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_11.cv_arg") -> "NonSpare_11":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_11":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_11", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -7318,15 +6748,13 @@ class NonSpare_13(NonSpare):
     cv_title = "For Plots Only"
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_13.cv_arg") -> "NonSpare_13":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_13":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_13", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -7430,15 +6858,13 @@ class Record_7(Record):
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Record_7.cv_arg") -> 'Record_7':
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
     def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_7", Bits]]:
-        return cls._parse(pm, bs)
+        return cls._parse(pm, bs) # type: ignore
 
 class Variation_15(Element):
     cv_arg: TypeAlias = RuleContent_0.cv_arg
@@ -7446,24 +6872,20 @@ class Variation_15(Element):
     cv_bit_size = 16
     cv_rule = RuleContent_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_15.cv_arg") -> "Variation_15":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_15":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_15", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_0:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_0:
         return self.rule.content
 
@@ -7471,15 +6893,13 @@ class RuleVariation_15(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_15.cv_arg
     cv_variation: TypeAlias = Variation_15
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_15.cv_arg") -> "RuleVariation_15":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_15":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_15", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_15:
@@ -7491,15 +6911,13 @@ class NonSpare_9(NonSpare):
     cv_title = "For Tracks Only"
     cv_rule: TypeAlias = RuleVariation_15
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_9.cv_arg") -> "NonSpare_9":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_9":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_9", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_15:
@@ -7519,15 +6937,13 @@ class NonSpare_14(NonSpare):
     cv_title = "For Tracks Only"
     cv_rule: TypeAlias = RuleVariation_15
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_14.cv_arg") -> "NonSpare_14":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_14":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_14", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_15:
@@ -7631,15 +7047,13 @@ class Record_8(Record):
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Record_8.cv_arg") -> 'Record_8':
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
     def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_8", Bits]]:
-        return cls._parse(pm, bs)
+        return cls._parse(pm, bs) # type: ignore
 
 class Uap_5(UapMultiple):
     cv_arg: TypeAlias = Union[Record_7, Record_8]
@@ -7679,10 +7093,9 @@ class Asterix_5(AstCat):
     cv_edition = (1, 0)
     cv_uap: TypeAlias = Uap_5
 
-    @no_type_check
     @classmethod
     def create(cls, records : List[Uap_5.cv_arg]) -> "Asterix_5":
-        return cls._create(records)
+        return cls._create(records) # type: ignore
 
 class NonSpare_1(NonSpare):
     cv_arg: TypeAlias = RuleVariation_7.cv_arg
@@ -7690,15 +7103,13 @@ class NonSpare_1(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_1.cv_arg") -> "NonSpare_1":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_1":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_1", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -7718,15 +7129,13 @@ class NonSpare_29(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_29.cv_arg") -> "NonSpare_29":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_29":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_29", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -7746,15 +7155,13 @@ class NonSpare_32(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_32.cv_arg") -> "NonSpare_32":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_32":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_32", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -7830,15 +7237,13 @@ class Record_2(Record):
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Record_2.cv_arg") -> 'Record_2':
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
     def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_2", Bits]]:
-        return cls._parse(pm, bs)
+        return cls._parse(pm, bs) # type: ignore
 
 class NonSpare_38(NonSpare):
     cv_arg: TypeAlias = RuleVariation_15.cv_arg
@@ -7846,15 +7251,13 @@ class NonSpare_38(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_15
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_38.cv_arg") -> "NonSpare_38":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_38":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_38", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_15:
@@ -7874,15 +7277,13 @@ class NonSpare_39(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_15
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_39.cv_arg") -> "NonSpare_39":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_39":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_39", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_15:
@@ -7958,15 +7359,13 @@ class Record_5(Record):
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Record_5.cv_arg") -> 'Record_5':
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
     def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_5", Bits]]:
-        return cls._parse(pm, bs)
+        return cls._parse(pm, bs) # type: ignore
 
 class Variation_20(Element):
     cv_arg: TypeAlias = RuleContent_0.cv_arg
@@ -7974,24 +7373,20 @@ class Variation_20(Element):
     cv_bit_size = 32
     cv_rule = RuleContent_0
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Variation_20.cv_arg") -> "Variation_20":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Variation_20":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_20", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
-    @no_type_check
     def rule(self) -> RuleContent_0:
-        return self._get_rule()
+        return self._get_rule() # type: ignore
 
     # shortcut
     @property
-    @no_type_check
     def content(self) -> Content_0:
         return self.rule.content
 
@@ -7999,15 +7394,13 @@ class RuleVariation_20(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_20.cv_arg
     cv_variation: TypeAlias = Variation_20
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_20.cv_arg") -> "RuleVariation_20":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_20":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_20", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_20:
@@ -8019,15 +7412,13 @@ class NonSpare_40(NonSpare):
     cv_title = ""
     cv_rule: TypeAlias = RuleVariation_20
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_40.cv_arg") -> "NonSpare_40":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_40":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_40", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_20:
@@ -8089,15 +7480,13 @@ class Record_6(Record):
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Record_6.cv_arg") -> 'Record_6':
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
     def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_6", Bits]]:
-        return cls._parse(pm, bs)
+        return cls._parse(pm, bs) # type: ignore
 
 class Record_1(Record):
     cv_arg = TypedDict('cv_arg', {
@@ -8107,32 +7496,26 @@ class Record_1(Record):
     cv_items_list = [UapItem_1]
     cv_items_dict = {"010": NonSpare_1}
 
-    @no_type_check
     @classmethod
     def spec(cls, key : Literal["010"]) -> Type[NonSpare_1]:
-        return cls._spec(key)
+        return cls._spec(key) # type: ignore
 
-    @no_type_check
     def get_item(self, key : Literal["010"]) -> Optional[Type[NonSpare_1]]:
-        return self._get_item(key)
+        return self._get_item(key) # type: ignore
 
-    @no_type_check
     def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_1':
-        return self._set_item(key, val)
+        return self._set_item(key, val) # type: ignore
 
-    @no_type_check
     def del_item(self, key : Literal["010"]) -> 'Record_1':
-        return self._del_item(key)
+        return self._del_item(key) # type: ignore
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Record_1.cv_arg") -> 'Record_1':
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
     def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_1", Bits]]:
-        return cls._parse(pm, bs)
+        return cls._parse(pm, bs) # type: ignore
 
 class Uap_6(UapMultiple):
     cv_arg: TypeAlias = Union[Record_2, Record_5, Record_6, Record_1]
@@ -8188,10 +7571,9 @@ class Asterix_6(AstCat):
     cv_edition = (1, 0)
     cv_uap: TypeAlias = Uap_6
 
-    @no_type_check
     @classmethod
     def create(cls, records : List[Uap_6.cv_arg]) -> "Asterix_6":
-        return cls._create(records)
+        return cls._create(records) # type: ignore
 
 class Record_4(Record):
     cv_arg = TypedDict('cv_arg', {
@@ -8342,15 +7724,13 @@ class Record_4(Record):
     @classmethod
     def create(cls, arg: "Record_4.cv_arg", rfs1: Optional[List["Record_4.cv_union"]], rfs2: Optional[List["Record_4.cv_union"]], rfs3 : Optional[List["Record_4.cv_union"]] = None) -> 'Record_4':
         ...
-    @no_type_check
-    @classmethod
+    @classmethod # type: ignore
     def create(cls, arg: "Record_4.cv_arg", *rfs: Any) -> 'Record_4':
-        return cls._create(arg, *rfs)
+        return cls._create(arg, *rfs) # type: ignore
 
-    @no_type_check
     @classmethod
     def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_4", Bits]]:
-        return cls._parse(pm, bs)
+        return cls._parse(pm, bs) # type: ignore
 
 class Uap_2(UapSingle):
     cv_arg: TypeAlias = Record_4
@@ -8366,10 +7746,9 @@ class Asterix_7(AstCat):
     cv_uap: TypeAlias = Uap_2
     cv_record: TypeAlias = cv_uap.cv_record # shortcut
 
-    @no_type_check
     @classmethod
     def create(cls, records : List[Uap_2.cv_arg]) -> "Asterix_7":
-        return cls._create(records)
+        return cls._create(records) # type: ignore
 
 class Record_3(Record):
     cv_arg = TypedDict('cv_arg', {
@@ -8475,15 +7854,13 @@ class Record_3(Record):
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Record_3.cv_arg") -> 'Record_3':
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
     def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_3", Bits]]:
-        return cls._parse(pm, bs)
+        return cls._parse(pm, bs) # type: ignore
 
 class Uap_1(UapSingle):
     cv_arg: TypeAlias = Record_3
@@ -8499,10 +7876,9 @@ class Asterix_8(AstCat):
     cv_uap: TypeAlias = Uap_1
     cv_record: TypeAlias = cv_uap.cv_record # shortcut
 
-    @no_type_check
     @classmethod
     def create(cls, records : List[Uap_1.cv_arg]) -> "Asterix_8":
-        return cls._create(records)
+        return cls._create(records) # type: ignore
 
 class NonSpare_55(NonSpare):
     cv_arg: TypeAlias = RuleVariation_6.cv_arg
@@ -8510,15 +7886,13 @@ class NonSpare_55(NonSpare):
     cv_title = "Test"
     cv_rule: TypeAlias = RuleVariation_6
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_55.cv_arg") -> "NonSpare_55":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_55":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_55", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_6:
@@ -8533,15 +7907,13 @@ class Item_19(Item):
     cv_arg: TypeAlias = NonSpare_55.cv_arg
     cv_non_spare: TypeAlias = NonSpare_55
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_19.cv_arg") -> "Item_19":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_19":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_19", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_55(Extended):
     cv_arg_group_1: TypeAlias = Union[int, Tuple[Union[RuleVariation_6.cv_arg, Tuple[Literal["I1"], RuleVariation_6.cv_arg]], None]]
@@ -8551,20 +7923,17 @@ class Variation_55(Extended):
     cv_items_list = [[(Item_19, 7), None]]
     cv_items_dict = {"I1": NonSpare_55}
 
-    @no_type_check
     @classmethod
     def spec(cls, key : Literal["I1"]) -> Type[NonSpare_55]:
-        return cls._spec(key)
+        return cls._spec(key) # type: ignore
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Variation_55.cv_arg") -> 'Variation_55':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_55.cv_arg") -> "Variation_55":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_55'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_55", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @overload # type: ignore
     def get_item(self, key : Literal["I1"]) -> RuleVariation_6:
@@ -8576,15 +7945,13 @@ class RuleVariation_50(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_55.cv_arg
     cv_variation: TypeAlias = Variation_55
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_50.cv_arg") -> "RuleVariation_50":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_50":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_50", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_55:
@@ -8596,15 +7963,13 @@ class NonSpare_31(NonSpare):
     cv_title = "Single1"
     cv_rule: TypeAlias = RuleVariation_50
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_31.cv_arg") -> "NonSpare_31":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_31":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_31", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_50:
@@ -8622,15 +7987,13 @@ class RuleVariation_33(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_33.cv_arg
     cv_variation: TypeAlias = Variation_33
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_33.cv_arg") -> "RuleVariation_33":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_33":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_33", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_33:
@@ -8647,15 +8010,13 @@ class NonSpare_57(NonSpare):
     cv_title = "Test"
     cv_rule: TypeAlias = RuleVariation_33
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_57.cv_arg") -> "NonSpare_57":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_57":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_57", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_33:
@@ -8670,15 +8031,13 @@ class Item_20(Item):
     cv_arg: TypeAlias = NonSpare_57.cv_arg
     cv_non_spare: TypeAlias = NonSpare_57
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_20.cv_arg") -> "Item_20":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_20":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_20", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_50(Extended):
     cv_arg_group_1: TypeAlias = Union[int, Tuple[int, Union[RuleVariation_33.cv_arg, Tuple[Literal["I1"], RuleVariation_33.cv_arg]], None]]
@@ -8688,20 +8047,17 @@ class Variation_50(Extended):
     cv_items_list = [[(Item_0, 4), (Item_20, 3), None]]
     cv_items_dict = {"I1": NonSpare_57}
 
-    @no_type_check
     @classmethod
     def spec(cls, key : Literal["I1"]) -> Type[NonSpare_57]:
-        return cls._spec(key)
+        return cls._spec(key) # type: ignore
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Variation_50.cv_arg") -> 'Variation_50':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_50.cv_arg") -> "Variation_50":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_50'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_50", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @overload # type: ignore
     def get_item(self, key : Literal["I1"]) -> RuleVariation_33:
@@ -8713,15 +8069,13 @@ class RuleVariation_45(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_50.cv_arg
     cv_variation: TypeAlias = Variation_50
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_45.cv_arg") -> "RuleVariation_45":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_45":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_45", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_50:
@@ -8733,15 +8087,13 @@ class NonSpare_34(NonSpare):
     cv_title = "Single2"
     cv_rule: TypeAlias = RuleVariation_45
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_34.cv_arg") -> "NonSpare_34":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_34":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_34", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_45:
@@ -8761,15 +8113,13 @@ class NonSpare_58(NonSpare):
     cv_title = "Test"
     cv_rule: TypeAlias = RuleVariation_34
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_58.cv_arg") -> "NonSpare_58":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_58":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_58", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_34:
@@ -8784,15 +8134,13 @@ class Item_21(Item):
     cv_arg: TypeAlias = NonSpare_58.cv_arg
     cv_non_spare: TypeAlias = NonSpare_58
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "Item_21.cv_arg") -> "Item_21":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "Item_21":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Item_21", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class Variation_51(Extended):
     cv_arg_group_1: TypeAlias = Union[int, Tuple[int, Union[RuleVariation_34.cv_arg, Tuple[Literal["I1"], RuleVariation_34.cv_arg]]]]
@@ -8802,20 +8150,17 @@ class Variation_51(Extended):
     cv_items_list = [[(Item_0, 4), (Item_21, 4)]]
     cv_items_dict = {"I1": NonSpare_58}
 
-    @no_type_check
     @classmethod
     def spec(cls, key : Literal["I1"]) -> Type[NonSpare_58]:
-        return cls._spec(key)
+        return cls._spec(key) # type: ignore
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Variation_51.cv_arg") -> 'Variation_51':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_51.cv_arg") -> "Variation_51":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_51'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_51", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @overload # type: ignore
     def get_item(self, key : Literal["I1"]) -> RuleVariation_34:
@@ -8827,15 +8172,13 @@ class RuleVariation_46(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_51.cv_arg
     cv_variation: TypeAlias = Variation_51
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_46.cv_arg") -> "RuleVariation_46":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_46":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_46", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_51:
@@ -8847,15 +8190,13 @@ class NonSpare_35(NonSpare):
     cv_title = "Single3"
     cv_rule: TypeAlias = RuleVariation_46
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_35.cv_arg") -> "NonSpare_35":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_35":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_35", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_46:
@@ -8875,15 +8216,13 @@ class NonSpare_56(NonSpare):
     cv_title = "Test"
     cv_rule: TypeAlias = RuleVariation_7
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_56.cv_arg") -> "NonSpare_56":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_56":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_56", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_7:
@@ -8902,46 +8241,38 @@ class Variation_68(Compound):
     cv_items_list = [NonSpare_56]
     cv_items_dict = {"I1": NonSpare_56}
 
-    @no_type_check
     @classmethod
     def spec(cls, key : Literal["I1"]) -> Type[NonSpare_56]:
-        return cls._spec(key)
+        return cls._spec(key) # type: ignore
 
-    @no_type_check
     def get_item(self, key : Literal["I1"]) -> Optional[Type[NonSpare_56]]:
-        return self._get_item(key)
+        return self._get_item(key) # type: ignore
 
-    @no_type_check
-    def set_item(self, key : Literal["I1"], val : NonSpare_56.cv_arg) -> 'Variation_68':
-        return self._set_item(key, val)
+    def set_item(self, key : Literal["I1"], val : NonSpare_56.cv_arg) -> "Variation_68":
+        return self._set_item(key, val) # type: ignore
 
-    @no_type_check
-    def del_item(self, key : Literal["I1"]) -> 'Variation_68':
-        return self._del_item(key)
+    def del_item(self, key : Literal["I1"]) -> "Variation_68":
+        return self._del_item(key) # type: ignore
 
-    @no_type_check
     @classmethod
-    def create(cls, arg: "Variation_68.cv_arg") -> 'Variation_68':
-        return cls._create(arg)
+    def create(cls, arg: "Variation_68.cv_arg") -> "Variation_68":
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "'Variation_68'":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["Variation_68", Bits]]:
+        return cls._parse(bs) # type: ignore
 
 class RuleVariation_63(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_68.cv_arg
     cv_variation: TypeAlias = Variation_68
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "RuleVariation_63.cv_arg") -> "RuleVariation_63":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "RuleVariation_63":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["RuleVariation_63", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def variation(self) -> Variation_68:
@@ -8953,15 +8284,13 @@ class NonSpare_36(NonSpare):
     cv_title = "Single4"
     cv_rule: TypeAlias = RuleVariation_63
 
-    @no_type_check
     @classmethod
     def create(cls, arg : "NonSpare_36.cv_arg") -> "NonSpare_36":
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
-    def parse(cls, bs: Bits) -> "NonSpare_36":
-        return cls._parse(bs)
+    def parse(cls, bs: Bits) -> Union[ValueError, Tuple["NonSpare_36", Bits]]:
+        return cls._parse(bs) # type: ignore
 
     @property
     def rule(self) -> RuleVariation_63:
@@ -9065,15 +8394,13 @@ class Record_0(Record):
     def del_item(self, key : Any) -> Any:
         return self._del_item(key)
 
-    @no_type_check
     @classmethod
     def create(cls, arg: "Record_0.cv_arg") -> 'Record_0':
-        return cls._create(arg)
+        return cls._create(arg) # type: ignore
 
-    @no_type_check
     @classmethod
     def parse(cls, pm: ParsingMode, bs : Bits) -> Union[ValueError, Tuple["Record_0", Bits]]:
-        return cls._parse(pm, bs)
+        return cls._parse(pm, bs) # type: ignore
 
 class Uap_0(UapSingle):
     cv_arg: TypeAlias = Record_0
@@ -9089,10 +8416,9 @@ class Asterix_9(AstCat):
     cv_uap: TypeAlias = Uap_0
     cv_record: TypeAlias = cv_uap.cv_record # shortcut
 
-    @no_type_check
     @classmethod
     def create(cls, records : List[Uap_0.cv_arg]) -> "Asterix_9":
-        return cls._create(records)
+        return cls._create(records) # type: ignore
 
 # Aliases
 

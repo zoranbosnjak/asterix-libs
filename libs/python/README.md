@@ -922,7 +922,7 @@ print(i010.variation.get_item('SA').as_uint())
 
 The program contains the following bugs:
 - Misspelled item name, `SA` instead of `SAC`, on lines 4 and 5
-- `get_item('010') result is not checked if the item
+- `get_item('010')` result is not checked if the item
   is actually present, which might result in runtime error
 
 ```

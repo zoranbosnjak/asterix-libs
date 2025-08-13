@@ -603,7 +603,7 @@ class NonSpare:
         return (cls(obj), remaining)
 
     @classmethod
-    def _create(cls, arg: Any) -> Any:
+    def _create(cls, arg: Any) -> 'NonSpare':
         if isinstance(arg, cls):
             return arg
         # first field of a tuple is maybe item name
@@ -637,7 +637,7 @@ class Item(ItemBase):
         return (cls(obj), remaining)
 
     @classmethod
-    def _create(cls, arg: Any) -> Any:
+    def _create(cls, arg: Any) -> 'Item':
         if isinstance(arg, cls):
             return arg
         val = cls.cv_non_spare.create(arg)  # type: ignore
@@ -664,7 +664,7 @@ class Element(Variation):
         return (cls(a), b)
 
     @classmethod
-    def _create(cls, arg: Any) -> Any:
+    def _create(cls, arg: Any) -> 'Element':
         if isinstance(arg, cls):
             return arg
         val = cls.cv_rule._convert(cls.cv_bit_size, arg)
@@ -710,7 +710,7 @@ class Group(Variation):
         return (cls(bs.take(n - m), items), remaining)
 
     @classmethod
-    def _create(cls, arg: Any) -> Any:
+    def _create(cls, arg: Any) -> 'Group':
         if isinstance(arg, cls):
             return arg
         # if arg is given as single integer, split to individual components
@@ -795,7 +795,7 @@ class Extended(Variation):
         return (cls(bs.take(n - m), items1), remaining)
 
     @classmethod
-    def _create(cls, groups: Any) -> Any:
+    def _create(cls, groups: Any) -> 'Extended':
         if isinstance(groups, cls):
             return groups
         all_items: List[List[Optional[ItemBase]]] = []
@@ -891,7 +891,7 @@ class Repetitive(Variation):
         return (cls(bs.take(n - m), items), remaining)
 
     @classmethod
-    def _create(cls, lst: Any) -> Any:
+    def _create(cls, lst: Any) -> 'Repetitive':
         if isinstance(lst, cls):
             return lst
         if cls.cv_rep_bytes is None:
@@ -932,7 +932,7 @@ class Explicit(Variation):
         return (cls(a), b)
 
     @classmethod
-    def _create(cls, s: Any) -> Any:
+    def _create(cls, s: Any) -> 'Explicit':
         if isinstance(s, cls):
             return s
         bs = Bits.from_uinteger(len(s) + 1, 0, 8)
@@ -1043,7 +1043,7 @@ class Compound(Variation):
         return (cls(bs.take(n - m), items), remaining)
 
     @classmethod
-    def _create(cls, args: Dict[str, Any]) -> Any:
+    def _create(cls, args: Dict[str, Any]) -> 'Compound':
         if isinstance(args, cls):
             return args
         bs, items = unparse_fspec(cls.cv_items_list, args)
@@ -1057,12 +1057,12 @@ class Compound(Variation):
     def _get_item(self, key: Any) -> Any:
         return self.arg.get(key)
 
-    def _set_item(self, key: Any, val: Any) -> Any:
+    def _set_item(self, key: Any, val: Any) -> 'Compound':
         d = self.arg
         d[key] = val
         return self.__class__._create(d)
 
-    def _del_item(self, key: Any) -> Any:
+    def _del_item(self, key: Any) -> 'Compound':
         d = self.arg
         try:
             del d[key]
@@ -1091,7 +1091,7 @@ class RuleVariationContextFree(RuleVariation):
         return (cls(obj), remaining)
 
     @classmethod
-    def _create(cls, arg: Any) -> Any:
+    def _create(cls, arg: Any) -> 'RuleVariationContextFree':
         if isinstance(arg, cls):
             return arg
         var = cls.cv_variation.create(arg)  # type: ignore
@@ -1135,7 +1135,7 @@ class RuleVariationDependent(RuleVariation):
         return (cls(obj.unparse()), remaining)
 
     @classmethod
-    def _create(cls, arg: Any) -> Any:
+    def _create(cls, arg: Any) -> 'RuleVariationDependent':
         if isinstance(arg, cls):
             return arg
         var = cls.cv_default_variation.create(arg)  # type: ignore
@@ -1288,7 +1288,7 @@ class Record:
         return (r, remaining)
 
     @classmethod
-    def _create(cls, args: Dict[str, Any], *rfs_args: Any) -> Any:
+    def _create(cls, args: Dict[str, Any], *rfs_args: Any) -> 'Record':
         # remove empty rfs elements from the tail of the rfss list
         rfss = list(dropwhile(lambda x: not x, reversed(rfs_args)))
 
@@ -1376,13 +1376,13 @@ class Record:
                     result.append(obj)
         return result
 
-    def _set_item(self, key: Any, val: Any) -> Any:
+    def _set_item(self, key: Any, val: Any) -> 'Record':
         d1 = self.items_regular
         d2 = self.items_rfs
         d1[key] = val
         return self.__class__._create(d1, d2 or None)
 
-    def _del_item(self, key: Any) -> Any:
+    def _del_item(self, key: Any) -> 'Record':
         d1 = self.items_regular
         d2 = self.items_rfs
         try:
@@ -1515,7 +1515,7 @@ class Expansion:
         return (cls(bs.take(n - m), items), remaining)
 
     @classmethod
-    def _create(cls, args: Dict[str, Any]) -> Any:
+    def _create(cls, args: Dict[str, Any]) -> 'Expansion':
         if isinstance(args, cls):
             return args
         a, b = cls.cv_type
@@ -1587,7 +1587,7 @@ class AstCat(AstSpec):
         self.records = records
 
     @classmethod
-    def _create(cls, records: Any) -> Any:
+    def _create(cls, records: Any) -> 'AstCat':
         s = Bits.concat([r.unparse() for r in records])
         cat = Bits.from_uinteger(cls.cv_category, 0, 8)
         n = Bits.from_uinteger((len(s) // 8) + 3, 0, 16)

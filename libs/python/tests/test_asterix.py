@@ -14,7 +14,7 @@ def test_create() -> None:
     Cat0.cv_record.create({})
     Cat0.cv_record.create({'010': 1}),
     with pytest.raises(ValueError):
-        Cat0.cv_record.create({'nonexistingitem': 1})
+        Cat0.cv_record.create({'nonexistingitem': 1}) # type: ignore
 
 
 def approximately(err: float, a: float, b: float) -> bool:
@@ -495,7 +495,7 @@ def test_explicit3c() -> None:
 def test_compound3() -> None:
     T = Cat_000_1_0.cv_record.spec('093')
     with pytest.raises(ValueError):
-        obj = T.create({'nonexistingitem': 1})
+        obj = T.create({'nonexistingitem': 1}) # type: ignore
     obj = T.create({})
     assert obj.unparse() == Bits.from_bytes(unhexlify('00'))
     obj1 = T.create({'I1': 1})
@@ -836,7 +836,7 @@ def test_parse3() -> None:
             assert r2.unparse() == rec_track.unparse()
 
     class _mixed:
-        records = [
+        records : Any = [
             rec_plot, rec_plot,
             rec_track, rec_track, rec_track,
         ]
