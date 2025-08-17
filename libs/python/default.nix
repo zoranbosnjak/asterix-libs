@@ -36,6 +36,7 @@ let
     pyproject = true;
     propagatedBuildInputs = deps;
     nativeCheckInputs = [
+      pkgs.python3Packages.mypy
       pkgs.python3Packages.pytest
     ];
     checkPhase = ''
