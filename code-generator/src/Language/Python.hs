@@ -11,7 +11,7 @@ import           Data.Coerce
 import           Data.List               (inits, intersperse, nub, sort, sortOn)
 import           Data.Maybe
 import           Data.Scientific
-import           Data.Set                as Set
+import           Data.Set                as Set hiding (drop)
 import           Data.Text               (Text)
 import           Data.Text.Lazy.Builder  (Builder)
 import qualified Data.Text.Lazy.Builder  as BL
@@ -363,7 +363,7 @@ instance Node Variation where
                         arg = fmtList "Union[int, Tuple[" "]]" f group
                     fmt ("cv_arg_group_" % int % ": TypeAlias = " % stext) gi arg
                 "cv_arg: TypeAlias = Union["
-                indent $ forM_ (tail $ inits [1 .. length groups]) $ \gi -> do
+                indent $ forM_ (drop 1 $ inits [1 .. length groups]) $ \gi -> do
                     let f = sformat ("Variation_" % int % ".cv_arg_group_" % int) ix
                     fmt stext (fmtList "Tuple[" "]," (quote . f) gi)
                 "]"

@@ -167,10 +167,14 @@ deriveAsterix = \case
     deriveUap :: [A.NonSpare ()] -> A.Uap [A.UapItem A.ItemName] -> Uap
     deriveUap catalogue = fmap getRecord
       where
+        -- suppress head partiality warning
+        head' = \case
+            [] -> error "empty list"
+            x : _ -> x
         items :: [NonSpare]
         items = fmap deriveNonSpare catalogue
         getItem :: A.ItemName -> NonSpare
-        getItem name = head $ flip mapMaybe items $ \i -> case i of
+        getItem name = head' $ flip mapMaybe items $ \i -> case i of
             A.NonSpare iName _ _ _ -> bool Nothing (Just i) (iName == name)
         getRecord :: [A.UapItem A.ItemName] -> Record
         getRecord lst = Record $ fmap (fmap getItem) lst
