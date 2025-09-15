@@ -926,6 +926,8 @@ class Explicit(Variation):
         if len(bs) < 8:
             return ValueError('overflow')
         cnt = bs.take(8).to_uinteger() * 8
+        if cnt == 0:
+            return ValueError("Unexpected size of explicit item")
         if len(bs) < cnt:
             return ValueError('overflow')
         a, b = bs.split_at(cnt)

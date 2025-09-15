@@ -402,6 +402,12 @@ def test_repetitive3() -> None:
     assert lst[2].as_uint() == 3
 
 
+def test_explicit0() -> None:
+    T = Cat_000_1_0.cv_record.spec('071')
+    result = T.parse(Bits.from_bytes(unhexlify('00')))
+    assert isinstance(result, ValueError)
+
+
 def test_explicit1() -> None:
     T = Cat_000_1_0.cv_record.spec('071')
     obj = T.create(unhexlify('010203'))
