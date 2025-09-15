@@ -538,6 +538,12 @@ def test_explicit3c() -> None:
     assert i3 is None
 
 
+def test_compound0() -> None:
+    T = Cat_000_1_0.cv_record.spec('091')
+    result = T.parse(Bits.from_bytes(unhexlify('0100')))
+    assert isinstance(result, ValueError)
+
+
 def test_compound3() -> None:
     T = Cat_000_1_0.cv_record.spec('093')
     with pytest.raises(ValueError):
@@ -582,7 +588,14 @@ def test_compound_del() -> None:
     assert var13.unparse() == obj13.unparse()
 
 
-def test_record() -> None:
+def test_record0() -> None:
+    T = Cat_000_1_0.cv_record
+    result = T.parse(ParsingMode.StrictParsing,
+                     Bits.from_bytes(unhexlify('0101010100')))
+    assert isinstance(result, ValueError)
+
+
+def test_record1() -> None:
     T = Cat_000_1_0.cv_record
     r0 = T.create({
     })

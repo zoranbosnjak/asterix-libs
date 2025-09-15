@@ -953,19 +953,22 @@ class Fspec:
         self.bs = bs
 
     @classmethod
-    def parse(cls, s: Bits) -> Union[ValueError, Tuple['Fspec', Bits]]:
+    def parse(cls, max_bytes: int, s: Bits) -> Union[ValueError, Tuple['Fspec', Bits]]:
         n = 0
         for i in s.to_bytes():
-            n += 8
+            n += 1
             if not (i & 0x01):
                 break
         # empty input is not valid
         if not n:
-            return ValueError('overflow')
+            return ValueError('empty fspec')
+        # too big
+        if n > max_bytes:
+            return ValueError('fspec too big')
         # 'i' contains the last byte, which must have FX=0
         if (i & 0x01):
             return ValueError('overflow')
-        (a, b) = s.split_at(n)
+        (a, b) = s.split_at(n*8)
         return (cls(a), b)
 
     def __iter__(self) -> Iterator[bool]:
@@ -1025,7 +1028,7 @@ class Compound(Variation):
 
     @classmethod
     def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Compound', Bits]]:
-        result = Fspec.parse(bs)
+        result = Fspec.parse(cls.cv_fspec_max_bytes, bs)
         if isinstance(result, ValueError):
             return result
         fspec, remaining = result
@@ -1224,7 +1227,7 @@ class Record:
                 case ParsingMode.PartialParsing: pass
                 case _: assert_never(pm)
 
-        result = Fspec.parse(bs)
+        result = Fspec.parse(cls.cv_fspec_max_bytes, bs)
         if isinstance(result, ValueError):
             return result
         fspec, remaining = result
@@ -1507,7 +1510,7 @@ class Expansion:
             flags_bits, remaining = bs.split_at(n)
             flags = list(flags_bits)
         elif a == FspecFx:
-            result1 = Fspec.parse(bs)
+            result1 = Fspec.parse(b, bs)
             if isinstance(result1, ValueError):
                 return result1
             fspec, remaining = result1
