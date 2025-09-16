@@ -590,9 +590,9 @@ def test_compound_del() -> None:
 
 def test_record0() -> None:
     T = Cat_000_1_0.cv_record
-    result = T.parse(ParsingMode.StrictParsing,
-                     Bits.from_bytes(unhexlify('0101010100')))
-    assert isinstance(result, ValueError)
+    s = Bits.from_bytes(unhexlify('0101010100'))
+    assert isinstance(T.parse(ParsingMode.StrictParsing, s), ValueError)
+    assert not isinstance(T.parse(ParsingMode.PartialParsing, s), ValueError)
 
 
 def test_record1() -> None:

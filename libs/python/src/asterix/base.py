@@ -948,12 +948,25 @@ class Explicit(Variation):
         return self.bs.drop(8).to_bytes()
 
 
+class ParsingMode(enum.Enum):
+    StrictParsing = enum.auto()
+    PartialParsing = enum.auto()
+
+
 class Fspec:
     def __init__(self, bs: Bits):
         self.bs = bs
 
     @classmethod
-    def parse(cls, max_bytes: int, s: Bits) -> Union[ValueError, Tuple['Fspec', Bits]]:
+    def parse(cls, pm: ParsingMode, max_bytes: int, s: Bits) -> \
+            Union[ValueError, Tuple['Fspec', Bits]]:
+        # make sure that we can use a simple 'if StrictParsing... else...'
+        # in the rest of this function (that is: there are only 2 modes).
+        if TYPE_CHECKING:
+            match pm:
+                case ParsingMode.StrictParsing: pass
+                case ParsingMode.PartialParsing: pass
+                case _: assert_never(pm)
         n = 0
         for i in s.to_bytes():
             n += 1
@@ -963,7 +976,7 @@ class Fspec:
         if not n:
             return ValueError('empty fspec')
         # too big
-        if n > max_bytes:
+        if pm == ParsingMode.StrictParsing and n > max_bytes:
             return ValueError('fspec too big')
         # 'i' contains the last byte, which must have FX=0
         if (i & 0x01):
@@ -1028,7 +1041,7 @@ class Compound(Variation):
 
     @classmethod
     def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Compound', Bits]]:
-        result = Fspec.parse(cls.cv_fspec_max_bytes, bs)
+        result = Fspec.parse(ParsingMode.StrictParsing, cls.cv_fspec_max_bytes, bs)
         if isinstance(result, ValueError):
             return result
         fspec, remaining = result
@@ -1189,11 +1202,6 @@ def get_frn(items_list: List[Type[UapItemBase]], name: str) -> int:
     raise ValueError(name, 'not found')
 
 
-class ParsingMode(enum.Enum):
-    StrictParsing = enum.auto()
-    PartialParsing = enum.auto()
-
-
 class Record:
     cv_fspec_max_bytes: ClassVar[int]
     cv_items_list: ClassVar[List[Type[UapItemBase]]]
@@ -1227,7 +1235,7 @@ class Record:
                 case ParsingMode.PartialParsing: pass
                 case _: assert_never(pm)
 
-        result = Fspec.parse(cls.cv_fspec_max_bytes, bs)
+        result = Fspec.parse(pm, cls.cv_fspec_max_bytes, bs)
         if isinstance(result, ValueError):
             return result
         fspec, remaining = result
@@ -1510,7 +1518,7 @@ class Expansion:
             flags_bits, remaining = bs.split_at(n)
             flags = list(flags_bits)
         elif a == FspecFx:
-            result1 = Fspec.parse(b, bs)
+            result1 = Fspec.parse(ParsingMode.StrictParsing, b, bs)
             if isinstance(result1, ValueError):
                 return result1
             fspec, remaining = result1

@@ -1,6 +1,6 @@
 [project]
 name = "libasterix"
-version = "0.21.2"
+version = "0.21.3"
 authors = [
   { name="Zoran Bošnjak", email="zoran.bosnjak@via.si" },
 ]
