@@ -18,12 +18,14 @@ import           Asterix.Specs            (Asterix, cDecoder)
 import           Asterix.Specs.Syntaxes   (syntaxes)
 import           Asterix.Specs.Validation (runErrM, validate)
 
+import qualified Language.Haskell
 import qualified Language.Python
 import           Types
 
 languages :: [(Target, Generator)]
 languages =
     [ ("python", Language.Python.mkCode)
+    , ("haskell", Language.Haskell.mkCode)
     ]
 
 data Options = Options

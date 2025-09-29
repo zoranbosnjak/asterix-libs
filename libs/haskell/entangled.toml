@@ -1,0 +1,5 @@
+version = "2.0"
+watch_list = ["README.md"]
+ignore_list = []
+hooks = ["quarto_attributes", "brei"]
+

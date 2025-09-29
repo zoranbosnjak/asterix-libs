@@ -1,0 +1,79 @@
+cabal-version:      3.0
+name:               libasterix
+version:            0.1.0
+synopsis:           Asterix data processing library
+-- description:
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Zoran Bošnjak
+maintainer:         zoran.bosnjak@via.si
+-- copyright:
+category:           Data
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+-- extra-source-files:
+
+common base
+    ghc-options:
+        -Wall
+        -Wincomplete-uni-patterns
+        -Wincomplete-record-updates
+        -Wcompat
+        -Widentities
+        -Wredundant-constraints
+        -Wunused-packages
+        -Wpartial-fields
+    default-language: GHC2021
+    build-depends:
+        base < 5
+
+library
+    import:           base
+    exposed-modules:
+        Asterix.Schema
+        Asterix.BitString
+        Asterix.Base
+        Asterix.Generated
+        Asterix.Coding
+    -- other-modules:
+    -- other-extensions:
+    hs-source-dirs:   src
+    build-depends:
+        text
+        , bytestring
+        , base16-bytestring
+        , transformers
+        , containers
+
+test-suite libasterix-test
+    import:           base
+    other-modules:
+        Common
+        Generated
+        TestBits
+        TestRawDatablock
+        TestAsterix
+        TestCoding
+    -- other-extensions:
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          Main.hs
+    build-depends:
+        libasterix
+        , bytestring
+        , tasty
+        , tasty-quickcheck
+        , tasty-hunit
+
+benchmark bench-bytes
+    import:           base
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          BenchBytes.hs
+    ghc-options:      "-with-rtsopts=-A32m"
+    if impl(ghc >= 8.6)
+        ghc-options: -fproc-alignment=64
+    build-depends:
+        libasterix
+        , tasty-bench
+
