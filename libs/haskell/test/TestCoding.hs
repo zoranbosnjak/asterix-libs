@@ -4,14 +4,14 @@
 
 module TestCoding (tests) where
 
-import Data.Word
+import           Data.Word
 
 import           Test.Tasty
 import           Test.Tasty.HUnit
 
 import           Asterix.Coding
-import           Generated        as Gen
 import           Common
+import           Generated        as Gen
 
 type Cat0_1_0 = Gen.Cat_000_1_0
 type Cat1_1_0 = Gen.Cat_001_1_0

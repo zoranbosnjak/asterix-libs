@@ -7,10 +7,8 @@
 
 module Asterix.BitString where
 
-import           GHC.Stack
 import           Data.Bits               (complement, shift, testBit, (.&.),
                                           (.|.))
-import           Data.Coerce
 import           Data.Bool
 import           Data.ByteString         (ByteString)
 import qualified Data.ByteString         as BS
@@ -18,9 +16,11 @@ import qualified Data.ByteString.Base16  as B16
 import           Data.ByteString.Builder as BSB
 import qualified Data.ByteString.Char8   as BS8
 import qualified Data.ByteString.Lazy    as BSL
+import           Data.Coerce
 import qualified Data.List               as L
 import           Data.Maybe
 import           Data.Word
+import           GHC.Stack
 
 -- | For function names overloading
 class IsNumBits t where
@@ -175,7 +175,7 @@ boolsToBits o8 lst = Bits bs (Offset $ intToNumBits o8) (Size $ intToNumBits n)
     byteList i =
         let (a, b) = splitAt 8 i
         in case Prelude.length a < 8 of
-            True -> [boolsToWord8 $ take 8 $ a <> repeat False]
+            True  -> [boolsToWord8 $ take 8 $ a <> repeat False]
             False -> boolsToWord8 a : byteList b
 
 -- | Calculate 'compact' version of Bits - helper function.

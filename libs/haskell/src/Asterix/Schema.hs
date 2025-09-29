@@ -17,9 +17,9 @@
 -- used also at runtime.
 
 {-# LANGUAGE DataKinds              #-}
+{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE TypeFamilyDependencies #-}
 {-# LANGUAGE UndecidableInstances   #-}
-{-# LANGUAGE PolyKinds   #-}
 
 module Asterix.Schema
 ( module Asterix.Schema

@@ -2,25 +2,25 @@
 
 -- Remark: Keep asterix test scenarios synchronized between implementations.
 
-{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DataKinds  #-}
 {-# LANGUAGE LambdaCase #-}
 
 module TestAsterix (tests) where
 
-import           Prelude hiding (head, tail)
+import           Control.Monad
+import           Data.Either
 import qualified Data.List.NonEmpty as NE
 import           Data.Maybe
-import           Data.Either
-import           Control.Monad
+import           Prelude            hiding (head, tail)
 import           Test.Tasty
 import           Test.Tasty.HUnit
 
-import           Asterix.Schema
 import           Asterix.Base
 import           Asterix.Coding
+import           Asterix.Schema
 
-import           Generated        as Gen
 import           Common
+import           Generated          as Gen
 
 tests :: TestTree
 tests = testGroup "Asterix"

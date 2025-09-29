@@ -4,14 +4,14 @@
 -- Asterix data structures and functions to decode, encode and
 -- manipulate asterix data.
 
-{-# LANGUAGE DataKinds            #-}
-{-# LANGUAGE TypeFamilies         #-}
-{-# LANGUAGE UndecidableInstances #-}
-{-# LANGUAGE LambdaCase           #-}
+{-# LANGUAGE AllowAmbiguousTypes    #-}
+{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiWayIf           #-}
-{-# LANGUAGE AllowAmbiguousTypes  #-}
-{-# LANGUAGE OverloadedStrings    #-}
+{-# LANGUAGE LambdaCase             #-}
+{-# LANGUAGE MultiWayIf             #-}
+{-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 module Asterix.Coding
 ( module Asterix.Coding
@@ -20,25 +20,25 @@ module Asterix.Coding
 , module Asterix.Base
 ) where
 
-import           Prelude hiding (head, tail)
-import           Data.Coerce
 import           Control.Applicative
 import           Control.Monad
-import           Data.Proxy
-import qualified Data.Text as T
 import           Data.Bool
-import           Data.ByteString (ByteString)
-import           Data.Char (isAsciiUpper, isDigit, ord)
-import qualified Data.List.NonEmpty as NE
+import           Data.ByteString     (ByteString)
+import           Data.Char           (isAsciiUpper, isDigit, ord)
+import           Data.Coerce
+import           Data.Kind           (Type)
+import qualified Data.List.NonEmpty  as NE
 import           Data.Maybe
+import           Data.Proxy
+import qualified Data.Text           as T
 import           Data.Type.Bool
 import           Data.Type.Equality
 import           GHC.TypeLits
-import           Data.Kind (Type)
+import           Prelude             hiding (head, tail)
 
 import           Asterix.Base
-import           Asterix.Schema
 import           Asterix.BitString
+import           Asterix.Schema
 
 -- The 'U' in the following types stands for 'Untyped' version
 -- of data, in contrast to typed versions as defined below.
@@ -67,8 +67,8 @@ data UItem
     deriving Show
 
 data URecord = URecord
-    { uRecUnparse   :: SBuilder
-    , uRecItems     :: [Maybe (RecordItem UNonSpare)]
+    { uRecUnparse :: SBuilder
+    , uRecItems   :: [Maybe (RecordItem UNonSpare)]
     } deriving Show
 
 data UExpansion = UExpansion
@@ -343,7 +343,7 @@ parse act bs = do
     (result, o) <- runParsing act (Env parsingStore bs) 0
     case parsingMode @pm Proxy of
         StrictParsing -> case o == endOffset bs of
-            True -> pure result
+            True  -> pure result
             False -> Left "remaining bits"
         PartialParsing -> pure result
 
@@ -405,7 +405,7 @@ instance
         padChar :: Char
         padChar = case schema @st Proxy of
             GStringAscii -> ' '
-            GStringICAO -> ' '
+            GStringICAO  -> ' '
             GStringOctal -> '0'
 
         bpc :: Int
@@ -421,9 +421,9 @@ instance
             GStringAscii -> ord ch
             GStringICAO -> if
                 | isAsciiUpper ch -> 0x01 + ord ch - ord 'A'
-                | ch == ' ' -> 0x20
-                | isDigit ch -> 0x30 + ord ch - ord '0'
-                | otherwise -> 0
+                | ch == ' '       -> 0x20
+                | isDigit ch      -> 0x30 + ord ch - ord '0'
+                | otherwise       -> 0
             GStringOctal -> ord ch - ord '0'
 
         padAndStrip :: String -> String
@@ -762,7 +762,7 @@ instance -- this instance matches last group (t1 ': '[])
     ) => CExtendedGroups ts2 (t1 ': '[]) where
     extendedConstructGroups _p (HCons (Variation val) HNil) = case val of
         UGroup lst -> fmap Just lst <> trailingFx
-        _ -> intError
+        _          -> intError
       where
         appendFx = boolVal @fx Proxy
         trailingFx = bool [] [Nothing] appendFx
@@ -1169,7 +1169,7 @@ getFrn :: Enum n => n -> VText -> [VUapItem] -> n
 getFrn acc name = \case
     [] -> intError
     (GUapItem (GNonSpare name2 _title _rv) : ts) -> case name == name2 of
-        True -> acc
+        True  -> acc
         False -> getFrn (succ acc) name ts
     (GUapItemSpare : ts) -> getFrn (succ acc) name ts
     (GUapItemRFS : ts) -> getFrn (succ acc) name ts
@@ -1326,7 +1326,7 @@ expansion lst1 = Expansion $ UExpansion bld items
 
     fxbits :: SBuilder
     fxbits = case schema @mn Proxy of
-        Nothing -> mkFspecFx (fmap isJust items)
+        Nothing     -> mkFspecFx (fmap isJust items)
         Just nBytes -> mkFspecFixed nBytes (fmap isJust items)
 
     bld :: SBuilder
@@ -1452,7 +1452,7 @@ instance
   where
     asString (Item i) = case i of
         UItem val -> asString @ruleIx @(NonSpare nsp) (NonSpare val)
-        _ -> intError
+        _         -> intError
 
 class ToInteger ruleIx t where
     asInteger :: t -> Integer
@@ -1516,7 +1516,7 @@ instance
   where
     asInteger (Item i) = case i of
         UItem val -> asInteger @ruleIx @(NonSpare nsp) (NonSpare val)
-        _ -> intError
+        _         -> intError
 
 class ToQuantity unit ruleIx t where
     asQuantity :: t -> Quantity unit ruleIx
@@ -1585,7 +1585,7 @@ instance
   where
     asQuantity (Item i) = case i of
         UItem val -> asQuantity @unit @ruleIx @(NonSpare nsp) (NonSpare val)
-        _ -> intError
+        _         -> intError
 
 type family GetVariationResult t where
     GetVariationResult ('GNonSpare name title ('GContextFree var)) = var
@@ -1647,18 +1647,18 @@ getExtendedItem (Variation var) = case var of
         guard (n < length lst)
         case lst !! n of
             Just (UItem nsp) -> Just (NonSpare nsp)
-            _ -> intError
+            _                -> intError
     _ -> intError
 
 getRepetitiveItems :: Variation ('GRepetitive rt var) -> [Variation var]
 getRepetitiveItems (Variation var) = case var of
     URepetitive _bld lst -> fmap Variation lst
-    _ -> intError
+    _                    -> intError
 
 getExplicitData :: Variation ('GExplicit mt) -> Bits
 getExplicitData (Variation var) = case var of
     UExplicit _bld val -> val
-    _ -> intError
+    _                  -> intError
 
 getCompoundItem :: forall name lst. -- t lst ix.
     ( KnownNat (LookupCompound name lst)

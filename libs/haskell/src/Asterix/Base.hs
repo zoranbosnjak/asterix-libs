@@ -7,38 +7,38 @@
 {-# OPTIONS_GHC -Wno-redundant-constraints #-}
 
 {-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE TypeFamilies      #-}
-{-# LANGUAGE LambdaCase        #-}
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE GADTs             #-}
+{-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE MultiWayIf        #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 module Asterix.Base where
 
-import           GHC.Stack
-import           Data.Coerce
 import           Control.Applicative
 import           Control.Monad
 import           Control.Monad.Trans.Class
 import           Control.Monad.Trans.RWS
-import           Data.Char                 (chr, ord)
 import           Data.Bits                 (testBit)
+import           Data.Bool
 import           Data.ByteString           (ByteString)
 import qualified Data.ByteString           as BS
 import           Data.ByteString.Builder   as BSB
+import           Data.Char                 (chr, ord)
+import           Data.Coerce
+import           Data.Kind                 (Type)
 import qualified Data.List                 as L
 import           Data.Map                  (Map)
 import qualified Data.Map                  as Map
-import           Data.Proxy
 import           Data.Maybe
+import           Data.Proxy
 import           Data.String               as S
 import           Data.Text                 (Text)
 import           Data.Word
-import           Data.Bool
-import           Data.Kind                 (Type)
+import           GHC.Stack
 
-import           Asterix.Schema
 import           Asterix.BitString
+import           Asterix.Schema
 
 type family Fst t where Fst '(a, b) = a
 type family Snd t where Snd '(a, b) = b
@@ -66,7 +66,7 @@ bitsPerChar = \case
 -- | Evaluate GZ number to Integer.
 evalGz :: VZ -> Integer
 evalGz (GZ pm i) = fromIntegral $ i * case pm of
-    GPlus -> 1
+    GPlus  -> 1
     GMinus -> -1
 
 -- | Evaluate VNumber
@@ -89,9 +89,9 @@ bitsToString st bitSize =
             GStringAscii -> chr x
             GStringICAO -> if
                 | x >= 0x01 && x <= 0x1A -> chr (ord 'A' + x - 0x01)
-                | x == 0x20 -> ' '
+                | x == 0x20              -> ' '
                 | x >= 0x30 && x <= 0x39 -> chr (ord '0' + x - 0x30)
-                | otherwise -> '?'
+                | otherwise              -> '?'
             GStringOctal -> chr (ord '0' + x)
 
         p = 2 ^ bpc
@@ -113,7 +113,7 @@ applySignedness sig n val = case sig of
     GSigned -> withAssumption (n > 0) $
         let half = 2 ^ (n-1)
         in case val < half of
-            True -> val
+            True  -> val
             False -> val - (2 * half)
 
 bitsToInteger :: VSignedness -> Int -> Bits -> Integer
@@ -263,7 +263,7 @@ recreateExtended = \case
     [Just i] -> unparse @Bits i
     (x:xs) -> case x of
         Nothing -> setFx True `appendBits` recreateExtended xs
-        Just i -> unparse @Bits i `appendBits` recreateExtended xs
+        Just i  -> unparse @Bits i `appendBits` recreateExtended xs
   where
     setFx = integerToBits 7 1 . bool 0 1
 
@@ -448,7 +448,7 @@ parseFspec pm definedItems = do
             | otherwise = (a+1) * 7
     when (n == 0) $ parsingError "empty fspec"
     case pm of
-        StrictParsing -> when (n > maxSize) $ parsingError "fspec too big"
+        StrictParsing  -> when (n > maxSize) $ parsingError "fspec too big"
         PartialParsing -> pure ()
     pure $ Fspec $ take definedItems result
   where
@@ -486,7 +486,7 @@ parseVariation sch = ask >>= \env -> case sch of
                 False -> pure [Nothing]
                 True -> case xs of
                     [] -> parsingError "last FX bit is expected to be zero"
-                    _ -> (:) <$> pure Nothing <*> go xs
+                    _  -> (:) <$> pure Nothing <*> go xs
             Just x -> ((:) . Just <$> parseItem x) <*> go xs
     GRepetitive rt var -> do
         o1 <- get
@@ -533,7 +533,7 @@ parseVariation sch = ask >>= \env -> case sch of
         go ((flag,spec) : xs)
             | not flag = (:) <$> pure Nothing <*> go xs
             | otherwise = case spec of
-                Nothing -> parsingError "FX bit set for non-defined item"
+                Nothing  -> parsingError "FX bit set for non-defined item"
                 Just nsp -> ((:) . Just <$> parseNonSpare nsp) <*> go xs
 
 parseRuleVariation :: VRule VVariation
@@ -612,7 +612,7 @@ parseRecord (GRecord lst) = ask >>= \env -> do
         (items, clean) <- goItems [] ts
         pure (Nothing : items, clean)
     goItems _flags [] = case pm of
-        StrictParsing -> parsingError "record subitem not defined"
+        StrictParsing  -> parsingError "record subitem not defined"
         PartialParsing -> pure (mempty, False)
     goItems (flag:flags) (spec:specs)
         | not flag = do
@@ -620,7 +620,7 @@ parseRecord (GRecord lst) = ask >>= \env -> do
             pure (Nothing : items, clean)
         | otherwise = case spec of
             GUapItemSpare -> case pm of
-                StrictParsing -> parsingError "FX bit set for spare item"
+                StrictParsing  -> parsingError "FX bit set for spare item"
                 PartialParsing -> pure (mempty, False)
             GUapItemRFS -> do
                 (rfs, clean1) <- goRfs
@@ -659,7 +659,7 @@ recreateFspec
       where
         m = Prelude.length lst
     terminateFx :: Num a => [a] -> [a]
-    terminateFx []   = []
+    terminateFx []  = []
     terminateFx lst = init lst <> [last lst - 1]
 
 -- | Parse multiple records of the same UAP.
@@ -710,7 +710,7 @@ parseExpansion (GExpansion mn lst) = ask >>= \env -> do
     go ((flag, spec) : xs)
         | not flag = (:) <$> pure Nothing <*> go xs
         | otherwise = case spec of
-            Nothing -> parsingError "FX bit set for non-defined item"
+            Nothing  -> parsingError "FX bit set for non-defined item"
             Just nsp -> ((:) . Just <$> parseNonSpare nsp) <*> go xs
 
 parseRawDatablock :: ByteString -> Either ParsingError (RawDatablock, ByteString)

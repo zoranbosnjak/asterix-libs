@@ -163,15 +163,13 @@ import Asterix.Generated as Gen
 This library is built aroud the following concepts:
 
 - **Datagram** is a raw binary data as received for example from UDP socket.
-  This is represented with `bytes` data type in python.
 - **RawDatablock** is asterix datablock in the form `cat|length|data` with
   correct byte size. A datagram can contain multiple datablocks.
-  This is represented in python with `class RawDatablock`.
   In some cases it might be sufficient to work with raw datablocks, for
   example "asterix category filtering". In this case, it is not necessary
   to fully parse all asterix records, but is sufficient and faster to
   parse only up to the `RawDatablock` level.
-- **Datablock/Record** (represented as `class Datablock` and `class Record`)
+- **Datablock/Record**
   is a higher level construct, where we have a guarantee that all containing
   elements (records, subitems) are semantically correct (asterix is fully
   parsed or correctly constructed).
@@ -193,7 +191,7 @@ Datablock/Record. This operation can obviously fail at runtime, so some
 form of error handling is required inside application.
 
 The terms **encoding/decoding** are used to denote conversion between
-python objects from this library to application specific python objects,
+objects from this library to application specific objects,
 for example *target reports* or *sector messages*
 
 ```
