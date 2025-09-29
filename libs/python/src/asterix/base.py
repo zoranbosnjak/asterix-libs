@@ -47,8 +47,8 @@ class Bits:
             return cls.from_bytes(b'')
         if len(lst) == 1:
             return lst[0]
-        # TODO: optimize...
-        #   - try to avoid bytes concatination
+        # There is a possible optimization:
+        #   - avoid bytes concatination
         #   - create groups of the same 'bs'
         #   - use b''.join(...) instead if (+)
         return reduce(lambda a, b: a + b, lst)
@@ -769,7 +769,10 @@ class Extended(Variation):
         remaining = bs
         items1: List[List[Optional[ItemBase]]] = []
         items2: List[Optional[ItemBase]] = []
-        for i in chain.from_iterable(cls.cv_items_list):
+        lst = list(chain.from_iterable(cls.cv_items_list))
+        n = len(lst)
+        for (ix, i) in enumerate(lst):
+            is_last = ix == n - 1
             if i is None:
                 items2.append(None)
                 items1.append(items2.copy())
@@ -779,6 +782,8 @@ class Extended(Variation):
                 fx, remaining = remaining.head_tail()
                 if not fx:
                     break
+                if is_last:
+                    return ValueError('Last FX bit is expected to be zero')
             else:
                 spec, size = i
                 result = spec._parse(remaining)
@@ -981,7 +986,7 @@ class Fspec:
         # 'i' contains the last byte, which must have FX=0
         if (i & 0x01):
             return ValueError('overflow')
-        (a, b) = s.split_at(n*8)
+        (a, b) = s.split_at(n * 8)
         return (cls(a), b)
 
     def __iter__(self) -> Iterator[bool]:
@@ -1041,7 +1046,10 @@ class Compound(Variation):
 
     @classmethod
     def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Compound', Bits]]:
-        result = Fspec.parse(ParsingMode.StrictParsing, cls.cv_fspec_max_bytes, bs)
+        result = Fspec.parse(
+            ParsingMode.StrictParsing,
+            cls.cv_fspec_max_bytes,
+            bs)
         if isinstance(result, ValueError):
             return result
         fspec, remaining = result

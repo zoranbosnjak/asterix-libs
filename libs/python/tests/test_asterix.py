@@ -369,6 +369,15 @@ def test_extended3() -> None:
     assert obj.unparse() == Bits.from_bytes(unhexlify('0304'))
 
 
+def test_extended4() -> None:
+    # Create extended sample with last FX bit set to '1' (wrong).
+    # Parsing shall fail in this case.
+    T = Cat_000_1_0.cv_record.spec('053')
+    bs = Bits.from_bytes(unhexlify('010101'))
+    result = T.cv_rule.cv_variation.parse(bs)
+    assert isinstance(result, ValueError)
+
+
 def test_repetitive1() -> None:
     T = Cat_000_1_0.cv_record.spec('061')
     obj = T.create([1, 2, 3])
@@ -544,7 +553,7 @@ def test_compound0() -> None:
     assert isinstance(result, ValueError)
 
 
-def test_compound3() -> None:
+def test_compound1() -> None:
     T = Cat_000_1_0.cv_record.spec('093')
     with pytest.raises(ValueError):
         obj = T.create({'nonexistingitem': 1}) # type: ignore
@@ -570,6 +579,17 @@ def test_compound3() -> None:
     assert obj123.variation.get_item('I2') is not None
     assert obj123.variation.get_item('I3') is not None
     assert obj123.unparse() == Bits.from_bytes(unhexlify('A180010203'))
+    # order shall make no difference
+    t2 = T.create({'I1': 1, 'I3': 3, 'I2': 2})
+    t3 = T.create({'I2': 2, 'I1': 1, 'I3': 3})
+    t4 = T.create({'I2': 2, 'I3': 3, 'I1': 1})
+    t5 = T.create({'I3': 3, 'I1': 1, 'I2': 2})
+    t6 = T.create({'I3': 3, 'I2': 2, 'I1': 1})
+    assert t2.unparse() == obj123.unparse()
+    assert t3.unparse() == obj123.unparse()
+    assert t4.unparse() == obj123.unparse()
+    assert t5.unparse() == obj123.unparse()
+    assert t6.unparse() == obj123.unparse()
 
 
 def test_compound_set() -> None:
@@ -595,7 +615,28 @@ def test_record0() -> None:
     assert not isinstance(T.parse(ParsingMode.PartialParsing, s), ValueError)
 
 
-def test_record1() -> None:
+def test_record_0_rfs() -> None:
+    T = Cat_004_1_0.cv_record
+    r0 = T.create({
+    })
+    assert r0.unparse() == Bits.from_bytes(unhexlify('00'))
+    assert r0.get_item('010') is None
+
+    r1 = T.create({
+        '010': 0x03,
+    })
+    assert r1.unparse() == Bits.from_bytes(unhexlify('8003'))
+    r1_000 = r1.get_item('010')
+    assert r1_000 is not None
+    r1_000.as_uint() == 0x03
+
+    # RFS is not allowed in this record
+    with pytest.raises(TypeError):
+        T.create({'010': 0x03}, [('010', 0xAA)]) # type: ignore
+
+
+
+def test_record_1_rfs() -> None:
     T = Cat_000_1_0.cv_record
     r0 = T.create({
     })
@@ -656,8 +697,8 @@ def test_record1() -> None:
     assert with_rfs.get_item('000') is not None
     assert with_rfs.get_item('010') is None
 
-    assert len(with_rfs.get_rfs_item('000')) == 2
-    assert len(with_rfs.get_rfs_item('010')) == 1
+    assert [i.as_uint() for i in with_rfs.get_rfs_item('000')] == [0xAA, 0x55]
+    assert [i.as_uint() for i in with_rfs.get_rfs_item('010')]== [0x1234]
     assert len(with_rfs.get_rfs_item('020')) == 0
     assert len(with_rfs.get_rfs_item('053')) == 1
 
