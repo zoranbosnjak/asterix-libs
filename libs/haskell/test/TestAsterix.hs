@@ -17,7 +17,6 @@ import           Test.Tasty.HUnit
 
 import           Asterix.Base
 import           Asterix.Coding
-import           Asterix.Schema
 
 import           Common
 import           Generated          as Gen
