@@ -19,7 +19,8 @@ Features:
 
 ## Asterix encoding and decoding example
 
-```{haskell file=readme-samples/example0.hs}
+```haskell
+-- | file: readme-samples/example0.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
 
@@ -216,7 +217,8 @@ or converted to required value.
 
 This is a typical usage:
 
-```{haskell file=readme-samples/subitems.hs}
+```haskell
+-- | file: readme-samples/subitems.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
 
@@ -248,7 +250,8 @@ main = do
 
 **Example**: Category filter, drop datablocks if category == 1
 
-```{haskell file=readme-samples/catflt.hs}
+```haskell
+-- | file: readme-samples/catflt.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
 
@@ -257,14 +260,14 @@ import Data.Maybe
 import Data.ByteString (ByteString)
 import Asterix.Coding
 
--- | UDP rx test function
+-- UDP rx test function
 receiveFromUdp :: IO ByteString
 receiveFromUdp = pure $ fromJust $ unhexlify $ join
     [ "01000401" -- cat1 datablock
     , "02000402" -- cat2 datablock
     ]
 
--- | UDP tx test function
+-- UDP tx test function
 sendToUdp :: SBuilder -> IO ()
 sendToUdp = putStrLn . hexlify . toByteString
 
@@ -286,7 +289,8 @@ main = do
 
 **Example**: Asterix filter, rewrite SAC/SIC code.
 
-```{haskell file=readme-samples/rewrite-sacsic.hs}
+```haskell
+-- | file: readme-samples/rewrite-sacsic.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE MonoLocalBinds #-}
@@ -304,7 +308,7 @@ type Cat048 = Gen.Cat_048_1_31
 type Cat062 = Gen.Cat_062_1_19
 type Cat063 = Gen.Cat_063_1_6
 
--- | All of the following types have the same item "010"
+-- All of the following types have the same item "010"
 type TSacSic = SameType '[ Cat048 ~> "010", Cat062 ~> "010", Cat063 ~> "010"]
 
 handleDatablock :: forall cat.
@@ -381,7 +385,8 @@ Multiple spare bit groups can be defined on a single item.
 
 **Example**
 
-```{haskell file=readme-samples/spares.hs}
+```haskell
+-- | file: readme-samples/spares.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE MonoLocalBinds #-}
@@ -435,7 +440,8 @@ a possiblity to explicitly select both editions individually.
 
 This example demonstrates required steps for constructing and parsing:
 
-```{haskell file=readme-samples/ref.hs}
+```haskell
+-- | file: readme-samples/ref.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
 
@@ -523,7 +529,8 @@ explicit about subitems, for example `["010", "SAC"]`.
 
 **Example**: Show raw content of all toplevel items of each record
 
-```{haskell file=readme-samples/generic-names.hs}
+```haskell
+-- | file: readme-samples/generic-names.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
 
@@ -582,7 +589,8 @@ main = do
 
 **Example**: Generate dummy single record datablock with all fixed items set to zero
 
-```{haskell file=readme-samples/generic-zero.hs}
+```haskell
+-- | file: readme-samples/generic-zero.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
 
@@ -674,7 +682,8 @@ manifest =
 This structure can be used to extract *latest* editions for each defined
 category, for example:
 
-```{haskell file=readme-samples/generic-latest.hs}
+```haskell
+-- | file: readme-samples/generic-latest.hs
 import Control.Monad
 import Data.List (sort)
 import Data.Map as Map
@@ -703,7 +712,8 @@ main = forM_ (sort (Map.keys latest)) $ \cat -> do
 Alternatively, a prefered way is to be explicit about each edition,
 for example:
 
-```{haskell file=readme-samples/generic-edition.hs}
+```haskell
+-- | file: readme-samples/generic-editon.hs
 import Data.List (sort)
 import Data.Map as Map
 import Asterix.Schema
@@ -782,7 +792,8 @@ code. It's based on processing `HList` of subitems (list of different types).
 'HList' constuction is performed with `*:` as `HCons` operator and `nil` as
 list termination `HNil`. For example:
 
-```{haskell file=readme-samples/construct1.hs}
+```haskell
+-- | file: readme-samples/construct1.hs
 {-# LANGUAGE DataKinds #-}
 
 import Data.Maybe
@@ -833,7 +844,8 @@ Regular asterix parsing with this library is performed in the following stages:
 
 Parsing is performed using `parse` function, for example:
 
-```{haskell file=readme-samples/parsing-normal.hs}
+```haskell
+-- | file: readme-samples/parsing-normal.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
 
@@ -932,7 +944,8 @@ used during automatic record parsing.
 This example demonstrates how to work with **content dependency**,
 such as `I062/380/IAS`.
 
-```{haskell file=readme-samples/dep-content.hs}
+```haskell
+-- | file: readme-samples/dep-content.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
 
@@ -1041,7 +1054,8 @@ main = do
 This example demonstrates how to work with **variation dependency**,
 such as `I004/120/CC/CPC`.
 
-```{haskell file=readme-samples/dep-variation.hs}
+```haskell
+-- | file: readme-samples/dep-variation.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
 
@@ -1186,7 +1200,8 @@ there is only one remaining result.
 
 Example:
 
-```{haskell file=readme-samples/parsing-cat001-try.hs}
+```haskell
+-- | file: readme-samples/parsing-cat001-try.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
@@ -1256,7 +1271,8 @@ can enforce parsing to try only that UAP and avoid additional processing
 stage. In this case, the situation is similar to the regular single
 UAP parsing. Example:
 
-```{haskell file=readme-samples/parsing-cat001-tracks.hs}
+```haskell
+-- | file: readme-samples/parsing-cat001-tracks.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
@@ -1310,7 +1326,8 @@ An empty list indicates that no such item is present in the RFS.
 
 **Example**
 
-```{haskell file=readme-samples/rfs.hs}
+```haskell
+-- | file: readme-samples/rfs.hs
 {-# LANGUAGE DataKinds #-}
 
 import Control.Monad
@@ -1391,7 +1408,8 @@ data ParsingMode
 
 This example demonstrates both parsing modes:
 
-```{haskell file=readme-samples/parsing-partial-mode.hs}
+```haskell
+-- | file: readme-samples/parsing-partial-mode.hs
 {-# LANGUAGE DataKinds #-}
 
 import Data.Maybe
@@ -1408,7 +1426,7 @@ assert :: Bool -> IO ()
 assert True = pure ()
 assert False = error "Assertion error"
 
--- | In the new spec, item 060 is extended to contain 3 groups,
+-- In the new spec, item 060 is extended to contain 3 groups,
 -- while in the old spec it only contain2 groups.
 -- Create record according to the new spec
 rec0 :: Record (RecordOf SpecNew)

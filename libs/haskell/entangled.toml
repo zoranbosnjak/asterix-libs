@@ -3,3 +3,12 @@ watch_list = ["README.md"]
 ignore_list = []
 hooks = ["quarto_attributes", "brei"]
 
+[markers]
+open="^(?P<indent>\\s*)```(?P<properties>.*)$"
+close="^(?P<indent>\\s*)```\\s*$"
+
+[[languages]]
+name="Haskell"
+identifiers=["haskell"]
+comment={open="-- "}
+
