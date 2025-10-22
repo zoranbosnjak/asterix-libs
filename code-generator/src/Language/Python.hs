@@ -962,9 +962,11 @@ instance Node Uap where
                 do
                     ""
                     "@classmethod"
-                    let rv = sformat ("List[List[Uap_" % int % ".cv_arg]]") ix
-                    pyFunc "parse_any_uap" ["cls", "bs : Bits"] (quote rv) $ do
-                        "return cls._parse_any_uap(bs)"
+                    let rv = sformat ("Union[ValueError, List[List[Uap_"
+                            % int % ".cv_arg]]]") ix
+                    pyFunc "parse_any_uap" ["cls", "bs : Bits",
+                        "max_depth: Optional[int]"] (quote rv) $ do
+                            "return cls._parse_any_uap(bs, max_depth)"
 
 instance Node Expansion where
     focus = lExpansion

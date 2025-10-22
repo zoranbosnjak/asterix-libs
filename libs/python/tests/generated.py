@@ -7112,8 +7112,8 @@ class Uap_5(UapMultiple):
         return cls._parse(uap, bs)
 
     @classmethod
-    def parse_any_uap(cls, bs : Bits) -> "List[List[Uap_5.cv_arg]]":
-        return cls._parse_any_uap(bs)
+    def parse_any_uap(cls, bs : Bits, max_depth: Optional[int]) -> "Union[ValueError, List[List[Uap_5.cv_arg]]]":
+        return cls._parse_any_uap(bs, max_depth)
 
 class Asterix_5(AstCat):
     cv_category = 1
@@ -7590,8 +7590,8 @@ class Uap_6(UapMultiple):
         return cls._parse(uap, bs)
 
     @classmethod
-    def parse_any_uap(cls, bs : Bits) -> "List[List[Uap_6.cv_arg]]":
-        return cls._parse_any_uap(bs)
+    def parse_any_uap(cls, bs : Bits, max_depth: Optional[int]) -> "Union[ValueError, List[List[Uap_6.cv_arg]]]":
+        return cls._parse_any_uap(bs, max_depth)
 
 class Asterix_6(AstCat):
     cv_category = 2

@@ -1247,7 +1247,7 @@ main = do
         rawRecords = case rawDatablockCategory rawDatablock of
             1 -> getRawRecords rawDatablock
             _ -> error "unexpected category"
-        parsingAction = parseRecordsTry (schema @Cat001 Proxy)
+        parsingAction = parseRecordsTry (Just 10) (schema @Cat001 Proxy)
         results = case parse @StrictParsing parsingAction rawRecords of
             Left (ParsingError _) -> error "unexpected parse failure"
             Right val -> val

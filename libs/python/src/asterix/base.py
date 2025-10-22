@@ -1462,7 +1462,7 @@ class UapMultiple(Uap):
         return cls._parse_records(cls.cv_uaps[uap], bs)
 
     @classmethod
-    def _parse_any_uap(cls, bs: Bits) -> List[List[Any]]:
+    def _parse_any_uap(cls, bs: Bits, max_depth: Optional[int]) -> Union[ValueError, List[List[Any]]]:
         """Try to parse with all possible uap combinations.
         The result is list of possible combinations where each combination
         is itself a list (like with normal single uap _parse function).
@@ -1472,10 +1472,17 @@ class UapMultiple(Uap):
         - Multi element outer list is a sign for a possible ambiguity,
           that is: every list element is a possible parsing result.
           eg. [[plot, plot], [track, plot]]
+
+        Using this function on specific inputs can lead to combination
+        explosion and RecursionError. It is possible to fail early by
+        using max_depth argument.
         """
         lst = cls.cv_uaps.values()
 
-        def go(acc: List[Any], s: Bits) -> Any:
+        def go(depth : int, acc: List[Any], s: Bits) -> Any:
+            if max_depth is not None:
+                if depth > max_depth:
+                    raise ValueError('max_depth reached')
             if not len(s):
                 yield acc
             for cls in lst:
@@ -1483,10 +1490,13 @@ class UapMultiple(Uap):
                 if isinstance(result, ValueError):
                     continue
                 x, remaining = result
-                for i in go(acc + [x], remaining):
+                for i in go(depth + 1, acc + [x], remaining):
                     yield i
 
-        return list(go([], bs))
+        try:
+            return list(go(0, [], bs))
+        except ValueError as ex:
+            return ex
 
 
 class FspecType:

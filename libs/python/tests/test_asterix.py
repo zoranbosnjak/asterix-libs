@@ -900,7 +900,8 @@ def test_parse3() -> None:
         assert isinstance(result2, ValueError)
 
         # try to parse as any defined UAP
-        result3 = Cat1.cv_uap.parse_any_uap(bs2)
+        result3 = Cat1.cv_uap.parse_any_uap(bs2, None)
+        assert not isinstance(result3, ValueError)
         assert len(result3) == 1
         assert len(result3[0]) == 2
         for r2 in result3[0]:
@@ -929,7 +930,8 @@ def test_parse3() -> None:
             assert r1.unparse() == rec_track.unparse()
 
         # try to parse as any defined UAP
-        result3 = Cat1.cv_uap.parse_any_uap(bs2)
+        result3 = Cat1.cv_uap.parse_any_uap(bs2, None)
+        assert not isinstance(result3, ValueError)
         assert len(result3) == 1
         assert len(result3[0]) == 3
         for r2 in result3[0]:
@@ -957,7 +959,8 @@ def test_parse3() -> None:
         assert isinstance(result2, ValueError)
 
         # try to parse as any defined UAP
-        result3 = Cat1.cv_uap.parse_any_uap(bs2)
+        result3 = Cat1.cv_uap.parse_any_uap(bs2, None)
+        assert not isinstance(result3, ValueError)
         assert len(result3) == 1
         assert len(result3[0]) == len(records)
         for (r1, r2) in zip(records, result3[0]):
@@ -981,7 +984,8 @@ def test_parse4() -> None:
         assert len(dbs) == 1
         db = dbs[0]
         bs2 = db.get_raw_records()
-        results = Cat1.cv_uap.parse_any_uap(bs2)
+        results = Cat1.cv_uap.parse_any_uap(bs2, None)
+        assert not isinstance(results, ValueError)
         assert len(results) == 2
         for result in results:
             assert len(result) == 1
@@ -999,7 +1003,8 @@ def test_parse4() -> None:
         assert len(dbs) == 1
         db = dbs[0]
         bs2 = db.get_raw_records()
-        results = Cat1.cv_uap.parse_any_uap(bs2)
+        results = Cat1.cv_uap.parse_any_uap(bs2, None)
+        assert not isinstance(results, ValueError)
         assert len(results) == 4
         for result in results:
             assert len(result) == 2
@@ -1017,7 +1022,8 @@ def test_parse4() -> None:
         assert len(dbs) == 1
         db = dbs[0]
         bs2 = db.get_raw_records()
-        results = Cat1.cv_uap.parse_any_uap(bs2)
+        results = Cat1.cv_uap.parse_any_uap(bs2, None)
+        assert not isinstance(results, ValueError)
         assert len(results) == pow(2, 3)
         for result in results:
             assert len(result) == 3
@@ -1038,14 +1044,32 @@ def test_parse5() -> None:
     bs_plot = rec_plot.unparse()
     bs_track = rec_track.unparse()
 
-    results_plot = Cat1.cv_uap.parse_any_uap(bs_plot)
+    results_plot = Cat1.cv_uap.parse_any_uap(bs_plot, None)
+    assert not isinstance(results_plot, ValueError)
     assert len(results_plot) == 1
     assert len(results_plot[0]) == 1
 
-    results_track = Cat1.cv_uap.parse_any_uap(bs_track)
+    results_track = Cat1.cv_uap.parse_any_uap(bs_track, None)
+    assert not isinstance(results_track, ValueError)
     assert len(results_track) == 1
     assert len(results_track[0]) == 1
 
+
+def test_parse6() -> None:
+    """Check parse_any_uap with max_depth."""
+    Cat1 = Cat_001_1_0
+
+    # create all zeros sample
+    def mk_sample(n: int) -> Bits:
+        zeros = [0]*n
+        return Bits.from_bytes(bytes(zeros))
+
+    result1 = Cat1.cv_uap.parse_any_uap(mk_sample(10), max_depth=9)
+    assert isinstance(result1, ValueError)
+
+    result2 = Cat1.cv_uap.parse_any_uap(mk_sample(10), max_depth=10)
+    assert not isinstance(result2, ValueError)
+    assert len(result2) == 1024
 
 def test_parse_nonblocking() -> None:
     """We encode a single record with a new edition, where some items

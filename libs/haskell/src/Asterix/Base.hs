@@ -671,25 +671,39 @@ parseRecords sch = eof >>= \case
     False -> (:) <$> parseRecord sch <*> parseRecords sch
 
 -- | Try to parse multiple UAP combinations.
--- This function consumes complete input in any case.
+-- This function consumes complete input or fails if maxDepth reached.
 parseRecordsTry ::
     ( pm ~ StrictParsing -- only makes sense with StrictParsing
-    ) => [(VText, VRecord)] -> ParsingM pm a b c d rec f [[(VText, rec)]]
-parseRecordsTry schs = do
+    ) => Maybe Int -> [(VText, VRecord)]
+    -> ParsingM pm a b c d rec f [[(VText, rec)]]
+parseRecordsTry mMaxDepth schs = do
     env <- ask
     offset <- get
     let eo = endOffset $ envInput env
+    result <- go 0 eo env offset
     put eo
-    pure $ go eo env offset
+    pure result
   where
-    go eo env offset
+    isOverflow depth = case mMaxDepth of
+        Nothing -> False
+        Just maxDepth -> depth > maxDepth
+    go depth eo env offset
+        | isOverflow depth = parsingError "max_depth reached"
         | offset > eo = intError
-        | offset == eo = [[]]
+        | offset == eo = pure [[]]
         | otherwise = do
-            (name, sch) <- schs
-            (x, offset') <- either (const empty) pure
-                (runParsing (parseRecord sch) env offset)
-            (:) <$> pure (name, x) <*> go eo env offset'
+            let result1 = do
+                    (name, sch) <- schs
+                    (x, offset') <- either (const empty) pure
+                        (runParsing (parseRecord sch) env offset)
+                    pure (name, x, offset')
+            result2 <- forM result1 $ \(name, x, offset') -> do
+                cont <- go (succ depth) eo env offset'
+                pure (name, x, cont)
+            pure $ do
+                (name, x, ys) <- result2
+                y <- ys
+                pure ((name, x) : y)
 
 parseExpansion :: VExpansion -> ParsingM pm a b c d e exp exp
 parseExpansion (GExpansion mn lst) = ask >>= \env -> do

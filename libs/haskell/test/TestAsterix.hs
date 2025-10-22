@@ -9,6 +9,7 @@ module TestAsterix (tests) where
 
 import           Control.Monad
 import           Data.Either
+import qualified Data.ByteString as BS
 import qualified Data.List.NonEmpty as NE
 import           Data.Maybe
 import           Prelude            hiding (head, tail)
@@ -72,6 +73,7 @@ tests = testGroup "Asterix"
     , testCase "testParse3" testParse3
     , testCase "testParse4" testParse4
     , testCase "testParse5" testParse5
+    , testCase "testParse6" testParse6
     , testCase "testParseNonblocking" testParseNonblocking
     ]
 
@@ -978,7 +980,7 @@ testParse3 = do
         assertEqual "result2" True (isLeft result2)
 
         -- try to parse as any defined UAP
-        let act3 = parseRecordsTry (schema @Cat_001_1_0 Proxy)
+        let act3 = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         result3s <- either (assertFailure . show) pure
             (parse @StrictParsing act3 bs2)
         assertEqual "plots length outer" 1 (length result3s)
@@ -1015,7 +1017,7 @@ testParse3 = do
                 (debugBits $ unparse @Bits r2)
 
         -- try to parse as any defined UAP
-        let act3 = parseRecordsTry (schema @Cat_001_1_0 Proxy)
+        let act3 = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         result3s <- either (assertFailure . show) pure
             (parse @StrictParsing act3 bs2)
         assertEqual "tracks length outer" 1 (length result3s)
@@ -1049,7 +1051,7 @@ testParse3 = do
         assertEqual "result2" True (isLeft result2)
 
         -- try to parse as any defined UAP
-        let act3 = parseRecordsTry (schema @Cat_001_1_0 Proxy)
+        let act3 = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         result3s <- either (assertFailure . show) pure
             (parse @StrictParsing act3 bs2)
         assertEqual "mixed length outer" 1 (length result3s)
@@ -1078,7 +1080,7 @@ testParse4 = do
         assertEqual "results" 1 (length dbs)
         let db = head dbs
             bs2 = getRawRecords db
-            act = parseRecordsTry (schema @Cat_001_1_0 Proxy)
+            act = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         results <- either (assertFailure . show) pure
             (parse @StrictParsing act bs2)
         assertEqual "results" 2 (length results)
@@ -1101,7 +1103,7 @@ testParse4 = do
         assertEqual "results" 1 (length dbs)
         let db = head dbs
             bs2 = getRawRecords db
-            act = parseRecordsTry (schema @Cat_001_1_0 Proxy)
+            act = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         results <- either (assertFailure . show) pure
             (parse @StrictParsing act bs2)
         assertEqual "results" 4 (length results)
@@ -1124,7 +1126,7 @@ testParse4 = do
         assertEqual "results" 1 (length dbs)
         let db = head dbs
             bs2 = getRawRecords db
-            act = parseRecordsTry (schema @Cat_001_1_0 Proxy)
+            act = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         results <- either (assertFailure . show) pure
             (parse @StrictParsing act bs2)
         assertEqual "results" (2 ^ (3::Int)) (length results)
@@ -1151,18 +1153,31 @@ testParse5 = do
         bsTrack = toByteString $ unparse @SBuilder recTrack
 
     do
-        let act = parseRecordsTry (schema @Cat_001_1_0 Proxy)
+        let act = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         results <- either (assertFailure . show) pure
             (parse @StrictParsing act bsPlot)
         assertEqual "result" 1 (length results)
         assertEqual "result" 1 (length $ head results)
 
     do
-        let act = parseRecordsTry (schema @Cat_001_1_0 Proxy)
+        let act = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         results <- either (assertFailure . show) pure
             (parse @StrictParsing act bsTrack)
         assertEqual "result" 1 (length results)
         assertEqual "result" 1 (length $ head results)
+
+testParse6 :: Assertion
+testParse6 = do
+    -- Check parse_any_uap with max_depth.
+    let sample = BS.pack (replicate 10 0)
+        sch = schema @Cat_001_1_0 Proxy
+        act1 = parseRecordsTry (Just 9) sch
+        act2 = parseRecordsTry (Just 10) sch
+        result1 = parse @StrictParsing act1 sample
+    assertEqual "failure" True (isLeft result1)
+    result2 <- either (assertFailure . show) pure
+        (parse @StrictParsing act2 sample)
+    assertEqual "result2" 1024 (length result2)
 
 testParseNonblocking :: Assertion
 testParseNonblocking = do
