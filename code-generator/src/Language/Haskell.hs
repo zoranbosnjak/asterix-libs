@@ -17,8 +17,8 @@ import           Data.Text.Lazy.Builder  (Builder)
 import qualified Data.Text.Lazy.Builder  as BL
 import           Formatting              as F
 
-import           Asterix.Indent
 import qualified Asterix.Specs           as A
+import           Asterix.Specs.Indent
 import           Struct
 import           Types
 
@@ -256,7 +256,7 @@ instance Node Expansion where
                 pure $ sformat ("'Just TNonSpare" % int) ref
         let sn = case mn of
                 Nothing -> "'Nothing"
-                Just n -> sformat ("('Just " % int % ")") (coerce n :: Int)
+                Just n  -> sformat ("('Just " % int % ")") (coerce n :: Int)
         pure $ sformat ("'GExpansion " % stext % " " % stext)
             sn
             (fmtList "'[ " "]" id refs)

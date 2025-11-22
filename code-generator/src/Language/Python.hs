@@ -17,8 +17,8 @@ import           Data.Text.Lazy.Builder  (Builder)
 import qualified Data.Text.Lazy.Builder  as BL
 import           Formatting              as F
 
-import           Asterix.Indent
 import qualified Asterix.Specs           as A
+import           Asterix.Specs.Indent
 import           Struct
 import           Types
 

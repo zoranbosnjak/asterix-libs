@@ -685,7 +685,7 @@ parseRecordsTry mMaxDepth schs = do
     pure result
   where
     isOverflow depth = case mMaxDepth of
-        Nothing -> False
+        Nothing       -> False
         Just maxDepth -> depth > maxDepth
     go depth eo env offset
         | isOverflow depth = parsingError "max_depth reached"

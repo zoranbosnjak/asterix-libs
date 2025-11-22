@@ -8,8 +8,8 @@
 module TestAsterix (tests) where
 
 import           Control.Monad
+import qualified Data.ByteString    as BS
 import           Data.Either
-import qualified Data.ByteString as BS
 import qualified Data.List.NonEmpty as NE
 import           Data.Maybe
 import           Prelude            hiding (head, tail)

@@ -4,19 +4,18 @@
 
 module Main where
 
-import           Data.Text                (Text)
+import           Data.Text              (Text)
 import qualified Data.Text
-import qualified Data.Text.IO             as T
-import qualified Data.Text.Lazy.Builder   as T
-import qualified Data.Text.Lazy.IO        as TL
-import           Data.Version             (showVersion)
-import           Main.Utf8                (withUtf8)
-import           Options.Applicative      as Opt
-import           Paths_generator          (version)
+import qualified Data.Text.IO           as T
+import qualified Data.Text.Lazy.Builder as T
+import qualified Data.Text.Lazy.IO      as TL
+import           Data.Version           (showVersion)
+import           Main.Utf8              (withUtf8)
+import           Options.Applicative    as Opt
+import           Paths_generator        (version)
 
-import           Asterix.Specs            (Asterix, cDecoder)
-import           Asterix.Specs.Syntaxes   (syntaxes)
-import           Asterix.Specs.Validation (runErrM, validate)
+import           Asterix.Specs          (Asterix, cDecoder, runErrM, syntaxes,
+                                         validate)
 
 import qualified Language.Haskell
 import qualified Language.Python

@@ -14,13 +14,13 @@ module Asterix.Generated where
 import           Asterix.Schema
 
 asterixSpecsRef :: String
-asterixSpecsRef = "git:0e11b553035fb5983eecb23d3ca4df56cf206bc7"
+asterixSpecsRef = "git:8bd2e9cf340d2c1da679409c01a066d788f66174"
 
 asterixSpecsDate :: String
-asterixSpecsDate = "2025-10-27T08:13:18+01:00"
+asterixSpecsDate = "2025-11-22T09:20:38+01:00"
 
 codeGeneratorVersion :: String
-codeGeneratorVersion = "0.10.0"
+codeGeneratorVersion = "0.11.0"
 
 -- Asterix types
 
