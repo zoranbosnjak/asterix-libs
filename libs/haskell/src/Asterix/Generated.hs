@@ -14,10 +14,10 @@ module Asterix.Generated where
 import           Asterix.Schema
 
 asterixSpecsRef :: String
-asterixSpecsRef = "git:8bd2e9cf340d2c1da679409c01a066d788f66174"
+asterixSpecsRef = "git:788dc3d773252d90a66ead4789e7708fdb762746"
 
 asterixSpecsDate :: String
-asterixSpecsDate = "2025-11-22T09:20:38+01:00"
+asterixSpecsDate = "2025-12-10T09:10:38+01:00"
 
 codeGeneratorVersion :: String
 codeGeneratorVersion = "0.11.0"
@@ -2050,10 +2050,10 @@ type TContent582 = 'GContentTable '[ '(0, "Yes"), '(1, "No")]
 type TRuleContent580 = 'GContextFree TContent582
 type TVariation593 = 'GElement 2 1 TRuleContent580
 type TRuleVariation582 = 'GContextFree TVariation593
-type TNonSpare905 = 'GNonSpare "DC" "Differential Correction" TRuleVariation582
-type TItem258 = 'GItem TNonSpare905
+type TNonSpare904 = 'GNonSpare "DC" "Differential Correction" TRuleVariation582
+type TItem257 = 'GItem TNonSpare904
 type TItem19 = 'GSpare 3 5
-type TVariation1105 = 'GGroup 0 '[ TItem195, TItem960, TItem29, TItem946, TItem81, TItem55, TItem109, TItem110, TItem37, TItem574, TItem258, TItem19]
+type TVariation1105 = 'GGroup 0 '[ TItem195, TItem960, TItem29, TItem946, TItem81, TItem55, TItem109, TItem110, TItem37, TItem574, TItem257, TItem19]
 type TRuleVariation1062 = 'GContextFree TVariation1105
 type TNonSpare821 = 'GNonSpare "COMACAS" "Communications/ACAS Capability and Flight Status" TRuleVariation1062
 type TVariation380 = 'GElement 0 32 TRuleContent618
@@ -2530,7 +2530,7 @@ type TVariation706 = 'GElement 3 4 TRuleContent326
 type TRuleVariation695 = 'GContextFree TVariation706
 type TNonSpare1834 = 'GNonSpare "STAT" "Flight Status" TRuleVariation695
 type TItem961 = 'GItem TNonSpare1834
-type TVariation1106 = 'GGroup 0 '[ TItem195, TItem961, TItem29, TItem946, TItem81, TItem55, TItem109, TItem110, TItem37, TItem574, TItem258, TItem19]
+type TVariation1106 = 'GGroup 0 '[ TItem195, TItem961, TItem29, TItem946, TItem81, TItem55, TItem109, TItem110, TItem37, TItem574, TItem257, TItem19]
 type TRuleVariation1063 = 'GContextFree TVariation1106
 type TNonSpare822 = 'GNonSpare "COMACAS" "Communications/ACAS Capability and Flight Status" TRuleVariation1063
 type TVariation1539 = 'GCompound '[ 'Just TNonSpare1270, 'Just TNonSpare594, 'Nothing, 'Just TNonSpare822, 'Nothing, 'Nothing, 'Nothing, 'Just TNonSpare589, 'Just TNonSpare952, 'Nothing, 'Just TNonSpare678]
@@ -4412,12 +4412,12 @@ type TVariation603 = 'GElement 2 2 TRuleContent557
 type TRuleVariation592 = 'GContextFree TVariation603
 type TNonSpare1337 = 'GNonSpare "MN" "Multiple Navigation Aids" TRuleVariation592
 type TItem573 = 'GItem TNonSpare1337
-type TContent553 = 'GContentTable '[ '(0, "Unknown"), '(1, "Differencial Correction"), '(2, "NO Differencial Correction"), '(3, "Invalid")]
+type TContent553 = 'GContentTable '[ '(0, "Unknown"), '(1, "Differential Correction"), '(2, "NO Differential Correction"), '(3, "Invalid")]
 type TRuleContent551 = 'GContextFree TContent553
 type TVariation784 = 'GElement 4 2 TRuleContent551
 type TRuleVariation773 = 'GContextFree TVariation784
-type TNonSpare904 = 'GNonSpare "DC" "Differencial Correction" TRuleVariation773
-type TItem257 = 'GItem TNonSpare904
+type TNonSpare905 = 'GNonSpare "DC" "Differential Correction" TRuleVariation773
+type TItem258 = 'GItem TNonSpare905
 type TItem28 = 'GSpare 6 6
 type TContent633 = 'GContentQuantity 'GSigned ('GNumInt ('GZ 'GPlus 1)) ""
 type TRuleContent631 = 'GContextFree TContent633
@@ -4425,7 +4425,7 @@ type TVariation821 = 'GElement 4 4 TRuleContent631
 type TRuleVariation791 = 'GContextFree TVariation821
 type TNonSpare1463 = 'GNonSpare "PA" "Position Accuracy" TRuleVariation791
 type TItem690 = 'GItem TNonSpare1463
-type TVariation1067 = 'GGroup 0 '[ TItem36, TItem573, TItem257, TItem28, TItem690]
+type TVariation1067 = 'GGroup 0 '[ TItem36, TItem573, TItem258, TItem28, TItem690]
 type TRuleVariation1034 = 'GContextFree TVariation1067
 type TNonSpare252 = 'GNonSpare "090" "Figure of Merit" TRuleVariation1034
 type TUapItem252 = 'GUapItem TNonSpare252
@@ -7337,7 +7337,7 @@ type TContent428 = 'GContentTable '[ '(0, "PO not supported (PPM only)"), '(1, "
 type TRuleContent426 = 'GContextFree TContent428
 type TVariation963 = 'GElement 6 1 TRuleContent426
 type TRuleVariation933 = 'GContextFree TVariation963
-type TNonSpare2059 = 'GNonSpare "VAL" "PO Transpomder Capability" TRuleVariation933
+type TNonSpare2059 = 'GNonSpare "VAL" "PO Transponder Capability" TRuleVariation933
 type TItem1134 = 'GItem TNonSpare2059
 type TVariation1377 = 'GGroup 5 '[ TItem321, TItem1134]
 type TRuleVariation1295 = 'GContextFree TVariation1377
