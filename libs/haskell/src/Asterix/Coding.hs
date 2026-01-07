@@ -1181,7 +1181,7 @@ instance MkRfs tsAll ts2 '[] where
     mkRfs HNil = []
 
 instance
-    ( TypeError ('Text "MkRfs undefined item: " :<>: 'ShowType name)
+    ( TypeError ('Text "MkRfs item not defined: " :<>: 'ShowType name)
     ) => MkRfs tsAll '[] (Named name nsp ': ts) where
     mkRfs = intError
 
@@ -1810,6 +1810,22 @@ instance GetSpares (Variation ('GGroup o lst)) where
 class SetItem name parent child | name parent -> child where
     setItem :: child -> parent -> parent
 
+-- | If we are able to perform "setItem @name Variation NonSpare", then
+-- we shall also be able to do "setItem @name NonSpare NonSpare".
+-- This is useful in situations like:
+--  compound nil
+--  & setItem @"I1" val1
+--  & setItem @"I2" val2
+instance
+    ( nspChild ~ nspParent ~> name
+    , var ~ GetVariationResult nspParent
+    , SetItem name (Variation var) (NonSpare nspChild)
+    ) => SetItem name (NonSpare nspParent) (NonSpare nspChild) where
+    setItem child parent =
+        let var = getVariation parent
+            var' = setItem @name child var
+        in NonSpare $ UNonSpare $ URuleVar $ unVariation var'
+
 instance
     ( r ~ 'GRecord lst
     , nsp ~ Lookup name (PrependName (RecordNonSpares lst))
@@ -1823,6 +1839,13 @@ instance
     , var ~ 'GCompound lst
     ) => SetItem name (Variation var) (NonSpare nsp) where
     setItem = setCompoundItem @name
+
+-- | Helper function to setItem conditionally.
+maybeSetItem :: forall name parent child.
+    ( SetItem name parent child
+    ) => Maybe child -> parent -> parent
+maybeSetItem Nothing parent      = parent
+maybeSetItem (Just child) parent = setItem @name child parent
 
 class DelItem name parent where
     delItem :: parent -> parent

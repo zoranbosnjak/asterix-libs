@@ -10,6 +10,7 @@ module TestAsterix (tests) where
 import           Control.Monad
 import qualified Data.ByteString    as BS
 import           Data.Either
+import           Data.Function      ((&))
 import qualified Data.List.NonEmpty as NE
 import           Data.Maybe
 import           Prelude            hiding (head, tail)
@@ -676,12 +677,16 @@ testCompound1 = do
 
 testCompoundSet :: Assertion
 testCompoundSet = do
-    let obj1, obj2 :: NonSpare (RecordOf Cat_000_1_0 ~> "093")
+    let obj1, obj2, obj2a, obj2b :: NonSpare (RecordOf Cat_000_1_0 ~> "093")
         obj1 = compound ( item @"I1" 1 *: nil )
         obj2 = compound ( item @"I1" 1 *: item @"I2" 2 *: nil )
+        obj2a = compound nil & setItem @"I1" 1 & setItem @"I2" 2
+        obj2b = compound nil & setItem @"I1" 1 & maybeSetItem @"I2" (Just 2)
         var1 = getVariation obj1
         var2Ref = getVariation obj2
         var2 = setItem @"I2" 2 var1
+    assertEqual "setItemA" (unparse @Bits obj2) (unparse obj2a)
+    assertEqual "setItemB" (unparse @Bits obj2) (unparse obj2b)
     assertEqual "setItem" (unparse @Bits var2Ref) (unparse var2)
 
 testCompoundDel :: Assertion
@@ -850,10 +855,12 @@ testRecordMultipleRFS = do
 
 testRecordSetItem :: Assertion
 testRecordSetItem = do
-    let r0, r1 :: Record (RecordOf Cat_000_1_0)
+    let r0, r1, r2 :: Record (RecordOf Cat_000_1_0)
         r0 = setItem @"000" 0x03 (record nil)
         r1 = record (item @"000" 0x03 *: nil)
+        r2 = record nil & maybeSetItem @"000" (Just 0x03)
     assertEqual "unparse" (unparse @Bits r0) (unparse r1)
+    assertEqual "unparse" (unparse @Bits r0) (unparse r2)
 
 testRecordDelItem :: Assertion
 testRecordDelItem = do

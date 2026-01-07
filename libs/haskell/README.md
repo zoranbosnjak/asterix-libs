@@ -210,7 +210,7 @@ for example *target reports* or *sector messages*
 ## Subitem and content access
 
 A `Record` contains `Items`, which in turn contains subitems at various
-nesting levels. To access a subitem, use `getItem @"item_name"` function.
+nesting levels. To access a subitem, use `getItem @"itemName"` function.
 
 The result (if not `Nothing`) can be in turn querried for nested subitems
 or converted to required value.
@@ -218,7 +218,7 @@ or converted to required value.
 This is a typical usage:
 
 ```haskell
--- | file: readme-samples/subitems.hs
+-- | file: readme-samples/subitems-get.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
 
@@ -242,6 +242,68 @@ main = do
         theta :: Double = unQuantity $ asQuantity @"°" (getItem @"THETA" i040)
         ssr :: String = asString $ getItem @"MODE3A" i070
     print (rho, theta, ssr)
+```
+
+## Setting subitem
+
+This library provides `setItem @"itemName" subItem parentItem` and
+`maybeSetItem @"itemName" subItem parentItem` functions to manipulate asterix
+constructs. For example:
+
+```haskell
+-- | file: readme-samples/subitems-set.hs
+{-# LANGUAGE DataKinds #-}
+
+import Data.Function ((&))
+
+import Asterix.Coding
+import Asterix.Generated as Gen
+
+type Cat048 = Gen.Cat_048_1_32
+
+assert :: Bool -> IO ()
+assert True = pure ()
+assert False = error "Assertion error"
+
+main :: IO ()
+main = do
+    -- construct compound item
+    let i120a:: NonSpare (Cat048 ~> "120")
+        i120a = compound
+                ( item @"CAL" (group
+                    ( item @"D" 0
+                   *: spare
+                   *: item @"CAL" 0
+                   *: nil))
+               *: item @"RDS" (repetitive [1,2,3])
+               *: nil)
+
+    -- construct empty compound item and add items
+    let i120b :: NonSpare (Cat048 ~> "120")
+        i120b = compound nil
+            & setItem @"CAL" (group
+                    ( item @"D" 0
+                   *: spare
+                   *: item @"CAL" 0
+                   *: nil))
+            & maybeSetItem @"RDS" (Just (repetitive [1,2,3]))
+
+    -- the result shall be the same
+    assert (unparse @Bits i120a == unparse i120b)
+
+    -- same scenario is possible on 'Record' too
+    let recordA :: Record (RecordOf Cat048)
+        recordA = record
+            ( item @"010" 0x0102
+           *: item @"120" i120a
+           *: nil)
+
+    let recordB :: Record (RecordOf Cat048)
+        recordB = record nil
+            & setItem @"010" 0x0102
+            & maybeSetItem @"020" Nothing
+            & setItem @"120" i120b
+    assert (unparse @Bits recordA == unparse recordB)
 ```
 
 ## Application examples
