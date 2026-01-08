@@ -306,6 +306,45 @@ main = do
     assert (unparse @Bits recordA == unparse recordB)
 ```
 
+## Modifying extended subitem
+
+Extended item contains always-present primary part and optional
+extensions and so some subitems might not be present.
+
+`modifyExtendedSubitemIfPresent @subitemName f item` provides necessary
+checking and if a subitem is present, it applies a modifier
+function `f` to the subitem. Otherwises, if the subitem is not
+present, the function returns complete item unchanged.
+
+```haskell
+-- | file: readme-samples/modify-extended-subitem.hs
+{-# LANGUAGE DataKinds #-}
+import Asterix.Coding
+import Asterix.Generated as Gen
+
+type Cat048 = Gen.Cat_048_1_32
+
+assert :: Bool -> IO ()
+assert True = pure ()
+assert False = error "Assertion error"
+
+main :: IO ()
+main = do
+    -- construct extende item with only the first group present
+    let i020 :: NonSpare (Cat048 ~> "020")
+        i020 = extendedGroups (0 *: nil)
+
+        -- "TYP" is part of the first group (present), we are changing it
+        result1 = modifyExtendedSubitemIfPresent @"TYP" (const 1) i020
+
+        -- "TST" is part of the second group (not present),
+        -- so the function call shall have no effect
+        result2 = modifyExtendedSubitemIfPresent @"TST" (const 1) i020
+
+    assert $ not (unparse @Bits i020 == unparse result1)
+    assert (unparse @Bits i020 == unparse result2)
+```
+
 ## Application examples
 
 ### Category filter

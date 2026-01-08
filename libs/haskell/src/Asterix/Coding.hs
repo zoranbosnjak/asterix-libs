@@ -1836,8 +1836,7 @@ instance
 instance
     ( nsp ~ 'GCompound lst ~> name
     , KnownNat (LookupCompound name lst)
-    , var ~ 'GCompound lst
-    ) => SetItem name (Variation var) (NonSpare nsp) where
+    ) => SetItem name (Variation ('GCompound lst)) (NonSpare nsp) where
     setItem = setCompoundItem @name
 
 -- | Helper function to setItem conditionally.
@@ -1861,4 +1860,36 @@ instance
     , KnownNat (LookupCompound name lst)
     ) => DelItem name (Variation var) where
     delItem = delCompoundItem @name
+
+class ExtModify name parent child | name parent -> child where
+    modifyExtendedSubitemIfPresent :: (child -> child) -> parent -> parent
+
+instance
+    ( ExtModify name (Variation (GetVariationResult nsp1)) (NonSpare nsp2)
+    ) => ExtModify name (NonSpare nsp1) (NonSpare nsp2) where
+    modifyExtendedSubitemIfPresent f parent =
+        let Variation v =
+                modifyExtendedSubitemIfPresent @name f $ getVariation parent
+        in NonSpare $ UNonSpare $ URuleVar v
+
+instance
+    ( nsp ~ 'GExtended lst ~> name
+    , KnownNat (LookupExtended name lst)
+    ) => ExtModify name (Variation ('GExtended lst)) (NonSpare nsp)
+  where
+    modifyExtendedSubitemIfPresent f (Variation var) = case var of
+        UExtended _bld lst ->
+            let ix = fromIntegral $ natVal (Proxy @(LookupExtended name lst))
+            in case ix < length lst of
+                False -> Variation var -- item not present
+                True -> case lst !! ix of
+                    Just (UItem x) ->
+                        let NonSpare y = f (NonSpare x)
+                            lst2 :: [Maybe UItem]
+                            lst2 = take ix lst ++ Just (UItem y) : drop (ix+1) lst
+                            bld :: SBuilder
+                            bld = bitsToSBuilder $ recreateExtended lst2
+                        in Variation $ UExtended bld lst2
+                    _ -> intError
+        _ -> intError
 

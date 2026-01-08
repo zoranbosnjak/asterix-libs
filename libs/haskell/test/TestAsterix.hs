@@ -48,6 +48,7 @@ tests = testGroup "Asterix"
     , testCase "testExtended2" testExtended2
     , testCase "testExtended3" testExtended3
     , testCase "testExtended4" testExtended4
+    , testCase "testExtended5" testExtended5
     , testCase "testRepetitive1" testRepetitive1
     , testCase "testRepetitive2" testRepetitive2
     , testCase "testRepetitive3" testRepetitive3
@@ -444,6 +445,19 @@ testExtended4 = do
         env = Env parsingStore bs
         result = runParsing act env 0
     assertEqual "failure" True (isLeft result)
+
+testExtended5 :: Assertion
+testExtended5 = do
+    -- check modifyExtendedSubitemIfPresent function
+    let o1, o2, o3 :: NonSpare (Cat_000_1_0 ~> "053")
+        o1 = extended ( 1 *: item @"I2" 2 *: fx *: nil)
+        o2 = extended ( 1 *: item @"I2" 5 *: fx *: nil)
+        o3 = modifyExtendedSubitemIfPresent @"I2" (const 2) o2 -- present
+        o4 = modifyExtendedSubitemIfPresent @"I3" (const 0) o1 -- not present
+        o5 = modifyExtendedSubitemIfPresent @"I5" (const 0) o1 -- not present
+    assertEqual "failure o3" (unparse @Bits o1) (unparse o3)
+    assertEqual "failure o4" (unparse @Bits o1) (unparse o4)
+    assertEqual "failure o5" (unparse @Bits o1) (unparse o5)
 
 testRepetitive1 :: Assertion
 testRepetitive1 = do
