@@ -271,6 +271,41 @@ theta = i040.variation.get_item('THETA').variation.content.as_quantity("°")
 ssr = i070.variation.get_item('MODE3A').variation.content.as_string()
 ```
 
+## Modifying extended subitem
+
+Extended item contains always-present primary part and optional
+extensions and so some subitems might not be present.
+
+`modify_subitem_if_present(item_name, f)` method provides necessary checking
+and if a subitem is present, it applies a modifier function `f` to the subitem.
+Otherwises, if the subitem is not present, the method returns `self` unchanged.
+
+```python
+#| file: example-modify-subitems.py
+from asterix.base import *
+import asterix.generated as gen
+
+Cat048 = gen.Cat_048_1_32
+T = Cat048.cv_record.spec('020')
+
+# helper 'constant' function
+def const(x: Any) -> Any:
+    return lambda y: y.create(x)
+
+# construct extende item with only the first group present
+v020 = T.create((0,)).variation
+
+# "TYP" is part of the first group (present), we are changing it
+result1 = v020.modify_subitem_if_present('TYP', const(1))
+
+# "TST" is part of the second group (not present),
+# so the function call shall have no effect
+result2 = v020.modify_subitem_if_present('TST', const(1))
+
+assert v020.unparse() != result1.unparse()
+assert v020.unparse() == result2.unparse()
+```
+
 ## Application examples
 
 ### Category filter

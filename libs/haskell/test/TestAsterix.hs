@@ -458,6 +458,11 @@ testExtended5 = do
     assertEqual "failure o3" (unparse @Bits o1) (unparse o3)
     assertEqual "failure o4" (unparse @Bits o1) (unparse o4)
     assertEqual "failure o5" (unparse @Bits o1) (unparse o5)
+    let o6, o7, o8 :: NonSpare (Cat_000_1_0 ~> "053")
+        o6 = extended ( 1 *: 2 *: fx *: item @"I3" 3 *: spare *: 4 *: fx *: nil)
+        o7 = extended ( 1 *: 2 *: fx *: item @"I3" 0 *: spare *: 4 *: fx *: nil)
+        o8 = modifyExtendedSubitemIfPresent @"I3" (const 3) o7 -- present
+    assertEqual "failure o8" (unparse @Bits o6) (unparse o8)
 
 testRepetitive1 :: Assertion
 testRepetitive1 = do

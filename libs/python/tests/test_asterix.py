@@ -14,7 +14,7 @@ def test_create() -> None:
     Cat0.cv_record.create({})
     Cat0.cv_record.create({'010': 1}),
     with pytest.raises(ValueError):
-        Cat0.cv_record.create({'nonexistingitem': 1}) # type: ignore
+        Cat0.cv_record.create({'nonexistingitem': 1})  # type: ignore
 
 
 def approximately(err: float, a: float, b: float) -> bool:
@@ -41,7 +41,7 @@ def test_rule_variation_dependent() -> None:
                 ('TID', 0),
                 ('CP', obj.as_uint()),
                 ('CS', 0))
-            }
+        }
     })
     bs = rec1.unparse()
     # try to unparse and parse the record
@@ -58,9 +58,9 @@ def test_rule_variation_dependent() -> None:
     # try to cast to all variation cases
     var0a = item_cp.variation()
     var0b = item_cp.variation(None)
-    var1 = item_cp.variation((1,1))
-    var2 = item_cp.variation((1,2))
-    var3 = item_cp.variation((2,1))
+    var1 = item_cp.variation((1, 1))
+    var2 = item_cp.variation((1, 2))
+    var3 = item_cp.variation((2, 1))
     assert not isinstance(var0a, ValueError)
     assert not isinstance(var0b, ValueError)
     assert not isinstance(var1, ValueError)
@@ -378,6 +378,27 @@ def test_extended4() -> None:
     assert isinstance(result, ValueError)
 
 
+def test_extended5() -> None:
+    def const(x: Any) -> Any:
+        return lambda y: y.create(x)
+
+    def dump(arg: Any) -> Any:
+        return hexlify(arg.unparse().to_bytes())
+    T = Cat_000_1_0.cv_record.spec('053')
+    v1 = T.create(((1, ('I2', 2), None),)).variation
+    v2 = T.create(((1, ('I2', 5), None),)).variation
+    v3 = v2.modify_subitem_if_present('I2', const(2))  # present
+    v4 = v1.modify_subitem_if_present('I3', const(0))  # not present
+    v5 = v1.modify_subitem_if_present('I5', const(0))  # not present
+    assert (dump(v1) == dump(v3))
+    assert (dump(v1) == dump(v4))
+    assert (dump(v1) == dump(v5))
+    v6 = T.create(((1, 2, None), (('I3', 3), 0, 4, None))).variation
+    v7 = T.create(((1, 2, None), (('I3', 0), 0, 4, None))).variation
+    v8 = v7.modify_subitem_if_present('I3', const(3))  # present
+    assert (dump(v6) == dump(v8))
+
+
 def test_repetitive1() -> None:
     T = Cat_000_1_0.cv_record.spec('061')
     obj = T.create([1, 2, 3])
@@ -556,7 +577,7 @@ def test_compound0() -> None:
 def test_compound1() -> None:
     T = Cat_000_1_0.cv_record.spec('093')
     with pytest.raises(ValueError):
-        obj = T.create({'nonexistingitem': 1}) # type: ignore
+        obj = T.create({'nonexistingitem': 1})  # type: ignore
     obj = T.create({})
     assert obj.unparse() == Bits.from_bytes(unhexlify('00'))
     obj1 = T.create({'I1': 1})
@@ -632,8 +653,7 @@ def test_record_0_rfs() -> None:
 
     # RFS is not allowed in this record
     with pytest.raises(TypeError):
-        T.create({'010': 0x03}, [('010', 0xAA)]) # type: ignore
-
+        T.create({'010': 0x03}, [('010', 0xAA)])  # type: ignore
 
 
 def test_record_1_rfs() -> None:
@@ -698,7 +718,7 @@ def test_record_1_rfs() -> None:
     assert with_rfs.get_item('010') is None
 
     assert [i.as_uint() for i in with_rfs.get_rfs_item('000')] == [0xAA, 0x55]
-    assert [i.as_uint() for i in with_rfs.get_rfs_item('010')]== [0x1234]
+    assert [i.as_uint() for i in with_rfs.get_rfs_item('010')] == [0x1234]
     assert len(with_rfs.get_rfs_item('020')) == 0
     assert len(with_rfs.get_rfs_item('053')) == 1
 
@@ -938,7 +958,7 @@ def test_parse3() -> None:
             assert r2.unparse() == rec_track.unparse()
 
     class _mixed:
-        records : Any = [
+        records: Any = [
             rec_plot, rec_plot,
             rec_track, rec_track, rec_track,
         ]
@@ -1061,7 +1081,7 @@ def test_parse6() -> None:
 
     # create all zeros sample
     def mk_sample(n: int) -> Bits:
-        zeros = [0]*n
+        zeros = [0] * n
         return Bits.from_bytes(bytes(zeros))
 
     result1 = Cat1.cv_uap.parse_any_uap(mk_sample(10), max_depth=9)
@@ -1070,6 +1090,7 @@ def test_parse6() -> None:
     result2 = Cat1.cv_uap.parse_any_uap(mk_sample(10), max_depth=10)
     assert not isinstance(result2, ValueError)
     assert len(result2) == 1024
+
 
 def test_parse_nonblocking() -> None:
     """We encode a single record with a new edition, where some items

@@ -3618,6 +3618,24 @@ class Variation_52(Extended):
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
 
+    @overload
+    def modify_subitem_if_present(self, key : Literal["I1"], f: Callable[[RuleVariation_0], RuleVariation_0]) -> "Variation_52":
+        ...
+    @overload
+    def modify_subitem_if_present(self, key : Literal["I2"], f: Callable[[RuleVariation_27], RuleVariation_27]) -> "Variation_52":
+        ...
+    @overload
+    def modify_subitem_if_present(self, key : Literal["I3"], f: Callable[[RuleVariation_3], RuleVariation_3]) -> "Variation_52":
+        ...
+    @overload
+    def modify_subitem_if_present(self, key : Literal["I4"], f: Callable[[RuleVariation_31], RuleVariation_31]) -> "Variation_52":
+        ...
+    @overload
+    def modify_subitem_if_present(self, key : Literal["I5"], f: Callable[[RuleVariation_6], RuleVariation_6]) -> "Variation_52":
+        ...
+    def modify_subitem_if_present(self, key : Any, f : Any) -> Any:
+        return self._modify_subitem_if_present(key, f)
+
 class RuleVariation_47(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_52.cv_arg
     cv_variation: TypeAlias = Variation_52
@@ -3756,6 +3774,24 @@ class Variation_53(Extended):
         ...
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
+
+    @overload
+    def modify_subitem_if_present(self, key : Literal["I1"], f: Callable[[RuleVariation_0], RuleVariation_0]) -> "Variation_53":
+        ...
+    @overload
+    def modify_subitem_if_present(self, key : Literal["I2"], f: Callable[[RuleVariation_27], RuleVariation_27]) -> "Variation_53":
+        ...
+    @overload
+    def modify_subitem_if_present(self, key : Literal["I3"], f: Callable[[RuleVariation_3], RuleVariation_3]) -> "Variation_53":
+        ...
+    @overload
+    def modify_subitem_if_present(self, key : Literal["I4"], f: Callable[[RuleVariation_31], RuleVariation_31]) -> "Variation_53":
+        ...
+    @overload
+    def modify_subitem_if_present(self, key : Literal["I5"], f: Callable[[RuleVariation_7], RuleVariation_7]) -> "Variation_53":
+        ...
+    def modify_subitem_if_present(self, key : Any, f : Any) -> Any:
+        return self._modify_subitem_if_present(key, f)
 
 class RuleVariation_48(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_53.cv_arg
@@ -5273,6 +5309,15 @@ class Variation_54(Extended):
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
 
+    @overload
+    def modify_subitem_if_present(self, key : Literal["I1"], f: Callable[[RuleVariation_6], RuleVariation_6]) -> "Variation_54":
+        ...
+    @overload
+    def modify_subitem_if_present(self, key : Literal["I2"], f: Callable[[RuleVariation_41], RuleVariation_41]) -> "Variation_54":
+        ...
+    def modify_subitem_if_present(self, key : Any, f : Any) -> Any:
+        return self._modify_subitem_if_present(key, f)
+
 class RuleVariation_49(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_54.cv_arg
     cv_variation: TypeAlias = Variation_54
@@ -6675,6 +6720,18 @@ class Variation_56(Extended):
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
 
+    @overload
+    def modify_subitem_if_present(self, key : Literal["TYP"], f: Callable[[RuleVariation_2], RuleVariation_2]) -> "Variation_56":
+        ...
+    @overload
+    def modify_subitem_if_present(self, key : Literal["I1"], f: Callable[[RuleVariation_27], RuleVariation_27]) -> "Variation_56":
+        ...
+    @overload
+    def modify_subitem_if_present(self, key : Literal["I2"], f: Callable[[RuleVariation_6], RuleVariation_6]) -> "Variation_56":
+        ...
+    def modify_subitem_if_present(self, key : Any, f : Any) -> Any:
+        return self._modify_subitem_if_present(key, f)
+
 class RuleVariation_51(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_56.cv_arg
     cv_variation: TypeAlias = Variation_56
@@ -8026,6 +8083,12 @@ class Variation_55(Extended):
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
 
+    @overload # type: ignore
+    def modify_subitem_if_present(self, key : Literal["I1"], f: Callable[[RuleVariation_6], RuleVariation_6]) -> "Variation_55":
+        ...
+    def modify_subitem_if_present(self, key : Any, f : Any) -> Any:
+        return self._modify_subitem_if_present(key, f)
+
 class RuleVariation_50(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_55.cv_arg
     cv_variation: TypeAlias = Variation_55
@@ -8150,6 +8213,12 @@ class Variation_50(Extended):
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
 
+    @overload # type: ignore
+    def modify_subitem_if_present(self, key : Literal["I1"], f: Callable[[RuleVariation_33], RuleVariation_33]) -> "Variation_50":
+        ...
+    def modify_subitem_if_present(self, key : Any, f : Any) -> Any:
+        return self._modify_subitem_if_present(key, f)
+
 class RuleVariation_45(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_50.cv_arg
     cv_variation: TypeAlias = Variation_50
@@ -8252,6 +8321,12 @@ class Variation_51(Extended):
         ...
     def get_item(self, key : Any) -> Any:
         return self._get_item(key)
+
+    @overload # type: ignore
+    def modify_subitem_if_present(self, key : Literal["I1"], f: Callable[[RuleVariation_34], RuleVariation_34]) -> "Variation_51":
+        ...
+    def modify_subitem_if_present(self, key : Any, f : Any) -> Any:
+        return self._modify_subitem_if_present(key, f)
 
 class RuleVariation_46(RuleVariationContextFree):
     cv_arg: TypeAlias = Variation_51.cv_arg

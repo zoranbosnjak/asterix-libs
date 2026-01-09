@@ -311,10 +311,10 @@ main = do
 Extended item contains always-present primary part and optional
 extensions and so some subitems might not be present.
 
-`modifyExtendedSubitemIfPresent @subitemName f item` provides necessary
-checking and if a subitem is present, it applies a modifier
-function `f` to the subitem. Otherwises, if the subitem is not
-present, the function returns complete item unchanged.
+`modifyExtendedSubitemIfPresent @subitemName f item` function provides
+necessary checking and if a subitem is present, it applies a modifier function
+`f` to the subitem. Otherwises, if the subitem is not present, the function
+returns complete item unchanged.
 
 ```haskell
 -- | file: readme-samples/modify-extended-subitem.hs

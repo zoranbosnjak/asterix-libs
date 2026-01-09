@@ -7,7 +7,6 @@
 from asterix.generated import *
 
 Spec = Cat_008_1_3
-rec = Spec.cv_record.create({'010': (('SA',1), ('SIC',2))})
+rec = Spec.cv_record.create({'010': (('SA', 1), ('SIC', 2))})
 i010 = rec.get_item('010')
 print(i010.variation.get_item('SA').as_uint())
-

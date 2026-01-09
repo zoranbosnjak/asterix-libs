@@ -431,6 +431,22 @@ instance Node Variation where
                         _ -> pure ()
                 pyFunc "get_item" ["self", "key : Any"] "Any" $ do
                     "return self._get_item(key)"
+                ""
+                forM_ (zip [1::Int ..] groups) $ \(_gi, group) -> do
+                    forM_ group $ \case
+                        Just (Just (name, ref)) -> do
+                            let arg = sformat ("key : Literal[" % stext % "]")
+                                    (quote $ coerce name)
+                                fArg = sformat("RuleVariation_" % int) ref
+                                fType = sformat("f: Callable[[" % stext % "], " % stext % "]") fArg fArg
+                            case num_of_items of
+                                1 -> "@overload # type: ignore"
+                                _ -> "@overload"
+                            pyFunc "modify_subitem_if_present" ["self", arg, fType] (quote rv) $ do
+                                "..."
+                        _ -> pure ()
+                pyFunc "modify_subitem_if_present" ["self", "key : Any", "f : Any"] "Any" $ do
+                    "return self._modify_subitem_if_present(key, f)"
 
         A.Repetitive rt var -> do
             ref <- walk var

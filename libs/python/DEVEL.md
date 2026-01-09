@@ -5,6 +5,9 @@ nix-shell
 
 # prettify python source code
 autopep8 --in-place --aggressive --aggressive <filename> <filename>...
+find . | grep "\.py$" \
+    | grep -v "generated" \
+    | xargs autopep8 --in-place --aggressive --aggressive
 
 # run test from command line (as a module or via pytest), for example
 python -m tests.test_asterix

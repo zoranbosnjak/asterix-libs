@@ -852,6 +852,32 @@ class Extended(Variation):
                         return i.arg.arg
         return None
 
+    def _modify_subitem_if_present(self, key: Any, f: Any) -> Any:
+        all_items: List[List[Optional[ItemBase]]] = []
+        bs = Bits.from_bytes(b'')
+
+        for ix, j in enumerate(self.arg):
+            items: List[Optional[ItemBase]] = []
+            fx = True if (ix + 1) < len(self.arg) else False
+            for i in j:
+                if i is None:
+                    items.append(None)
+                    bs += Bits.fx(fx)
+                else:
+                    if isinstance(i, Item):
+                        if i.cv_non_spare.cv_name == key:
+                            i = i.__class__(f(i.arg))
+                        items.append(i)
+                        bs += i.unparse()
+                    elif isinstance(i, Spare):
+                        items.append(i)
+                        bs += i.unparse()
+                    else:
+                        raise Exception('Unexpected', i)
+            all_items.append(items)
+
+        return self.__class__(bs, all_items)
+
 
 class Repetitive(Variation):
     cv_rep_bytes: ClassVar[Optional[int]]
@@ -1462,7 +1488,10 @@ class UapMultiple(Uap):
         return cls._parse_records(cls.cv_uaps[uap], bs)
 
     @classmethod
-    def _parse_any_uap(cls, bs: Bits, max_depth: Optional[int]) -> Union[ValueError, List[List[Any]]]:
+    def _parse_any_uap(cls,
+                       bs: Bits,
+                       max_depth: Optional[int]) -> Union[ValueError,
+                                                          List[List[Any]]]:
         """Try to parse with all possible uap combinations.
         The result is list of possible combinations where each combination
         is itself a list (like with normal single uap _parse function).
@@ -1479,7 +1508,7 @@ class UapMultiple(Uap):
         """
         lst = cls.cv_uaps.values()
 
-        def go(depth : int, acc: List[Any], s: Bits) -> Any:
+        def go(depth: int, acc: List[Any], s: Bits) -> Any:
             if max_depth is not None:
                 if depth > max_depth:
                     raise ValueError('max_depth reached')

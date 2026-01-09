@@ -20,7 +20,7 @@ asterixSpecsDate :: String
 asterixSpecsDate = "2025-12-10T09:10:38+01:00"
 
 codeGeneratorVersion :: String
-codeGeneratorVersion = "0.11.0"
+codeGeneratorVersion = "0.12.0"
 
 -- Asterix types
 
