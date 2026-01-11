@@ -1,6 +1,6 @@
 cabal-version:      3.0
 name:               libasterix
-version:            0.6.3
+version:            0.7.0
 synopsis:           Asterix data processing library
 description:
     A library for asterix data format processing.
