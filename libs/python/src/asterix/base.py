@@ -827,8 +827,8 @@ class Extended(Variation):
                 else:
                     a, size = a  # type: ignore
                     i = a.create(b)  # type: ignore
-                    items.append(i)  # type: ignore
-                    bs += i.unparse()  # type: ignore
+                    items.append(i)
+                    bs += i.unparse()
             all_items.append(items)
         return cls(bs, all_items)
 
@@ -1324,7 +1324,7 @@ class Record:
                 break
             elif issubclass(i, UapItem):
                 nsp = i.cv_non_spare
-                result2 = nsp.parse(remaining)
+                result2 = nsp.parse(remaining)  # type: ignore
                 if isinstance(result2, ValueError):
                     if pm == ParsingMode.StrictParsing:
                         return result2
