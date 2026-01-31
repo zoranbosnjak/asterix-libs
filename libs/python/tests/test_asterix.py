@@ -1138,3 +1138,65 @@ def test_parse_nonblocking() -> None:
     assert hexlify(record0.unparse().to_bytes()) == \
         hexlify(r2.unparse().to_bytes())
     assert remaining == Bits.from_uinteger(0xff, 0, 8)
+
+
+def test_empty() -> None:
+    """Test 'is_empty' method"""
+
+    # repetitive
+    TRep = Cat_000_1_0.cv_record.spec('061')
+    rep1 = TRep.create([1, 2, 3])
+    assert rep1.variation.is_empty() == False
+    rep2 = TRep.create([])
+    assert rep2.variation.is_empty()
+
+    # compound
+    TComp = Cat_000_1_0.cv_record.spec('093')
+    comp1 = TComp.create({'I1': 1})
+    assert comp1.variation.is_empty() == False
+    comp2 = TComp.create({})
+    assert comp2.variation.is_empty()
+
+    # record
+    rec1 = Cat_000_1_0.cv_record.create({'010': 1})
+    assert rec1.is_empty() == False
+    rec2 = Cat_000_1_0.cv_record.create({})
+    assert rec2.is_empty()
+
+# python specific tests
+
+
+def python_construct_none() -> None:
+    """Construct compound/record with some 'None' arguments"""
+
+    # compound
+    TComp = Cat_000_1_0.cv_record.spec('093')
+    comp1 = TComp.create({'I1': 1})
+    comp2 = TComp.create({'I1': 1, 'I2': None})
+    assert comp1.unparse() == comp2.unparse()
+
+    # record
+    rec1 = Cat_000_1_0.cv_record.create({'010': 1})
+    rec2 = Cat_000_1_0.cv_record.create({'010': 1, '000': None})
+    assert rec1.unparse() == rec2.unparse()
+
+
+def python_set_item_none() -> None:
+    """set_item('x', None) is the same as del_item"""
+
+    # compound
+    TComp = Cat_000_1_0.cv_record.spec('093')
+    comp1 = TComp.create({'I1': 1, 'I2': 2})
+    comp2 = TComp.create({'I1': 1})
+    comp3 = comp1.variation.set_item('I1', None)
+    comp4 = comp1.variation.del_item('I1')
+    assert comp3.unparse() == comp2.unparse()
+    assert comp4.unparse() == comp2.unparse()
+
+    # record
+    rec1 = Cat_000_1_0.cv_record.create({'010': 1, '000': None})
+    rec2 = Cat_000_1_0.cv_record.create({'010': 1})
+    rec3 = rec1.set_item('000', None)
+    rec4 = rec1.del_item('000')
+    assert rec3.unparse() == rec2.unparse()
+    assert rec4.unparse() == rec2.unparse()

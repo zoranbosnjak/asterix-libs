@@ -129,6 +129,10 @@ bitsToDouble sig n lsb
   where
     applyLsb = (* lsb) . fromIntegral
 
+-- | Empty structure check
+class IsEmpty t where
+    isEmpty :: t -> Bool
+
 -- | Conversion from typelevel to value level bool.
 class KnownBool t where boolVal :: Proxy t -> Bool
 instance KnownBool 'False where boolVal _ = False

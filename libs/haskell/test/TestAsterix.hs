@@ -77,6 +77,7 @@ tests = testGroup "Asterix"
     , testCase "testParse5" testParse5
     , testCase "testParse6" testParse6
     , testCase "testParseNonblocking" testParseNonblocking
+    , testCase "testEmpty" testEmpty
     ]
 
 testCreate :: Assertion
@@ -1249,4 +1250,29 @@ testParseNonblocking = do
     r2 <- either (assertFailure . show) pure (parse @PartialParsing
         (parseRecord $ schema @(RecordOf Cat_000_1_0) Proxy) s)
     assertEqual "unparse" (unparse @Bits record0) (unparse @Bits r2)
+
+testEmpty :: Assertion
+testEmpty = do
+    -- Test 'is_empty' function
+
+    -- repetitive
+    let rep1, rep2 :: NonSpare (RecordOf Cat_000_1_0 ~> "061")
+        rep1 = repetitive [1,2,3]
+        rep2 = repetitive []
+    assertEqual "rep empty1" (isEmpty rep1) False
+    assertEqual "rep empty2" (isEmpty rep2) True
+
+    -- compound
+    let comp1, comp2 :: NonSpare (RecordOf Cat_000_1_0 ~> "093")
+        comp1 = compound ( item @"I1" 1 *: nil)
+        comp2 = compound nil
+    assertEqual "comp empty1" (isEmpty comp1) False
+    assertEqual "comp empty2" (isEmpty comp2) True
+
+    -- record
+    let rec1, rec2 :: Record (RecordOf Cat_000_1_0)
+        rec1 = record (item @"000" 1 *: nil)
+        rec2 = record nil
+    assertEqual "rec empty1" (isEmpty rec1) False
+    assertEqual "rec empty2" (isEmpty rec2) True
 

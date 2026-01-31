@@ -691,6 +691,7 @@ Spec = Cat_002_1_1
 
 # create empty record
 rec0 = Spec.cv_record.create({})
+assert rec0.is_empty() == True
 
 # this operation does nothing (result is not stored)
 rec0.set_item('000', 1)

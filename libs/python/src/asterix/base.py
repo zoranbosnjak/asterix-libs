@@ -1,6 +1,7 @@
 """Asterix data processing module (generic code)
 """
 
+import copy
 from itertools import chain, dropwhile
 from dataclasses import dataclass
 from binascii import hexlify, unhexlify
@@ -887,6 +888,9 @@ class Repetitive(Variation):
         self.bs = bs
         self.arg = arg
 
+    def is_empty(self) -> bool:
+        return len(self.arg) == 0
+
     @classmethod
     def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Repetitive', Bits]]:
         rbs = cls.cv_rep_bytes
@@ -1066,6 +1070,9 @@ class Compound(Variation):
         self.bs = bs
         self.arg = arg
 
+    def is_empty(self) -> bool:
+        return len(self.arg) == 0
+
     @classmethod
     def _spec(cls, key: str) -> Type[NonSpare]:
         return cls.cv_items_dict[key]
@@ -1098,6 +1105,8 @@ class Compound(Variation):
     def _create(cls, args: Dict[str, Any]) -> 'Compound':
         if isinstance(args, cls):
             return args
+        # remove None items from args
+        args = {key: args[key] for key in args if args[key] is not None}
         bs, items = unparse_fspec(cls.cv_items_list, args)
         for obj in items:
             bs += obj[1].unparse()
@@ -1110,12 +1119,15 @@ class Compound(Variation):
         return self.arg.get(key)
 
     def _set_item(self, key: Any, val: Any) -> 'Compound':
-        d = self.arg
-        d[key] = val
+        d = copy.deepcopy(self.arg)
+        if val is None:
+            d.pop(key, None)
+        else:
+            d[key] = val
         return self.__class__._create(d)
 
     def _del_item(self, key: Any) -> 'Compound':
-        d = self.arg
+        d = copy.deepcopy(self.arg)
         try:
             del d[key]
         except KeyError:
@@ -1251,6 +1263,9 @@ class Record:
         self.items_regular = items1
         self.items_rfs = items2
 
+    def is_empty(self) -> bool:
+        return len(self.items_regular) == 0 and len(self.items_rfs) == 0
+
     @classmethod
     def _parse(cls, pm: ParsingMode, bs: Bits) -> \
             Union[ValueError, Tuple['Record', Bits]]:
@@ -1349,6 +1364,8 @@ class Record:
 
     @classmethod
     def _create(cls, args: Dict[str, Any], *rfs_args: Any) -> 'Record':
+        # remove None items from args
+        args = {key: args[key] for key in args if args[key] is not None}
         # remove empty rfs elements from the tail of the rfss list
         rfss = list(dropwhile(lambda x: not x, reversed(rfs_args)))
 
@@ -1437,14 +1454,17 @@ class Record:
         return result
 
     def _set_item(self, key: Any, val: Any) -> 'Record':
-        d1 = self.items_regular
-        d2 = self.items_rfs
-        d1[key] = val
+        d1 = copy.deepcopy(self.items_regular)
+        d2 = copy.deepcopy(self.items_rfs)
+        if val is None:
+            d1.pop(key, None)
+        else:
+            d1[key] = val
         return self.__class__._create(d1, d2 or None)
 
     def _del_item(self, key: Any) -> 'Record':
-        d1 = self.items_regular
-        d2 = self.items_rfs
+        d1 = copy.deepcopy(self.items_regular)
+        d2 = copy.deepcopy(self.items_rfs)
         try:
             del d1[key]
         except KeyError:
@@ -1633,12 +1653,12 @@ class Expansion:
         return self.arg.get(key)
 
     def _set_item(self, key: Any, val: Any) -> Any:
-        d = self.arg
+        d = copy.deepcopy(self.arg)
         d[key] = val
         return self.__class__._create(d)
 
     def _del_item(self, key: Any) -> Any:
-        d = self.arg
+        d = copy.deepcopy(self.arg)
         try:
             del d[key]
         except KeyError:

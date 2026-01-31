@@ -105,6 +105,28 @@ newtype Expansion (t :: TExpansion) = Expansion { unExpansion :: UExpansion }
 newtype Datablock (db :: TDatablock) = Datablock { unDatablock :: UDatablock }
     deriving Show
 
+-- IsEmpty instances
+
+instance IsEmpty
+    (NonSpare ('GNonSpare name title ('GContextFree ('GRepetitive a b))))
+  where
+    isEmpty (NonSpare (UNonSpare (URuleVar var))) = case var of
+        URepetitive _bld lst -> null lst
+        _                    -> intError
+
+instance IsEmpty
+    (NonSpare ('GNonSpare name title ('GContextFree ('GCompound lst))))
+  where
+    isEmpty (NonSpare (UNonSpare (URuleVar var))) = case var of
+        UCompound _bld lst -> null $ catMaybes lst
+        _                  -> intError
+
+instance IsEmpty URecord where
+    isEmpty = null . catMaybes . uRecItems
+
+instance IsEmpty (Record t) where
+    isEmpty = isEmpty . unRecord
+
 -- Unparsing to 'Bits' instances
 
 instance Unparsing Bits UVariation where

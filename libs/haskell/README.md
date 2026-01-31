@@ -290,6 +290,7 @@ main = do
 
     -- the result shall be the same
     assert (unparse @Bits i120a == unparse i120b)
+    assert (isEmpty i120b == False)
 
     -- same scenario is possible on 'Record' too
     let recordA :: Record (RecordOf Cat048)

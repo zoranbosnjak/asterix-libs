@@ -1370,21 +1370,21 @@ class NonSpare_44(NonSpare):
 
 class Variation_69(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "R": NonSpare_80.cv_arg,
-        "T": NonSpare_88.cv_arg,
-        "S1": NonSpare_81.cv_arg,
-        "S2": NonSpare_82.cv_arg,
-        "S3": NonSpare_83.cv_arg,
-        "I1": NonSpare_60.cv_arg,
-        "I2": NonSpare_65.cv_arg,
-        "Q1LAT": NonSpare_75.cv_arg,
-        "Q2LON": NonSpare_76.cv_arg,
-        "Q3": NonSpare_77.cv_arg,
-        "Q4": NonSpare_78.cv_arg,
-        "Q5": NonSpare_79.cv_arg,
-        "B1": NonSpare_42.cv_arg,
-        "B2": NonSpare_43.cv_arg,
-        "B3": NonSpare_44.cv_arg,
+        "R": Optional[NonSpare_80.cv_arg],
+        "T": Optional[NonSpare_88.cv_arg],
+        "S1": Optional[NonSpare_81.cv_arg],
+        "S2": Optional[NonSpare_82.cv_arg],
+        "S3": Optional[NonSpare_83.cv_arg],
+        "I1": Optional[NonSpare_60.cv_arg],
+        "I2": Optional[NonSpare_65.cv_arg],
+        "Q1LAT": Optional[NonSpare_75.cv_arg],
+        "Q2LON": Optional[NonSpare_76.cv_arg],
+        "Q3": Optional[NonSpare_77.cv_arg],
+        "Q4": Optional[NonSpare_78.cv_arg],
+        "Q5": Optional[NonSpare_79.cv_arg],
+        "B1": Optional[NonSpare_42.cv_arg],
+        "B2": Optional[NonSpare_43.cv_arg],
+        "B3": Optional[NonSpare_44.cv_arg],
     }, total=False)
     cv_fspec_max_bytes = 3
     cv_items_list = [NonSpare_80, NonSpare_88, NonSpare_81, NonSpare_82, NonSpare_83, NonSpare_60, NonSpare_65, NonSpare_75, NonSpare_76, NonSpare_77, NonSpare_78, NonSpare_79, NonSpare_42, NonSpare_43, NonSpare_44]
@@ -1503,49 +1503,49 @@ class Variation_69(Compound):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["R"], val : NonSpare_80.cv_arg) -> "Variation_69":
+    def set_item(self, key : Literal["R"], val : Optional[NonSpare_80.cv_arg]) -> "Variation_69":
         ...
     @overload
-    def set_item(self, key : Literal["T"], val : NonSpare_88.cv_arg) -> "Variation_69":
+    def set_item(self, key : Literal["T"], val : Optional[NonSpare_88.cv_arg]) -> "Variation_69":
         ...
     @overload
-    def set_item(self, key : Literal["S1"], val : NonSpare_81.cv_arg) -> "Variation_69":
+    def set_item(self, key : Literal["S1"], val : Optional[NonSpare_81.cv_arg]) -> "Variation_69":
         ...
     @overload
-    def set_item(self, key : Literal["S2"], val : NonSpare_82.cv_arg) -> "Variation_69":
+    def set_item(self, key : Literal["S2"], val : Optional[NonSpare_82.cv_arg]) -> "Variation_69":
         ...
     @overload
-    def set_item(self, key : Literal["S3"], val : NonSpare_83.cv_arg) -> "Variation_69":
+    def set_item(self, key : Literal["S3"], val : Optional[NonSpare_83.cv_arg]) -> "Variation_69":
         ...
     @overload
-    def set_item(self, key : Literal["I1"], val : NonSpare_60.cv_arg) -> "Variation_69":
+    def set_item(self, key : Literal["I1"], val : Optional[NonSpare_60.cv_arg]) -> "Variation_69":
         ...
     @overload
-    def set_item(self, key : Literal["I2"], val : NonSpare_65.cv_arg) -> "Variation_69":
+    def set_item(self, key : Literal["I2"], val : Optional[NonSpare_65.cv_arg]) -> "Variation_69":
         ...
     @overload
-    def set_item(self, key : Literal["Q1LAT"], val : NonSpare_75.cv_arg) -> "Variation_69":
+    def set_item(self, key : Literal["Q1LAT"], val : Optional[NonSpare_75.cv_arg]) -> "Variation_69":
         ...
     @overload
-    def set_item(self, key : Literal["Q2LON"], val : NonSpare_76.cv_arg) -> "Variation_69":
+    def set_item(self, key : Literal["Q2LON"], val : Optional[NonSpare_76.cv_arg]) -> "Variation_69":
         ...
     @overload
-    def set_item(self, key : Literal["Q3"], val : NonSpare_77.cv_arg) -> "Variation_69":
+    def set_item(self, key : Literal["Q3"], val : Optional[NonSpare_77.cv_arg]) -> "Variation_69":
         ...
     @overload
-    def set_item(self, key : Literal["Q4"], val : NonSpare_78.cv_arg) -> "Variation_69":
+    def set_item(self, key : Literal["Q4"], val : Optional[NonSpare_78.cv_arg]) -> "Variation_69":
         ...
     @overload
-    def set_item(self, key : Literal["Q5"], val : NonSpare_79.cv_arg) -> "Variation_69":
+    def set_item(self, key : Literal["Q5"], val : Optional[NonSpare_79.cv_arg]) -> "Variation_69":
         ...
     @overload
-    def set_item(self, key : Literal["B1"], val : NonSpare_42.cv_arg) -> "Variation_69":
+    def set_item(self, key : Literal["B1"], val : Optional[NonSpare_42.cv_arg]) -> "Variation_69":
         ...
     @overload
-    def set_item(self, key : Literal["B2"], val : NonSpare_43.cv_arg) -> "Variation_69":
+    def set_item(self, key : Literal["B2"], val : Optional[NonSpare_43.cv_arg]) -> "Variation_69":
         ...
     @overload
-    def set_item(self, key : Literal["B3"], val : NonSpare_44.cv_arg) -> "Variation_69":
+    def set_item(self, key : Literal["B3"], val : Optional[NonSpare_44.cv_arg]) -> "Variation_69":
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -2614,8 +2614,8 @@ class NonSpare_45(NonSpare):
 
 class Variation_67(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "I1": NonSpare_53.cv_arg,
-        "CC": NonSpare_45.cv_arg,
+        "I1": Optional[NonSpare_53.cv_arg],
+        "CC": Optional[NonSpare_45.cv_arg],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [NonSpare_53, NonSpare_45]
@@ -2643,10 +2643,10 @@ class Variation_67(Compound):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["I1"], val : NonSpare_53.cv_arg) -> "Variation_67":
+    def set_item(self, key : Literal["I1"], val : Optional[NonSpare_53.cv_arg]) -> "Variation_67":
         ...
     @overload
-    def set_item(self, key : Literal["CC"], val : NonSpare_45.cv_arg) -> "Variation_67":
+    def set_item(self, key : Literal["CC"], val : Optional[NonSpare_45.cv_arg]) -> "Variation_67":
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -4358,7 +4358,7 @@ class UapItem_43(UapItemRFS):
 
 class Variation_64(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "I1": NonSpare_53.cv_arg,
+        "I1": Optional[NonSpare_53.cv_arg],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [NonSpare_53]
@@ -4371,7 +4371,7 @@ class Variation_64(Compound):
     def get_item(self, key : Literal["I1"]) -> Optional[Type[NonSpare_53]]:
         return self._get_item(key) # type: ignore
 
-    def set_item(self, key : Literal["I1"], val : NonSpare_53.cv_arg) -> "Variation_64":
+    def set_item(self, key : Literal["I1"], val : Optional[NonSpare_53.cv_arg]) -> "Variation_64":
         return self._set_item(key, val) # type: ignore
 
     def del_item(self, key : Literal["I1"]) -> "Variation_64":
@@ -4429,8 +4429,8 @@ class UapItem_26(UapItem):
 
 class Variation_65(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "I1": NonSpare_53.cv_arg,
-        "I2": NonSpare_62.cv_arg,
+        "I1": Optional[NonSpare_53.cv_arg],
+        "I2": Optional[NonSpare_62.cv_arg],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [NonSpare_53, None, NonSpare_62]
@@ -4458,10 +4458,10 @@ class Variation_65(Compound):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["I1"], val : NonSpare_53.cv_arg) -> "Variation_65":
+    def set_item(self, key : Literal["I1"], val : Optional[NonSpare_53.cv_arg]) -> "Variation_65":
         ...
     @overload
-    def set_item(self, key : Literal["I2"], val : NonSpare_62.cv_arg) -> "Variation_65":
+    def set_item(self, key : Literal["I2"], val : Optional[NonSpare_62.cv_arg]) -> "Variation_65":
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -4550,9 +4550,9 @@ class NonSpare_68(NonSpare):
 
 class Variation_66(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "I1": NonSpare_53.cv_arg,
-        "I2": NonSpare_62.cv_arg,
-        "I3": NonSpare_68.cv_arg,
+        "I1": Optional[NonSpare_53.cv_arg],
+        "I2": Optional[NonSpare_62.cv_arg],
+        "I3": Optional[NonSpare_68.cv_arg],
     }, total=False)
     cv_fspec_max_bytes = 2
     cv_items_list = [NonSpare_53, None, NonSpare_62, None, None, None, None, NonSpare_68]
@@ -4587,13 +4587,13 @@ class Variation_66(Compound):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["I1"], val : NonSpare_53.cv_arg) -> "Variation_66":
+    def set_item(self, key : Literal["I1"], val : Optional[NonSpare_53.cv_arg]) -> "Variation_66":
         ...
     @overload
-    def set_item(self, key : Literal["I2"], val : NonSpare_62.cv_arg) -> "Variation_66":
+    def set_item(self, key : Literal["I2"], val : Optional[NonSpare_62.cv_arg]) -> "Variation_66":
         ...
     @overload
-    def set_item(self, key : Literal["I3"], val : NonSpare_68.cv_arg) -> "Variation_66":
+    def set_item(self, key : Literal["I3"], val : Optional[NonSpare_68.cv_arg]) -> "Variation_66":
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -5362,29 +5362,29 @@ class UapItem_33(UapItem):
 
 class Record_9(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": NonSpare_3.cv_arg,
-        "000": NonSpare_0.cv_arg,
-        "020": NonSpare_4.cv_arg,
-        "030": NonSpare_6.cv_arg,
-        "031": NonSpare_7.cv_arg,
-        "032": NonSpare_10.cv_arg,
-        "040": NonSpare_12.cv_arg,
-        "051": NonSpare_15.cv_arg,
-        "052": NonSpare_16.cv_arg,
-        "053": NonSpare_17.cv_arg,
-        "054": NonSpare_18.cv_arg,
-        "061": NonSpare_19.cv_arg,
-        "062": NonSpare_20.cv_arg,
-        "063": NonSpare_21.cv_arg,
-        "064": NonSpare_22.cv_arg,
-        "071": NonSpare_23.cv_arg,
-        "072": NonSpare_24.cv_arg,
-        "073": NonSpare_25.cv_arg,
-        "091": NonSpare_26.cv_arg,
-        "092": NonSpare_27.cv_arg,
-        "093": NonSpare_28.cv_arg,
-        "101": NonSpare_30.cv_arg,
-        "102": NonSpare_33.cv_arg,
+        "010": Optional[NonSpare_3.cv_arg],
+        "000": Optional[NonSpare_0.cv_arg],
+        "020": Optional[NonSpare_4.cv_arg],
+        "030": Optional[NonSpare_6.cv_arg],
+        "031": Optional[NonSpare_7.cv_arg],
+        "032": Optional[NonSpare_10.cv_arg],
+        "040": Optional[NonSpare_12.cv_arg],
+        "051": Optional[NonSpare_15.cv_arg],
+        "052": Optional[NonSpare_16.cv_arg],
+        "053": Optional[NonSpare_17.cv_arg],
+        "054": Optional[NonSpare_18.cv_arg],
+        "061": Optional[NonSpare_19.cv_arg],
+        "062": Optional[NonSpare_20.cv_arg],
+        "063": Optional[NonSpare_21.cv_arg],
+        "064": Optional[NonSpare_22.cv_arg],
+        "071": Optional[NonSpare_23.cv_arg],
+        "072": Optional[NonSpare_24.cv_arg],
+        "073": Optional[NonSpare_25.cv_arg],
+        "091": Optional[NonSpare_26.cv_arg],
+        "092": Optional[NonSpare_27.cv_arg],
+        "093": Optional[NonSpare_28.cv_arg],
+        "101": Optional[NonSpare_30.cv_arg],
+        "102": Optional[NonSpare_33.cv_arg],
     }, total=False)
     cv_union: TypeAlias = Union[
         Tuple[Literal["010"], NonSpare_3.cv_arg],
@@ -5584,73 +5584,73 @@ class Record_9(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["010"], val : NonSpare_3.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["010"], val : Optional[NonSpare_3.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["000"], val : NonSpare_0.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["000"], val : Optional[NonSpare_0.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["020"], val : NonSpare_4.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["020"], val : Optional[NonSpare_4.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["030"], val : NonSpare_6.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["030"], val : Optional[NonSpare_6.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["031"], val : NonSpare_7.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["031"], val : Optional[NonSpare_7.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["032"], val : NonSpare_10.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["032"], val : Optional[NonSpare_10.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["040"], val : NonSpare_12.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["040"], val : Optional[NonSpare_12.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["051"], val : NonSpare_15.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["051"], val : Optional[NonSpare_15.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["052"], val : NonSpare_16.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["052"], val : Optional[NonSpare_16.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["053"], val : NonSpare_17.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["053"], val : Optional[NonSpare_17.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["054"], val : NonSpare_18.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["054"], val : Optional[NonSpare_18.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["061"], val : NonSpare_19.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["061"], val : Optional[NonSpare_19.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["062"], val : NonSpare_20.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["062"], val : Optional[NonSpare_20.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["063"], val : NonSpare_21.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["063"], val : Optional[NonSpare_21.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["064"], val : NonSpare_22.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["064"], val : Optional[NonSpare_22.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["071"], val : NonSpare_23.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["071"], val : Optional[NonSpare_23.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["072"], val : NonSpare_24.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["072"], val : Optional[NonSpare_24.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["073"], val : NonSpare_25.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["073"], val : Optional[NonSpare_25.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["091"], val : NonSpare_26.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["091"], val : Optional[NonSpare_26.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["092"], val : NonSpare_27.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["092"], val : Optional[NonSpare_27.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["093"], val : NonSpare_28.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["093"], val : Optional[NonSpare_28.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["101"], val : NonSpare_30.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["101"], val : Optional[NonSpare_30.cv_arg]) -> 'Record_9':
         ...
     @overload
-    def set_item(self, key : Literal["102"], val : NonSpare_33.cv_arg) -> 'Record_9':
+    def set_item(self, key : Literal["102"], val : Optional[NonSpare_33.cv_arg]) -> 'Record_9':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -5914,29 +5914,29 @@ class UapItem_37(UapItem):
 
 class Record_10(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": NonSpare_3.cv_arg,
-        "000": NonSpare_0.cv_arg,
-        "020": NonSpare_4.cv_arg,
-        "030": NonSpare_6.cv_arg,
-        "031": NonSpare_7.cv_arg,
-        "032": NonSpare_10.cv_arg,
-        "040": NonSpare_12.cv_arg,
-        "051": NonSpare_15.cv_arg,
-        "052": NonSpare_16.cv_arg,
-        "053": NonSpare_17.cv_arg,
-        "054": NonSpare_18.cv_arg,
-        "061": NonSpare_19.cv_arg,
-        "062": NonSpare_20.cv_arg,
-        "063": NonSpare_21.cv_arg,
-        "071": NonSpare_23.cv_arg,
-        "072": NonSpare_24.cv_arg,
-        "073": NonSpare_25.cv_arg,
-        "091": NonSpare_26.cv_arg,
-        "092": NonSpare_27.cv_arg,
-        "093": NonSpare_28.cv_arg,
-        "101": NonSpare_30.cv_arg,
-        "102": NonSpare_33.cv_arg,
-        "200": NonSpare_37.cv_arg,
+        "010": Optional[NonSpare_3.cv_arg],
+        "000": Optional[NonSpare_0.cv_arg],
+        "020": Optional[NonSpare_4.cv_arg],
+        "030": Optional[NonSpare_6.cv_arg],
+        "031": Optional[NonSpare_7.cv_arg],
+        "032": Optional[NonSpare_10.cv_arg],
+        "040": Optional[NonSpare_12.cv_arg],
+        "051": Optional[NonSpare_15.cv_arg],
+        "052": Optional[NonSpare_16.cv_arg],
+        "053": Optional[NonSpare_17.cv_arg],
+        "054": Optional[NonSpare_18.cv_arg],
+        "061": Optional[NonSpare_19.cv_arg],
+        "062": Optional[NonSpare_20.cv_arg],
+        "063": Optional[NonSpare_21.cv_arg],
+        "071": Optional[NonSpare_23.cv_arg],
+        "072": Optional[NonSpare_24.cv_arg],
+        "073": Optional[NonSpare_25.cv_arg],
+        "091": Optional[NonSpare_26.cv_arg],
+        "092": Optional[NonSpare_27.cv_arg],
+        "093": Optional[NonSpare_28.cv_arg],
+        "101": Optional[NonSpare_30.cv_arg],
+        "102": Optional[NonSpare_33.cv_arg],
+        "200": Optional[NonSpare_37.cv_arg],
     }, total=False)
     cv_union: TypeAlias = Union[
         Tuple[Literal["010"], NonSpare_3.cv_arg],
@@ -6136,73 +6136,73 @@ class Record_10(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["010"], val : NonSpare_3.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["010"], val : Optional[NonSpare_3.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["000"], val : NonSpare_0.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["000"], val : Optional[NonSpare_0.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["020"], val : NonSpare_4.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["020"], val : Optional[NonSpare_4.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["030"], val : NonSpare_6.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["030"], val : Optional[NonSpare_6.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["031"], val : NonSpare_7.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["031"], val : Optional[NonSpare_7.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["032"], val : NonSpare_10.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["032"], val : Optional[NonSpare_10.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["040"], val : NonSpare_12.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["040"], val : Optional[NonSpare_12.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["051"], val : NonSpare_15.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["051"], val : Optional[NonSpare_15.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["052"], val : NonSpare_16.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["052"], val : Optional[NonSpare_16.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["053"], val : NonSpare_17.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["053"], val : Optional[NonSpare_17.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["054"], val : NonSpare_18.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["054"], val : Optional[NonSpare_18.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["061"], val : NonSpare_19.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["061"], val : Optional[NonSpare_19.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["062"], val : NonSpare_20.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["062"], val : Optional[NonSpare_20.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["063"], val : NonSpare_21.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["063"], val : Optional[NonSpare_21.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["071"], val : NonSpare_23.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["071"], val : Optional[NonSpare_23.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["072"], val : NonSpare_24.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["072"], val : Optional[NonSpare_24.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["073"], val : NonSpare_25.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["073"], val : Optional[NonSpare_25.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["091"], val : NonSpare_26.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["091"], val : Optional[NonSpare_26.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["092"], val : NonSpare_27.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["092"], val : Optional[NonSpare_27.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["093"], val : NonSpare_28.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["093"], val : Optional[NonSpare_28.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["101"], val : NonSpare_30.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["101"], val : Optional[NonSpare_30.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["102"], val : NonSpare_33.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["102"], val : Optional[NonSpare_33.cv_arg]) -> 'Record_10':
         ...
     @overload
-    def set_item(self, key : Literal["200"], val : NonSpare_37.cv_arg) -> 'Record_10':
+    def set_item(self, key : Literal["200"], val : Optional[NonSpare_37.cv_arg]) -> 'Record_10':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -6854,11 +6854,11 @@ class UapItem_13(UapItem):
 
 class Record_7(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": NonSpare_2.cv_arg,
-        "020": NonSpare_5.cv_arg,
-        "031": NonSpare_8.cv_arg,
-        "040": NonSpare_11.cv_arg,
-        "041": NonSpare_13.cv_arg,
+        "010": Optional[NonSpare_2.cv_arg],
+        "020": Optional[NonSpare_5.cv_arg],
+        "031": Optional[NonSpare_8.cv_arg],
+        "040": Optional[NonSpare_11.cv_arg],
+        "041": Optional[NonSpare_13.cv_arg],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [UapItem_2, UapItem_5, UapItem_8, UapItem_42, UapItem_11, UapItem_13]
@@ -6907,19 +6907,19 @@ class Record_7(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["010"], val : NonSpare_2.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["010"], val : Optional[NonSpare_2.cv_arg]) -> 'Record_7':
         ...
     @overload
-    def set_item(self, key : Literal["020"], val : NonSpare_5.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["020"], val : Optional[NonSpare_5.cv_arg]) -> 'Record_7':
         ...
     @overload
-    def set_item(self, key : Literal["031"], val : NonSpare_8.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["031"], val : Optional[NonSpare_8.cv_arg]) -> 'Record_7':
         ...
     @overload
-    def set_item(self, key : Literal["040"], val : NonSpare_11.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["040"], val : Optional[NonSpare_11.cv_arg]) -> 'Record_7':
         ...
     @overload
-    def set_item(self, key : Literal["041"], val : NonSpare_13.cv_arg) -> 'Record_7':
+    def set_item(self, key : Literal["041"], val : Optional[NonSpare_13.cv_arg]) -> 'Record_7':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -7043,11 +7043,11 @@ class UapItem_14(UapItem):
 
 class Record_8(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": NonSpare_2.cv_arg,
-        "020": NonSpare_5.cv_arg,
-        "032": NonSpare_9.cv_arg,
-        "040": NonSpare_11.cv_arg,
-        "042": NonSpare_14.cv_arg,
+        "010": Optional[NonSpare_2.cv_arg],
+        "020": Optional[NonSpare_5.cv_arg],
+        "032": Optional[NonSpare_9.cv_arg],
+        "040": Optional[NonSpare_11.cv_arg],
+        "042": Optional[NonSpare_14.cv_arg],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [UapItem_2, UapItem_5, UapItem_42, UapItem_9, UapItem_11, UapItem_14]
@@ -7096,19 +7096,19 @@ class Record_8(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["010"], val : NonSpare_2.cv_arg) -> 'Record_8':
+    def set_item(self, key : Literal["010"], val : Optional[NonSpare_2.cv_arg]) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["020"], val : NonSpare_5.cv_arg) -> 'Record_8':
+    def set_item(self, key : Literal["020"], val : Optional[NonSpare_5.cv_arg]) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["032"], val : NonSpare_9.cv_arg) -> 'Record_8':
+    def set_item(self, key : Literal["032"], val : Optional[NonSpare_9.cv_arg]) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["040"], val : NonSpare_11.cv_arg) -> 'Record_8':
+    def set_item(self, key : Literal["040"], val : Optional[NonSpare_11.cv_arg]) -> 'Record_8':
         ...
     @overload
-    def set_item(self, key : Literal["042"], val : NonSpare_14.cv_arg) -> 'Record_8':
+    def set_item(self, key : Literal["042"], val : Optional[NonSpare_14.cv_arg]) -> 'Record_8':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -7261,9 +7261,9 @@ class UapItem_32(UapItem):
 
 class Record_2(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": NonSpare_1.cv_arg,
-        "101": NonSpare_29.cv_arg,
-        "102": NonSpare_32.cv_arg,
+        "010": Optional[NonSpare_1.cv_arg],
+        "101": Optional[NonSpare_29.cv_arg],
+        "102": Optional[NonSpare_32.cv_arg],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [UapItem_1, UapItem_29, UapItem_32]
@@ -7298,13 +7298,13 @@ class Record_2(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_2':
+    def set_item(self, key : Literal["010"], val : Optional[NonSpare_1.cv_arg]) -> 'Record_2':
         ...
     @overload
-    def set_item(self, key : Literal["101"], val : NonSpare_29.cv_arg) -> 'Record_2':
+    def set_item(self, key : Literal["101"], val : Optional[NonSpare_29.cv_arg]) -> 'Record_2':
         ...
     @overload
-    def set_item(self, key : Literal["102"], val : NonSpare_32.cv_arg) -> 'Record_2':
+    def set_item(self, key : Literal["102"], val : Optional[NonSpare_32.cv_arg]) -> 'Record_2':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -7383,9 +7383,9 @@ class UapItem_39(UapItem):
 
 class Record_5(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": NonSpare_1.cv_arg,
-        "201": NonSpare_38.cv_arg,
-        "202": NonSpare_39.cv_arg,
+        "010": Optional[NonSpare_1.cv_arg],
+        "201": Optional[NonSpare_38.cv_arg],
+        "202": Optional[NonSpare_39.cv_arg],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [UapItem_1, UapItem_38, UapItem_39]
@@ -7420,13 +7420,13 @@ class Record_5(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_5':
+    def set_item(self, key : Literal["010"], val : Optional[NonSpare_1.cv_arg]) -> 'Record_5':
         ...
     @overload
-    def set_item(self, key : Literal["201"], val : NonSpare_38.cv_arg) -> 'Record_5':
+    def set_item(self, key : Literal["201"], val : Optional[NonSpare_38.cv_arg]) -> 'Record_5':
         ...
     @overload
-    def set_item(self, key : Literal["202"], val : NonSpare_39.cv_arg) -> 'Record_5':
+    def set_item(self, key : Literal["202"], val : Optional[NonSpare_39.cv_arg]) -> 'Record_5':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -7518,8 +7518,8 @@ class UapItem_40(UapItem):
 
 class Record_6(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": NonSpare_1.cv_arg,
-        "301": NonSpare_40.cv_arg,
+        "010": Optional[NonSpare_1.cv_arg],
+        "301": Optional[NonSpare_40.cv_arg],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [UapItem_1, UapItem_40]
@@ -7547,10 +7547,10 @@ class Record_6(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["010"], val : Optional[NonSpare_1.cv_arg]) -> 'Record_6':
         ...
     @overload
-    def set_item(self, key : Literal["301"], val : NonSpare_40.cv_arg) -> 'Record_6':
+    def set_item(self, key : Literal["301"], val : Optional[NonSpare_40.cv_arg]) -> 'Record_6':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -7574,7 +7574,7 @@ class Record_6(Record):
 
 class Record_1(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": NonSpare_1.cv_arg,
+        "010": Optional[NonSpare_1.cv_arg],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [UapItem_1]
@@ -7587,7 +7587,7 @@ class Record_1(Record):
     def get_item(self, key : Literal["010"]) -> Optional[Type[NonSpare_1]]:
         return self._get_item(key) # type: ignore
 
-    def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_1':
+    def set_item(self, key : Literal["010"], val : Optional[NonSpare_1.cv_arg]) -> 'Record_1':
         return self._set_item(key, val) # type: ignore
 
     def del_item(self, key : Literal["010"]) -> 'Record_1':
@@ -7687,13 +7687,13 @@ class UapItem_41(UapItem):
 
 class Record_4(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": NonSpare_1.cv_arg,
-        "101": NonSpare_29.cv_arg,
-        "102": NonSpare_32.cv_arg,
-        "201": NonSpare_38.cv_arg,
-        "202": NonSpare_39.cv_arg,
-        "301": NonSpare_40.cv_arg,
-        "302": NonSpare_41.cv_arg,
+        "010": Optional[NonSpare_1.cv_arg],
+        "101": Optional[NonSpare_29.cv_arg],
+        "102": Optional[NonSpare_32.cv_arg],
+        "201": Optional[NonSpare_38.cv_arg],
+        "202": Optional[NonSpare_39.cv_arg],
+        "301": Optional[NonSpare_40.cv_arg],
+        "302": Optional[NonSpare_41.cv_arg],
     }, total=False)
     cv_union: TypeAlias = Union[
         Tuple[Literal["010"], NonSpare_1.cv_arg],
@@ -7765,25 +7765,25 @@ class Record_4(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_4':
+    def set_item(self, key : Literal["010"], val : Optional[NonSpare_1.cv_arg]) -> 'Record_4':
         ...
     @overload
-    def set_item(self, key : Literal["101"], val : NonSpare_29.cv_arg) -> 'Record_4':
+    def set_item(self, key : Literal["101"], val : Optional[NonSpare_29.cv_arg]) -> 'Record_4':
         ...
     @overload
-    def set_item(self, key : Literal["102"], val : NonSpare_32.cv_arg) -> 'Record_4':
+    def set_item(self, key : Literal["102"], val : Optional[NonSpare_32.cv_arg]) -> 'Record_4':
         ...
     @overload
-    def set_item(self, key : Literal["201"], val : NonSpare_38.cv_arg) -> 'Record_4':
+    def set_item(self, key : Literal["201"], val : Optional[NonSpare_38.cv_arg]) -> 'Record_4':
         ...
     @overload
-    def set_item(self, key : Literal["202"], val : NonSpare_39.cv_arg) -> 'Record_4':
+    def set_item(self, key : Literal["202"], val : Optional[NonSpare_39.cv_arg]) -> 'Record_4':
         ...
     @overload
-    def set_item(self, key : Literal["301"], val : NonSpare_40.cv_arg) -> 'Record_4':
+    def set_item(self, key : Literal["301"], val : Optional[NonSpare_40.cv_arg]) -> 'Record_4':
         ...
     @overload
-    def set_item(self, key : Literal["302"], val : NonSpare_41.cv_arg) -> 'Record_4':
+    def set_item(self, key : Literal["302"], val : Optional[NonSpare_41.cv_arg]) -> 'Record_4':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -7880,13 +7880,13 @@ class Asterix_7(AstCat):
 
 class Record_3(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": NonSpare_1.cv_arg,
-        "101": NonSpare_29.cv_arg,
-        "102": NonSpare_32.cv_arg,
-        "201": NonSpare_38.cv_arg,
-        "202": NonSpare_39.cv_arg,
-        "301": NonSpare_40.cv_arg,
-        "302": NonSpare_41.cv_arg,
+        "010": Optional[NonSpare_1.cv_arg],
+        "101": Optional[NonSpare_29.cv_arg],
+        "102": Optional[NonSpare_32.cv_arg],
+        "201": Optional[NonSpare_38.cv_arg],
+        "202": Optional[NonSpare_39.cv_arg],
+        "301": Optional[NonSpare_40.cv_arg],
+        "302": Optional[NonSpare_41.cv_arg],
     }, total=False)
     cv_fspec_max_bytes = 2
     cv_items_list = [UapItem_1, UapItem_29, UapItem_32, UapItem_38, UapItem_39, UapItem_40, UapItem_42, UapItem_41]
@@ -7949,25 +7949,25 @@ class Record_3(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["010"], val : NonSpare_1.cv_arg) -> 'Record_3':
+    def set_item(self, key : Literal["010"], val : Optional[NonSpare_1.cv_arg]) -> 'Record_3':
         ...
     @overload
-    def set_item(self, key : Literal["101"], val : NonSpare_29.cv_arg) -> 'Record_3':
+    def set_item(self, key : Literal["101"], val : Optional[NonSpare_29.cv_arg]) -> 'Record_3':
         ...
     @overload
-    def set_item(self, key : Literal["102"], val : NonSpare_32.cv_arg) -> 'Record_3':
+    def set_item(self, key : Literal["102"], val : Optional[NonSpare_32.cv_arg]) -> 'Record_3':
         ...
     @overload
-    def set_item(self, key : Literal["201"], val : NonSpare_38.cv_arg) -> 'Record_3':
+    def set_item(self, key : Literal["201"], val : Optional[NonSpare_38.cv_arg]) -> 'Record_3':
         ...
     @overload
-    def set_item(self, key : Literal["202"], val : NonSpare_39.cv_arg) -> 'Record_3':
+    def set_item(self, key : Literal["202"], val : Optional[NonSpare_39.cv_arg]) -> 'Record_3':
         ...
     @overload
-    def set_item(self, key : Literal["301"], val : NonSpare_40.cv_arg) -> 'Record_3':
+    def set_item(self, key : Literal["301"], val : Optional[NonSpare_40.cv_arg]) -> 'Record_3':
         ...
     @overload
-    def set_item(self, key : Literal["302"], val : NonSpare_41.cv_arg) -> 'Record_3':
+    def set_item(self, key : Literal["302"], val : Optional[NonSpare_41.cv_arg]) -> 'Record_3':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)
@@ -8395,7 +8395,7 @@ class NonSpare_57(NonSpare):
 
 class Variation_68(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "I1": NonSpare_57.cv_arg,
+        "I1": Optional[NonSpare_57.cv_arg],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [NonSpare_57]
@@ -8408,7 +8408,7 @@ class Variation_68(Compound):
     def get_item(self, key : Literal["I1"]) -> Optional[Type[NonSpare_57]]:
         return self._get_item(key) # type: ignore
 
-    def set_item(self, key : Literal["I1"], val : NonSpare_57.cv_arg) -> "Variation_68":
+    def set_item(self, key : Literal["I1"], val : Optional[NonSpare_57.cv_arg]) -> "Variation_68":
         return self._set_item(key, val) # type: ignore
 
     def del_item(self, key : Literal["I1"]) -> "Variation_68":
@@ -8466,11 +8466,11 @@ class UapItem_36(UapItem):
 
 class Record_0(Record):
     cv_arg = TypedDict('cv_arg', {
-        "000": NonSpare_0.cv_arg,
-        "101": NonSpare_31.cv_arg,
-        "102": NonSpare_34.cv_arg,
-        "103": NonSpare_35.cv_arg,
-        "104": NonSpare_36.cv_arg,
+        "000": Optional[NonSpare_0.cv_arg],
+        "101": Optional[NonSpare_31.cv_arg],
+        "102": Optional[NonSpare_34.cv_arg],
+        "103": Optional[NonSpare_35.cv_arg],
+        "104": Optional[NonSpare_36.cv_arg],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [UapItem_0, UapItem_31, UapItem_34, UapItem_35, UapItem_36]
@@ -8519,19 +8519,19 @@ class Record_0(Record):
         return self._get_item(key)
 
     @overload
-    def set_item(self, key : Literal["000"], val : NonSpare_0.cv_arg) -> 'Record_0':
+    def set_item(self, key : Literal["000"], val : Optional[NonSpare_0.cv_arg]) -> 'Record_0':
         ...
     @overload
-    def set_item(self, key : Literal["101"], val : NonSpare_31.cv_arg) -> 'Record_0':
+    def set_item(self, key : Literal["101"], val : Optional[NonSpare_31.cv_arg]) -> 'Record_0':
         ...
     @overload
-    def set_item(self, key : Literal["102"], val : NonSpare_34.cv_arg) -> 'Record_0':
+    def set_item(self, key : Literal["102"], val : Optional[NonSpare_34.cv_arg]) -> 'Record_0':
         ...
     @overload
-    def set_item(self, key : Literal["103"], val : NonSpare_35.cv_arg) -> 'Record_0':
+    def set_item(self, key : Literal["103"], val : Optional[NonSpare_35.cv_arg]) -> 'Record_0':
         ...
     @overload
-    def set_item(self, key : Literal["104"], val : NonSpare_36.cv_arg) -> 'Record_0':
+    def set_item(self, key : Literal["104"], val : Optional[NonSpare_36.cv_arg]) -> 'Record_0':
         ...
     def set_item(self, key : Any, val : Any) -> Any:
         return self._set_item(key, val)

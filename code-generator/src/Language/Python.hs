@@ -499,7 +499,7 @@ instance Node Variation where
             out $ pyClass "Variation" ix "Compound" $ do
                 "cv_arg = TypedDict('cv_arg', {"
                 indent $ forM_ refDict $ \(name, ref) -> do
-                    fmt (stext % ": NonSpare_" % int % ".cv_arg,")
+                    fmt (stext % ": Optional[NonSpare_" % int % ".cv_arg],")
                         (quote $ coerce name) ref
                 "}, total=False)"
                 fmt ("cv_fspec_max_bytes = " % int) (fspecMaxBytes lst)
@@ -523,7 +523,8 @@ instance Node Variation where
                         pyFunc "get_item" ["self", arg] ("Optional[" <> rv <> "]") $ do
                             "return self._get_item(key) # type: ignore"
                         ""
-                        let arg2 = sformat ("val : NonSpare_" % int % ".cv_arg")
+                        let arg2 = sformat
+                                ("val : Optional[NonSpare_" % int % ".cv_arg]")
                                 ref
                         pyFunc "set_item" ["self", arg, arg2] (quote rv2) $ do
                             "return self._set_item(key, val) # type: ignore"
@@ -563,7 +564,9 @@ instance Node Variation where
                             "@overload"
                             let key = sformat ("Literal[" % stext % "]")
                                     (quote $ coerce name)
-                                arg2 = sformat ("NonSpare_" % int % ".cv_arg") ref
+                                arg2 = sformat
+                                    ("Optional[NonSpare_" % int % ".cv_arg]")
+                                    ref
                                 rv2 = quote $ sformat ("Variation_" % int) ix
                             pyFunc "set_item" [ "self" , "key : " <> key
                                 , "val : " <> arg2] rv2 $ do
@@ -776,7 +779,7 @@ instance Node Record where
         out $ pyClass "Record" ix "Record" $ do
             "cv_arg = TypedDict('cv_arg', {"
             indent $ forM_ refDict $ \(name, ref) -> do
-                fmt (stext % ": NonSpare_" % int % ".cv_arg,") name ref
+                fmt (stext % ": Optional[NonSpare_" % int % ".cv_arg],") name ref
             "}, total=False)"
             when (rfs > 0) $ do
                 "cv_union: TypeAlias = Union["
@@ -807,7 +810,8 @@ instance Node Record where
                     pyFunc "get_item" ["self", arg] ("Optional[" <> rv <> "]") $ do
                         "return self._get_item(key) # type: ignore"
                     ""
-                    let arg2 = sformat ("val : NonSpare_" % int % ".cv_arg")
+                    let arg2 = sformat
+                            ("val : Optional[NonSpare_" % int % ".cv_arg]")
                             ref
                     pyFunc "set_item" ["self", arg, arg2] rv2 $ do
                         "return self._set_item(key, val) # type: ignore"
@@ -846,7 +850,8 @@ instance Node Record where
                     forM_ refDict $ \(name, ref) -> do
                         "@overload"
                         let arg = sformat ("Literal[" % stext % "]") name
-                            arg3 = sformat ("NonSpare_" % int % ".cv_arg") ref
+                            arg3 = sformat
+                                ("Optional[NonSpare_" % int % ".cv_arg]") ref
                             rv2 = sformat ("'Record_" % int % "'") ix
                         pyFunc "set_item" ["self", "key : " <> arg,
                                             "val : " <> arg3] rv2 $ do
