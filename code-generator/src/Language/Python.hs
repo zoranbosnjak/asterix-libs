@@ -499,8 +499,9 @@ instance Node Variation where
             out $ pyClass "Variation" ix "Compound" $ do
                 "cv_arg = TypedDict('cv_arg', {"
                 indent $ forM_ refDict $ \(name, ref) -> do
-                    fmt (stext % ": Optional[NonSpare_" % int % ".cv_arg],")
-                        (quote $ coerce name) ref
+                    fmt (stext % ": Optional[Union[NonSpare_" % int %
+                        ", NonSpare_" % int % ".cv_arg]],")
+                        (quote $ coerce name) ref ref
                 "}, total=False)"
                 fmt ("cv_fspec_max_bytes = " % int) (fspecMaxBytes lst)
                 fmt ("cv_items_list = " % stext) (fmtList "[" "]" id refList)
@@ -779,7 +780,9 @@ instance Node Record where
         out $ pyClass "Record" ix "Record" $ do
             "cv_arg = TypedDict('cv_arg', {"
             indent $ forM_ refDict $ \(name, ref) -> do
-                fmt (stext % ": Optional[NonSpare_" % int % ".cv_arg],") name ref
+                fmt (stext % ": Optional[Union[NonSpare_" % int %
+                    ", NonSpare_" % int % ".cv_arg]],")
+                    name ref ref
             "}, total=False)"
             when (rfs > 0) $ do
                 "cv_union: TypeAlias = Union["

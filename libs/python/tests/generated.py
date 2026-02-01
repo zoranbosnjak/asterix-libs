@@ -1370,21 +1370,21 @@ class NonSpare_44(NonSpare):
 
 class Variation_69(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "R": Optional[NonSpare_80.cv_arg],
-        "T": Optional[NonSpare_88.cv_arg],
-        "S1": Optional[NonSpare_81.cv_arg],
-        "S2": Optional[NonSpare_82.cv_arg],
-        "S3": Optional[NonSpare_83.cv_arg],
-        "I1": Optional[NonSpare_60.cv_arg],
-        "I2": Optional[NonSpare_65.cv_arg],
-        "Q1LAT": Optional[NonSpare_75.cv_arg],
-        "Q2LON": Optional[NonSpare_76.cv_arg],
-        "Q3": Optional[NonSpare_77.cv_arg],
-        "Q4": Optional[NonSpare_78.cv_arg],
-        "Q5": Optional[NonSpare_79.cv_arg],
-        "B1": Optional[NonSpare_42.cv_arg],
-        "B2": Optional[NonSpare_43.cv_arg],
-        "B3": Optional[NonSpare_44.cv_arg],
+        "R": Optional[Union[NonSpare_80, NonSpare_80.cv_arg]],
+        "T": Optional[Union[NonSpare_88, NonSpare_88.cv_arg]],
+        "S1": Optional[Union[NonSpare_81, NonSpare_81.cv_arg]],
+        "S2": Optional[Union[NonSpare_82, NonSpare_82.cv_arg]],
+        "S3": Optional[Union[NonSpare_83, NonSpare_83.cv_arg]],
+        "I1": Optional[Union[NonSpare_60, NonSpare_60.cv_arg]],
+        "I2": Optional[Union[NonSpare_65, NonSpare_65.cv_arg]],
+        "Q1LAT": Optional[Union[NonSpare_75, NonSpare_75.cv_arg]],
+        "Q2LON": Optional[Union[NonSpare_76, NonSpare_76.cv_arg]],
+        "Q3": Optional[Union[NonSpare_77, NonSpare_77.cv_arg]],
+        "Q4": Optional[Union[NonSpare_78, NonSpare_78.cv_arg]],
+        "Q5": Optional[Union[NonSpare_79, NonSpare_79.cv_arg]],
+        "B1": Optional[Union[NonSpare_42, NonSpare_42.cv_arg]],
+        "B2": Optional[Union[NonSpare_43, NonSpare_43.cv_arg]],
+        "B3": Optional[Union[NonSpare_44, NonSpare_44.cv_arg]],
     }, total=False)
     cv_fspec_max_bytes = 3
     cv_items_list = [NonSpare_80, NonSpare_88, NonSpare_81, NonSpare_82, NonSpare_83, NonSpare_60, NonSpare_65, NonSpare_75, NonSpare_76, NonSpare_77, NonSpare_78, NonSpare_79, NonSpare_42, NonSpare_43, NonSpare_44]
@@ -2614,8 +2614,8 @@ class NonSpare_45(NonSpare):
 
 class Variation_67(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "I1": Optional[NonSpare_53.cv_arg],
-        "CC": Optional[NonSpare_45.cv_arg],
+        "I1": Optional[Union[NonSpare_53, NonSpare_53.cv_arg]],
+        "CC": Optional[Union[NonSpare_45, NonSpare_45.cv_arg]],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [NonSpare_53, NonSpare_45]
@@ -4358,7 +4358,7 @@ class UapItem_43(UapItemRFS):
 
 class Variation_64(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "I1": Optional[NonSpare_53.cv_arg],
+        "I1": Optional[Union[NonSpare_53, NonSpare_53.cv_arg]],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [NonSpare_53]
@@ -4429,8 +4429,8 @@ class UapItem_26(UapItem):
 
 class Variation_65(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "I1": Optional[NonSpare_53.cv_arg],
-        "I2": Optional[NonSpare_62.cv_arg],
+        "I1": Optional[Union[NonSpare_53, NonSpare_53.cv_arg]],
+        "I2": Optional[Union[NonSpare_62, NonSpare_62.cv_arg]],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [NonSpare_53, None, NonSpare_62]
@@ -4550,9 +4550,9 @@ class NonSpare_68(NonSpare):
 
 class Variation_66(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "I1": Optional[NonSpare_53.cv_arg],
-        "I2": Optional[NonSpare_62.cv_arg],
-        "I3": Optional[NonSpare_68.cv_arg],
+        "I1": Optional[Union[NonSpare_53, NonSpare_53.cv_arg]],
+        "I2": Optional[Union[NonSpare_62, NonSpare_62.cv_arg]],
+        "I3": Optional[Union[NonSpare_68, NonSpare_68.cv_arg]],
     }, total=False)
     cv_fspec_max_bytes = 2
     cv_items_list = [NonSpare_53, None, NonSpare_62, None, None, None, None, NonSpare_68]
@@ -5362,29 +5362,29 @@ class UapItem_33(UapItem):
 
 class Record_9(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": Optional[NonSpare_3.cv_arg],
-        "000": Optional[NonSpare_0.cv_arg],
-        "020": Optional[NonSpare_4.cv_arg],
-        "030": Optional[NonSpare_6.cv_arg],
-        "031": Optional[NonSpare_7.cv_arg],
-        "032": Optional[NonSpare_10.cv_arg],
-        "040": Optional[NonSpare_12.cv_arg],
-        "051": Optional[NonSpare_15.cv_arg],
-        "052": Optional[NonSpare_16.cv_arg],
-        "053": Optional[NonSpare_17.cv_arg],
-        "054": Optional[NonSpare_18.cv_arg],
-        "061": Optional[NonSpare_19.cv_arg],
-        "062": Optional[NonSpare_20.cv_arg],
-        "063": Optional[NonSpare_21.cv_arg],
-        "064": Optional[NonSpare_22.cv_arg],
-        "071": Optional[NonSpare_23.cv_arg],
-        "072": Optional[NonSpare_24.cv_arg],
-        "073": Optional[NonSpare_25.cv_arg],
-        "091": Optional[NonSpare_26.cv_arg],
-        "092": Optional[NonSpare_27.cv_arg],
-        "093": Optional[NonSpare_28.cv_arg],
-        "101": Optional[NonSpare_30.cv_arg],
-        "102": Optional[NonSpare_33.cv_arg],
+        "010": Optional[Union[NonSpare_3, NonSpare_3.cv_arg]],
+        "000": Optional[Union[NonSpare_0, NonSpare_0.cv_arg]],
+        "020": Optional[Union[NonSpare_4, NonSpare_4.cv_arg]],
+        "030": Optional[Union[NonSpare_6, NonSpare_6.cv_arg]],
+        "031": Optional[Union[NonSpare_7, NonSpare_7.cv_arg]],
+        "032": Optional[Union[NonSpare_10, NonSpare_10.cv_arg]],
+        "040": Optional[Union[NonSpare_12, NonSpare_12.cv_arg]],
+        "051": Optional[Union[NonSpare_15, NonSpare_15.cv_arg]],
+        "052": Optional[Union[NonSpare_16, NonSpare_16.cv_arg]],
+        "053": Optional[Union[NonSpare_17, NonSpare_17.cv_arg]],
+        "054": Optional[Union[NonSpare_18, NonSpare_18.cv_arg]],
+        "061": Optional[Union[NonSpare_19, NonSpare_19.cv_arg]],
+        "062": Optional[Union[NonSpare_20, NonSpare_20.cv_arg]],
+        "063": Optional[Union[NonSpare_21, NonSpare_21.cv_arg]],
+        "064": Optional[Union[NonSpare_22, NonSpare_22.cv_arg]],
+        "071": Optional[Union[NonSpare_23, NonSpare_23.cv_arg]],
+        "072": Optional[Union[NonSpare_24, NonSpare_24.cv_arg]],
+        "073": Optional[Union[NonSpare_25, NonSpare_25.cv_arg]],
+        "091": Optional[Union[NonSpare_26, NonSpare_26.cv_arg]],
+        "092": Optional[Union[NonSpare_27, NonSpare_27.cv_arg]],
+        "093": Optional[Union[NonSpare_28, NonSpare_28.cv_arg]],
+        "101": Optional[Union[NonSpare_30, NonSpare_30.cv_arg]],
+        "102": Optional[Union[NonSpare_33, NonSpare_33.cv_arg]],
     }, total=False)
     cv_union: TypeAlias = Union[
         Tuple[Literal["010"], NonSpare_3.cv_arg],
@@ -5914,29 +5914,29 @@ class UapItem_37(UapItem):
 
 class Record_10(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": Optional[NonSpare_3.cv_arg],
-        "000": Optional[NonSpare_0.cv_arg],
-        "020": Optional[NonSpare_4.cv_arg],
-        "030": Optional[NonSpare_6.cv_arg],
-        "031": Optional[NonSpare_7.cv_arg],
-        "032": Optional[NonSpare_10.cv_arg],
-        "040": Optional[NonSpare_12.cv_arg],
-        "051": Optional[NonSpare_15.cv_arg],
-        "052": Optional[NonSpare_16.cv_arg],
-        "053": Optional[NonSpare_17.cv_arg],
-        "054": Optional[NonSpare_18.cv_arg],
-        "061": Optional[NonSpare_19.cv_arg],
-        "062": Optional[NonSpare_20.cv_arg],
-        "063": Optional[NonSpare_21.cv_arg],
-        "071": Optional[NonSpare_23.cv_arg],
-        "072": Optional[NonSpare_24.cv_arg],
-        "073": Optional[NonSpare_25.cv_arg],
-        "091": Optional[NonSpare_26.cv_arg],
-        "092": Optional[NonSpare_27.cv_arg],
-        "093": Optional[NonSpare_28.cv_arg],
-        "101": Optional[NonSpare_30.cv_arg],
-        "102": Optional[NonSpare_33.cv_arg],
-        "200": Optional[NonSpare_37.cv_arg],
+        "010": Optional[Union[NonSpare_3, NonSpare_3.cv_arg]],
+        "000": Optional[Union[NonSpare_0, NonSpare_0.cv_arg]],
+        "020": Optional[Union[NonSpare_4, NonSpare_4.cv_arg]],
+        "030": Optional[Union[NonSpare_6, NonSpare_6.cv_arg]],
+        "031": Optional[Union[NonSpare_7, NonSpare_7.cv_arg]],
+        "032": Optional[Union[NonSpare_10, NonSpare_10.cv_arg]],
+        "040": Optional[Union[NonSpare_12, NonSpare_12.cv_arg]],
+        "051": Optional[Union[NonSpare_15, NonSpare_15.cv_arg]],
+        "052": Optional[Union[NonSpare_16, NonSpare_16.cv_arg]],
+        "053": Optional[Union[NonSpare_17, NonSpare_17.cv_arg]],
+        "054": Optional[Union[NonSpare_18, NonSpare_18.cv_arg]],
+        "061": Optional[Union[NonSpare_19, NonSpare_19.cv_arg]],
+        "062": Optional[Union[NonSpare_20, NonSpare_20.cv_arg]],
+        "063": Optional[Union[NonSpare_21, NonSpare_21.cv_arg]],
+        "071": Optional[Union[NonSpare_23, NonSpare_23.cv_arg]],
+        "072": Optional[Union[NonSpare_24, NonSpare_24.cv_arg]],
+        "073": Optional[Union[NonSpare_25, NonSpare_25.cv_arg]],
+        "091": Optional[Union[NonSpare_26, NonSpare_26.cv_arg]],
+        "092": Optional[Union[NonSpare_27, NonSpare_27.cv_arg]],
+        "093": Optional[Union[NonSpare_28, NonSpare_28.cv_arg]],
+        "101": Optional[Union[NonSpare_30, NonSpare_30.cv_arg]],
+        "102": Optional[Union[NonSpare_33, NonSpare_33.cv_arg]],
+        "200": Optional[Union[NonSpare_37, NonSpare_37.cv_arg]],
     }, total=False)
     cv_union: TypeAlias = Union[
         Tuple[Literal["010"], NonSpare_3.cv_arg],
@@ -6854,11 +6854,11 @@ class UapItem_13(UapItem):
 
 class Record_7(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": Optional[NonSpare_2.cv_arg],
-        "020": Optional[NonSpare_5.cv_arg],
-        "031": Optional[NonSpare_8.cv_arg],
-        "040": Optional[NonSpare_11.cv_arg],
-        "041": Optional[NonSpare_13.cv_arg],
+        "010": Optional[Union[NonSpare_2, NonSpare_2.cv_arg]],
+        "020": Optional[Union[NonSpare_5, NonSpare_5.cv_arg]],
+        "031": Optional[Union[NonSpare_8, NonSpare_8.cv_arg]],
+        "040": Optional[Union[NonSpare_11, NonSpare_11.cv_arg]],
+        "041": Optional[Union[NonSpare_13, NonSpare_13.cv_arg]],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [UapItem_2, UapItem_5, UapItem_8, UapItem_42, UapItem_11, UapItem_13]
@@ -7043,11 +7043,11 @@ class UapItem_14(UapItem):
 
 class Record_8(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": Optional[NonSpare_2.cv_arg],
-        "020": Optional[NonSpare_5.cv_arg],
-        "032": Optional[NonSpare_9.cv_arg],
-        "040": Optional[NonSpare_11.cv_arg],
-        "042": Optional[NonSpare_14.cv_arg],
+        "010": Optional[Union[NonSpare_2, NonSpare_2.cv_arg]],
+        "020": Optional[Union[NonSpare_5, NonSpare_5.cv_arg]],
+        "032": Optional[Union[NonSpare_9, NonSpare_9.cv_arg]],
+        "040": Optional[Union[NonSpare_11, NonSpare_11.cv_arg]],
+        "042": Optional[Union[NonSpare_14, NonSpare_14.cv_arg]],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [UapItem_2, UapItem_5, UapItem_42, UapItem_9, UapItem_11, UapItem_14]
@@ -7261,9 +7261,9 @@ class UapItem_32(UapItem):
 
 class Record_2(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": Optional[NonSpare_1.cv_arg],
-        "101": Optional[NonSpare_29.cv_arg],
-        "102": Optional[NonSpare_32.cv_arg],
+        "010": Optional[Union[NonSpare_1, NonSpare_1.cv_arg]],
+        "101": Optional[Union[NonSpare_29, NonSpare_29.cv_arg]],
+        "102": Optional[Union[NonSpare_32, NonSpare_32.cv_arg]],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [UapItem_1, UapItem_29, UapItem_32]
@@ -7383,9 +7383,9 @@ class UapItem_39(UapItem):
 
 class Record_5(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": Optional[NonSpare_1.cv_arg],
-        "201": Optional[NonSpare_38.cv_arg],
-        "202": Optional[NonSpare_39.cv_arg],
+        "010": Optional[Union[NonSpare_1, NonSpare_1.cv_arg]],
+        "201": Optional[Union[NonSpare_38, NonSpare_38.cv_arg]],
+        "202": Optional[Union[NonSpare_39, NonSpare_39.cv_arg]],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [UapItem_1, UapItem_38, UapItem_39]
@@ -7518,8 +7518,8 @@ class UapItem_40(UapItem):
 
 class Record_6(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": Optional[NonSpare_1.cv_arg],
-        "301": Optional[NonSpare_40.cv_arg],
+        "010": Optional[Union[NonSpare_1, NonSpare_1.cv_arg]],
+        "301": Optional[Union[NonSpare_40, NonSpare_40.cv_arg]],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [UapItem_1, UapItem_40]
@@ -7574,7 +7574,7 @@ class Record_6(Record):
 
 class Record_1(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": Optional[NonSpare_1.cv_arg],
+        "010": Optional[Union[NonSpare_1, NonSpare_1.cv_arg]],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [UapItem_1]
@@ -7687,13 +7687,13 @@ class UapItem_41(UapItem):
 
 class Record_4(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": Optional[NonSpare_1.cv_arg],
-        "101": Optional[NonSpare_29.cv_arg],
-        "102": Optional[NonSpare_32.cv_arg],
-        "201": Optional[NonSpare_38.cv_arg],
-        "202": Optional[NonSpare_39.cv_arg],
-        "301": Optional[NonSpare_40.cv_arg],
-        "302": Optional[NonSpare_41.cv_arg],
+        "010": Optional[Union[NonSpare_1, NonSpare_1.cv_arg]],
+        "101": Optional[Union[NonSpare_29, NonSpare_29.cv_arg]],
+        "102": Optional[Union[NonSpare_32, NonSpare_32.cv_arg]],
+        "201": Optional[Union[NonSpare_38, NonSpare_38.cv_arg]],
+        "202": Optional[Union[NonSpare_39, NonSpare_39.cv_arg]],
+        "301": Optional[Union[NonSpare_40, NonSpare_40.cv_arg]],
+        "302": Optional[Union[NonSpare_41, NonSpare_41.cv_arg]],
     }, total=False)
     cv_union: TypeAlias = Union[
         Tuple[Literal["010"], NonSpare_1.cv_arg],
@@ -7880,13 +7880,13 @@ class Asterix_7(AstCat):
 
 class Record_3(Record):
     cv_arg = TypedDict('cv_arg', {
-        "010": Optional[NonSpare_1.cv_arg],
-        "101": Optional[NonSpare_29.cv_arg],
-        "102": Optional[NonSpare_32.cv_arg],
-        "201": Optional[NonSpare_38.cv_arg],
-        "202": Optional[NonSpare_39.cv_arg],
-        "301": Optional[NonSpare_40.cv_arg],
-        "302": Optional[NonSpare_41.cv_arg],
+        "010": Optional[Union[NonSpare_1, NonSpare_1.cv_arg]],
+        "101": Optional[Union[NonSpare_29, NonSpare_29.cv_arg]],
+        "102": Optional[Union[NonSpare_32, NonSpare_32.cv_arg]],
+        "201": Optional[Union[NonSpare_38, NonSpare_38.cv_arg]],
+        "202": Optional[Union[NonSpare_39, NonSpare_39.cv_arg]],
+        "301": Optional[Union[NonSpare_40, NonSpare_40.cv_arg]],
+        "302": Optional[Union[NonSpare_41, NonSpare_41.cv_arg]],
     }, total=False)
     cv_fspec_max_bytes = 2
     cv_items_list = [UapItem_1, UapItem_29, UapItem_32, UapItem_38, UapItem_39, UapItem_40, UapItem_42, UapItem_41]
@@ -8395,7 +8395,7 @@ class NonSpare_57(NonSpare):
 
 class Variation_68(Compound):
     cv_arg = TypedDict('cv_arg', {
-        "I1": Optional[NonSpare_57.cv_arg],
+        "I1": Optional[Union[NonSpare_57, NonSpare_57.cv_arg]],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [NonSpare_57]
@@ -8466,11 +8466,11 @@ class UapItem_36(UapItem):
 
 class Record_0(Record):
     cv_arg = TypedDict('cv_arg', {
-        "000": Optional[NonSpare_0.cv_arg],
-        "101": Optional[NonSpare_31.cv_arg],
-        "102": Optional[NonSpare_34.cv_arg],
-        "103": Optional[NonSpare_35.cv_arg],
-        "104": Optional[NonSpare_36.cv_arg],
+        "000": Optional[Union[NonSpare_0, NonSpare_0.cv_arg]],
+        "101": Optional[Union[NonSpare_31, NonSpare_31.cv_arg]],
+        "102": Optional[Union[NonSpare_34, NonSpare_34.cv_arg]],
+        "103": Optional[Union[NonSpare_35, NonSpare_35.cv_arg]],
+        "104": Optional[Union[NonSpare_36, NonSpare_36.cv_arg]],
     }, total=False)
     cv_fspec_max_bytes = 1
     cv_items_list = [UapItem_0, UapItem_31, UapItem_34, UapItem_35, UapItem_36]

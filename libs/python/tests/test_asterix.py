@@ -1173,12 +1173,21 @@ def python_construct_none() -> None:
     TComp = Cat_000_1_0.cv_record.spec('093')
     comp1 = TComp.create({'I1': 1})
     comp2 = TComp.create({'I1': 1, 'I2': None})
+    comp3 = TComp.create({'I1': comp1.variation.get_item('I1')})
+    comp4 = TComp.create({'I1': 1, 'I2': comp1.variation.get_item('I2')})
     assert comp1.unparse() == comp2.unparse()
+    assert comp1.unparse() == comp3.unparse()
+    assert comp1.unparse() == comp4.unparse()
 
     # record
     rec1 = Cat_000_1_0.cv_record.create({'010': 1})
     rec2 = Cat_000_1_0.cv_record.create({'010': 1, '000': None})
+    rec3 = Cat_000_1_0.cv_record.create({'010': rec1.get_item('010')})
+    rec4 = Cat_000_1_0.cv_record.create(
+        {'010': 1, '000': rec1.get_item('000')})
     assert rec1.unparse() == rec2.unparse()
+    assert rec1.unparse() == rec3.unparse()
+    assert rec1.unparse() == rec4.unparse()
 
 
 def python_set_item_none() -> None:
