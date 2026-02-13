@@ -748,8 +748,8 @@ print(SAC)
 SIC = Spec.cv_uap.cv_record.spec('010').cv_rule.cv_variation.spec('SIC')
 print(SIC)
 
-# SAC and SIC subitems are both 8-bits long raw values (same structure),
-# so thay both map to the same class.
+# SAC and SIC subitems are both 8-bits long raw values.
+# Both structures shall map to the same class.
 assert (SAC==SIC)
 
 # With this specification it is possible to perform low level

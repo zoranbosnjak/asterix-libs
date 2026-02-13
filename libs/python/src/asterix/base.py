@@ -49,7 +49,7 @@ class Bits:
         if len(lst) == 1:
             return lst[0]
         # There is a possible optimization:
-        #   - avoid bytes concatination
+        #   - avoid bytes concatenation
         #   - create groups of the same 'bs'
         #   - use b''.join(...) instead if (+)
         return reduce(lambda a, b: a + b, lst)
@@ -1128,10 +1128,7 @@ class Compound(Variation):
 
     def _del_item(self, key: Any) -> 'Compound':
         d = copy.deepcopy(self.arg)
-        try:
-            del d[key]
-        except KeyError:
-            pass
+        d.pop(key, None)
         return self.__class__._create(d)
 
 
@@ -1465,10 +1462,7 @@ class Record:
     def _del_item(self, key: Any) -> 'Record':
         d1 = copy.deepcopy(self.items_regular)
         d2 = copy.deepcopy(self.items_rfs)
-        try:
-            del d1[key]
-        except KeyError:
-            pass
+        d1.pop(key, None)
         return self.__class__._create(d1, d2 or None)
 
 
@@ -1659,10 +1653,7 @@ class Expansion:
 
     def _del_item(self, key: Any) -> Any:
         d = copy.deepcopy(self.arg)
-        try:
-            del d[key]
-        except KeyError:
-            pass
+        d.pop(key, None)
         return self.__class__._create(d)
 
 

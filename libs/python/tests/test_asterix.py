@@ -1165,8 +1165,21 @@ def test_empty() -> None:
 
 # python specific tests
 
+def test_python_spec() -> None:
+    """Check 'spec' method for subitems."""
+    # for group
+    T1 = Cat_000_1_0.cv_record.spec('010').cv_rule.cv_variation.spec('SAC')
+    assert T1.cv_variation.cv_bit_size == 8
 
-def python_construct_none() -> None:
+    # for extended
+    T2 = Cat_000_1_0.cv_record.spec('053').cv_rule.cv_variation.spec('I2')
+    assert T2.cv_rule.cv_variation.cv_bit_size == 6
+
+    # for compound
+    T3 = Cat_000_1_0.cv_record.spec('020').cv_rule.cv_variation.spec('S1')
+    assert T3.cv_rule.cv_variation.cv_bit_size == 56
+
+def test_python_construct_none() -> None:
     """Construct compound/record with some 'None' arguments"""
 
     # compound
@@ -1190,15 +1203,15 @@ def python_construct_none() -> None:
     assert rec1.unparse() == rec4.unparse()
 
 
-def python_set_item_none() -> None:
-    """set_item('x', None) is the same as del_item"""
+def test_python_set_item_none() -> None:
+    """set_item('x', None) is the same as del_item('x')"""
 
     # compound
     TComp = Cat_000_1_0.cv_record.spec('093')
     comp1 = TComp.create({'I1': 1, 'I2': 2})
     comp2 = TComp.create({'I1': 1})
-    comp3 = comp1.variation.set_item('I1', None)
-    comp4 = comp1.variation.del_item('I1')
+    comp3 = comp1.variation.set_item('I2', None)
+    comp4 = comp1.variation.del_item('I2')
     assert comp3.unparse() == comp2.unparse()
     assert comp4.unparse() == comp2.unparse()
 

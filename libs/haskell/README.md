@@ -331,7 +331,7 @@ assert False = error "Assertion error"
 
 main :: IO ()
 main = do
-    -- construct extende item with only the first group present
+    -- construct extended item with only the first group present
     let i020 :: NonSpare (Cat048 ~> "020")
         i020 = extendedGroups (0 *: nil)
 
@@ -995,7 +995,7 @@ second stage of parsing becomes more complicated.
 
 `Asterix.Base` module provides `class Unparsing r t` for types that can be
 unparsed into target value, such as `Bits` or `SBuilder`. Unparsing into
-regular `ByteString` is not efficient (a problem is `ByteString` concatination)
+regular `ByteString` is not efficient (a problem is `ByteString` concatenation)
 and so the instances are not provided. It is however possible to
 (inefficiently) convert from `SBuilder` to `ByteString` if necessary for debug
 purposes.
