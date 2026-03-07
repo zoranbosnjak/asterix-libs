@@ -1,7 +1,7 @@
 -- |
 -- Module: Asterix.BitString
 --
--- Bits and bytes manipulation module
+-- Bits and bytes manipulation module.
 
 {-# LANGUAGE LambdaCase #-}
 
@@ -22,20 +22,22 @@ import           Data.Maybe
 import           Data.Word
 import           GHC.Stack
 
--- | For function names overloading
+-- | numBytes and numBits function overloading for various structures.
 class IsNumBits t where
     numBytes :: t -> Int
     numBits :: t -> Int
 
--- | Number of bits, but stored as 'divMod n 8'.
+-- | Number of bits, stored as 'divMod n 8'.
 data NumBits = NumBits
     { _numBytes :: !Int
     , _numBits  :: !Int
     } deriving (Eq, Show)
 
+-- | Convert structure's number of bits to Int.
 numBitsToInt :: IsNumBits t => t -> Int
 numBitsToInt x = numBytes x * 8 + numBits x
 
+-- | Convert Int to NumBits.
 intToNumBits :: Coercible NumBits t => Int -> t
 intToNumBits i = coerce (uncurry NumBits $ divMod i 8)
 
@@ -56,11 +58,13 @@ instance Ord NumBits where
         = compare a1 b1
         <> compare a2 b2
 
+-- | Bit offset.
 newtype Offset = Offset NumBits deriving (Eq, Ord, Num, Show, IsNumBits)
 
+-- | Bit size.
 newtype Size = Size NumBits deriving (Eq, Ord, Num, Show, IsNumBits)
 
--- | ByteString's bits fragment.
+-- | A bitstring, capturing fragment of a ByteString.
 data Bits = Bits
     { bitsData   :: ByteString
     , bitsOffset :: !Offset
@@ -136,7 +140,7 @@ byteStringToBits bs = Bits bs 0 (intToNumBits $ BS.length bs * 8)
 requiredBytes :: Int -> Int -> (Int, Int)
 requiredBytes o8 n = divMod (o8 + n) 8
 
--- |onvert 'Integer' to 'Bits'.
+-- | Convert 'Integer' to 'Bits'.
 integerToBits :: Int -> Int -> Integer -> Bits
 integerToBits o8 n val = Bits bs o (Size $ intToNumBits n)
   where
@@ -219,6 +223,7 @@ concatBits = \case
     [x] -> x
     x:xs -> appendBits x (Asterix.BitString.concatBits xs)
 
+-- | Convert Bits to Integral.
 bitsToNum :: Integral a => Bits -> a
 bitsToNum s = case n of
     0 -> 0

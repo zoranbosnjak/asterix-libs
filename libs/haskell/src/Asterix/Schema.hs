@@ -4,10 +4,13 @@
 -- This module defines asterix structures as types and values.
 --
 -- Naming convention:
+--
 --    GSomething ... generic definition of 'Something'
 --        It is indexed by 'Usecase' type parameter.
+--
 --    TSomething ... type level definition of 'Something', defined with:
 --        type TSomething = GSomething 'TypeLevel
+--
 --    VSomething ... value level definition of 'Something', defined with:
 --        type VSomething = GSomething 'ValueLevel
 --
@@ -33,11 +36,12 @@ import           Data.Type.Equality
 import           Data.Type.Ord
 import           GHC.TypeLits
 
+-- | Type or value level usecase.
 data Usecase
     = TypeLevel
     | ValueLevel
 
--- Generic Int is 'Nat' or 'Integer'.
+-- | Generic Int is 'Nat' or 'Integer'.
 type family GInt (u :: Usecase) = r | r -> u where
     GInt 'TypeLevel = Nat
     GInt 'ValueLevel = Int
@@ -45,6 +49,7 @@ type family GInt (u :: Usecase) = r | r -> u where
 type TInt = GInt 'TypeLevel
 type VInt = GInt 'ValueLevel
 
+-- | Integer in the interval [0..7]
 newtype Int8 = Int8 { unInt8 :: Int }
     deriving (Show, Eq)
 
@@ -54,7 +59,7 @@ class KnownNat8 (n :: Nat) where
 instance (KnownNat n, n <= 7) => KnownNat8 n where
     natVal8 = Int8 . fromIntegral . natVal
 
--- Generic Text is 'Symbol' or 'Text'.
+-- | Generic Text is 'Symbol' or 'Text'.
 type family GText (u :: Usecase) = r | r -> u where
     GText 'TypeLevel = Symbol
     GText 'ValueLevel = Text
@@ -64,6 +69,7 @@ type VText = GText 'ValueLevel
 
 -- Generic asterix schema
 
+-- | Rule.
 data GRule (u :: Usecase) t
     = GContextFree t
     | GDependent [[GText u]] t [([GInt u], t)]
@@ -72,6 +78,7 @@ deriving instance Show t => Show (GRule 'ValueLevel t)
 type TRule = GRule 'TypeLevel
 type VRule = GRule 'ValueLevel
 
+-- | String type.
 data GStringType
     = GStringAscii
     | GStringICAO
@@ -81,6 +88,7 @@ data GStringType
 type TStringType = GStringType
 type VStringType = GStringType
 
+-- | Signed or unsigned.
 data GSignedness
     = GSigned
     | GUnsigned
@@ -89,6 +97,7 @@ data GSignedness
 type TSignedness = GSignedness
 type VSignedness = GSignedness
 
+-- | Plus or minus.
 data GPlusMinus
     = GPlus
     | GMinus
@@ -97,13 +106,14 @@ data GPlusMinus
 type TPlusMinus = GPlusMinus
 type VPlusMinus = GPlusMinus
 
--- Positive or negative integer numbers
+-- | Positive or negative integer numbers
 data GZ (u :: Usecase) = GZ GPlusMinus (GInt u)
 deriving instance Show (GZ 'ValueLevel)
 
 type TZ = GZ 'TypeLevel
 type VZ = GZ 'ValueLevel
 
+-- | A number without rounding errors.
 data GNumber (u :: Usecase)
     = GNumInt (GZ u)
     | GNumDiv (GNumber u) (GNumber u)
@@ -113,6 +123,7 @@ deriving instance Show (GNumber 'ValueLevel)
 type TNumber = GNumber 'TypeLevel
 type VNumber = GNumber 'ValueLevel
 
+-- | BDS type.
 data GBdsType (u :: Usecase)
     = GBdsWithAddress
     | GBdsAt (Maybe (GInt u))
@@ -121,6 +132,7 @@ deriving instance Show (GBdsType 'ValueLevel)
 type TBdsType = GBdsType 'TypeLevel
 type VBdsType = GBdsType 'ValueLevel
 
+-- | Type of content.
 data GContent (u :: Usecase)
     = GContentRaw
     | GContentTable [(GInt u, GText u)]
@@ -133,6 +145,7 @@ deriving instance Show (GContent 'ValueLevel)
 type TContent = GContent 'TypeLevel
 type VContent = GContent 'ValueLevel
 
+-- | Repetitive type.
 data GRepetitiveType (u :: Usecase)
     = GRepetitiveRegular (GInt u)
     | GRepetitiveFx
@@ -141,6 +154,7 @@ deriving instance Show (GRepetitiveType 'ValueLevel)
 type TRepetitiveType = GRepetitiveType 'TypeLevel
 type VRepetitiveType = GRepetitiveType 'ValueLevel
 
+-- | Explicit type.
 data GExplicitType
     = GReservedExpansion
     | GSpecialPurpose
@@ -149,6 +163,7 @@ data GExplicitType
 type TExplicitType = GExplicitType
 type VExplicitType = GExplicitType
 
+-- | Variation.
 data GVariation (u :: Usecase)
     = GElement (GInt u) (GInt u) (GRule u (GContent u)) -- offset size
     | GGroup (GInt u) [GItem u] -- offset items
@@ -161,6 +176,7 @@ deriving instance Show (GVariation 'ValueLevel)
 type TVariation = GVariation 'TypeLevel
 type VVariation = GVariation 'ValueLevel
 
+-- | NonSpare.
 data GNonSpare (u :: Usecase)
     = GNonSpare (GText u) (GText u) (GRule u (GVariation u)) -- name, title
 deriving instance Show (GNonSpare 'ValueLevel)
@@ -168,6 +184,7 @@ deriving instance Show (GNonSpare 'ValueLevel)
 type TNonSpare = GNonSpare 'TypeLevel
 type VNonSpare = GNonSpare 'ValueLevel
 
+-- | Item.
 data GItem (u :: Usecase)
     = GSpare (GInt u) (GInt u) -- offset size
     | GItem (GNonSpare u)
@@ -176,6 +193,7 @@ deriving instance Show (GItem 'ValueLevel)
 type TItem = GItem 'TypeLevel
 type VItem = GItem 'ValueLevel
 
+-- | UAP Item.
 data GUapItem (u :: Usecase)
     = GUapItem (GNonSpare u)
     | GUapItemSpare
@@ -185,18 +203,21 @@ deriving instance Show (GUapItem 'ValueLevel)
 type TUapItem = GUapItem 'TypeLevel
 type VUapItem = GUapItem 'ValueLevel
 
+-- | Record.
 newtype GRecord (u :: Usecase) = GRecord [GUapItem u]
 deriving instance Show (GRecord 'ValueLevel)
 
 type TRecord = GRecord 'TypeLevel
 type VRecord = GRecord 'ValueLevel
 
+-- | UAP selector.
 data GUapSelector (u :: Usecase) = GUapSelector [GText u] [(GInt u, GText u)]
 deriving instance Show (GUapSelector 'ValueLevel)
 
 type TUapSelector = GUapSelector 'TypeLevel
 type VUapSelector = GUapSelector 'ValueLevel
 
+-- | User application profile.
 data GUap (u :: Usecase)
     = GUap (GRecord u)
     | GUaps [(GText u, GRecord u)] (Maybe (GUapSelector u))
@@ -205,18 +226,21 @@ deriving instance Show (GUap 'ValueLevel)
 type TUap = GUap 'TypeLevel
 type VUap = GUap 'ValueLevel
 
+-- | Datablock.
 data GDatablock (u ::  Usecase) = GDatablock (GInt u) (GUap u) -- cat uap
 deriving instance Show (GDatablock 'ValueLevel)
 
 type TDatablock = GDatablock 'TypeLevel
 type VDatablock = GDatablock 'ValueLevel
 
+-- | Expansion.
 data GExpansion (u :: Usecase) = GExpansion (Maybe (GInt u)) [Maybe (GNonSpare u)]
 deriving instance Show (GExpansion 'ValueLevel)
 
 type TExpansion = GExpansion 'TypeLevel
 type VExpansion = GExpansion 'ValueLevel
 
+-- | Edition.
 data GEdition (u :: Usecase) = GEdition (GInt u) (GInt u) -- major, minor
 deriving instance Show (GEdition 'ValueLevel)
 
@@ -229,6 +253,7 @@ instance Ord VEdition where
         = compare a1 a2
        <> compare b1 b2
 
+-- | Toplevel asterix structure.
 data GAsterix (u :: Usecase)
     = GAsterixBasic (GInt u) (GEdition u) (GUap u) -- cat
     | GAsterixExpansion (GInt u) (GEdition u) (GExpansion u) -- cat
@@ -237,7 +262,8 @@ deriving instance Show (GAsterix 'ValueLevel)
 type TAsterix = GAsterix 'TypeLevel
 type VAsterix = GAsterix 'ValueLevel
 
--- | Convert structures from type level to value level
+-- | Convert structures from type level to value level,
+-- with 'schema' function.
 class IsSchema t a where
     schema :: Proxy t -> a
 
@@ -527,14 +553,15 @@ instance
         (schema @ed Proxy)
         (schema @exp Proxy)
 
--- | TypeError wrappers
+-- | TypeError wrapper.
 type Unspecified (t :: k)
     = TypeError ('Text "Unspecified " :<>: ShowType t)
 
+-- | Name is not defined.
 type NotDefined (name :: Symbol)
     = TypeError ('Text "Not defined: " :<>: 'Text name)
 
--- | Type level lookup
+-- | Type level lookup.
 type family Lookup (name :: Symbol) (lst :: [(Symbol, k)]) :: k where
     Lookup name '[] = NotDefined name
     Lookup name1 ( '(name2, uap) ': ts) = If
@@ -556,46 +583,49 @@ type family BitSizeOf t where
     BitSizeOf ('GItem nsp) = BitSizeOf nsp
     BitSizeOf other = Unspecified other
 
--- | Extract category
+-- | Extract category.
 type CategoryOf :: k -> Nat
 type family CategoryOf t where
     CategoryOf ('GAsterixBasic cat ed uap) = cat
     CategoryOf ('GDatablock cat uap) = cat
     CategoryOf other = Unspecified other
 
--- | Extract record type from single uap basic asterix
+-- | Extract record type from single uap basic asterix.
 type RecordOf :: TAsterix -> TRecord
 type family RecordOf t where
     RecordOf ('GAsterixBasic cat ed ('GUap rec)) = rec
     RecordOf other = Unspecified other
 
--- | Extract record type from multiple uap basic asterix
+-- | Extract record type from multiple uap basic asterix.
 type RecordOfUap :: TAsterix -> Symbol -> TRecord
 type family RecordOfUap t name where
     RecordOfUap ('GAsterixBasic cat ed ('GUaps lst sel)) name
         = Lookup name lst
     RecordOfUap other name = Unspecified other
 
--- | Get Datablock type
+-- | Get Datablock type.
 type family DatablockOf (t :: TAsterix) :: TDatablock where
     DatablockOf ('GAsterixBasic cat ed uap) = 'GDatablock cat uap
     DatablockOf other = Unspecified other
 
--- | Get Expansion type
+-- | Get Expansion type.
 type family ExpansionOf (t :: GAsterix u) :: GExpansion u where
     ExpansionOf ('GAsterixExpansion cat ed exp) = exp
     ExpansionOf other = Unspecified other
 
+-- | Extract first group of extension.
 type family ExtendedFirstGroup (lst :: [Maybe a]) :: [a] where
     ExtendedFirstGroup '[] = '[]
     ExtendedFirstGroup ('Nothing ': ts) = '[]
     ExtendedFirstGroup ('Just t ': ts) = t ': ExtendedFirstGroup ts
 
+-- | Does extended end with Fx?
 type family ExtendedTrailingFx (lst :: [Maybe a]) :: Bool where
     ExtendedTrailingFx '[] = 'False
     ExtendedTrailingFx ('Nothing ': ts) = 'True
     ExtendedTrailingFx ('Just t ': ts) = ExtendedTrailingFx ts
 
+-- | Remaining extended items.
 type family ExtendedRemainingItems (lst :: [Maybe a]) :: [Maybe a] where
     ExtendedRemainingItems '[] = '[]
     ExtendedRemainingItems ('Nothing ': ts) = ts
@@ -606,6 +636,7 @@ type family TypeOfRecord (t :: TDatablock) :: TRecord where
     TypeOfRecord ('GDatablock cat ('GUap rec)) = rec
     TypeOfRecord db = TypeError ('Text "Not defined")
 
+-- | Does this datablock contain multiple UAPs?
 type family IsMultiUap (t :: GDatablock u) :: Bool where
     IsMultiUap ('GDatablock cat ('GUap rec)) = 'False
     IsMultiUap ('GDatablock cat ('GUaps lst sel)) = 'True
@@ -618,12 +649,14 @@ type family UapName r lst :: Symbol where
         name
         (UapName r1 ts)
 
+-- | Find group subitem by name.
 type family LookupGroup (name :: Symbol) (lst :: [TItem]) :: Nat where
     LookupGroup name '[] = NotDefined name
     LookupGroup name ('GSpare o n ': ts) = 1 + LookupGroup name ts
     LookupGroup name ('GItem ('GNonSpare name1 title rv) ': ts) = If
         (name1 == name) 0 (1 + LookupGroup name ts)
 
+-- | Find extended subitem by name.
 type family LookupExtended (name :: Symbol) (lst :: [Maybe TItem]) :: Nat where
     LookupExtended name '[] = NotDefined name
     LookupExtended name ('Nothing ': ts) = 1 + LookupExtended name ts
@@ -631,12 +664,14 @@ type family LookupExtended (name :: Symbol) (lst :: [Maybe TItem]) :: Nat where
     LookupExtended name ('Just ('GItem ('GNonSpare name1 title rv)) ': ts) = If
         (name1 == name) 0 (1 + LookupExtended name ts)
 
+-- | Find compound subitem by name.
 type family LookupCompound (name :: Symbol) (lst :: [Maybe TNonSpare]) :: Nat where
     LookupCompound name '[] = NotDefined name
     LookupCompound name ('Nothing ': ts) = 1 + LookupCompound name ts
     LookupCompound name ('Just ('GNonSpare name1 title rv) ': ts) = If
         (name1 == name) 0 (1 + LookupCompound name ts)
 
+-- | Find record subitem by name.
 type family LookupRecord (name :: Symbol) (lst :: [TUapItem]) :: Nat where
     LookupRecord name '[] = NotDefined name
     LookupRecord name ('GUapItem ('GNonSpare name1 title rv) ': ts) = If
@@ -644,6 +679,7 @@ type family LookupRecord (name :: Symbol) (lst :: [TUapItem]) :: Nat where
     LookupRecord name ('GUapItemSpare ': ts) = 1 + LookupRecord name ts
     LookupRecord name ('GUapItemRFS ': ts) = 1 + LookupRecord name ts
 
+-- | Extract NonSpares from uap item listing.
 type family RecordNonSpares (t :: [TUapItem]) :: [TNonSpare]
   where
     RecordNonSpares '[] = '[]
@@ -651,17 +687,20 @@ type family RecordNonSpares (t :: [TUapItem]) :: [TNonSpare]
     RecordNonSpares ('GUapItemSpare ': ts) = RecordNonSpares ts
     RecordNonSpares ('GUapItemRFS ': ts) = RecordNonSpares ts
 
+-- | Extract NonSpares from item listing.
 type family ItemNonSpares (t :: [TItem]) :: [TNonSpare]
   where
     ItemNonSpares '[] = '[]
     ItemNonSpares ('GSpare o2 n2 ': ts) = ItemNonSpares ts
     ItemNonSpares ('GItem nsp ': ts) = nsp ': ItemNonSpares ts
 
+-- | Type level list filtering.
 type family FilterMaybe (lst :: [Maybe a]) :: [a] where
     FilterMaybe '[] = '[]
     FilterMaybe ('Nothing ': ts) = FilterMaybe ts
     FilterMaybe ('Just t ': ts) = t ': FilterMaybe ts
 
+-- | Prepend name.
 type family PrependName t where
     PrependName '[] = '[]
     PrependName ('GNonSpare name title rv ': ts)

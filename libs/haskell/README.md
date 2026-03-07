@@ -995,8 +995,8 @@ second stage of parsing becomes more complicated.
 
 `Asterix.Base` module provides `class Unparsing r t` for types that can be
 unparsed into target value, such as `Bits` or `SBuilder`. Unparsing into
-regular `ByteString` is not efficient (a problem is `ByteString` concatenation)
-and so the instances are not provided. It is however possible to
+regular `ByteString` is not efficient (a problem is slow `ByteString`
+concatenation) and so the instances are not provided. It is however possible to
 (inefficiently) convert from `SBuilder` to `ByteString` if necessary for debug
 purposes.
 

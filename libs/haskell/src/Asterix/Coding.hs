@@ -3,6 +3,12 @@
 --
 -- Asterix data structures and functions to decode, encode and
 -- manipulate asterix data.
+--
+-- The 'U' prefix in some types stands for 'Untyped' version of data, in
+-- contrast to 'Typed' versions, for example `Variation` and `UVariation`.
+--
+-- In some data structures, the fields are stored redundantly,
+-- to optimize some parsing/unparsing scenarios.
 
 {-# LANGUAGE AllowAmbiguousTypes    #-}
 {-# LANGUAGE DataKinds              #-}
@@ -40,12 +46,7 @@ import           Asterix.Base
 import           Asterix.BitString
 import           Asterix.Schema
 
--- The 'U' in the following types stands for 'Untyped' version
--- of data, in contrast to typed versions as defined below.
---
--- In some data structures, the fields are stored redundantly,
--- to optimize some parsing/unparsing scenarios.
-
+-- | Untyped variation.
 data UVariation
     = UElement Bits
     | UGroup [UItem]
@@ -55,22 +56,27 @@ data UVariation
     | UCompound SBuilder [Maybe UNonSpare]
     deriving Show
 
+-- | Untyped 'rule', capturing a 'Variation'.
 newtype URuleVar = URuleVar { unURuleVar :: UVariation }
     deriving Show
 
+-- | Untyped NonSpare item.
 newtype UNonSpare = UNonSpare { unUNonSpare :: URuleVar }
     deriving Show
 
+-- | Untyped item.
 data UItem
     = USpare Bits
     | UItem UNonSpare
     deriving Show
 
+-- | Untyped record.
 data URecord = URecord
     { uRecUnparse :: SBuilder
     , uRecItems   :: [Maybe (RecordItem UNonSpare)]
     } deriving Show
 
+-- | Untyped expansion.
 data UExpansion = UExpansion
     { uExpUnparse :: SBuilder
     , uExpItems   :: [Maybe UNonSpare]
@@ -84,24 +90,31 @@ data UDatablock = UDatablock
 
 -- Typed wrappers around U-version of data structures
 
+-- | Typed variation.
 newtype Variation (t :: TVariation) = Variation { unVariation :: UVariation }
     deriving Show
 
+-- | Typed rule variation.
 newtype RuleVar (t1 :: TRule t2) = RuleVar { unRuleVar :: URuleVar }
     deriving Show
 
+-- | Typed nonSpare item.
 newtype NonSpare (t :: TNonSpare) = NonSpare { unNonSpare :: UNonSpare }
     deriving Show
 
+-- | Typed item.
 newtype Item (t :: TItem) = Item { unItem :: UItem }
     deriving Show
 
+-- | Typed record.
 newtype Record (t :: TRecord) = Record { unRecord :: URecord }
     deriving Show
 
+-- | Typed expansion.
 newtype Expansion (t :: TExpansion) = Expansion { unExpansion :: UExpansion }
     deriving Show
 
+-- | Typed datablock.
 newtype Datablock (db :: TDatablock) = Datablock { unDatablock :: UDatablock }
     deriving Show
 
@@ -324,7 +337,7 @@ instance
     negate = fromInteger . negate . unparseToNum
     fromInteger = Item . UItem . unNonSpare . fromInteger @(NonSpare nsp)
 
--- The Asterix.Base module performs the actual parsing.
+-- | The Asterix.Base module performs the actual parsing.
 -- This structure tells how to store parsing results.
 parsingStore :: ParsingStore UVariation URuleVar UNonSpare UItem URecord UExpansion
 parsingStore = ParsingStore
@@ -356,11 +369,16 @@ parsingStore = ParsingStore
         (bitsToSBuilder rawFspec <> bitsToSBuilder rawItems) items
     }
 
+-- | ParsingM with some type parameters instantiated.
 type Parsing pm = ParsingM pm UVariation URuleVar UNonSpare UItem URecord UExpansion
 
+-- | The actual parsing function.
 parse :: forall pm r.
     ( KnownParsingMode pm
-    ) => Parsing pm r -> ByteString -> Either ParsingError r
+    )
+    => Parsing pm r           -- ^ parsing action, returning result 'r'
+    -> ByteString             -- ^ input
+    -> Either ParsingError r  -- ^ parsing result
 parse act bs = do
     (result, o) <- runParsing act (Env parsingStore bs) 0
     case parsingMode @pm Proxy of
@@ -371,21 +389,28 @@ parse act bs = do
 
 -- Constructing
 
+-- | Type level index.
 data Ix
     = IxItem Symbol
     | IxRfs Nat
 
+-- | Indexed value.
 newtype Indexed (ix :: Ix) a = Indexed a
     deriving (Eq, Show)
 
+-- | Named value.
 type Named name = Indexed ('IxItem name)
+
+-- | Random field sequencing.
 type Rfs cnt ts = Indexed ('IxRfs cnt) (HList ts)
 
 deriving instance (Num a) => Num (Indexed ('IxItem name) a)
 
+-- | Helper function to construct (Named) items.
 item :: forall name a. a -> Named name a
 item = Indexed
 
+-- | Helper function to construct RFS.
 rfs :: forall cnt ts. HList ts -> Rfs cnt ts
 rfs = Indexed
 
@@ -393,15 +418,19 @@ rfs = Indexed
 newtype AbuseSpare a = AbuseSpare a
     deriving (Eq, Show, Num)
 
+-- | Set spare bits to any value.
 abuseSpare :: a -> AbuseSpare a
 abuseSpare = AbuseSpare
 
+-- | Construct spare bits.
 spare :: Num a => AbuseSpare a
 spare = abuseSpare 0
 
+-- | Data structure, representing Fx bit.
 data Fx = Fx
     deriving (Eq, Show)
 
+-- | Fx bit constructor.
 fx :: Fx
 fx = Fx
 
@@ -478,6 +507,7 @@ instance
 
 -- Construct quantity
 
+-- | A Double wrapper with statically known unit, such as NM.
 newtype Quantity (unit :: Symbol) (ruleIx :: (Maybe Nat)) = Quantity
     { unQuantity :: Double
     } deriving (Eq, Ord, Show, Num, Fractional)
@@ -499,7 +529,7 @@ instance
   where
     getLsb = schema @lsb Proxy
 
--- | Another helper class to handle dependent cases.
+-- | Helper class to handle dependent cases.
 class GetLsb2 (flag :: Bool) (unit :: Symbol) (ix :: Nat) (rules :: [k])
   where
     getLsb2 :: Proxy flag -> Proxy unit -> Proxy ix -> Proxy rules -> VNumber
@@ -588,6 +618,7 @@ instance
 --  - MkGroup instances creates target types
 --    (Variation, NonSpare, Item, Named)
 
+-- | Helper clas to construct groups.
 class CGroup ts2 ts1 where
     groupConstruct :: Proxy ts2 -> HList ts1 -> [UItem]
 
@@ -671,6 +702,7 @@ instance
 
 -- Extended construction by items
 
+-- | Helper class to construct extended item.
 class CExtended ts2 done ts1 where
     extendedConstruct :: Proxy ts2 -> Proxy done -> HList ts1 -> [Maybe UItem]
 
@@ -767,6 +799,7 @@ instance
 
 -- Extended construction by groups
 
+-- | Helper class to construct extended groups.
 class CExtendedGroups ts2 ts1 where
     extendedConstructGroups :: Proxy ts2 -> HList ts1 -> [Maybe UItem]
 
@@ -928,7 +961,6 @@ instance
         @(Item ('GItem ('GNonSpare name2 title ('GContextFree var))))
 
 -- | 'explicit' function is overloaded for different output types
-
 class MkExplicit t2 t1 where
     explicit :: t1 -> t2
 
@@ -1027,6 +1059,7 @@ type family NoDuplicates t where
 
 -- Compound construction
 
+-- | Check if name is defined inside Compound.
 type family IsDefinedCompound ts name where
     IsDefinedCompound '[] name = 'False
     IsDefinedCompound ('Nothing ': ts) name = IsDefinedCompound ts name
@@ -1038,6 +1071,7 @@ type family IsDefinedCompound ts name where
         = TypeError ('Text "IsDefinedCompound unexpected argument: "
             :<>: 'ShowType ts :<>: 'Text ", " :<>: 'ShowType name)
 
+-- | Check if all names are defined inside Compound.
 type family AllDefinedCompound ts2 ts1 where
     AllDefinedCompound ts2 '[] = '[]
     AllDefinedCompound ts2 (Named name rv ': ts) = If
@@ -1048,6 +1082,7 @@ type family AllDefinedCompound ts2 ts1 where
         = TypeError ('Text "AllDefinedCompound unexpected argument: "
             :<>: 'ShowType ts2 :<>: 'Text ", " :<>: 'ShowType ts1)
 
+-- | Helper class to construct compound item.
 class CCompound ts2 ts1 where
     compoundConstruct :: Proxy ts2 -> HList ts1 -> [Maybe UNonSpare]
 
@@ -1137,6 +1172,7 @@ instance
 --    - The items inside RFS block may be duplicated and specified in the
 --      order or required result.
 
+-- | Helper type level function to count Rfs flags.
 type family MaxRfs ts where
     MaxRfs '[] = 0
     MaxRfs ('GUapItem nsp ': ts) = MaxRfs ts
@@ -1144,6 +1180,7 @@ type family MaxRfs ts where
     MaxRfs ('GUapItemRFS ': ts) = 1 + MaxRfs ts
     MaxRfs ts = TypeError ('Text "MaxRfs unexpected argument: " :<>: 'ShowType ts)
 
+-- | Check if name is defined inside record.
 type family IsDefinedRecord ts name where
     IsDefinedRecord '[] name = 'False
     IsDefinedRecord ('GUapItem ('GNonSpare name1 title rv) ': ts) name2 = If
@@ -1156,6 +1193,7 @@ type family IsDefinedRecord ts name where
         = TypeError ('Text "IsDefinedRecord unexpected argument: "
             :<>: 'ShowType ts :<>: 'Text ", " :<>: 'ShowType name)
 
+-- | Helper type level function to check if Rfs is specified.
 type family IsDefinedRfs ix ts cnt where
     IsDefinedRfs ix '[] cnt = 'False
     IsDefinedRfs ix ('GUapItem nsp ': ts) cnt = IsDefinedRfs ix ts cnt
@@ -1168,6 +1206,7 @@ type family IsDefinedRfs ix ts cnt where
         = TypeError ('Text "IsDefinedRfs unexpected argument: "
             :<>: 'ShowType ts :<>: 'Text ", " :<>: 'ShowType cnt)
 
+-- | Helper function to check if all record items are actually defined.
 type family AllDefinedRecord ts2 ts1 where
     AllDefinedRecord ts2 '[] = '[]
     AllDefinedRecord ts2 (Named name rv ': ts) = If
@@ -1182,12 +1221,18 @@ type family AllDefinedRecord ts2 ts1 where
         = TypeError ('Text "AllDefinedRecord unexpected argument: "
             :<>: 'ShowType ts2 :<>: 'Text ", " :<>: 'ShowType ts1)
 
+-- | Recreate a record from some items.
 rebuildRecord :: [Maybe (RecordItem UNonSpare)] -> SBuilder
 rebuildRecord items
     = mkFspecFx (fmap isJust items)
    <> mconcat (unparse <$> catMaybes items)
 
-getFrn :: Enum n => n -> VText -> [VUapItem] -> n
+-- | Helper function to extract frame number from list of items.
+getFrn :: Enum n
+    => n            -- ^ accumulator
+    -> VText        -- ^ item name to find
+    -> [VUapItem]   -- ^ remaining candidates
+    -> n
 getFrn acc name = \case
     [] -> intError
     (GUapItem (GNonSpare name2 _title _rv) : ts) -> case name == name2 of
@@ -1196,6 +1241,7 @@ getFrn acc name = \case
     (GUapItemSpare : ts) -> getFrn (succ acc) name ts
     (GUapItemRFS : ts) -> getFrn (succ acc) name ts
 
+-- | 'mkRfs' name overloading.
 class MkRfs tsAll ts2 ts1 where
     mkRfs :: HList ts1 -> [(FRN, UNonSpare)]
 
@@ -1223,6 +1269,7 @@ instance
     ) => MkRfs tsAll (t1 ': ts1) (t2 ': ts2) where
     mkRfs = mkRfs @tsAll @ts1
 
+-- | Helper class to set items.
 class RSetItem nsp ts1 where
     rSetItem :: HList ts1 -> Maybe (RecordItem UNonSpare)
 
@@ -1239,6 +1286,7 @@ instance
     ) => RSetItem ('GNonSpare name title rv) (t ': ts) where
     rSetItem (HCons _x xs) = rSetItem @('GNonSpare name title rv) xs
 
+-- | Helper class to set Rfs.
 class RSetRfs (rfs :: Nat) tsAll ts1 where
     rSetRfs :: HList ts1 -> Maybe (RecordItem UNonSpare)
 
@@ -1256,6 +1304,7 @@ instance
     ) => RSetRfs rfs tsAll (t ': ts) where
     rSetRfs (HCons _x xs) = rSetRfs @rfs @tsAll xs
 
+-- | Helper class for constructing records.
 class CRecord maxRfs rfs tsAll ts2 ts1 where
     recordConstruct :: HList ts1 -> [Maybe (RecordItem UNonSpare)]
 
@@ -1285,7 +1334,7 @@ instance
         = rSetRfs @rfs @tsAll lst
         : recordConstruct @maxRfs @(rfs+1) @tsAll @ts lst
 
--- In case of a single rfs, we explicitly set it to 'rfs @0',
+-- | In case of a single rfs, we explicitly set it to 'rfs @0',
 -- so that inside the application this type application '@0'
 -- becomes optional.
 class EnumerateRfs (single :: Bool) ts1 where
@@ -1315,6 +1364,7 @@ instance
         = Rfs 0 a ': EnumerateRfsR 'True ts
     enumerateRfs (HCons x xs) = HCons x (enumerateRfs @'True @ts xs)
 
+-- | Record constructor function.
 record :: forall ts2 ts1 ts1'.
     ( ts1' ~ EnumerateRfsR (MaxRfs ts2 == 1) ts1
     , AllDefinedRecord ts2 (NoDuplicates ts1) ~ ts1'
@@ -1334,6 +1384,7 @@ record lst = Record $ URecord bld items
 
 -- Expansion construction
 
+-- | Expansion constructor function.
 expansion :: forall mn ts2 ts1.
     ( CCompound ts2 ts1
     , NoDuplicates ts1 ~ ts1
@@ -1357,6 +1408,7 @@ expansion lst1 = Expansion $ UExpansion bld items
 
 -- Datablock construction
 
+-- | Helper class to construct databock.
 class CDatablock multi dbt ts where
     datablockConstruct ::
         Proxy multi       -- multi UAP datablock (Bool)
@@ -1391,6 +1443,7 @@ instance
       where
         uapName = T.pack $ symbolVal (Proxy @name)
 
+-- | Helper function to compose datablock from records.
 datablockBuilder :: Integral n => n -> [URecord] -> SBuilder
 datablockBuilder cat lst =
     let bldData = mconcat (unparse <$> lst)
@@ -1401,6 +1454,7 @@ datablockBuilder cat lst =
      <> word8ToSBuilder (fromIntegral n2)
      <> bldData
 
+-- | Datablock constructor function.
 datablock :: forall dbt ts.
     ( CDatablock (IsMultiUap dbt) dbt ts
     , KnownNat (CategoryOf dbt)
@@ -1412,6 +1466,7 @@ datablock lst = Datablock $ UDatablock bld records where
     bld :: SBuilder
     bld = datablockBuilder (natVal (Proxy @(CategoryOf dbt))) (fmap snd records)
 
+-- | Convert some types to 'String'.
 class ToString ruleIx t where
     asString :: t -> String
 
@@ -1476,6 +1531,7 @@ instance
         UItem val -> asString @ruleIx @(NonSpare nsp) (NonSpare val)
         _         -> intError
 
+-- | Convert some types to 'Integer'.
 class ToInteger ruleIx t where
     asInteger :: t -> Integer
 
@@ -1540,6 +1596,7 @@ instance
         UItem val -> asInteger @ruleIx @(NonSpare nsp) (NonSpare val)
         _         -> intError
 
+-- | Convert types to 'Quantity'.
 class ToQuantity unit ruleIx t where
     asQuantity :: t -> Quantity unit ruleIx
 
@@ -1616,9 +1673,11 @@ type family GetVariationResult t where
         = TypeError ('Text "GetVariationResult unexpected argument: "
             :<>: 'ShowType t)
 
+-- | Extract 'Variation' from 'NonSpare'.
 getVariation :: NonSpare nsp -> Variation (GetVariationResult nsp)
 getVariation = Variation . unURuleVar . unUNonSpare . unNonSpare
 
+-- | Get Dependent Variation from 'NonSpare'.
 getDepVariation :: forall ix nsp.
     ( IsSchema (DepRule nsp ix) VVariation
     ) => NonSpare nsp -> Either ParsingError (Variation (DepRule nsp ix))
@@ -1639,6 +1698,7 @@ getGroupSpares (Variation var) = case var of
         _ -> empty
     _ -> intError
 
+-- | Extract group subitem by typelevel name.
 getGroupItem :: forall name o lst.
     ( KnownNat (LookupGroup name lst)
     ) => Variation ('GGroup o lst) -> NonSpare ('GGroup o lst ~> name)
@@ -1659,6 +1719,7 @@ getExtendedSpares (Variation var) = case var of
         _ -> empty
     _ -> intError
 
+-- | Extract extended subitem by typelevel name.
 getExtendedItem :: forall name lst.
     ( KnownNat (LookupExtended name lst)
     ) => Variation ('GExtended lst)
@@ -1672,16 +1733,19 @@ getExtendedItem (Variation var) = case var of
             _                -> intError
     _ -> intError
 
+-- | Extract repetitive content.
 getRepetitiveItems :: Variation ('GRepetitive rt var) -> [Variation var]
 getRepetitiveItems (Variation var) = case var of
     URepetitive _bld lst -> fmap Variation lst
     _                    -> intError
 
+-- | Extract explicit data 'Bits'.
 getExplicitData :: Variation ('GExplicit mt) -> Bits
 getExplicitData (Variation var) = case var of
     UExplicit _bld val -> val
     _                  -> intError
 
+-- | Extract compound subitem by typelevel name.
 getCompoundItem :: forall name lst. -- t lst ix.
     ( KnownNat (LookupCompound name lst)
     ) => Variation ('GCompound lst)
@@ -1692,6 +1756,7 @@ getCompoundItem (Variation var) = case var of
         in NonSpare <$> (lst !! n)
     _ -> intError
 
+-- | Set compound subitem by typelevel name.
 setCompoundItem :: forall name lst.
     ( KnownNat (LookupCompound name lst)
     ) => NonSpare ('GCompound lst ~> name) -> Variation ('GCompound lst)
@@ -1706,6 +1771,7 @@ setCompoundItem (NonSpare nsp) (Variation var) = case var of
         in Variation (UCompound bld lst2)
     _ -> intError
 
+-- | Del compound subitem by typelevel name.
 delCompoundItem :: forall name lst.
     ( KnownNat (LookupCompound name lst)
     ) => Variation ('GCompound lst) -> Variation ('GCompound lst)
@@ -1718,6 +1784,7 @@ delCompoundItem (Variation var) = case var of
         in Variation (UCompound bld lst2)
     _ -> intError
 
+-- | Extract record subitem by typelevel name.
 getRecordItem :: forall name lst.
     ( KnownNat (LookupRecord name lst)
     ) => Record ('GRecord lst) -> Maybe (NonSpare ('GRecord lst ~> name))
@@ -1730,6 +1797,7 @@ getRecordItem (Record (URecord _bld lst)) = f <$> lst !! n
         RecordItem nsp -> NonSpare nsp
         _ -> intError
 
+-- | Set record subitem by typelevel name.
 setRecordItem :: forall name lst.
     ( KnownNat (LookupRecord name lst)
     ) => NonSpare ('GRecord lst ~> name) -> Record ('GRecord lst)
@@ -1742,6 +1810,7 @@ setRecordItem (NonSpare nsp) (Record (URecord _bld lst1))
     lst2 = a <> [Just $ RecordItem nsp] <> tail b
     bld = rebuildRecord lst2
 
+-- | Del record subitem by typelevel name.
 delRecordItem :: forall name lst.
     ( KnownNat (LookupRecord name lst)
     ) => Record ('GRecord lst) -> Record ('GRecord lst)
@@ -1752,6 +1821,7 @@ delRecordItem (Record (URecord _bld lst1)) = Record (URecord bld lst2)
     lst2 = a <> [Nothing] <> tail b
     bld = rebuildRecord lst2
 
+-- | Get RFS subitems by typelevel name.
 getRfsItem :: forall name lst.
     ( KnownSymbol name
     , IsSchema lst [VUapItem]
@@ -1768,6 +1838,7 @@ getRfsItem (Record (URecord _bld lst)) = mconcat $ fmap f lst
             guard $ frn == frnRequired
             pure $ NonSpare nsp
 
+-- | Get Expansion subitems by typelevel name.
 getExpansionItem :: forall name mn lst.
     ( KnownNat (LookupCompound name lst)
     ) => Expansion ('GExpansion mn lst)
@@ -1779,6 +1850,7 @@ getExpansionItem (Expansion (UExpansion _bld lst))
 
 -- Item access overloaded functions
 
+-- | 'getItem' name overloading.
 class GetItem name parent child | name parent -> child where
     getItem :: parent -> child
 
@@ -1818,6 +1890,7 @@ instance
     ) => GetItem name (Expansion ('GExpansion mn lst)) (Maybe (NonSpare nsp)) where
     getItem = getExpansionItem @name
 
+-- | 'getSpares' name overloading.
 class GetSpares t where
     getSpares :: t -> [Bits]
 
@@ -1829,6 +1902,7 @@ instance
 instance GetSpares (Variation ('GGroup o lst)) where
     getSpares = getGroupSpares
 
+-- | 'setItem' name overloading.
 class SetItem name parent child | name parent -> child where
     setItem :: child -> parent -> parent
 
@@ -1868,6 +1942,7 @@ maybeSetItem :: forall name parent child.
 maybeSetItem Nothing parent      = parent
 maybeSetItem (Just child) parent = setItem @name child parent
 
+-- | 'delItem' name overloading.
 class DelItem name parent where
     delItem :: parent -> parent
 
@@ -1883,6 +1958,7 @@ instance
     ) => DelItem name (Variation var) where
     delItem = delCompoundItem @name
 
+-- | Helper function to manipulate extended subitem if present.
 class ExtModify name parent child | name parent -> child where
     modifyExtendedSubitemIfPresent :: (child -> child) -> parent -> parent
 

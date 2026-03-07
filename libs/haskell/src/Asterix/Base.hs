@@ -13,7 +13,76 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TypeFamilies      #-}
 
-module Asterix.Base where
+module Asterix.Base (
+
+-- * RawDatablock
+--
+-- | A 'RawDatablock' represents a valid 'ByteString', according to the
+-- first level of asterix: @[cat|length|records...]@, where the record
+-- bytes are not yet fully parsed.
+RawDatablock(..)
+, rawDatablockCategory
+, parseRawDatablock
+, parseRawDatablocks
+, unparseRawDatablock
+, getRawRecords
+, processDatablocks
+
+-- * Basic asterix building blocks
+, ItemName
+, FRN
+, RecordItem(..)
+
+-- * Parsing
+, KnownParsingMode(..)
+, ParsingStore(..)
+, ParsingM
+, ParsingError(..)
+, ParsingMode(..)
+, Env(..)
+, runParsing
+, parseVariation
+, parseExpansion
+, parseNonSpare
+, parseRecord
+, parseRecords
+, parseRecordsTry
+
+-- * Unparsing
+, Unparsing(..)
+, unparseToNum
+
+-- * Asterix related support types and functions
+, recreateExtended
+, mkFspecFx
+, mkFspecFixed
+, bitsToString
+, bitsToInteger
+, bitsToDouble
+, asUint
+, endOffset
+, bitsPerChar
+, evalNum
+
+-- * Other support types and functions
+, intError
+, IsEmpty(..)
+, KnownBool(..)
+, Fst
+, Snd
+, Asterix.Base.tail
+, Asterix.Base.head
+
+-- * Heterogeneous list
+, HList(..)
+, hlUncons
+, hlHead
+, hlTail
+, nil
+, (*:)
+, FoldHList(..)
+
+) where
 
 import           Control.Applicative
 import           Control.Monad
@@ -40,23 +109,27 @@ import           GHC.Stack
 import           Asterix.BitString
 import           Asterix.Schema
 
+-- | First part of a Pair.
 type family Fst t where Fst '(a, b) = a
+
+-- | Second part of a Pair.
 type family Snd t where Snd '(a, b) = b
 
+-- | Raise internal error.
 intError :: HasCallStack => a
 intError = error $ "Internal error, " <> prettyCallStack callStack
 
--- Avoid partial warning of the original 'head' function
+-- | Avoid partial warning of the original 'head' function from base.
 head :: [a] -> a
 head = \case
     [] -> error "empty list"
     x : _ -> x
 
--- Avoid partial warning of the original 'tail' function
+-- | Avoid partial warning of the original 'tail' function from base.
 tail :: [a] -> [a]
 tail = drop 1
 
--- | Number of bits per character of different string types.
+-- | Number of bits per character for different string types.
 bitsPerChar :: VStringType -> Int
 bitsPerChar = \case
     GStringAscii -> 8
@@ -69,16 +142,18 @@ evalGz (GZ pm i) = fromIntegral $ i * case pm of
     GPlus  -> 1
     GMinus -> -1
 
--- | Evaluate VNumber
+-- | Evaluate VNumber.
 evalNum :: Fractional a => VNumber -> a
 evalNum = \case
     GNumInt gz -> fromIntegral $ evalGz gz
     GNumDiv a b -> evalNum a / evalNum b
     GNumPow a b -> fromIntegral (evalGz a ^ evalGz b)
 
+-- | Convert structure to unsigned integer, via Bits representation.
 asUint :: forall b a. (Unparsing Bits a, Integral b) => a -> b
 asUint = bitsToNum . unparse
 
+-- | Convert Bits to String, according to string type rules.
 bitsToString :: VStringType -> Int -> Bits -> String
 bitsToString st bitSize =
     let bpc :: Int
@@ -107,6 +182,8 @@ bitsToString st bitSize =
             | otherwise = intError
     in reverse . go n . bitsToNum @Integer
 
+-- | Map Unsigned values unchanged, apply proper modulo for signed values.
+-- This is a helper function when converting unsigned bits to signed integer.
 applySignedness :: (Integral b, Num a, Ord a) => GSignedness -> b -> a -> a
 applySignedness sig n val = case sig of
     GUnsigned -> val
@@ -116,11 +193,13 @@ applySignedness sig n val = case sig of
             True  -> val
             False -> val - (2 * half)
 
+-- | Convert bits to integer.
 bitsToInteger :: VSignedness -> Int -> Bits -> Integer
 bitsToInteger sig n
     = applySignedness sig n
     . bitsToNum @Integer
 
+-- | Convert bits to double.
 bitsToDouble :: VSignedness -> Int -> Double -> Bits -> Double
 bitsToDouble sig n lsb
     = applyLsb
@@ -129,7 +208,7 @@ bitsToDouble sig n lsb
   where
     applyLsb = (* lsb) . fromIntegral
 
--- | Empty structure check
+-- | Empty structure check.
 class IsEmpty t where
     isEmpty :: t -> Bool
 
@@ -138,28 +217,33 @@ class KnownBool t where boolVal :: Proxy t -> Bool
 instance KnownBool 'False where boolVal _ = False
 instance KnownBool 'True where boolVal _ = True
 
--- Hlist
+-- | Heterogeneous list.
 data HList t where
     HNil :: HList '[]
     HCons :: t -> HList ts -> HList (t ': ts)
 
+-- | Empty HList.
 nil :: HList '[]
 nil = HNil
 
+-- | HList cons operator.
 infixr 5 *:
 (*:) :: x -> HList xs -> HList (x ': xs)
 (*:) = HCons
 
+-- | Uncons head and tail from HList.
 hlUncons :: HList (t ': ts) -> (t, HList ts)
 hlUncons (HCons x xs) = (x, xs)
 
+-- | Head of HList.
 hlHead :: HList (c : ts) -> c
 hlHead = fst . hlUncons
 
+-- | Tail of HList.
 hlTail :: HList (a : ts) -> HList ts
 hlTail = snd . hlUncons
 
--- | Split HList based on type level index
+-- | Split HList based on type level index.
 class HListSplit (ix :: [Type]) (ts :: [Type]) where
     type HListSplitL ix ts :: [Type]
     type HListSplitR ix ts :: [Type]
@@ -181,7 +265,7 @@ instance
         let (a, b) = hListSplit (Proxy @ts1) xs
         in (x *: a, b)
 
--- Append 2 HLists
+-- | Append 2 HLists.
 class HListAppend l1 l2 where
     type HListAppendR l1 l2 :: [Type]
     hListAppend :: HList l1 -> HList l2 -> HList (HListAppendR l1 l2)
@@ -194,7 +278,7 @@ instance HListAppend ts l2 => HListAppend (t ': ts) l2 where
     type HListAppendR (t ': ts) l2 = t ': HListAppendR ts l2
     hListAppend (HCons x xs) l2 = HCons x (hListAppend xs l2)
 
--- Fold HList by converting each element to a Monoid
+-- | Fold HList by converting each element to a Monoid
 -- and combining the results.
 -- A 'c' represents a constraint on each element of HList.
 -- A caller of 'foldHList' should provide 'c' as type application,
@@ -213,6 +297,7 @@ instance
     ) => FoldHList c (t ': ts) where
     foldHList f (HCons x xs) = f x <> foldHList @c f xs
 
+-- | Overload 'unparse' function to work on various structures and results.
 class Unparsing r t where
     unparse :: t -> r
 
@@ -225,40 +310,46 @@ instance Unparsing Bits ByteString where
 instance Unparsing SBuilder ByteString where
     unparse = fromByteString
 
--- | If we can unparse to bits, we can also get a number
+-- | If we can unparse to bits, we can also get a number.
 unparseToNum :: (Unparsing Bits t, Integral a) => t -> a
 unparseToNum = bitsToNum . unparse
 
+-- | Item name alias.
 type ItemName = Text
 
+-- | RawDatablock wrapper around ByteString.
 newtype RawDatablock = RawDatablock { unRawDatablock :: ByteString }
     deriving (Eq, Show)
 
 instance Unparsing SBuilder RawDatablock where
     unparse = fromByteString . unRawDatablock
 
--- | Fspec flag bits, without fx bits and without trailing bits
+-- | Fspec flag bits, without fx bits and without trailing bits.
 newtype Fspec = Fspec { fspecBits :: [Bool] }
     deriving Show
 
+-- | Frame number.
 type FRN = Word8
 
+-- | Parsing mode.
 data ParsingMode
     = StrictParsing
     | PartialParsing
     deriving (Eq, Enum, Bounded, Show)
 
+-- | Parsing mode type to value instances.
 class KnownParsingMode t where parsingMode :: Proxy t -> ParsingMode
 instance KnownParsingMode 'StrictParsing where parsingMode _ = StrictParsing
 instance KnownParsingMode 'PartialParsing where parsingMode _ = PartialParsing
 
+-- | Record item, containing some NonSpare type.
 data RecordItem nsp
     = RecordItem nsp
     | RecordItemSpare
     | RecordItemRFS [(FRN, nsp)]
     deriving (Eq, Show)
 
--- All 'Nothing' items represent FX which must be '1',
+-- | All 'Nothing' items represent FX which must be '1',
 -- except for the last which must be '0' (if FX).
 recreateExtended :: Unparsing Bits i => [Maybe i] -> Bits
 recreateExtended = \case
@@ -298,7 +389,10 @@ mkFspecFx
         lst -> lst
 
 -- | Create fixed size raw fspec from given binary flags (no fx).
-mkFspecFixed :: Int -> [Bool] -> SBuilder
+mkFspecFixed
+    :: Int        -- ^ number of resulting bytes
+    -> [Bool]     -- ^ input flags
+    -> SBuilder
 mkFspecFixed nBytes
     = bitsToSBuilder
     . boolsToBits 0
@@ -357,35 +451,40 @@ data Env (pm :: ParsingMode) var rv nsp item rec exp = Env
     , envInput :: ByteString
     }
 
+-- | Extract category number from RawDatablock.
 rawDatablockCategory :: RawDatablock -> Word8
 rawDatablockCategory (RawDatablock bs) = BS.index bs 0
 
+-- | Extract bytes, representing raw records from RawDatablock.
 getRawRecords :: RawDatablock -> ByteString
 getRawRecords (RawDatablock bs) = BS.drop 3 bs
 
+-- | Parsing error text.
 newtype ParsingError = ParsingError Text
     deriving (Show, IsString)
 
 -- | Parsing monad
 type ParsingM pm a b c d e f = RWST (Env pm a b c d e f) () Offset (Either ParsingError)
 
+-- | Run parsing action.
 runParsing :: Monad m => RWST r w s m a -> r -> s -> m (a, s)
 runParsing act r s = do
     (a, s', _w) <- runRWST act r s
     pure (a, s')
 
+-- | Raise parsing error.
 parsingError :: ParsingError -> ParsingM pm a b c d e f r
 parsingError = lift . Left
 
--- | Check bit alignment
+-- | Check bit alignment.
 aligned :: Offset -> Int -> Bool
 aligned o o8 = numBits o == o8
 
--- | End of a bytestring
+-- | End of a bytestring.
 endOffset :: ByteString -> Offset
 endOffset = intToNumBits . (*8) . BS.length
 
--- | End of input
+-- | End of input.
 eof :: ParsingM pm a b c d e f Bool
 eof = do
     o <- get
@@ -413,7 +512,7 @@ parseBits o8 n = do
         moveOffset n
         pure $ Bits bs o n
 
--- | Parse Word8
+-- | Parse Word8.
 parseWord8 :: ParsingM pm a b c d e f Word8
 parseWord8 = do
     bs <- asks envInput
@@ -422,7 +521,7 @@ parseWord8 = do
         moveOffset 8
         pure $ BS.index bs (numBytes o)
 
--- | Parse 'n' bytes
+-- | Parse 'n' bytes.
 parseBytes :: Int -> ParsingM pm a b c d e f ByteString
 parseBytes n = do
     bs <- asks envInput
@@ -431,7 +530,7 @@ parseBytes n = do
         moveOffset $ intToNumBits $ n * 8
         pure $ BS.take n $ BS.drop (numBytes o) bs
 
--- | Parse 'fx' bit
+-- | Parse 'fx' bit.
 parseFx :: ParsingM pm a b c d e f Bool
 parseFx = do
     Bits bs o _ <- parseBits 7 1
@@ -464,6 +563,7 @@ parseFspec pm definedItems = do
             False -> pure flags
             True  -> (<>) <$> pure flags <*> go
 
+-- | Parse Variation.
 parseVariation :: VVariation -> ParsingM pm var b c d e f var
 parseVariation sch = ask >>= \env -> case sch of
     GElement o n _ruleCont -> do
@@ -540,6 +640,7 @@ parseVariation sch = ask >>= \env -> case sch of
                 Nothing  -> parsingError "FX bit set for non-defined item"
                 Just nsp -> ((:) . Just <$> parseNonSpare nsp) <*> go xs
 
+-- | Parse RuleVariation.
 parseRuleVariation :: VRule VVariation
     -> ParsingM pm a rv c d e f rv
 parseRuleVariation sch1 = ask >>= \env -> do
@@ -548,15 +649,18 @@ parseRuleVariation sch1 = ask >>= \env -> do
             GDependent _ sch _ -> sch
     psRuleVar (envStore env) <$> parseVariation sch2
 
+-- | Parse NonSpare.
 parseNonSpare :: VNonSpare -> ParsingM pm var rv nsp d e f nsp
 parseNonSpare (GNonSpare _name _title rvSch) = ask >>= \env -> do
     psNsp (envStore env) <$> parseRuleVariation rvSch
 
+-- | Parse Item.
 parseItem :: VItem -> ParsingM pm a b c item e f item
 parseItem sch = ask >>= \env -> case sch of
     GSpare o n -> psSpare (envStore env) <$> parseBits o (intToNumBits n)
     GItem nsp  -> psItem (envStore env) <$> parseNonSpare nsp
 
+-- | Parse Record.
 parseRecord :: forall pm a b c d rec f.
     ( KnownParsingMode pm
     ) => VRecord -> ParsingM pm a b c d rec f rec
@@ -645,6 +749,7 @@ parseRecord (GRecord lst) = ask >>= \env -> do
                         (items, clean) <- goItems flags specs
                         pure (Just (RecordItem x) : items, clean)
 
+-- | Recreate Fspec as Bits.
 recreateFspec :: [Bool] -> Bits
 recreateFspec
     = byteStringToBits
@@ -709,6 +814,7 @@ parseRecordsTry mMaxDepth schs = do
                 y <- ys
                 pure ((name, x) : y)
 
+-- | Parse Expansion.
 parseExpansion :: VExpansion -> ParsingM pm a b c d e exp exp
 parseExpansion (GExpansion mn lst) = ask >>= \env -> do
     o1 <- get
@@ -731,6 +837,7 @@ parseExpansion (GExpansion mn lst) = ask >>= \env -> do
             Nothing  -> parsingError "FX bit set for non-defined item"
             Just nsp -> ((:) . Just <$> parseNonSpare nsp) <*> go xs
 
+-- | Parse ByteString to RawDatablock and the remaining ByteString.
 parseRawDatablock :: ByteString -> Either ParsingError (RawDatablock, ByteString)
 parseRawDatablock bs = do
     let n = BS.length bs
@@ -739,6 +846,7 @@ parseRawDatablock bs = do
     when (m > n) $ Left "overflow"
     pure (RawDatablock $ BS.take m bs, BS.drop m bs)
 
+-- | Parse many RawDatablocks.
 parseRawDatablocks :: ByteString -> Either ParsingError [RawDatablock]
 parseRawDatablocks bs
     | BS.null bs = pure []
@@ -746,6 +854,9 @@ parseRawDatablocks bs
         (x, bs') <- parseRawDatablock bs
         (:) <$> pure x <*> parseRawDatablocks bs'
 
+-- | Given a map from asterix category to processing function,
+-- process known categories and create list of results. The
+-- result is 'Nothing' for unknown category.
 processDatablocks :: Map Word8 (RawDatablock -> r) -> ByteString
     -> Either ParsingError [Maybe r]
 processDatablocks mapping bs = fmap go <$> parseRawDatablocks bs
@@ -754,6 +865,7 @@ processDatablocks mapping bs = fmap go <$> parseRawDatablocks bs
         f <- Map.lookup (rawDatablockCategory db) mapping
         pure $ f db
 
+-- | Unparse RawDatablock.
 unparseRawDatablock :: RawDatablock -> Builder
 unparseRawDatablock = BSB.byteString . unRawDatablock
 

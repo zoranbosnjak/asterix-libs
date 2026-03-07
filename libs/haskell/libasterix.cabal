@@ -1,12 +1,18 @@
 cabal-version:      3.0
 name:               libasterix
-version:            0.9.1
+version:            0.9.2
 synopsis:           Asterix data processing library
 description:
-    A library for asterix data format processing.
-    This data format is defined by Eurocontrol and is used for
-    exchanging surveillance related information in
-    air traffic control applications.
+    This library provides features to process asterix data format, including
+    parsing, unparsing, constructing and manipulating asterix records.
+
+    Asterix data format is a set of specifications, defined by Eurocontrol.
+    It is mostly used for exchanging surveillance related information in air
+    traffic control applications.
+
+    For more details and tutorial see
+    <https://github.com/zoranbosnjak/asterix-libs/tree/main/libs/haskell#readme the readme>.
+
 license:            BSD-3-Clause
 license-file:       LICENSE
 author:             Zoran Bošnjak
@@ -17,7 +23,12 @@ bug-reports:        https://github.com/zoranbosnjak/asterix-libs/issues
 category:           Data
 build-type:         Simple
 extra-doc-files:    CHANGELOG.md
--- extra-source-files:
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/zoranbosnjak/asterix-libs
 
 common base
     ghc-options:
