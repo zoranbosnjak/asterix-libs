@@ -44,29 +44,16 @@ twine upload dist/*
 
 ## Running examples from README.md file
 
-The `README.md` file contain examples, which can be extracted and tested.
-Unfortunately the `entangled` tool is not yet part of `nix` (see:
-<https://github.com/entangled/entangled.py/issues/64>), so the process to
-install the tool and check the examples is currently manual:
+The `README.md` file contain examples, which can be extracted to testfiles with
+the `entangled` tool. To make sure that examples actually work, run:
 
 ```bash
-sudo apt install python3-venv           # install virtual env under ubuntu
-python3 -m venv env                     # create new virtual environment
-source env/bin/activate                 # and activate it
-pip install entangled_cli               # install entangled to that environment
-entangled --version
+nix-shell
 entangled tangle                        # extract code snippets from README.md
-# run all examples
-for i in $(ls *py); do
-    echo "---"
-    echo "running: $i"
-    nix-shell --command "python $i"
-    if [ $? -ne 0 ]; then
-        echo ""
-        echo "Failure in $i!"
-        echo ""
-        break
-    fi
-done
+./readme-samples/run-samples.sh         # run all samples
+
+# or monitor README.md file and re-run samples automatically
+echo README.md | entr sh -c \
+    'clear && date && entangled tangle && ./readme-samples/run-samples.sh'
 ```
 

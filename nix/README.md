@@ -33,3 +33,10 @@ file directly. For example.
 hsh=...
 cabal2nix --revision ${hsh} https://github.com/user/proj.git > nix/proj.nix
 ```
+
+## entangled
+
+To update, manually edit `nix/extra/entangled-cli.nix` file. Once the entangled
+tool is part of nix packages, this file might not be needed any more.
+See: <https://github.com/entangled/entangled.py/issues/64>.
+

@@ -32,10 +32,13 @@ let
     };
   };
 
+  entangled-cli = import ../../nix/extra/entangled-cli.nix { nixpkgs = pkgs; };
+
   buildExports = ''
     export LC_ALL=C.UTF-8
     export GHC_BASE=$(which ghc | cut -d '/' -f-4)
     export PATH=${code-generator}/bin:$PATH
+    export PATH=${entangled-cli}/bin:$PATH
     export ASTERIX_SPECS_REF="git:${aspecsRef.rev}"
     export ASTERIX_SPECS_DATE="${aspecsRef.date}"
     export ASTERIX_SPECS_FILES=$(find ${aspecsDir}/specs/cat* | grep "\.ast")

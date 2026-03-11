@@ -30,6 +30,8 @@ let
 
   testSpecs = import ../../test-specs/default.nix { inShell = false; };
 
+  entangled-cli = import ../../nix/extra/entangled-cli.nix { nixpkgs = pkgs; };
+
   drv = pkgs.python3Packages.buildPythonPackage rec {
     name = "libasterix";
     src = ./.;
@@ -63,6 +65,7 @@ let
       export LC_ALL=C.UTF-8
       export PYTHONPATH=$(pwd)/src:$PYTHONPATH
       export PATH=${code-generator}/bin:$PATH
+      export PATH=${entangled-cli}/bin:$PATH
       export ASTERIX_SPECS_REF="git:${aspecsRef.rev}"
       export ASTERIX_SPECS_DATE="${aspecsRef.date}"
       export ASTERIX_SPECS_FILES=$(find ${aspecsDir}/specs/cat* | grep "\.ast")

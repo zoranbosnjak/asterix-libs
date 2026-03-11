@@ -24,7 +24,7 @@ type checking with `mypy`. In a simple untyped environment,
 the type annotations and assertions could be skipped.
 
 ```python
-#| file: example0.py
+#| file: readme-samples/example0.py
 from typing import *
 from binascii import hexlify, unhexlify
 from dataclasses import dataclass
@@ -281,7 +281,7 @@ and if a subitem is present, it applies a modifier function `f` to the subitem.
 Otherwises, if the subitem is not present, the method returns `self` unchanged.
 
 ```python
-#| file: example-modify-subitems.py
+#| file: readme-samples/example-modify-subitems.py
 from asterix.base import *
 import asterix.generated as gen
 
@@ -313,7 +313,7 @@ assert v020.unparse() == result2.unparse()
 **Example**: Category filter, drop datablocks if category == 1
 
 ```python
-#| file: example1.py
+#| file: readme-samples/example1.py
 from binascii import hexlify, unhexlify
 from asterix.base import *
 
@@ -340,7 +340,7 @@ send_to_udp(output_data)
 **Example**: Asterix filter, rewrite SAC/SIC code.
 
 ```python
-#| file: example4.py
+#| file: readme-samples/example4.py
 from asterix.base import *
 from asterix.generated import *
 
@@ -413,7 +413,7 @@ Multiple spare bit groups can be defined on a single item.
 **Example**
 
 ```python
-#| file: example-spare.py
+#| file: readme-samples/example-spare.py
 from asterix.generated import *
 
 # I062/120 contain single group of spare bits
@@ -459,7 +459,7 @@ a possiblity to explicitly select both editions individually.
 This example demonstrates required steps for constructing and parsing:
 
 ```python
-#| file: example5.py
+#| file: readme-samples/example5.py
 from asterix.generated import *
 
 Spec = Cat_062_1_20
@@ -526,7 +526,7 @@ explicit about subitems, for example `["010", "SAC"]`.
 **Example**: Show raw content of all toplevel items of each record
 
 ```python
-#| file: example9.py
+#| file: readme-samples/example9.py
 from binascii import unhexlify
 from asterix.generated import *
 
@@ -564,7 +564,7 @@ for db in RawDatablock.parse(Bits.from_bytes(s)):
 **Example**: Generate dummy single record datablock with all fixed items set to zero
 
 ```python
-#| file: example10.py
+#| file: readme-samples/example10.py
 from binascii import hexlify
 from asterix.generated import *
 
@@ -623,7 +623,7 @@ This structure can be used to extract *latest* editions for each defined
 category, for example:
 
 ```python
-#| file: example7.py
+#| file: readme-samples/example7.py
 from asterix.generated import *
 
 Specs = {cat: manifest['CATS'][cat][-1] for cat in manifest['CATS']}
@@ -636,7 +636,7 @@ Alternatively, a prefered way is to be explicit about each edition,
 for example:
 
 ```python
-#| file: example8.py
+#| file: readme-samples/example8.py
 from asterix.generated import *
 
 Specs = {
@@ -684,7 +684,7 @@ All operation on asterix objects are *immutable*.
 For example:
 
 ```python
-#| file: example-immutable.py
+#| file: readme-samples/example-immutable.py
 from asterix.generated import *
 
 Spec = Cat_002_1_1
@@ -726,7 +726,7 @@ There is a `spec` class method which follows this structure deeper to the
 hierarchy. For example:
 
 ```python
-#| file: example-spec.py
+#| file: readme-samples/example-spec.py
 from binascii import unhexlify
 from asterix.generated import *
 
@@ -811,7 +811,7 @@ Found 3 errors in 1 file (checked 1 source file)
 Correct version of this program is:
 
 ```python
-#| file: example11.py
+#| file: readme-samples/example11.py
 from asterix.generated import *
 
 Spec = Cat_008_1_3
@@ -860,7 +860,7 @@ This example demonstrates how to work with **content dependency**,
 such as `I062/380/IAS`.
 
 ```python
-#| file: example-dep-content.py
+#| file: readme-samples/example-dep-content.py
 from asterix.base import *
 from asterix.generated import *
 
@@ -950,7 +950,7 @@ This example demonstrates how to work with **variation dependency**,
 such as `I004/120/CC/CPC`.
 
 ```python
-#| file: example-dep-variation.py
+#| file: readme-samples/example-dep-variation.py
 from asterix.base import *
 from asterix.generated import *
 
@@ -1058,7 +1058,7 @@ value, for example for CAT001:
 - `['020', 'TYP'] = 1` for `track`
 
 ```python
-#| file: example6.py
+#| file: readme-samples/example6.py
 from asterix.base import *
 from asterix.generated import *
 
@@ -1099,7 +1099,7 @@ An empty list indicates that no such item is present in the RFS.
 **Example**
 
 ```python
-#| file: example-rfs.py
+#| file: readme-samples/example-rfs.py
 from binascii import hexlify
 from asterix.generated import *
 
@@ -1180,7 +1180,7 @@ Both methods can fail on invalid input data (return `ValueError`).
 This example demonstrates both parsing modes:
 
 ```python
-#| file: example-partial-parsing.py
+#| file: readme-samples/example-partial-parsing.py
 from asterix.base import *
 from asterix.generated import *
 
