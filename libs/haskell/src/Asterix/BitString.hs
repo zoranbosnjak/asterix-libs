@@ -18,6 +18,7 @@ import qualified Data.ByteString.Char8   as BS8
 import qualified Data.ByteString.Lazy    as BSL
 import           Data.Coerce
 import qualified Data.List               as L
+import           Data.List.NonEmpty      (NonEmpty (..), uncons)
 import           Data.Maybe
 import           Data.Word
 import           GHC.Stack
@@ -77,13 +78,13 @@ data SBuilder = SBuilder
     , sbData     :: Builder
     } deriving Show
 
--- | For tyes that contain bits.
-class HasBits t where
+-- | For types that can be converted to bits.
+class ToBits t where
     toBits :: t -> Bits
 
--- | For tyes that can be converted to/from ByteString.
+-- | For types that can be converted to/from ByteString.
 -- Be aware that some conversions might be slow.
-class IsByteString t where
+class ToFromByteString t where
     toByteString :: t -> ByteString
     fromByteString :: ByteString -> t
 
@@ -161,9 +162,9 @@ integerToBits o8 n val = Bits bs o (Size $ intToNumBits n)
 word8ToBools :: Word8 -> [Bool]
 word8ToBools w = [testBit w i | i <- [7,6..0]]
 
--- | Combine boolean flags to 'Word8'.
-boolsToWord8 :: [Bool] -> Word8
-boolsToWord8 = go . Prelude.reverse
+-- | Fold boolean flags to Num.
+boolsToNum :: Num a => [Bool] -> a
+boolsToNum = go . Prelude.reverse
   where
     go = \case
         [] -> 0
@@ -179,8 +180,8 @@ boolsToBits o8 lst = Bits bs (Offset $ intToNumBits o8) (Size $ intToNumBits n)
     byteList i =
         let (a, b) = splitAt 8 i
         in case Prelude.length a < 8 of
-            True  -> [boolsToWord8 $ take 8 $ a <> repeat False]
-            False -> boolsToWord8 a : byteList b
+            True  -> [boolsToNum $ take 8 $ a <> repeat False]
+            False -> boolsToNum a : byteList b
 
 -- | Calculate 'compact' version of Bits - helper function.
 compactBits :: Bits -> (ByteString, Maybe Word8)
@@ -217,11 +218,10 @@ appendBits s1 s2 = withAssumption (rightAlignment s1 == leftAlignment s2) go
         | otherwise = Bits bs o n
 
 -- | Concatinate non-empty list of 'Bits'.
-concatBits :: [Bits] -> Bits
-concatBits = \case
-    [] -> error "Empty list"
-    [x] -> x
-    x:xs -> appendBits x (Asterix.BitString.concatBits xs)
+concatBits :: NonEmpty Bits -> Bits
+concatBits lst = case uncons lst of
+    (x, Nothing) -> x
+    (x, Just xs) -> appendBits x (Asterix.BitString.concatBits xs)
 
 -- | Convert Bits to Integral.
 bitsToNum :: Integral a => Bits -> a
@@ -270,7 +270,7 @@ word8ToSBuilder :: Word8 -> SBuilder
 word8ToSBuilder = SBuilder 1 . BSB.word8
 
 -- | Show value as binary string.
-debugBits :: HasBits t => t -> String
+debugBits :: ToBits t => t -> String
 debugBits val = mconcat $ L.intersperse " " (goOctet <$> octets)
   where
     Bits bs o n' = toBits val
@@ -294,16 +294,16 @@ instance Eq Bits where
         = numBits (bitsOffset b1) == numBits (bitsOffset b2)
         && bitsToBools b1 == bitsToBools b2
 
-instance HasBits Bits where
+instance ToBits Bits where
     toBits = id
 
-instance HasBits ByteString where
+instance ToBits ByteString where
     toBits = byteStringToBits
 
-instance HasBits Builder where
+instance ToBits Builder where
     toBits = toBits . BSL.toStrict . BSB.toLazyByteString
 
-instance HasBits SBuilder where
+instance ToBits SBuilder where
     toBits = toBits . sbData
 
 instance Semigroup SBuilder where
@@ -312,15 +312,15 @@ instance Semigroup SBuilder where
 instance Monoid SBuilder where
     mempty = SBuilder 0 mempty
 
-instance IsByteString ByteString where
+instance ToFromByteString ByteString where
     toByteString = id
     fromByteString = id
 
-instance IsByteString Builder where
+instance ToFromByteString Builder where
     toByteString = BSL.toStrict . BSB.toLazyByteString
     fromByteString = BSB.byteString
 
-instance IsByteString SBuilder where
+instance ToFromByteString SBuilder where
     toByteString = toByteString . sbData
     fromByteString s = SBuilder (BS.length s) (BSB.byteString s)
 

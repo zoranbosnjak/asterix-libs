@@ -40,7 +40,6 @@ import qualified Data.Text           as T
 import           Data.Type.Bool
 import           Data.Type.Equality
 import           GHC.TypeLits
-import           Prelude             hiding (head, tail)
 
 import           Asterix.Base
 import           Asterix.BitString
@@ -145,7 +144,9 @@ instance IsEmpty (Record t) where
 instance Unparsing Bits UVariation where
     unparse = \case
         UElement bits -> bits
-        UGroup lst -> concatBits (unparse <$> lst)
+        UGroup lst -> case NE.nonEmpty lst of
+            Nothing -> toBits @ByteString mempty
+            Just ne -> concatBits (fmap unparse ne)
         UExtended b _ -> byteStringToBits $ builderToByteStringSlow $ sbData b
         URepetitive b _ -> byteStringToBits $ builderToByteStringSlow $ sbData b
         UExplicit b _ -> byteStringToBits $ builderToByteStringSlow $ sbData b
@@ -443,7 +444,7 @@ class MkString t where
 instance
     ( KnownNat8 o
     , KnownNat n
-    , IsSchema st GStringType
+    , Schema st GStringType
     ) => MkString (Variation ('GElement o n ('GContextFree
         ('GContentString st))))
   where
@@ -521,7 +522,7 @@ class GetLsb unit ruleIx t where
     getLsb :: VNumber
 
 instance
-    ( IsSchema lsb VNumber
+    ( Schema lsb VNumber
     , ruleIx ~ 'Nothing
     , unit1 ~ unit2
     ) => GetLsb unit1 ruleIx (Variation
@@ -537,7 +538,7 @@ class GetLsb2 (flag :: Bool) (unit :: Symbol) (ix :: Nat) (rules :: [k])
 instance
     ( ix ~ 0
     , unit1 ~ unit2
-    , IsSchema lsb VNumber
+    , Schema lsb VNumber
     ) => GetLsb2 'True unit1 ix ( '( val, 'GContentQuantity sig lsb unit2) ': ts)
   where
     getLsb2 _ _ _ _ = schema @lsb Proxy
@@ -551,7 +552,7 @@ instance
     getLsb2 _ _ _ _
         = getLsb2 (Proxy @flag) (Proxy @unit) (Proxy @iy) (Proxy @ts)
 
--- We can now defined GetLsb instance using the auxilary GetLsb2
+-- We can now define GetLsb instance using the auxilary GetLsb2
 instance
     ( ruleIx ~ 'Just ix
     , flag ~ (ix == 0)
@@ -618,7 +619,7 @@ instance
 --  - MkGroup instances creates target types
 --    (Variation, NonSpare, Item, Named)
 
--- | Helper clas to construct groups.
+-- | Helper class to construct groups.
 class CGroup ts2 ts1 where
     groupConstruct :: Proxy ts2 -> HList ts1 -> [UItem]
 
@@ -899,9 +900,10 @@ instance
         bld :: SBuilder
         bld =
             let nBytes = fromIntegral $ natVal (Proxy @n)
-                n = integerToBits 0 (nBytes*8) (fromIntegral $ Prelude.length lst2)
+                n = integerToBits 0 (nBytes*8)
+                    (fromIntegral $ Prelude.length lst2)
                 items = fmap unparse lst1
-            in bitsToSBuilder $ concatBits (n : items)
+            in bitsToSBuilder $ concatBits (n NE.:| items)
 
 instance MkRepetitive
         (Variation ('GRepetitive 'GRepetitiveFx var))
@@ -909,23 +911,21 @@ instance MkRepetitive
       where
     type RepetitiveInputList
         (Variation ('GRepetitive 'GRepetitiveFx var)) = NE.NonEmpty
-    repetitive lst1 = Variation $ URepetitive bld lst2
+    repetitive lst1 = Variation $ URepetitive (bld lst1) lst2
       where
-        lst1' = NE.toList lst1
-
         lst2 :: [UVariation]
-        lst2 = fmap unVariation lst1'
+        lst2 = fmap unVariation (NE.toList lst1)
 
         addFx :: Bool -> Bits -> Bits
         addFx flag arg = appendBits arg (boolsToBits 7 [flag])
 
-        bld :: SBuilder
+        bld :: NE.NonEmpty (Variation var) -> SBuilder
         bld = bitsToSBuilder
-            $ concatBits
-            $ reverse
-            $ zipWith addFx (False : repeat True)
-            $ reverse
-            $ fmap unparse lst1'
+            . concatBits
+            . NE.reverse
+            . NE.zipWith addFx (False NE.:| repeat True)
+            . NE.reverse
+            . fmap unparse
 
 instance
     ( MkRepetitive (Variation var) ts1
@@ -1257,7 +1257,7 @@ instance {-# OVERLAPPING #-}
     ( nsp ~ NonSpare ('GNonSpare name title rv)
     , MkRfs tsAll tsAll ts2
     , KnownSymbol name
-    , IsSchema tsAll [VUapItem]
+    , Schema tsAll [VUapItem]
     ) => MkRfs tsAll ('GUapItem ('GNonSpare name title rv) ': ts1)
         (Named name nsp ': ts2) where
     mkRfs (HCons (Indexed (NonSpare x)) xs)
@@ -1389,7 +1389,7 @@ expansion :: forall mn ts2 ts1.
     ( CCompound ts2 ts1
     , NoDuplicates ts1 ~ ts1
     , AllDefinedCompound ts2 ts1 ~ ts1
-    , IsSchema mn (Maybe Int)
+    , Schema mn (Maybe Int)
     ) => HList ts1 -> Expansion ('GExpansion mn ts2)
 expansion lst1 = Expansion $ UExpansion bld items
   where
@@ -1471,7 +1471,7 @@ class ToString ruleIx t where
     asString :: t -> String
 
 instance
-    ( IsSchema st VStringType
+    ( Schema st VStringType
     , KnownNat n
     ) => ToString ruleIx (Variation
         ('GElement o n ('GContextFree ('GContentString st))))
@@ -1484,7 +1484,7 @@ instance
         _ -> intError
 
 instance {-# OVERLAPPING #-}
-    ( IsSchema st VStringType
+    ( Schema st VStringType
     , KnownNat n
     ) => ToString ('Just 0) (Variation
         ('GElement o n ('GDependent ts1 dt
@@ -1536,7 +1536,7 @@ class ToInteger ruleIx t where
     asInteger :: t -> Integer
 
 instance
-    ( IsSchema sig VSignedness
+    ( Schema sig VSignedness
     , KnownNat n
     ) => ToInteger ruleIx (Variation
         ('GElement o n ('GContextFree ('GContentInteger sig))))
@@ -1549,7 +1549,7 @@ instance
         _ -> intError
 
 instance {-# OVERLAPPING #-}
-    ( IsSchema sig VSignedness
+    ( Schema sig VSignedness
     , KnownNat n
     ) => ToInteger ('Just 0) (Variation
         ('GElement o n ('GDependent ts1 dt
@@ -1601,9 +1601,9 @@ class ToQuantity unit ruleIx t where
     asQuantity :: t -> Quantity unit ruleIx
 
 instance
-    ( IsSchema sig VSignedness
+    ( Schema sig VSignedness
     , KnownNat n
-    , IsSchema lsb VNumber
+    , Schema lsb VNumber
     , unit1 ~ unit2
     ) => ToQuantity unit1 ruleIx (Variation
         ('GElement o n ('GContextFree ('GContentQuantity sig lsb unit2))))
@@ -1617,9 +1617,9 @@ instance
         _ -> intError
 
 instance {-# OVERLAPPING #-}
-    ( IsSchema sig VSignedness
+    ( Schema sig VSignedness
     , KnownNat n
-    , IsSchema lsb VNumber
+    , Schema lsb VNumber
     , unit1 ~ unit2
     ) => ToQuantity unit1 ('Just 0) (Variation
         ('GElement o n ('GDependent ts1 dt
@@ -1679,7 +1679,7 @@ getVariation = Variation . unURuleVar . unUNonSpare . unNonSpare
 
 -- | Get Dependent Variation from 'NonSpare'.
 getDepVariation :: forall ix nsp.
-    ( IsSchema (DepRule nsp ix) VVariation
+    ( Schema (DepRule nsp ix) VVariation
     ) => NonSpare nsp -> Either ParsingError (Variation (DepRule nsp ix))
 getDepVariation nsp = do
     let Bits bs o1 size1 = unparse @Bits nsp
@@ -1766,7 +1766,7 @@ setCompoundItem (NonSpare nsp) (Variation var) = case var of
         -- replace element in a list and rebuild
         let n = fromIntegral $ natVal (Proxy @(LookupCompound name lst))
             (a, b) = splitAt n lst1
-            lst2 = a <> [Just nsp] <> tail b
+            lst2 = a <> [Just nsp] <> drop 1 b
             bld = rebuildCompound lst2
         in Variation (UCompound bld lst2)
     _ -> intError
@@ -1779,7 +1779,7 @@ delCompoundItem (Variation var) = case var of
     UCompound _bld lst1 ->
         let n = fromIntegral $ natVal (Proxy @(LookupCompound name lst))
             (a, b) = splitAt n lst1
-            lst2 = a <> [Nothing] <> tail b
+            lst2 = a <> [Nothing] <> drop 1 b
             bld = rebuildCompound lst2
         in Variation (UCompound bld lst2)
     _ -> intError
@@ -1807,7 +1807,7 @@ setRecordItem (NonSpare nsp) (Record (URecord _bld lst1))
   where
     n = fromIntegral (natVal (Proxy @(LookupRecord name lst)))
     (a, b) = splitAt n lst1
-    lst2 = a <> [Just $ RecordItem nsp] <> tail b
+    lst2 = a <> [Just $ RecordItem nsp] <> drop 1 b
     bld = rebuildRecord lst2
 
 -- | Del record subitem by typelevel name.
@@ -1818,13 +1818,13 @@ delRecordItem (Record (URecord _bld lst1)) = Record (URecord bld lst2)
   where
     n = fromIntegral (natVal (Proxy @(LookupRecord name lst)))
     (a, b) = splitAt n lst1
-    lst2 = a <> [Nothing] <> tail b
+    lst2 = a <> [Nothing] <> drop 1 b
     bld = rebuildRecord lst2
 
 -- | Get RFS subitems by typelevel name.
 getRfsItem :: forall name lst.
     ( KnownSymbol name
-    , IsSchema lst [VUapItem]
+    , Schema lst [VUapItem]
     ) => Record ('GRecord lst) -> [NonSpare ('GRecord lst ~> name)]
 getRfsItem (Record (URecord _bld lst)) = mconcat $ fmap f lst
   where

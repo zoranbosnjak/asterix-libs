@@ -1,23 +1,38 @@
 -- |
 -- Module: Asterix.Schema
 --
--- This module defines asterix structures as types and values.
+-- This module defines generic asterix structures which can be used as types
+-- and as values. This imposes some complexity, mainly because of the fact that
+-- in haskell, all type information is erased during program compilation. In
+-- other words: normally types are only important when writting and compiling
+-- the code, not when running it. Whatever is required at runtime must be
+-- explicitely "created" during compile phase.
+--
+-- A standard approach to convert type level information to the value level
+-- equivalent is to use typeclasses and instances. Regular function don't work
+-- in this case.
+--
+-- An approach taken in this library is to have:
+--  - generic structures from this module, for type or value level usecases;
+--  - generated file where complete asterix specs are defined as types;
+--  - conversion rules (as typeclasses and instances) from this module to have
+--    runtime equivalent of complete asterix specs at value level too;
 --
 -- Naming convention:
 --
---    GSomething ... generic definition of 'Something'
---        It is indexed by 'Usecase' type parameter.
+-- * GSomething ... generic definition of 'Something'
+--    It is indexed by 'Usecase' type parameter.
 --
---    TSomething ... type level definition of 'Something', defined with:
---        type TSomething = GSomething 'TypeLevel
+-- * TSomething ... type level definition of 'Something', defined as:
+--    type TSomething = GSomething 'TypeLevel
 --
---    VSomething ... value level definition of 'Something', defined with:
---        type VSomething = GSomething 'ValueLevel
+-- * VSomething ... value level definition of 'Something', defined as:
+--    type VSomething = GSomething 'ValueLevel
 --
 -- The type level definitions (TSomething) are generated in a separate module.
--- The 'schema' function from IsSchema typeclass converts from
--- TSomething -> VSomething, such that any specification part can be
--- used also at runtime.
+-- The 'schema' function from Schema typeclass converts from
+-- TSomething -> VSomething, such that any specification part can also be
+-- used at runtime.
 
 {-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE PolyKinds              #-}
@@ -49,7 +64,7 @@ type family GInt (u :: Usecase) = r | r -> u where
 type TInt = GInt 'TypeLevel
 type VInt = GInt 'ValueLevel
 
--- | Integer in the interval [0..7]
+-- | Integer in the interval [0..7].
 newtype Int8 = Int8 { unInt8 :: Int }
     deriving (Show, Eq)
 
@@ -106,7 +121,7 @@ data GPlusMinus
 type TPlusMinus = GPlusMinus
 type VPlusMinus = GPlusMinus
 
--- | Positive or negative integer numbers
+-- | Positive or negative integer numbers.
 data GZ (u :: Usecase) = GZ GPlusMinus (GInt u)
 deriving instance Show (GZ 'ValueLevel)
 
@@ -262,55 +277,55 @@ deriving instance Show (GAsterix 'ValueLevel)
 type TAsterix = GAsterix 'TypeLevel
 type VAsterix = GAsterix 'ValueLevel
 
--- | Convert structures from type level to value level,
+-- | Convert structures from type level 't' to value level 'a',
 -- with 'schema' function.
-class IsSchema t a where
+class Schema t a where
     schema :: Proxy t -> a
 
-instance KnownNat n => IsSchema n Int where
+instance KnownNat n => Schema n Int where
     schema _ = fromIntegral $ natVal @n Proxy
 
-instance KnownNat8 n => IsSchema n Int8 where
+instance KnownNat8 n => Schema n Int8 where
     schema _ = natVal8 @n Proxy
 
-instance KnownSymbol s => IsSchema s Text where
+instance KnownSymbol s => Schema s Text where
     schema _ = Data.Text.pack $ symbolVal @s Proxy
 
-instance IsSchema 'Nothing (Maybe a) where
+instance Schema 'Nothing (Maybe a) where
     schema _ = Nothing
 
 instance
-    ( IsSchema t a
-    ) => IsSchema ('Just t) (Maybe a) where
+    ( Schema t a
+    ) => Schema ('Just t) (Maybe a) where
     schema _ = Just (schema @t Proxy)
 
-instance IsSchema '[] [a] where
+instance Schema '[] [a] where
     schema _ = []
 
 instance
-    ( IsSchema t a
-    , IsSchema ts [a]
-    ) => IsSchema (t ': ts) [a] where
+    ( Schema t a
+    , Schema ts [a]
+    ) => Schema (t ': ts) [a] where
     schema _ = schema @t Proxy : schema @ts Proxy
 
 instance
-    ( IsSchema t1 a1
-    , IsSchema t2 a2
-    ) => IsSchema '(t1, t2) (a1, a2) where
+    ( Schema t1 a1
+    , Schema t2 a2
+    ) => Schema '(t1, t2) (a1, a2) where
     schema _ = (schema @t1 Proxy, schema @t2 Proxy)
 
 instance
-    ( IsSchema t (f 'ValueLevel)
-    ) => IsSchema
+    ( Schema t (f 'ValueLevel)
+    ) => Schema
         ('GContextFree (t :: f 'TypeLevel))
         (GRule 'ValueLevel (f 'ValueLevel)) where
     schema _ = GContextFree (schema @t Proxy)
 
 instance
-    ( IsSchema lst1 [[Text]]
-    , IsSchema t (f 'ValueLevel)
-    , IsSchema lst2 [([Int], f ValueLevel)]
-    ) => IsSchema
+    ( Schema lst1 [[Text]]
+    , Schema t (f 'ValueLevel)
+    , Schema lst2 [([Int], f ValueLevel)]
+    ) => Schema
         ('GDependent lst1 (t :: f 'TypeLevel) lst2)
         (GRule 'ValueLevel (f 'ValueLevel)) where
     schema _= GDependent
@@ -318,219 +333,219 @@ instance
         (schema @t Proxy)
         (schema @lst2 Proxy)
 
-instance IsSchema 'GStringAscii GStringType where
+instance Schema 'GStringAscii GStringType where
     schema _ = GStringAscii
 
-instance IsSchema 'GStringICAO GStringType where
+instance Schema 'GStringICAO GStringType where
     schema _ = GStringICAO
 
-instance IsSchema 'GStringOctal GStringType where
+instance Schema 'GStringOctal GStringType where
     schema _ = GStringOctal
 
-instance IsSchema 'GSigned GSignedness where
+instance Schema 'GSigned GSignedness where
     schema _ = GSigned
 
-instance IsSchema 'GUnsigned GSignedness where
+instance Schema 'GUnsigned GSignedness where
     schema _ = GUnsigned
 
-instance IsSchema 'GPlus GPlusMinus where
+instance Schema 'GPlus GPlusMinus where
     schema _ = GPlus
 
-instance IsSchema 'GMinus GPlusMinus where
+instance Schema 'GMinus GPlusMinus where
     schema _ = GMinus
 
 instance
-    ( IsSchema pm GPlusMinus
-    , IsSchema n Int
-    ) => IsSchema ('GZ pm n) VZ where
+    ( Schema pm GPlusMinus
+    , Schema n Int
+    ) => Schema ('GZ pm n) VZ where
     schema _ = GZ (schema @pm Proxy) (schema @n Proxy)
 
 instance
-    ( IsSchema z VZ
-    ) => IsSchema ('GNumInt z) VNumber where
+    ( Schema z VZ
+    ) => Schema ('GNumInt z) VNumber where
     schema _ = GNumInt (schema @z Proxy)
 
 instance
-    ( IsSchema n1 (GNumber ValueLevel)
-    , IsSchema n2 (GNumber ValueLevel)
-    ) => IsSchema ('GNumDiv n1 n2) VNumber where
+    ( Schema n1 (GNumber ValueLevel)
+    , Schema n2 (GNumber ValueLevel)
+    ) => Schema ('GNumDiv n1 n2) VNumber where
     schema _ = GNumDiv (schema @n1 Proxy) (schema @n2 Proxy)
 
 instance
-    ( IsSchema a (GZ ValueLevel)
-    , IsSchema b (GZ ValueLevel)
-    ) => IsSchema ('GNumPow a b) VNumber where
+    ( Schema a (GZ ValueLevel)
+    , Schema b (GZ ValueLevel)
+    ) => Schema ('GNumPow a b) VNumber where
     schema _ = GNumPow (schema @a Proxy) (schema @b Proxy)
 
-instance IsSchema 'GBdsWithAddress VBdsType where
+instance Schema 'GBdsWithAddress VBdsType where
     schema _ = GBdsWithAddress
 
 instance
-    ( IsSchema ma (Maybe Int)
-    ) => IsSchema ('GBdsAt ma) VBdsType where
+    ( Schema ma (Maybe Int)
+    ) => Schema ('GBdsAt ma) VBdsType where
     schema _ = GBdsAt (schema @ma Proxy)
 
-instance IsSchema 'GContentRaw VContent where
+instance Schema 'GContentRaw VContent where
     schema _ = GContentRaw
 
 instance
-    ( IsSchema lst [(Int, Text)]
-    ) => IsSchema ('GContentTable lst) VContent where
+    ( Schema lst [(Int, Text)]
+    ) => Schema ('GContentTable lst) VContent where
     schema _ = GContentTable (schema @lst @[(Int, Text)] Proxy)
 
 instance
-    ( IsSchema st GStringType
-    ) => IsSchema ('GContentString st) VContent where
+    ( Schema st GStringType
+    ) => Schema ('GContentString st) VContent where
     schema _ = GContentString (schema @st Proxy)
 
 instance
-    ( IsSchema sig GSignedness
-    ) => IsSchema ('GContentInteger sig) VContent where
+    ( Schema sig GSignedness
+    ) => Schema ('GContentInteger sig) VContent where
     schema _ = GContentInteger (schema @sig Proxy)
 
 instance
-    ( IsSchema sig GSignedness
-    , IsSchema lsb (GNumber ValueLevel)
-    , IsSchema unit Text
-    ) => IsSchema ('GContentQuantity sig lsb unit) VContent where
+    ( Schema sig GSignedness
+    , Schema lsb (GNumber ValueLevel)
+    , Schema unit Text
+    ) => Schema ('GContentQuantity sig lsb unit) VContent where
     schema _ = GContentQuantity
         (schema @sig Proxy)
         (schema @lsb Proxy)
         (schema @unit Proxy)
 
 instance
-    ( IsSchema bt (GBdsType ValueLevel)
-    ) => IsSchema ('GContentBds bt) VContent where
+    ( Schema bt (GBdsType ValueLevel)
+    ) => Schema ('GContentBds bt) VContent where
     schema _ = GContentBds (schema @bt Proxy)
 
 instance
-    ( IsSchema n Int
-    ) => IsSchema ('GRepetitiveRegular n) VRepetitiveType where
+    ( Schema n Int
+    ) => Schema ('GRepetitiveRegular n) VRepetitiveType where
     schema _ = GRepetitiveRegular (schema @n Proxy)
 
-instance IsSchema 'GRepetitiveFx VRepetitiveType where
+instance Schema 'GRepetitiveFx VRepetitiveType where
     schema _ = GRepetitiveFx
 
-instance IsSchema 'GReservedExpansion GExplicitType where
+instance Schema 'GReservedExpansion GExplicitType where
     schema _ = GReservedExpansion
 
-instance IsSchema 'GSpecialPurpose GExplicitType where
+instance Schema 'GSpecialPurpose GExplicitType where
     schema _ = GSpecialPurpose
 
 instance
-    ( IsSchema o Int8
-    , IsSchema n Int
-    , IsSchema rule (VRule VContent)
-    ) => IsSchema ('GElement o n rule) VVariation where
+    ( Schema o Int8
+    , Schema n Int
+    , Schema rule (VRule VContent)
+    ) => Schema ('GElement o n rule) VVariation where
     schema _ = GElement
         (unInt8 $ schema @o Proxy)
         (schema @n Proxy)
         (schema @rule Proxy)
 
 instance
-    ( IsSchema o Int8
-    , IsSchema ts [VItem]
-    ) => IsSchema ('GGroup o ts) VVariation where
+    ( Schema o Int8
+    , Schema ts [VItem]
+    ) => Schema ('GGroup o ts) VVariation where
     schema _ = GGroup (unInt8 $ schema @o Proxy) (schema @ts Proxy)
 
 instance
-    ( IsSchema lst [Maybe VItem]
-    ) => IsSchema ('GExtended lst) VVariation where
+    ( Schema lst [Maybe VItem]
+    ) => Schema ('GExtended lst) VVariation where
     schema _ = GExtended (schema @lst Proxy)
 
 instance
-    ( IsSchema rt VRepetitiveType
-    , IsSchema var VVariation
-    ) => IsSchema ('GRepetitive rt var) VVariation where
+    ( Schema rt VRepetitiveType
+    , Schema var VVariation
+    ) => Schema ('GRepetitive rt var) VVariation where
     schema _ = GRepetitive (schema @rt Proxy) (schema @var Proxy)
 
 instance
-    ( IsSchema met (Maybe GExplicitType)
-    ) => IsSchema ('GExplicit met) VVariation where
+    ( Schema met (Maybe GExplicitType)
+    ) => Schema ('GExplicit met) VVariation where
     schema _ = GExplicit (schema @met Proxy)
 
 instance
-    ( IsSchema lst [Maybe VNonSpare]
-    ) => IsSchema ('GCompound lst) VVariation where
+    ( Schema lst [Maybe VNonSpare]
+    ) => Schema ('GCompound lst) VVariation where
     schema _ = GCompound (schema @lst Proxy)
 
 instance
-    ( IsSchema name Text
-    , IsSchema title Text
-    , IsSchema rule (VRule VVariation)
-    ) => IsSchema ('GNonSpare name title rule) VNonSpare where
+    ( Schema name Text
+    , Schema title Text
+    , Schema rule (VRule VVariation)
+    ) => Schema ('GNonSpare name title rule) VNonSpare where
     schema _ = GNonSpare
         (schema @name Proxy)
         (schema @title Proxy)
         (schema @rule Proxy)
 
 instance
-    ( IsSchema o Int8
-    , IsSchema n Int
-    ) => IsSchema ('GSpare o n) VItem where
+    ( Schema o Int8
+    , Schema n Int
+    ) => Schema ('GSpare o n) VItem where
     schema _ = GSpare (unInt8 $ schema @o Proxy) (schema @n Proxy)
 
 instance
-    ( IsSchema nsp VNonSpare
-    ) => IsSchema ('GItem nsp) VItem where
+    ( Schema nsp VNonSpare
+    ) => Schema ('GItem nsp) VItem where
     schema _ = GItem (schema @nsp Proxy)
 
 instance
-    ( IsSchema nsp VNonSpare
-    ) => IsSchema ('GUapItem nsp) VUapItem where
+    ( Schema nsp VNonSpare
+    ) => Schema ('GUapItem nsp) VUapItem where
     schema _ = GUapItem (schema @nsp Proxy)
 
-instance IsSchema 'GUapItemSpare VUapItem where
+instance Schema 'GUapItemSpare VUapItem where
     schema _ = GUapItemSpare
 
-instance IsSchema 'GUapItemRFS VUapItem where
+instance Schema 'GUapItemRFS VUapItem where
     schema _ = GUapItemRFS
 
 instance
-    ( IsSchema lst [VUapItem]
-    ) => IsSchema ('GRecord lst) VRecord where
+    ( Schema lst [VUapItem]
+    ) => Schema ('GRecord lst) VRecord where
     schema _ = GRecord (schema @lst Proxy)
 
 instance
-    ( IsSchema iname [Text]
-    , IsSchema lst [(Int, Text)]
-    ) => IsSchema ('GUapSelector iname lst) VUapSelector where
+    ( Schema iname [Text]
+    , Schema lst [(Int, Text)]
+    ) => Schema ('GUapSelector iname lst) VUapSelector where
     schema _ = GUapSelector (schema @iname Proxy) (schema @lst Proxy)
 
 instance
-    ( IsSchema rec VRecord
-    ) => IsSchema ('GUap rec) VUap where
+    ( Schema rec VRecord
+    ) => Schema ('GUap rec) VUap where
     schema _ = GUap (schema @rec Proxy)
 
 instance
-    ( IsSchema lst [(Text, VRecord)]
-    , IsSchema msel (Maybe VUapSelector)
-    ) => IsSchema ('GUaps lst msel) VUap where
+    ( Schema lst [(Text, VRecord)]
+    , Schema msel (Maybe VUapSelector)
+    ) => Schema ('GUaps lst msel) VUap where
     schema _ = GUaps (schema @lst Proxy) (schema @msel Proxy)
 
 instance
-    ( IsSchema cat Int
-    , IsSchema uap VUap
-    ) => IsSchema ('GDatablock cat uap) VDatablock where
+    ( Schema cat Int
+    , Schema uap VUap
+    ) => Schema ('GDatablock cat uap) VDatablock where
     schema _ = GDatablock (schema @cat Proxy) (schema @uap Proxy)
 
 instance
-    ( IsSchema mn (Maybe Int)
-    , IsSchema lst [Maybe VNonSpare]
-    ) => IsSchema ('GExpansion mn lst) VExpansion where
+    ( Schema mn (Maybe Int)
+    , Schema lst [Maybe VNonSpare]
+    ) => Schema ('GExpansion mn lst) VExpansion where
     schema _ = GExpansion (schema @mn Proxy) (schema @lst Proxy)
 
 instance
-    ( IsSchema a Int
-    , IsSchema b Int
-    ) => IsSchema ('GEdition a b) VEdition where
+    ( Schema a Int
+    , Schema b Int
+    ) => Schema ('GEdition a b) VEdition where
     schema _ = GEdition (schema @a Proxy) (schema @b Proxy)
 
 instance
-    ( IsSchema cat Int
-    , IsSchema ed VEdition
-    , IsSchema uap VUap
-    ) => IsSchema ('GAsterixBasic cat ed uap) VAsterix where
+    ( Schema cat Int
+    , Schema ed VEdition
+    , Schema uap VUap
+    ) => Schema ('GAsterixBasic cat ed uap) VAsterix where
     schema _ = GAsterixBasic
         (schema @cat Proxy)
         (schema @ed Proxy)
@@ -539,15 +554,15 @@ instance
 instance
     ( name ~ VText
     , uap ~ 'GUaps lst msel
-    , IsSchema lst [(VText, VRecord)]
-    ) => IsSchema ('GAsterixBasic cat ed uap) [(name, VRecord)] where
+    , Schema lst [(VText, VRecord)]
+    ) => Schema ('GAsterixBasic cat ed uap) [(name, VRecord)] where
     schema _ = schema @lst Proxy
 
 instance
-    ( IsSchema cat Int
-    , IsSchema ed VEdition
-    , IsSchema exp VExpansion
-    ) => IsSchema ('GAsterixExpansion cat ed exp) VAsterix where
+    ( Schema cat Int
+    , Schema ed VEdition
+    , Schema exp VExpansion
+    ) => Schema ('GAsterixExpansion cat ed exp) VAsterix where
     schema _ = GAsterixExpansion
         (schema @cat Proxy)
         (schema @ed Proxy)
@@ -706,7 +721,7 @@ type family PrependName t where
     PrependName ('GNonSpare name title rv ': ts)
         = '(name, 'GNonSpare name title rv) ': PrependName ts
 
--- | Overloaded type level function to extract subtype from parent, based on name
+-- | Overloaded type level function to extract subtype from parent, based on name.
 type (~>) :: k -> Symbol -> TNonSpare
 type family (~>) t name where
     (~>) ('GGroup o lst) name
@@ -735,7 +750,7 @@ type family (~>) t name where
         = 'GExpansion mn lst ~> name
     (~>) k name = TypeError ('Text "Undefined argument: " :<>: ShowType k)
 
--- | Extract dependent rule
+-- | Extract dependent rule.
 type family DepRule2 lst ix where
     DepRule2 ('(ix1, t) ': ts) ix = If (ix1 == ix) t (DepRule2 ts ix)
     DepRule2 t ix = TypeError ('Text "Undefined rule: " :<>: ShowType ix)

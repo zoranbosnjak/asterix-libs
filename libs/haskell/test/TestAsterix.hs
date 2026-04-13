@@ -13,7 +13,6 @@ import           Data.Either
 import           Data.Function      ((&))
 import qualified Data.List.NonEmpty as NE
 import           Data.Maybe
-import           Prelude            hiding (head, tail)
 import           Test.Tasty
 import           Test.Tasty.HUnit
 
@@ -98,7 +97,8 @@ testRuleVariationContextFree = do
 
 testRuleVariationDependent :: Assertion
 testRuleVariationDependent = do
-    let obj :: Variation (DepRule (Cat_000_1_0 ~> "032" ~> "CC" ~> "CP") '[ 1, 2]) = 4
+    let obj :: Variation (DepRule (Cat_000_1_0 ~> "032" ~> "CC" ~> "CP")
+                '[ 1, 2]) = 4
     assertUint 4 obj
     -- create complete record with that object
     let rec1 :: Record (RecordOf Cat_000_1_0)
@@ -470,10 +470,7 @@ testRepetitive1 = do
     let obj :: NonSpare (RecordOf Cat_000_1_0 ~> "061") = repetitive [1,2,3]
     assertUnparse "03010203" obj
     let lst = getRepetitiveItems $ getVariation obj
-    assertEqual "len" 3 (length lst)
-    assertUint 1 (head lst)
-    assertUint 2 (lst !! 1)
-    assertUint 3 (lst !! 2)
+    assertEqual "val" [1, 2, 3] $ fmap (asUint @Int) lst
 
 testRepetitive2 :: Assertion
 testRepetitive2 = do
@@ -484,20 +481,14 @@ testRepetitive2 = do
             ]
     assertUnparse "03000102030004" obj
     let lst = getRepetitiveItems $ getVariation obj
-    assertEqual "len" 3 (length lst)
-    assertUint 1 (head lst)
-    assertUint 0x0203 (lst !! 1)
-    assertUint 4 (lst !! 2)
+    assertEqual "val" [1, 0x0203, 4] $ fmap (asUint @Int) lst
 
 testRepetitive3 :: Assertion
 testRepetitive3 = do
     let obj :: NonSpare (RecordOf Cat_000_1_0 ~> "063") = repetitive (1 NE.:| [2, 3])
     assertUnparse "030506" obj
     let lst = getRepetitiveItems $ getVariation obj
-    assertEqual "len" 3 (length lst)
-    assertUint 1 (head lst)
-    assertUint 2 (lst !! 1)
-    assertUint 3 (lst !! 2)
+    assertEqual "val" [1, 2, 3] $ fmap (asUint @Int) lst
 
 testExplicit0 :: Assertion
 testExplicit0 = do
@@ -953,9 +944,8 @@ testParse2 = do
         bs = toByteString $ unparse @SBuilder d
         result1 = parseRawDatablocks bs
     dbs <- either (assertFailure . show) pure result1
-    assertEqual "length" 1 (length dbs)
-    let db = head dbs
-        act = parseRecords (schema @(RecordOf Cat_000_1_0) Proxy)
+    db <- assertOne dbs
+    let act = parseRecords (schema @(RecordOf Cat_000_1_0) Proxy)
         result = parse @StrictParsing act (getRawRecords db)
     records <- either (assertFailure . show) pure result
     assertEqual "len" 3 (length records)
@@ -987,9 +977,8 @@ testParse3 = do
                 ( recPlot *: recPlot *: nil)
             bs = toByteString $ unparse @SBuilder _db
         dbs <- either (assertFailure . show) pure (parseRawDatablocks bs)
-        assertEqual "plots length" 1 (length dbs)
-        let db = head dbs
-            bs2 = getRawRecords db
+        db <- assertOne dbs
+        let bs2 = getRawRecords db
 
         -- try to parse as 'plots'
         let act1 = parseRecords (schema @(RecordOfUap Cat_001_1_0 "plot") Proxy)
@@ -1010,8 +999,7 @@ testParse3 = do
         let act3 = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         result3s <- either (assertFailure . show) pure
             (parse @StrictParsing act3 bs2)
-        assertEqual "plots length outer" 1 (length result3s)
-        let result3 = head result3s
+        result3 <- assertOne result3s
         assertEqual "plots length inner" 2 (length result3)
         forM_ (zip [0::Int ..] result3) $ \(cnt, (_name, r2)) -> do
             assertEqual ("unparse " <> show cnt)
@@ -1024,9 +1012,8 @@ testParse3 = do
                 ( recTrack *: recTrack *: recTrack *: nil)
             bs = toByteString $ unparse @SBuilder _db
         dbs <- either (assertFailure . show) pure (parseRawDatablocks bs)
-        assertEqual "tracks length" 1 (length dbs)
-        let db = head dbs
-            bs2 = getRawRecords db
+        db <- assertOne dbs
+        let bs2 = getRawRecords db
 
         -- try to parse as 'plots'
         let act1 = parseRecords (schema @(RecordOfUap Cat_001_1_0 "plot") Proxy)
@@ -1047,8 +1034,7 @@ testParse3 = do
         let act3 = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         result3s <- either (assertFailure . show) pure
             (parse @StrictParsing act3 bs2)
-        assertEqual "tracks length outer" 1 (length result3s)
-        let result3 = head result3s
+        result3 <- assertOne result3s
         assertEqual "tracks length inner" 3 (length result3)
         forM_ (zip [0::Int ..] result3) $ \(cnt, (_name, r2)) -> do
             assertEqual ("unparse " <> show cnt)
@@ -1063,9 +1049,8 @@ testParse3 = do
             _db :: Datablock (DatablockOf Cat_001_1_0) = datablock records
             bs = toByteString $ unparse @SBuilder _db
         dbs <- either (assertFailure . show) pure (parseRawDatablocks bs)
-        assertEqual "mixed length" 1 (length dbs)
-        let db = head dbs
-            bs2 = getRawRecords db
+        db <- assertOne dbs
+        let bs2 = getRawRecords db
 
         -- try to parse as 'plots'
         let act1 = parseRecords (schema @(RecordOfUap Cat_001_1_0 "plot") Proxy)
@@ -1081,9 +1066,8 @@ testParse3 = do
         let act3 = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         result3s <- either (assertFailure . show) pure
             (parse @StrictParsing act3 bs2)
-        assertEqual "mixed length outer" 1 (length result3s)
-        let result3 = head result3s
-            recordsRaw = foldHList @(Unparsing Bits)
+        result3 <- assertOne result3s
+        let recordsRaw = foldHList @(Unparsing Bits)
                 (\r -> [unparse @Bits r])
                 records
         assertEqual "mixed length inner" (length recordsRaw) (length result3)
@@ -1101,12 +1085,12 @@ testParse4 = do
     assertEqual "unparse" (unparse @Bits recPlot) (unparse @Bits recTrack)
 
     do -- one
-        let _db :: Datablock (DatablockOf Cat_001_1_0) = datablock (recPlot *: nil)
+        let _db :: Datablock (DatablockOf Cat_001_1_0)
+                = datablock (recPlot *: nil)
             bs = toByteString $ unparse @SBuilder _db
         dbs <- either (assertFailure . show) pure (parseRawDatablocks bs)
-        assertEqual "results" 1 (length dbs)
-        let db = head dbs
-            bs2 = getRawRecords db
+        db <- assertOne dbs
+        let bs2 = getRawRecords db
             act = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         results <- either (assertFailure . show) pure
             (parse @StrictParsing act bs2)
@@ -1127,9 +1111,8 @@ testParse4 = do
                 (recPlot *: recPlot *: nil)
             bs = toByteString $ unparse @SBuilder _db
         dbs <- either (assertFailure . show) pure (parseRawDatablocks bs)
-        assertEqual "results" 1 (length dbs)
-        let db = head dbs
-            bs2 = getRawRecords db
+        db <- assertOne dbs
+        let bs2 = getRawRecords db
             act = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         results <- either (assertFailure . show) pure
             (parse @StrictParsing act bs2)
@@ -1150,9 +1133,8 @@ testParse4 = do
                 (recPlot *: recPlot *: recPlot *: nil)
             bs = toByteString $ unparse @SBuilder _db
         dbs <- either (assertFailure . show) pure (parseRawDatablocks bs)
-        assertEqual "results" 1 (length dbs)
-        let db = head dbs
-            bs2 = getRawRecords db
+        db <- assertOne dbs
+        let bs2 = getRawRecords db
             act = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         results <- either (assertFailure . show) pure
             (parse @StrictParsing act bs2)
@@ -1183,15 +1165,15 @@ testParse5 = do
         let act = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         results <- either (assertFailure . show) pure
             (parse @StrictParsing act bsPlot)
-        assertEqual "result" 1 (length results)
-        assertEqual "result" 1 (length $ head results)
+        result <- assertOne results
+        void $ assertOne result
 
     do
         let act = parseRecordsTry Nothing (schema @Cat_001_1_0 Proxy)
         results <- either (assertFailure . show) pure
             (parse @StrictParsing act bsTrack)
-        assertEqual "result" 1 (length results)
-        assertEqual "result" 1 (length $ head results)
+        result <- assertOne results
+        void $ assertOne result
 
 testParse6 :: Assertion
 testParse6 = do

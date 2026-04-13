@@ -70,8 +70,6 @@ RawDatablock(..)
 , KnownBool(..)
 , Fst
 , Snd
-, Asterix.Base.tail
-, Asterix.Base.head
 
 -- * Heterogeneous list
 , HList(..)
@@ -118,16 +116,6 @@ type family Snd t where Snd '(a, b) = b
 -- | Raise internal error.
 intError :: HasCallStack => a
 intError = error $ "Internal error, " <> prettyCallStack callStack
-
--- | Avoid partial warning of the original 'head' function from base.
-head :: [a] -> a
-head = \case
-    [] -> error "empty list"
-    x : _ -> x
-
--- | Avoid partial warning of the original 'tail' function from base.
-tail :: [a] -> [a]
-tail = drop 1
 
 -- | Number of bits per character for different string types.
 bitsPerChar :: VStringType -> Int
@@ -446,6 +434,10 @@ data ParsingStore var rv nsp item rec exp = ParsingStore
     }
 
 -- | Parsing environment.
+-- This data type is parametrized with several data types,
+-- like 'var', 'item', 'rec'..., such that a Coding module can select concrete
+-- types to store 'Variation', 'Item', 'Record'... and this module can remain
+-- generic.
 data Env (pm :: ParsingMode) var rv nsp item rec exp = Env
     { envStore :: ParsingStore var rv nsp item rec exp
     , envInput :: ByteString
@@ -463,7 +455,14 @@ getRawRecords (RawDatablock bs) = BS.drop 3 bs
 newtype ParsingError = ParsingError Text
     deriving (Show, IsString)
 
--- | Parsing monad
+-- | Parsing monad. It combines several effects, which are already
+-- provided by the RWST type from the 'mtl' library.
+--  - reader type is the environment
+--  - writer type is not used ()
+--  - state type is the current parsing offfset
+--  - monad is (Either ParsingError r), where the 'r' represents
+--    eventual parsing result
+-- All type parameters are required by the environment (see 'Env').
 type ParsingM pm a b c d e f = RWST (Env pm a b c d e f) () Offset (Either ParsingError)
 
 -- | Run parsing action.
@@ -755,7 +754,7 @@ recreateFspec
     = byteStringToBits
     . BS.pack
     . terminateFx -- set last FX bit to '0'
-    . fmap ((+ 1) . (* 2) . boolsToWord8)
+    . fmap ((+ 1) . (* 2) . boolsToNum)
     . L.dropWhileEnd (replicate 7 False ==)
     . groupsOf False 7
   where

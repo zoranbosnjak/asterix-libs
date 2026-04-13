@@ -25,6 +25,10 @@ assertUnparse s obj = assertEqual "unparse"
         (debugBits @Bits $ byteStringToBits (fromJust $ unhexlify s))
         (debugBits @Bits $ unparse obj)
 
+assertOne :: [a] -> IO a
+assertOne [x] = pure x
+assertOne _   = assertFailure "expecting list of length 1"
+
 data StResult
     = Bin String
     | Hex String

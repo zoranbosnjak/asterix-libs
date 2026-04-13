@@ -182,8 +182,7 @@ This library is built aroud the following concepts:
 ## Constructing, parsing/unparsing, encoding/decoding
 
 This library uses term to **construct asterix**, when a
-record/datablock/datagram is "constructed" inside the application source
-code, that is: not parsed.
+record/datablock/datagram is "constructed" inside the application source code.
 
 Once the datablock is constructed, it is **unparsed** to bytes, ready to
 be sent over the network. Similarly, the term **parsing** is used when we
@@ -414,7 +413,7 @@ type Cat063 = Gen.Cat_063_1_6
 type TSacSic = SameType '[ Cat048 ~> "010", Cat062 ~> "010", Cat063 ~> "010"]
 
 handleDatablock :: forall cat.
-    ( IsSchema (RecordOf cat) VRecord
+    ( Schema (RecordOf cat) VRecord
     , SetItem "010" (Record (RecordOf cat)) (NonSpare TSacSic)
     , KnownNat (CategoryOf cat)
     ) => Proxy cat -> NonSpare TSacSic -> ByteString -> SBuilder
@@ -525,12 +524,12 @@ main = do
 ## Reserved expansion (RE) fields
 
 This library supports working with expansion fields. From the `Record`
-prespective, the `RE` item contains raw bytes, without any structure,
-similar to how a datablock contains raw bytes without a structure. Parsing
-raw datablocks and parsing records are 2 separate steps. In the same
-vain, parsing `RE` out of the record would be a third step. Once parsed,
-the `RE` item  gets it's structure, and it's possible to access it's subitems,
-similar to a regular record/subitem situation.
+prespective, the `RE` item contains raw bytes, without any structure, similar
+to how a datablock contains raw bytes without a structure. Parsing raw
+datablocks and parsing records are 2 separate steps. Similarly, parsing `RE`
+out of the record would be a third step. Once parsed, the `RE` item  gets it's
+structure, and it's possible to access it's subitems, similar to a regular
+record/subitem situation.
 
 When constructing a record with the `RE` item, a user must first
 construct the `RE` item itself, unparse it to bytes and insert bytes
@@ -889,7 +888,7 @@ Type t  - Typed wrapper around Untyped value: (Item t), (Variation t),  ...
 
 ### Constructing
 
-A special `DSL` is provided to construct asterix objects within the source
+A simplified syntax is provided to construct asterix objects within the source
 code. It's based on processing `HList` of subitems (list of different types).
 'HList' constuction is performed with `*:` as `HCons` operator and `nil` as
 list termination `HNil`. For example:
