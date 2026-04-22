@@ -34,6 +34,30 @@ cabal bench
 cabal haddock --enable-documentation
 ```
 
+## Manually publish/update project to hackage
+
+``` bash
+nix-shell
+# from clean repository
+git status
+
+cabal check
+cabal sdist
+cabal haddock --haddock-for-hackage --enable-documentation
+
+# upload package candidate for test
+cabal upload dist-newstyle/sdist/libasterix*
+cabal upload -d dist-newstyle/libasterix*docs.tar.gz
+
+# upload permanently
+cabal upload --publish dist-newstyle/sdist/libasterix*
+cabal upload --publish -d dist-newstyle/libasterix*docs.tar.gz
+
+# cleanup
+rm -rf dist-newstyle/
+exit
+```
+
 ## Running examples from README.md file
 
 The `README.md` file contain examples, which can be extracted and tested.
