@@ -1,4 +1,4 @@
-name: Update from upstream
+name: update-from-upstream
 
 on:
   workflow_dispatch: {}
