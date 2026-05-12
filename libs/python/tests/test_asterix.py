@@ -7,6 +7,7 @@ from typing import *
 import pytest
 
 from . generated import *
+from . import sample_records
 
 
 def test_create() -> None:
@@ -1162,6 +1163,30 @@ def test_empty() -> None:
     assert rec1.is_empty() == False
     rec2 = Cat_000_1_0.cv_record.create({})
     assert rec2.is_empty()
+
+def _test_roundtrip(num_records: int) -> None:
+    """For each specification and edition, create a few records,
+    encode, decode, expect the same result."""
+
+    def check(Spec: AstCat, r: Record) -> None:
+        records = list([r]*num_records)
+        bs = b''.join([r.unparse().to_bytes() for r in records])
+        if m_name is None:
+            result = Spec.cv_uap.parse(Bits.from_bytes(bs)) # type: ignore
+        else:
+            result = Spec.cv_uap.parse(m_name, Bits.from_bytes(bs)) # type: ignore
+        assert not isinstance(result, ValueError)
+        bs2 = b''.join([r.unparse().to_bytes() for r in result])
+        assert bs2 == bs
+
+    for lst in manifest['CATS'].values(): # type: ignore
+        for Spec in lst:
+            for (m_name, r1, r2) in sample_records(Spec):
+                check(Spec, r1)
+                check(Spec, r2)
+
+def test_roundtrip() -> None:
+    _test_roundtrip(5)
 
 # python specific tests
 

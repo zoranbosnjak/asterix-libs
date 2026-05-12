@@ -18,6 +18,9 @@ pytest -v tests/test_asterix.py::test_raises
 mypy
 pytest
 
+# generate record samples
+python generate-samples.py
+
 # monitor changes in .py files, check automatically on any change
 find . | grep "\.py" | entr sh -c 'clear && date && mypy && pytest'
 ```
