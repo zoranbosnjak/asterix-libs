@@ -30,6 +30,9 @@ runhaskell -Wall -isrc -itest test/Main.hs
 find . | grep "\.hs" \
     | entr sh -c 'clear && date && runhaskell -Wall -isrc -itest test/Main.hs'
 
+# generate record samples
+runhaskell -Wall -isrc -itest generate-samples.hs
+
 # build documentation
 cabal haddock --enable-documentation
 ```

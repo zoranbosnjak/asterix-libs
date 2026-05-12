@@ -2,7 +2,9 @@
 
 module Common where
 
+import           Data.Bool
 import           Data.Char
+import qualified Data.List.NonEmpty as NE
 import           Data.Maybe
 import           Test.Tasty.HUnit
 
@@ -46,4 +48,78 @@ rStrip
     = reverse
     . dropWhile isSpace
     . reverse
+
+-- | Create record with all items set to zero/one.
+populateRecord :: Bool -> VRecord -> URecord
+populateRecord val (GRecord schItems) = URecord bld items
+  where
+    bld :: SBuilder
+    bld = rebuildRecord items
+
+    items :: [Maybe (RecordItem UNonSpare)]
+    items = fmap goUapItem schItems
+
+    goUapItem :: VUapItem -> Maybe (RecordItem UNonSpare)
+    goUapItem = \case
+        GUapItem nsp -> Just . RecordItem $ goNsp nsp
+        _ -> Nothing
+
+    goNsp :: VNonSpare -> UNonSpare
+    goNsp (GNonSpare _name _title rv) = UNonSpare $ goRuleVar rv
+
+    goRuleVar :: VRule VVariation -> URuleVar
+    goRuleVar sch = URuleVar $ goVar $ case sch of
+        GContextFree var   -> var
+        GDependent _ var _ -> var
+
+    goVar :: VVariation -> UVariation
+    goVar = \case
+        GElement o n _rc -> UElement $ integerToBits o n (bool 0 (-1) val)
+        GGroup _o lst -> UGroup $ fmap goItem lst
+        GExtended lst ->
+            let extItems = [fmap goItem i | i <- lst]
+                extBld = bitsToSBuilder $ recreateExtended extItems
+            in UExtended extBld extItems
+        GRepetitive rt var ->
+            let repVar = goVar var
+                repLst1 = replicate 9 (goVar var)
+            in case rt of
+                GRepetitiveRegular n ->
+                    let repLst2 = repVar : repLst1
+                        repBld = rebuildRepetitiveRegular n repLst2
+                    in URepetitive repBld repLst2
+                GRepetitiveFx ->
+                    let repLst2 = repVar NE.:| repLst1
+                        repBld = rebuildRepetitiveFx repLst2
+                    in URepetitive repBld (NE.toList repLst2)
+        GExplicit _met ->
+            let expBits = byteStringToBits mempty
+                expN = bitsToSBuilder $ integerToBits 0 8 1
+                expBld = expN <> bitsToSBuilder expBits
+            in UExplicit expBld expBits
+        GCompound lst ->
+            let compItems = [fmap goNsp i | i <- lst]
+                compBld = rebuildCompound compItems
+            in UCompound compBld compItems
+
+    goItem :: VItem -> UItem
+    goItem = \case
+        GSpare o n -> USpare $ integerToBits o n 0
+        GItem nsp -> UItem $ goNsp nsp
+
+-- | Generate sample records from the given spec.
+-- A result is a list (in case of multiple UAPs) of element, where each element
+-- is a tuple (Optional[uap name], record with zeros, record with ones in each item).
+sampleRecords :: VAsterix -> [(VInt, ((Maybe VText, VRecord), (URecord, URecord)))]
+sampleRecords = \case
+    GAsterixBasic cat _ed uap -> case uap of
+        GUap sch        -> go cat (Nothing, sch)
+        GUaps lst _mSel -> lst >>= \(name, sch) -> go cat (Just name, sch)
+    GAsterixExpansion {} -> []
+  where
+    r1 = populateRecord False
+    r2 = populateRecord True
+    go :: Int -> (Maybe VText, VRecord)
+        -> [(Int, ((Maybe VText, VRecord), (URecord, URecord)))]
+    go cat (mName, sch) = [(cat, ((mName, sch), (r1 sch, r2 sch)))]
 

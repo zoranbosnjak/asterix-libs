@@ -5,7 +5,10 @@
 {-# LANGUAGE DataKinds  #-}
 {-# LANGUAGE LambdaCase #-}
 
-module TestAsterix (tests) where
+module TestAsterix
+( tests
+, testRoundtrip
+) where
 
 import           Control.Monad
 import qualified Data.ByteString    as BS
@@ -77,6 +80,7 @@ tests = testGroup "Asterix"
     , testCase "testParse6" testParse6
     , testCase "testParseNonblocking" testParseNonblocking
     , testCase "testEmpty" testEmpty
+    , testCase "testRoundtrip" (testRoundtrip 5)
     ]
 
 testCreate :: Assertion
@@ -1257,4 +1261,21 @@ testEmpty = do
         rec2 = record nil
     assertEqual "rec empty1" (isEmpty rec1) False
     assertEqual "rec empty2" (isEmpty rec2) True
+
+-- | For each specification and edition, create a few records,
+-- encode, decode, expect the same result
+testRoundtrip :: Int -> Assertion
+testRoundtrip numRecords = forM_ manifest $ \ast -> do
+    forM_ (sampleRecords ast) $ \(_cat, ((_, sch), (r1, r2))) -> do
+        go sch r1
+        go sch r2
+  where
+    go :: VRecord -> URecord -> Assertion
+    go sch r = do
+        let records1 = replicate numRecords r
+            s1 = mconcat $ fmap (toByteString . unparse @SBuilder) records1
+            result = parse @StrictParsing (parseRecords sch) s1
+        records2 <- either (assertFailure . show) pure result
+        let s2 = mconcat $ fmap (toByteString . unparse @SBuilder) records2
+        assertEqual "compare" s2 s1
 
