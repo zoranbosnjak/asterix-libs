@@ -2,6 +2,8 @@
 
 from binascii import hexlify, unhexlify
 from typing import *
+from hypothesis import given
+import hypothesis.strategies as st
 
 from asterix.base import Bits, RawDatablock
 
@@ -34,6 +36,8 @@ datagram_in = unhexlify(''.join([
     '01000401',  # cat1
     '02000402',  # cat2
 ]))
+
+all_zeros = unhexlify("00000000000000000000")
 
 
 def test_parse_ok() -> None:
@@ -73,3 +77,14 @@ def test_reverse() -> None:
         '01000401',  # cat1
         '01000401',  # cat1
     ]))
+
+
+def test_zeros() -> None:
+    datablocks = RawDatablock.parse(Bits.from_bytes(all_zeros))
+    assert isinstance(datablocks, ValueError)
+
+
+@given(st.binary())
+def test_random(bs: bytes) -> None:
+    # we ignore the result, but it shall terminate for any input
+    RawDatablock.parse(Bits.from_bytes(bs))

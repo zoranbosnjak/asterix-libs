@@ -840,9 +840,10 @@ parseExpansion (GExpansion mn lst) = ask >>= \env -> do
 parseRawDatablock :: ByteString -> Either ParsingError (RawDatablock, ByteString)
 parseRawDatablock bs = do
     let n = BS.length bs
-    when (n < 3) $ Left "overflow"
+    when (n < 3) $ Left "overflow datablock header"
     let m = fromIntegral (BS.index bs 1) * 256 + fromIntegral (BS.index bs 2)
-    when (m > n) $ Left "overflow"
+    when (m < 3) $ Left "unexpected length"
+    when (m > n) $ Left "overflow datablock records"
     pure (RawDatablock $ BS.take m bs, BS.drop m bs)
 
 -- | Parse many RawDatablocks.

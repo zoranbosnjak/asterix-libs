@@ -1165,6 +1165,7 @@ def test_empty() -> None:
 
 # python specific tests
 
+
 def test_python_spec() -> None:
     """Check 'spec' method for subitems."""
     # for group
@@ -1178,6 +1179,7 @@ def test_python_spec() -> None:
     # for compound
     T3 = Cat_000_1_0.cv_record.spec('020').cv_rule.cv_variation.spec('S1')
     assert T3.cv_rule.cv_variation.cv_bit_size == 56
+
 
 def test_python_construct_none() -> None:
     """Construct compound/record with some 'None' arguments"""

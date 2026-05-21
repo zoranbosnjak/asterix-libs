@@ -8,6 +8,7 @@ import           Data.Maybe
 import           Data.Word
 import           Test.Tasty
 import           Test.Tasty.HUnit
+import           Test.Tasty.QuickCheck
 
 import           Asterix.Base
 import           Asterix.BitString
@@ -33,6 +34,9 @@ samples =
     , "02000402" -- cat2
     ]
 
+allZeros :: String
+allZeros = "00000000000000000000"
+
 datagramIn :: ByteString
 datagramIn = fromJust $ unhexlify $ mconcat samples
 
@@ -47,6 +51,13 @@ tests = testGroup "RawDatablock"
     , testCase "reverse" $ assertEqual "sample"
         (fromJust $ unhexlify $ mconcat $ reverse samples)
         (builderToByteStringSlow $ reverseDatablocks datagramIn)
+    , testCase "all zeros" $ assertEqual "sample"
+        True (isLeft $ parseRawDatablocks $ fromJust $ unhexlify allZeros)
+    , testProperty "random input" $ withMaxSuccess 10_000 $ \(lst :: [Word8]) ->
+        let bs = BS.pack lst
+            result = parseRawDatablocks bs
+        -- this is always true, but we want the expression to terminate
+        in (isLeft result || isRight result)
     ]
   where
     cat1 = take 2 samples
