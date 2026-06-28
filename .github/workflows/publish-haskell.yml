@@ -16,7 +16,7 @@ jobs:
       update: ${{ steps.check.outputs.update }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Check versions
         id: check
@@ -39,7 +39,7 @@ jobs:
     needs:
       - check-versions
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: |
           cd libs/haskell
           cabal check
