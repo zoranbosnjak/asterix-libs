@@ -30,6 +30,7 @@ RawDatablock(..)
 
 -- * Basic asterix building blocks
 , ItemName
+, Fspec
 , FRN
 , RecordItem(..)
 
@@ -41,9 +42,18 @@ RawDatablock(..)
 , ParsingMode(..)
 , Env(..)
 , runParsing
+, parsingError
+, aligned
+, parseBits
+, parseWord8
+, parseBytes
+, parseFx
+, parseFspec
 , parseVariation
+, parseRuleVariation
 , parseExpansion
 , parseNonSpare
+, parseItem
 , parseRecord
 , parseRecords
 , parseRecordsTry
@@ -53,6 +63,7 @@ RawDatablock(..)
 , unparseToNum
 
 -- * Asterix related support types and functions
+, recreateFspec
 , recreateExtended
 , mkFspecFx
 , mkFspecFixed
@@ -61,7 +72,10 @@ RawDatablock(..)
 , bitsToDouble
 , asUint
 , endOffset
+, moveOffset
+, eof
 , bitsPerChar
+, evalGz
 , evalNum
 
 -- * Other support types and functions
@@ -78,6 +92,8 @@ RawDatablock(..)
 , hlTail
 , nil
 , (*:)
+, HListSplit(..)
+, HListAppend(..)
 , FoldHList(..)
 
 ) where
