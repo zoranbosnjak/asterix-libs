@@ -469,7 +469,7 @@ getRawRecords (RawDatablock bs) = BS.drop 3 bs
 
 -- | Parsing error text.
 newtype ParsingError = ParsingError Text
-    deriving (Show, IsString)
+    deriving (Show, IsString, Semigroup)
 
 -- | Parsing monad. It combines several effects, which are already
 -- provided by the RWST type from the 'mtl' library.
@@ -479,7 +479,8 @@ newtype ParsingError = ParsingError Text
 --  - monad is (Either ParsingError r), where the 'r' represents
 --    eventual parsing result
 -- All type parameters are required by the environment (see 'Env').
-type ParsingM pm a b c d e f = RWST (Env pm a b c d e f) () Offset (Either ParsingError)
+type ParsingM pm a b c d e f = RWST (Env pm a b c d e f) () Offset
+    (Either ParsingError)
 
 -- | Run parsing action.
 runParsing :: Monad m => RWST r w s m a -> r -> s -> m (a, s)
@@ -510,45 +511,45 @@ eof = do
         GT -> intError
 
 -- | Move offset pointer by 'n' bits.
-moveOffset :: Size -> ParsingM pm a b c d e f ()
-moveOffset n = do
+moveOffset :: ParsingError -> Size -> ParsingM pm a b c d e f ()
+moveOffset pe n = do
     bs <- asks envInput
     o <- get
     let o' = o + coerce n
-    when (o' > endOffset bs) $ parsingError "overflow"
+    when (o' > endOffset bs) $ parsingError $ "overflow, " <> pe
     put o'
 
 -- | Fetch some number of bits.
-parseBits :: Int -> Size -> ParsingM pm a b c d e f Bits
-parseBits o8 n = do
+parseBits :: ParsingError -> Int -> Size -> ParsingM pm a b c d e f Bits
+parseBits pe o8 n = do
     bs <- asks envInput
     o <- get
     withAssumption (aligned o o8) $ do
-        moveOffset n
+        moveOffset pe n
         pure $ Bits bs o n
 
 -- | Parse Word8.
-parseWord8 :: ParsingM pm a b c d e f Word8
-parseWord8 = do
+parseWord8 :: ParsingError -> ParsingM pm a b c d e f Word8
+parseWord8 pe = do
     bs <- asks envInput
     o <- get
     withAssumption (aligned o 0) $ do
-        moveOffset 8
+        moveOffset pe 8
         pure $ BS.index bs (numBytes o)
 
 -- | Parse 'n' bytes.
-parseBytes :: Int -> ParsingM pm a b c d e f ByteString
-parseBytes n = do
+parseBytes :: ParsingError -> Int -> ParsingM pm a b c d e f ByteString
+parseBytes pe n = do
     bs <- asks envInput
     o <- get
     withAssumption (aligned o 0) $ do
-        moveOffset $ intToNumBits $ n * 8
+        moveOffset pe $ intToNumBits $ n * 8
         pure $ BS.take n $ BS.drop (numBytes o) bs
 
 -- | Parse 'fx' bit.
 parseFx :: ParsingM pm a b c d e f Bool
 parseFx = do
-    Bits bs o _ <- parseBits 7 1
+    Bits bs o _ <- parseBits "parseFx" 7 1
     pure $ testBit (BS.index bs (numBytes o)) 0
 
 -- | Parse complete fspec, take fx bits into account
@@ -572,7 +573,7 @@ parseFspec pm definedItems = do
   where
     go :: ParsingM pm a b c d e f [Bool]
     go = do
-        w <- word8ToBools <$> parseWord8
+        w <- word8ToBools <$> parseWord8 "parse FSPEC"
         let (flags, fx) = (init w, last w)
         case fx of
             False -> pure flags
@@ -582,7 +583,7 @@ parseFspec pm definedItems = do
 parseVariation :: VVariation -> ParsingM pm var b c d e f var
 parseVariation sch = ask >>= \env -> case sch of
     GElement o n _ruleCont -> do
-        psElement (envStore env) <$> parseBits o (intToNumBits n)
+        psElement (envStore env) <$> parseBits "parse Element" o (intToNumBits n)
     GGroup _o lst -> do
         o1 <- get
         items <- go lst
@@ -611,7 +612,8 @@ parseVariation sch = ask >>= \env -> case sch of
         o1 <- get
         lst <- case rt of
             GRepetitiveRegular rep -> do
-                parseBytes rep >>= goRegular . byteStringToNum @Int
+                parseBytes "parse Repetitive" rep
+                    >>= goRegular . byteStringToNum @Int
             GRepetitiveFx -> goFx
         o2 <- get
         let bits = Bits (envInput env) o1 (coerce $ o2 - o1)
@@ -627,11 +629,11 @@ parseVariation sch = ask >>= \env -> case sch of
                 True -> (:) <$> pure x <*> goFx
     GExplicit _met -> do
         o1 <- get
-        n <- parseWord8
+        n <- parseWord8 "parse Explicit size"
         o2 <- get
         _ <- case n of
             0 -> parsingError "unexpected size of explicit item"
-            _ -> parseBytes (fromIntegral $ pred n)
+            _ -> parseBytes "parse Explicit data" (fromIntegral $ pred n)
         o3 <- get
         let b1 = Bits (envInput env) o1 (coerce $ o3 - o1)
             b2 = Bits (envInput env) o2 (coerce $ o3 - o2)
@@ -672,7 +674,8 @@ parseNonSpare (GNonSpare _name _title rvSch) = ask >>= \env -> do
 -- | Parse Item.
 parseItem :: VItem -> ParsingM pm a b c item e f item
 parseItem sch = ask >>= \env -> case sch of
-    GSpare o n -> psSpare (envStore env) <$> parseBits o (intToNumBits n)
+    GSpare o n -> psSpare (envStore env) <$> parseBits "parse Item" o
+        (intToNumBits n)
     GItem nsp  -> psItem (envStore env) <$> parseNonSpare nsp
 
 -- | Parse Record.
@@ -705,13 +708,13 @@ parseRecord (GRecord lst) = ask >>= \env -> do
         | otherwise = findSchema (pred n) xs
 
     goRfs :: ParsingM pm a b nsp d e f ([(FRN, nsp)], Bool)
-    goRfs = parseWord8 >>= go
+    goRfs = parseWord8 "parse RFS count" >>= go
       where
         go :: Word8 -> ParsingM pm a b nsp d e f ([(FRN, nsp)], Bool)
         go = \case
             0 -> pure (mempty, True)
             cnt -> do
-                frn <- parseWord8 >>= \case
+                frn <- parseWord8 "parse RFS frn" >>= \case
                     0 -> parsingError "invalid FRN"
                     n -> pure n
                 nsp <- maybe
@@ -835,7 +838,8 @@ parseExpansion (GExpansion mn lst) = ask >>= \env -> do
     o1 <- get
     fspec <- case mn of
         Nothing -> parseFspec StrictParsing (length lst)
-        Just n -> Fspec . mconcat . fmap word8ToBools . BS.unpack <$> parseBytes n
+        Just n -> Fspec . mconcat . fmap word8ToBools . BS.unpack
+            <$> parseBytes "parse Expansion" n
     o2 <- get
     items <- go $ zip (fspecBits fspec <> repeat False) lst
     o3 <- get
@@ -856,10 +860,10 @@ parseExpansion (GExpansion mn lst) = ask >>= \env -> do
 parseRawDatablock :: ByteString -> Either ParsingError (RawDatablock, ByteString)
 parseRawDatablock bs = do
     let n = BS.length bs
-    when (n < 3) $ Left "overflow datablock header"
+    when (n < 3) $ Left "overflow, unable to parse datablock header"
     let m = fromIntegral (BS.index bs 1) * 256 + fromIntegral (BS.index bs 2)
-    when (m < 3) $ Left "unexpected length"
-    when (m > n) $ Left "overflow datablock records"
+    when (m < 3) $ Left "unexpected datablock length"
+    when (m > n) $ Left "overflow, unable to parse datablock records"
     pure (RawDatablock $ BS.take m bs, BS.drop m bs)
 
 -- | Parse many RawDatablocks.
