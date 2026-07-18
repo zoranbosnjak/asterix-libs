@@ -567,7 +567,7 @@ class Spare(ItemBase):
     def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Spare', Bits]]:
         n = cls.cv_bit_size
         if len(bs) < n:
-            return ValueError('overflow')
+            return ValueError('insufficient data, spare')
         a, b = bs.split_at(n)
         return (cls(a), b)
 
@@ -660,7 +660,7 @@ class Element(Variation):
     def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Element', Bits]]:
         n = cls.cv_bit_size
         if len(bs) < n:
-            return ValueError('overflow')
+            return ValueError('insufficient data, element')
         a, b = bs.split_at(n)
         return (cls(a), b)
 
@@ -779,7 +779,7 @@ class Extended(Variation):
                 items1.append(items2.copy())
                 items2 = []
                 if len(remaining) < 1:
-                    return ValueError('overflow')
+                    return ValueError('insufficient data, extended')
                 fx, remaining = remaining.head_tail()
                 if not fx:
                     break
@@ -904,7 +904,7 @@ class Repetitive(Variation):
                     return result
                 obj, remaining = result
                 if len(remaining) < 1:
-                    return ValueError('overflow')
+                    return ValueError('insufficient data, repetitive')
                 fx, remaining = remaining.head_tail()
                 items.append(obj)
                 if not fx:
@@ -913,7 +913,7 @@ class Repetitive(Variation):
         else:
             rbs = rbs * 8
             if len(remaining) < rbs:
-                return ValueError('overflow')
+                return ValueError('insufficient data, repetitive')
             (cnt, remaining) = remaining.split_at(rbs)
             for i in range(cnt.to_uinteger()):
                 result = cls.cv_variation._parse(remaining)
@@ -959,12 +959,12 @@ class Explicit(Variation):
     @classmethod
     def _parse(cls, bs: Bits) -> Union[ValueError, Tuple['Explicit', Bits]]:
         if len(bs) < 8:
-            return ValueError('overflow')
+            return ValueError('insufficient data, explicit size')
         cnt = bs.take(8).to_uinteger() * 8
         if cnt == 0:
             return ValueError("Unexpected size of explicit item")
         if len(bs) < cnt:
-            return ValueError('overflow')
+            return ValueError('insufficient data, explicit data')
         a, b = bs.split_at(cnt)
         return (cls(a), b)
 
@@ -1015,7 +1015,7 @@ class Fspec:
             return ValueError('fspec too big')
         # 'i' contains the last byte, which must have FX=0
         if (i & 0x01):
-            return ValueError('overflow')
+            return ValueError('insufficient data, fspec')
         (a, b) = s.split_at(n * 8)
         return (cls(a), b)
 
@@ -1299,7 +1299,7 @@ class Record:
                 items3: List[Tuple[str, NonSpare]] = []
                 if len(remaining) < 8:
                     if pm == ParsingMode.StrictParsing:
-                        return ValueError('overflow')
+                        return ValueError('insufficient data, rfs')
                     else:
                         break
                 a, remaining = remaining.split_at(8)
@@ -1307,7 +1307,7 @@ class Record:
                 for j in range(n):
                     if len(remaining) < 8:
                         if pm == ParsingMode.StrictParsing:
-                            return ValueError('overflow')
+                            return ValueError('insufficient data, rfs')
                         else:
                             break
                     b, remaining = remaining.split_at(8)
@@ -1575,7 +1575,7 @@ class Expansion:
         if a == FspecFixed:
             n = b * 8
             if len(bs) < n:
-                return ValueError('overflow')
+                return ValueError('insufficient data, expansion')
             flags_bits, remaining = bs.split_at(n)
             flags = list(flags_bits)
         elif a == FspecFx:

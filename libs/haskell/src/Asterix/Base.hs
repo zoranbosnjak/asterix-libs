@@ -516,7 +516,7 @@ moveOffset pe n = do
     bs <- asks envInput
     o <- get
     let o' = o + coerce n
-    when (o' > endOffset bs) $ parsingError $ "overflow, " <> pe
+    when (o' > endOffset bs) $ parsingError $ "insufficient data, " <> pe
     put o'
 
 -- | Fetch some number of bits.
@@ -811,11 +811,11 @@ parseRecordsTry mMaxDepth schs = do
     put eo
     pure result
   where
-    isOverflow depth = case mMaxDepth of
+    isMaxDepth depth = case mMaxDepth of
         Nothing       -> False
         Just maxDepth -> depth > maxDepth
     go depth eo env offset
-        | isOverflow depth = parsingError "max_depth reached"
+        | isMaxDepth depth = parsingError "max_depth reached"
         | offset > eo = intError
         | offset == eo = pure [[]]
         | otherwise = do
@@ -860,10 +860,10 @@ parseExpansion (GExpansion mn lst) = ask >>= \env -> do
 parseRawDatablock :: ByteString -> Either ParsingError (RawDatablock, ByteString)
 parseRawDatablock bs = do
     let n = BS.length bs
-    when (n < 3) $ Left "overflow, unable to parse datablock header"
+    when (n < 3) $ Left "insufficient data, unable to parse datablock header"
     let m = fromIntegral (BS.index bs 1) * 256 + fromIntegral (BS.index bs 2)
     when (m < 3) $ Left "unexpected datablock length"
-    when (m > n) $ Left "overflow, unable to parse datablock records"
+    when (m > n) $ Left "insufficient data, unable to parse datablock records"
     pure (RawDatablock $ BS.take m bs, BS.drop m bs)
 
 -- | Parse many RawDatablocks.
