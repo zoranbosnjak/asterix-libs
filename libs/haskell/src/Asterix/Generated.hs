@@ -14,10 +14,10 @@ module Asterix.Generated where
 import           Asterix.Schema
 
 asterixSpecsRef :: String
-asterixSpecsRef = "git:d53554a651aad4dfca0f088e412852681b3a4f24"
+asterixSpecsRef = "git:7679897841f393cfd7ce74bb5cb62b8df0b0a212"
 
 asterixSpecsDate :: String
-asterixSpecsDate = "2026-07-09T12:52:55+02:00"
+asterixSpecsDate = "2026-07-14T13:43:53+02:00"
 
 codeGeneratorVersion :: String
 codeGeneratorVersion = "0.13.1"
@@ -5850,11 +5850,11 @@ type TVariation507 = 'GElement 1 5 TRuleContent358
 type TRuleVariation495 = 'GContextFree TVariation507
 type TNonSpare2194 = 'GNonSpare "VAL" "Value" TRuleVariation495
 type TItem1219 = 'GItem TNonSpare2194
-type TVariation1143 = 'GGroup 0 '[ TItem319, TItem1219, TItem26]
+type TVariation1143 = 'GGroup 0 '[ TItem319, TItem1219]
 type TRuleVariation1096 = 'GContextFree TVariation1143
 type TNonSpare1987 = 'GNonSpare "TAO" "Transponder Antenna Offset" TRuleVariation1096
 type TItem1053 = 'GItem TNonSpare1987
-type TVariation1429 = 'GExtended '[ 'Just TItem342, 'Just TItem1182, 'Just TItem840, 'Just TItem893, 'Nothing, 'Just TItem768, 'Just TItem1106, 'Nothing, 'Just TItem1136, 'Just TItem650, 'Just TItem911, 'Nothing, 'Just TItem256, 'Just TItem276, 'Nothing, 'Just TItem1046, 'Just TItem149, 'Nothing, 'Just TItem1053, 'Nothing]
+type TVariation1429 = 'GExtended '[ 'Just TItem342, 'Just TItem1182, 'Just TItem840, 'Just TItem893, 'Nothing, 'Just TItem768, 'Just TItem1106, 'Nothing, 'Just TItem1136, 'Just TItem650, 'Just TItem911, 'Nothing, 'Just TItem256, 'Just TItem276, 'Nothing, 'Just TItem1046, 'Just TItem149, 'Nothing, 'Just TItem1053, 'Just TItem26, 'Nothing]
 type TRuleVariation1345 = 'GContextFree TVariation1429
 type TNonSpare1931 = 'GNonSpare "STA" "Aircraft Status" TRuleVariation1345
 type TExpansion1 = 'GExpansion ('Just 1) '[ 'Just TNonSpare750, 'Just TNonSpare1847, 'Just TNonSpare1463, 'Just TNonSpare1098, 'Just TNonSpare1845, 'Just TNonSpare1931, 'Just TNonSpare2044, 'Just TNonSpare1377]
