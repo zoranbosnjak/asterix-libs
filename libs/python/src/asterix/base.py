@@ -576,7 +576,9 @@ class Spare(ItemBase):
         return cls._parse(bs)
 
     @classmethod
-    def create(cls, arg: int) -> 'Spare':
+    def create(cls, arg: Union['Spare', int]) -> 'Spare':
+        if isinstance(arg, Spare):
+            return arg
         bs = Bits.from_uinteger(arg, cls.cv_bit_offset8, cls.cv_bit_size)
         return cls(bs)
 
