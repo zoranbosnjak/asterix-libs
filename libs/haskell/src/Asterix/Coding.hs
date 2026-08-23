@@ -884,6 +884,13 @@ class MkRepetitive t2 t1 | t2 -> t1 where
     type RepetitiveInputList t2 :: Type -> Type
     repetitive :: RepetitiveInputList t2 t1 -> t2
 
+rebuildRepetitiveRegular :: Int -> [UVariation] -> SBuilder
+rebuildRepetitiveRegular nBytes lst =
+    let n = integerToBits 0 (nBytes*8)
+            (fromIntegral $ Prelude.length lst)
+        items = fmap unparse lst
+    in bitsToSBuilder $ concatBits (n NE.:| items)
+
 instance
     ( KnownNat n
     ) => MkRepetitive
@@ -898,12 +905,19 @@ instance
         lst2 = fmap unVariation lst1
 
         bld :: SBuilder
-        bld =
-            let nBytes = fromIntegral $ natVal (Proxy @n)
-                n = integerToBits 0 (nBytes*8)
-                    (fromIntegral $ Prelude.length lst2)
-                items = fmap unparse lst1
-            in bitsToSBuilder $ concatBits (n NE.:| items)
+        bld = rebuildRepetitiveRegular (fromIntegral $ natVal (Proxy @n)) lst2
+
+rebuildRepetitiveFx :: NE.NonEmpty UVariation -> SBuilder
+rebuildRepetitiveFx
+    = bitsToSBuilder
+    . concatBits
+    . NE.reverse
+    . NE.zipWith addFx (False NE.:| repeat True)
+    . NE.reverse
+    . fmap unparse
+  where
+    addFx :: Bool -> Bits -> Bits
+    addFx flag arg = appendBits arg (boolsToBits 7 [flag])
 
 instance MkRepetitive
         (Variation ('GRepetitive 'GRepetitiveFx var))
@@ -911,21 +925,13 @@ instance MkRepetitive
       where
     type RepetitiveInputList
         (Variation ('GRepetitive 'GRepetitiveFx var)) = NE.NonEmpty
-    repetitive lst1 = Variation $ URepetitive (bld lst1) lst2
+    repetitive lst1 = Variation $ URepetitive bld lst2
       where
         lst2 :: [UVariation]
         lst2 = fmap unVariation (NE.toList lst1)
 
-        addFx :: Bool -> Bits -> Bits
-        addFx flag arg = appendBits arg (boolsToBits 7 [flag])
-
-        bld :: NE.NonEmpty (Variation var) -> SBuilder
-        bld = bitsToSBuilder
-            . concatBits
-            . NE.reverse
-            . NE.zipWith addFx (False NE.:| repeat True)
-            . NE.reverse
-            . fmap unparse
+        bld :: SBuilder
+        bld = rebuildRepetitiveFx (fmap unVariation lst1)
 
 instance
     ( MkRepetitive (Variation var) ts1

@@ -27,8 +27,8 @@ ghcid --no-title --lint "--command=ghci \
 
 # run tests
 runhaskell -Wall -isrc -itest test/Main.hs
-find . | grep "\.hs" | entr sh -c 'clear && date && runhaskell -Wall -isrc -itest test/Main.hs'
-cabal bench
+find . | grep "\.hs" \
+    | entr sh -c 'clear && date && runhaskell -Wall -isrc -itest test/Main.hs'
 
 # build documentation
 cabal haddock --enable-documentation

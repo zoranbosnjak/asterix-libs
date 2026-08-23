@@ -62,6 +62,7 @@
 - ignore: {name: Use if}
 - ignore: {name: Use curry}
 - ignore: {name: Redundant <$>}
+- ignore: {name: Use head}
 
 # Define some custom infix operators
 # - fixity: infixr 3 ~^#^~

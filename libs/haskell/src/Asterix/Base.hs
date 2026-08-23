@@ -96,6 +96,10 @@ RawDatablock(..)
 , HListAppend(..)
 , FoldHList(..)
 
+-- * Schema and manifest
+, latestEditions
+, latestEditionsBasic
+, latestEditionsExpansion
 ) where
 
 import           Control.Applicative
@@ -113,6 +117,7 @@ import           Data.Kind                 (Type)
 import qualified Data.List                 as L
 import           Data.Map                  (Map)
 import qualified Data.Map                  as Map
+import qualified Data.Map.Merge.Lazy       as Map
 import           Data.Maybe
 import           Data.Proxy
 import           Data.String               as S
@@ -888,4 +893,39 @@ processDatablocks mapping bs = fmap go <$> parseRawDatablocks bs
 -- | Unparse RawDatablock.
 unparseRawDatablock :: RawDatablock -> Builder
 unparseRawDatablock = BSB.byteString . unRawDatablock
+
+-- | Helper function to select newer edition, augmented with some schema.
+maxOn :: Ord b => (a -> b) -> a -> a -> a
+maxOn f x1 x2
+    | f x1 > f x2 = x1
+    | otherwise = x2
+
+-- | Extract latest editions from given manifest.
+latestEditions
+    :: forall a. (VAsterix -> Maybe (VInt, VEdition, a)) -- selector function
+    -> [VAsterix]                                        -- manifest
+    -> Map VInt (VEdition, a)
+latestEditions f = foldr g mempty
+  where
+    g :: VAsterix -> Map Int (VEdition, a) -> Map Int (VEdition, a)
+    g sch acc = case f sch of
+        Nothing -> acc
+        Just (cat, ed, val) -> Map.merge
+            Map.preserveMissing
+            Map.preserveMissing
+            (Map.zipWithMatched (const (maxOn fst)))
+            acc
+            (Map.singleton cat (ed, val))
+
+-- | Extract latest editions of basic cats from given manifest.
+latestEditionsBasic :: [VAsterix] -> Map VInt (VEdition, VUap)
+latestEditionsBasic = latestEditions $ \case
+    GAsterixBasic cat ed sch -> Just (cat, ed, sch)
+    GAsterixExpansion {} -> Nothing
+
+-- | Extract latest editions of expansions from given manifest.
+latestEditionsExpansion :: [VAsterix] -> Map VInt (VEdition, VExpansion)
+latestEditionsExpansion = latestEditions $ \case
+    GAsterixBasic {} -> Nothing
+    GAsterixExpansion cat ed sch -> Just (cat, ed, sch)
 
