@@ -1,13 +1,13 @@
 -- This program generates samples of all categories, with all data bits set to
 -- 0 and 1.
 
-import           Control.Monad (forM_)
-import           Data.Map as Map
+import           Control.Monad     (forM_)
+import           Data.Map          as Map
 
-import           Asterix.Generated (manifest)
 import           Asterix.Coding
+import           Asterix.Generated (manifest)
 
-import           Common (sampleRecords)
+import           Common            (sampleRecords)
 
 main :: IO ()
 main = forM_ (Map.assocs $ latestEditionsBasic manifest) $ \(cat, (ed, uap)) -> do

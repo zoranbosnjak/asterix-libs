@@ -2,7 +2,7 @@
 """
 
 import copy
-from itertools import chain, dropwhile
+from itertools import chain, dropwhile, repeat
 from dataclasses import dataclass
 from binascii import hexlify, unhexlify
 from typing import *
@@ -1021,6 +1021,15 @@ class Fspec:
         (a, b) = s.split_at(n * 8)
         return (cls(a), b)
 
+    @classmethod
+    def iter_complete(cls, flags: Any, items: List[Any]) \
+            -> Iterator[Tuple[bool, Any]]:
+        """Make sure to visit all FSPEC bits, even after the last defined
+        item. This is important, to let the caller check all FSPEC bits."""
+
+        for (a, b) in zip(flags, chain(items, repeat(None))):
+            yield (a, b)
+
     def __iter__(self) -> Iterator[bool]:
         n = 0
         for flag in self.bs:
@@ -1089,7 +1098,7 @@ class Compound(Variation):
             return result
         fspec, remaining = result
         items = {}
-        for (flag, nsp) in zip(fspec, cls.cv_items_list):
+        for (flag, nsp) in Fspec.iter_complete(fspec, cls.cv_items_list):
             if not flag:
                 continue
             if nsp is None:
@@ -1289,7 +1298,7 @@ class Record:
         fspec, remaining = result
         items1: Dict[str, NonSpare] = {}
         items2: List[Optional[List[Tuple[str, NonSpare]]]] = []
-        for (flag, i) in zip(fspec, cls.cv_items_list):
+        for (flag, i) in Fspec.iter_complete(fspec, cls.cv_items_list):
             if not flag:
                 continue
             if issubclass(i, UapItemSpare):
@@ -1338,7 +1347,7 @@ class Record:
                 break
             elif issubclass(i, UapItem):
                 nsp = i.cv_non_spare
-                result2 = nsp.parse(remaining)  # type: ignore
+                result2 = nsp.parse(remaining)
                 if isinstance(result2, ValueError):
                     if pm == ParsingMode.StrictParsing:
                         return result2
@@ -1589,7 +1598,7 @@ class Expansion:
         else:
             raise Exception('Unexpected cv_type', a)
         items = {}
-        for (flag, nsp) in zip(flags, cls.cv_items_list):
+        for (flag, nsp) in Fspec.iter_complete(flags, cls.cv_items_list):
             if not flag:
                 continue
             if nsp is None:

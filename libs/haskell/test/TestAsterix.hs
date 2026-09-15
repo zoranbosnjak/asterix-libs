@@ -61,6 +61,7 @@ tests = testGroup "Asterix"
     , testCase "testExplicit3b" testExplicit3b
     , testCase "testExplicit3c" testExplicit3c
     , testCase "testCompound0" testCompound0
+    , testCase "testCompoundFspecError" testCompoundFspecError
     , testCase "testCompound1" testCompound1
     , testCase "testCompoundSet" testCompoundSet
     , testCase "testCompoundDel" testCompoundDel
@@ -631,6 +632,18 @@ testCompound0 = do
         act = parseNonSpare (schema @(RecordOf Cat_000_1_0 ~> "091") Proxy)
         result = parse @StrictParsing act bs
     assertEqual "result" True (isLeft result)
+
+testCompoundFspecError :: Assertion
+testCompoundFspecError = do
+    let -- error: fspec bit is set between 'I1' and 'I2'
+        bs1 = fromJust $ unhexlify "c01122"
+        -- error: fspec bit is set between 'I1' and 'I2'
+        bs2 = fromJust $ unhexlify "a21122"
+        act = parseNonSpare (schema @(RecordOf Cat_000_1_0 ~> "092") Proxy)
+        result1 = parse @StrictParsing act bs1
+        result2 = parse @StrictParsing act bs2
+    assertEqual "result1" True (isLeft result1)
+    assertEqual "result2" True (isLeft result2)
 
 testCompound1 :: Assertion
 testCompound1 = do

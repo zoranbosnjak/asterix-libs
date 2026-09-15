@@ -575,6 +575,16 @@ def test_compound0() -> None:
     assert isinstance(result, ValueError)
 
 
+def test_compound_fspec_error() -> None:
+    T = Cat_000_1_0.cv_record.spec('092')
+    # error: fspec bit is set between 'I1' and 'I2'
+    result1 = T.parse(Bits.from_bytes(unhexlify('c01122')))
+    assert isinstance(result1, ValueError)
+    # error: fspec bit is set after 'I2'
+    result2 = T.parse(Bits.from_bytes(unhexlify('a21122')))
+    assert isinstance(result2, ValueError)
+
+
 def test_compound1() -> None:
     T = Cat_000_1_0.cv_record.spec('093')
     with pytest.raises(ValueError):
@@ -1164,26 +1174,29 @@ def test_empty() -> None:
     rec2 = Cat_000_1_0.cv_record.create({})
     assert rec2.is_empty()
 
+
 def _test_roundtrip(num_records: int) -> None:
     """For each specification and edition, create a few records,
     encode, decode, expect the same result."""
 
     def check(Spec: AstCat, r: Record) -> None:
-        records = list([r]*num_records)
+        records = list([r] * num_records)
         bs = b''.join([r.unparse().to_bytes() for r in records])
         if m_name is None:
-            result = Spec.cv_uap.parse(Bits.from_bytes(bs)) # type: ignore
+            result = Spec.cv_uap.parse(Bits.from_bytes(bs))  # type: ignore
         else:
-            result = Spec.cv_uap.parse(m_name, Bits.from_bytes(bs)) # type: ignore
+            result = Spec.cv_uap.parse(  # type: ignore
+                m_name, Bits.from_bytes(bs))
         assert not isinstance(result, ValueError)
         bs2 = b''.join([r.unparse().to_bytes() for r in result])
         assert bs2 == bs
 
-    for lst in manifest['CATS'].values(): # type: ignore
+    for lst in manifest['CATS'].values():  # type: ignore
         for Spec in lst:
             for (m_name, r1, r2) in sample_records(Spec):
                 check(Spec, r1)
                 check(Spec, r2)
+
 
 def test_roundtrip() -> None:
     _test_roundtrip(5)

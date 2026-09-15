@@ -4,6 +4,7 @@ from typing import *
 
 from asterix.base import *
 
+
 def populate_record(val: bool, Rec: Type[Record]) -> Record:
     """Create record with all items set to zero/one."""
 
@@ -15,11 +16,13 @@ def populate_record(val: bool, Rec: Type[Record]) -> Record:
             return Var.create(tuple(items))
         elif issubclass(Var, Extended):
             Groups = Var.cv_items_list
+
             def mk_ext_item(Arg: Any) -> Any:
                 if Arg is None:
                     return None
                 (I, _O) = Arg
                 return mk_item(I)
+
             def mk_ext_group(G: Any) -> Any:
                 return tuple([mk_ext_item(Arg) for Arg in G])
             groups = tuple([mk_ext_group(G) for G in Groups])
@@ -30,7 +33,8 @@ def populate_record(val: bool, Rec: Type[Record]) -> Record:
         elif issubclass(Var, Explicit):
             return Var.create(b'')
         elif issubclass(Var, Compound):
-            d = {key: mk_nonspare(Nsp) for (key, Nsp) in Var.cv_items_dict.items()}
+            d = {key: mk_nonspare(Nsp)
+                 for (key, Nsp) in Var.cv_items_dict.items()}
             return Var.create(d)
         else:
             raise Exception('Unexpected', Var)
@@ -55,7 +59,8 @@ def populate_record(val: bool, Rec: Type[Record]) -> Record:
             raise Exception('Unexpected', I)
 
     d = {key: mk_nonspare(Nsp) for (key, Nsp) in Rec.cv_items_dict.items()}
-    return Rec.create(d) # type: ignore
+    return Rec.create(d)  # type: ignore
+
 
 def sample_records(Spec: AstCat) -> List[Tuple[Optional[str], Record, Record]]:
     """Generate sample records from the given spec.
@@ -82,4 +87,3 @@ def sample_records(Spec: AstCat) -> List[Tuple[Optional[str], Record, Record]]:
         raise Exception('Unexpected', Uap)
 
     return result
-

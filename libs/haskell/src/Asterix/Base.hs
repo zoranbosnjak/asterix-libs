@@ -572,7 +572,12 @@ parseFspec pm definedItems = do
             | otherwise = (a+1) * 7
     when (n == 0) $ parsingError "empty fspec"
     case pm of
-        StrictParsing  -> when (n > maxSize) $ parsingError "fspec too big"
+        StrictParsing  -> do
+            -- check max size
+            when (n > maxSize) $ parsingError "fspec too big"
+            -- check trailing bits, expect all zero
+            when (or $ drop definedItems result) $
+                parsingError "unexpected fspec bit set"
         PartialParsing -> pure ()
     pure $ Fspec $ take definedItems result
   where
