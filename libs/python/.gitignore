@@ -1,3 +1,5 @@
+readme-samples/*.py
+.entangled/
 .mypy_cache/
 .pytest_cache/
 .hypothesis/

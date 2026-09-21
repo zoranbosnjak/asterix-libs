@@ -33,3 +33,10 @@ file directly. For example.
 hsh=...
 cabal2nix --revision ${hsh} https://github.com/user/proj.git > nix/proj.nix
 ```
+
+## entangled
+
+Unfortunately the `entangled` tool is not yet part of `nix` (see:
+<https://github.com/entangled/entangled.py/issues/64>).
+Manually created `./entangled.nix` is a workaround.
+

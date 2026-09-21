@@ -62,7 +62,7 @@ cabal upload --publish -d dist-newstyle/libasterix*docs.tar.gz
 
 # cleanup
 rm -rf dist-newstyle/
-exit
+exit # from nix-shell
 ```
 
 ## Running examples from README.md file
@@ -73,16 +73,14 @@ Unfortunately the `entangled` tool is not yet part of `nix` (see:
 install the tool and check the examples is currently manual:
 
 ```bash
-sudo apt install python3-venv           # install virtual env under ubuntu
-python3 -m venv env                     # create new virtual environment
-source env/bin/activate                 # and activate it
-pip install entangled_cli               # install entangled to that environment
-entangled --version
+nix-shell
 entangled tangle                        # extract code snippets from README.md
 ./readme-samples/run-samples.sh         # run all samples
 
 # or monitor README.md file and re-run samples automatically
 echo README.md | entr sh -c \
     'clear && date && entangled tangle && ./readme-samples/run-samples.sh'
+
+exit # from nix-shell
 ```
 

@@ -54,6 +54,8 @@ let
       buildInputs = oldAttrs.buildInputs ++ deps;
   });
 
+  entangled-cli = import ../../nix/entangled.nix { };
+
   env = haskellPackages.shellFor {
     packages = p: with p; [
       drv
@@ -66,6 +68,7 @@ let
       cabal-install
       pkgs.ghcid
       pkgs.cabal2nix
+      entangled-cli
     ];
 
     withHoogle = withHoogle;

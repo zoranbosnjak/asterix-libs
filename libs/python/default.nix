@@ -52,11 +52,14 @@ let
     '';
   };
 
+  entangled-cli = import ../../nix/entangled.nix { };
+
   env = pkgs.stdenv.mkDerivation rec {
     name = "python-environment";
     buildInputs = [
       customPython
       code-generator
+      entangled-cli
     ];
     LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     shellHook = ''
