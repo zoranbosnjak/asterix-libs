@@ -1,10 +1,12 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module TestRawDatablock (tests) where
 
 import           Data.ByteString         (ByteString)
 import qualified Data.ByteString         as BS
 import           Data.ByteString.Builder as BSB
 import           Data.Either
-import           Data.Maybe
+import           Data.Text               (Text)
 import           Data.Word
 import           Test.Tasty
 import           Test.Tasty.HUnit
@@ -12,6 +14,7 @@ import           Test.Tasty.QuickCheck
 
 import           Asterix.Base
 import           Asterix.BitString
+import           Common
 
 allowCategory :: Word8 -> RawDatablock -> Bool
 allowCategory n db = rawDatablockCategory db == n
@@ -27,18 +30,18 @@ reverseDatablocks s = case parseRawDatablocks s of
     Right lst -> mconcat (unparseRawDatablock <$> reverse lst)
 
 -- e.g.: received from the network
-samples :: [String]
+samples :: [Text]
 samples =
     [ "01000401" -- cat1
     , "01000401" -- cat1
     , "02000402" -- cat2
     ]
 
-allZeros :: String
+allZeros :: Text
 allZeros = "00000000000000000000"
 
 datagramIn :: ByteString
-datagramIn = fromJust $ unhexlify $ mconcat samples
+datagramIn = unhexlify $ mconcat samples
 
 tests :: TestTree
 tests = testGroup "RawDatablock"
@@ -49,10 +52,10 @@ tests = testGroup "RawDatablock"
     , testCase "filter 1" $ checkFilter 1 cat1
     , testCase "filter 2" $ checkFilter 2 cat2
     , testCase "reverse" $ assertEqual "sample"
-        (fromJust $ unhexlify $ mconcat $ reverse samples)
+        (unhexlify $ mconcat $ reverse samples)
         (builderToByteStringSlow $ reverseDatablocks datagramIn)
     , testCase "all zeros" $ assertEqual "sample"
-        True (isLeft $ parseRawDatablocks $ fromJust $ unhexlify allZeros)
+        True (isLeft $ parseRawDatablocks $ unhexlify allZeros)
     , testProperty "random input" $ withMaxSuccess 10_000 $ \(lst :: [Word8]) ->
         let bs = BS.pack lst
             result = parseRawDatablocks bs

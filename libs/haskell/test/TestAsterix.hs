@@ -2,8 +2,9 @@
 
 -- Remark: Keep asterix test scenarios synchronized between implementations.
 
-{-# LANGUAGE DataKinds  #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE LambdaCase        #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module TestAsterix
 ( tests
@@ -323,7 +324,7 @@ testGroup3 = do
 testExtended1 :: Assertion
 testExtended1 = do
     let act = parseNonSpare (schema @(RecordOf Cat_000_1_0 ~> "053") Proxy)
-        bs = fromJust $ unhexlify "80"
+        bs = unhexlify "80"
         env = Env parsingStore bs
         result = runParsing act env 0
     (_obj, o) <- either (assertFailure . show) pure result
@@ -374,7 +375,7 @@ testExtended1 = do
 testExtended2 :: Assertion
 testExtended2 = do
     let act = parseNonSpare (schema @(RecordOf Cat_000_1_0 ~> "054") Proxy)
-        bs = fromJust $ unhexlify "80"
+        bs = unhexlify "80"
         env = Env parsingStore bs
         result = runParsing act env 0
     (_obj, o) <- either (assertFailure . show) pure result
@@ -447,7 +448,7 @@ testExtended4 = do
     -- Create extended sample with last FX bit set to '1' (wrong).
     -- Parsing shall fail in this case.
     let act = parseNonSpare (schema @(RecordOf Cat_000_1_0 ~> "053") Proxy)
-        bs = fromJust $ unhexlify "010101"
+        bs = unhexlify "010101"
         env = Env parsingStore bs
         result = runParsing act env 0
     assertEqual "failure" True (isLeft result)
@@ -497,7 +498,7 @@ testRepetitive3 = do
 
 testExplicit0 :: Assertion
 testExplicit0 = do
-    let bs = fromJust $ unhexlify "00"
+    let bs = unhexlify "00"
         act = parseNonSpare (schema @(RecordOf Cat_000_1_0 ~> "071") Proxy)
         result = parse @StrictParsing act bs
     assertEqual "result" True (isLeft result)
@@ -505,10 +506,10 @@ testExplicit0 = do
 testExplicit1 :: Assertion
 testExplicit1 = do
     let obj :: NonSpare (RecordOf Cat_000_1_0 ~> "071")
-        obj = explicit $ fromJust $ unhexlify "010203"
+        obj = explicit $ unhexlify "010203"
     assertUnparse "04010203" obj
     assertEqual "data"
-        (byteStringToBits (fromJust $ unhexlify "010203"))
+        (byteStringToBits (unhexlify "010203"))
         (getExplicitData $ getVariation obj)
 
 testExplicit2 :: Assertion
@@ -628,7 +629,7 @@ testExplicit3c = do
 
 testCompound0 :: Assertion
 testCompound0 = do
-    let bs = fromJust $ unhexlify "0100"
+    let bs = unhexlify "0100"
         act = parseNonSpare (schema @(RecordOf Cat_000_1_0 ~> "091") Proxy)
         result = parse @StrictParsing act bs
     assertEqual "result" True (isLeft result)
@@ -636,9 +637,9 @@ testCompound0 = do
 testCompoundFspecError :: Assertion
 testCompoundFspecError = do
     let -- error: fspec bit is set between 'I1' and 'I2'
-        bs1 = fromJust $ unhexlify "c01122"
+        bs1 = unhexlify "c01122"
         -- error: fspec bit is set between 'I1' and 'I2'
-        bs2 = fromJust $ unhexlify "a21122"
+        bs2 = unhexlify "a21122"
         act = parseNonSpare (schema @(RecordOf Cat_000_1_0 ~> "092") Proxy)
         result1 = parse @StrictParsing act bs1
         result2 = parse @StrictParsing act bs2
@@ -728,7 +729,7 @@ testCompoundDel = do
 
 testRecordEmpty :: Assertion
 testRecordEmpty = do
-    let bs = fromJust $ unhexlify "0101010100"
+    let bs = unhexlify "0101010100"
         env = Env parsingStore bs
         actStrict  = parseRecord @StrictParsing (schema @(RecordOf Cat_000_1_0) Proxy)
         actPartial = parseRecord @PartialParsing (schema @(RecordOf Cat_000_1_0) Proxy)
@@ -808,7 +809,7 @@ testRecord1RFS = do
                *: nil )
            *: nil )
         bs = "410104030602AA02550112340A03040B03040C01FF"
-        bs' = fromJust $ unhexlify bs
+        bs' = unhexlify bs
     assertUnparse bs withRfs
 
     let _i000 = fromJust $ getItem @"000" withRfs
@@ -832,7 +833,7 @@ testRecordMultipleRFS = do
     let check r expected = do
             assertUnparse expected r
             let act = parseRecord (schema @(RecordOf Cat_003_1_0) Proxy)
-                bs = fromJust $ unhexlify expected
+                bs = unhexlify expected
                 result = parse @StrictParsing act bs
             readback <- either (assertFailure . show) pure result
             assertEqual "readback" (toBits bs) (unparse readback)
@@ -931,13 +932,13 @@ testCreateDatagram = do
            *: nil )
         datagram :: SBuilder = unparse db0 <> unparse db1
     assertEqual "unparse"
-        (fromJust $ unhexlify "000009800001800002010009800001800002")
+        (unhexlify "000009800001800002010009800001800002")
         (toByteString datagram)
 
 testParse1 :: Assertion
 testParse1 = forM_ samples $ \sample -> do
     let act = parseRecord (schema @(RecordOf Cat_000_1_0) Proxy)
-        bs = fromJust $ unhexlify sample
+        bs = unhexlify sample
         env = Env @StrictParsing parsingStore bs
         result = runParsing act env 0
     (r, o) <- either (assertFailure . show) pure result

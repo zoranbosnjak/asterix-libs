@@ -3,7 +3,8 @@
 --
 -- Bits and bytes manipulation module.
 
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE LambdaCase        #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Asterix.BitString where
 
@@ -12,14 +13,14 @@ import           Data.Bits               (complement, shift, testBit, (.&.),
 import           Data.Bool
 import           Data.ByteString         (ByteString)
 import qualified Data.ByteString         as BS
-import qualified Data.ByteString.Base16  as B16
 import           Data.ByteString.Builder as BSB
-import qualified Data.ByteString.Char8   as BS8
 import qualified Data.ByteString.Lazy    as BSL
 import           Data.Coerce
 import qualified Data.List               as L
 import           Data.List.NonEmpty      (NonEmpty (..), uncons)
 import           Data.Maybe
+import           Data.Text               (Text)
+import qualified Data.Text               as T
 import           Data.Word
 import           GHC.Stack
 
@@ -87,14 +88,6 @@ class ToBits t where
 class ToFromByteString t where
     toByteString :: t -> ByteString
     fromByteString :: ByteString -> t
-
--- | Convert bytestring to hex representation.
-hexlify :: BS.ByteString -> String
-hexlify = BS8.unpack . B16.encode
-
--- | Convert hex representation back to a bytestring.
-unhexlify :: String -> Maybe BS.ByteString
-unhexlify = either (const Nothing) Just . B16.decode . BS8.pack
 
 -- | Helper function for expression evaluation.
 withAssumption :: HasCallStack => Bool -> a -> a
@@ -269,9 +262,19 @@ bitsToSBuilder arg = SBuilder
 word8ToSBuilder :: Word8 -> SBuilder
 word8ToSBuilder = SBuilder 1 . BSB.word8
 
+-- | Convert 'ByteString' to 'SBuilder'.
+byteStringToSBuilder :: ByteString -> SBuilder
+byteStringToSBuilder bs = SBuilder (BS.length bs) (byteString bs)
+
+-- | Convert 'LazyByteString' to 'SBuilder'.
+lazyByteStringToSBuilder :: BSL.ByteString -> SBuilder
+lazyByteStringToSBuilder bs = SBuilder
+    (fromIntegral $ BSL.length bs)
+    (lazyByteString bs)
+
 -- | Show value as binary string.
-debugBits :: ToBits t => t -> String
-debugBits val = mconcat $ L.intersperse " " (goOctet <$> octets)
+debugBits :: ToBits t => t -> Text
+debugBits val = mconcat $ L.intersperse " " (T.pack . goOctet <$> octets)
   where
     Bits bs o n' = toBits val
     n = numBitsToInt n'
@@ -279,7 +282,11 @@ debugBits val = mconcat $ L.intersperse " " (goOctet <$> octets)
     (m, b) = requiredBytes o8 n
     k = bool m (pred m) (b == 0)
     a = numBytes o
+
+    octets :: [Int]
     octets = [a .. (a+k)]
+
+    goOctet :: Int -> String
     goOctet ix =
         let w = BS.index bs ix
         in do

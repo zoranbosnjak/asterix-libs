@@ -1,14 +1,17 @@
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE LambdaCase        #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module TestBits (tests) where
 
 import qualified Data.ByteString       as BS
+import qualified Data.Text             as T
 
 import           Test.Tasty
 import           Test.Tasty.HUnit
 import           Test.Tasty.QuickCheck as QC
 
 import           Asterix.BitString
+import           Common
 
 tests :: TestTree
 tests = testGroup "Bits"
@@ -69,7 +72,7 @@ testBitsDebug = testGroup "debugBits" (fmap check samples)
 testBsToBools :: TestTree
 testBsToBools = testGroup "BsToBools" (fmap check samples)
   where
-    check (x, y) = testCase (hexlify $ BS.pack x) $
+    check (x, y) = testCase (T.unpack . hexlify $ BS.pack x) $
         bitsToBools (byteStringToBits $ BS.pack x) @?= y
     samples =
         [ ([], [])

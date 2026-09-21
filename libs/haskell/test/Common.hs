@@ -2,14 +2,25 @@
 
 module Common where
 
+import           Data.Base16.Types      (assertBase16, extractBase16)
 import           Data.Bool
+import qualified Data.ByteString        as BS
+import qualified Data.ByteString.Base16 as B16
 import           Data.Char
-import qualified Data.List.NonEmpty as NE
-import           Data.Maybe
+import qualified Data.List.NonEmpty     as NE
+import           Data.Text              (Text)
 import           Test.Tasty.HUnit
 
 import           Asterix.Base
 import           Asterix.Coding
+
+-- | Convert bytestring to hex representation.
+hexlify :: BS.ByteString -> Text
+hexlify = extractBase16 . B16.encodeBase16
+
+-- | Convert hex representation to bytestring.
+unhexlify :: Text -> BS.ByteString
+unhexlify = B16.decodeBase16' . assertBase16
 
 approximately :: (Ord a, Fractional a) => a -> a -> a -> Bool
 approximately err a b = abs (b - a) / a < err
@@ -22,9 +33,9 @@ assertApproximately name err a b = assertEqual name True
 assertUint :: Unparsing Bits t => Integer -> t -> Assertion
 assertUint n obj = assertEqual "uint" n (asUint obj)
 
-assertUnparse :: Unparsing Bits t => String -> t -> Assertion
+assertUnparse :: Unparsing Bits t => Text -> t -> Assertion
 assertUnparse s obj = assertEqual "unparse"
-        (debugBits @Bits $ byteStringToBits (fromJust $ unhexlify s))
+        (debugBits @Bits $ byteStringToBits (unhexlify s))
         (debugBits @Bits $ unparse obj)
 
 assertOne :: [a] -> IO a
@@ -32,8 +43,8 @@ assertOne [x] = pure x
 assertOne _   = assertFailure "expecting list of length 1"
 
 data StResult
-    = Bin String
-    | Hex String
+    = Bin Text
+    | Hex Text
 
 checkBits :: Unparsing Bits a => String -> a -> StResult -> Assertion
 checkBits name x = \case

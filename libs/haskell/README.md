@@ -23,15 +23,29 @@ Features:
 -- | file: readme-samples/example0.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 import Data.Maybe
 import Data.ByteString (ByteString)
+import Data.Text (Text)
+import qualified Data.Text.IO as T
+import qualified Data.ByteString as BS
+import qualified Data.ByteString.Base16 as B16
+import Data.Base16.Types (assertBase16, extractBase16)
 import Asterix.Coding
 import Asterix.Generated as Gen
 
 assert :: Bool -> IO ()
 assert True = pure ()
 assert False = error "Assertion error"
+
+-- | Convert bytestring to hex representation.
+hexlify :: BS.ByteString -> Text
+hexlify = extractBase16 . B16.encodeBase16
+
+-- | Convert hex representation back to a bytestring.
+unhexlify :: Text -> BS.ByteString
+unhexlify = B16.decodeBase16' . assertBase16
 
 -- Select particular asterix categories and editions
 type Cat034 = Gen.Cat_034_1_29
@@ -131,7 +145,7 @@ decode rxBytes = fromRight $ do
         ssr = asString $ getItem @"MODE3A" i070
 
 expected :: ByteString
-expected = fromJust $ unhexlify "220007c0010201220008d00102020030000c9801020a0020000fff220008d001020220"
+expected = unhexlify "220007c0010201220008d00102020030000c9801020a0020000fff220008d001020220"
 
 main :: IO ()
 main = do
@@ -139,7 +153,7 @@ main = do
     print ("sending message: " <> show txMessage)
     let datablocks = fmap encode txMessage
         tx = toByteString $ mconcat datablocks
-    putStrLn ("bytes on the wire: " <> hexlify tx)
+    T.putStrLn ("bytes on the wire: " <> hexlify tx)
     assert (tx == expected)
 
     -- decode bytes back to message, expect the same message
@@ -353,22 +367,34 @@ main = do
 ```haskell
 -- | file: readme-samples/catflt.hs
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 import Control.Monad
-import Data.Maybe
 import Data.ByteString (ByteString)
+import Data.Text (Text)
+import qualified Data.ByteString.Base16 as B16
+import Data.Base16.Types (assertBase16, extractBase16)
+import qualified Data.Text.IO as T
 import Asterix.Coding
+
+-- | Convert bytestring to hex representation.
+hexlify :: ByteString -> Text
+hexlify = extractBase16 . B16.encodeBase16
+
+-- | Convert hex representation back to a bytestring.
+unhexlify :: Text -> ByteString
+unhexlify = B16.decodeBase16' . assertBase16
 
 -- UDP rx test function
 receiveFromUdp :: IO ByteString
-receiveFromUdp = pure $ fromJust $ unhexlify $ join
+receiveFromUdp = pure $ unhexlify $ mconcat
     [ "01000401" -- cat1 datablock
     , "02000402" -- cat2 datablock
     ]
 
 -- UDP tx test function
 sendToUdp :: SBuilder -> IO ()
-sendToUdp = putStrLn . hexlify . toByteString
+sendToUdp = T.putStrLn . hexlify . toByteString
 
 main :: IO ()
 main = do
@@ -392,11 +418,15 @@ main = do
 -- | file: readme-samples/rewrite-sacsic.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE MonoLocalBinds #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 import GHC.TypeLits
-import Data.Maybe
 import Data.Either
 import Data.ByteString (ByteString)
+import qualified Data.ByteString.Base16 as B16
+import Data.Base16.Types (assertBase16, extractBase16)
+import Data.Text (Text)
+import qualified Data.Text.IO as T
 
 import Asterix.Coding
 import Asterix.Generated as Gen
@@ -408,6 +438,14 @@ type Cat063 = Gen.Cat_063_1_6
 
 -- All of the following types have the same item "010"
 type TSacSic = SameType '[ Cat048 ~> "010", Cat062 ~> "010", Cat063 ~> "010"]
+
+-- | Convert bytestring to hex representation.
+hexlify :: ByteString -> Text
+hexlify = extractBase16 . B16.encodeBase16
+
+-- | Convert hex representation back to a bytestring.
+unhexlify :: Text -> ByteString
+unhexlify = B16.decodeBase16' . assertBase16
 
 handleDatablock :: forall cat.
     ( Schema (RecordOf cat) VRecord
@@ -453,7 +491,7 @@ readBytesFromTheNetwork = do
 
 -- Dummy tx function
 txBytesToTheNetwork :: SBuilder -> IO ()
-txBytesToTheNetwork = putStrLn . hexlify . toByteString
+txBytesToTheNetwork = T.putStrLn . hexlify . toByteString
 
 main :: IO ()
 main = do
@@ -461,11 +499,11 @@ main = do
     let newSacSic :: NonSpare TSacSic
         newSacSic = group (1 *: 2 *: nil)
         sOutput = rewriteSacSic newSacSic sInput
-        expected = fromJust $ unhexlify
+        expected = unhexlify
             "300011900102000000009001020000000030000a90010200000000"
     txBytesToTheNetwork sOutput
     case expected == toByteString sOutput of
-        True -> print "OK"
+        True -> putStrLn "OK"
         False -> error "unexpected output"
 ```
 
@@ -541,14 +579,23 @@ This example demonstrates required steps for constructing and parsing:
 ```haskell
 -- | file: readme-samples/ref.hs
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 import Data.Either
 import Data.Maybe
+import Data.Text (Text)
+import qualified Data.ByteString as BS
+import qualified Data.ByteString.Base16 as B16
+import Data.Base16.Types (assertBase16)
 import Asterix.Coding
 import Asterix.Generated as Gen
 
 type Spec = Gen.Cat_062_1_20
 type Ref  = Gen.Ref_062_1_3
+
+-- | Convert hex representation back to a bytestring.
+unhexlify :: Text -> BS.ByteString
+unhexlify = B16.decodeBase16' . assertBase16
 
 assert :: Bool -> IO ()
 assert True = pure ()
@@ -578,7 +625,7 @@ main :: IO ()
 main = do
     let s = unparse @SBuilder db
         bs = toByteString s
-        expected = fromJust $ unhexlify
+        expected = unhexlify
             "3e001b8101010104010211c8010000000000020000010000028000"
     assert (bs == expected)
 
@@ -631,16 +678,23 @@ explicit about subitems, for example `["010", "SAC"]`.
 -- | file: readme-samples/generic-names.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 import Control.Monad
 import Data.Word
-import Data.Maybe
 import Data.Either
 import Data.Map as Map
+import Data.Text (Text)
 import Data.ByteString (ByteString)
+import qualified Data.ByteString.Base16 as B16
+import Data.Base16.Types (assertBase16)
 
 import Asterix.Coding
 import Asterix.Generated as Gen
+
+-- | Convert hex representation back to a bytestring.
+unhexlify :: Text -> ByteString
+unhexlify = B16.decodeBase16' . assertBase16
 
 specs :: Map Word8 VRecord
 specs = Map.fromList
@@ -652,7 +706,7 @@ specs = Map.fromList
 
 -- some test input bytes
 s :: ByteString
-s = mconcat $ fmap (fromJust . unhexlify)
+s = mconcat $ fmap unhexlify
     [ "3e00a5254327d835a95a0d0a2baf256af940e8a8d0caa1a594e1e525f2e32bc0448b"
     , "0e34c0b6211b5847038319d1b88d714b990a6e061589a414209d2e1d00ba5602248e"
     , "64092c2a0410138b2c030621c2043080fe06182ee40d2fa51078192cce70e9af5435"
@@ -676,7 +730,7 @@ main = do
     forM_ rawDatablocks $ \db -> do
         let cat = rawDatablockCategory db
         case Map.lookup cat specs of
-            Nothing -> print ("unsupported category", cat)
+            Nothing -> print ("unsupported category" :: String, cat)
             Just (GRecord sch) -> do
                 let act = parseRecords (GRecord sch)
                     records = fromRight (error "unexpected")
@@ -691,10 +745,23 @@ main = do
 -- | file: readme-samples/generic-zero.hs
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
 
-import Data.Maybe
+import Data.Text (Text)
+import qualified Data.Text.IO as T
+import qualified Data.ByteString as BS
+import qualified Data.ByteString.Base16 as B16
+import Data.Base16.Types (assertBase16, extractBase16)
 import Asterix.Coding
 import Asterix.Generated as Gen
+
+-- | Convert bytestring to hex representation.
+hexlify :: BS.ByteString -> Text
+hexlify = extractBase16 . B16.encodeBase16
+
+-- | Convert hex representation back to a bytestring.
+unhexlify :: Text -> BS.ByteString
+unhexlify = B16.decodeBase16' . assertBase16
 
 assert :: Bool -> IO ()
 assert True = pure ()
@@ -757,10 +824,10 @@ db = UDatablock bld records
 
 main :: IO ()
 main = do
-    let expected = fromJust $ unhexlify
+    let expected = unhexlify
             "3e0038bfe9bd5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
         result = toByteString $ unparse @SBuilder db
-    putStrLn $ hexlify result
+    T.putStrLn $ hexlify result
     assert (result == expected)
 ```
 
@@ -880,11 +947,23 @@ list termination `HNil`. For example:
 ```haskell
 -- | file: readme-samples/construct1.hs
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE OverloadedStrings #-}
 
-import Data.Maybe
-
+import Data.Text (Text)
+import qualified Data.Text.IO as T
+import qualified Data.ByteString as BS
+import qualified Data.ByteString.Base16 as B16
+import Data.Base16.Types (assertBase16, extractBase16)
 import Asterix.Coding
 import Asterix.Generated as Gen
+
+-- | Convert bytestring to hex representation.
+hexlify :: BS.ByteString -> Text
+hexlify = extractBase16 . B16.encodeBase16
+
+-- | Convert hex representation back to a bytestring.
+unhexlify :: Text -> BS.ByteString
+unhexlify = B16.decodeBase16' . assertBase16
 
 assert :: Bool -> IO ()
 assert True = pure ()
@@ -909,10 +988,10 @@ main :: IO ()
 main = do
     let sb :: SBuilder = unparse db062
         result = toByteString sb
-        expected = fromJust $ unhexlify
+        expected = unhexlify
             "3e0015911101100102003db34024304f820820029c"
     assert (result == expected)
-    putStrLn $ hexlify result
+    T.putStrLn $ hexlify result
 ```
 
 ### Parsing
@@ -1032,16 +1111,25 @@ such as `I062/380/IAS`.
 ```haskell
 -- | file: readme-samples/dep-content.hs
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 import Control.Monad
 import Data.Maybe
 import Data.Either
 import Data.ByteString (ByteString)
+import Data.Text (Text)
+import qualified Data.ByteString as BS
+import qualified Data.ByteString.Base16 as B16
+import Data.Base16.Types (assertBase16)
 
 import Asterix.Coding
 import Asterix.Generated as Gen
 
 type Spec = Gen.Cat_062_1_20
+
+-- | Convert hex representation back to a bytestring.
+unhexlify :: Text -> BS.ByteString
+unhexlify = B16.decodeBase16' . assertBase16
 
 assert :: Bool -> IO ()
 assert True = pure ()
@@ -1099,7 +1187,7 @@ db0 :: Datablock (DatablockOf Spec)
 db0 = datablock (rec0 *: rec1 *: rec2 *: rec3 *: nil)
 
 expected :: ByteString
-expected = fromJust $ unhexlify "3e0017011010000101101000010110104ccd0110108320"
+expected = unhexlify "3e0017011010000101101000010110104ccd0110108320"
 
 main :: IO ()
 main = do
@@ -1127,10 +1215,10 @@ main = do
                     1 -> unQuantity $ asQuantity @"Mach" @('Just 1) iIAS2
                     _ -> error "unexpected value"
 
-            print ("--- record", cnt, "---")
-            print ("I062/380/IAS/IM raw value:", asUint @Integer iIM)
-            print ("I062/380/IAS/IAS raw value:", asUint @Integer iIAS2)
-            print ("converted value", value)
+            print ("--- record" :: String, cnt, "---" :: String)
+            print ("I062/380/IAS/IM raw value:" :: String, asUint @Integer iIM)
+            print ("I062/380/IAS/IAS raw value:" :: String, asUint @Integer iIAS2)
+            print ("converted value" :: String, value)
 ```
 
 #### Handling **variation dependency**
@@ -1141,15 +1229,25 @@ such as `I004/120/CC/CPC`.
 ```haskell
 -- | file: readme-samples/dep-variation.hs
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 import Control.Monad
 import Data.Maybe
 import Data.Either
 import Data.ByteString (ByteString)
+import Data.Text (Text)
+import qualified Data.ByteString as BS
+import qualified Data.ByteString.Base16 as B16
+import Data.Base16.Types (assertBase16)
+
 import Asterix.Coding
 import Asterix.Generated as Gen
 
 type Spec = Gen.Cat_004_1_13 -- Cat 004, edition 1.13
+
+-- | Convert hex representation back to a bytestring.
+unhexlify :: Text -> BS.ByteString
+unhexlify = B16.decodeBase16' . assertBase16
 
 -- Item 'I004/120/CC/CPC' depends on I004/000 and I004/120/CC/TID values
 -- Default case is: element3, raw, but there are many other cases.
@@ -1209,7 +1307,7 @@ db0 :: Datablock (DatablockOf Spec)
 db0 = datablock (rec0 *: rec1 *: rec2 *: nil)
 
 expected :: ByteString
-expected = fromJust $ unhexlify "040012412000400041200540104120094028"
+expected = unhexlify "040012412000400041200540104120094028"
 
 main :: IO ()
 main = do
@@ -1225,7 +1323,7 @@ main = do
             records = either (const (error "unexpected")) (fmap Record)
                 (parse @StrictParsing act (getRawRecords db))
         forM_ (zip [0::Int ..] records) $ \(cnt, rec) -> do
-            print ("--- record", cnt, "---")
+            print ("--- record" :: String, cnt, "---" :: String)
             let i000 = fromJust $ getItem @"000" rec
                 i120 = fromJust $ getItem @"120" rec
                 iCC = fromJust $ getItem @"CC" $ getVariation i120
@@ -1413,6 +1511,7 @@ An empty list indicates that no such item is present in the RFS.
 
 import Control.Monad
 import Data.Maybe
+import qualified Data.Text.IO as T
 import Asterix.Coding
 import Asterix.Generated as Gen
 
@@ -1439,13 +1538,13 @@ main :: IO ()
 main = do
     -- extract regular item 010
     let i010Regular = fromJust $ getItem @"010" rec1
-    putStrLn $ debugBits $ unparse @Bits i010Regular
+    T.putStrLn $ debugBits $ unparse @Bits i010Regular
 
     -- extract RFS items 010, expecting 2 such items
     let i010Rfs = getRfsItem @"010" rec1
     assert (length i010Rfs == 2)
     forM_ i010Rfs $ \i -> do
-        putStrLn $ debugBits $ unparse @Bits i
+        T.putStrLn $ debugBits $ unparse @Bits i
 
     -- but item '000' is not present in RFS
     assert (null $ getRfsItem @"000" rec1)
@@ -1492,16 +1591,25 @@ This example demonstrates both parsing modes:
 ```haskell
 -- | file: readme-samples/parsing-partial-mode.hs
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 import Data.Maybe
 import Data.Either
 import Data.ByteString (ByteString)
+import Data.Text (Text)
+import qualified Data.ByteString as BS
+import qualified Data.ByteString.Base16 as B16
+import Data.Base16.Types (assertBase16)
 
 import Asterix.Coding
 import Asterix.Generated as Gen
 
 type SpecOld = Gen.Cat_063_1_6
 type SpecNew = Gen.Cat_063_1_7
+
+-- | Convert hex representation back to a bytestring.
+unhexlify :: Text -> BS.ByteString
+unhexlify = B16.decodeBase16' . assertBase16
 
 assert :: Bool -> IO ()
 assert True = pure ()
@@ -1523,7 +1631,7 @@ bs = toByteString $ unparse @SBuilder rec0
 
 main :: IO ()
 main = do
-    let expected = fromJust $ unhexlify "c8010203030506"
+    let expected = unhexlify "c8010203030506"
     assert (bs == expected)
 
     -- We should be able to parse the record, using the new spec

@@ -3,11 +3,12 @@
 
 import           Control.Monad     (forM_)
 import           Data.Map          as Map
+import           Data.Text.IO      as T
 
 import           Asterix.Coding
 import           Asterix.Generated (manifest)
 
-import           Common            (sampleRecords)
+import           Common            (sampleRecords, hexlify)
 
 main :: IO ()
 main = forM_ (Map.assocs $ latestEditionsBasic manifest) $ \(cat, (ed, uap)) -> do
@@ -21,5 +22,5 @@ main = forM_ (Map.assocs $ latestEditionsBasic manifest) $ \(cat, (ed, uap)) -> 
         let records = [(mName, r)]
             bld = datablockBuilder cat (fmap snd records)
             db = UDatablock bld records
-        in putStrLn $ hexlify $ builderToByteStringSlow $ sbData $ unparse db
+        in T.putStrLn $ hexlify $ builderToByteStringSlow $ sbData $ unparse db
 
